@@ -6,27 +6,27 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-#import "BZRNetworkRequest.h"
+#import "FRDNetworkRequest.h"
 
-@class BZRNetworkOperation;
+@class FRDNetworkOperation;
 
-typedef void (^SuccessOperationBlock)(BZRNetworkOperation* operation);
-typedef void (^FailureOperationBlock)(BZRNetworkOperation* operation, NSError* error, BOOL isCanceled);
+typedef void (^SuccessOperationBlock)(FRDNetworkOperation* operation);
+typedef void (^FailureOperationBlock)(FRDNetworkOperation* operation, NSError* error, BOOL isCanceled);
 
 typedef void (^SuccessBlock)(BOOL isSuccess);
 typedef void (^FailureBlock)(NSError* error, BOOL isCanceled);
 
-typedef void (^ProgressBlock)(BZRNetworkOperation* operation, long long totalBytesWritten, long long totalBytesExpectedToWrite);
+typedef void (^ProgressBlock)(FRDNetworkOperation* operation, long long totalBytesWritten, long long totalBytesExpectedToWrite);
 
-@interface BZRNetworkOperation : NSObject
+@interface FRDNetworkOperation : NSObject
 
 @property (strong, nonatomic) NSDictionary *allHeaders;
-@property (strong, nonatomic, readonly) BZRNetworkRequest *networkRequest;
+@property (strong, nonatomic, readonly) FRDNetworkRequest *networkRequest;
 
 @property (copy, nonatomic) SuccessOperationBlock successBlock;
 @property (copy, nonatomic) FailureOperationBlock failureBlock;
 
-- (id)initWithNetworkRequest:(BZRNetworkRequest*)networkRequest networkManager:(id)manager error:(NSError *__autoreleasing *)error;
+- (id)initWithNetworkRequest:(FRDNetworkRequest*)networkRequest networkManager:(id)manager error:(NSError *__autoreleasing *)error;
 - (void)setCompletionBlockAfterProcessingWithSuccess:(SuccessOperationBlock)success
                                              failure:(FailureOperationBlock)failure;
 - (void)setProgressBlock:(ProgressBlock)block;

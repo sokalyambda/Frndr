@@ -13,6 +13,11 @@
 		581B9D441B9ED7FE0080393B /* FRDFacebookService.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D431B9ED7FE0080393B /* FRDFacebookService.m */; };
 		581B9D481B9ED8D30080393B /* FRDFacebookProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D471B9ED8D30080393B /* FRDFacebookProfile.m */; };
 		581B9D4C1B9ED8EE0080393B /* FRDUserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D4B1B9ED8EE0080393B /* FRDUserProfile.m */; };
+		581B9D4F1B9EDC350080393B /* FRDSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D4E1B9EDC350080393B /* FRDSessionManager.m */; };
+		581B9D531B9EDC740080393B /* FRDNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D521B9EDC740080393B /* FRDNetworkRequest.m */; };
+		581B9D561B9EDCA00080393B /* FRDNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D551B9EDCA00080393B /* FRDNetworkOperation.m */; };
+		581B9D591B9EDCBB0080393B /* FRDProjectFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D581B9EDCBB0080393B /* FRDProjectFacade.m */; };
+		581B9D5C1B9EDCDB0080393B /* FRDFailedOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D5B1B9EDCDB0080393B /* FRDFailedOperationManager.m */; };
 		58BC76A11B9EB6B500BB8B5A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A01B9EB6B500BB8B5A /* main.m */; };
 		58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A31B9EB6B500BB8B5A /* AppDelegate.m */; };
 		58BC76AA1B9EB6B500BB8B5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58BC76A81B9EB6B500BB8B5A /* Main.storyboard */; };
@@ -77,6 +82,17 @@
 		581B9D471B9ED8D30080393B /* FRDFacebookProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDFacebookProfile.m; path = Classes/MVC/Models/FacebookProfile/FRDFacebookProfile.m; sourceTree = "<group>"; };
 		581B9D4A1B9ED8EE0080393B /* FRDUserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDUserProfile.h; path = Classes/MVC/Models/UserProfile/FRDUserProfile.h; sourceTree = "<group>"; };
 		581B9D4B1B9ED8EE0080393B /* FRDUserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDUserProfile.m; path = Classes/MVC/Models/UserProfile/FRDUserProfile.m; sourceTree = "<group>"; };
+		581B9D4D1B9EDC350080393B /* FRDSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSessionManager.h; path = "Classes/Server APIs/API/SessionManager/FRDSessionManager.h"; sourceTree = "<group>"; };
+		581B9D4E1B9EDC350080393B /* FRDSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSessionManager.m; path = "Classes/Server APIs/API/SessionManager/FRDSessionManager.m"; sourceTree = "<group>"; };
+		581B9D511B9EDC740080393B /* FRDNetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDNetworkRequest.h; path = "Classes/Server APIs/API/Requests/BaseNetworkRequest/FRDNetworkRequest.h"; sourceTree = "<group>"; };
+		581B9D521B9EDC740080393B /* FRDNetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDNetworkRequest.m; path = "Classes/Server APIs/API/Requests/BaseNetworkRequest/FRDNetworkRequest.m"; sourceTree = "<group>"; };
+		581B9D541B9EDCA00080393B /* FRDNetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDNetworkOperation.h; path = "Classes/Server APIs/API/NetworkOperation/FRDNetworkOperation.h"; sourceTree = "<group>"; };
+		581B9D551B9EDCA00080393B /* FRDNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDNetworkOperation.m; path = "Classes/Server APIs/API/NetworkOperation/FRDNetworkOperation.m"; sourceTree = "<group>"; };
+		581B9D571B9EDCBB0080393B /* FRDProjectFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDProjectFacade.h; path = "Classes/Server APIs/API/NetworkFacade/FRDProjectFacade.h"; sourceTree = "<group>"; };
+		581B9D581B9EDCBB0080393B /* FRDProjectFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDProjectFacade.m; path = "Classes/Server APIs/API/NetworkFacade/FRDProjectFacade.m"; sourceTree = "<group>"; };
+		581B9D5A1B9EDCDB0080393B /* FRDFailedOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDFailedOperationManager.h; path = "Classes/Server APIs/API/FailedOperationManager/FRDFailedOperationManager.h"; sourceTree = "<group>"; };
+		581B9D5B1B9EDCDB0080393B /* FRDFailedOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDFailedOperationManager.m; path = "Classes/Server APIs/API/FailedOperationManager/FRDFailedOperationManager.m"; sourceTree = "<group>"; };
+		581B9D5D1B9EDE020080393B /* FRDRequests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FRDRequests.h; path = "Classes/Server APIs/API/Requests/BaseNetworkRequest/FRDRequests.h"; sourceTree = "<group>"; };
 		58BC769B1B9EB6B500BB8B5A /* Frndr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frndr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58BC769F1B9EB6B500BB8B5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58BC76A01B9EB6B500BB8B5A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -190,6 +206,15 @@
 				581B9D4B1B9ED8EE0080393B /* FRDUserProfile.m */,
 			);
 			name = UserProfile;
+			sourceTree = "<group>";
+		};
+		581B9D501B9EDC550080393B /* BaseNetworkRequest */ = {
+			isa = PBXGroup;
+			children = (
+				581B9D511B9EDC740080393B /* FRDNetworkRequest.h */,
+				581B9D521B9EDC740080393B /* FRDNetworkRequest.m */,
+			);
+			name = BaseNetworkRequest;
 			sourceTree = "<group>";
 		};
 		58BC76921B9EB6B500BB8B5A = {
@@ -429,6 +454,8 @@
 		58BC76D91B9EB9DC00BB8B5A /* FailedOperationManager */ = {
 			isa = PBXGroup;
 			children = (
+				581B9D5A1B9EDCDB0080393B /* FRDFailedOperationManager.h */,
+				581B9D5B1B9EDCDB0080393B /* FRDFailedOperationManager.m */,
 			);
 			name = FailedOperationManager;
 			sourceTree = "<group>";
@@ -436,6 +463,8 @@
 		58BC76DA1B9EB9ED00BB8B5A /* NetworkFacade */ = {
 			isa = PBXGroup;
 			children = (
+				581B9D571B9EDCBB0080393B /* FRDProjectFacade.h */,
+				581B9D581B9EDCBB0080393B /* FRDProjectFacade.m */,
 			);
 			name = NetworkFacade;
 			sourceTree = "<group>";
@@ -443,6 +472,8 @@
 		58BC76DB1B9EB9F400BB8B5A /* NetworkOperation */ = {
 			isa = PBXGroup;
 			children = (
+				581B9D541B9EDCA00080393B /* FRDNetworkOperation.h */,
+				581B9D551B9EDCA00080393B /* FRDNetworkOperation.m */,
 			);
 			name = NetworkOperation;
 			sourceTree = "<group>";
@@ -450,6 +481,8 @@
 		58BC76DC1B9EB9FD00BB8B5A /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				581B9D501B9EDC550080393B /* BaseNetworkRequest */,
+				581B9D5D1B9EDE020080393B /* FRDRequests.h */,
 			);
 			name = Requests;
 			sourceTree = "<group>";
@@ -457,6 +490,8 @@
 		58BC76DD1B9EBA0500BB8B5A /* SessionManager */ = {
 			isa = PBXGroup;
 			children = (
+				581B9D4D1B9EDC350080393B /* FRDSessionManager.h */,
+				581B9D4E1B9EDC350080393B /* FRDSessionManager.m */,
 			);
 			name = SessionManager;
 			sourceTree = "<group>";
@@ -957,6 +992,7 @@
 				58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */,
 				58FFDBAE1B9ECF6B00B0490A /* FRDCommonDateFormatter.m in Sources */,
 				58FFDBB81B9ED0A900B0490A /* FRDErrorHandler.m in Sources */,
+				581B9D5C1B9EDCDB0080393B /* FRDFailedOperationManager.m in Sources */,
 				58FFDBB51B9ED07E00B0490A /* FRDCommonNumberFormatter.m in Sources */,
 				581B9D3B1B9ED6090080393B /* FRDStorageManager.m in Sources */,
 				58BC77081B9ECA3700BB8B5A /* NSString+Base64Decoding.m in Sources */,
@@ -964,12 +1000,14 @@
 				58FFDBAB1B9ECF3B00B0490A /* FRDSerialViewConstructor.m in Sources */,
 				58BC773D1B9ECDD100BB8B5A /* FRDValidator.m in Sources */,
 				58BC770E1B9ECA5000BB8B5A /* UIView+MakeFromXib.m in Sources */,
+				581B9D531B9EDC740080393B /* FRDNetworkRequest.m in Sources */,
 				581B9D481B9ED8D30080393B /* FRDFacebookProfile.m in Sources */,
 				58BC77231B9ECAA900BB8B5A /* UIImage+Base64Encoding.m in Sources */,
 				58FFDBB21B9ED00100B0490A /* ISO8601DateFormatter.m in Sources */,
 				58BC77111B9ECA5B00BB8B5A /* UIView+Shaking.m in Sources */,
 				581B9D441B9ED7FE0080393B /* FRDFacebookService.m in Sources */,
 				58BC77291B9ECB0300BB8B5A /* FRDKeychainHandler.m in Sources */,
+				581B9D561B9EDCA00080393B /* FRDNetworkOperation.m in Sources */,
 				58BC77201B9ECA9C00BB8B5A /* UIFont+Styles.m in Sources */,
 				58BC77171B9ECA7400BB8B5A /* UIView+SoftRemoving.m in Sources */,
 				58FFDBC31B9ED32000B0490A /* FRDBaseNavigationController.m in Sources */,
@@ -979,6 +1017,8 @@
 				58FFDBBB1B9ED17B00B0490A /* FRDAlertFacade.m in Sources */,
 				58BC76A11B9EB6B500BB8B5A /* main.m in Sources */,
 				58BC772A1B9ECB0300BB8B5A /* KeychainItemWrapper.m in Sources */,
+				581B9D591B9EDCBB0080393B /* FRDProjectFacade.m in Sources */,
+				581B9D4F1B9EDC350080393B /* FRDSessionManager.m in Sources */,
 				58BC771D1B9ECA9000BB8B5A /* UIViewController+fixOrientation.m in Sources */,
 				581B9D411B9ED71A0080393B /* FRDReachabilityHelper.m in Sources */,
 				58BC770B1B9ECA4400BB8B5A /* UIImagePickerController+fixOrientation.m in Sources */,

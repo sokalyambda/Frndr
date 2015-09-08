@@ -11,11 +11,11 @@
  
 */
 
-#import "BZRNetworkRequest.h"
+#import "FRDNetworkRequest.h"
 
-#import "BZRRequests.h"
+#import "FRDRequests.h"
 
-@implementation BZRNetworkRequest
+@implementation FRDNetworkRequest
 
 #pragma mark - Lifecycle
 
@@ -59,10 +59,12 @@
 {
     BOOL parseJSONData = NO;
     
+    /*
     //This needs because response from API for this request is empty
     if ([self isKindOfClass:[BZRForgotPasswordRequest class]]) {
         return YES;
     }
+     */
     
     if (!responseObject) {
         LOG_NETWORK(@"Error: Response Is Empty");

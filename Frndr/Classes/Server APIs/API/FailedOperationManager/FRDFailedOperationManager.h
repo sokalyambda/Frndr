@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-#import "BZRNetworkOperation.h"
+#import "FRDNetworkOperation.h"
 
-@interface BZRFailedOperationManager : NSObject
+@interface FRDFailedOperationManager : NSObject
 
-+ (BZRFailedOperationManager *)sharedManager;
++ (FRDFailedOperationManager *)sharedManager;
 
-- (void)addAndRestartFailedOperation:(BZRNetworkOperation *)operation;
+- (void)addAndRestartFailedOperation:(FRDNetworkOperation *)operation;
 - (void)setFailedOperationSuccessBlock:(SuccessOperationBlock)success andFailureBlock:(FailureOperationBlock)failure;
 
 @end

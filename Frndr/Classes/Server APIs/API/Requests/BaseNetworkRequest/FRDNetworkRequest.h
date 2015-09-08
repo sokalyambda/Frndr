@@ -7,11 +7,11 @@
 //
 
 typedef enum : NSUInteger {
-    BZRRequestSerializationTypeJSON,
-    BZRRequestSerializationTypeHTTP
-} BZRRequestSerializationType;
+    FRDRequestSerializationTypeJSON,
+    FRDRequestSerializationTypeHTTP
+} FRDRequestSerializationType;
 
-@interface BZRNetworkRequest : NSObject {
+@interface FRDNetworkRequest : NSObject {
     NSString            *_path;
     NSMutableDictionary *_parameters;
     NSString            *_method;
@@ -38,7 +38,7 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSError *error;
 @property (strong, nonatomic) NSString *action;
 
-@property (assign, nonatomic) BZRRequestSerializationType serializationType;
+@property (assign, nonatomic) FRDRequestSerializationType serializationType;
 
 - (BOOL)prepareAndCheckRequestParameters;
 - (BOOL)parseResponseSucessfully:(id)responseObject;

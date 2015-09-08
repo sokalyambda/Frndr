@@ -6,19 +6,17 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-#import "BZRSessionManager.h"
-#import "BZRFailedOperationManager.h"
+#import "FRDSessionManager.h"
+#import "FRDFailedOperationManager.h"
 
-#import "BZRNetworkOperation.h"
+#import "FRDNetworkOperation.h"
 
-#import "BZRReachabilityHelper.h"
+#import "FRDReachabilityHelper.h"
 
-#import "BZRErrorHandler.h"
+#import "FRDErrorHandler.h"
 
-#import "BZRAlertFacade.h"
-
-#import "BZRRenewSessionTokenRequest.h"
-#import "BZRGetClientCredentialsRequest.h"
+//#import "FRDRenewSessionTokenRequest.h"
+//#import "FRDGetClientCredentialsRequest.h"
 
 static CGFloat const kRequestTimeInterval = 60.f;
 static NSInteger const kMaxConcurentRequests = 100.f;
@@ -26,12 +24,12 @@ static NSInteger const kAllCleansCount = 1.f;
 
 static NSString *const kCleanSessionLock = @"CleanSessionLock";
 
-@interface BZRSessionManager ()
+@interface FRDSessionManager ()
 
 @property (copy, nonatomic) CleanBlock cleanBlock;
 
 @property (strong, nonatomic) AFHTTPSessionManager *sessionManager;
-@property (strong, nonatomic) BZRFailedOperationManager *failedOperationManager;
+@property (strong, nonatomic) FRDFailedOperationManager *failedOperationManager;
 
 @property (assign, nonatomic) AFNetworkReachabilityStatus reachabilityStatus;
 
@@ -47,14 +45,14 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
 
 @end
 
-@implementation BZRSessionManager
+@implementation FRDSessionManager
 
 #pragma mark - Accessors
 
-- (BZRFailedOperationManager *)failedOperationManager
+- (FRDFailedOperationManager *)failedOperationManager
 {
     if (!_failedOperationManager) {
-        _failedOperationManager = [BZRFailedOperationManager sharedManager];
+        _failedOperationManager = [FRDFailedOperationManager sharedManager];
     }
     return _failedOperationManager;
 }
@@ -185,7 +183,7 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
 
 #pragma mark - Operation cycle
 
-- (BZRNetworkOperation*)enqueueOperationWithNetworkRequest:(BZRNetworkRequest*)networkRequest success:(SuccessOperationBlock)success
+- (FRDNetworkOperation *)enqueueOperationWithNetworkRequest:(FRDNetworkRequest *)networkRequest success:(SuccessOperationBlock)success
                                                   failure:(FailureOperationBlock)failure
 {
     //set success&failure blocks to failed operation manager. This step adds a possibility to restart operation if connection failed
@@ -199,11 +197,11 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
     }
     
     switch (networkRequest.serializationType) {
-        case BZRRequestSerializationTypeHTTP:
+        case FRDRequestSerializationTypeHTTP:
             [(AFHTTPSessionManager *)manager setRequestSerializer:self.HTTPRequestSerializer];
             break;
             
-        case BZRRequestSerializationTypeJSON:
+        case FRDRequestSerializationTypeJSON:
             [(AFHTTPSessionManager *)manager setRequestSerializer:self.JSONRequestSerializer];
             break;
             
@@ -211,26 +209,26 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
             break;
     }
     
-    BZRNetworkOperation *operation = [[BZRNetworkOperation alloc] initWithNetworkRequest:networkRequest networkManager:manager error:&error];
+    FRDNetworkOperation *operation = [[FRDNetworkOperation alloc] initWithNetworkRequest:networkRequest networkManager:manager error:&error];
     
     WEAK_SELF;
     if (error && failure) {
         failure(operation ,error, NO);
     } else {
-        [self enqueueOperation:operation success:^(BZRNetworkOperation *operation) {
+        [self enqueueOperation:operation success:^(FRDNetworkOperation *operation) {
             
             [weakSelf finishOperationInQueue:operation];
             if (success) {
                 success(operation);
             }
             
-        } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
             
             [weakSelf finishOperationInQueue:operation];
             
-            if ([BZRErrorHandler errorIsNetworkError:error] && operation.networkRequest.retryIfConnectionFailed) {
+            if ([FRDErrorHandler errorIsNetworkError:error] && operation.networkRequest.retryIfConnectionFailed) {
                 
-                [BZRAlertFacade showRetryInternetConnectionAlertForController:nil withCompletion:^(BOOL retry) {
+                [FRDAlertFacade showRetryInternetConnectionAlertForController:nil withCompletion:^(BOOL retry) {
                     if (!retry && failure) {
                         failure(operation, error, isCanceled);
                     } else {
@@ -245,11 +243,11 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
     return operation;
 }
 
-- (void)enqueueOperation:(BZRNetworkOperation*)operation success:(SuccessOperationBlock)success failure:(FailureOperationBlock)failure
+- (void)enqueueOperation:(FRDNetworkOperation*)operation success:(SuccessOperationBlock)success failure:(FailureOperationBlock)failure
 {
     WEAK_SELF;
     //check reachability
-    [BZRReachabilityHelper checkConnectionOnSuccess:^{
+    [FRDReachabilityHelper checkConnectionOnSuccess:^{
         
         [operation setCompletionBlockAfterProcessingWithSuccess:success failure:failure];
         [weakSelf addOperationToQueue:operation];
@@ -267,7 +265,7 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
 - (void)cancelAllOperations
 {
     if ([NSURLSession class]) {
-        for (BZRNetworkOperation *operation in self.operationsQueue) {
+        for (FRDNetworkOperation *operation in self.operationsQueue) {
             [operation cancel];
         }
         [self.sessionManager.operationQueue cancelAllOperations];
@@ -281,7 +279,7 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
  */
 - (BOOL)isOperationInProcess
 {
-    for (BZRNetworkOperation *operation in self.operationsQueue) {
+    for (FRDNetworkOperation *operation in self.operationsQueue) {
         if ([operation isInProcess]) {
             return YES;
         }
@@ -294,7 +292,7 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
  *
  *  @param operation Operation that has to be removed
  */
-- (void)finishOperationInQueue:(BZRNetworkOperation*)operation
+- (void)finishOperationInQueue:(FRDNetworkOperation*)operation
 {
     [self.operationsQueue removeObject:operation];
 }
@@ -304,7 +302,7 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
  *
  *  @param operation Operation that has to be added to queue
  */
-- (void)addOperationToQueue:(BZRNetworkOperation*)operation
+- (void)addOperationToQueue:(FRDNetworkOperation*)operation
 {
     [self.operationsQueue addObject:operation];
     
@@ -318,8 +316,9 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
  *  @param success     Success Block
  *  @param failure     Failure Block
  */
-- (void)validateSessionWithType:(BZRSessionType)sessionType onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+- (void)validateSessionWithType:(FRDSessionType)sessionType onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
+    /*
     BOOL isValid = [self isSessionValidWithType:sessionType];
     
     if (!isValid && sessionType == BZRSessionTypeUser) {
@@ -347,6 +346,7 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
             success(YES);
         }
     }
+     */
 }
 
 /**
@@ -356,20 +356,20 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
  *
  *  @return Returns 'YES' if session is valid
  */
-- (BOOL)isSessionValidWithType:(BZRSessionType)sessionType
+- (BOOL)isSessionValidWithType:(FRDSessionType)sessionType
 {
     NSString *accessToken;
     NSDate *tokenExpirationDate;
     
     switch (sessionType) {
-        case BZRSessionTypeApplication: {
-            accessToken = [BZRStorageManager sharedStorage].applicationToken.accessToken;
-            tokenExpirationDate = [BZRStorageManager sharedStorage].applicationToken.expirationDate;
+        case FRDSessionTypeApplication: {
+//            accessToken = [FRDStorageManager sharedStorage].applicationToken.accessToken;
+//            tokenExpirationDate = [FRDStorageManager sharedStorage].applicationToken.expirationDate;
             break;
         }
-        case BZRSessionTypeUser: {
-            accessToken = [BZRStorageManager sharedStorage].userToken.accessToken;
-            tokenExpirationDate = [BZRStorageManager sharedStorage].userToken.expirationDate;
+        case FRDSessionTypeUser: {
+//            accessToken = [FRDStorageManager sharedStorage].userToken.accessToken;
+//            tokenExpirationDate = [FRDStorageManager sharedStorage].userToken.expirationDate;
             break;
         }
         default:
@@ -380,6 +380,7 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
 }
 
 #pragma mark - Renew Session Token
+#warning should be configured for current API
 
 /**
  *  Reauthorize user session
@@ -389,7 +390,8 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
  *
  *  @return BZRNetworkOperation
  */
-- (BZRNetworkOperation *)renewSessionTokenOnSuccess:(void (^)(BOOL isSuccess))success
+/*
+- (FRDNetworkOperation *)renewSessionTokenOnSuccess:(void (^)(BOOL isSuccess))success
                                               onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
     BZRRenewSessionTokenRequest *request = [[BZRRenewSessionTokenRequest alloc] init];
@@ -412,6 +414,7 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
     }];
     return operation;
 }
+ */
 
 #pragma mark - Get Application Token
 
@@ -423,22 +426,23 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
  *
  *  @return BZRNetworkOperation
  */
-- (BZRNetworkOperation *)getClientCredentialsOnSuccess:(void (^)(BOOL success))success onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
+/*
+- (FRDNetworkOperation *)getClientCredentialsOnSuccess:(void (^)(BOOL success))success onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
-    BZRGetClientCredentialsRequest *request = [[BZRGetClientCredentialsRequest alloc] init];
+    FRDGetClientCredentialsRequest *request = [[FRDGetClientCredentialsRequest alloc] init];
     
-    BZRNetworkOperation *operation = [self enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+    FRDNetworkOperation *operation = [self enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
         
-        BZRGetClientCredentialsRequest *request = (BZRGetClientCredentialsRequest*)operation.networkRequest;
+        FRDGetClientCredentialsRequest *request = (FRDGetClientCredentialsRequest*)operation.networkRequest;
         
-        [BZRStorageManager sharedStorage].applicationToken = request.token;
+        [FRDStorageManager sharedStorage].applicationToken = request.token;
         
         if (success) {
             success(YES);
         }
         
-    } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-        [BZRAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:^{
+    } failure:^(FRDNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:^{
             
         }];
         if (failure) {
@@ -447,5 +451,6 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
     }];
     return operation;
 }
+ */
 
 @end

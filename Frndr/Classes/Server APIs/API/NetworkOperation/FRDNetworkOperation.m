@@ -8,13 +8,13 @@
 
 #define TOKEN_EXPIRED_TIME 86400.f
 
-#import "BZRNetworkOperation.h"
+#import "FRDNetworkOperation.h"
 
-#import "BZRNetworkRequest.h"
+#import "FRDNetworkRequest.h"
 
-#import "BZRProjectFacade.h"
+#import "FRDProjectFacade.h"
 
-#import "BZRSessionManager.h"
+#import "FRDSessionManager.h"
 
 NS_CLASS_AVAILABLE(10_9, 7_0)
 @interface DataTask : NSURLSessionDataTask @end
@@ -25,9 +25,9 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 NS_CLASS_AVAILABLE(10_9, 7_0)
 @interface DownloadTask : NSURLSessionDownloadTask @end
 
-@interface BZRNetworkOperation ()
+@interface FRDNetworkOperation ()
 
-@property (strong, nonatomic, readwrite) BZRNetworkRequest *networkRequest;
+@property (strong, nonatomic, readwrite) FRDNetworkRequest *networkRequest;
 @property (strong, nonatomic) NSMutableURLRequest *urlRequest;
 
 @property (strong, nonatomic) AFHTTPRequestOperation *operation;
@@ -44,7 +44,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 
 @end
 
-@implementation BZRNetworkOperation
+@implementation FRDNetworkOperation
 
 #pragma mark - Accessors
 
@@ -56,7 +56,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 
 #pragma mark - Lifecycle
 
-- (id)initWithNetworkRequest:(BZRNetworkRequest*)networkRequest networkManager:(id)manager error:(NSError *__autoreleasing *)error
+- (id)initWithNetworkRequest:(FRDNetworkRequest*)networkRequest networkManager:(id)manager error:(NSError *__autoreleasing *)error
 {
     BOOL passedParametersCheck = [networkRequest prepareAndCheckRequestParameters];
     
@@ -86,7 +86,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
     }
     
     if ([networkRequest.files count] > 0) {
-        self.urlRequest = [serializer  multipartFormRequestWithMethod:@"POST" URLString:[[NSURL URLWithString:networkRequest.path relativeToURL:[BZRProjectFacade HTTPClient].baseURL] absoluteString] parameters:networkRequest.parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        self.urlRequest = [serializer  multipartFormRequestWithMethod:@"POST" URLString:[[NSURL URLWithString:networkRequest.path relativeToURL:[FRDProjectFacade HTTPClient].baseURL] absoluteString] parameters:networkRequest.parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             
             [networkRequest.files enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
 
@@ -95,7 +95,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
         
     } else {
         self.urlRequest = [serializer requestWithMethod:networkRequest.method
-                                              URLString:[NSString stringWithFormat:@"%@%@", [BZRProjectFacade HTTPClient].baseURL, networkRequest.path]
+                                              URLString:[NSString stringWithFormat:@"%@%@", [FRDProjectFacade HTTPClient].baseURL, networkRequest.path]
                                              parameters:networkRequest.parameters
                                                   error:error];
     }
@@ -263,8 +263,8 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
         [_downloadTask resume];
     }
     if (!_downloadTask) {
-        [BZRProjectFacade HTTPClient].requestNumber++;
-        self.requestNumber = [BZRProjectFacade HTTPClient].requestNumber;
+        [FRDProjectFacade HTTPClient].requestNumber++;
+        self.requestNumber = [FRDProjectFacade HTTPClient].requestNumber;
         
         [self printRequestData:self.urlRequest withNumber:self.requestNumber];
     }

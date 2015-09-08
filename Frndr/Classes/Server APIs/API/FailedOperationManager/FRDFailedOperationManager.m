@@ -6,41 +6,41 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-#import "BZRFailedOperationManager.h"
+#import "FRDFailedOperationManager.h"
 
-#import "BZRProjectFacade.h"
+#import "FRDProjectFacade.h"
 
-@interface BZRFailedOperationManager ()
+@interface FRDFailedOperationManager ()
 
-@property (strong, nonatomic) BZRSessionManager *sessionManager;
-@property (strong, nonatomic) BZRNetworkRequest *currentFailedRequest;
+@property (strong, nonatomic) FRDSessionManager *sessionManager;
+@property (strong, nonatomic) FRDNetworkRequest *currentFailedRequest;
 
 @property (copy, nonatomic) SuccessOperationBlock successBlock;
 @property (copy, nonatomic) FailureOperationBlock failureBlock;
 
 @end
 
-@implementation BZRFailedOperationManager
+@implementation FRDFailedOperationManager
 
 #pragma mark - Accessors
 
-- (BZRSessionManager *)sessionManager
+- (FRDSessionManager *)sessionManager
 {
     if (!_sessionManager) {
-        _sessionManager = [BZRProjectFacade HTTPClient];
+        _sessionManager = [FRDProjectFacade HTTPClient];
     }
     return _sessionManager;
 }
 
 #pragma mark - Lifecycle
 
-+ (BZRFailedOperationManager *)sharedManager
++ (FRDFailedOperationManager *)sharedManager
 {
-    static BZRFailedOperationManager *manager = nil;
+    static FRDFailedOperationManager *manager = nil;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        manager = [[BZRFailedOperationManager alloc] init];
+        manager = [[FRDFailedOperationManager alloc] init];
     });
     
     return manager;
@@ -61,7 +61,7 @@
  *
  *  @param operation Failed Operation
  */
-- (void)addAndRestartFailedOperation:(BZRNetworkOperation *)operation
+- (void)addAndRestartFailedOperation:(FRDNetworkOperation *)operation
 {
     if (![self.currentFailedRequest isEqual:operation.networkRequest]) {
         self.currentFailedRequest = operation.networkRequest;

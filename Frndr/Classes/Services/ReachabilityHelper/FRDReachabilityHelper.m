@@ -8,6 +8,8 @@
 
 #import "FRDReachabilityHelper.h"
 
+#import "FRDProjectFacade.h"
+
 @implementation FRDReachabilityHelper
 
 /**
@@ -38,8 +40,7 @@
  */
 + (BOOL)isInternetAvaliable
 {
-    return YES;
-//    return [BZRProjectFacade isInternetReachable];
+    return [FRDProjectFacade isInternetReachable];
 }
 
 @end
