@@ -1,0 +1,26 @@
+//
+//  Frndr-Prefix.pch
+//  Frndr
+//
+//  Created by Eugenity on 08.09.15.
+//  Copyright (c) 2015 ThinkMobiles. All rights reserved.
+//
+
+#ifndef Frndr_Frndr_Prefix_pch
+#define Frndr_Frndr_Prefix_pch
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <MBProgressHUD/MBProgressHUD.h>
+#import <AFNetworking/AFNetworking.h>
+
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+
+#import "FRDGlobalConstants.h"
+#import "FRDMacros.h"
+#import "FRDAlertFacade.h"
+
+#endif
