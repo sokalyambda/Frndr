@@ -46,6 +46,8 @@
 		58BC77381B9ECD4800BB8B5A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BC77371B9ECD4800BB8B5A /* SystemConfiguration.framework */; };
 		58BC773A1B9ECD4D00BB8B5A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BC77391B9ECD4D00BB8B5A /* MobileCoreServices.framework */; };
 		58BC773D1B9ECDD100BB8B5A /* FRDValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC773C1B9ECDD100BB8B5A /* FRDValidator.m */; };
+		58F2F30F1B9EF93F000DC739 /* FRDTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F2F30E1B9EF93F000DC739 /* FRDTutorialController.m */; };
+		58F2F3131B9EF96E000DC739 /* FRDTutorialContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F2F3121B9EF96E000DC739 /* FRDTutorialContentController.m */; };
 		58FFDBAB1B9ECF3B00B0490A /* FRDSerialViewConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FFDBAA1B9ECF3B00B0490A /* FRDSerialViewConstructor.m */; };
 		58FFDBAE1B9ECF6B00B0490A /* FRDCommonDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FFDBAD1B9ECF6B00B0490A /* FRDCommonDateFormatter.m */; };
 		58FFDBB21B9ED00100B0490A /* ISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FFDBB11B9ED00100B0490A /* ISO8601DateFormatter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -144,6 +146,10 @@
 		58BC77391B9ECD4D00BB8B5A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		58BC773B1B9ECDD100BB8B5A /* FRDValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDValidator.h; path = Classes/Utilities/Validator/FRDValidator.h; sourceTree = "<group>"; };
 		58BC773C1B9ECDD100BB8B5A /* FRDValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDValidator.m; path = Classes/Utilities/Validator/FRDValidator.m; sourceTree = "<group>"; };
+		58F2F30D1B9EF93F000DC739 /* FRDTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDTutorialController.h; path = Classes/MVC/Controllers/TutorialController/FRDTutorialController.h; sourceTree = "<group>"; };
+		58F2F30E1B9EF93F000DC739 /* FRDTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDTutorialController.m; path = Classes/MVC/Controllers/TutorialController/FRDTutorialController.m; sourceTree = "<group>"; };
+		58F2F3111B9EF96E000DC739 /* FRDTutorialContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDTutorialContentController.h; path = Classes/MVC/Controllers/TutorialContentController/FRDTutorialContentController.h; sourceTree = "<group>"; };
+		58F2F3121B9EF96E000DC739 /* FRDTutorialContentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDTutorialContentController.m; path = Classes/MVC/Controllers/TutorialContentController/FRDTutorialContentController.m; sourceTree = "<group>"; };
 		58FFDBA91B9ECF3B00B0490A /* FRDSerialViewConstructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSerialViewConstructor.h; path = Classes/Utilities/SerialViewsConstructor/FRDSerialViewConstructor.h; sourceTree = "<group>"; };
 		58FFDBAA1B9ECF3B00B0490A /* FRDSerialViewConstructor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSerialViewConstructor.m; path = Classes/Utilities/SerialViewsConstructor/FRDSerialViewConstructor.m; sourceTree = "<group>"; };
 		58FFDBAC1B9ECF6B00B0490A /* FRDCommonDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDCommonDateFormatter.h; path = Classes/Utilities/CommonDateFormatter/FRDCommonDateFormatter.h; sourceTree = "<group>"; };
@@ -389,6 +395,8 @@
 		58BC76D21B9EB95600BB8B5A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				58F2F3101B9EF956000DC739 /* TutorialContentController */,
+				58F2F30C1B9EF911000DC739 /* TutorialController */,
 				58FFDBBD1B9ED1D300B0490A /* BaseViewController */,
 				58FFDBBC1B9ED1CB00B0490A /* BaseNavigationController */,
 			);
@@ -800,6 +808,24 @@
 			path = Classes/Utilities/Keychain/KeychainHandler;
 			sourceTree = "<group>";
 		};
+		58F2F30C1B9EF911000DC739 /* TutorialController */ = {
+			isa = PBXGroup;
+			children = (
+				58F2F30D1B9EF93F000DC739 /* FRDTutorialController.h */,
+				58F2F30E1B9EF93F000DC739 /* FRDTutorialController.m */,
+			);
+			name = TutorialController;
+			sourceTree = "<group>";
+		};
+		58F2F3101B9EF956000DC739 /* TutorialContentController */ = {
+			isa = PBXGroup;
+			children = (
+				58F2F3111B9EF96E000DC739 /* FRDTutorialContentController.h */,
+				58F2F3121B9EF96E000DC739 /* FRDTutorialContentController.m */,
+			);
+			name = TutorialContentController;
+			sourceTree = "<group>";
+		};
 		58FFDBAF1B9ECFEA00B0490A /* ISO8601Formatter */ = {
 			isa = PBXGroup;
 			children = (
@@ -993,12 +1019,14 @@
 				58FFDBAE1B9ECF6B00B0490A /* FRDCommonDateFormatter.m in Sources */,
 				58FFDBB81B9ED0A900B0490A /* FRDErrorHandler.m in Sources */,
 				581B9D5C1B9EDCDB0080393B /* FRDFailedOperationManager.m in Sources */,
+				58F2F3131B9EF96E000DC739 /* FRDTutorialContentController.m in Sources */,
 				58FFDBB51B9ED07E00B0490A /* FRDCommonNumberFormatter.m in Sources */,
 				581B9D3B1B9ED6090080393B /* FRDStorageManager.m in Sources */,
 				58BC77081B9ECA3700BB8B5A /* NSString+Base64Decoding.m in Sources */,
 				581B9D3E1B9ED67B0080393B /* FRDPushNotifiactionService.m in Sources */,
 				58FFDBAB1B9ECF3B00B0490A /* FRDSerialViewConstructor.m in Sources */,
 				58BC773D1B9ECDD100BB8B5A /* FRDValidator.m in Sources */,
+				58F2F30F1B9EF93F000DC739 /* FRDTutorialController.m in Sources */,
 				58BC770E1B9ECA5000BB8B5A /* UIView+MakeFromXib.m in Sources */,
 				581B9D531B9EDC740080393B /* FRDNetworkRequest.m in Sources */,
 				581B9D481B9ED8D30080393B /* FRDFacebookProfile.m in Sources */,
