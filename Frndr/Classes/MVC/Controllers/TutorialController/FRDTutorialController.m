@@ -29,14 +29,19 @@
     [self setupPageControl];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self customizeNavigationItem];
+}
+
 #pragma mark - Actions
 
 - (void)createPageViewController
 {
-    self.contentImages = @[@"nature_pic_1",
-                      @"nature_pic_2",
-                      @"nature_pic_3",
-                      @"nature_pic_4"];
+    self.contentImages = @[@"tutorial01",
+                      @"tutorial02",
+                      @"tutorial03"];
     
     UIPageViewController *pageController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageController"];
     pageController.dataSource = self;
@@ -58,9 +63,19 @@
 
 - (void)setupPageControl
 {
-    [[UIPageControl appearance] setPageIndicatorTintColor:[UIColor redColor]];
-    [[UIPageControl appearance] setCurrentPageIndicatorTintColor:[UIColor whiteColor]];
-    [[UIPageControl appearance] setBackgroundColor:[UIColor darkGrayColor]];
+    [[UIPageControl appearance] setPageIndicatorTintColor:[UIColor whiteColor]];
+    [[UIPageControl appearance] setCurrentPageIndicatorTintColor:[UIColor blueColor]];
+    [[UIPageControl appearance] setBackgroundColor:[UIColor clearColor]];
+}
+
+- (void)customizeNavigationItem
+{
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+- (IBAction)facebookLoginClick:(id)sender
+{
+    
 }
 
 #pragma mark - UIPageViewControllerDataSource
@@ -70,7 +85,7 @@
     FRDTutorialContentController *itemController = (FRDTutorialContentController *)viewController;
     
     if (itemController.itemIndex > 0) {
-        return [self itemControllerForIndex: itemController.itemIndex-1];
+        return [self itemControllerForIndex: itemController.itemIndex - 1];
     }
     
     return nil;
