@@ -22,5 +22,6 @@ static NSString *const InternetIsNotReachableString = @"Internet Is Not Reachabl
 static NSString *const FBLoginSuccess = @"FBLoginSuccess";
 static NSString *const FBAccessTokenExpirationDate = @"FBAccessTokenExpirationDate";
 static NSString *const FBAccessToken = @"FBAccessToken";
+static NSString *const FBCurrentProfile = @"FBCurrentProfile";
 
 #endif

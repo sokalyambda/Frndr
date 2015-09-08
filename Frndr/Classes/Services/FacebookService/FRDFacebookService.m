@@ -14,8 +14,8 @@ static NSString *const kPublicProfile = @"public_profile";
 static NSString *const kEmail = @"email";
 static NSString *const kFields = @"fields";
 
-static NSString *const kFBAppId = @"851500644887516";
-static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
+static NSString *const kFBAppId = @"867267406728699";
+static NSString *const kFBAppSecret = @"0591ca317dbda06c3f8aefe2fc624952";
 
 @implementation FRDFacebookService
 
@@ -93,15 +93,12 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
         if (error && failure) {
             failure(error);
         } else {
-//            NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary *)response];
-            FRDFacebookProfile *profile = [[FRDFacebookProfile alloc] init];
-            /*
-            BZRFacebookProfile *facebookProfile = [[BZRFacebookProfile alloc] initWithServerResponse:userProfile];
+            NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary *)response];
+            FRDFacebookProfile *facebookProfile = [[FRDFacebookProfile alloc] initWithServerResponse:userProfile];
             [facebookProfile setFacebookProfileToDefaultsForKey:FBCurrentProfile];
-             */
             
             if (success) {
-                success(profile);
+                success(facebookProfile);
             }
         }
     }];
@@ -144,14 +141,11 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
         return YES;
     } else {
         //if session isn't valid - remove FB profile from defaults (if exists)
-        /*
         if ([defaults objectForKey:FBCurrentProfile]) {
-            [BZRStorageManager sharedStorage].facebookProfile = nil;
+            [FRDStorageManager sharedStorage].currentFacebookProfile = nil;
             [defaults removeObjectForKey:FBCurrentProfile];
             [defaults synchronize];
         }
-         */
-        
         return NO;
     }
 }

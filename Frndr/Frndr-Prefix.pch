@@ -23,4 +23,6 @@
 #import "FRDMacros.h"
 #import "FRDAlertFacade.h"
 
+#import "FRDStorageManager.h"
+
 #endif

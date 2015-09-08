@@ -14,6 +14,16 @@
 
 @implementation FRDStorageManager
 
+#pragma mark - Accessors
+
+- (FRDFacebookProfile *)currentFacebookProfile
+{
+    if (!_currentFacebookProfile) {
+        _currentFacebookProfile = [FRDFacebookProfile facebookProfileFromDefaultsForKey:FBCurrentProfile];
+    }
+    return _currentFacebookProfile;
+}
+
 - (NSString *)deviceUDID
 {
     _deviceUDID = [UIDevice currentDevice].identifierForVendor.UUIDString;

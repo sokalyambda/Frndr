@@ -9,6 +9,8 @@
 #import "FRDTutorialController.h"
 #import "FRDTutorialContentController.h"
 
+#import "FRDFacebookService.h"
+
 @interface FRDTutorialController ()<UIPageViewControllerDataSource>
 
 @property (weak, nonatomic) IBOutlet UIView *tutorialContainer;
@@ -73,9 +75,18 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
+- (void)authorizeWithFacebookAction
+{
+    [FRDFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        
+    }];
+}
+
 - (IBAction)facebookLoginClick:(id)sender
 {
-    
+    [self authorizeWithFacebookAction];
 }
 
 #pragma mark - UIPageViewControllerDataSource
