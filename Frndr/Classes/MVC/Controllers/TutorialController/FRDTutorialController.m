@@ -9,14 +9,14 @@
 #import "FRDTutorialController.h"
 #import "FRDTutorialContentController.h"
 
-#import "TTTAttributedLabel.h"
+#import "FRDTermsOfServiceLabel.h"
 
 #import "FRDFacebookService.h"
 
 @interface FRDTutorialController ()<UIPageViewControllerDataSource, UITextViewDelegate, TTTAttributedLabelDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *tutorialContainer;
-@property (weak, nonatomic) IBOutlet TTTAttributedLabel *termsLabel;
+@property (weak, nonatomic) IBOutlet FRDTermsOfServiceLabel *termsLabel;
 
 @property (strong, nonatomic) NSArray *contentImages;
 @property (strong, nonatomic) UIPageViewController *pageViewController;
@@ -40,14 +40,6 @@
 {
     [super viewWillAppear:animated];
     [self customizeNavigationItem];
-    
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    [self customizeTermsLabel];
 }
 
 #pragma mark - Actions
@@ -86,22 +78,6 @@
 - (void)customizeNavigationItem
 {
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
-
-- (void)customizeTermsLabel
-{
-    self.termsLabel.linkAttributes = @{
-                                       NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:10.f],
-                                       NSUnderlineStyleAttributeName: @0,
-                                       NSForegroundColorAttributeName: [UIColor whiteColor]
-                                       };
-    self.termsLabel.activeLinkAttributes = @{
-                                             NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:10.f],
-                                             NSUnderlineStyleAttributeName: @0,
-                                             NSForegroundColorAttributeName: [UIColor whiteColor]
-                                             };
-    [self.termsLabel addLinkToURL:[NSURL URLWithString:@"http://PRIVACY_POLICY"] withRange:[self.termsLabel.text rangeOfString:@"Privacy Policy"]];
-    [self.termsLabel addLinkToURL:[NSURL URLWithString:@"http://TERMS_OF_SERVICE"] withRange:[self.termsLabel.text rangeOfString:@"Terms of Service"]];
 }
 
 - (void)authorizeWithFacebookAction
