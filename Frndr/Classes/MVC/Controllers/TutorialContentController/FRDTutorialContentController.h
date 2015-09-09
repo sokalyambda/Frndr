@@ -10,11 +10,7 @@
 
 @interface FRDTutorialContentController : FRDBaseViewController
 
-// Item controller information
 @property (nonatomic) NSUInteger itemIndex;
 @property (strong, nonatomic) NSString *imageName;
-
-// IBOutlets
-@property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
 
 @end

@@ -10,6 +10,8 @@
 
 @interface FRDTutorialContentController ()
 
+@property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
+
 @end
 
 @implementation FRDTutorialContentController

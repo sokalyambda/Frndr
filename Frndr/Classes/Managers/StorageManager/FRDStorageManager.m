@@ -14,6 +14,8 @@
 
 @implementation FRDStorageManager
 
+@synthesize deviceName = _deviceName, deviceUDID = _deviceUDID;
+
 #pragma mark - Accessors
 
 - (FRDFacebookProfile *)currentFacebookProfile
