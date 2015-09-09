@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3ED072321BA0370C0091B7E4 /* FRDPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED072311BA0370C0091B7E4 /* FRDPreferencesController.m */; };
+		3ED072361BA048460091B7E4 /* FRDPreferencesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED072351BA048460091B7E4 /* FRDPreferencesTableViewController.m */; };
 		581B9D3B1B9ED6090080393B /* FRDStorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D3A1B9ED6090080393B /* FRDStorageManager.m */; };
 		581B9D3E1B9ED67B0080393B /* FRDPushNotifiactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D3D1B9ED67B0080393B /* FRDPushNotifiactionService.m */; };
 		581B9D411B9ED71A0080393B /* FRDReachabilityHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D401B9ED71A0080393B /* FRDReachabilityHelper.m */; };
@@ -70,6 +72,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3ED072301BA0370C0091B7E4 /* FRDPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPreferencesController.h; path = Classes/MVC/Controllers/PreferencesController/FRDPreferencesController.h; sourceTree = "<group>"; };
+		3ED072311BA0370C0091B7E4 /* FRDPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPreferencesController.m; path = Classes/MVC/Controllers/PreferencesController/FRDPreferencesController.m; sourceTree = "<group>"; };
+		3ED072341BA048460091B7E4 /* FRDPreferencesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPreferencesTableViewController.h; path = Classes/MVC/Controllers/PreferencesTableViewController/FRDPreferencesTableViewController.h; sourceTree = "<group>"; };
+		3ED072351BA048460091B7E4 /* FRDPreferencesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPreferencesTableViewController.m; path = Classes/MVC/Controllers/PreferencesTableViewController/FRDPreferencesTableViewController.m; sourceTree = "<group>"; };
 		3ED281275AA17DB13D1C36A1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		4E086F2D4037543EBA52BEA4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		581B9D391B9ED6090080393B /* FRDStorageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDStorageManager.h; path = Classes/Managers/StorageManager/FRDStorageManager.h; sourceTree = "<group>"; };
@@ -196,6 +202,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3ED0722F1BA0364E0091B7E4 /* PreferencesController */ = {
+			isa = PBXGroup;
+			children = (
+				3ED072301BA0370C0091B7E4 /* FRDPreferencesController.h */,
+				3ED072311BA0370C0091B7E4 /* FRDPreferencesController.m */,
+			);
+			name = PreferencesController;
+			sourceTree = "<group>";
+		};
+		3ED072331BA047D90091B7E4 /* PreferencesTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3ED072341BA048460091B7E4 /* FRDPreferencesTableViewController.h */,
+				3ED072351BA048460091B7E4 /* FRDPreferencesTableViewController.m */,
+			);
+			name = PreferencesTableViewController;
+			sourceTree = "<group>";
+		};
 		581B9D451B9ED8B90080393B /* FacebookProfile */ = {
 			isa = PBXGroup;
 			children = (
@@ -395,6 +419,8 @@
 		58BC76D21B9EB95600BB8B5A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3ED072331BA047D90091B7E4 /* PreferencesTableViewController */,
+				3ED0722F1BA0364E0091B7E4 /* PreferencesController */,
 				58F2F3101B9EF956000DC739 /* TutorialContentController */,
 				58F2F30C1B9EF911000DC739 /* TutorialController */,
 				58FFDBBD1B9ED1D300B0490A /* BaseViewController */,
@@ -1016,6 +1042,7 @@
 				58BC771A1B9ECA8100BB8B5A /* UIView+Flashable.m in Sources */,
 				58BC77051B9ECA2200BB8B5A /* NSString+JSONRepresentation.m in Sources */,
 				58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */,
+				3ED072361BA048460091B7E4 /* FRDPreferencesTableViewController.m in Sources */,
 				58FFDBAE1B9ECF6B00B0490A /* FRDCommonDateFormatter.m in Sources */,
 				58FFDBB81B9ED0A900B0490A /* FRDErrorHandler.m in Sources */,
 				581B9D5C1B9EDCDB0080393B /* FRDFailedOperationManager.m in Sources */,
@@ -1024,6 +1051,7 @@
 				581B9D3B1B9ED6090080393B /* FRDStorageManager.m in Sources */,
 				58BC77081B9ECA3700BB8B5A /* NSString+Base64Decoding.m in Sources */,
 				581B9D3E1B9ED67B0080393B /* FRDPushNotifiactionService.m in Sources */,
+				3ED072321BA0370C0091B7E4 /* FRDPreferencesController.m in Sources */,
 				58FFDBAB1B9ECF3B00B0490A /* FRDSerialViewConstructor.m in Sources */,
 				58BC773D1B9ECDD100BB8B5A /* FRDValidator.m in Sources */,
 				58F2F30F1B9EF93F000DC739 /* FRDTutorialController.m in Sources */,
