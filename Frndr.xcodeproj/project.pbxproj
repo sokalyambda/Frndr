@@ -20,6 +20,7 @@
 		581B9D561B9EDCA00080393B /* FRDNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D551B9EDCA00080393B /* FRDNetworkOperation.m */; };
 		581B9D591B9EDCBB0080393B /* FRDProjectFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D581B9EDCBB0080393B /* FRDProjectFacade.m */; };
 		581B9D5C1B9EDCDB0080393B /* FRDFailedOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D5B1B9EDCDB0080393B /* FRDFailedOperationManager.m */; };
+		585807DF1BA07A5C00064D9E /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 585807DE1BA07A5C00064D9E /* TTTAttributedLabel.m */; };
 		58BC76A11B9EB6B500BB8B5A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A01B9EB6B500BB8B5A /* main.m */; };
 		58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A31B9EB6B500BB8B5A /* AppDelegate.m */; };
 		58BC76AA1B9EB6B500BB8B5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58BC76A81B9EB6B500BB8B5A /* Main.storyboard */; };
@@ -101,6 +102,8 @@
 		581B9D5A1B9EDCDB0080393B /* FRDFailedOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDFailedOperationManager.h; path = "Classes/Server APIs/API/FailedOperationManager/FRDFailedOperationManager.h"; sourceTree = "<group>"; };
 		581B9D5B1B9EDCDB0080393B /* FRDFailedOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDFailedOperationManager.m; path = "Classes/Server APIs/API/FailedOperationManager/FRDFailedOperationManager.m"; sourceTree = "<group>"; };
 		581B9D5D1B9EDE020080393B /* FRDRequests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FRDRequests.h; path = "Classes/Server APIs/API/Requests/BaseNetworkRequest/FRDRequests.h"; sourceTree = "<group>"; };
+		585807DD1BA07A5C00064D9E /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		585807DE1BA07A5C00064D9E /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		58BC769B1B9EB6B500BB8B5A /* Frndr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frndr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58BC769F1B9EB6B500BB8B5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58BC76A01B9EB6B500BB8B5A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -247,6 +250,16 @@
 			name = BaseNetworkRequest;
 			sourceTree = "<group>";
 		};
+		585807DC1BA07A5C00064D9E /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				585807DD1BA07A5C00064D9E /* TTTAttributedLabel.h */,
+				585807DE1BA07A5C00064D9E /* TTTAttributedLabel.m */,
+			);
+			name = TTTAttributedLabel;
+			path = Classes/Libraries/TTTAttributedLabel;
+			sourceTree = "<group>";
+		};
 		58BC76921B9EB6B500BB8B5A = {
 			isa = PBXGroup;
 			children = (
@@ -313,6 +326,7 @@
 		58BC76C71B9EB91000BB8B5A /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				585807DC1BA07A5C00064D9E /* TTTAttributedLabel */,
 				58FFDBAF1B9ECFEA00B0490A /* ISO8601Formatter */,
 			);
 			name = Libraries;
@@ -1063,6 +1077,7 @@
 				58BC77111B9ECA5B00BB8B5A /* UIView+Shaking.m in Sources */,
 				581B9D441B9ED7FE0080393B /* FRDFacebookService.m in Sources */,
 				58BC77291B9ECB0300BB8B5A /* FRDKeychainHandler.m in Sources */,
+				585807DF1BA07A5C00064D9E /* TTTAttributedLabel.m in Sources */,
 				581B9D561B9EDCA00080393B /* FRDNetworkOperation.m in Sources */,
 				58BC77201B9ECA9C00BB8B5A /* UIFont+Styles.m in Sources */,
 				58BC77171B9ECA7400BB8B5A /* UIView+SoftRemoving.m in Sources */,
