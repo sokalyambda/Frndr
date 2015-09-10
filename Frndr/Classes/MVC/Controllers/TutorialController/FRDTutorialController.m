@@ -9,9 +9,9 @@
 #import "FRDTutorialController.h"
 #import "FRDTutorialContentController.h"
 
-#import "FRDTermsOfServiceLabel.h"
-
 #import "FRDFacebookService.h"
+
+#import "FRDTermsLabel.h"
 
 #import "UIView+ConfigureAnchorPoint.h"
 #import "CAAnimation+CompetionBlock.h"
@@ -19,7 +19,7 @@
 @interface FRDTutorialController ()<UIPageViewControllerDataSource, UITextViewDelegate, TTTAttributedLabelDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *tutorialContainer;
-@property (weak, nonatomic) IBOutlet FRDTermsOfServiceLabel *termsLabel;
+@property (weak, nonatomic) IBOutlet FRDTermsLabel *termsLabel;
 @property (weak, nonatomic) IBOutlet UIButton *facebookButton;
 
 @property (strong, nonatomic) NSArray *contentImages;
@@ -50,10 +50,7 @@
 {
     [super viewDidAppear:animated];
 
-    
-    
     [self animateTutorialViews];
-
 }
 
 #pragma mark - Actions
@@ -218,5 +215,7 @@ static CGFloat const kTermsLabelAnimDuration = .6f;
 {
     NSLog(@"url string %@", url.absoluteString);
 }
+
+
 
 @end

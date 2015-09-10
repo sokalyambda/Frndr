@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E10E3081BA15B3E0075C72D /* FRDPhotoGalleryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E10E3071BA15B3E0075C72D /* FRDPhotoGalleryCollectionViewController.m */; };
+		3E10E3101BA16E080075C72D /* FRDPhotoGalleryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E10E30F1BA16E080075C72D /* FRDPhotoGalleryCollectionViewCell.m */; };
+		3E10E3151BA16E780075C72D /* FRDPhotoGalleryCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E10E3141BA16E780075C72D /* FRDPhotoGalleryCollectionViewLayout.m */; };
 		3ED072321BA0370C0091B7E4 /* FRDPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED072311BA0370C0091B7E4 /* FRDPreferencesController.m */; };
 		3ED072361BA048460091B7E4 /* FRDPreferencesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED072351BA048460091B7E4 /* FRDPreferencesTableViewController.m */; };
 		581B9D3B1B9ED6090080393B /* FRDStorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D3A1B9ED6090080393B /* FRDStorageManager.m */; };
@@ -20,8 +23,6 @@
 		581B9D561B9EDCA00080393B /* FRDNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D551B9EDCA00080393B /* FRDNetworkOperation.m */; };
 		581B9D591B9EDCBB0080393B /* FRDProjectFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D581B9EDCBB0080393B /* FRDProjectFacade.m */; };
 		581B9D5C1B9EDCDB0080393B /* FRDFailedOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D5B1B9EDCDB0080393B /* FRDFailedOperationManager.m */; };
-		585807DF1BA07A5C00064D9E /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 585807DE1BA07A5C00064D9E /* TTTAttributedLabel.m */; };
-		5893C7D91BA08305002C131E /* FRDTermsOfServiceLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5893C7D81BA08305002C131E /* FRDTermsOfServiceLabel.m */; };
 		58BC76A11B9EB6B500BB8B5A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A01B9EB6B500BB8B5A /* main.m */; };
 		58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A31B9EB6B500BB8B5A /* AppDelegate.m */; };
 		58BC76AA1B9EB6B500BB8B5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58BC76A81B9EB6B500BB8B5A /* Main.storyboard */; };
@@ -51,6 +52,8 @@
 		58BC773A1B9ECD4D00BB8B5A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BC77391B9ECD4D00BB8B5A /* MobileCoreServices.framework */; };
 		58BC773D1B9ECDD100BB8B5A /* FRDValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC773C1B9ECDD100BB8B5A /* FRDValidator.m */; };
 		58CD17EA1BA18AA30021D948 /* CAAnimation+CompetionBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD17E91BA18AA30021D948 /* CAAnimation+CompetionBlock.m */; };
+		58CD17EE1BA19BC70021D948 /* FRDTermsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD17ED1BA19BC70021D948 /* FRDTermsLabel.m */; };
+		58CD17F21BA19BF40021D948 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD17F11BA19BF40021D948 /* TTTAttributedLabel.m */; };
 		58F2F30F1B9EF93F000DC739 /* FRDTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F2F30E1B9EF93F000DC739 /* FRDTutorialController.m */; };
 		58F2F3131B9EF96E000DC739 /* FRDTutorialContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F2F3121B9EF96E000DC739 /* FRDTutorialContentController.m */; };
 		58FFDBAB1B9ECF3B00B0490A /* FRDSerialViewConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FFDBAA1B9ECF3B00B0490A /* FRDSerialViewConstructor.m */; };
@@ -75,6 +78,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E10E3061BA15B3E0075C72D /* FRDPhotoGalleryCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPhotoGalleryCollectionViewController.h; path = Classes/MVC/Controllers/PhotoGalleryCollectionController/FRDPhotoGalleryCollectionViewController.h; sourceTree = "<group>"; };
+		3E10E3071BA15B3E0075C72D /* FRDPhotoGalleryCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPhotoGalleryCollectionViewController.m; path = Classes/MVC/Controllers/PhotoGalleryCollectionController/FRDPhotoGalleryCollectionViewController.m; sourceTree = "<group>"; };
+		3E10E30E1BA16E080075C72D /* FRDPhotoGalleryCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPhotoGalleryCollectionViewCell.h; path = Classes/Cells/UICollectionViewCells/PhotoGalleryCollectionCell/FRDPhotoGalleryCollectionViewCell.h; sourceTree = "<group>"; };
+		3E10E30F1BA16E080075C72D /* FRDPhotoGalleryCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPhotoGalleryCollectionViewCell.m; path = Classes/Cells/UICollectionViewCells/PhotoGalleryCollectionCell/FRDPhotoGalleryCollectionViewCell.m; sourceTree = "<group>"; };
+		3E10E3131BA16E780075C72D /* FRDPhotoGalleryCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPhotoGalleryCollectionViewLayout.h; path = Classes/Layouts/PhotoGalleryCollectionLayout/FRDPhotoGalleryCollectionViewLayout.h; sourceTree = "<group>"; };
+		3E10E3141BA16E780075C72D /* FRDPhotoGalleryCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPhotoGalleryCollectionViewLayout.m; path = Classes/Layouts/PhotoGalleryCollectionLayout/FRDPhotoGalleryCollectionViewLayout.m; sourceTree = "<group>"; };
 		3ED072301BA0370C0091B7E4 /* FRDPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPreferencesController.h; path = Classes/MVC/Controllers/PreferencesController/FRDPreferencesController.h; sourceTree = "<group>"; };
 		3ED072311BA0370C0091B7E4 /* FRDPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPreferencesController.m; path = Classes/MVC/Controllers/PreferencesController/FRDPreferencesController.m; sourceTree = "<group>"; };
 		3ED072341BA048460091B7E4 /* FRDPreferencesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPreferencesTableViewController.h; path = Classes/MVC/Controllers/PreferencesTableViewController/FRDPreferencesTableViewController.h; sourceTree = "<group>"; };
@@ -104,10 +113,6 @@
 		581B9D5A1B9EDCDB0080393B /* FRDFailedOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDFailedOperationManager.h; path = "Classes/Server APIs/API/FailedOperationManager/FRDFailedOperationManager.h"; sourceTree = "<group>"; };
 		581B9D5B1B9EDCDB0080393B /* FRDFailedOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDFailedOperationManager.m; path = "Classes/Server APIs/API/FailedOperationManager/FRDFailedOperationManager.m"; sourceTree = "<group>"; };
 		581B9D5D1B9EDE020080393B /* FRDRequests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FRDRequests.h; path = "Classes/Server APIs/API/Requests/BaseNetworkRequest/FRDRequests.h"; sourceTree = "<group>"; };
-		585807DD1BA07A5C00064D9E /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
-		585807DE1BA07A5C00064D9E /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
-		5893C7D71BA08305002C131E /* FRDTermsOfServiceLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDTermsOfServiceLabel.h; path = Classes/MVC/Views/PrivacyLabel/FRDTermsOfServiceLabel.h; sourceTree = "<group>"; };
-		5893C7D81BA08305002C131E /* FRDTermsOfServiceLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDTermsOfServiceLabel.m; path = Classes/MVC/Views/PrivacyLabel/FRDTermsOfServiceLabel.m; sourceTree = "<group>"; };
 		58BC769B1B9EB6B500BB8B5A /* Frndr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frndr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58BC769F1B9EB6B500BB8B5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58BC76A01B9EB6B500BB8B5A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -161,6 +166,10 @@
 		58BC773C1B9ECDD100BB8B5A /* FRDValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDValidator.m; path = Classes/Utilities/Validator/FRDValidator.m; sourceTree = "<group>"; };
 		58CD17E81BA18AA30021D948 /* CAAnimation+CompetionBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimation+CompetionBlock.h"; sourceTree = "<group>"; };
 		58CD17E91BA18AA30021D948 /* CAAnimation+CompetionBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAAnimation+CompetionBlock.m"; sourceTree = "<group>"; };
+		58CD17EC1BA19BC70021D948 /* FRDTermsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDTermsLabel.h; path = Classes/MVC/Views/TermsLabel/FRDTermsLabel.h; sourceTree = "<group>"; };
+		58CD17ED1BA19BC70021D948 /* FRDTermsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDTermsLabel.m; path = Classes/MVC/Views/TermsLabel/FRDTermsLabel.m; sourceTree = "<group>"; };
+		58CD17F01BA19BF40021D948 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTTAttributedLabel.h; path = Classes/Libraries/TTTAttributedLabel/TTTAttributedLabel.h; sourceTree = "<group>"; };
+		58CD17F11BA19BF40021D948 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTAttributedLabel.m; path = Classes/Libraries/TTTAttributedLabel/TTTAttributedLabel.m; sourceTree = "<group>"; };
 		58F2F30D1B9EF93F000DC739 /* FRDTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDTutorialController.h; path = Classes/MVC/Controllers/TutorialController/FRDTutorialController.h; sourceTree = "<group>"; };
 		58F2F30E1B9EF93F000DC739 /* FRDTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDTutorialController.m; path = Classes/MVC/Controllers/TutorialController/FRDTutorialController.m; sourceTree = "<group>"; };
 		58F2F3111B9EF96E000DC739 /* FRDTutorialContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDTutorialContentController.h; path = Classes/MVC/Controllers/TutorialContentController/FRDTutorialContentController.h; sourceTree = "<group>"; };
@@ -211,6 +220,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E10E3051BA15A800075C72D /* PhotoGalleryCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3E10E3061BA15B3E0075C72D /* FRDPhotoGalleryCollectionViewController.h */,
+				3E10E3071BA15B3E0075C72D /* FRDPhotoGalleryCollectionViewController.m */,
+			);
+			name = PhotoGalleryCollectionViewController;
+			sourceTree = "<group>";
+		};
+		3E10E30D1BA16DEE0075C72D /* PhotoGalleryCollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				3E10E30E1BA16E080075C72D /* FRDPhotoGalleryCollectionViewCell.h */,
+				3E10E30F1BA16E080075C72D /* FRDPhotoGalleryCollectionViewCell.m */,
+			);
+			name = PhotoGalleryCollectionCell;
+			sourceTree = "<group>";
+		};
+		3E10E3111BA16E130075C72D /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				3E10E3121BA16E4D0075C72D /* PhotoGalleryCollectionLayout */,
+			);
+			name = Layouts;
+			sourceTree = "<group>";
+		};
+		3E10E3121BA16E4D0075C72D /* PhotoGalleryCollectionLayout */ = {
+			isa = PBXGroup;
+			children = (
+				3E10E3131BA16E780075C72D /* FRDPhotoGalleryCollectionViewLayout.h */,
+				3E10E3141BA16E780075C72D /* FRDPhotoGalleryCollectionViewLayout.m */,
+			);
+			name = PhotoGalleryCollectionLayout;
+			sourceTree = "<group>";
+		};
 		3ED0722F1BA0364E0091B7E4 /* PreferencesController */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,25 +298,6 @@
 				581B9D521B9EDC740080393B /* FRDNetworkRequest.m */,
 			);
 			name = BaseNetworkRequest;
-			sourceTree = "<group>";
-		};
-		585807DC1BA07A5C00064D9E /* TTTAttributedLabel */ = {
-			isa = PBXGroup;
-			children = (
-				585807DD1BA07A5C00064D9E /* TTTAttributedLabel.h */,
-				585807DE1BA07A5C00064D9E /* TTTAttributedLabel.m */,
-			);
-			name = TTTAttributedLabel;
-			path = Classes/Libraries/TTTAttributedLabel;
-			sourceTree = "<group>";
-		};
-		5893C7D61BA082E5002C131E /* TermsOfServiceLabel */ = {
-			isa = PBXGroup;
-			children = (
-				5893C7D71BA08305002C131E /* FRDTermsOfServiceLabel.h */,
-				5893C7D81BA08305002C131E /* FRDTermsOfServiceLabel.m */,
-			);
-			name = TermsOfServiceLabel;
 			sourceTree = "<group>";
 		};
 		58BC76921B9EB6B500BB8B5A = {
@@ -341,7 +366,7 @@
 		58BC76C71B9EB91000BB8B5A /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				585807DC1BA07A5C00064D9E /* TTTAttributedLabel */,
+				58CD17EF1BA19BE50021D948 /* TTTAttributedLabel */,
 				58FFDBAF1B9ECFEA00B0490A /* ISO8601Formatter */,
 			);
 			name = Libraries;
@@ -442,7 +467,7 @@
 		58BC76D11B9EB95100BB8B5A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5893C7D61BA082E5002C131E /* TermsOfServiceLabel */,
+				58CD17EB1BA19B680021D948 /* TermsLabel */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -450,6 +475,7 @@
 		58BC76D21B9EB95600BB8B5A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3E10E3051BA15A800075C72D /* PhotoGalleryCollectionViewController */,
 				3ED072331BA047D90091B7E4 /* PreferencesTableViewController */,
 				3ED0722F1BA0364E0091B7E4 /* PreferencesController */,
 				58F2F3101B9EF956000DC739 /* TutorialContentController */,
@@ -805,6 +831,7 @@
 		58BC76F91B9EBB8300BB8B5A /* UICollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				3E10E30D1BA16DEE0075C72D /* PhotoGalleryCollectionCell */,
 			);
 			name = UICollectionViewCells;
 			sourceTree = "<group>";
@@ -843,6 +870,7 @@
 			isa = PBXGroup;
 			children = (
 				58BC76CF1B9EB94800BB8B5A /* MVC */,
+				3E10E3111BA16E130075C72D /* Layouts */,
 				58BC76CE1B9EB94000BB8B5A /* Cells */,
 				58BC76CD1B9EB93B00BB8B5A /* Categories */,
 				58BC76CC1B9EB93500BB8B5A /* Utilities */,
@@ -880,6 +908,24 @@
 				58CD17E91BA18AA30021D948 /* CAAnimation+CompetionBlock.m */,
 			);
 			name = "CAAnimation+CompletionBlock";
+			sourceTree = "<group>";
+		};
+		58CD17EB1BA19B680021D948 /* TermsLabel */ = {
+			isa = PBXGroup;
+			children = (
+				58CD17EC1BA19BC70021D948 /* FRDTermsLabel.h */,
+				58CD17ED1BA19BC70021D948 /* FRDTermsLabel.m */,
+			);
+			name = TermsLabel;
+			sourceTree = "<group>";
+		};
+		58CD17EF1BA19BE50021D948 /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				58CD17F01BA19BF40021D948 /* TTTAttributedLabel.h */,
+				58CD17F11BA19BF40021D948 /* TTTAttributedLabel.m */,
+			);
+			name = TTTAttributedLabel;
 			sourceTree = "<group>";
 		};
 		58F2F30C1B9EF911000DC739 /* TutorialController */ = {
@@ -1101,7 +1147,6 @@
 				581B9D3E1B9ED67B0080393B /* FRDPushNotifiactionService.m in Sources */,
 				3ED072321BA0370C0091B7E4 /* FRDPreferencesController.m in Sources */,
 				58FFDBAB1B9ECF3B00B0490A /* FRDSerialViewConstructor.m in Sources */,
-				5893C7D91BA08305002C131E /* FRDTermsOfServiceLabel.m in Sources */,
 				58BC773D1B9ECDD100BB8B5A /* FRDValidator.m in Sources */,
 				58F2F30F1B9EF93F000DC739 /* FRDTutorialController.m in Sources */,
 				58BC770E1B9ECA5000BB8B5A /* UIView+MakeFromXib.m in Sources */,
@@ -1113,16 +1158,20 @@
 				58CD17EA1BA18AA30021D948 /* CAAnimation+CompetionBlock.m in Sources */,
 				581B9D441B9ED7FE0080393B /* FRDFacebookService.m in Sources */,
 				58BC77291B9ECB0300BB8B5A /* FRDKeychainHandler.m in Sources */,
-				585807DF1BA07A5C00064D9E /* TTTAttributedLabel.m in Sources */,
 				581B9D561B9EDCA00080393B /* FRDNetworkOperation.m in Sources */,
 				58BC77201B9ECA9C00BB8B5A /* UIFont+Styles.m in Sources */,
 				58BC77171B9ECA7400BB8B5A /* UIView+SoftRemoving.m in Sources */,
+				58CD17EE1BA19BC70021D948 /* FRDTermsLabel.m in Sources */,
 				58FFDBC31B9ED32000B0490A /* FRDBaseNavigationController.m in Sources */,
 				58FFDBC01B9ED2FB00B0490A /* FRDBaseViewController.m in Sources */,
 				581B9D4C1B9ED8EE0080393B /* FRDUserProfile.m in Sources */,
 				58BC77141B9ECA6700BB8B5A /* UIView+ConfigureAnchorPoint.m in Sources */,
+				58CD17F21BA19BF40021D948 /* TTTAttributedLabel.m in Sources */,
 				58FFDBBB1B9ED17B00B0490A /* FRDAlertFacade.m in Sources */,
 				58BC76A11B9EB6B500BB8B5A /* main.m in Sources */,
+				3E10E3151BA16E780075C72D /* FRDPhotoGalleryCollectionViewLayout.m in Sources */,
+				3E10E3101BA16E080075C72D /* FRDPhotoGalleryCollectionViewCell.m in Sources */,
+				3E10E3081BA15B3E0075C72D /* FRDPhotoGalleryCollectionViewController.m in Sources */,
 				58BC772A1B9ECB0300BB8B5A /* KeychainItemWrapper.m in Sources */,
 				581B9D591B9EDCBB0080393B /* FRDProjectFacade.m in Sources */,
 				581B9D4F1B9EDC350080393B /* FRDSessionManager.m in Sources */,

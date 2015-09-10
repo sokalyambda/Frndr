@@ -63,13 +63,13 @@
                                     <action selector="facebookLoginClick:" destination="XRT-sT-Uge" eventType="touchUpInside" id="JmH-bM-Snk"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By continuing you agree to our Terms of Service and Privacy Policy. Frndr does not post anything to Facebook" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgk-7h-Ry8" customClass="FRDTermsOfServiceLabel">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By continuing you agree to our Terms of Service and Privacy Policy. Frndr does not post anything to Facebook" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgk-7h-Ry8" customClass="FRDTermsLabel">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="10"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <connections>
-                                    <outlet property="delegate" destination="XRT-sT-Uge" id="jlt-ka-4F0"/>
+                                    <outlet property="delegate" destination="XRT-sT-Uge" id="Jeq-J4-pcJ"/>
                                 </connections>
                             </label>
                         </subviews>
@@ -145,7 +145,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="m4b-BE-TjG"/>
                     <connections>
-                        <outlet property="termsLabel" destination="kgk-7h-Ry8" id="dGq-vO-EIg"/>
+                        <outlet property="facebookButton" destination="mbj-Hd-iYU" id="SqU-hb-TmT"/>
+                        <outlet property="termsLabel" destination="kgk-7h-Ry8" id="iAM-pZ-IYb"/>
                         <outlet property="tutorialContainer" destination="P4B-gb-ySr" id="BOf-IG-9gs"/>
                     </connections>
                 </viewController>
@@ -444,6 +445,71 @@
             </objects>
             <point key="canvasLocation" x="2037" y="1033.5"/>
         </scene>
+        <!--Photo Gallery Collection View Controller-->
+        <scene sceneID="f48-KY-DIg">
+            <objects>
+                <collectionViewController id="Mi7-ax-NUS" customClass="FRDPhotoGalleryCollectionViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ZHI-Ii-abp">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewLayout key="collectionViewLayout" id="ZlS-0y-yyK" customClass="FRDPhotoGalleryCollectionViewLayout"/>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FRDPhotoGalleryCollectionViewCell" id="7aM-9V-OeS" customClass="FRDPhotoGalleryCollectionViewCell">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gpN-Cz-2gs">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="gpN-Cz-2gs" secondAttribute="bottom" id="bEv-oD-aXC"/>
+                                    <constraint firstItem="gpN-Cz-2gs" firstAttribute="leading" secondItem="7aM-9V-OeS" secondAttribute="leading" id="g0A-sA-RoX"/>
+                                    <constraint firstItem="gpN-Cz-2gs" firstAttribute="top" secondItem="7aM-9V-OeS" secondAttribute="top" id="gBM-5d-d0O"/>
+                                    <constraint firstAttribute="trailing" secondItem="gpN-Cz-2gs" secondAttribute="trailing" id="mud-a6-uZX"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="gpN-Cz-2gs"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <exclude reference="bEv-oD-aXC"/>
+                                        <exclude reference="g0A-sA-RoX"/>
+                                        <exclude reference="gBM-5d-d0O"/>
+                                        <exclude reference="mud-a6-uZX"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="gpN-Cz-2gs"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <include reference="bEv-oD-aXC"/>
+                                        <include reference="g0A-sA-RoX"/>
+                                        <include reference="gBM-5d-d0O"/>
+                                        <include reference="mud-a6-uZX"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <outlet property="imageView" destination="gpN-Cz-2gs" id="KJc-ke-csP"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Mi7-ax-NUS" id="nYy-Q9-GZa"/>
+                            <outlet property="delegate" destination="Mi7-ax-NUS" id="2ln-E9-HJZ"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZUJ-Y5-52c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2808" y="1134.75"/>
+        </scene>
         <!--Page View Controller-->
         <scene sceneID="0pO-Kt-WlH">
             <objects>
@@ -566,6 +632,60 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eUv-br-TBH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2037" y="458.25"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="oXs-9E-gd3">
+            <objects>
+                <viewController id="7HD-3D-Eub" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3aM-fJ-iUi"/>
+                        <viewControllerLayoutGuide type="bottom" id="ttf-jH-CqS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9aO-zW-AMk">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9wa-wC-Lar">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <connections>
+                                    <segue destination="Mi7-ax-NUS" kind="embed" id="8MG-Br-fB8"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9wa-wC-Lar" firstAttribute="leading" secondItem="9aO-zW-AMk" secondAttribute="leading" id="7de-Vg-HgT"/>
+                            <constraint firstAttribute="bottom" secondItem="9wa-wC-Lar" secondAttribute="bottom" id="LP7-VY-a9T"/>
+                            <constraint firstAttribute="trailing" secondItem="9wa-wC-Lar" secondAttribute="trailing" id="gCR-Oz-8f9"/>
+                            <constraint firstItem="9wa-wC-Lar" firstAttribute="top" secondItem="3aM-fJ-iUi" secondAttribute="bottom" id="gdX-kF-Bos"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="9wa-wC-Lar"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="7de-Vg-HgT"/>
+                                <exclude reference="LP7-VY-a9T"/>
+                                <exclude reference="gCR-Oz-8f9"/>
+                                <exclude reference="gdX-kF-Bos"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="9wa-wC-Lar"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="7de-Vg-HgT"/>
+                                <include reference="LP7-VY-a9T"/>
+                                <include reference="gCR-Oz-8f9"/>
+                                <include reference="gdX-kF-Bos"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q98-ba-KQs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2808" y="458.25"/>
         </scene>
     </scenes>
     <resources>

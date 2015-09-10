@@ -1,14 +1,14 @@
 //
-//  FRDTermsOfServiceLabel.m
+//  FRDTermsLabel.m
 //  Frndr
 //
-//  Created by Eugenity on 09.09.15.
+//  Created by Eugenity on 10.09.15.
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "FRDTermsOfServiceLabel.h"
+#import "FRDTermsLabel.h"
 
-@implementation FRDTermsOfServiceLabel
+@implementation FRDTermsLabel
 
 - (void)setText:(id)text
 {
@@ -25,5 +25,6 @@
     [self addLinkToURL:[NSURL URLWithString:@"http://PRIVACY_POLICY"] withRange:[self.text rangeOfString:@"Privacy Policy"]];
     [self addLinkToURL:[NSURL URLWithString:@"http://TERMS_OF_SERVICE"] withRange:[self.text rangeOfString:@"Terms of Service"]];
 }
+
 
 @end
