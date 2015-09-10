@@ -50,6 +50,7 @@
 		58BC77381B9ECD4800BB8B5A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BC77371B9ECD4800BB8B5A /* SystemConfiguration.framework */; };
 		58BC773A1B9ECD4D00BB8B5A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BC77391B9ECD4D00BB8B5A /* MobileCoreServices.framework */; };
 		58BC773D1B9ECDD100BB8B5A /* FRDValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC773C1B9ECDD100BB8B5A /* FRDValidator.m */; };
+		58CD17EA1BA18AA30021D948 /* CAAnimation+CompetionBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD17E91BA18AA30021D948 /* CAAnimation+CompetionBlock.m */; };
 		58F2F30F1B9EF93F000DC739 /* FRDTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F2F30E1B9EF93F000DC739 /* FRDTutorialController.m */; };
 		58F2F3131B9EF96E000DC739 /* FRDTutorialContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F2F3121B9EF96E000DC739 /* FRDTutorialContentController.m */; };
 		58FFDBAB1B9ECF3B00B0490A /* FRDSerialViewConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FFDBAA1B9ECF3B00B0490A /* FRDSerialViewConstructor.m */; };
@@ -158,6 +159,8 @@
 		58BC77391B9ECD4D00BB8B5A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		58BC773B1B9ECDD100BB8B5A /* FRDValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDValidator.h; path = Classes/Utilities/Validator/FRDValidator.h; sourceTree = "<group>"; };
 		58BC773C1B9ECDD100BB8B5A /* FRDValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDValidator.m; path = Classes/Utilities/Validator/FRDValidator.m; sourceTree = "<group>"; };
+		58CD17E81BA18AA30021D948 /* CAAnimation+CompetionBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimation+CompetionBlock.h"; sourceTree = "<group>"; };
+		58CD17E91BA18AA30021D948 /* CAAnimation+CompetionBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAAnimation+CompetionBlock.m"; sourceTree = "<group>"; };
 		58F2F30D1B9EF93F000DC739 /* FRDTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDTutorialController.h; path = Classes/MVC/Controllers/TutorialController/FRDTutorialController.h; sourceTree = "<group>"; };
 		58F2F30E1B9EF93F000DC739 /* FRDTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDTutorialController.m; path = Classes/MVC/Controllers/TutorialController/FRDTutorialController.m; sourceTree = "<group>"; };
 		58F2F3111B9EF96E000DC739 /* FRDTutorialContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDTutorialContentController.h; path = Classes/MVC/Controllers/TutorialContentController/FRDTutorialContentController.h; sourceTree = "<group>"; };
@@ -396,6 +399,7 @@
 		58BC76CD1B9EB93B00BB8B5A /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				58CD17E61BA18A880021D948 /* CAAnimation */,
 				58BC76EC1B9EBADC00BB8B5A /* NSDictionary */,
 				58BC76EB1B9EBAD700BB8B5A /* NSString */,
 				58BC76EA1B9EBACD00BB8B5A /* UIImagePickerController */,
@@ -861,6 +865,23 @@
 			path = Classes/Utilities/Keychain/KeychainHandler;
 			sourceTree = "<group>";
 		};
+		58CD17E61BA18A880021D948 /* CAAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				58CD17E71BA18A920021D948 /* CAAnimation+CompletionBlock */,
+			);
+			name = CAAnimation;
+			sourceTree = "<group>";
+		};
+		58CD17E71BA18A920021D948 /* CAAnimation+CompletionBlock */ = {
+			isa = PBXGroup;
+			children = (
+				58CD17E81BA18AA30021D948 /* CAAnimation+CompetionBlock.h */,
+				58CD17E91BA18AA30021D948 /* CAAnimation+CompetionBlock.m */,
+			);
+			name = "CAAnimation+CompletionBlock";
+			sourceTree = "<group>";
+		};
 		58F2F30C1B9EF911000DC739 /* TutorialController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1089,6 +1110,7 @@
 				58BC77231B9ECAA900BB8B5A /* UIImage+Base64Encoding.m in Sources */,
 				58FFDBB21B9ED00100B0490A /* ISO8601DateFormatter.m in Sources */,
 				58BC77111B9ECA5B00BB8B5A /* UIView+Shaking.m in Sources */,
+				58CD17EA1BA18AA30021D948 /* CAAnimation+CompetionBlock.m in Sources */,
 				581B9D441B9ED7FE0080393B /* FRDFacebookService.m in Sources */,
 				58BC77291B9ECB0300BB8B5A /* FRDKeychainHandler.m in Sources */,
 				585807DF1BA07A5C00064D9E /* TTTAttributedLabel.m in Sources */,

@@ -13,10 +13,14 @@
 
 #import "FRDFacebookService.h"
 
+#import "UIView+ConfigureAnchorPoint.h"
+#import "CAAnimation+CompetionBlock.h"
+
 @interface FRDTutorialController ()<UIPageViewControllerDataSource, UITextViewDelegate, TTTAttributedLabelDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *tutorialContainer;
 @property (weak, nonatomic) IBOutlet FRDTermsOfServiceLabel *termsLabel;
+@property (weak, nonatomic) IBOutlet UIButton *facebookButton;
 
 @property (strong, nonatomic) NSArray *contentImages;
 @property (strong, nonatomic) UIPageViewController *pageViewController;
@@ -40,6 +44,16 @@
 {
     [super viewWillAppear:animated];
     [self customizeNavigationItem];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    
+    
+    [self animateTutorialViews];
+
 }
 
 #pragma mark - Actions
@@ -89,6 +103,54 @@
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
     }];
+}
+
+static NSInteger const kTempOffset = 7.f;
+static CGFloat const kTutorialAnimDuration = .8f;
+static CGFloat const kFBButtonAnimDuration = .7f;
+static CGFloat const kTermsLabelAnimDuration = .6f;
+- (void)animateTutorialViews
+{
+    WEAK_SELF;
+    NSArray *tutorialViewValues = @[@(-CGRectGetHeight(self.tutorialContainer.frame)), @(CGRectGetMinY(self.tutorialContainer.frame) + kTempOffset), @(CGRectGetMinY(self.tutorialContainer.frame))];
+    NSArray *facebookButtonValues = @[@(-CGRectGetHeight(self.facebookButton.frame)), @(CGRectGetMinY(self.facebookButton.frame) + kTempOffset), @(CGRectGetMinY(self.facebookButton.frame))];
+    NSArray *termsLabelValues = @[@(-CGRectGetHeight(self.termsLabel.frame)), @(CGRectGetMinY(self.termsLabel.frame) + kTempOffset), @(CGRectGetMinY(self.termsLabel.frame))];
+    
+    CAKeyframeAnimation *tutorialViewFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
+    CAKeyframeAnimation *facebookButtonFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
+    CAKeyframeAnimation *termsLabelFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
+    
+    tutorialViewFrameAnimation.begin = ^ {
+        [weakSelf.tutorialContainer setAnchorPoint:CGPointZero];
+    };
+    facebookButtonFrameAnimation.begin = ^ {
+        [weakSelf.facebookButton setAnchorPoint:CGPointZero];
+    };
+    termsLabelFrameAnimation.begin = ^ {
+        [weakSelf.termsLabel setAnchorPoint:CGPointZero];
+    };
+    
+    tutorialViewFrameAnimation.end = ^(BOOL end) {
+        [weakSelf.tutorialContainer setAnchorPoint:CGPointMake(.5f, .5f)];
+    };
+    facebookButtonFrameAnimation.end = ^(BOOL end) {
+        [weakSelf.facebookButton setAnchorPoint:CGPointMake(.5f, .5f)];
+    };
+    termsLabelFrameAnimation.end = ^(BOOL end) {
+        [weakSelf.termsLabel setAnchorPoint:CGPointMake(.5f, .5f)];
+    };
+    
+    tutorialViewFrameAnimation.values = tutorialViewValues;
+    facebookButtonFrameAnimation.values = facebookButtonValues;
+    termsLabelFrameAnimation.values = termsLabelValues;
+    
+    tutorialViewFrameAnimation.duration = kTutorialAnimDuration;
+    facebookButtonFrameAnimation.duration = kFBButtonAnimDuration;
+    termsLabelFrameAnimation.duration = kTermsLabelAnimDuration;
+    
+    [self.tutorialContainer.layer addAnimation:tutorialViewFrameAnimation forKey:@"position.y"];
+    [self.facebookButton.layer addAnimation:facebookButtonFrameAnimation forKey:@"position.y"];
+    [self.termsLabel.layer addAnimation:termsLabelFrameAnimation forKey:@"position.y"];
 }
 
 - (IBAction)facebookLoginClick:(id)sender
