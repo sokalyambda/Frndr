@@ -7,6 +7,8 @@
 //
 
 #import "FRDTutorialController.h"
+#import "FRDTermsAndServicesController.h"
+#import "FRDBaseNavigationController.h"
 
 #import "FRDFacebookService.h"
 
@@ -46,8 +48,12 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self setupTutorialScrollView];
-    [self animateTutorialViews];
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self setupTutorialScrollView];
+        [self animateTutorialViews];
+    });
 }
 
 #pragma mark - Actions
@@ -89,6 +95,11 @@
     }
 }
 
+/**
+ *  Update the page control
+ *
+ *  @param idx Current page index
+ */
 - (void)updatePageControlWithIndex:(NSUInteger)idx
 {
     self.tutorialPageControl.currentPage = idx;
@@ -161,6 +172,11 @@ static CGFloat const kPageControlAnimDuration = .6f;
 
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
 {
+    FRDTermsAndServicesController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDTermsAndServicesController class])];
+    FRDBaseNavigationController *navigationController = [[FRDBaseNavigationController alloc] initWithRootViewController:controller];
+    controller.currentURL = url;
+
+    [self presentViewController:navigationController animated:YES completion:nil];
     NSLog(@"url string %@", url.absoluteString);
 }
 

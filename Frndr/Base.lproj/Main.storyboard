@@ -200,6 +200,67 @@
             </objects>
             <point key="canvasLocation" x="1114.5" y="458.25"/>
         </scene>
+        <!--Terms And Services Controller-->
+        <scene sceneID="MTp-GY-fiz">
+            <objects>
+                <viewController storyboardIdentifier="FRDTermsAndServicesController" id="0TH-aW-PWu" customClass="FRDTermsAndServicesController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1V9-vO-HLE"/>
+                        <viewControllerLayoutGuide type="bottom" id="uim-7K-dxI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ObY-qr-zX2">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gxj-jM-chh">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="uim-7K-dxI" firstAttribute="top" secondItem="Gxj-jM-chh" secondAttribute="bottom" id="A3J-4U-4S2"/>
+                            <constraint firstAttribute="trailing" secondItem="Gxj-jM-chh" secondAttribute="trailing" id="BGx-7D-bNE"/>
+                            <constraint firstItem="Gxj-jM-chh" firstAttribute="top" secondItem="ObY-qr-zX2" secondAttribute="topMargin" id="ERu-KX-5an"/>
+                            <constraint firstItem="Gxj-jM-chh" firstAttribute="leading" secondItem="ObY-qr-zX2" secondAttribute="leading" id="mgw-Vr-Lja"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Gxj-jM-chh"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="BGx-7D-bNE"/>
+                                <exclude reference="ERu-KX-5an"/>
+                                <exclude reference="mgw-Vr-Lja"/>
+                                <exclude reference="A3J-4U-4S2"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="Gxj-jM-chh"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="BGx-7D-bNE"/>
+                                <include reference="ERu-KX-5an"/>
+                                <include reference="mgw-Vr-Lja"/>
+                                <include reference="A3J-4U-4S2"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="doneButton" destination="3u3-Wj-vKP" id="GdF-A8-fM2"/>
+                        <outlet property="webView" destination="Gxj-jM-chh" id="Z0n-Ns-Zum"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RPO-Ni-KhD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem systemItem="done" id="3u3-Wj-vKP">
+                    <connections>
+                        <action selector="doneClick:" destination="0TH-aW-PWu" id="pRf-oC-Qmh"/>
+                    </connections>
+                </barButtonItem>
+            </objects>
+            <point key="canvasLocation" x="1114.5" y="1142.25"/>
+        </scene>
         <!--Preferences Table View Controller-->
         <scene sceneID="mgv-9s-eb6">
             <objects>

@@ -23,6 +23,7 @@
 		581B9D561B9EDCA00080393B /* FRDNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D551B9EDCA00080393B /* FRDNetworkOperation.m */; };
 		581B9D591B9EDCBB0080393B /* FRDProjectFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D581B9EDCBB0080393B /* FRDProjectFacade.m */; };
 		581B9D5C1B9EDCDB0080393B /* FRDFailedOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D5B1B9EDCDB0080393B /* FRDFailedOperationManager.m */; };
+		587727F81BA2D8150032D746 /* FRDTermsAndServicesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 587727F71BA2D8150032D746 /* FRDTermsAndServicesController.m */; };
 		5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */; };
 		58BC76A11B9EB6B500BB8B5A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A01B9EB6B500BB8B5A /* main.m */; };
 		58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A31B9EB6B500BB8B5A /* AppDelegate.m */; };
@@ -113,6 +114,8 @@
 		581B9D5A1B9EDCDB0080393B /* FRDFailedOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDFailedOperationManager.h; path = "Classes/Server APIs/API/FailedOperationManager/FRDFailedOperationManager.h"; sourceTree = "<group>"; };
 		581B9D5B1B9EDCDB0080393B /* FRDFailedOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDFailedOperationManager.m; path = "Classes/Server APIs/API/FailedOperationManager/FRDFailedOperationManager.m"; sourceTree = "<group>"; };
 		581B9D5D1B9EDE020080393B /* FRDRequests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FRDRequests.h; path = "Classes/Server APIs/API/Requests/BaseNetworkRequest/FRDRequests.h"; sourceTree = "<group>"; };
+		587727F61BA2D8150032D746 /* FRDTermsAndServicesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDTermsAndServicesController.h; path = Classes/MVC/Controllers/TermsAndServicesController/FRDTermsAndServicesController.h; sourceTree = "<group>"; };
+		587727F71BA2D8150032D746 /* FRDTermsAndServicesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDTermsAndServicesController.m; path = Classes/MVC/Controllers/TermsAndServicesController/FRDTermsAndServicesController.m; sourceTree = "<group>"; };
 		5895FD931BA2D55C00079F9D /* FRDCustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDCustomPageControl.h; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.h; sourceTree = "<group>"; };
 		5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDCustomPageControl.m; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.m; sourceTree = "<group>"; };
 		58BC769B1B9EB6B500BB8B5A /* Frndr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frndr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -300,6 +303,15 @@
 			name = BaseNetworkRequest;
 			sourceTree = "<group>";
 		};
+		587727F51BA2D7EB0032D746 /* TermsAndServicesController */ = {
+			isa = PBXGroup;
+			children = (
+				587727F61BA2D8150032D746 /* FRDTermsAndServicesController.h */,
+				587727F71BA2D8150032D746 /* FRDTermsAndServicesController.m */,
+			);
+			name = TermsAndServicesController;
+			sourceTree = "<group>";
+		};
 		58A2B7461BA2C04B007D4D60 /* StyledPageControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,6 +497,7 @@
 		58BC76D21B9EB95600BB8B5A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				587727F51BA2D7EB0032D746 /* TermsAndServicesController */,
 				3E10E3051BA15A800075C72D /* PhotoGalleryCollectionViewController */,
 				3ED072331BA047D90091B7E4 /* PreferencesTableViewController */,
 				3ED0722F1BA0364E0091B7E4 /* PreferencesController */,
@@ -1179,6 +1192,7 @@
 				581B9D411B9ED71A0080393B /* FRDReachabilityHelper.m in Sources */,
 				58BC770B1B9ECA4400BB8B5A /* UIImagePickerController+fixOrientation.m in Sources */,
 				58BC77021B9ECA1700BB8B5A /* NSDictionary+JSONRepresentation.m in Sources */,
+				587727F81BA2D8150032D746 /* FRDTermsAndServicesController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
