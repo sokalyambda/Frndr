@@ -22,7 +22,7 @@ extern const CGPathRef FXPageControlDotShapeCircle;
 extern const CGPathRef FXPageControlDotShapeSquare;
 extern const CGPathRef FXPageControlDotShapeTriangle;
 
-@protocol FXPageControlDelegate;
+@protocol FRDPageControlDelegate;
 
 IB_DESIGNABLE @interface FRDCustomPageControl : UIControl
 
@@ -30,7 +30,7 @@ IB_DESIGNABLE @interface FRDCustomPageControl : UIControl
 - (CGSize)sizeForNumberOfPages:(NSInteger)pageCount;
 - (void)updateCurrentPageDisplay;
 
-@property (nonatomic, weak_delegate) IBOutlet id <FXPageControlDelegate> delegate;
+@property (nonatomic, weak_delegate) IBOutlet id <FRDPageControlDelegate> delegate;
 
 @property (nonatomic, assign) IBInspectable NSInteger currentPage;
 @property (nonatomic, assign) IBInspectable NSInteger numberOfPages;
@@ -59,7 +59,7 @@ IB_DESIGNABLE @interface FRDCustomPageControl : UIControl
 
 @end
 
-@protocol FXPageControlDelegate <NSObject>
+@protocol FRDPageControlDelegate <NSObject>
 @optional
 
 - (UIImage *)pageControl:(FRDCustomPageControl *)pageControl imageForDotAtIndex:(NSInteger)index;

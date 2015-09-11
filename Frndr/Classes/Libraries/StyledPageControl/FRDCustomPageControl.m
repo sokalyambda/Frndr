@@ -199,7 +199,7 @@ const CGPathRef FXPageControlDotShapeTriangle = (const CGPathRef)3;
     }
 }
 
-- (void)setDelegate:(id<FXPageControlDelegate>)delegate
+- (void)setDelegate:(id<FRDPageControlDelegate>)delegate
 {
     if (_delegate != delegate) {
         _delegate = delegate;
