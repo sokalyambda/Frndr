@@ -55,6 +55,9 @@
 
 #pragma mark - Actions
 
+/**
+ *  Create page view controller
+ */
 - (void)createPageViewController
 {
     self.contentImages = @[@"tutorial01",
@@ -79,6 +82,9 @@
     [self.pageViewController didMoveToParentViewController:self];
 }
 
+/**
+ *  Setup page control appearance
+ */
 - (void)setupPageControl
 {
     [[UIPageControl appearance] setPageIndicatorTintColor:[UIColor whiteColor]];
@@ -86,11 +92,17 @@
     [[UIPageControl appearance] setBackgroundColor:[UIColor lightGrayColor]];
 }
 
+/**
+ *  Customize navigation item
+ */
 - (void)customizeNavigationItem
 {
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
+/**
+ *  Try authorize with Facebook
+ */
 - (void)authorizeWithFacebookAction
 {
     WEAK_SELF;
@@ -102,40 +114,22 @@
     }];
 }
 
-static NSInteger const kTempOffset = 7.f;
+/**
+ *  Animate the tutorial views
+ */
+static NSInteger const kTempOffset = 8.f;
 static CGFloat const kTutorialAnimDuration = .8f;
 static CGFloat const kFBButtonAnimDuration = .7f;
 static CGFloat const kTermsLabelAnimDuration = .6f;
 - (void)animateTutorialViews
 {
-    WEAK_SELF;
-    NSArray *tutorialViewValues = @[@(-CGRectGetHeight(self.tutorialContainer.frame)), @(CGRectGetMinY(self.tutorialContainer.frame) + kTempOffset), @(CGRectGetMinY(self.tutorialContainer.frame))];
-    NSArray *facebookButtonValues = @[@(-CGRectGetHeight(self.facebookButton.frame)), @(CGRectGetMinY(self.facebookButton.frame) + kTempOffset), @(CGRectGetMinY(self.facebookButton.frame))];
-    NSArray *termsLabelValues = @[@(-CGRectGetHeight(self.termsLabel.frame)), @(CGRectGetMinY(self.termsLabel.frame) + kTempOffset), @(CGRectGetMinY(self.termsLabel.frame))];
+    NSArray *tutorialViewValues = @[@(-CGRectGetHeight(self.tutorialContainer.frame)), @(CGRectGetMidY(self.tutorialContainer.frame) + kTempOffset), @(CGRectGetMidY(self.tutorialContainer.frame))];
+    NSArray *facebookButtonValues = @[@(-CGRectGetHeight(self.facebookButton.frame)), @(CGRectGetMidY(self.facebookButton.frame) + kTempOffset), @(CGRectGetMidY(self.facebookButton.frame))];
+    NSArray *termsLabelValues = @[@(-CGRectGetHeight(self.termsLabel.frame)), @(CGRectGetMidY(self.termsLabel.frame) + kTempOffset), @(CGRectGetMidY(self.termsLabel.frame))];
     
     CAKeyframeAnimation *tutorialViewFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
     CAKeyframeAnimation *facebookButtonFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
     CAKeyframeAnimation *termsLabelFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
-    
-    tutorialViewFrameAnimation.begin = ^ {
-        [weakSelf.tutorialContainer setAnchorPoint:CGPointZero];
-    };
-    facebookButtonFrameAnimation.begin = ^ {
-        [weakSelf.facebookButton setAnchorPoint:CGPointZero];
-    };
-    termsLabelFrameAnimation.begin = ^ {
-        [weakSelf.termsLabel setAnchorPoint:CGPointZero];
-    };
-    
-    tutorialViewFrameAnimation.end = ^(BOOL end) {
-        [weakSelf.tutorialContainer setAnchorPoint:CGPointMake(.5f, .5f)];
-    };
-    facebookButtonFrameAnimation.end = ^(BOOL end) {
-        [weakSelf.facebookButton setAnchorPoint:CGPointMake(.5f, .5f)];
-    };
-    termsLabelFrameAnimation.end = ^(BOOL end) {
-        [weakSelf.termsLabel setAnchorPoint:CGPointMake(.5f, .5f)];
-    };
     
     tutorialViewFrameAnimation.values = tutorialViewValues;
     facebookButtonFrameAnimation.values = facebookButtonValues;
@@ -144,7 +138,7 @@ static CGFloat const kTermsLabelAnimDuration = .6f;
     tutorialViewFrameAnimation.duration = kTutorialAnimDuration;
     facebookButtonFrameAnimation.duration = kFBButtonAnimDuration;
     termsLabelFrameAnimation.duration = kTermsLabelAnimDuration;
-    
+
     [self.tutorialContainer.layer addAnimation:tutorialViewFrameAnimation forKey:@"position.y"];
     [self.facebookButton.layer addAnimation:facebookButtonFrameAnimation forKey:@"position.y"];
     [self.termsLabel.layer addAnimation:termsLabelFrameAnimation forKey:@"position.y"];
@@ -216,6 +210,15 @@ static CGFloat const kTermsLabelAnimDuration = .6f;
     NSLog(@"url string %@", url.absoluteString);
 }
 
+- (void)pageViewController:(UIPageViewController *)viewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
+{
+    if (!completed){return;}
+    
+    // Find index of current page
+    FRDTutorialContentController *currentViewController = (FRDTutorialContentController *)[self.pageViewController.viewControllers lastObject];
+    NSUInteger indexOfCurrentPage = currentViewController.itemIndex;
+//    self.pageViewController  = indexOfCurrentPage;
+}
 
 
 @end
