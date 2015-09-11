@@ -11,9 +11,16 @@
 
 #import "FRDFacebookService.h"
 
-@interface FRDTutorialController ()<UIPageViewControllerDataSource, UITextViewDelegate>
+#import "FRDTermsLabel.h"
+
+#import "UIView+ConfigureAnchorPoint.h"
+#import "CAAnimation+CompetionBlock.h"
+
+@interface FRDTutorialController ()<UIPageViewControllerDataSource, UITextViewDelegate, TTTAttributedLabelDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *tutorialContainer;
+@property (weak, nonatomic) IBOutlet FRDTermsLabel *termsLabel;
+@property (weak, nonatomic) IBOutlet UIButton *facebookButton;
 
 @property (strong, nonatomic) NSArray *contentImages;
 @property (strong, nonatomic) UIPageViewController *pageViewController;
@@ -37,11 +44,20 @@
 {
     [super viewWillAppear:animated];
     [self customizeNavigationItem];
-    [self customizeViews];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    [self animateTutorialViews];
 }
 
 #pragma mark - Actions
 
+/**
+ *  Create page view controller
+ */
 - (void)createPageViewController
 {
     self.contentImages = @[@"tutorial01",
@@ -66,6 +82,9 @@
     [self.pageViewController didMoveToParentViewController:self];
 }
 
+/**
+ *  Setup page control appearance
+ */
 - (void)setupPageControl
 {
     [[UIPageControl appearance] setPageIndicatorTintColor:[UIColor whiteColor]];
@@ -73,15 +92,17 @@
     [[UIPageControl appearance] setBackgroundColor:[UIColor lightGrayColor]];
 }
 
+/**
+ *  Customize navigation item
+ */
 - (void)customizeNavigationItem
 {
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
-- (void)customizeViews
-{
-}
-
+/**
+ *  Try authorize with Facebook
+ */
 - (void)authorizeWithFacebookAction
 {
     WEAK_SELF;
@@ -91,6 +112,36 @@
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
     }];
+}
+
+/**
+ *  Animate the tutorial views
+ */
+static NSInteger const kTempOffset = 8.f;
+static CGFloat const kTutorialAnimDuration = .8f;
+static CGFloat const kFBButtonAnimDuration = .7f;
+static CGFloat const kTermsLabelAnimDuration = .6f;
+- (void)animateTutorialViews
+{
+    NSArray *tutorialViewValues = @[@(-CGRectGetHeight(self.tutorialContainer.frame)), @(CGRectGetMidY(self.tutorialContainer.frame) + kTempOffset), @(CGRectGetMidY(self.tutorialContainer.frame))];
+    NSArray *facebookButtonValues = @[@(-CGRectGetHeight(self.facebookButton.frame)), @(CGRectGetMidY(self.facebookButton.frame) + kTempOffset), @(CGRectGetMidY(self.facebookButton.frame))];
+    NSArray *termsLabelValues = @[@(-CGRectGetHeight(self.termsLabel.frame)), @(CGRectGetMidY(self.termsLabel.frame) + kTempOffset), @(CGRectGetMidY(self.termsLabel.frame))];
+    
+    CAKeyframeAnimation *tutorialViewFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
+    CAKeyframeAnimation *facebookButtonFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
+    CAKeyframeAnimation *termsLabelFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
+    
+    tutorialViewFrameAnimation.values = tutorialViewValues;
+    facebookButtonFrameAnimation.values = facebookButtonValues;
+    termsLabelFrameAnimation.values = termsLabelValues;
+    
+    tutorialViewFrameAnimation.duration = kTutorialAnimDuration;
+    facebookButtonFrameAnimation.duration = kFBButtonAnimDuration;
+    termsLabelFrameAnimation.duration = kTermsLabelAnimDuration;
+
+    [self.tutorialContainer.layer addAnimation:tutorialViewFrameAnimation forKey:@"position.y"];
+    [self.facebookButton.layer addAnimation:facebookButtonFrameAnimation forKey:@"position.y"];
+    [self.termsLabel.layer addAnimation:termsLabelFrameAnimation forKey:@"position.y"];
 }
 
 - (IBAction)facebookLoginClick:(id)sender
@@ -152,11 +203,21 @@
     return self.presentationIndex;
 }
 
-#pragma mark - UITextViewDelegate
+#pragma mark - TTTAttributedLabelDelegate
 
-- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
 {
-    return YES;
+    NSLog(@"url string %@", url.absoluteString);
+}
+
+- (void)pageViewController:(UIPageViewController *)viewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
+{
+    if (!completed){return;}
+    
+    // Find index of current page
+    FRDTutorialContentController *currentViewController = (FRDTutorialContentController *)[self.pageViewController.viewControllers lastObject];
+    NSUInteger indexOfCurrentPage = currentViewController.itemIndex;
+//    self.pageViewController  = indexOfCurrentPage;
 }
 
 
