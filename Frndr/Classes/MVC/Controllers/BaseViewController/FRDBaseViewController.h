@@ -8,4 +8,6 @@
 
 @interface FRDBaseViewController : UIViewController
 
+- (void)customizeNavigationItem;
+
 @end

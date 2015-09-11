@@ -9,6 +9,7 @@
 #import "FRDTutorialController.h"
 #import "FRDTermsAndServicesController.h"
 #import "FRDBaseNavigationController.h"
+#import "FRDPreferencesController.h"
 
 #import "FRDFacebookService.h"
 
@@ -39,12 +40,6 @@
     [self initContentImagesArray];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self customizeNavigationItem];
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -61,9 +56,9 @@
 - (void)initContentImagesArray
 {
     self.contentImages = @[
-                           [UIImage imageNamed:@"iPhone-6+"],
-                           [UIImage imageNamed:@"iPhone-6+"],
-                           [UIImage imageNamed:@"iPhone-6+"]
+                           [UIImage imageNamed:@"Tutorial01"],
+                           [UIImage imageNamed:@"Tutorial02"],
+                           [UIImage imageNamed:@"Tutorial03"]
                            ];
 }
 
@@ -110,6 +105,7 @@
  */
 - (void)customizeNavigationItem
 {
+    [super customizeNavigationItem];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
@@ -118,13 +114,21 @@
  */
 - (void)authorizeWithFacebookAction
 {
+    FRDPreferencesController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
+    [self.navigationController pushViewController:controller animated:YES];
+    /*
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [FRDFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        FRDPreferencesController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
+        [weakSelf.navigationController pushViewController:controller animated:YES];
+        
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
     }];
+     */
 }
 
 /**

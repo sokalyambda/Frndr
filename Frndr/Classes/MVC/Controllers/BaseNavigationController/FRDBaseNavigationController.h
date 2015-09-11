@@ -8,4 +8,6 @@
 
 @interface FRDBaseNavigationController : UINavigationController
 
+@property (strong, nonatomic) UIBarButtonItem *customBackButton;
+
 @end

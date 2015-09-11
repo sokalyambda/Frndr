@@ -10,6 +10,8 @@
 
 @implementation FRDPreferencesTableViewController
 
+#pragma mark - View Lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

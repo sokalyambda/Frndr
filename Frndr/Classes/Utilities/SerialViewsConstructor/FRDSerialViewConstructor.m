@@ -8,8 +8,8 @@
 
 #import "FRDSerialViewConstructor.h"
 
-static NSString *const kDoneButtonImageName = @"done_btn";
-static NSString *const kBackArrowImageName = @"back_arrow";
+static NSString *const kDoneButtonImageName = @"topRightIcon";
+static NSString *const kBackArrowImageName = @"backArrow";
 
 static CGFloat const kDoneFontSize = 14.f;
 
@@ -24,35 +24,35 @@ static CGFloat const kDoneFontSize = 14.f;
  */
 + (UIBarButtonItem *)backButtonForController:(UIViewController *)controller withAction:(SEL)action
 {
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:kBackArrowImageName] style:UIBarButtonItemStylePlain target:controller action:action];
+//    UIImage *faceImage = [UIImage imageNamed:kBackArrowImageName];
+//    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
+//    face.bounds = CGRectMake( 0, 0, faceImage.size.width, faceImage.size.height );
+//    [face setImage:faceImage forState:UIControlStateNormal];
+//    UIBarButtonItem *faceBtn = [[UIBarButtonItem alloc] initWithCustomView:face];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:kBackArrowImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:controller action:action];
     return backButton;
 }
 
 /**
- *  Create custom 'Done' button with specific background image
+ *  Create custom right icon button with specific background image
  *
- *  @param controller Receiver of custom 'Done' button
- *  @param action     Selector that will be passed to 'Done' button
+ *  @param controller Receiver of custom right icon button
+ *  @param action     Selector that will be passed to right icon button
  *
- *  @return Custom Done Button
+ *  @return Custom Right Icon
  */
-+ (UIBarButtonItem *)customButtonWithTitle:(NSString *)title forController:(UIViewController *)controller withAction:(SEL)action
++ (UIBarButtonItem *)customRightBarButtonForController:(UIViewController *)controller withAction:(SEL)action
 {
-    UIImage *backgroundImage = [UIImage imageNamed:kDoneButtonImageName];
+    UIImage *backgroundImage = [[UIImage imageNamed:kDoneButtonImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
-    UIButton *doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [doneButton setFrame:CGRectMake(0.0f, 0.0f, backgroundImage.size.width, backgroundImage.size.height)];
+    UIButton *topRightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [topRightButton setFrame:CGRectMake(0.0f, 0.0f, backgroundImage.size.width, backgroundImage.size.height)];
     
-    [doneButton setBackgroundImage:backgroundImage forState:UIControlStateNormal];
-    [doneButton setTitle:LOCALIZED(title) forState:UIControlStateNormal];
+    [topRightButton setBackgroundImage:backgroundImage forState:UIControlStateNormal];
     
-    doneButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:kDoneFontSize];
-    
-    [doneButton setTitleColor:UIColorFromRGB(0x091e40) forState:UIControlStateNormal];
-    
-    [doneButton addTarget:controller action:action forControlEvents:UIControlEventTouchUpInside];
+    [topRightButton addTarget:controller action:action forControlEvents:UIControlEventTouchUpInside];
 
-    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:topRightButton];
     
     return doneBarButton;
 }

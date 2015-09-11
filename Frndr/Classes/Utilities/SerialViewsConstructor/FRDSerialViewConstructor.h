@@ -10,6 +10,6 @@
 
 + (UIBarButtonItem *)backButtonForController:(UIViewController *)controller withAction:(SEL)action;
 
-+ (UIBarButtonItem *)customButtonWithTitle:(NSString *)title forController:(UIViewController *)controller withAction:(SEL)action;
++ (UIBarButtonItem *)customRightBarButtonForController:(UIViewController *)controller withAction:(SEL)action;
 
 @end

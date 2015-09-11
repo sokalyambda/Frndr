@@ -25,12 +25,6 @@
     [self updateWebViewInformation];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self customizeNavigationItem];
-}
-
 #pragma mark - Actions
 
 - (void)updateWebViewInformation
@@ -41,6 +35,7 @@
 
 - (void)customizeNavigationItem
 {
+    [super customizeNavigationItem];
     self.navigationItem.title = LOCALIZED(@"Terms of Service");
     //show navigation bar
     [self.navigationController setNavigationBarHidden:NO animated:YES];

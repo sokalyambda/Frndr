@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "FRDBaseViewController.h"
 
-@interface FRDPreferencesController : UIViewController
+@interface FRDPreferencesController : FRDBaseViewController
 
 @end
