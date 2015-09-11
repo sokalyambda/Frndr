@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#import "FRDPushNotifiactionService.h"
+
 @interface AppDelegate ()
 
 @end
@@ -36,6 +38,35 @@
                                                           openURL:url
                                                 sourceApplication:sourceApplication
                                                        annotation:annotation];
+}
+
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    if (notificationSettings.types != UIUserNotificationTypeNone) {
+        [application registerForRemoteNotifications];
+    } else {
+        [FRDPushNotifiactionService failedToRegisterForPushNotificationsWithError:nil];
+    }
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler
+{
+    
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    [FRDPushNotifiactionService registeredForPushNotificationsWithToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    [FRDPushNotifiactionService failedToRegisterForPushNotificationsWithError:error];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    [FRDPushNotifiactionService recivedPushNotification:userInfo];
 }
 
 @end

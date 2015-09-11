@@ -17,7 +17,7 @@
 - (void)customizeNavigationItem
 {
     [super customizeNavigationItem];
-    self.navigationItem.title = LOCALIZED(@"frndr");
+    self.navigationTitleView.titleText = LOCALIZED(@"Preferences");
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     UIBarButtonItem *rightIcon = [FRDSerialViewConstructor customRightBarButtonForController:self withAction:nil];

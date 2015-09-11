@@ -1,5 +1,5 @@
 //
-//  BZRPushNotifiactionService.m
+//  FRDPushNotifiactionService.m
 //  BizrateRewards
 //
 //  Created by Eugenity on 17.10.14.

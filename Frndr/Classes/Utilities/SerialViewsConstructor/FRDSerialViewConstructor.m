@@ -11,8 +11,6 @@
 static NSString *const kDoneButtonImageName = @"topRightIcon";
 static NSString *const kBackArrowImageName = @"backArrow";
 
-static CGFloat const kDoneFontSize = 14.f;
-
 @implementation FRDSerialViewConstructor
 
 /**

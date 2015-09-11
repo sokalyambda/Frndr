@@ -9,6 +9,8 @@
 #import "FRDBaseViewController.h"
 #import "FRDBaseNavigationController.h"
 
+#import "UIView+MakeFromXib.h"
+
 @interface FRDBaseViewController ()
 
 @property (weak, nonatomic) FRDBaseNavigationController *baseNavigationController;
@@ -42,6 +44,9 @@
 
 - (void)customizeNavigationItem
 {
+    self.navigationTitleView = [FRDNavigationTitleView makeFromXib];
+    self.navigationItem.titleView = self.navigationTitleView;
+    
     self.navigationItem.leftBarButtonItem = self.baseNavigationController.customBackButton;
 }
 

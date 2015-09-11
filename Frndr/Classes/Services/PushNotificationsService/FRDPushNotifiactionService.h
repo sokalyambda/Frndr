@@ -1,5 +1,5 @@
 //
-//  BZRPushNotifiactionServer.h
+//  FRDPushNotifiactionService.h
 //  BizrateRewards
 //
 //  Created by Euginity on 17.10.14.

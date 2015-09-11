@@ -36,7 +36,7 @@
 - (void)customizeNavigationItem
 {
     [super customizeNavigationItem];
-    self.navigationItem.title = LOCALIZED(@"Terms of Service");
+    self.navigationTitleView.titleText = LOCALIZED(@"Terms of Service");
     //show navigation bar
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
@@ -44,7 +44,7 @@
     self.navigationItem.rightBarButtonItem = self.doneButton;
     
     //remove back button (custom and system)
-    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.leftBarButtonItems = nil;
     self.navigationItem.hidesBackButton = YES;
 }
 

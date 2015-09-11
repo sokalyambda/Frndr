@@ -56,6 +56,8 @@
 		58CD17EA1BA18AA30021D948 /* CAAnimation+CompetionBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD17E91BA18AA30021D948 /* CAAnimation+CompetionBlock.m */; };
 		58CD17EE1BA19BC70021D948 /* FRDTermsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD17ED1BA19BC70021D948 /* FRDTermsLabel.m */; };
 		58CD17F21BA19BF40021D948 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD17F11BA19BF40021D948 /* TTTAttributedLabel.m */; };
+		58D5A16A1BA329C800D552CF /* FRDNavigationTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D5A1691BA329C800D552CF /* FRDNavigationTitleView.m */; };
+		58D5A16C1BA329E500D552CF /* FRDNavigationTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58D5A16B1BA329E500D552CF /* FRDNavigationTitleView.xib */; };
 		58F2F30F1B9EF93F000DC739 /* FRDTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F2F30E1B9EF93F000DC739 /* FRDTutorialController.m */; };
 		58FFDBAB1B9ECF3B00B0490A /* FRDSerialViewConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FFDBAA1B9ECF3B00B0490A /* FRDSerialViewConstructor.m */; };
 		58FFDBAE1B9ECF6B00B0490A /* FRDCommonDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FFDBAD1B9ECF6B00B0490A /* FRDCommonDateFormatter.m */; };
@@ -175,6 +177,9 @@
 		58CD17ED1BA19BC70021D948 /* FRDTermsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDTermsLabel.m; path = Classes/MVC/Views/TermsLabel/FRDTermsLabel.m; sourceTree = "<group>"; };
 		58CD17F01BA19BF40021D948 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTTAttributedLabel.h; path = Classes/Libraries/TTTAttributedLabel/TTTAttributedLabel.h; sourceTree = "<group>"; };
 		58CD17F11BA19BF40021D948 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTAttributedLabel.m; path = Classes/Libraries/TTTAttributedLabel/TTTAttributedLabel.m; sourceTree = "<group>"; };
+		58D5A1681BA329C800D552CF /* FRDNavigationTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDNavigationTitleView.h; path = Classes/MVC/Views/NavigationTitleView/FRDNavigationTitleView.h; sourceTree = "<group>"; };
+		58D5A1691BA329C800D552CF /* FRDNavigationTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDNavigationTitleView.m; path = Classes/MVC/Views/NavigationTitleView/FRDNavigationTitleView.m; sourceTree = "<group>"; };
+		58D5A16B1BA329E500D552CF /* FRDNavigationTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDNavigationTitleView.xib; path = Classes/MVC/Views/NavigationTitleView/FRDNavigationTitleView.xib; sourceTree = "<group>"; };
 		58F2F30D1B9EF93F000DC739 /* FRDTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDTutorialController.h; path = Classes/MVC/Controllers/TutorialController/FRDTutorialController.h; sourceTree = "<group>"; };
 		58F2F30E1B9EF93F000DC739 /* FRDTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDTutorialController.m; path = Classes/MVC/Controllers/TutorialController/FRDTutorialController.m; sourceTree = "<group>"; };
 		58FFDBA91B9ECF3B00B0490A /* FRDSerialViewConstructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSerialViewConstructor.h; path = Classes/Utilities/SerialViewsConstructor/FRDSerialViewConstructor.h; sourceTree = "<group>"; };
@@ -489,6 +494,7 @@
 		58BC76D11B9EB95100BB8B5A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				58D5A1671BA329A300D552CF /* NavigationTitleView */,
 				58CD17EB1BA19B680021D948 /* TermsLabel */,
 			);
 			name = Views;
@@ -950,6 +956,16 @@
 			name = TTTAttributedLabel;
 			sourceTree = "<group>";
 		};
+		58D5A1671BA329A300D552CF /* NavigationTitleView */ = {
+			isa = PBXGroup;
+			children = (
+				58D5A1681BA329C800D552CF /* FRDNavigationTitleView.h */,
+				58D5A1691BA329C800D552CF /* FRDNavigationTitleView.m */,
+				58D5A16B1BA329E500D552CF /* FRDNavigationTitleView.xib */,
+			);
+			name = NavigationTitleView;
+			sourceTree = "<group>";
+		};
 		58F2F30C1B9EF911000DC739 /* TutorialController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1093,6 +1109,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58D5A16C1BA329E500D552CF /* FRDNavigationTitleView.xib in Resources */,
 				58BC76AA1B9EB6B500BB8B5A /* Main.storyboard in Resources */,
 				58BC76AF1B9EB6B500BB8B5A /* LaunchScreen.xib in Resources */,
 				58BC76AC1B9EB6B500BB8B5A /* Images.xcassets in Resources */,
@@ -1190,6 +1207,7 @@
 				581B9D4F1B9EDC350080393B /* FRDSessionManager.m in Sources */,
 				58BC771D1B9ECA9000BB8B5A /* UIViewController+fixOrientation.m in Sources */,
 				581B9D411B9ED71A0080393B /* FRDReachabilityHelper.m in Sources */,
+				58D5A16A1BA329C800D552CF /* FRDNavigationTitleView.m in Sources */,
 				58BC770B1B9ECA4400BB8B5A /* UIImagePickerController+fixOrientation.m in Sources */,
 				58BC77021B9ECA1700BB8B5A /* NSDictionary+JSONRepresentation.m in Sources */,
 				587727F81BA2D8150032D746 /* FRDTermsAndServicesController.m in Sources */,
