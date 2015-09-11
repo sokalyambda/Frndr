@@ -8,7 +8,7 @@
 
 #import "FRDPhotoGalleryCollectionViewLayout.h"
 
-static CGFloat const fullSpace = 4.f;
+static CGFloat const fullSpace = 2.f;
 static CGFloat const halfSpace = fullSpace / 2;
 static CGFloat const quarterSpace = halfSpace / 2;
 
@@ -51,7 +51,12 @@ static CGFloat const quarterSpace = halfSpace / 2;
 
 - (void)modifyLayoutAttributes:(UICollectionViewLayoutAttributes *)attributes
 {
-    static NSInteger normalRowNumber = 1;
+    static NSInteger row = 0;
+    
+    NSInteger column = attributes.indexPath.item % 3;
+    if (column == 2) {
+        row++;
+    }
     
     CGFloat bigSize = self.collectionView.frame.size.width * (2.0 / 3.0);
     CGFloat smallSize = self.collectionView.frame.size.width - bigSize;
@@ -72,20 +77,13 @@ static CGFloat const quarterSpace = halfSpace / 2;
                                       smallSize - halfSpace);
     }
     else {
-        NSInteger column = attributes.indexPath.item % 3;
-        //CGFloat xOffset = (column == 1) ? halfSpace : quarterSpace
-        if (column == 1) {
-            attributes.frame = CGRectMake((smallSize + halfSpace) * column,
-                                          bigSize + halfSpace,
-                                          smallSize - fullSpace,
-                                          smallSize - halfSpace);
-        }
-        else {
-            attributes.frame = CGRectMake((smallSize + quarterSpace) * column,
-                                          bigSize + halfSpace,
-                                          smallSize - halfSpace,
-                                          smallSize - halfSpace);
-        }
+        CGFloat xOffset = (column == 1) ? halfSpace : quarterSpace;
+        CGFloat widthOffset = (column == 1) ? fullSpace : halfSpace;
+        
+        attributes.frame = CGRectMake((smallSize + xOffset) * column,
+                                      (bigSize + fullSpace) * row,
+                                      smallSize - widthOffset,
+                                      smallSize - halfSpace);
     }
 }
 
