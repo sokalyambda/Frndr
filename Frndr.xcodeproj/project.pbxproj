@@ -23,6 +23,7 @@
 		581B9D561B9EDCA00080393B /* FRDNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D551B9EDCA00080393B /* FRDNetworkOperation.m */; };
 		581B9D591B9EDCBB0080393B /* FRDProjectFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D581B9EDCBB0080393B /* FRDProjectFacade.m */; };
 		581B9D5C1B9EDCDB0080393B /* FRDFailedOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D5B1B9EDCDB0080393B /* FRDFailedOperationManager.m */; };
+		5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */; };
 		58BC76A11B9EB6B500BB8B5A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A01B9EB6B500BB8B5A /* main.m */; };
 		58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A31B9EB6B500BB8B5A /* AppDelegate.m */; };
 		58BC76AA1B9EB6B500BB8B5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58BC76A81B9EB6B500BB8B5A /* Main.storyboard */; };
@@ -55,7 +56,6 @@
 		58CD17EE1BA19BC70021D948 /* FRDTermsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD17ED1BA19BC70021D948 /* FRDTermsLabel.m */; };
 		58CD17F21BA19BF40021D948 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD17F11BA19BF40021D948 /* TTTAttributedLabel.m */; };
 		58F2F30F1B9EF93F000DC739 /* FRDTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F2F30E1B9EF93F000DC739 /* FRDTutorialController.m */; };
-		58F2F3131B9EF96E000DC739 /* FRDTutorialContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F2F3121B9EF96E000DC739 /* FRDTutorialContentController.m */; };
 		58FFDBAB1B9ECF3B00B0490A /* FRDSerialViewConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FFDBAA1B9ECF3B00B0490A /* FRDSerialViewConstructor.m */; };
 		58FFDBAE1B9ECF6B00B0490A /* FRDCommonDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FFDBAD1B9ECF6B00B0490A /* FRDCommonDateFormatter.m */; };
 		58FFDBB21B9ED00100B0490A /* ISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FFDBB11B9ED00100B0490A /* ISO8601DateFormatter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -113,6 +113,8 @@
 		581B9D5A1B9EDCDB0080393B /* FRDFailedOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDFailedOperationManager.h; path = "Classes/Server APIs/API/FailedOperationManager/FRDFailedOperationManager.h"; sourceTree = "<group>"; };
 		581B9D5B1B9EDCDB0080393B /* FRDFailedOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDFailedOperationManager.m; path = "Classes/Server APIs/API/FailedOperationManager/FRDFailedOperationManager.m"; sourceTree = "<group>"; };
 		581B9D5D1B9EDE020080393B /* FRDRequests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FRDRequests.h; path = "Classes/Server APIs/API/Requests/BaseNetworkRequest/FRDRequests.h"; sourceTree = "<group>"; };
+		5895FD931BA2D55C00079F9D /* FRDCustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDCustomPageControl.h; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.h; sourceTree = "<group>"; };
+		5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDCustomPageControl.m; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.m; sourceTree = "<group>"; };
 		58BC769B1B9EB6B500BB8B5A /* Frndr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frndr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58BC769F1B9EB6B500BB8B5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58BC76A01B9EB6B500BB8B5A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -172,8 +174,6 @@
 		58CD17F11BA19BF40021D948 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTAttributedLabel.m; path = Classes/Libraries/TTTAttributedLabel/TTTAttributedLabel.m; sourceTree = "<group>"; };
 		58F2F30D1B9EF93F000DC739 /* FRDTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDTutorialController.h; path = Classes/MVC/Controllers/TutorialController/FRDTutorialController.h; sourceTree = "<group>"; };
 		58F2F30E1B9EF93F000DC739 /* FRDTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDTutorialController.m; path = Classes/MVC/Controllers/TutorialController/FRDTutorialController.m; sourceTree = "<group>"; };
-		58F2F3111B9EF96E000DC739 /* FRDTutorialContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDTutorialContentController.h; path = Classes/MVC/Controllers/TutorialContentController/FRDTutorialContentController.h; sourceTree = "<group>"; };
-		58F2F3121B9EF96E000DC739 /* FRDTutorialContentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDTutorialContentController.m; path = Classes/MVC/Controllers/TutorialContentController/FRDTutorialContentController.m; sourceTree = "<group>"; };
 		58FFDBA91B9ECF3B00B0490A /* FRDSerialViewConstructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSerialViewConstructor.h; path = Classes/Utilities/SerialViewsConstructor/FRDSerialViewConstructor.h; sourceTree = "<group>"; };
 		58FFDBAA1B9ECF3B00B0490A /* FRDSerialViewConstructor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSerialViewConstructor.m; path = Classes/Utilities/SerialViewsConstructor/FRDSerialViewConstructor.m; sourceTree = "<group>"; };
 		58FFDBAC1B9ECF6B00B0490A /* FRDCommonDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDCommonDateFormatter.h; path = Classes/Utilities/CommonDateFormatter/FRDCommonDateFormatter.h; sourceTree = "<group>"; };
@@ -300,6 +300,15 @@
 			name = BaseNetworkRequest;
 			sourceTree = "<group>";
 		};
+		58A2B7461BA2C04B007D4D60 /* StyledPageControl */ = {
+			isa = PBXGroup;
+			children = (
+				5895FD931BA2D55C00079F9D /* FRDCustomPageControl.h */,
+				5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */,
+			);
+			name = StyledPageControl;
+			sourceTree = "<group>";
+		};
 		58BC76921B9EB6B500BB8B5A = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +375,7 @@
 		58BC76C71B9EB91000BB8B5A /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				58A2B7461BA2C04B007D4D60 /* StyledPageControl */,
 				58CD17EF1BA19BE50021D948 /* TTTAttributedLabel */,
 				58FFDBAF1B9ECFEA00B0490A /* ISO8601Formatter */,
 			);
@@ -478,7 +488,6 @@
 				3E10E3051BA15A800075C72D /* PhotoGalleryCollectionViewController */,
 				3ED072331BA047D90091B7E4 /* PreferencesTableViewController */,
 				3ED0722F1BA0364E0091B7E4 /* PreferencesController */,
-				58F2F3101B9EF956000DC739 /* TutorialContentController */,
 				58F2F30C1B9EF911000DC739 /* TutorialController */,
 				58FFDBBD1B9ED1D300B0490A /* BaseViewController */,
 				58FFDBBC1B9ED1CB00B0490A /* BaseNavigationController */,
@@ -937,15 +946,6 @@
 			name = TutorialController;
 			sourceTree = "<group>";
 		};
-		58F2F3101B9EF956000DC739 /* TutorialContentController */ = {
-			isa = PBXGroup;
-			children = (
-				58F2F3111B9EF96E000DC739 /* FRDTutorialContentController.h */,
-				58F2F3121B9EF96E000DC739 /* FRDTutorialContentController.m */,
-			);
-			name = TutorialContentController;
-			sourceTree = "<group>";
-		};
 		58FFDBAF1B9ECFEA00B0490A /* ISO8601Formatter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1140,7 +1140,6 @@
 				58FFDBAE1B9ECF6B00B0490A /* FRDCommonDateFormatter.m in Sources */,
 				58FFDBB81B9ED0A900B0490A /* FRDErrorHandler.m in Sources */,
 				581B9D5C1B9EDCDB0080393B /* FRDFailedOperationManager.m in Sources */,
-				58F2F3131B9EF96E000DC739 /* FRDTutorialContentController.m in Sources */,
 				58FFDBB51B9ED07E00B0490A /* FRDCommonNumberFormatter.m in Sources */,
 				581B9D3B1B9ED6090080393B /* FRDStorageManager.m in Sources */,
 				58BC77081B9ECA3700BB8B5A /* NSString+Base64Decoding.m in Sources */,
@@ -1158,6 +1157,7 @@
 				58CD17EA1BA18AA30021D948 /* CAAnimation+CompetionBlock.m in Sources */,
 				581B9D441B9ED7FE0080393B /* FRDFacebookService.m in Sources */,
 				58BC77291B9ECB0300BB8B5A /* FRDKeychainHandler.m in Sources */,
+				5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */,
 				581B9D561B9EDCA00080393B /* FRDNetworkOperation.m in Sources */,
 				58BC77201B9ECA9C00BB8B5A /* UIFont+Styles.m in Sources */,
 				58BC77171B9ECA7400BB8B5A /* UIView+SoftRemoving.m in Sources */,

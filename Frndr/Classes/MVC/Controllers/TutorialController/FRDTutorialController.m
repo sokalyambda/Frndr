@@ -7,25 +7,23 @@
 //
 
 #import "FRDTutorialController.h"
-#import "FRDTutorialContentController.h"
 
 #import "FRDFacebookService.h"
 
 #import "FRDTermsLabel.h"
+#import "FRDCustomPageControl.h"
 
 #import "UIView+ConfigureAnchorPoint.h"
 #import "CAAnimation+CompetionBlock.h"
 
-@interface FRDTutorialController ()<UIPageViewControllerDataSource, UITextViewDelegate, TTTAttributedLabelDelegate>
+@interface FRDTutorialController ()<TTTAttributedLabelDelegate, UIScrollViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *tutorialContainer;
+@property (weak, nonatomic) IBOutlet UIScrollView *tutorialScrollView;
+@property (weak, nonatomic) IBOutlet FRDCustomPageControl *tutorialPageControl;
 @property (weak, nonatomic) IBOutlet FRDTermsLabel *termsLabel;
 @property (weak, nonatomic) IBOutlet UIButton *facebookButton;
 
 @property (strong, nonatomic) NSArray *contentImages;
-@property (strong, nonatomic) UIPageViewController *pageViewController;
-
-@property (assign, nonatomic) NSUInteger presentationIndex;
 
 @end
 
@@ -36,8 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self createPageViewController];
-    [self setupPageControl];
+    [self initContentImagesArray];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -49,47 +46,52 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-
+    [self setupTutorialScrollView];
     [self animateTutorialViews];
 }
 
 #pragma mark - Actions
 
-/**
- *  Create page view controller
- */
-- (void)createPageViewController
+- (void)initContentImagesArray
 {
-    self.contentImages = @[@"tutorial01",
-                      @"tutorial02",
-                      @"tutorial03"];
-    
-    UIPageViewController *pageController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageController"];
-    pageController.dataSource = self;
-    
-    if([self.contentImages count]) {
-        NSArray *startingViewControllers = @[[self itemControllerForIndex:0]];
-        [pageController setViewControllers:startingViewControllers
-                                 direction:UIPageViewControllerNavigationDirectionForward
-                                  animated:YES
-                                completion:nil];
-    }
-    
-    self.pageViewController = pageController;
-    [self addChildViewController:self.pageViewController];
-    [self.pageViewController.view setFrame:self.tutorialContainer.bounds];
-    [self.tutorialContainer addSubview:self.pageViewController.view];
-    [self.pageViewController didMoveToParentViewController:self];
+    self.contentImages = @[
+                           [UIImage imageNamed:@"iPhone-6+"],
+                           [UIImage imageNamed:@"iPhone-6+"],
+                           [UIImage imageNamed:@"iPhone-6+"]
+                           ];
 }
 
 /**
- *  Setup page control appearance
+ *  Setup tutorial scroll view with contentImages
  */
-- (void)setupPageControl
+- (void)setupTutorialScrollView
 {
-    [[UIPageControl appearance] setPageIndicatorTintColor:[UIColor whiteColor]];
-    [[UIPageControl appearance] setCurrentPageIndicatorTintColor:[UIColor blueColor]];
-    [[UIPageControl appearance] setBackgroundColor:[UIColor lightGrayColor]];
+    if (self.contentImages.count) {
+        
+        self.tutorialPageControl.numberOfPages = self.contentImages.count;
+        self.tutorialPageControl.defersCurrentPageDisplay = YES;
+        
+        CGFloat scrollWidth = CGRectGetWidth(self.tutorialScrollView.frame);
+        CGFloat scrollHeight = CGRectGetHeight(self.tutorialScrollView.frame);
+        CGFloat idx = 0;
+        
+        for (NSInteger i = 0; i < self.contentImages.count; i++) {
+            UIImageView *imaqeView = [[UIImageView alloc] initWithImage:self.contentImages[i]];
+            CGRect frame = CGRectMake(idx, 0.f, scrollWidth, scrollHeight);
+            imaqeView.frame = frame;
+            [self.tutorialScrollView addSubview:imaqeView];
+            idx += scrollWidth;
+        }
+        
+        CGSize contentSize = self.tutorialScrollView.frame.size;
+        contentSize.width *= self.contentImages.count;
+        self.tutorialScrollView.contentSize = contentSize;
+    }
+}
+
+- (void)updatePageControlWithIndex:(NSUInteger)idx
+{
+    self.tutorialPageControl.currentPage = idx;
 }
 
 /**
@@ -118,89 +120,41 @@
  *  Animate the tutorial views
  */
 static NSInteger const kTempOffset = 8.f;
-static CGFloat const kTutorialAnimDuration = .8f;
-static CGFloat const kFBButtonAnimDuration = .7f;
-static CGFloat const kTermsLabelAnimDuration = .6f;
+static CGFloat const kTutorialAnimDuration = .9f;
+static CGFloat const kFBButtonAnimDuration = .8f;
+static CGFloat const kTermsLabelAnimDuration = .7f;
+static CGFloat const kPageControlAnimDuration = .6f;
 - (void)animateTutorialViews
 {
-    NSArray *tutorialViewValues = @[@(-CGRectGetHeight(self.tutorialContainer.frame)), @(CGRectGetMidY(self.tutorialContainer.frame) + kTempOffset), @(CGRectGetMidY(self.tutorialContainer.frame))];
+    NSArray *tutorialViewValues = @[@(-CGRectGetHeight(self.tutorialScrollView.frame)), @(CGRectGetMidY(self.tutorialScrollView.frame) + kTempOffset), @(CGRectGetMidY(self.tutorialScrollView.frame))];
     NSArray *facebookButtonValues = @[@(-CGRectGetHeight(self.facebookButton.frame)), @(CGRectGetMidY(self.facebookButton.frame) + kTempOffset), @(CGRectGetMidY(self.facebookButton.frame))];
     NSArray *termsLabelValues = @[@(-CGRectGetHeight(self.termsLabel.frame)), @(CGRectGetMidY(self.termsLabel.frame) + kTempOffset), @(CGRectGetMidY(self.termsLabel.frame))];
+    NSArray *pageControlValues = @[@(-CGRectGetHeight(self.tutorialPageControl.frame)), @(CGRectGetMidY(self.tutorialPageControl.frame) + kTempOffset), @(CGRectGetMidY(self.tutorialPageControl.frame))];
     
     CAKeyframeAnimation *tutorialViewFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
     CAKeyframeAnimation *facebookButtonFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
     CAKeyframeAnimation *termsLabelFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
+    CAKeyframeAnimation *pageControlFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
     
     tutorialViewFrameAnimation.values = tutorialViewValues;
     facebookButtonFrameAnimation.values = facebookButtonValues;
     termsLabelFrameAnimation.values = termsLabelValues;
+    pageControlFrameAnimation.values = pageControlValues;
     
     tutorialViewFrameAnimation.duration = kTutorialAnimDuration;
     facebookButtonFrameAnimation.duration = kFBButtonAnimDuration;
     termsLabelFrameAnimation.duration = kTermsLabelAnimDuration;
+    pageControlFrameAnimation.duration = kPageControlAnimDuration;
 
-    [self.tutorialContainer.layer addAnimation:tutorialViewFrameAnimation forKey:@"position.y"];
+    [self.tutorialScrollView.layer addAnimation:tutorialViewFrameAnimation forKey:@"position.y"];
     [self.facebookButton.layer addAnimation:facebookButtonFrameAnimation forKey:@"position.y"];
     [self.termsLabel.layer addAnimation:termsLabelFrameAnimation forKey:@"position.y"];
+    [self.tutorialPageControl.layer addAnimation:pageControlFrameAnimation forKey:@"position.y"];
 }
 
 - (IBAction)facebookLoginClick:(id)sender
 {
     [self authorizeWithFacebookAction];
-}
-
-#pragma mark - UIPageViewControllerDataSource
-
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
-{
-    FRDTutorialContentController *itemController = (FRDTutorialContentController *)viewController;
-    NSUInteger index = itemController.itemIndex;
-    
-    if (index == 0 || index == NSNotFound) {
-        index = [self.contentImages count];
-    }
-    
-    --index;
-    
-    return [self itemControllerForIndex:index];
-}
-
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
-{
-    FRDTutorialContentController *itemController = (FRDTutorialContentController *) viewController;
-    NSUInteger index = itemController.itemIndex;
-    
-    ++index;
-    
-    if (index == self.contentImages.count || index == NSNotFound) {
-        index = 0;
-    }
-    
-    return [self itemControllerForIndex:index];
-}
-
-- (FRDTutorialContentController *)itemControllerForIndex:(NSUInteger)itemIndex
-{
-    self.presentationIndex = itemIndex;
-    
-    FRDTutorialContentController *pageItemController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDTutorialContentController class])];
-    
-    pageItemController.itemIndex = itemIndex;
-    pageItemController.imageName = self.contentImages[itemIndex];
-    
-    return pageItemController;
-}
-
-#pragma mark - Page Indicator
-
-- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
-{
-    return [self.contentImages count];
-}
-
-- (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController
-{
-    return self.presentationIndex;
 }
 
 #pragma mark - TTTAttributedLabelDelegate
@@ -210,15 +164,19 @@ static CGFloat const kTermsLabelAnimDuration = .6f;
     NSLog(@"url string %@", url.absoluteString);
 }
 
-- (void)pageViewController:(UIPageViewController *)viewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if (!completed){return;}
-    
-    // Find index of current page
-    FRDTutorialContentController *currentViewController = (FRDTutorialContentController *)[self.pageViewController.viewControllers lastObject];
-    NSUInteger indexOfCurrentPage = currentViewController.itemIndex;
-//    self.pageViewController  = indexOfCurrentPage;
+    NSUInteger page = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
+    [self updatePageControlWithIndex:page];
 }
 
+#pragma mark - UIStatusBar
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
 
 @end
