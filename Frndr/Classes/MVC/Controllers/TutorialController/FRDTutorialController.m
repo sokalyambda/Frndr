@@ -82,18 +82,27 @@
         
         UIImageView *firstImage = [[UIImageView alloc] initWithImage:self.contentImages[0]];
         
-        CGFloat distanceToBorder = (CGRectGetWidth(self.tutorialScrollView.frame) - CGRectGetWidth(firstImage.frame)) / 2.f;
+        CGFloat imageWidth = CGRectGetWidth(firstImage.frame);
+        CGFloat k = scrollHeight / CGRectGetHeight(firstImage.frame);
+        imageWidth *= k;
+        
+        CGFloat distanceToBorder = (CGRectGetWidth(self.tutorialScrollView.frame) - imageWidth) / 2.f;
+        
         idx += distanceToBorder;
-        CGRect frame = CGRectMake(idx, 0.f, CGRectGetWidth(firstImage.frame), scrollHeight);
+        
+        CGRect frame = CGRectMake(idx, 0.f, imageWidth, scrollHeight);
         firstImage.frame = frame;
         [self.tutorialScrollView addSubview:firstImage];
         
         for (NSInteger i = 1; i < self.contentImages.count; i++) {
+            
             UIImageView *imageView = [[UIImageView alloc] initWithImage:self.contentImages[i]];
-           
-            idx += distanceToBorder * 2 + CGRectGetWidth(imageView.frame);
-            CGRect frame = CGRectMake(idx, 0.f, CGRectGetWidth(imageView.frame), scrollHeight);
+            
+            idx += distanceToBorder * 2 + imageWidth;
+            
+            CGRect frame = CGRectMake(idx, 0.f, imageWidth, scrollHeight);
             imageView.frame = frame;
+            
             [self.tutorialScrollView addSubview:imageView];
         }
         

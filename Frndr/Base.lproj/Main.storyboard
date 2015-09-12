@@ -136,7 +136,7 @@
                             </constraint>
                             <constraint firstItem="VKy-Ec-wi1" firstAttribute="top" secondItem="uID-YT-doa" secondAttribute="top" id="jsT-Mn-3fq"/>
                             <constraint firstItem="mJe-7K-etv" firstAttribute="centerX" secondItem="Qzs-jU-R28" secondAttribute="centerX" constant="-0.5" id="msD-Gy-3la"/>
-                            <constraint firstItem="mJe-7K-etv" firstAttribute="top" secondItem="Qzs-jU-R28" secondAttribute="bottom" constant="10" id="nFf-xJ-Ju9"/>
+                            <constraint firstItem="mJe-7K-etv" firstAttribute="top" secondItem="Qzs-jU-R28" secondAttribute="bottom" constant="-5" id="nFf-xJ-Ju9"/>
                             <constraint firstItem="vte-7s-cEe" firstAttribute="top" secondItem="kgk-7h-Ry8" secondAttribute="bottom" constant="8" id="wmj-Wq-b6r"/>
                         </constraints>
                         <variation key="default">
