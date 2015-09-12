@@ -8,6 +8,8 @@
 
 #import "FRDTermsAndServicesController.h"
 
+#import "FRDSerialViewConstructor.h"
+
 @interface FRDTermsAndServicesController ()<UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -44,8 +46,8 @@
     self.navigationItem.rightBarButtonItem = self.doneButton;
     
     //remove back button (custom and system)
-    self.navigationItem.leftBarButtonItems = nil;
-    self.navigationItem.hidesBackButton = YES;
+    UIBarButtonItem *leftIconImageButton = [FRDSerialViewConstructor customRightBarButtonForController:self withAction:nil];
+    self.navigationItem.leftBarButtonItem = leftIconImageButton;
 }
 
 - (IBAction)doneClick:(id)sender

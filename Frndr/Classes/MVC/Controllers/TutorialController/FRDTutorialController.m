@@ -40,6 +40,11 @@
     [self initContentImagesArray];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -72,16 +77,24 @@
         self.tutorialPageControl.numberOfPages = self.contentImages.count;
         self.tutorialPageControl.defersCurrentPageDisplay = YES;
         
-        CGFloat scrollWidth = CGRectGetWidth(self.tutorialScrollView.frame);
         CGFloat scrollHeight = CGRectGetHeight(self.tutorialScrollView.frame);
         CGFloat idx = 0;
         
-        for (NSInteger i = 0; i < self.contentImages.count; i++) {
-            UIImageView *imaqeView = [[UIImageView alloc] initWithImage:self.contentImages[i]];
-            CGRect frame = CGRectMake(idx, 0.f, scrollWidth, scrollHeight);
-            imaqeView.frame = frame;
-            [self.tutorialScrollView addSubview:imaqeView];
-            idx += scrollWidth;
+        UIImageView *firstImage = [[UIImageView alloc] initWithImage:self.contentImages[0]];
+        
+        CGFloat distanceToBorder = (CGRectGetWidth(self.tutorialScrollView.frame) - CGRectGetWidth(firstImage.frame)) / 2.f;
+        idx += distanceToBorder;
+        CGRect frame = CGRectMake(idx, 0.f, CGRectGetWidth(firstImage.frame), scrollHeight);
+        firstImage.frame = frame;
+        [self.tutorialScrollView addSubview:firstImage];
+        
+        for (NSInteger i = 1; i < self.contentImages.count; i++) {
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:self.contentImages[i]];
+           
+            idx += distanceToBorder * 2 + CGRectGetWidth(imageView.frame);
+            CGRect frame = CGRectMake(idx, 0.f, CGRectGetWidth(imageView.frame), scrollHeight);
+            imageView.frame = frame;
+            [self.tutorialScrollView addSubview:imageView];
         }
         
         CGSize contentSize = self.tutorialScrollView.frame.size;
