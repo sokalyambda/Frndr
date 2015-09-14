@@ -31,6 +31,7 @@ static NSString *const kTutorialSegueIdentifier = @"tutorialSegueIdentifier";
 
 - (void)customizeNavigationItem
 {
+    [super customizeNavigationItem];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 

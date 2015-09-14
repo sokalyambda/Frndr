@@ -6,6 +6,6 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-@interface FRDPhotoGalleryCollectionViewController : UICollectionViewController <UICollectionViewDelegateFlowLayout>
+@interface FRDPhotoGalleryCollectionViewController : UICollectionViewController
 
 @end

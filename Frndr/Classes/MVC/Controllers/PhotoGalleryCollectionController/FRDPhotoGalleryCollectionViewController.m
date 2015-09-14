@@ -12,12 +12,14 @@
 
 @implementation FRDPhotoGalleryCollectionViewController
 
+#pragma mark - View Lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 }
 
-#pragma mark - Data source
+#pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {

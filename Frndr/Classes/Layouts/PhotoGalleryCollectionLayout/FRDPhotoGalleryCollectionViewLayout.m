@@ -14,50 +14,59 @@ static CGFloat const kQuarterSpace = kHalfSpace / 2;
 
 @interface FRDPhotoGalleryCollectionViewLayout ()
 
-@property (assign, readwrite, nonatomic) CGFloat oneThirdOfScreenWidth;
-@property (assign, readwrite, nonatomic) CGFloat twoThirdsOfScreenWidth;
+@property (nonatomic) CGFloat oneThirdOfScreenWidth;
+@property (nonatomic) CGFloat twoThirdsOfScreenWidth;
 
-@property (assign, readwrite, nonatomic) CGSize mainPhotoSize;
-@property (assign, readwrite, nonatomic) CGSize secondaryPhotoSize;
-@property (assign, readwrite, nonatomic) CGSize contentSize;
+@property (nonatomic) CGSize mainPhotoSize;
+@property (nonatomic) CGSize secondaryPhotoSize;
+@property (nonatomic) CGSize contentSize;
 
-@property (strong, nonatomic) NSMutableArray *attributes;
-
-@property (strong, nonatomic) NSMutableDictionary *layoutAttributes;
+@property (nonatomic) NSMutableArray *attributes;
 
 @end
 
 
 @implementation FRDPhotoGalleryCollectionViewLayout
 
+#pragma mark - Accessors
+
+- (CGFloat)oneThirdOfScreenWidth
+{
+    return CGRectGetWidth(self.collectionView.frame) * (1.0 / 3.0);
+}
+
+- (CGFloat)twoThirdsOfScreenWidth
+{
+    return CGRectGetWidth(self.collectionView.frame) * (2.0 / 3.0);
+}
+
+- (CGSize)mainPhotoSize
+{
+    return CGSizeMake(self.twoThirdsOfScreenWidth, self.twoThirdsOfScreenWidth);
+}
+
+- (CGSize)secondaryPhotoSize
+{
+    return CGSizeMake(self.oneThirdOfScreenWidth, self.oneThirdOfScreenWidth);
+}
 
 - (void)prepareLayout
 {
     [super prepareLayout];
     
-    self.oneThirdOfScreenWidth = CGRectGetWidth(self.collectionView.frame) * (1.0 / 3.0);
-    self.twoThirdsOfScreenWidth = CGRectGetWidth(self.collectionView.frame) * (2.0 / 3.0);
-    
-    self.mainPhotoSize = CGSizeMake(self.twoThirdsOfScreenWidth, self.twoThirdsOfScreenWidth);
-    self.secondaryPhotoSize = CGSizeMake(self.oneThirdOfScreenWidth, self.oneThirdOfScreenWidth);
-    
     NSInteger numberOfElements = [self.collectionView numberOfItemsInSection:0];
-    
     self.attributes = [NSMutableArray arrayWithCapacity:numberOfElements];
+    
     for (int i = 0; i < numberOfElements; ++i) {
         UICollectionViewLayoutAttributes *cellAttributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
         cellAttributes.frame = [self frameForElementAtIndexPath:cellAttributes.indexPath];
         
         [self.attributes addObject:cellAttributes];
-        
-        NSLog(@"{ %f : %f }", cellAttributes.frame.origin.x, cellAttributes.frame.origin.y);
     }
     
     UICollectionViewLayoutAttributes *lastCellAttributes = self.attributes.lastObject;
     self.contentSize = CGSizeMake(CGRectGetWidth(self.collectionView.bounds),
                                   CGRectGetMaxY(lastCellAttributes.frame));
-    
-    NSLog(@"Content size: WIDTH = %f, HEIGHT = %f", self.contentSize.width, self.contentSize.height);
 }
 
 - (CGSize)collectionViewContentSize
@@ -67,18 +76,11 @@ static CGFloat const kQuarterSpace = kHalfSpace / 2;
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    NSLog(@"New Rect");
-    NSLog(@" ");
-    // NSLog(@"{ %f : %f } { %f : %f }", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
-    
     NSMutableArray *attributesInRect = [NSMutableArray arrayWithCapacity:20];
     
     for (UICollectionViewLayoutAttributes *cellAttributes in self.attributes) {
         if (CGRectIntersectsRect(rect, cellAttributes.frame)) {
             [attributesInRect addObject:cellAttributes];
-            
-            
-            NSLog(@"{ %.1f : %.1f }", cellAttributes.frame.origin.x, cellAttributes.frame.origin.y);
         }
     }
     
@@ -98,28 +100,25 @@ static CGFloat const kQuarterSpace = kHalfSpace / 2;
     CGFloat xOffset;
     CGFloat widthOffset;
     
-    GalleryLayoutItemType type = indexPath.item;
+    FRDGalleryLayoutItemType type = indexPath.item;
     switch (type) {
-        case Main:
+        case FRDGalleryItemTypeMain:
             return CGRectMake(0,
                               0,
                               self.mainPhotoSize.width - kHalfSpace,
                               self.mainPhotoSize.height);
-            break;
             
-        case FirstSide:
+        case FRDGalleryItemTypeFirstSide:
             return CGRectMake(self.mainPhotoSize.width + kHalfSpace,
                               0,
                               self.secondaryPhotoSize.width - kHalfSpace,
                               self.secondaryPhotoSize.height - kHalfSpace);
-            break;
             
-        case SecondSide:
+        case FRDGalleryItemTypeSecondSide:
             return CGRectMake(self.mainPhotoSize.width + kHalfSpace,
                               self.secondaryPhotoSize.height + kHalfSpace,
                               self.secondaryPhotoSize.width - kHalfSpace,
                               self.secondaryPhotoSize.height - kHalfSpace);
-            break;
             
         default:
             xOffset = (column == 1) ? kHalfSpace : kQuarterSpace;
@@ -129,7 +128,6 @@ static CGFloat const kQuarterSpace = kHalfSpace / 2;
                               (self.secondaryPhotoSize.height + kHalfSpace) * row,
                               self.secondaryPhotoSize.width - widthOffset,
                               self.secondaryPhotoSize.height - kHalfSpace);
-            break;
     }
 }
 

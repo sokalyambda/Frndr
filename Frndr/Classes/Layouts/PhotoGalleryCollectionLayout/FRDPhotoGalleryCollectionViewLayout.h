@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-typedef NS_ENUM(NSInteger, GalleryLayoutItemType)
+typedef NS_ENUM(NSInteger, FRDGalleryLayoutItemType)
 {
-    Main = 0,
-    FirstSide = 1,
-    SecondSide = 2
+    FRDGalleryItemTypeMain = 0,
+    FRDGalleryItemTypeFirstSide = 1,
+    FRDGalleryItemTypeSecondSide = 2
 };
 
 @interface FRDPhotoGalleryCollectionViewLayout : UICollectionViewLayout

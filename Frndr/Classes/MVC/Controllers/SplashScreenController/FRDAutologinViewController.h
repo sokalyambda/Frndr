@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-@interface FRDAutologinViewController : UIViewController
+#import "FRDBaseViewController.h"
+
+@interface FRDAutologinViewController : FRDBaseViewController
 
 @end

@@ -269,13 +269,13 @@
 			name = PhotoGalleryCollectionLayout;
 			sourceTree = "<group>";
 		};
-		3E3D41561BA6A4B20021026A /* SplashScreenController */ = {
+		3E3D41561BA6A4B20021026A /* AutologinController */ = {
 			isa = PBXGroup;
 			children = (
 				3E3D41571BA6A5A90021026A /* FRDAutologinViewController.h */,
 				3E3D41581BA6A5A90021026A /* FRDAutologinViewController.m */,
 			);
-			name = SplashScreenController;
+			name = AutologinController;
 			sourceTree = "<group>";
 		};
 		3E3D415A1BA6B1020021026A /* SearchSettingsController */ = {
@@ -528,7 +528,7 @@
 			isa = PBXGroup;
 			children = (
 				3E3D415A1BA6B1020021026A /* SearchSettingsController */,
-				3E3D41561BA6A4B20021026A /* SplashScreenController */,
+				3E3D41561BA6A4B20021026A /* AutologinController */,
 				587727F51BA2D7EB0032D746 /* TermsAndServicesController */,
 				3E10E3051BA15A800075C72D /* PhotoGalleryCollectionViewController */,
 				3ED072331BA047D90091B7E4 /* PreferencesTableViewController */,

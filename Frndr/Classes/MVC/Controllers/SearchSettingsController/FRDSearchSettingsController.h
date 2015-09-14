@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-@interface FRDSearchSettingsController : UIViewController
+#import "FRDBaseViewController.h"
+
+@interface FRDSearchSettingsController : FRDBaseViewController
 
 @end
