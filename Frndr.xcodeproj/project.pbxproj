@@ -11,6 +11,7 @@
 		3E10E3101BA16E080075C72D /* FRDPhotoGalleryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E10E30F1BA16E080075C72D /* FRDPhotoGalleryCollectionViewCell.m */; };
 		3E10E3151BA16E780075C72D /* FRDPhotoGalleryCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E10E3141BA16E780075C72D /* FRDPhotoGalleryCollectionViewLayout.m */; };
 		3E3D41591BA6A5A90021026A /* FRDAutologinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D41581BA6A5A90021026A /* FRDAutologinViewController.m */; };
+		3E3D415D1BA6B1530021026A /* FRDSearchSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D415C1BA6B1530021026A /* FRDSearchSettingsController.m */; };
 		3ED072321BA0370C0091B7E4 /* FRDPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED072311BA0370C0091B7E4 /* FRDPreferencesController.m */; };
 		3ED072361BA048460091B7E4 /* FRDPreferencesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED072351BA048460091B7E4 /* FRDPreferencesTableViewController.m */; };
 		581B9D3B1B9ED6090080393B /* FRDStorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D3A1B9ED6090080393B /* FRDStorageManager.m */; };
@@ -90,6 +91,8 @@
 		3E10E3141BA16E780075C72D /* FRDPhotoGalleryCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPhotoGalleryCollectionViewLayout.m; path = Classes/Layouts/PhotoGalleryCollectionLayout/FRDPhotoGalleryCollectionViewLayout.m; sourceTree = "<group>"; };
 		3E3D41571BA6A5A90021026A /* FRDAutologinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDAutologinViewController.h; path = Classes/MVC/Controllers/SplashScreenController/FRDAutologinViewController.h; sourceTree = "<group>"; };
 		3E3D41581BA6A5A90021026A /* FRDAutologinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDAutologinViewController.m; path = Classes/MVC/Controllers/SplashScreenController/FRDAutologinViewController.m; sourceTree = "<group>"; };
+		3E3D415B1BA6B1530021026A /* FRDSearchSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSearchSettingsController.h; path = Classes/MVC/Controllers/SearchSettingsController/FRDSearchSettingsController.h; sourceTree = "<group>"; };
+		3E3D415C1BA6B1530021026A /* FRDSearchSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSearchSettingsController.m; path = Classes/MVC/Controllers/SearchSettingsController/FRDSearchSettingsController.m; sourceTree = "<group>"; };
 		3ED072301BA0370C0091B7E4 /* FRDPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPreferencesController.h; path = Classes/MVC/Controllers/PreferencesController/FRDPreferencesController.h; sourceTree = "<group>"; };
 		3ED072311BA0370C0091B7E4 /* FRDPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPreferencesController.m; path = Classes/MVC/Controllers/PreferencesController/FRDPreferencesController.m; sourceTree = "<group>"; };
 		3ED072341BA048460091B7E4 /* FRDPreferencesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPreferencesTableViewController.h; path = Classes/MVC/Controllers/PreferencesTableViewController/FRDPreferencesTableViewController.h; sourceTree = "<group>"; };
@@ -273,6 +276,15 @@
 				3E3D41581BA6A5A90021026A /* FRDAutologinViewController.m */,
 			);
 			name = SplashScreenController;
+			sourceTree = "<group>";
+		};
+		3E3D415A1BA6B1020021026A /* SearchSettingsController */ = {
+			isa = PBXGroup;
+			children = (
+				3E3D415B1BA6B1530021026A /* FRDSearchSettingsController.h */,
+				3E3D415C1BA6B1530021026A /* FRDSearchSettingsController.m */,
+			);
+			name = SearchSettingsController;
 			sourceTree = "<group>";
 		};
 		3ED0722F1BA0364E0091B7E4 /* PreferencesController */ = {
@@ -515,6 +527,7 @@
 		58BC76D21B9EB95600BB8B5A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3E3D415A1BA6B1020021026A /* SearchSettingsController */,
 				3E3D41561BA6A4B20021026A /* SplashScreenController */,
 				587727F51BA2D7EB0032D746 /* TermsAndServicesController */,
 				3E10E3051BA15A800075C72D /* PhotoGalleryCollectionViewController */,
@@ -1203,6 +1216,7 @@
 				5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */,
 				581B9D561B9EDCA00080393B /* FRDNetworkOperation.m in Sources */,
 				58BC77201B9ECA9C00BB8B5A /* UIFont+Styles.m in Sources */,
+				3E3D415D1BA6B1530021026A /* FRDSearchSettingsController.m in Sources */,
 				58BC77171B9ECA7400BB8B5A /* UIView+SoftRemoving.m in Sources */,
 				58CD17EE1BA19BC70021D948 /* FRDTermsLabel.m in Sources */,
 				58FFDBC31B9ED32000B0490A /* FRDBaseNavigationController.m in Sources */,
