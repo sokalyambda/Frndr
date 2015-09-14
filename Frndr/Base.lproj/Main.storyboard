@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="7HD-3D-Eub">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VVZ-Ve-cwB">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -15,12 +15,76 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="XRT-sT-Uge" kind="relationship" relationship="rootViewController" id="mIV-mH-QxK"/>
+                        <segue destination="rca-xK-4u1" kind="relationship" relationship="rootViewController" id="KOZ-4V-iDX"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dBE-l0-JKO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="412.5" y="458.25"/>
+            <point key="canvasLocation" x="-445.5" y="458.25"/>
+        </scene>
+        <!--Autologin View Controller-->
+        <scene sceneID="Okm-Xb-Abz">
+            <objects>
+                <viewController id="rca-xK-4u1" customClass="FRDAutologinViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fZs-P4-CdE"/>
+                        <viewControllerLayoutGuide type="bottom" id="GoN-Xy-rfi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="akv-zY-GJY">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hnk-0X-c71">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="1hB-XT-r6e"/>
+                                    <constraint firstAttribute="height" constant="150" id="Wmb-lT-57k"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="1hB-XT-r6e"/>
+                                        <exclude reference="Wmb-lT-57k"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="1hB-XT-r6e"/>
+                                        <include reference="Wmb-lT-57k"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Hnk-0X-c71" firstAttribute="top" secondItem="fZs-P4-CdE" secondAttribute="bottom" constant="70" id="No4-QG-jsG"/>
+                            <constraint firstAttribute="centerX" secondItem="Hnk-0X-c71" secondAttribute="centerX" id="xh2-lR-9tg"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Hnk-0X-c71"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="No4-QG-jsG"/>
+                                <exclude reference="xh2-lR-9tg"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="Hnk-0X-c71"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="No4-QG-jsG"/>
+                                <include reference="xh2-lR-9tg"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="Emp-66-2xn"/>
+                    <connections>
+                        <segue destination="XRT-sT-Uge" kind="show" identifier="tutorialSegueIdentifier" id="dl2-dp-boL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l1O-Et-fil" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="328.5" y="461.25"/>
         </scene>
         <!--Tutorial Controller-->
         <scene sceneID="JdV-ua-oed">
