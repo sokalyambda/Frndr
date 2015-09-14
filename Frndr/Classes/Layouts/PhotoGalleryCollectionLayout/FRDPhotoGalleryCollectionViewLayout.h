@@ -6,8 +6,13 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+typedef NS_ENUM(NSInteger, GalleryLayoutItemType)
+{
+    Main = 0,
+    FirstSide = 1,
+    SecondSide = 2
+};
 
-@interface FRDPhotoGalleryCollectionViewLayout : UICollectionViewFlowLayout
+@interface FRDPhotoGalleryCollectionViewLayout : UICollectionViewLayout
 
 @end

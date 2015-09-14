@@ -8,82 +8,128 @@
 
 #import "FRDPhotoGalleryCollectionViewLayout.h"
 
-static CGFloat const fullSpace = 2.f;
-static CGFloat const halfSpace = fullSpace / 2;
-static CGFloat const quarterSpace = halfSpace / 2;
+static CGFloat const kFullSpace = 2.f;
+static CGFloat const kHalfSpace = kFullSpace / 2;
+static CGFloat const kQuarterSpace = kHalfSpace / 2;
 
 @interface FRDPhotoGalleryCollectionViewLayout ()
 
+@property (assign, readwrite, nonatomic) CGFloat oneThirdOfScreenWidth;
+@property (assign, readwrite, nonatomic) CGFloat twoThirdsOfScreenWidth;
+
 @property (assign, readwrite, nonatomic) CGSize mainPhotoSize;
 @property (assign, readwrite, nonatomic) CGSize secondaryPhotoSize;
+@property (assign, readwrite, nonatomic) CGSize contentSize;
+
+@property (strong, nonatomic) NSMutableArray *attributes;
+
+@property (strong, nonatomic) NSMutableDictionary *layoutAttributes;
 
 @end
 
+
 @implementation FRDPhotoGalleryCollectionViewLayout
 
-- (instancetype)init
+
+- (void)prepareLayout
 {
-    if (self = [super init]) {
-        CGFloat bigSide = self.collectionView.frame.size.width * (2.0 / 3.0);
-        _mainPhotoSize = CGSizeMake(bigSide, bigSide);
+    [super prepareLayout];
+    
+    self.oneThirdOfScreenWidth = CGRectGetWidth(self.collectionView.frame) * (1.0 / 3.0);
+    self.twoThirdsOfScreenWidth = CGRectGetWidth(self.collectionView.frame) * (2.0 / 3.0);
+    
+    self.mainPhotoSize = CGSizeMake(self.twoThirdsOfScreenWidth, self.twoThirdsOfScreenWidth);
+    self.secondaryPhotoSize = CGSizeMake(self.oneThirdOfScreenWidth, self.oneThirdOfScreenWidth);
+    
+    NSInteger numberOfElements = [self.collectionView numberOfItemsInSection:0];
+    
+    self.attributes = [NSMutableArray arrayWithCapacity:numberOfElements];
+    for (int i = 0; i < numberOfElements; ++i) {
+        UICollectionViewLayoutAttributes *cellAttributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+        cellAttributes.frame = [self frameForElementAtIndexPath:cellAttributes.indexPath];
         
-        CGFloat smallSide = self.collectionView.frame.size.width * (1.0 / 3.0);
-        _secondaryPhotoSize = CGSizeMake(smallSide, smallSide);
+        [self.attributes addObject:cellAttributes];
+        
+        NSLog(@"{ %f : %f }", cellAttributes.frame.origin.x, cellAttributes.frame.origin.y);
     }
-    return self;
+    
+    UICollectionViewLayoutAttributes *lastCellAttributes = self.attributes.lastObject;
+    self.contentSize = CGSizeMake(CGRectGetWidth(self.collectionView.bounds),
+                                  CGRectGetMaxY(lastCellAttributes.frame));
+    
+    NSLog(@"Content size: WIDTH = %f, HEIGHT = %f", self.contentSize.width, self.contentSize.height);
 }
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionViewContentSize
 {
-    UICollectionViewLayoutAttributes *attributes = [super layoutAttributesForItemAtIndexPath:indexPath];
-    [self modifyLayoutAttributes:attributes];
-    return attributes;
+    return self.contentSize;
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    NSArray *attributesInRect = [super layoutAttributesForElementsInRect:rect];
-    for (UICollectionViewLayoutAttributes *cellAttributes in attributesInRect) {
-        [self modifyLayoutAttributes:cellAttributes];
+    NSLog(@"New Rect");
+    NSLog(@" ");
+    // NSLog(@"{ %f : %f } { %f : %f }", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
+    
+    NSMutableArray *attributesInRect = [NSMutableArray arrayWithCapacity:20];
+    
+    for (UICollectionViewLayoutAttributes *cellAttributes in self.attributes) {
+        if (CGRectIntersectsRect(rect, cellAttributes.frame)) {
+            [attributesInRect addObject:cellAttributes];
+            
+            
+            NSLog(@"{ %.1f : %.1f }", cellAttributes.frame.origin.x, cellAttributes.frame.origin.y);
+        }
     }
+    
     return attributesInRect;
 }
 
-- (void)modifyLayoutAttributes:(UICollectionViewLayoutAttributes *)attributes
+- (CGRect)frameForElementAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSInteger row = 0;
     
-    NSInteger column = attributes.indexPath.item % 3;
-    if (column == 2) {
+    NSInteger column = indexPath.item % 3;
+    if (column == 0) {
         row++;
     }
     
-    CGFloat bigSize = self.collectionView.frame.size.width * (2.0 / 3.0);
-    CGFloat smallSize = self.collectionView.frame.size.width - bigSize;
+    // Offsets for items that are not Main or Side
+    CGFloat xOffset;
+    CGFloat widthOffset;
     
-    if (attributes.indexPath.item == 0) {
-        attributes.frame = CGRectMake(0, 0, bigSize - halfSpace, bigSize);
-    }
-    else if (attributes.indexPath.item == 1) {
-        attributes.frame = CGRectMake(bigSize + halfSpace,
-                                      0,
-                                      smallSize - halfSpace,
-                                      smallSize - halfSpace);
-    }
-    else if (attributes.indexPath.item == 2) {
-        attributes.frame = CGRectMake(bigSize + halfSpace,
-                                      smallSize + halfSpace,
-                                      smallSize - halfSpace,
-                                      smallSize - halfSpace);
-    }
-    else {
-        CGFloat xOffset = (column == 1) ? halfSpace : quarterSpace;
-        CGFloat widthOffset = (column == 1) ? fullSpace : halfSpace;
-        
-        attributes.frame = CGRectMake((smallSize + xOffset) * column,
-                                      (bigSize + fullSpace) * row,
-                                      smallSize - widthOffset,
-                                      smallSize - halfSpace);
+    GalleryLayoutItemType type = indexPath.item;
+    switch (type) {
+        case Main:
+            return CGRectMake(0,
+                              0,
+                              self.mainPhotoSize.width - kHalfSpace,
+                              self.mainPhotoSize.height);
+            break;
+            
+        case FirstSide:
+            return CGRectMake(self.mainPhotoSize.width + kHalfSpace,
+                              0,
+                              self.secondaryPhotoSize.width - kHalfSpace,
+                              self.secondaryPhotoSize.height - kHalfSpace);
+            break;
+            
+        case SecondSide:
+            return CGRectMake(self.mainPhotoSize.width + kHalfSpace,
+                              self.secondaryPhotoSize.height + kHalfSpace,
+                              self.secondaryPhotoSize.width - kHalfSpace,
+                              self.secondaryPhotoSize.height - kHalfSpace);
+            break;
+            
+        default:
+            xOffset = (column == 1) ? kHalfSpace : kQuarterSpace;
+            widthOffset = (column == 1) ? kFullSpace : kHalfSpace;
+            
+            return CGRectMake((self.secondaryPhotoSize.width + xOffset) * column,
+                              (self.secondaryPhotoSize.height + kHalfSpace) * row,
+                              self.secondaryPhotoSize.width - widthOffset,
+                              self.secondaryPhotoSize.height - kHalfSpace);
+            break;
     }
 }
 
