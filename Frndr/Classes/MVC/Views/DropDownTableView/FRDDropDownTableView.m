@@ -10,15 +10,14 @@
 
 #import "FRDBaseDropDownDataSource.h"
 
-static NSUInteger const kDropDownHeight = 350.f;
+static NSUInteger const kDropDownHeight = 200.f;
 static CGFloat const kSlidingTime = .5f;
 
 @interface FRDDropDownTableView ()
 
 @property (weak, nonatomic) IBOutlet UITableView *dropDownList;
 
-@property (strong, nonatomic) FRDBaseDropDownDataSource *dropDownDataSource;
-@property (copy, nonatomic) DropDownCompletion completion;
+@property (nonatomic) FRDBaseDropDownDataSource *dropDownDataSource;
 
 @property (weak, nonatomic) UIView *anchorView;
 @property (weak, nonatomic) UIView *presentedView;
@@ -28,8 +27,6 @@ static CGFloat const kSlidingTime = .5f;
 @implementation FRDDropDownTableView {
     CGRect savedDropDownTableFrame;
 }
-
-#pragma mark - Lifecycle
 
 #pragma mark - Lifecycle
 
@@ -69,7 +66,6 @@ static CGFloat const kSlidingTime = .5f;
                          withCompletion:(DropDownCompletion)completion
 {
     self.presentedView = presentedView;
-    self.completion = completion;
     
     //If any action hasn't been called yet, but data source has been changed
     if (![dataSource isKindOfClass:[self.dropDownDataSource class]]) {
@@ -79,7 +75,8 @@ static CGFloat const kSlidingTime = .5f;
     
     //changing the table's data source and reload table's data
     self.dropDownDataSource = dataSource;
-    self.dropDownDataSource.dropDownTableView = self.dropDownList;
+    self.dropDownDataSource.completion = completion;
+    self.dropDownDataSource.dropDownTableView = self;
     self.dropDownList.dataSource = self.dropDownDataSource;
     self.dropDownList.delegate = self.dropDownDataSource;
     [self.dropDownList reloadData];
@@ -92,7 +89,6 @@ static CGFloat const kSlidingTime = .5f;
     
     self.isExpanded = !self.isExpanded;
 }
-
 
 - (void)showDropDownList
 {

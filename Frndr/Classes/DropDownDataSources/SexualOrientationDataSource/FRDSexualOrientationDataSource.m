@@ -28,6 +28,11 @@
     return _sexualOrientations;
 }
 
+- (NSArray *)currentDataSourceArray
+{
+    return self.sexualOrientations;
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

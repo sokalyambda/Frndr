@@ -11,9 +11,12 @@ typedef enum : NSUInteger {
     FRDDataSourceTypeSexualOrientation,
 } FRDDataSourceType;
 
+#import "FRDDropDownTableView.h"
+
 @interface FRDBaseDropDownDataSource : NSObject<UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) UITableView *dropDownTableView;
+@property (nonatomic) FRDDropDownTableView *dropDownTableView;
+@property (copy, nonatomic) DropDownCompletion completion;
 
 + (instancetype)dataSourceWithType:(FRDDataSourceType)sourceType;
 

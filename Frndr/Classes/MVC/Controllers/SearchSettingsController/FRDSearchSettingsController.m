@@ -41,9 +41,13 @@
     }];
 }
 
-- (IBAction)sexualOrientationClick:(id)sender
+- (IBAction)sexualOrientationClick:(UITapGestureRecognizer *)tap
 {
-    
+    UIView *tapView = tap.view;
+    FRDBaseDropDownDataSource *smokerDataSource = [FRDBaseDropDownDataSource dataSourceWithType:FRDDataSourceTypeSexualOrientation];
+    [self.dropDownList dropDownTableBecomeActiveInView:self.view fromAnchorView:tapView withDataSource:smokerDataSource withCompletion:^(FRDDropDownTableView *table, NSString *chosenValue) {
+        NSLog(@"chosen value %@", chosenValue);
+    }];
 }
 
 - (void)initDropDownTable

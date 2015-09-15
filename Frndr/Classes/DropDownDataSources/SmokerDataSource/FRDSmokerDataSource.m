@@ -28,6 +28,11 @@
     return _smokerTypes;
 }
 
+- (NSArray *)currentDataSourceArray
+{
+    return self.smokerTypes;
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

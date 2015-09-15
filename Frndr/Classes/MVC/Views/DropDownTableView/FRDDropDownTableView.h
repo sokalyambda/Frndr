@@ -19,4 +19,6 @@ typedef void(^DropDownCompletion)(FRDDropDownTableView *table, NSString *chosenV
                          withDataSource:(FRDBaseDropDownDataSource *)dataSource
                          withCompletion:(DropDownCompletion)completion;
 
+- (void)hideDropDownList;
+
 @end

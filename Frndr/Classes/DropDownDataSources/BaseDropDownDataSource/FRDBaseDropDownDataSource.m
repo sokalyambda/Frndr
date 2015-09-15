@@ -13,6 +13,12 @@
 
 #import "FRDDropDownCell.h"
 
+@interface FRDBaseDropDownDataSource ()
+
+@property (nonatomic) NSArray *currentDataSourceArray;
+
+@end
+
 @implementation FRDBaseDropDownDataSource
 
 #pragma mark - Lifecycle
@@ -70,6 +76,17 @@
 - (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath
 {
     
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.completion) {
+        [self.dropDownTableView hideDropDownList];
+        self.completion(self.dropDownTableView, self.currentDataSourceArray[indexPath.row]);
+        self.completion = nil;
+    }
 }
 
 @end
