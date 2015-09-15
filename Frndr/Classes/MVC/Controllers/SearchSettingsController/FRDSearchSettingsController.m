@@ -18,10 +18,14 @@
 
 #import "FRDSerialViewConstructor.h"
 
+#import "NMRangeSlider.h"
+
 @interface FRDSearchSettingsController ()
 
 @property (weak, nonatomic) IBOutlet UIView *dropDownHolderContainer;
 @property (weak, nonatomic) IBOutlet UIView *relationshipsContainer;
+
+@property (weak, nonatomic) IBOutlet NMRangeSlider *ageRangeSlider;
 
 @property (nonatomic) FRDDropDownHolderController *dropDownHolderController;
 @property (nonatomic) FRDRelationshipStatusController *relationshipController;
@@ -37,6 +41,7 @@
     [super viewDidLoad];
     [self initDropDownHolderContainer];
     [self initRelationshipStatusesHolderContainer];
+    [self configureAgeRangeSlider];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -62,6 +67,27 @@
     [self.relationshipsContainer addSubview:self.relationshipController.view];
     [self addChildViewController:self.relationshipController];
     [self.relationshipController didMoveToParentViewController:self];
+}
+
+- (void)configureAgeRangeSlider
+{
+    UIImage* image;
+    
+    image = [UIImage imageNamed:@"Slider_Thumb"];
+ //   image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)];
+    self.ageRangeSlider.trackBackgroundImage = image;
+    
+//    image = [UIImage imageNamed:@"Shape-9"];
+//    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(2.0, 7.0, 2.0, 7.0)];
+//    self.ageRangeSlider.trackImage = image;
+    
+    image = [UIImage imageNamed:@"Slider_Thumb"];
+    self.ageRangeSlider.lowerHandleImageNormal = image;
+    self.ageRangeSlider.upperHandleImageNormal = image;
+    
+    image = [UIImage imageNamed:@"Slider_Thumb"];
+    self.ageRangeSlider.lowerHandleImageHighlighted = image;
+    self.ageRangeSlider.upperHandleImageHighlighted = image;
 }
 
 - (void)customizeNavigationItem
