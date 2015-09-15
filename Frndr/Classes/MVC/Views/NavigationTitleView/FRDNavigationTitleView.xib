@@ -47,7 +47,7 @@
             <connections>
                 <outlet property="titleLabel" destination="Hwp-ri-YvZ" id="Ni4-m6-T3t"/>
             </connections>
-            <point key="canvasLocation" x="524" y="202"/>
+            <point key="canvasLocation" x="461" y="200"/>
         </view>
     </objects>
 </document>

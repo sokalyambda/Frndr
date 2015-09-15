@@ -23,6 +23,7 @@
     _titleText = titleText;
     _titleLabel.text = _titleText;
     _titleLabel.textColor = UIColorFromRGB(0x58406B);
+    _titleLabel.font = [UIFont fontWithName:@"GillSans-Regular" size:20.f];
 }
 
 @end

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iop-ZY-mlb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VVZ-Ve-cwB">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -34,11 +34,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hnk-0X-c71">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="preferencesTopIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Hnk-0X-c71">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="1hB-XT-r6e"/>
-                                    <constraint firstAttribute="height" constant="150" id="Wmb-lT-57k"/>
+                                    <constraint firstAttribute="width" constant="150" id="1hB-XT-r6e">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="134"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="150" id="Wmb-lT-57k">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="120"/>
+                                    </constraint>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -56,7 +60,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Hnk-0X-c71" firstAttribute="top" secondItem="fZs-P4-CdE" secondAttribute="bottom" constant="70" id="No4-QG-jsG"/>
+                            <constraint firstItem="Hnk-0X-c71" firstAttribute="top" secondItem="akv-zY-GJY" secondAttribute="topMargin" constant="134" id="tVb-os-vFs"/>
                             <constraint firstAttribute="centerX" secondItem="Hnk-0X-c71" secondAttribute="centerX" id="xh2-lR-9tg"/>
                         </constraints>
                         <variation key="default">
@@ -64,7 +68,7 @@
                                 <exclude reference="Hnk-0X-c71"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="No4-QG-jsG"/>
+                                <exclude reference="tVb-os-vFs"/>
                                 <exclude reference="xh2-lR-9tg"/>
                             </mask>
                         </variation>
@@ -73,7 +77,7 @@
                                 <include reference="Hnk-0X-c71"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="No4-QG-jsG"/>
+                                <include reference="tVb-os-vFs"/>
                                 <include reference="xh2-lR-9tg"/>
                             </mask>
                         </variation>
@@ -110,6 +114,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Nsz-As-9ER"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                 <state key="normal" title="Log In with Facebook" backgroundImage="facebookButtonBackground">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -130,7 +135,7 @@
                             </button>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By continuing you agree to our Terms of Service and Privacy Policy. Frndr does not post anything to Facebook" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgk-7h-Ry8" customClass="FRDTermsLabel">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="10"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <connections>
@@ -362,9 +367,12 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Za-GX-bvr">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
+                                                    <color key="textColor" red="0.42352941179999998" green="0.3294117647" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="20" y="26" width="109" height="18"/>
+                                                    </variation>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosureIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="AlU-2r-aEe">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -425,12 +433,6 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nGu-5l-iQb" id="rF0-6H-r7E">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Profile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pqd-Qe-W9K">
-                                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosureIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="Jpt-X8-4XG">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                     <constraints>
@@ -451,6 +453,15 @@
                                                         </mask>
                                                     </variation>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Profile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pqd-Qe-W9K">
+                                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
+                                                    <color key="textColor" red="0.42352941176470588" green="0.32941176470588235" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="20" y="26" width="69" height="18"/>
+                                                    </variation>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="Pqd-Qe-W9K" secondAttribute="centerY" id="1B2-hv-KgB"/>
@@ -460,8 +471,8 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">
-                                                    <exclude reference="Pqd-Qe-W9K"/>
                                                     <exclude reference="Jpt-X8-4XG"/>
+                                                    <exclude reference="Pqd-Qe-W9K"/>
                                                 </mask>
                                                 <mask key="constraints">
                                                     <exclude reference="1B2-hv-KgB"/>
@@ -472,8 +483,8 @@
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="subviews">
-                                                    <include reference="Pqd-Qe-W9K"/>
                                                     <include reference="Jpt-X8-4XG"/>
+                                                    <include reference="Pqd-Qe-W9K"/>
                                                 </mask>
                                                 <mask key="constraints">
                                                     <include reference="1B2-hv-KgB"/>
@@ -492,7 +503,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hs3-SB-I74">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.42352941179999998" green="0.3294117647" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosureIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="e5f-dh-XDd">
@@ -556,7 +567,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share Frndr" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8by-72-SV8">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.42352941179999998" green="0.3294117647" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosureIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="YP6-qx-KmH">
@@ -632,6 +643,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ZHI-Ii-abp">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <collectionViewLayout key="collectionViewLayout" id="ZlS-0y-yyK" customClass="FRDPhotoGalleryCollectionViewLayout"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FRDPhotoGalleryCollectionViewCell" id="7aM-9V-OeS" customClass="FRDPhotoGalleryCollectionViewCell">
@@ -713,8 +725,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="j0i-pl-ghW"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                 <state key="normal" title="Logout of Frndr">
-                                    <color key="titleColor" red="0.36991003787878785" green="0.36991003787878785" blue="0.36991003787878785" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.42352941179999998" green="0.3294117647" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="default">
@@ -856,14 +869,14 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M0E-UL-odk">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" red="0.0" green="0.870132032" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
+                                        <color key="textColor" red="0.20784313730000001" green="0.72156862749999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Relationship Statuses" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5LT-cV-9kI">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" red="0.0" green="0.870132032" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
+                                        <color key="textColor" red="0.20784313730000001" green="0.72156862749999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="1Vs-xy-Nmm" userLabel="Distance Horizontal Slider">
@@ -871,8 +884,8 @@
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age Range" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TVq-nv-8OU">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" red="0.0" green="0.870132032" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
+                                        <color key="textColor" red="0.20784313730000001" green="0.72156862749999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aFt-kK-qOT" userLabel="Drop Down Holder Container">
@@ -928,11 +941,12 @@
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y5q-yD-rh0">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                        <color key="backgroundColor" red="0.253561537" green="0.023173133700000001" blue="0.44349747470000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="QQq-R6-8Lv"/>
                                         </constraints>
-                                        <state key="normal" title="SAVE">
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
+                                        <state key="normal" title="SAVE" backgroundImage="saveButton">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -989,28 +1003,28 @@
                                         <exclude reference="y5q-yD-rh0"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <exclude reference="lpt-Qq-Aqu"/>
+                                        <exclude reference="rxr-do-oC3"/>
                                         <exclude reference="O5u-7l-1ce"/>
                                         <exclude reference="b9V-eZ-BJb"/>
+                                        <exclude reference="CCV-Sl-6XK"/>
+                                        <exclude reference="h55-TS-KIU"/>
                                         <exclude reference="5Oa-xG-cAS"/>
                                         <exclude reference="kPO-Y8-J33"/>
                                         <exclude reference="o9s-ea-gla"/>
-                                        <exclude reference="lpt-Qq-Aqu"/>
-                                        <exclude reference="rxr-do-oC3"/>
+                                        <exclude reference="NK4-li-Hi9"/>
+                                        <exclude reference="a96-Ro-M34"/>
+                                        <exclude reference="eMO-26-s13"/>
+                                        <exclude reference="sP5-Ih-QG8"/>
                                         <exclude reference="8oU-fa-o5l"/>
                                         <exclude reference="gFE-Op-83D"/>
                                         <exclude reference="h82-GE-jf3"/>
                                         <exclude reference="Mp9-jJ-IFS"/>
                                         <exclude reference="XgF-iF-iZX"/>
                                         <exclude reference="jeN-CG-gC2"/>
-                                        <exclude reference="CCV-Sl-6XK"/>
-                                        <exclude reference="h55-TS-KIU"/>
                                         <exclude reference="l6v-tB-egd"/>
                                         <exclude reference="m61-Rr-wxH"/>
                                         <exclude reference="xS6-hQ-dXX"/>
-                                        <exclude reference="NK4-li-Hi9"/>
-                                        <exclude reference="a96-Ro-M34"/>
-                                        <exclude reference="eMO-26-s13"/>
-                                        <exclude reference="sP5-Ih-QG8"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -1025,28 +1039,28 @@
                                         <include reference="y5q-yD-rh0"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <include reference="lpt-Qq-Aqu"/>
+                                        <include reference="rxr-do-oC3"/>
                                         <include reference="O5u-7l-1ce"/>
                                         <include reference="b9V-eZ-BJb"/>
+                                        <include reference="CCV-Sl-6XK"/>
+                                        <include reference="h55-TS-KIU"/>
                                         <include reference="5Oa-xG-cAS"/>
                                         <include reference="kPO-Y8-J33"/>
                                         <include reference="o9s-ea-gla"/>
-                                        <include reference="lpt-Qq-Aqu"/>
-                                        <include reference="rxr-do-oC3"/>
+                                        <include reference="NK4-li-Hi9"/>
+                                        <include reference="a96-Ro-M34"/>
+                                        <include reference="eMO-26-s13"/>
+                                        <include reference="sP5-Ih-QG8"/>
                                         <include reference="8oU-fa-o5l"/>
                                         <include reference="gFE-Op-83D"/>
                                         <include reference="h82-GE-jf3"/>
                                         <include reference="Mp9-jJ-IFS"/>
                                         <include reference="XgF-iF-iZX"/>
                                         <include reference="jeN-CG-gC2"/>
-                                        <include reference="CCV-Sl-6XK"/>
-                                        <include reference="h55-TS-KIU"/>
                                         <include reference="l6v-tB-egd"/>
                                         <include reference="m61-Rr-wxH"/>
                                         <include reference="xS6-hQ-dXX"/>
-                                        <include reference="NK4-li-Hi9"/>
-                                        <include reference="a96-Ro-M34"/>
-                                        <include reference="eMO-26-s13"/>
-                                        <include reference="sP5-Ih-QG8"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -1159,5 +1173,6 @@
         <image name="facebookButtonBackground" width="389" height="44"/>
         <image name="maskBackground" width="414" height="736"/>
         <image name="preferencesTopIcon" width="134" height="120"/>
+        <image name="saveButton" width="583" height="66"/>
     </resources>
 </document>

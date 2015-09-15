@@ -21,8 +21,8 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="75" id="QFm-iz-9Qz"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <color key="textColor" red="0.0" green="0.870132032" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
+                    <color key="textColor" red="0.20784313730000001" green="0.72156862749999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
@@ -40,8 +40,8 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="161" id="7GO-Td-9Ro"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <color key="textColor" red="0.0" green="0.870132032" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
+                    <color key="textColor" red="0.20784313730000001" green="0.72156862749999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
@@ -59,8 +59,8 @@
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Any" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJh-rd-QlQ">
                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.25207149620000002" green="0.25207149620000002" blue="0.25207149620000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
+                            <color key="textColor" red="0.42352941179999998" green="0.3294117647" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downArrow" translatesAutoresizingMaskIntoConstraints="NO" id="Cao-uY-JI3">
@@ -132,8 +132,8 @@
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Non-Smoker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVU-1i-rf2">
                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.25207149620000002" green="0.25207149620000002" blue="0.25207149620000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
+                            <color key="textColor" red="0.42352941179999998" green="0.3294117647" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downArrow" translatesAutoresizingMaskIntoConstraints="NO" id="Idx-Wd-jFd">
@@ -224,17 +224,17 @@
                     <exclude reference="kft-tM-kQv"/>
                 </mask>
                 <mask key="constraints">
+                    <exclude reference="V5p-Ks-xys"/>
+                    <exclude reference="gMy-cQ-wHE"/>
                     <exclude reference="eFB-9A-IXU"/>
                     <exclude reference="hHp-L7-7Qs"/>
                     <exclude reference="sqz-sT-VuR"/>
+                    <exclude reference="s6c-4q-4yy"/>
+                    <exclude reference="sEp-Ta-gA9"/>
                     <exclude reference="ILW-2u-FNn"/>
                     <exclude reference="QsE-rt-w0o"/>
                     <exclude reference="SQS-4Y-ShU"/>
                     <exclude reference="xIW-g1-Fxn"/>
-                    <exclude reference="V5p-Ks-xys"/>
-                    <exclude reference="gMy-cQ-wHE"/>
-                    <exclude reference="s6c-4q-4yy"/>
-                    <exclude reference="sEp-Ta-gA9"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
@@ -245,20 +245,20 @@
                     <include reference="kft-tM-kQv"/>
                 </mask>
                 <mask key="constraints">
+                    <include reference="V5p-Ks-xys"/>
+                    <include reference="gMy-cQ-wHE"/>
                     <include reference="eFB-9A-IXU"/>
                     <include reference="hHp-L7-7Qs"/>
                     <include reference="sqz-sT-VuR"/>
+                    <include reference="s6c-4q-4yy"/>
+                    <include reference="sEp-Ta-gA9"/>
                     <include reference="ILW-2u-FNn"/>
                     <include reference="QsE-rt-w0o"/>
                     <include reference="SQS-4Y-ShU"/>
                     <include reference="xIW-g1-Fxn"/>
-                    <include reference="V5p-Ks-xys"/>
-                    <include reference="gMy-cQ-wHE"/>
-                    <include reference="s6c-4q-4yy"/>
-                    <include reference="sEp-Ta-gA9"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="418.5" y="107"/>
+            <point key="canvasLocation" x="418" y="-103"/>
         </view>
         <tapGestureRecognizer id="rBb-KL-GYH" userLabel="SmokerTap">
             <connections>
