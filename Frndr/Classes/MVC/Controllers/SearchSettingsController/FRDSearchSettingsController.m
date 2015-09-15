@@ -7,6 +7,7 @@
 //
 
 #import "FRDSearchSettingsController.h"
+#import "FRDDropDownHolderController.h"
 
 #import "FRDDropDownTableView.h"
 
@@ -18,10 +19,9 @@
 
 @interface FRDSearchSettingsController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *smokerLabel;
-@property (weak, nonatomic) IBOutlet UILabel *sexualOrientationLabel;
+@property (weak, nonatomic) IBOutlet UIView *dropDownHolderContainer;
 
-@property (nonatomic) FRDDropDownTableView *dropDownList;
+@property (nonatomic) FRDDropDownHolderController *dropDownHolderController;
 
 @end
 
@@ -32,42 +32,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self initDropDownTable];
+    [self initDropDownHolderContainer];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
     [super viewWillAppear:animated];
 }
 
 #pragma mark - Actions
 
-- (IBAction)smokerClick:(UITapGestureRecognizer *)tap
+- (void)initDropDownHolderContainer
 {
-    UIView *tapView = tap.view;
-    FRDBaseDropDownDataSource *smokerDataSource = [FRDBaseDropDownDataSource dataSourceWithType:FRDDataSourceTypeSmoker];
-    WEAK_SELF;
-    [self.dropDownList dropDownTableBecomeActiveInView:self.view fromAnchorView:tapView withDataSource:smokerDataSource withCompletion:^(FRDDropDownTableView *table, NSString *chosenValue) {
-        NSLog(@"chosen value %@", chosenValue);
-        weakSelf.smokerLabel.text = chosenValue;
-    }];
-}
-
-- (IBAction)sexualOrientationClick:(UITapGestureRecognizer *)tap
-{
-    UIView *tapView = tap.view;
-    FRDBaseDropDownDataSource *smokerDataSource = [FRDBaseDropDownDataSource dataSourceWithType:FRDDataSourceTypeSexualOrientation];
-    WEAK_SELF;
-    [self.dropDownList dropDownTableBecomeActiveInView:self.view fromAnchorView:tapView withDataSource:smokerDataSource withCompletion:^(FRDDropDownTableView *table, NSString *chosenValue) {
-        NSLog(@"chosen value %@", chosenValue);
-        weakSelf.sexualOrientationLabel.text = chosenValue;
-    }];
-}
-
-- (void)initDropDownTable
-{
-    self.dropDownList = [FRDDropDownTableView makeFromXib];
+    self.dropDownHolderController = [[FRDDropDownHolderController alloc] initWithNibName:NSStringFromClass([FRDDropDownHolderController class]) bundle:nil];
+    [self.dropDownHolderController.view setFrame:self.dropDownHolderContainer.frame];
+    [self.dropDownHolderContainer addSubview:self.dropDownHolderController.view];
+    [self addChildViewController:self.dropDownHolderController];
+    [self.dropDownHolderController didMoveToParentViewController:self];
 }
 
 - (void)customizeNavigationItem

@@ -32,6 +32,8 @@
 		587B3A7D1BA7F7C30098154F /* FRDSexualOrientationDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A7C1BA7F7C30098154F /* FRDSexualOrientationDataSource.m */; };
 		587B3A811BA7F8510098154F /* FRDDropDownCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A801BA7F8510098154F /* FRDDropDownCell.m */; };
 		587B3A831BA7FD120098154F /* FRDDropDownTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587B3A821BA7FD120098154F /* FRDDropDownTableView.xib */; };
+		587B3A881BA80F3D0098154F /* FRDDropDownHolderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A861BA80F3D0098154F /* FRDDropDownHolderController.m */; };
+		587B3A891BA80F3D0098154F /* FRDDropDownHolderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587B3A871BA80F3D0098154F /* FRDDropDownHolderController.xib */; };
 		5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */; };
 		58BC76A11B9EB6B500BB8B5A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A01B9EB6B500BB8B5A /* main.m */; };
 		58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A31B9EB6B500BB8B5A /* AppDelegate.m */; };
@@ -141,6 +143,9 @@
 		587B3A7F1BA7F8510098154F /* FRDDropDownCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDDropDownCell.h; path = Classes/Cells/UITableViewCells/DropDownCell/FRDDropDownCell.h; sourceTree = "<group>"; };
 		587B3A801BA7F8510098154F /* FRDDropDownCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDDropDownCell.m; path = Classes/Cells/UITableViewCells/DropDownCell/FRDDropDownCell.m; sourceTree = "<group>"; };
 		587B3A821BA7FD120098154F /* FRDDropDownTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FRDDropDownTableView.xib; sourceTree = "<group>"; };
+		587B3A851BA80F3D0098154F /* FRDDropDownHolderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDDropDownHolderController.h; path = Classes/MVC/Controllers/DropDownHolderController/FRDDropDownHolderController.h; sourceTree = "<group>"; };
+		587B3A861BA80F3D0098154F /* FRDDropDownHolderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDDropDownHolderController.m; path = Classes/MVC/Controllers/DropDownHolderController/FRDDropDownHolderController.m; sourceTree = "<group>"; };
+		587B3A871BA80F3D0098154F /* FRDDropDownHolderController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDDropDownHolderController.xib; path = Classes/MVC/Controllers/DropDownHolderController/FRDDropDownHolderController.xib; sourceTree = "<group>"; };
 		5895FD931BA2D55C00079F9D /* FRDCustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDCustomPageControl.h; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.h; sourceTree = "<group>"; };
 		5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDCustomPageControl.m; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.m; sourceTree = "<group>"; };
 		58BC769B1B9EB6B500BB8B5A /* Frndr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frndr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -414,6 +419,16 @@
 			name = DropDownCell;
 			sourceTree = "<group>";
 		};
+		587B3A841BA80F050098154F /* DropDownHolderController */ = {
+			isa = PBXGroup;
+			children = (
+				587B3A851BA80F3D0098154F /* FRDDropDownHolderController.h */,
+				587B3A861BA80F3D0098154F /* FRDDropDownHolderController.m */,
+				587B3A871BA80F3D0098154F /* FRDDropDownHolderController.xib */,
+			);
+			name = DropDownHolderController;
+			sourceTree = "<group>";
+		};
 		58A2B7461BA2C04B007D4D60 /* StyledPageControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -601,6 +616,7 @@
 		58BC76D21B9EB95600BB8B5A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				587B3A841BA80F050098154F /* DropDownHolderController */,
 				3E3D415A1BA6B1020021026A /* SearchSettingsController */,
 				3E3D41561BA6A4B20021026A /* AutologinController */,
 				587727F51BA2D7EB0032D746 /* TermsAndServicesController */,
@@ -1212,6 +1228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				58D5A16C1BA329E500D552CF /* FRDNavigationTitleView.xib in Resources */,
+				587B3A891BA80F3D0098154F /* FRDDropDownHolderController.xib in Resources */,
 				587B3A831BA7FD120098154F /* FRDDropDownTableView.xib in Resources */,
 				58BC76AA1B9EB6B500BB8B5A /* Main.storyboard in Resources */,
 				58BC76AF1B9EB6B500BB8B5A /* LaunchScreen.xib in Resources */,
@@ -1269,6 +1286,7 @@
 				58BC771A1B9ECA8100BB8B5A /* UIView+Flashable.m in Sources */,
 				58BC77051B9ECA2200BB8B5A /* NSString+JSONRepresentation.m in Sources */,
 				58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */,
+				587B3A881BA80F3D0098154F /* FRDDropDownHolderController.m in Sources */,
 				3ED072361BA048460091B7E4 /* FRDPreferencesTableViewController.m in Sources */,
 				58FFDBAE1B9ECF6B00B0490A /* FRDCommonDateFormatter.m in Sources */,
 				58FFDBB81B9ED0A900B0490A /* FRDErrorHandler.m in Sources */,
