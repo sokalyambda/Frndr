@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FRDRelationshipCollectionCell" id="gTV-IL-0wX" customClass="FRDRelationshipCollectionCell">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="descr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgi-Lg-Voq" userLabel="descriprion label">
+                        <rect key="frame" x="34" y="83" width="32" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C3W-s3-Suv" customClass="FRDRoundedView">
+                        <rect key="frame" x="10" y="0.0" width="80" height="80"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vvl-HY-Zch">
+                                <rect key="frame" x="22" y="22" width="36" height="36"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="6SS-hz-Oe9"/>
+                                    <constraint firstAttribute="width" constant="36" id="UXh-eI-BWg"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.91947451065526198" green="0.99480879934210531" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="80" id="S2x-uX-gzA"/>
+                            <constraint firstAttribute="centerX" secondItem="Vvl-HY-Zch" secondAttribute="centerX" id="fAq-1d-8Oa"/>
+                            <constraint firstAttribute="centerY" secondItem="Vvl-HY-Zch" secondAttribute="centerY" id="yqc-hk-1hW"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="C3W-s3-Suv" secondAttribute="trailing" constant="10" id="Cf6-GV-Gc2"/>
+                <constraint firstItem="C3W-s3-Suv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="FQY-iB-3Ib"/>
+                <constraint firstAttribute="centerX" secondItem="C3W-s3-Suv" secondAttribute="centerX" id="fhL-to-Rnb"/>
+                <constraint firstItem="C3W-s3-Suv" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="jQF-Ua-1zQ"/>
+                <constraint firstItem="pgi-Lg-Voq" firstAttribute="top" secondItem="C3W-s3-Suv" secondAttribute="bottom" constant="3" id="uzA-Yn-aND"/>
+                <constraint firstItem="pgi-Lg-Voq" firstAttribute="centerX" secondItem="C3W-s3-Suv" secondAttribute="centerX" id="wue-5Q-Xg7"/>
+            </constraints>
+            <size key="customSize" width="87" height="107"/>
+            <connections>
+                <outlet property="relationshipImageView" destination="Vvl-HY-Zch" id="Wt0-DD-Uss"/>
+                <outlet property="relationshipTitleLabel" destination="pgi-Lg-Voq" id="x4A-cy-Pqi"/>
+            </connections>
+            <point key="canvasLocation" x="490" y="358.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

@@ -8,6 +8,7 @@
 
 #import "FRDSearchSettingsController.h"
 #import "FRDDropDownHolderController.h"
+#import "FRDRelationshipStatusController.h"
 
 #import "FRDDropDownTableView.h"
 
@@ -20,8 +21,10 @@
 @interface FRDSearchSettingsController ()
 
 @property (weak, nonatomic) IBOutlet UIView *dropDownHolderContainer;
+@property (weak, nonatomic) IBOutlet UIView *relationshipsContainer;
 
 @property (nonatomic) FRDDropDownHolderController *dropDownHolderController;
+@property (nonatomic) FRDRelationshipStatusController *relationshipController;
 
 @end
 
@@ -33,6 +36,7 @@
 {
     [super viewDidLoad];
     [self initDropDownHolderContainer];
+    [self initRelationshipStatusesHolderContainer];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -49,6 +53,15 @@
     [self.dropDownHolderContainer addSubview:self.dropDownHolderController.view];
     [self addChildViewController:self.dropDownHolderController];
     [self.dropDownHolderController didMoveToParentViewController:self];
+}
+
+- (void)initRelationshipStatusesHolderContainer
+{
+    self.relationshipController = [[FRDRelationshipStatusController alloc] initWithNibName:NSStringFromClass([FRDRelationshipStatusController class]) bundle:nil];
+    [self.relationshipController.view setFrame:self.relationshipsContainer.frame];
+    [self.relationshipsContainer addSubview:self.relationshipController.view];
+    [self addChildViewController:self.relationshipController];
+    [self.relationshipController didMoveToParentViewController:self];
 }
 
 - (void)customizeNavigationItem

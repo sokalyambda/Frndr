@@ -63,10 +63,12 @@
                             <color key="textColor" red="0.25207149620000002" green="0.25207149620000002" blue="0.25207149620000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cao-uY-JI3">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downArrow" translatesAutoresizingMaskIntoConstraints="NO" id="Cao-uY-JI3">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="20" id="91L-Pq-kOY"/>
+                                <constraint firstAttribute="width" constant="20" id="91L-Pq-kOY">
+                                    <variation key="heightClass=regular-widthClass=compact" constant="18"/>
+                                </constraint>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
@@ -86,8 +88,12 @@
                         <constraint firstAttribute="trailing" secondItem="Cao-uY-JI3" secondAttribute="trailing" constant="8" id="ZIv-iw-n8m"/>
                         <constraint firstAttribute="centerX" secondItem="GJh-rd-QlQ" secondAttribute="centerX" id="ft3-7p-TTT"/>
                         <constraint firstAttribute="height" constant="30" id="qPx-CV-ifq"/>
-                        <constraint firstItem="Cao-uY-JI3" firstAttribute="bottom" secondItem="GJh-rd-QlQ" secondAttribute="bottom" id="roq-ml-4Fk"/>
-                        <constraint firstItem="Cao-uY-JI3" firstAttribute="top" secondItem="GJh-rd-QlQ" secondAttribute="top" id="zOz-Pu-fbQ"/>
+                        <constraint firstItem="Cao-uY-JI3" firstAttribute="bottom" secondItem="GJh-rd-QlQ" secondAttribute="bottom" id="roq-ml-4Fk">
+                            <variation key="heightClass=regular-widthClass=compact" constant="-2"/>
+                        </constraint>
+                        <constraint firstItem="Cao-uY-JI3" firstAttribute="top" secondItem="GJh-rd-QlQ" secondAttribute="top" id="zOz-Pu-fbQ">
+                            <variation key="heightClass=regular-widthClass=compact" constant="3"/>
+                        </constraint>
                     </constraints>
                     <variation key="default">
                         <mask key="subviews">
@@ -130,10 +136,12 @@
                             <color key="textColor" red="0.25207149620000002" green="0.25207149620000002" blue="0.25207149620000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Idx-Wd-jFd">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downArrow" translatesAutoresizingMaskIntoConstraints="NO" id="Idx-Wd-jFd">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="20" id="ZV1-0E-rk5"/>
+                                <constraint firstAttribute="width" constant="20" id="ZV1-0E-rk5">
+                                    <variation key="heightClass=regular-widthClass=compact" constant="18"/>
+                                </constraint>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
@@ -151,10 +159,10 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="Idx-Wd-jFd" secondAttribute="trailing" constant="8" id="2FI-FP-Ysq"/>
                         <constraint firstItem="GVU-1i-rf2" firstAttribute="top" secondItem="Idx-Wd-jFd" secondAttribute="top" constant="-2" id="VIP-bW-Vcd">
-                            <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            <variation key="heightClass=regular-widthClass=compact" constant="-3"/>
                         </constraint>
                         <constraint firstItem="GVU-1i-rf2" firstAttribute="bottom" secondItem="Idx-Wd-jFd" secondAttribute="bottom" constant="2" id="Wr5-GC-5dJ">
-                            <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            <variation key="heightClass=regular-widthClass=compact" constant="2"/>
                         </constraint>
                         <constraint firstAttribute="height" constant="30" id="fNo-XJ-BlC"/>
                         <constraint firstAttribute="centerX" secondItem="GVU-1i-rf2" secondAttribute="centerX" id="vzY-ms-iiu"/>
@@ -263,4 +271,7 @@
             </connections>
         </tapGestureRecognizer>
     </objects>
+    <resources>
+        <image name="downArrow" width="18" height="16"/>
+    </resources>
 </document>

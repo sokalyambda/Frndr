@@ -34,6 +34,12 @@
 		587B3A831BA7FD120098154F /* FRDDropDownTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587B3A821BA7FD120098154F /* FRDDropDownTableView.xib */; };
 		587B3A881BA80F3D0098154F /* FRDDropDownHolderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A861BA80F3D0098154F /* FRDDropDownHolderController.m */; };
 		587B3A891BA80F3D0098154F /* FRDDropDownHolderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587B3A871BA80F3D0098154F /* FRDDropDownHolderController.xib */; };
+		587B3A8E1BA814C40098154F /* FRDRelationshipStatusController.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A8C1BA814C40098154F /* FRDRelationshipStatusController.m */; };
+		587B3A8F1BA814C40098154F /* FRDRelationshipStatusController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587B3A8D1BA814C40098154F /* FRDRelationshipStatusController.xib */; };
+		587B3A941BA815850098154F /* FRDRelationshipCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A921BA815850098154F /* FRDRelationshipCollectionCell.m */; };
+		587B3A951BA815850098154F /* FRDRelationshipCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587B3A931BA815850098154F /* FRDRelationshipCollectionCell.xib */; };
+		587B3A991BA817440098154F /* FRDRelationshipItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A981BA817440098154F /* FRDRelationshipItem.m */; };
+		587B3A9D1BA828370098154F /* FRDRoundedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A9C1BA828370098154F /* FRDRoundedView.m */; };
 		5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */; };
 		58BC76A11B9EB6B500BB8B5A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A01B9EB6B500BB8B5A /* main.m */; };
 		58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A31B9EB6B500BB8B5A /* AppDelegate.m */; };
@@ -146,6 +152,16 @@
 		587B3A851BA80F3D0098154F /* FRDDropDownHolderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDDropDownHolderController.h; path = Classes/MVC/Controllers/DropDownHolderController/FRDDropDownHolderController.h; sourceTree = "<group>"; };
 		587B3A861BA80F3D0098154F /* FRDDropDownHolderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDDropDownHolderController.m; path = Classes/MVC/Controllers/DropDownHolderController/FRDDropDownHolderController.m; sourceTree = "<group>"; };
 		587B3A871BA80F3D0098154F /* FRDDropDownHolderController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDDropDownHolderController.xib; path = Classes/MVC/Controllers/DropDownHolderController/FRDDropDownHolderController.xib; sourceTree = "<group>"; };
+		587B3A8B1BA814C40098154F /* FRDRelationshipStatusController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRelationshipStatusController.h; path = Classes/MVC/Controllers/RelationshipStatusController/FRDRelationshipStatusController.h; sourceTree = "<group>"; };
+		587B3A8C1BA814C40098154F /* FRDRelationshipStatusController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRelationshipStatusController.m; path = Classes/MVC/Controllers/RelationshipStatusController/FRDRelationshipStatusController.m; sourceTree = "<group>"; };
+		587B3A8D1BA814C40098154F /* FRDRelationshipStatusController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDRelationshipStatusController.xib; path = Classes/MVC/Controllers/RelationshipStatusController/FRDRelationshipStatusController.xib; sourceTree = "<group>"; };
+		587B3A911BA815850098154F /* FRDRelationshipCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRelationshipCollectionCell.h; path = Classes/Cells/UICollectionViewCells/RelationshipCollectionCell/FRDRelationshipCollectionCell.h; sourceTree = "<group>"; };
+		587B3A921BA815850098154F /* FRDRelationshipCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRelationshipCollectionCell.m; path = Classes/Cells/UICollectionViewCells/RelationshipCollectionCell/FRDRelationshipCollectionCell.m; sourceTree = "<group>"; };
+		587B3A931BA815850098154F /* FRDRelationshipCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDRelationshipCollectionCell.xib; path = Classes/Cells/UICollectionViewCells/RelationshipCollectionCell/FRDRelationshipCollectionCell.xib; sourceTree = "<group>"; };
+		587B3A971BA817440098154F /* FRDRelationshipItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRelationshipItem.h; path = Classes/MVC/Models/RelationshipItem/FRDRelationshipItem.h; sourceTree = "<group>"; };
+		587B3A981BA817440098154F /* FRDRelationshipItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRelationshipItem.m; path = Classes/MVC/Models/RelationshipItem/FRDRelationshipItem.m; sourceTree = "<group>"; };
+		587B3A9B1BA828370098154F /* FRDRoundedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRoundedView.h; path = Classes/MVC/Views/RoundedImageView/FRDRoundedView.h; sourceTree = "<group>"; };
+		587B3A9C1BA828370098154F /* FRDRoundedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRoundedView.m; path = Classes/MVC/Views/RoundedImageView/FRDRoundedView.m; sourceTree = "<group>"; };
 		5895FD931BA2D55C00079F9D /* FRDCustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDCustomPageControl.h; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.h; sourceTree = "<group>"; };
 		5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDCustomPageControl.m; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.m; sourceTree = "<group>"; };
 		58BC769B1B9EB6B500BB8B5A /* Frndr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frndr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -429,6 +445,44 @@
 			name = DropDownHolderController;
 			sourceTree = "<group>";
 		};
+		587B3A8A1BA814990098154F /* RelationshipStatusController */ = {
+			isa = PBXGroup;
+			children = (
+				587B3A8B1BA814C40098154F /* FRDRelationshipStatusController.h */,
+				587B3A8C1BA814C40098154F /* FRDRelationshipStatusController.m */,
+				587B3A8D1BA814C40098154F /* FRDRelationshipStatusController.xib */,
+			);
+			name = RelationshipStatusController;
+			sourceTree = "<group>";
+		};
+		587B3A901BA815540098154F /* RelationshipCollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				587B3A911BA815850098154F /* FRDRelationshipCollectionCell.h */,
+				587B3A921BA815850098154F /* FRDRelationshipCollectionCell.m */,
+				587B3A931BA815850098154F /* FRDRelationshipCollectionCell.xib */,
+			);
+			name = RelationshipCollectionCell;
+			sourceTree = "<group>";
+		};
+		587B3A961BA817260098154F /* RelationshipItem */ = {
+			isa = PBXGroup;
+			children = (
+				587B3A971BA817440098154F /* FRDRelationshipItem.h */,
+				587B3A981BA817440098154F /* FRDRelationshipItem.m */,
+			);
+			name = RelationshipItem;
+			sourceTree = "<group>";
+		};
+		587B3A9A1BA8281D0098154F /* RoundedImageView */ = {
+			isa = PBXGroup;
+			children = (
+				587B3A9B1BA828370098154F /* FRDRoundedView.h */,
+				587B3A9C1BA828370098154F /* FRDRoundedView.m */,
+			);
+			name = RoundedImageView;
+			sourceTree = "<group>";
+		};
 		58A2B7461BA2C04B007D4D60 /* StyledPageControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -597,6 +651,7 @@
 		58BC76D01B9EB94C00BB8B5A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				587B3A961BA817260098154F /* RelationshipItem */,
 				581B9D491B9ED8DC0080393B /* UserProfile */,
 				581B9D451B9ED8B90080393B /* FacebookProfile */,
 			);
@@ -606,6 +661,7 @@
 		58BC76D11B9EB95100BB8B5A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				587B3A9A1BA8281D0098154F /* RoundedImageView */,
 				587B3A6A1BA7F25B0098154F /* DropDownTableView */,
 				58D5A1671BA329A300D552CF /* NavigationTitleView */,
 				58CD17EB1BA19B680021D948 /* TermsLabel */,
@@ -616,6 +672,7 @@
 		58BC76D21B9EB95600BB8B5A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				587B3A8A1BA814990098154F /* RelationshipStatusController */,
 				587B3A841BA80F050098154F /* DropDownHolderController */,
 				3E3D415A1BA6B1020021026A /* SearchSettingsController */,
 				3E3D41561BA6A4B20021026A /* AutologinController */,
@@ -975,6 +1032,7 @@
 		58BC76F91B9EBB8300BB8B5A /* UICollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				587B3A901BA815540098154F /* RelationshipCollectionCell */,
 				3E10E30D1BA16DEE0075C72D /* PhotoGalleryCollectionCell */,
 			);
 			name = UICollectionViewCells;
@@ -1227,9 +1285,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				587B3A8F1BA814C40098154F /* FRDRelationshipStatusController.xib in Resources */,
 				58D5A16C1BA329E500D552CF /* FRDNavigationTitleView.xib in Resources */,
 				587B3A891BA80F3D0098154F /* FRDDropDownHolderController.xib in Resources */,
 				587B3A831BA7FD120098154F /* FRDDropDownTableView.xib in Resources */,
+				587B3A951BA815850098154F /* FRDRelationshipCollectionCell.xib in Resources */,
 				58BC76AA1B9EB6B500BB8B5A /* Main.storyboard in Resources */,
 				58BC76AF1B9EB6B500BB8B5A /* LaunchScreen.xib in Resources */,
 				58BC76AC1B9EB6B500BB8B5A /* Images.xcassets in Resources */,
@@ -1283,6 +1343,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				587B3A8E1BA814C40098154F /* FRDRelationshipStatusController.m in Sources */,
 				58BC771A1B9ECA8100BB8B5A /* UIView+Flashable.m in Sources */,
 				58BC77051B9ECA2200BB8B5A /* NSString+JSONRepresentation.m in Sources */,
 				58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */,
@@ -1333,9 +1394,12 @@
 				581B9D591B9EDCBB0080393B /* FRDProjectFacade.m in Sources */,
 				581B9D4F1B9EDC350080393B /* FRDSessionManager.m in Sources */,
 				58BC771D1B9ECA9000BB8B5A /* UIViewController+fixOrientation.m in Sources */,
+				587B3A9D1BA828370098154F /* FRDRoundedView.m in Sources */,
 				581B9D411B9ED71A0080393B /* FRDReachabilityHelper.m in Sources */,
+				587B3A991BA817440098154F /* FRDRelationshipItem.m in Sources */,
 				58D5A16A1BA329C800D552CF /* FRDNavigationTitleView.m in Sources */,
 				58BC770B1B9ECA4400BB8B5A /* UIImagePickerController+fixOrientation.m in Sources */,
+				587B3A941BA815850098154F /* FRDRelationshipCollectionCell.m in Sources */,
 				58BC77021B9ECA1700BB8B5A /* NSDictionary+JSONRepresentation.m in Sources */,
 				587B3A6D1BA7F2A20098154F /* FRDDropDownTableView.m in Sources */,
 				587727F81BA2D8150032D746 /* FRDTermsAndServicesController.m in Sources */,
