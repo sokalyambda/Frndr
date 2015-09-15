@@ -957,19 +957,30 @@
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Non-Smoker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcJ-vA-yiy">
+                                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.25207149620000002" green="0.25207149620000002" blue="0.25207149620000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" red="0.85227536110000002" green="0.93606985119999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="centerX" secondItem="kcJ-vA-yiy" secondAttribute="centerX" id="66p-Zp-rao"/>
                                             <constraint firstAttribute="centerY" secondItem="4XT-si-SZ8" secondAttribute="centerY" id="OuX-Wi-uZH"/>
                                             <constraint firstAttribute="height" constant="30" id="SQC-74-T86"/>
                                             <constraint firstAttribute="trailing" secondItem="4XT-si-SZ8" secondAttribute="trailing" id="nLa-d2-RHT"/>
+                                            <constraint firstAttribute="centerY" secondItem="kcJ-vA-yiy" secondAttribute="centerY" id="up8-BQ-Eay"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="subviews">
                                                 <exclude reference="4XT-si-SZ8"/>
+                                                <exclude reference="kcJ-vA-yiy"/>
                                             </mask>
                                             <mask key="constraints">
                                                 <exclude reference="SQC-74-T86"/>
+                                                <exclude reference="66p-Zp-rao"/>
+                                                <exclude reference="up8-BQ-Eay"/>
                                                 <exclude reference="OuX-Wi-uZH"/>
                                                 <exclude reference="nLa-d2-RHT"/>
                                             </mask>
@@ -977,9 +988,12 @@
                                         <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="subviews">
                                                 <include reference="4XT-si-SZ8"/>
+                                                <include reference="kcJ-vA-yiy"/>
                                             </mask>
                                             <mask key="constraints">
                                                 <include reference="SQC-74-T86"/>
+                                                <include reference="66p-Zp-rao"/>
+                                                <include reference="up8-BQ-Eay"/>
                                                 <include reference="OuX-Wi-uZH"/>
                                                 <include reference="nLa-d2-RHT"/>
                                             </mask>
@@ -988,12 +1002,6 @@
                                             <outletCollection property="gestureRecognizers" destination="Wl8-XK-WPn" appends="YES" id="KUW-P1-iqg"/>
                                         </connections>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Non-Smoker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcJ-vA-yiy">
-                                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" red="0.25207149620000002" green="0.25207149620000002" blue="0.25207149620000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sexual Orientation" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYO-do-RBR">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -1099,7 +1107,6 @@
                                     <constraint firstItem="PYO-do-RBR" firstAttribute="leading" secondItem="Fgp-Gc-FxF" secondAttribute="leading" id="KVQ-N2-xks"/>
                                     <constraint firstItem="VLm-nk-mDm" firstAttribute="leading" secondItem="GxC-c1-tr9" secondAttribute="trailing" constant="37" id="LOb-X5-UQe"/>
                                     <constraint firstAttribute="trailing" secondItem="Fgp-Gc-FxF" secondAttribute="trailing" constant="13" id="MXy-DB-w3J"/>
-                                    <constraint firstItem="9nE-0F-51o" firstAttribute="centerY" secondItem="kcJ-vA-yiy" secondAttribute="centerY" id="NXB-pQ-Rvf"/>
                                     <constraint firstItem="1wy-4P-hgJ" firstAttribute="leading" secondItem="VLm-nk-mDm" secondAttribute="trailing" constant="37" id="NXZ-DW-9XL"/>
                                     <constraint firstItem="EcD-kO-RcA" firstAttribute="leading" secondItem="1wy-4P-hgJ" secondAttribute="trailing" constant="37" id="O2l-sa-tKk"/>
                                     <constraint firstItem="M0E-UL-odk" firstAttribute="top" secondItem="2Ly-Yn-1Um" secondAttribute="top" constant="37" id="O5u-7l-1ce"/>
@@ -1133,7 +1140,6 @@
                                     <constraint firstItem="qwy-Re-M3S" firstAttribute="leading" secondItem="9nE-0F-51o" secondAttribute="leading" id="mxu-Hx-smr"/>
                                     <constraint firstItem="KAU-fB-8cT" firstAttribute="top" secondItem="VLm-nk-mDm" secondAttribute="bottom" id="nGK-87-Cyn"/>
                                     <constraint firstAttribute="trailing" secondItem="1Vs-xy-Nmm" secondAttribute="trailing" constant="16" id="o9s-ea-gla"/>
-                                    <constraint firstItem="9nE-0F-51o" firstAttribute="centerX" secondItem="kcJ-vA-yiy" secondAttribute="centerX" constant="0.5" id="qPP-TY-SeZ"/>
                                     <constraint firstItem="5LT-cV-9kI" firstAttribute="top" secondItem="1Vs-xy-Nmm" secondAttribute="bottom" constant="33" id="rxr-do-oC3"/>
                                     <constraint firstItem="EcD-kO-RcA" firstAttribute="bottom" secondItem="1wy-4P-hgJ" secondAttribute="bottom" id="tQl-ib-eUu"/>
                                     <constraint firstItem="PYO-do-RBR" firstAttribute="leading" secondItem="9nE-0F-51o" secondAttribute="leading" id="uPD-WL-nhm"/>
@@ -1159,7 +1165,6 @@
                                         <exclude reference="W70-n4-3nm"/>
                                         <exclude reference="38j-DG-C4y"/>
                                         <exclude reference="9nE-0F-51o"/>
-                                        <exclude reference="kcJ-vA-yiy"/>
                                         <exclude reference="PYO-do-RBR"/>
                                         <exclude reference="TVq-nv-8OU"/>
                                         <exclude reference="Fgp-Gc-FxF"/>
@@ -1211,10 +1216,8 @@
                                         <exclude reference="a96-Ro-M34"/>
                                         <exclude reference="eMO-26-s13"/>
                                         <exclude reference="la4-FZ-bZk"/>
-                                        <exclude reference="NXB-pQ-Rvf"/>
                                         <exclude reference="RKn-5y-9c4"/>
                                         <exclude reference="f85-rN-nlG"/>
-                                        <exclude reference="qPP-TY-SeZ"/>
                                         <exclude reference="MXy-DB-w3J"/>
                                         <exclude reference="YxY-mu-p9l"/>
                                         <exclude reference="wWa-Tf-Oyj"/>
@@ -1239,7 +1242,6 @@
                                         <include reference="W70-n4-3nm"/>
                                         <include reference="38j-DG-C4y"/>
                                         <include reference="9nE-0F-51o"/>
-                                        <include reference="kcJ-vA-yiy"/>
                                         <include reference="PYO-do-RBR"/>
                                         <include reference="TVq-nv-8OU"/>
                                         <include reference="Fgp-Gc-FxF"/>
@@ -1291,10 +1293,8 @@
                                         <include reference="a96-Ro-M34"/>
                                         <include reference="eMO-26-s13"/>
                                         <include reference="la4-FZ-bZk"/>
-                                        <include reference="NXB-pQ-Rvf"/>
                                         <include reference="RKn-5y-9c4"/>
                                         <include reference="f85-rN-nlG"/>
-                                        <include reference="qPP-TY-SeZ"/>
                                         <include reference="MXy-DB-w3J"/>
                                         <include reference="YxY-mu-p9l"/>
                                         <include reference="wWa-Tf-Oyj"/>
@@ -1337,6 +1337,10 @@
                             </mask>
                         </variation>
                     </scrollView>
+                    <connections>
+                        <outlet property="sexualOrientationLabel" destination="gFs-wh-d3B" id="r4E-47-Tbs"/>
+                        <outlet property="smokerLabel" destination="kcJ-vA-yiy" id="aUV-9v-sMv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1yk-o2-oWo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="fGI-8w-IaH">
