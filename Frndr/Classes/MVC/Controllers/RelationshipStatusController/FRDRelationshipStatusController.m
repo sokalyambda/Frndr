@@ -70,6 +70,7 @@
 {
     FRDRelationshipItem *currentItem = self.relationshipStatuses[indexPath.row];
     currentItem.isSelected = !currentItem.isSelected;
+    [collectionView reloadItemsAtIndexPaths:@[indexPath]];
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
@@ -86,6 +87,9 @@
 
 #pragma mark - Actions
 
+/**
+ *  Register custom cell's class
+ */
 - (void)registerCell
 {
     NSString *nibName = NSStringFromClass([FRDRelationshipCollectionCell class]);
@@ -93,6 +97,11 @@
     [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:nibName];
 }
 
+/**
+ *  Create array of relationshipItems
+ *
+ *  @return relationshipItems
+ */
 - (NSArray *)setupRelationshipsArray
 {
     FRDRelationshipItem *relItem1 = [FRDRelationshipItem relationshipItemWithTitle:LOCALIZED(@"Single Female") andActiveImage:[UIImage imageNamed:@"SingleFemaleActiveIcon"] andNotActiveImage:[UIImage imageNamed:@"SingleFemaleNonActiveIcon"]];
