@@ -8,6 +8,47 @@
 
 #import "FRDSearchSettingsController.h"
 
+#import "FRDDropDownTableView.h"
+
+#import "UIView+MakeFromXib.h"
+
+#import "FRDBaseDropDownDataSource.h"
+
+@interface FRDSearchSettingsController ()
+
+@property (nonatomic) FRDDropDownTableView *dropDownList;
+
+@end
+
 @implementation FRDSearchSettingsController
+
+#pragma mark - View Lifecycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self initDropDownTable];
+}
+
+#pragma mark - Actions
+
+- (IBAction)smokerClick:(UITapGestureRecognizer *)tap
+{
+    UIView *tapView = tap.view;
+    FRDBaseDropDownDataSource *smokerDataSource = [FRDBaseDropDownDataSource dataSourceWithType:FRDDataSourceTypeSmoker];
+    [self.dropDownList dropDownTableBecomeActiveInView:self.view fromAnchorView:tapView withDataSource:smokerDataSource withCompletion:^(FRDDropDownTableView *table, NSString *chosenValue) {
+        NSLog(@"chosen value %@", chosenValue);
+    }];
+}
+
+- (IBAction)sexualOrientationClick:(id)sender
+{
+    
+}
+
+- (void)initDropDownTable
+{
+    self.dropDownList = [FRDDropDownTableView makeFromXib];
+}
 
 @end
