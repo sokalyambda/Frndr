@@ -45,7 +45,7 @@
     UIView *tapView = tap.view;
     FRDBaseDropDownDataSource *smokerDataSource = [FRDBaseDropDownDataSource dataSourceWithType:FRDDataSourceTypeSmoker];
     WEAK_SELF;
-    [self.dropDownList dropDownTableBecomeActiveInView:self.parentViewController.view fromAnchorView:tapView withDataSource:smokerDataSource withCompletion:^(FRDDropDownTableView *table, NSString *chosenValue) {
+    [self.dropDownList dropDownTableBecomeActiveInView:self.viewForDisplaying fromAnchorView:tapView withDataSource:smokerDataSource withCompletion:^(FRDDropDownTableView *table, NSString *chosenValue) {
         NSLog(@"chosen value %@", chosenValue);
         weakSelf.smokerLabel.text = chosenValue;
     }];
@@ -56,7 +56,7 @@
     UIView *tapView = tap.view;
     FRDBaseDropDownDataSource *smokerDataSource = [FRDBaseDropDownDataSource dataSourceWithType:FRDDataSourceTypeSexualOrientation];
     WEAK_SELF;
-    [self.dropDownList dropDownTableBecomeActiveInView:self.parentViewController.view fromAnchorView:tapView withDataSource:smokerDataSource withCompletion:^(FRDDropDownTableView *table, NSString *chosenValue) {
+    [self.dropDownList dropDownTableBecomeActiveInView:self.viewForDisplaying fromAnchorView:tapView withDataSource:smokerDataSource withCompletion:^(FRDDropDownTableView *table, NSString *chosenValue) {
         NSLog(@"chosen value %@", chosenValue);
         weakSelf.sexualOrientationLabel.text = chosenValue;
     }];

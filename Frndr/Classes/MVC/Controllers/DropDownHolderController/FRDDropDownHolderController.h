@@ -10,4 +10,6 @@
 
 @interface FRDDropDownHolderController : FRDBaseViewController
 
+@property (nonatomic) UIView *viewForDisplaying;
+
 @end

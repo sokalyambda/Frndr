@@ -207,13 +207,17 @@
                 <constraint firstItem="kft-tM-kQv" firstAttribute="trailing" secondItem="fBJ-Dv-0ca" secondAttribute="trailing" id="QsE-rt-w0o"/>
                 <constraint firstItem="kft-tM-kQv" firstAttribute="leading" secondItem="8W5-jI-DQc" secondAttribute="leading" id="SQS-4Y-ShU"/>
                 <constraint firstItem="8W5-jI-DQc" firstAttribute="leading" secondItem="fBJ-Dv-0ca" secondAttribute="leading" id="V5p-Ks-xys"/>
-                <constraint firstItem="jJZ-2V-Yod" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="eFB-9A-IXU"/>
+                <constraint firstItem="jJZ-2V-Yod" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="eFB-9A-IXU">
+                    <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                </constraint>
                 <constraint firstItem="8W5-jI-DQc" firstAttribute="top" secondItem="kft-tM-kQv" secondAttribute="bottom" constant="24" id="gMy-cQ-wHE"/>
                 <constraint firstItem="jJZ-2V-Yod" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="hHp-L7-7Qs"/>
                 <constraint firstAttribute="bottom" secondItem="fBJ-Dv-0ca" secondAttribute="bottom" constant="20" id="s6c-4q-4yy"/>
                 <constraint firstItem="fBJ-Dv-0ca" firstAttribute="top" secondItem="8W5-jI-DQc" secondAttribute="bottom" constant="12" id="sEp-Ta-gA9"/>
                 <constraint firstItem="jJZ-2V-Yod" firstAttribute="leading" secondItem="kft-tM-kQv" secondAttribute="leading" id="sqz-sT-VuR"/>
-                <constraint firstAttribute="trailing" secondItem="kft-tM-kQv" secondAttribute="trailing" constant="20" id="xIW-g1-Fxn"/>
+                <constraint firstAttribute="trailing" secondItem="kft-tM-kQv" secondAttribute="trailing" constant="20" id="xIW-g1-Fxn">
+                    <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                </constraint>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">

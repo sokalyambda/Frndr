@@ -11,6 +11,8 @@
 #import "FRDBaseNavigationController.h"
 #import "FRDPreferencesController.h"
 
+#import "FRDSearchFriendsController.h"
+
 #import "FRDFacebookService.h"
 
 #import "FRDTermsLabel.h"
@@ -136,7 +138,8 @@
  */
 - (void)authorizeWithFacebookAction
 {
-    FRDPreferencesController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
+    FRDSearchFriendsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDSearchFriendsController class])];
+//    FRDPreferencesController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
     [self.navigationController pushViewController:controller animated:YES];
     /*
     WEAK_SELF;

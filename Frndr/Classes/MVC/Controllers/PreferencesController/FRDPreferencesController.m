@@ -12,6 +12,13 @@
 
 @implementation FRDPreferencesController
 
+#pragma mark - View Lifecycle
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
 #pragma mark - Actions
 
 - (void)customizeNavigationItem
