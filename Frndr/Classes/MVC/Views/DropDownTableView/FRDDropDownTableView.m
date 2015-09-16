@@ -10,6 +10,8 @@
 
 #import "FRDBaseDropDownDataSource.h"
 
+#import "CAAnimation+CompetionBlock.h"
+
 static NSUInteger const kDropDownHeight = 200.f;
 static CGFloat const kSlidingTime = .5f;
 
@@ -108,7 +110,28 @@ static CGFloat const kSlidingTime = .5f;
 
 - (void)hideDropDownList
 {
+//    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"bounds"];
+//    animation.values = @[
+//                         [NSValue valueWithCGRect:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))],
+//                         [NSValue valueWithCGRect:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)/2)],
+//                         [NSValue valueWithCGRect:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)/3)],
+//                         [NSValue valueWithCGRect:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)/4)],
+//                         [NSValue valueWithCGRect:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)/5)],
+//                         [NSValue valueWithCGRect:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)/6)]];
+//    animation.duration = .5f;
     WEAK_SELF;
+//
+//    animation.end = ^(BOOL end) {
+//        if ([weakSelf.anchorView isKindOfClass:[UITextField class]]) {
+//            [(UITextField *)weakSelf
+//             .anchorView resignFirstResponder];
+//        }
+//        weakSelf.anchorView = nil;
+//        weakSelf.dropDownDataSource = nil;
+//        [weakSelf removeFromSuperview];
+//    };
+//    
+//    [self.layer addAnimation:animation forKey:@"bounds"];
     [UIView animateWithDuration:kSlidingTime animations:^{
         weakSelf.frame = savedDropDownTableFrame;
     } completion:^(BOOL finished) {

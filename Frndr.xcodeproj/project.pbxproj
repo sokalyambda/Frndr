@@ -70,6 +70,8 @@
 		58BC77381B9ECD4800BB8B5A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BC77371B9ECD4800BB8B5A /* SystemConfiguration.framework */; };
 		58BC773A1B9ECD4D00BB8B5A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BC77391B9ECD4D00BB8B5A /* MobileCoreServices.framework */; };
 		58BC773D1B9ECDD100BB8B5A /* FRDValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC773C1B9ECDD100BB8B5A /* FRDValidator.m */; };
+		58C28C391BA95207009D1AC4 /* FRDFriendsListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C28C381BA95207009D1AC4 /* FRDFriendsListController.m */; };
+		58C28C3D1BA9527A009D1AC4 /* FRDSearchFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C28C3C1BA9527A009D1AC4 /* FRDSearchFriendsController.m */; };
 		58CD17EA1BA18AA30021D948 /* CAAnimation+CompetionBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD17E91BA18AA30021D948 /* CAAnimation+CompetionBlock.m */; };
 		58CD17EE1BA19BC70021D948 /* FRDTermsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD17ED1BA19BC70021D948 /* FRDTermsLabel.m */; };
 		58CD17F21BA19BF40021D948 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD17F11BA19BF40021D948 /* TTTAttributedLabel.m */; };
@@ -218,6 +220,10 @@
 		58BC77391B9ECD4D00BB8B5A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		58BC773B1B9ECDD100BB8B5A /* FRDValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDValidator.h; path = Classes/Utilities/Validator/FRDValidator.h; sourceTree = "<group>"; };
 		58BC773C1B9ECDD100BB8B5A /* FRDValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDValidator.m; path = Classes/Utilities/Validator/FRDValidator.m; sourceTree = "<group>"; };
+		58C28C371BA95207009D1AC4 /* FRDFriendsListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDFriendsListController.h; path = Classes/MVC/Controllers/FriendsListController/FRDFriendsListController.h; sourceTree = "<group>"; };
+		58C28C381BA95207009D1AC4 /* FRDFriendsListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDFriendsListController.m; path = Classes/MVC/Controllers/FriendsListController/FRDFriendsListController.m; sourceTree = "<group>"; };
+		58C28C3B1BA9527A009D1AC4 /* FRDSearchFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSearchFriendsController.h; path = Classes/MVC/Controllers/SearchFriendsController/FRDSearchFriendsController.h; sourceTree = "<group>"; };
+		58C28C3C1BA9527A009D1AC4 /* FRDSearchFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSearchFriendsController.m; path = Classes/MVC/Controllers/SearchFriendsController/FRDSearchFriendsController.m; sourceTree = "<group>"; };
 		58CD17E81BA18AA30021D948 /* CAAnimation+CompetionBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimation+CompetionBlock.h"; sourceTree = "<group>"; };
 		58CD17E91BA18AA30021D948 /* CAAnimation+CompetionBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAAnimation+CompetionBlock.m"; sourceTree = "<group>"; };
 		58CD17EC1BA19BC70021D948 /* FRDTermsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDTermsLabel.h; path = Classes/MVC/Views/TermsLabel/FRDTermsLabel.h; sourceTree = "<group>"; };
@@ -692,6 +698,8 @@
 		58BC76D21B9EB95600BB8B5A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				58C28C3A1BA9524A009D1AC4 /* SearchFriendsController */,
+				58C28C361BA950FA009D1AC4 /* FriendsListController */,
 				587B3A8A1BA814990098154F /* RelationshipStatusController */,
 				587B3A841BA80F050098154F /* DropDownHolderController */,
 				3E3D415A1BA6B1020021026A /* SearchSettingsController */,
@@ -1118,6 +1126,24 @@
 			path = Classes/Utilities/Keychain/KeychainHandler;
 			sourceTree = "<group>";
 		};
+		58C28C361BA950FA009D1AC4 /* FriendsListController */ = {
+			isa = PBXGroup;
+			children = (
+				58C28C371BA95207009D1AC4 /* FRDFriendsListController.h */,
+				58C28C381BA95207009D1AC4 /* FRDFriendsListController.m */,
+			);
+			name = FriendsListController;
+			sourceTree = "<group>";
+		};
+		58C28C3A1BA9524A009D1AC4 /* SearchFriendsController */ = {
+			isa = PBXGroup;
+			children = (
+				58C28C3B1BA9527A009D1AC4 /* FRDSearchFriendsController.h */,
+				58C28C3C1BA9527A009D1AC4 /* FRDSearchFriendsController.m */,
+			);
+			name = SearchFriendsController;
+			sourceTree = "<group>";
+		};
 		58CD17E61BA18A880021D948 /* CAAnimation */ = {
 			isa = PBXGroup;
 			children = (
@@ -1377,6 +1403,7 @@
 				581B9D3B1B9ED6090080393B /* FRDStorageManager.m in Sources */,
 				58BC77081B9ECA3700BB8B5A /* NSString+Base64Decoding.m in Sources */,
 				581B9D3E1B9ED67B0080393B /* FRDPushNotifiactionService.m in Sources */,
+				58C28C3D1BA9527A009D1AC4 /* FRDSearchFriendsController.m in Sources */,
 				3ED072321BA0370C0091B7E4 /* FRDPreferencesController.m in Sources */,
 				58FFDBAB1B9ECF3B00B0490A /* FRDSerialViewConstructor.m in Sources */,
 				58BC773D1B9ECDD100BB8B5A /* FRDValidator.m in Sources */,
@@ -1408,6 +1435,7 @@
 				58CD17F21BA19BF40021D948 /* TTTAttributedLabel.m in Sources */,
 				58FFDBBB1B9ED17B00B0490A /* FRDAlertFacade.m in Sources */,
 				58BC76A11B9EB6B500BB8B5A /* main.m in Sources */,
+				58C28C391BA95207009D1AC4 /* FRDFriendsListController.m in Sources */,
 				3E10E3151BA16E780075C72D /* FRDPhotoGalleryCollectionViewLayout.m in Sources */,
 				3E10E3101BA16E080075C72D /* FRDPhotoGalleryCollectionViewCell.m in Sources */,
 				3E3D41591BA6A5A90021026A /* FRDAutologinViewController.m in Sources */,

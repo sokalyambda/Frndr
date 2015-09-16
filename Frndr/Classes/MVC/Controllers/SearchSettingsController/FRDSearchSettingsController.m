@@ -24,6 +24,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *dropDownHolderContainer;
 @property (weak, nonatomic) IBOutlet UIView *relationshipsContainer;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (weak, nonatomic) IBOutlet NMRangeSlider *ageRangeSlider;
 
@@ -54,6 +55,7 @@
 - (void)initDropDownHolderContainer
 {
     self.dropDownHolderController = [[FRDDropDownHolderController alloc] initWithNibName:NSStringFromClass([FRDDropDownHolderController class]) bundle:nil];
+    self.dropDownHolderController.viewForDisplaying = self.scrollView;
     [self.dropDownHolderController.view setFrame:self.dropDownHolderContainer.frame];
     [self.dropDownHolderContainer addSubview:self.dropDownHolderController.view];
     [self addChildViewController:self.dropDownHolderController];
