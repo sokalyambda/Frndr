@@ -18,14 +18,14 @@
 
 #import "FRDSerialViewConstructor.h"
 
-#import "NMRangeSlider.h"
+#import "FRDRangeSlider.h"
 
 @interface FRDSearchSettingsController ()
 
 @property (weak, nonatomic) IBOutlet UIView *dropDownHolderContainer;
 @property (weak, nonatomic) IBOutlet UIView *relationshipsContainer;
 
-@property (weak, nonatomic) IBOutlet NMRangeSlider *ageRangeSlider;
+@property (weak, nonatomic) IBOutlet FRDRangeSlider *ageRangeSlider;
 
 @property (nonatomic) FRDDropDownHolderController *dropDownHolderController;
 @property (nonatomic) FRDRelationshipStatusController *relationshipController;
@@ -44,9 +44,10 @@
     [self configureAgeRangeSlider];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
+    [self configureAgeRangeSlider];
 }
 
 #pragma mark - Actions
@@ -71,23 +72,14 @@
 
 - (void)configureAgeRangeSlider
 {
-    UIImage* image;
+    [self.ageRangeSlider setMinThumbImage:[UIImage imageNamed:@"Slider_Thumb"]];
+    [self.ageRangeSlider setMaxThumbImage:[UIImage imageNamed:@"Slider_Thumb"]];
+    [self.ageRangeSlider setTrackImage:[[UIImage imageNamed:@"Shape-9"]
+                                        resizableImageWithCapInsets:UIEdgeInsetsMake(9.0, 35.0, 9.0, 35.0)]];
+    [self.ageRangeSlider setInRangeTrackImage:[[UIImage imageNamed:@"downArrow"]
+                                               resizableImageWithCapInsets:UIEdgeInsetsMake(1, 1, 1, 1)]];
     
-    image = [UIImage imageNamed:@"Slider_Thumb"];
- //   image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)];
-    self.ageRangeSlider.trackBackgroundImage = image;
-    
-//    image = [UIImage imageNamed:@"Shape-9"];
-//    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(2.0, 7.0, 2.0, 7.0)];
-//    self.ageRangeSlider.trackImage = image;
-    
-    image = [UIImage imageNamed:@"Slider_Thumb"];
-    self.ageRangeSlider.lowerHandleImageNormal = image;
-    self.ageRangeSlider.upperHandleImageNormal = image;
-    
-    image = [UIImage imageNamed:@"Slider_Thumb"];
-    self.ageRangeSlider.lowerHandleImageHighlighted = image;
-    self.ageRangeSlider.upperHandleImageHighlighted = image;
+    self.ageRangeSlider.tracksHeight = 3.0;
 }
 
 - (void)customizeNavigationItem

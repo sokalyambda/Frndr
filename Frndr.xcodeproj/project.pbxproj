@@ -12,7 +12,7 @@
 		3E10E3151BA16E780075C72D /* FRDPhotoGalleryCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E10E3141BA16E780075C72D /* FRDPhotoGalleryCollectionViewLayout.m */; };
 		3E3D41591BA6A5A90021026A /* FRDAutologinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D41581BA6A5A90021026A /* FRDAutologinViewController.m */; };
 		3E3D415D1BA6B1530021026A /* FRDSearchSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D415C1BA6B1530021026A /* FRDSearchSettingsController.m */; };
-		3E3D42191BA83B470021026A /* NMRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D42181BA83B470021026A /* NMRangeSlider.m */; };
+		3E3D42191BA83B470021026A /* FRDRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D42181BA83B470021026A /* FRDRangeSlider.m */; };
 		3ED072321BA0370C0091B7E4 /* FRDPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED072311BA0370C0091B7E4 /* FRDPreferencesController.m */; };
 		3ED072361BA048460091B7E4 /* FRDPreferencesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED072351BA048460091B7E4 /* FRDPreferencesTableViewController.m */; };
 		581B9D3B1B9ED6090080393B /* FRDStorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D3A1B9ED6090080393B /* FRDStorageManager.m */; };
@@ -108,8 +108,8 @@
 		3E3D41581BA6A5A90021026A /* FRDAutologinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDAutologinViewController.m; path = Classes/MVC/Controllers/SplashScreenController/FRDAutologinViewController.m; sourceTree = "<group>"; };
 		3E3D415B1BA6B1530021026A /* FRDSearchSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSearchSettingsController.h; path = Classes/MVC/Controllers/SearchSettingsController/FRDSearchSettingsController.h; sourceTree = "<group>"; };
 		3E3D415C1BA6B1530021026A /* FRDSearchSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSearchSettingsController.m; path = Classes/MVC/Controllers/SearchSettingsController/FRDSearchSettingsController.m; sourceTree = "<group>"; };
-		3E3D42171BA83B470021026A /* NMRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMRangeSlider.h; path = Classes/Libraries/NMRangeSlider/NMRangeSlider.h; sourceTree = "<group>"; };
-		3E3D42181BA83B470021026A /* NMRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMRangeSlider.m; path = Classes/Libraries/NMRangeSlider/NMRangeSlider.m; sourceTree = "<group>"; };
+		3E3D42171BA83B470021026A /* FRDRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRangeSlider.h; path = Classes/Libraries/NMRangeSlider/FRDRangeSlider.h; sourceTree = "<group>"; };
+		3E3D42181BA83B470021026A /* FRDRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRangeSlider.m; path = Classes/Libraries/NMRangeSlider/FRDRangeSlider.m; sourceTree = "<group>"; };
 		3ED072301BA0370C0091B7E4 /* FRDPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPreferencesController.h; path = Classes/MVC/Controllers/PreferencesController/FRDPreferencesController.h; sourceTree = "<group>"; };
 		3ED072311BA0370C0091B7E4 /* FRDPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPreferencesController.m; path = Classes/MVC/Controllers/PreferencesController/FRDPreferencesController.m; sourceTree = "<group>"; };
 		3ED072341BA048460091B7E4 /* FRDPreferencesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPreferencesTableViewController.h; path = Classes/MVC/Controllers/PreferencesTableViewController/FRDPreferencesTableViewController.h; sourceTree = "<group>"; };
@@ -338,8 +338,8 @@
 		3E3D42131BA83AB80021026A /* NMRangeSlider */ = {
 			isa = PBXGroup;
 			children = (
-				3E3D42171BA83B470021026A /* NMRangeSlider.h */,
-				3E3D42181BA83B470021026A /* NMRangeSlider.m */,
+				3E3D42171BA83B470021026A /* FRDRangeSlider.h */,
+				3E3D42181BA83B470021026A /* FRDRangeSlider.m */,
 			);
 			name = NMRangeSlider;
 			sourceTree = "<group>";
@@ -1399,7 +1399,7 @@
 				3E3D415D1BA6B1530021026A /* FRDSearchSettingsController.m in Sources */,
 				58BC77171B9ECA7400BB8B5A /* UIView+SoftRemoving.m in Sources */,
 				58CD17EE1BA19BC70021D948 /* FRDTermsLabel.m in Sources */,
-				3E3D42191BA83B470021026A /* NMRangeSlider.m in Sources */,
+				3E3D42191BA83B470021026A /* FRDRangeSlider.m in Sources */,
 				58FFDBC31B9ED32000B0490A /* FRDBaseNavigationController.m in Sources */,
 				58FFDBC01B9ED2FB00B0490A /* FRDBaseViewController.m in Sources */,
 				581B9D4C1B9ED8EE0080393B /* FRDUserProfile.m in Sources */,
