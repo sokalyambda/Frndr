@@ -6,7 +6,15 @@
 //  Copyright 2011 Null Monkey Pty Ltd. All rights reserved.
 //
 
+typedef NS_ENUM(NSInteger, FRDRangeSliderMode)
+{
+    FRDRangeSliderModeSingleThumb,
+    FRDRangeSliderModeRange
+};
+
 @interface FRDRangeSlider : UIControl
+
+@property (nonatomic) FRDRangeSliderMode mode;
 
 /**
  *  Value of left thumb
@@ -28,8 +36,7 @@
  */
 @property (nonatomic) CGFloat tracksHeight;
 
-- (void)setMinThumbImage:(UIImage *)image;
-- (void)setMaxThumbImage:(UIImage *)image;
+- (void)setThumbImage:(UIImage *)image;
 - (void)setTrackImage:(UIImage *)image;
 - (void)setInRangeTrackImage:(UIImage *)image;
 

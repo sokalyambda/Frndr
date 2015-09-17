@@ -74,14 +74,14 @@
 
 - (void)configureAgeRangeSlider
 {
-    [self.ageRangeSlider setMinThumbImage:[UIImage imageNamed:@"Slider_Thumb"]];
-    [self.ageRangeSlider setMaxThumbImage:[UIImage imageNamed:@"Slider_Thumb"]];
+    [self.ageRangeSlider setThumbImage:[UIImage imageNamed:@"Slider_Thumb"]];
     [self.ageRangeSlider setTrackImage:[[UIImage imageNamed:@"Shape-9"]
                                         resizableImageWithCapInsets:UIEdgeInsetsMake(9.0, 35.0, 9.0, 35.0)]];
     [self.ageRangeSlider setInRangeTrackImage:[[UIImage imageNamed:@"downArrow"]
                                                resizableImageWithCapInsets:UIEdgeInsetsMake(1, 1, 1, 1)]];
     
     self.ageRangeSlider.tracksHeight = 3.0;
+    self.ageRangeSlider.mode = FRDRangeSliderModeRange;
 }
 
 - (void)customizeNavigationItem
