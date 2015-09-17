@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E00C40E1BAAB91F00AD2D97 /* FRDFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E00C40D1BAAB91F00AD2D97 /* FRDFriendCell.m */; };
 		3E10E3081BA15B3E0075C72D /* FRDPhotoGalleryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E10E3071BA15B3E0075C72D /* FRDPhotoGalleryCollectionViewController.m */; };
 		3E10E3101BA16E080075C72D /* FRDPhotoGalleryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E10E30F1BA16E080075C72D /* FRDPhotoGalleryCollectionViewCell.m */; };
 		3E10E3151BA16E780075C72D /* FRDPhotoGalleryCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E10E3141BA16E780075C72D /* FRDPhotoGalleryCollectionViewLayout.m */; };
@@ -104,6 +105,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E00C40C1BAAB91F00AD2D97 /* FRDFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDFriendCell.h; path = Classes/Cells/UITableViewCells/FriendCell/FRDFriendCell.h; sourceTree = "<group>"; };
+		3E00C40D1BAAB91F00AD2D97 /* FRDFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDFriendCell.m; path = Classes/Cells/UITableViewCells/FriendCell/FRDFriendCell.m; sourceTree = "<group>"; };
 		3E10E3061BA15B3E0075C72D /* FRDPhotoGalleryCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPhotoGalleryCollectionViewController.h; path = Classes/MVC/Controllers/PhotoGalleryCollectionController/FRDPhotoGalleryCollectionViewController.h; sourceTree = "<group>"; };
 		3E10E3071BA15B3E0075C72D /* FRDPhotoGalleryCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPhotoGalleryCollectionViewController.m; path = Classes/MVC/Controllers/PhotoGalleryCollectionController/FRDPhotoGalleryCollectionViewController.m; sourceTree = "<group>"; };
 		3E10E30E1BA16E080075C72D /* FRDPhotoGalleryCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPhotoGalleryCollectionViewCell.h; path = Classes/Cells/UICollectionViewCells/PhotoGalleryCollectionCell/FRDPhotoGalleryCollectionViewCell.h; sourceTree = "<group>"; };
@@ -292,6 +295,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E00C40B1BAAB89E00AD2D97 /* FriendCell */ = {
+			isa = PBXGroup;
+			children = (
+				3E00C40C1BAAB91F00AD2D97 /* FRDFriendCell.h */,
+				3E00C40D1BAAB91F00AD2D97 /* FRDFriendCell.m */,
+			);
+			name = FriendCell;
+			sourceTree = "<group>";
+		};
 		3E10E3051BA15A800075C72D /* PhotoGalleryCollectionViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1082,6 +1094,7 @@
 		58BC76FA1B9EBB8B00BB8B5A /* UITableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				3E00C40B1BAAB89E00AD2D97 /* FriendCell */,
 				587B3A7E1BA7F8310098154F /* DropDownCell */,
 			);
 			name = UITableViewCells;
@@ -1474,6 +1487,7 @@
 				3E3D42191BA83B470021026A /* FRDRangeSlider.m in Sources */,
 				58FFDBC31B9ED32000B0490A /* FRDBaseNavigationController.m in Sources */,
 				58FFDBC01B9ED2FB00B0490A /* FRDBaseViewController.m in Sources */,
+				3E00C40E1BAAB91F00AD2D97 /* FRDFriendCell.m in Sources */,
 				581B9D4C1B9ED8EE0080393B /* FRDUserProfile.m in Sources */,
 				587B3A751BA7F4450098154F /* FRDBaseDropDownDataSource.m in Sources */,
 				58BC77141B9ECA6700BB8B5A /* UIView+ConfigureAnchorPoint.m in Sources */,

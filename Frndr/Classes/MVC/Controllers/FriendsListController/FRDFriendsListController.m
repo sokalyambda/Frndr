@@ -10,6 +10,8 @@
 
 #import "FRDSerialViewConstructor.h"
 
+#import "FRDFriendCell.h"
+
 @interface FRDFriendsListController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic) NSArray *friends;
@@ -25,6 +27,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.friendsTableView.rowHeight = UITableViewAutomaticDimension;
+    self.friendsTableView.estimatedRowHeight = 100.f;
 }
 
 #pragma mark - Actions
@@ -40,12 +45,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.friends.count;
+    //return self.friends.count;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class]) forIndexPath:indexPath];
+    FRDFriendCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([FRDFriendCell class]) forIndexPath:indexPath];
+    
+    [cell configureWithFriend:self.friends[indexPath.row]];
+    
     return cell;
 }
 
