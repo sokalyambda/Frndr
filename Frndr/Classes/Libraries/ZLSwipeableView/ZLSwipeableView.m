@@ -157,10 +157,10 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
     }
     
     if (animated) {
-        NSTimeInterval maxDelay = 0.3;
+        NSTimeInterval maxDelay = 0.3f;
         NSTimeInterval delayStep = maxDelay / ZLPrefetchedViewsNumber;
         NSTimeInterval aggregatedDelay = maxDelay;
-        NSTimeInterval animationDuration = 0.25;
+        NSTimeInterval animationDuration = 0.25f;
         for (UIView *view in newViews) {
             view.center = CGPointMake(view.center.x, -CGRectGetHeight(view.frame));
             [UIView animateWithDuration:animationDuration
