@@ -76,6 +76,8 @@
 		58C28C501BA99A6E009D1AC4 /* FRDFriendDragableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58C28C4F1BA99A6E009D1AC4 /* FRDFriendDragableView.xib */; };
 		58C28FE81BAA8F850099ABE4 /* FRDFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C28FE71BAA8F850099ABE4 /* FRDFriend.m */; };
 		58C28FEC1BAA91670099ABE4 /* FRDFriendDragableParentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C28FEB1BAA91670099ABE4 /* FRDFriendDragableParentView.m */; };
+		58C28FF21BAABBFB0099ABE4 /* ZLPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C28FEF1BAABBFB0099ABE4 /* ZLPanGestureRecognizer.m */; };
+		58C28FF31BAABBFB0099ABE4 /* ZLSwipeableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C28FF11BAABBFB0099ABE4 /* ZLSwipeableView.m */; };
 		58CD17EA1BA18AA30021D948 /* CAAnimation+CompetionBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD17E91BA18AA30021D948 /* CAAnimation+CompetionBlock.m */; };
 		58CD17EE1BA19BC70021D948 /* FRDTermsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD17ED1BA19BC70021D948 /* FRDTermsLabel.m */; };
 		58CD17F21BA19BF40021D948 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD17F11BA19BF40021D948 /* TTTAttributedLabel.m */; };
@@ -235,6 +237,10 @@
 		58C28FE71BAA8F850099ABE4 /* FRDFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDFriend.m; path = Classes/MVC/Models/Friend/FRDFriend.m; sourceTree = "<group>"; };
 		58C28FEA1BAA91670099ABE4 /* FRDFriendDragableParentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDFriendDragableParentView.h; path = Classes/MVC/Views/FriendDragableView/FriendDragableParentView/FRDFriendDragableParentView.h; sourceTree = "<group>"; };
 		58C28FEB1BAA91670099ABE4 /* FRDFriendDragableParentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDFriendDragableParentView.m; path = Classes/MVC/Views/FriendDragableView/FriendDragableParentView/FRDFriendDragableParentView.m; sourceTree = "<group>"; };
+		58C28FEE1BAABBFB0099ABE4 /* ZLPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLPanGestureRecognizer.h; sourceTree = "<group>"; };
+		58C28FEF1BAABBFB0099ABE4 /* ZLPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLPanGestureRecognizer.m; sourceTree = "<group>"; };
+		58C28FF01BAABBFB0099ABE4 /* ZLSwipeableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLSwipeableView.h; sourceTree = "<group>"; };
+		58C28FF11BAABBFB0099ABE4 /* ZLSwipeableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLSwipeableView.m; sourceTree = "<group>"; };
 		58CD17E81BA18AA30021D948 /* CAAnimation+CompetionBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimation+CompetionBlock.h"; sourceTree = "<group>"; };
 		58CD17E91BA18AA30021D948 /* CAAnimation+CompetionBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAAnimation+CompetionBlock.m"; sourceTree = "<group>"; };
 		58CD17EC1BA19BC70021D948 /* FRDTermsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDTermsLabel.h; path = Classes/MVC/Views/TermsLabel/FRDTermsLabel.h; sourceTree = "<group>"; };
@@ -594,6 +600,7 @@
 		58BC76C71B9EB91000BB8B5A /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				58C28FED1BAABBFB0099ABE4 /* ZLSwipeableView */,
 				3E3D42131BA83AB80021026A /* NMRangeSlider */,
 				58A2B7461BA2C04B007D4D60 /* StyledPageControl */,
 				58CD17EF1BA19BE50021D948 /* TTTAttributedLabel */,
@@ -1186,6 +1193,17 @@
 			name = FriendDragableParentView;
 			sourceTree = "<group>";
 		};
+		58C28FED1BAABBFB0099ABE4 /* ZLSwipeableView */ = {
+			isa = PBXGroup;
+			children = (
+				58C28FEE1BAABBFB0099ABE4 /* ZLPanGestureRecognizer.h */,
+				58C28FEF1BAABBFB0099ABE4 /* ZLPanGestureRecognizer.m */,
+				58C28FF01BAABBFB0099ABE4 /* ZLSwipeableView.h */,
+				58C28FF11BAABBFB0099ABE4 /* ZLSwipeableView.m */,
+			);
+			path = ZLSwipeableView;
+			sourceTree = "<group>";
+		};
 		58CD17E61BA18A880021D948 /* CAAnimation */ = {
 			isa = PBXGroup;
 			children = (
@@ -1434,6 +1452,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				587B3A8E1BA814C40098154F /* FRDRelationshipStatusController.m in Sources */,
+				58C28FF31BAABBFB0099ABE4 /* ZLSwipeableView.m in Sources */,
 				58BC771A1B9ECA8100BB8B5A /* UIView+Flashable.m in Sources */,
 				58BC77051B9ECA2200BB8B5A /* NSString+JSONRepresentation.m in Sources */,
 				58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */,
@@ -1446,6 +1465,7 @@
 				581B9D3B1B9ED6090080393B /* FRDStorageManager.m in Sources */,
 				58BC77081B9ECA3700BB8B5A /* NSString+Base64Decoding.m in Sources */,
 				581B9D3E1B9ED67B0080393B /* FRDPushNotifiactionService.m in Sources */,
+				58C28FF21BAABBFB0099ABE4 /* ZLPanGestureRecognizer.m in Sources */,
 				58C28C3D1BA9527A009D1AC4 /* FRDSearchFriendsController.m in Sources */,
 				3ED072321BA0370C0091B7E4 /* FRDPreferencesController.m in Sources */,
 				58FFDBAB1B9ECF3B00B0490A /* FRDSerialViewConstructor.m in Sources */,

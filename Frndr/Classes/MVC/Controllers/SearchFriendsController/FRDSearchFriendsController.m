@@ -37,13 +37,9 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    self.dragableViewsHolder.dataSource = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self setupDragableViewOptions];
+    });
 }
 
 #pragma mark - Actions
@@ -56,6 +52,12 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (IBAction)yesClick:(id)sender
 {
     [self.dragableViewsHolder swipeTopViewToRight];
+}
+
+- (void)setupDragableViewOptions
+{
+    self.dragableViewsHolder.dataSource = self;
+    self.dragableViewsHolder.direction = ZLSwipeableViewDirectionHorizontal;
 }
 
 - (void)customizeNavigationItem
@@ -126,6 +128,13 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 }
 
 #pragma mark - ZLSwipeableViewDelegate
+
+- (BOOL)swipeableView:(ZLSwipeableView *)swipeableView
+     shouldRemoveView:(UIView *)view
+        withDirection:(ZLSwipeableViewDirection)direction
+{
+    return YES;
+}
 
 - (void)swipeableView:(ZLSwipeableView *)swipeableView
          didSwipeView:(UIView *)view
