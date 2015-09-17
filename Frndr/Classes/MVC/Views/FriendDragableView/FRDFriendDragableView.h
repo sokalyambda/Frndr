@@ -8,8 +8,10 @@
 
 #import "ZLSwipeableView.h"
 
+@class FRDFriend;
+
 @interface FRDFriendDragableView : UIView
 
-#warning Configure View !
+- (void)configureWithFriend:(FRDFriend *)friend;
 
 @end

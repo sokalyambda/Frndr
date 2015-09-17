@@ -678,6 +678,9 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="noClick:" destination="Eq2-Rl-oTr" eventType="touchUpInside" id="2u8-C4-xOp"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFE-E8-nhh">
                                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -686,6 +689,9 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="yesClick:" destination="Eq2-Rl-oTr" eventType="touchUpInside" id="zQA-mb-cb8"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -798,7 +804,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="ILl-0g-u9u" firstAttribute="leading" secondItem="P1K-s9-ED4" secondAttribute="leading" id="5l2-yB-lWY">
-                                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                                <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                                             </constraint>
                                             <constraint firstAttribute="trailing" secondItem="Du5-65-9If" secondAttribute="trailing" constant="8" id="8lM-Ny-lJy"/>
                                             <constraint firstItem="8cF-YB-NEU" firstAttribute="top" secondItem="Du5-65-9If" secondAttribute="bottom" constant="8" id="BVM-US-qh7"/>
@@ -814,7 +820,7 @@
                                             <constraint firstAttribute="trailing" secondItem="6fH-wy-opm" secondAttribute="trailing" constant="8" id="map-KL-hbb"/>
                                             <constraint firstAttribute="bottom" secondItem="6fH-wy-opm" secondAttribute="bottom" constant="8" id="qhZ-L9-Swz"/>
                                             <constraint firstAttribute="trailing" secondItem="ILl-0g-u9u" secondAttribute="trailing" id="r28-1f-y0G">
-                                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                                <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                                             </constraint>
                                             <constraint firstAttribute="trailing" secondItem="lr3-R0-X7D" secondAttribute="trailing" id="uct-Zq-sSA"/>
                                         </constraints>
@@ -950,7 +956,10 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="400" height="1300"/>
                     <connections>
+                        <outlet property="biographyLabel" destination="8cF-YB-NEU" id="1pT-7K-8lI"/>
                         <outlet property="dragableViewsHolder" destination="ILl-0g-u9u" id="QJM-hV-Qz7"/>
+                        <outlet property="interestsLabel" destination="Du5-65-9If" id="ruA-mR-9yT"/>
+                        <outlet property="photosCollectionContainer" destination="6fH-wy-opm" id="91C-LF-xkp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Rr-rT-LLJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1034,8 +1043,45 @@
                     <view key="view" contentMode="scaleToFill" id="Na0-JB-PdW">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.20784313730000001" green="0.72156862749999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="TS0-JZ-L6e">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="nNs-2K-mE8" firstAttribute="top" secondItem="TS0-JZ-L6e" secondAttribute="bottom" id="5mW-qQ-qDX"/>
+                            <constraint firstItem="TS0-JZ-L6e" firstAttribute="top" secondItem="8j3-xd-6nA" secondAttribute="bottom" id="Sv9-tV-fJG"/>
+                            <constraint firstItem="TS0-JZ-L6e" firstAttribute="leading" secondItem="Na0-JB-PdW" secondAttribute="leading" id="aVU-oL-ugA"/>
+                            <constraint firstAttribute="trailing" secondItem="TS0-JZ-L6e" secondAttribute="trailing" id="ez6-4O-F33"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="TS0-JZ-L6e"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Sv9-tV-fJG"/>
+                                <exclude reference="aVU-oL-ugA"/>
+                                <exclude reference="ez6-4O-F33"/>
+                                <exclude reference="5mW-qQ-qDX"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="TS0-JZ-L6e"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Sv9-tV-fJG"/>
+                                <include reference="aVU-oL-ugA"/>
+                                <include reference="ez6-4O-F33"/>
+                                <include reference="5mW-qQ-qDX"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="friendsTableView" destination="TS0-JZ-L6e" id="82j-0i-6GO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ct2-Lh-wk8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

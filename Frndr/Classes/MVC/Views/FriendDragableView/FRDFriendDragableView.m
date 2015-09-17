@@ -8,6 +8,8 @@
 
 #import "FRDFriendDragableView.h"
 
+#import "FRDFriend.h"
+
 @interface FRDFriendDragableView ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *friendProfileImageView;
@@ -20,5 +22,14 @@
 
 @implementation FRDFriendDragableView
 
+#pragma mark - Actions
+
+- (void)configureWithFriend:(FRDFriend *)friend
+{
+    self.friendNameLabel.text = friend.fullName;
+    self.friendAgeLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)friend.age];
+    self.friendDistanceLabel.text = [NSString stringWithFormat:@"%f", friend.distanceFromMe];
+    self.friendSmokerLabel.text = [NSString stringWithFormat:@"%@", friend.smoker ? LOCALIZED(@"Smoker") : LOCALIZED(@"Non-Smoker")];
+}
 
 @end

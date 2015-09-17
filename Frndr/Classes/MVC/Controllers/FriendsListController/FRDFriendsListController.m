@@ -8,7 +8,13 @@
 
 #import "FRDFriendsListController.h"
 
-@interface FRDFriendsListController ()
+#import "FRDSerialViewConstructor.h"
+
+@interface FRDFriendsListController ()<UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic) NSArray *friends;
+
+@property (weak, nonatomic) IBOutlet UITableView *friendsTableView;
 
 @end
 
@@ -19,6 +25,35 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+#pragma mark - Actions
+
+- (void)customizeNavigationItem
+{
+    [super customizeNavigationItem];
+    UIBarButtonItem *topIconItem = [FRDSerialViewConstructor customRightBarButtonForController:self withAction:nil];
+    self.navigationItem.rightBarButtonItem = topIconItem;
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.friends.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class]) forIndexPath:indexPath];
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

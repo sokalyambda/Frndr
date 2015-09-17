@@ -275,4 +275,32 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
     }];
 }
 
+/**
+ *  Show dialog alert with completion and two buttons (ok and cancel)
+ *
+ *  @param message    Message for alert
+ *  @param controller Presenting controller
+ *  @param completion Completion Block
+ */
++ (void)showDialogAlertWithMessage:(NSString *)message forController:(UIViewController *)controller withCompletion:(void(^)(BOOL cancel))completion
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:LOCALIZED(@"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        if (completion) {
+            completion(NO);
+        }
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        if (completion) {
+            completion(YES);
+        }
+    }];
+    
+    [alertController addAction:okAction];
+    [alertController addAction:cancelAction];
+    
+    [self showCurrentAlertController:alertController forController:controller];
+}
+
 @end

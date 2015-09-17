@@ -25,5 +25,6 @@ extern NSString *const kErrorAlertMessage;
 + (void)showErrorAlert:(NSError *)error forController:(UIViewController *)controller withCompletion:(void(^)(void))completion;
 + (void)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message forController:(UIViewController *)currentController withCompletion:(void(^)(void))completion;
 + (void)showAlertWithMessage:(NSString *)message forController:(UIViewController *)controller withCompletion:(void(^)(void))completion;
++ (void)showDialogAlertWithMessage:(NSString *)message forController:(UIViewController *)controller withCompletion:(void(^)(BOOL cancel))completion;
 
 @end

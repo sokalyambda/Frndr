@@ -8,7 +8,7 @@
 
 #import "FRDSerialViewConstructor.h"
 
-static NSString *const kDoneButtonImageName = @"topRightIcon";
+static NSString *const kTopIconImageName = @"topRightIcon";
 static NSString *const kBackArrowImageName = @"backArrow";
 
 @implementation FRDSerialViewConstructor
@@ -22,11 +22,6 @@ static NSString *const kBackArrowImageName = @"backArrow";
  */
 + (UIBarButtonItem *)backButtonForController:(UIViewController *)controller withAction:(SEL)action
 {
-//    UIImage *faceImage = [UIImage imageNamed:kBackArrowImageName];
-//    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
-//    face.bounds = CGRectMake( 0, 0, faceImage.size.width, faceImage.size.height );
-//    [face setImage:faceImage forState:UIControlStateNormal];
-//    UIBarButtonItem *faceBtn = [[UIBarButtonItem alloc] initWithCustomView:face];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:kBackArrowImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:controller action:action];
     return backButton;
 }
@@ -41,7 +36,7 @@ static NSString *const kBackArrowImageName = @"backArrow";
  */
 + (UIBarButtonItem *)customRightBarButtonForController:(UIViewController *)controller withAction:(SEL)action
 {
-    UIImage *backgroundImage = [[UIImage imageNamed:kDoneButtonImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage *backgroundImage = [[UIImage imageNamed:kTopIconImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     UIButton *topRightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [topRightButton setFrame:CGRectMake(0.0f, 0.0f, backgroundImage.size.width, backgroundImage.size.height)];
@@ -53,6 +48,21 @@ static NSString *const kBackArrowImageName = @"backArrow";
     UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:topRightButton];
     
     return doneBarButton;
+}
+
+/**
+ *  Create custom bar button item
+ *
+ *  @param image      Image for bar button
+ *  @param controller Controller
+ *  @param action     Selector
+ *
+ *  @return Custom bar button
+ */
++ (UIBarButtonItem *)customBarButtonWithImage:(UIImage *)image forController:(UIViewController *)controller withAction:(SEL)action
+{
+    UIBarButtonItem *customBarButton = [[UIBarButtonItem alloc] initWithImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:controller action:action];
+    return customBarButton;
 }
 
 @end
