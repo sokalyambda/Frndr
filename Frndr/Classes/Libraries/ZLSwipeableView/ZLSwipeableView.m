@@ -9,6 +9,9 @@
 #import "ZLSwipeableView.h"
 #import "ZLPanGestureRecognizer.h"
 
+#import "FRDFriendOverlayView.h"
+#import "UIView+MakeFromXib.h"
+
 const NSUInteger ZLPrefetchedViewsNumber = 3;
 
 ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector directionVector) {
@@ -45,6 +48,9 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
 @property (strong, nonatomic) UIView *reuseCoverContainerView;
 @property (strong, nonatomic) UIView *containerView;
 
+/*****Overlay View*****/
+@property (nonatomic) IBOutlet FRDFriendOverlayView *overlayView;
+
 @end
 
 @implementation ZLSwipeableView
@@ -68,6 +74,9 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
 }
 
 - (void)setup {
+    /*****Create overlay view*****/
+    self.overlayView = [FRDFriendOverlayView makeFromXibWithFileOwner:self];
+    
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self];
     self.animator.delegate = self;
     self.anchorContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
@@ -225,6 +234,17 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
     CGPoint location = [recognizer locationInView:self];
     UIView *swipeableView = recognizer.view;
     
+    
+    CGPoint velocity = [recognizer velocityInView:self];
+    CGFloat velocityMagnitude = sqrtf(powf(velocity.x, 2) + powf(velocity.y, 2));
+    CGPoint normalizedVelocity = CGPointMake(velocity.x / velocityMagnitude, velocity.y / velocityMagnitude);
+    CGFloat scale = velocityMagnitude > self.escapeVelocityThreshold ? velocityMagnitude : self.pushVelocityMagnitude;
+    CGFloat translationMagnitude = sqrtf(translation.x * translation.x + translation.y * translation.y);
+    CGVector directionVector = CGVectorMake(
+                                            translation.x / translationMagnitude * scale,
+                                            translation.y / translationMagnitude * scale
+                                            );
+    
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         [self createAnchorViewForCover:swipeableView atLocation:location shouldAttachAnchorViewToPoint:YES];
         
@@ -238,19 +258,24 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
         if ([self.delegate respondsToSelector:@selector(swipeableView:swipingView:atLocation:translation:)]) {
             [self.delegate swipeableView:self swipingView:swipeableView atLocation:location translation:translation];
         }
+
+        /*****Add overlay view if needed when swiping*****/
+        ZLSwipeableViewDirection directionType = ZLDirectionVectorToSwipeableViewDirection(directionVector);
+        if (![swipeableView.subviews containsObject:self.overlayView] && (directionType == ZLSwipeableViewDirectionLeft || directionType == ZLSwipeableViewDirectionRight)) {
+            [self.overlayView setFrame:swipeableView.frame];
+            [swipeableView addSubview:self.overlayView];
+        }
+        [self configureOverlayImageWithDirection:directionType];
     }
     
     if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
-        CGPoint velocity = [recognizer velocityInView:self];
-        CGFloat velocityMagnitude = sqrtf(powf(velocity.x, 2) + powf(velocity.y, 2));
-        CGPoint normalizedVelocity = CGPointMake(velocity.x / velocityMagnitude, velocity.y / velocityMagnitude);
-        CGFloat scale = velocityMagnitude > self.escapeVelocityThreshold ? velocityMagnitude : self.pushVelocityMagnitude;
-        CGFloat translationMagnitude = sqrtf(translation.x * translation.x + translation.y * translation.y);
-        CGVector directionVector = CGVectorMake(
-                                                translation.x / translationMagnitude * scale,
-                                                translation.y / translationMagnitude * scale
-                                                );
         
+        /*****Remove overlay*****/
+        if ([swipeableView.subviews containsObject:self.overlayView]) {
+            [self.overlayView removeFromSuperview];
+        }
+
+        /*****New delegate method*****/
         BOOL shouldRemoveView = NO;
         if ([self.delegate respondsToSelector:@selector(swipeableView:shouldRemoveView:withDirection:)]) {
             shouldRemoveView = [self.delegate swipeableView:self shouldRemoveView:swipeableView withDirection:self.direction];
@@ -305,6 +330,8 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
         return;
     }
     
+    
+    
     CGPoint location = CGPointMake(
                                    topSwipeableView.center.x,
                                    topSwipeableView.center.y *
@@ -314,6 +341,16 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
      shouldAttachAnchorViewToPoint:YES];
     CGVector direction =
     CGVectorMake((left ? -1 : 1) * self.escapeVelocityThreshold, 0);
+    
+
+    /***** Add overlay view if needed when press button *****/
+    ZLSwipeableViewDirection directionType = ZLDirectionVectorToSwipeableViewDirection(direction);
+    if (![topSwipeableView.subviews containsObject:self.overlayView]) {
+        [self.overlayView setFrame:topSwipeableView.frame];
+        [topSwipeableView addSubview:self.overlayView];
+    }
+    [self configureOverlayImageWithDirection:directionType];
+
     [self pushAnchorViewForCover:topSwipeableView
                      inDirection:direction
                 andCollideInRect:self.collisionRect];
@@ -445,8 +482,7 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
     if ([self.delegate respondsToSelector:@selector(swipeableView:didSwipeView:inDirection:)]) {
         [self.delegate swipeableView:self didSwipeView:swipeableView inDirection:direction];
     }
-    
-    
+
     [self.animator removeBehavior:self.anchorViewAttachmentBehavior];
     
     UICollisionBehavior *collisionBehavior = [self collisionBehaviorThatBoundsView:self.anchorView
@@ -576,7 +612,19 @@ atOffsetFromCenter:(CGPoint)offset
 }
 
 - (UIView *)topSwipeableView {
-    return self.containerView.subviews.lastObject;
+    UIView *topSwipeableView = self.containerView.subviews.lastObject;
+    return topSwipeableView;
+}
+
+#pragma mark - OverlayView
+/*****Custom methods*****/
+- (void)configureOverlayImageWithDirection:(ZLSwipeableViewDirection)directionType
+{
+    if (directionType == ZLSwipeableViewDirectionLeft) {
+        self.overlayView.currentOverlayImageName = @"discardIcon";
+    } else if (directionType == ZLSwipeableViewDirectionRight) {
+        self.overlayView.currentOverlayImageName = @"applyIcon";
+    }
 }
 
 @end

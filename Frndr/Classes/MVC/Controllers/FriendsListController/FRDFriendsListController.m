@@ -32,6 +32,9 @@
 - (void)customizeNavigationItem
 {
     [super customizeNavigationItem];
+    
+    self.navigationTitleView.titleText = LOCALIZED(@"Frnds");
+    
     UIBarButtonItem *topIconItem = [FRDSerialViewConstructor customRightBarButtonForController:self withAction:nil];
     self.navigationItem.rightBarButtonItem = topIconItem;
 }

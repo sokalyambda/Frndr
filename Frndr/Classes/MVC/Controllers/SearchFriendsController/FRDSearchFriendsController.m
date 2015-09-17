@@ -142,6 +142,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 {
     switch (direction) {
         case ZLSwipeableViewDirectionLeft: {
+            
             break;
         }
         case ZLSwipeableViewDirectionRight: {
