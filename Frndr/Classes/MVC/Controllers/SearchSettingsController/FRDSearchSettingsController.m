@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIView *relationshipsContainer;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
+@property (weak, nonatomic) IBOutlet FRDRangeSlider *distanceSlider;
 @property (weak, nonatomic) IBOutlet FRDRangeSlider *ageRangeSlider;
 
 @property (nonatomic) FRDDropDownHolderController *dropDownHolderController;
@@ -48,6 +49,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [self configureDistanceSlider];
     [self configureAgeRangeSlider];
 }
 
@@ -70,6 +72,18 @@
     [self.relationshipsContainer addSubview:self.relationshipController.view];
     [self addChildViewController:self.relationshipController];
     [self.relationshipController didMoveToParentViewController:self];
+}
+
+- (void)configureDistanceSlider
+{
+    [self.distanceSlider setThumbImage:[UIImage imageNamed:@"Slider_Thumb"]];
+    [self.distanceSlider setTrackImage:[[UIImage imageNamed:@"Shape-9"]
+                                        resizableImageWithCapInsets:UIEdgeInsetsMake(9.0, 35.0, 9.0, 35.0)]];
+    [self.distanceSlider setInRangeTrackImage:[[UIImage imageNamed:@"downArrow"]
+                                               resizableImageWithCapInsets:UIEdgeInsetsMake(1, 1, 1, 1)]];
+    
+    self.distanceSlider.tracksHeight = 3.0;
+    self.distanceSlider.mode = FRDRangeSliderModeSingleThumb;
 }
 
 - (void)configureAgeRangeSlider
