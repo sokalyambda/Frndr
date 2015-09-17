@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RoC-rl-LAq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VVZ-Ve-cwB">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -352,8 +352,8 @@
         <!--Preferences Table View Controller-->
         <scene sceneID="mgv-9s-eb6">
             <objects>
-                <tableViewController id="ZR7-6P-wVi" customClass="FRDPreferencesTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" id="Y0x-gd-Rpy">
+                <tableViewController automaticallyAdjustsScrollViewInsets="NO" id="ZR7-6P-wVi" customClass="FRDPreferencesTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" id="Y0x-gd-Rpy">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1134,15 +1134,15 @@
                                                     <exclude reference="vz5-sP-XPD"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="VBF-tX-zMc"/>
-                                                    <exclude reference="xfc-rr-HOA"/>
+                                                    <exclude reference="1Kz-d3-d68"/>
+                                                    <exclude reference="3gc-th-P4j"/>
                                                     <exclude reference="Ovl-RO-fDe"/>
                                                     <exclude reference="aMn-QF-Lzh"/>
                                                     <exclude reference="7g6-ea-z1b"/>
                                                     <exclude reference="9lf-o3-bah"/>
                                                     <exclude reference="CXb-43-c7e"/>
-                                                    <exclude reference="1Kz-d3-d68"/>
-                                                    <exclude reference="3gc-th-P4j"/>
+                                                    <exclude reference="VBF-tX-zMc"/>
+                                                    <exclude reference="xfc-rr-HOA"/>
                                                     <exclude reference="EpP-j6-nSu"/>
                                                     <exclude reference="Va9-dP-PO8"/>
                                                     <exclude reference="mPW-1x-pmC"/>
@@ -1157,15 +1157,15 @@
                                                     <include reference="vz5-sP-XPD"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="VBF-tX-zMc"/>
-                                                    <include reference="xfc-rr-HOA"/>
+                                                    <include reference="1Kz-d3-d68"/>
+                                                    <include reference="3gc-th-P4j"/>
                                                     <include reference="Ovl-RO-fDe"/>
                                                     <include reference="aMn-QF-Lzh"/>
                                                     <include reference="7g6-ea-z1b"/>
                                                     <include reference="9lf-o3-bah"/>
                                                     <include reference="CXb-43-c7e"/>
-                                                    <include reference="1Kz-d3-d68"/>
-                                                    <include reference="3gc-th-P4j"/>
+                                                    <include reference="VBF-tX-zMc"/>
+                                                    <include reference="xfc-rr-HOA"/>
                                                     <include reference="EpP-j6-nSu"/>
                                                     <include reference="Va9-dP-PO8"/>
                                                     <include reference="mPW-1x-pmC"/>
@@ -1228,7 +1228,7 @@
         <!--Preferences Controller-->
         <scene sceneID="ASD-bM-Yzy">
             <objects>
-                <viewController storyboardIdentifier="FRDPreferencesController" id="nL4-sj-XvU" customClass="FRDPreferencesController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FRDPreferencesController" automaticallyAdjustsScrollViewInsets="NO" id="nL4-sj-XvU" customClass="FRDPreferencesController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iJP-by-AR0"/>
                         <viewControllerLayoutGuide type="bottom" id="xVm-gC-6LS"/>
@@ -1415,7 +1415,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="223" id="7fB-pc-qK8"/>
+                                                    <constraint firstAttribute="height" constant="170" id="7fB-pc-qK8"/>
                                                 </constraints>
                                                 <variation key="default">
                                                     <mask key="constraints">

@@ -15,15 +15,9 @@
     self.avatarImageView.clipsToBounds = YES;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
 #pragma mark - Actions
 
-- (void)configureWithFriend:(FRDFriend *)friend_
+- (void)configureWithFriend:(FRDFriend *)currentFriend
 {
     self.messageLabel.text = @"This text is hardcoded This text is hardcoded This text is hardcoded This text is hardcoded v This text is hardcoded This text is hardcoded This text is hardcoded This text is hardcoded";
     

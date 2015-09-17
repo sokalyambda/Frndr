@@ -16,6 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *rightArrowImageView;
 
-- (void)configureWithFriend:(FRDFriend *)friend_;
+- (void)configureWithFriend:(FRDFriend *)currentFriend;
 
 @end

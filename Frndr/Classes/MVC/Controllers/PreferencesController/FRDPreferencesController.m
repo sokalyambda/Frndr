@@ -37,11 +37,4 @@
     NSLog(@"'Logout from Frndr' button clicked");
 }
 
-#pragma mark - UIStatusBar
-
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
-
 @end
