@@ -11,7 +11,8 @@
 @implementation FRDFriendCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    self.avatarImageView.layer.cornerRadius = CGRectGetHeight(self.avatarImageView.frame) / 3.0;
+    self.avatarImageView.clipsToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -24,11 +25,9 @@
 
 - (void)configureWithFriend:(FRDFriend *)friend_
 {
-    // ...
+    self.messageLabel.text = @"This text is hardcoded This text is hardcoded This text is hardcoded This text is hardcoded v This text is hardcoded This text is hardcoded This text is hardcoded This text is hardcoded";
     
-    // Remove text padding from text view
-    self.messageTextView.textContainer.lineFragmentPadding = 0;
-    self.messageTextView.textContainerInset = UIEdgeInsetsZero;
+    self.avatarImageView.image = [UIImage imageNamed:@"CoupleActiveIcon"];
 }
 
 @end

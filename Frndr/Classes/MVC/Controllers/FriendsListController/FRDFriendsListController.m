@@ -27,9 +27,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.friendsTableView.rowHeight = UITableViewAutomaticDimension;
-    self.friendsTableView.estimatedRowHeight = 100.f;
 }
 
 #pragma mark - Actions
