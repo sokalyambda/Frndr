@@ -10,13 +10,9 @@
 
 @implementation FRDDropDownCell
 
-- (void)awakeFromNib
+- (UIEdgeInsets)layoutMargins
 {
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
+    return UIEdgeInsetsZero;
 }
 
 @end

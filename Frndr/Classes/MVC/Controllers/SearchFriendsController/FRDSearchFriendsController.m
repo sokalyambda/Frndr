@@ -121,7 +121,6 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     FRDFriendDragableView *friendView = [FRDFriendDragableView makeFromXib];
     friendView.translatesAutoresizingMaskIntoConstraints = NO;
     [parentView addSubview:friendView];
-    
     [self addConstraintsForParentView:parentView andContentView:friendView];
 
     return parentView;

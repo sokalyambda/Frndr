@@ -12,8 +12,7 @@
 
 #import "CAAnimation+CompetionBlock.h"
 
-static NSUInteger const kDropDownHeight = 200.f;
-static CGFloat const kSlidingTime = .5f;
+static CGFloat const kDropDownHeight = 200.f;
 
 @interface FRDDropDownTableView ()
 
@@ -24,20 +23,62 @@ static CGFloat const kSlidingTime = .5f;
 @property (weak, nonatomic) UIView *anchorView;
 @property (weak, nonatomic) UIView *presentedView;
 
+@property (nonatomic) CGFloat calculatedDropDownHeight;
+
 @end
 
 @implementation FRDDropDownTableView {
     CGRect savedDropDownTableFrame;
 }
 
+
 #pragma mark - Lifecycle
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
 
 - (void)awakeFromNib
 {
+    [self commonInit];
+}
+
+- (void)commonInit
+{
+    self.layer.cornerRadius = 5.0;
     self.dropDownList.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 #pragma mark - Accessors
+
+- (CGFloat)calculatedDropDownHeight
+{
+    CGFloat actualHeight = kDropDownHeight;
+
+    NSLog(@"presented view frame %@", NSStringFromCGRect(self.presentedView.frame));
+    NSLog(@"anchor view frame %@", NSStringFromCGRect(self.anchorView.frame));
+    
+    if (CGRectContainsPoint(self.presentedView.frame, CGPointMake(CGRectGetMinX(self.anchorView.frame), CGRectGetMaxY(self.anchorView.frame) + actualHeight))) {
+        NSLog(@"OK");
+    } else {
+        NSLog(@"HOOJOK");
+    }
+    return actualHeight;
+}
 
 - (void)setAnchorView:(UIView *)anchorView
 {
@@ -92,36 +133,44 @@ static CGFloat const kSlidingTime = .5f;
     self.isExpanded = !self.isExpanded;
 }
 
+static CGFloat const kAdditionalOffset = 5.f;
+static CGFloat const kSlidingTime = .5f;
 - (void)showDropDownList
 {
     WEAK_SELF;
-    [UIView animateWithDuration:kSlidingTime animations:^{
-        
-        [weakSelf.dropDownList setHidden:YES];
-        
-        [weakSelf.presentedView addSubview:self];
-        CGRect newFrame = self.frame;
-        newFrame.size.height = kDropDownHeight;
-        weakSelf.frame = newFrame;
-    } completion:^(BOOL complete){
-        [weakSelf.dropDownList setHidden:NO];
-    }];
+    [UIView animateWithDuration:kSlidingTime
+                          delay:0.1f
+         usingSpringWithDamping:.5f
+          initialSpringVelocity:.5f
+                        options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                            [weakSelf.presentedView addSubview:self];
+                            CGRect newFrame = self.frame;
+                            newFrame.origin.y += kAdditionalOffset;
+                            newFrame.size.height = self.calculatedDropDownHeight;
+                            weakSelf.dropDownList.frame = newFrame;
+                            weakSelf.frame = newFrame;
+                        }
+                     completion:nil];
 }
 
 - (void)hideDropDownList
 {
     WEAK_SELF;
-    [UIView animateWithDuration:kSlidingTime animations:^{
-        weakSelf.frame = savedDropDownTableFrame;
-    } completion:^(BOOL finished) {
-        if ([weakSelf.anchorView isKindOfClass:[UITextField class]]) {
-            [(UITextField *)weakSelf
-             .anchorView resignFirstResponder];
-        }
-        weakSelf.anchorView = nil;
-        weakSelf.dropDownDataSource = nil;
-        [weakSelf removeFromSuperview];
-    }];
+    [UIView animateWithDuration:kSlidingTime
+                          delay:0.1f
+         usingSpringWithDamping:1.f
+          initialSpringVelocity:1.f
+                        options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                            weakSelf.frame = savedDropDownTableFrame;
+                        }
+                     completion:^(BOOL finished) {
+                         if ([weakSelf.anchorView isKindOfClass:[UITextField class]]) {
+                             [(UITextField *)weakSelf.anchorView resignFirstResponder];
+                         }
+                         weakSelf.anchorView = nil;
+                         weakSelf.dropDownDataSource = nil;
+                         [weakSelf removeFromSuperview];
+                     }];
 }
 
 @end
