@@ -8,3 +8,5 @@ pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
 
 pod 'SSKeychain'
+
+pod 'ZLSwipeableView'

@@ -639,7 +639,7 @@
                         <viewControllerLayoutGuide type="bottom" id="kGq-I3-Zso"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="XjV-sY-kgq">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="1300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YKD-fc-AB5">
@@ -648,11 +648,11 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P1K-s9-ED4" userLabel="Scroll Container">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ILl-0g-u9u" userLabel="Dragable Container">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ILl-0g-u9u" userLabel="Dragable Container" customClass="ZLSwipeableView">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                                <color key="backgroundColor" red="0.20784313730000001" green="0.72156862749999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="250" id="bHs-UK-Dpn"/>
+                                                    <constraint firstAttribute="height" constant="355" id="bHs-UK-Dpn"/>
                                                 </constraints>
                                                 <variation key="default">
                                                     <mask key="constraints">
@@ -664,6 +664,9 @@
                                                         <include reference="bHs-UK-Dpn"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <outlet property="delegate" destination="Eq2-Rl-oTr" id="TJA-Do-V0e"/>
+                                                </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lr3-R0-X7D" userLabel="Buttons Container">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -756,7 +759,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="10" id="xmd-hy-5ef"/>
                                                 </constraints>
-                                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.lLorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.l</mutableString>
+                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.lLorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.l</string>
                                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                                 <color key="textColor" red="0.42352941179999998" green="0.3294117647" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -776,7 +779,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="10" id="Cuv-yx-yc9"/>
                                                 </constraints>
-                                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.lLorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.l</mutableString>
+                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.lLorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.l</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" red="0.20784313730000001" green="0.72156862749999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -794,21 +797,25 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="ILl-0g-u9u" firstAttribute="leading" secondItem="P1K-s9-ED4" secondAttribute="leading" id="5l2-yB-lWY"/>
+                                            <constraint firstItem="ILl-0g-u9u" firstAttribute="leading" secondItem="P1K-s9-ED4" secondAttribute="leading" id="5l2-yB-lWY">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                            </constraint>
                                             <constraint firstAttribute="trailing" secondItem="Du5-65-9If" secondAttribute="trailing" constant="8" id="8lM-Ny-lJy"/>
                                             <constraint firstItem="8cF-YB-NEU" firstAttribute="top" secondItem="Du5-65-9If" secondAttribute="bottom" constant="8" id="BVM-US-qh7"/>
                                             <constraint firstItem="6fH-wy-opm" firstAttribute="top" secondItem="8cF-YB-NEU" secondAttribute="bottom" constant="8" id="GKi-yv-GnZ"/>
                                             <constraint firstItem="Du5-65-9If" firstAttribute="leading" secondItem="P1K-s9-ED4" secondAttribute="leading" constant="8" id="KUn-7J-SOW"/>
                                             <constraint firstItem="lr3-R0-X7D" firstAttribute="leading" secondItem="P1K-s9-ED4" secondAttribute="leading" id="NKy-zt-5tc"/>
                                             <constraint firstItem="8cF-YB-NEU" firstAttribute="leading" secondItem="Du5-65-9If" secondAttribute="leading" id="NPO-Dw-K4g"/>
-                                            <constraint firstItem="ILl-0g-u9u" firstAttribute="top" secondItem="P1K-s9-ED4" secondAttribute="top" id="T4G-Ec-MEP"/>
+                                            <constraint firstItem="ILl-0g-u9u" firstAttribute="top" secondItem="P1K-s9-ED4" secondAttribute="top" constant="10" id="T4G-Ec-MEP"/>
                                             <constraint firstItem="Du5-65-9If" firstAttribute="top" secondItem="lr3-R0-X7D" secondAttribute="bottom" constant="8" id="VnN-xl-eQM"/>
                                             <constraint firstItem="6fH-wy-opm" firstAttribute="leading" secondItem="P1K-s9-ED4" secondAttribute="leading" constant="8" id="aAq-6e-3bY"/>
                                             <constraint firstItem="lr3-R0-X7D" firstAttribute="top" secondItem="ILl-0g-u9u" secondAttribute="bottom" constant="8" id="anx-I7-nfh"/>
                                             <constraint firstItem="8cF-YB-NEU" firstAttribute="trailing" secondItem="Du5-65-9If" secondAttribute="trailing" id="gCa-Ko-o2O"/>
                                             <constraint firstAttribute="trailing" secondItem="6fH-wy-opm" secondAttribute="trailing" constant="8" id="map-KL-hbb"/>
                                             <constraint firstAttribute="bottom" secondItem="6fH-wy-opm" secondAttribute="bottom" constant="8" id="qhZ-L9-Swz"/>
-                                            <constraint firstAttribute="trailing" secondItem="ILl-0g-u9u" secondAttribute="trailing" id="r28-1f-y0G"/>
+                                            <constraint firstAttribute="trailing" secondItem="ILl-0g-u9u" secondAttribute="trailing" id="r28-1f-y0G">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                            </constraint>
                                             <constraint firstAttribute="trailing" secondItem="lr3-R0-X7D" secondAttribute="trailing" id="uct-Zq-sSA"/>
                                         </constraints>
                                         <variation key="default">
@@ -820,22 +827,22 @@
                                                 <exclude reference="8cF-YB-NEU"/>
                                             </mask>
                                             <mask key="constraints">
+                                                <exclude reference="BVM-US-qh7"/>
+                                                <exclude reference="NPO-Dw-K4g"/>
+                                                <exclude reference="gCa-Ko-o2O"/>
+                                                <exclude reference="8lM-Ny-lJy"/>
+                                                <exclude reference="KUn-7J-SOW"/>
+                                                <exclude reference="VnN-xl-eQM"/>
+                                                <exclude reference="GKi-yv-GnZ"/>
+                                                <exclude reference="aAq-6e-3bY"/>
+                                                <exclude reference="map-KL-hbb"/>
+                                                <exclude reference="qhZ-L9-Swz"/>
                                                 <exclude reference="5l2-yB-lWY"/>
                                                 <exclude reference="T4G-Ec-MEP"/>
                                                 <exclude reference="r28-1f-y0G"/>
                                                 <exclude reference="NKy-zt-5tc"/>
                                                 <exclude reference="anx-I7-nfh"/>
                                                 <exclude reference="uct-Zq-sSA"/>
-                                                <exclude reference="8lM-Ny-lJy"/>
-                                                <exclude reference="KUn-7J-SOW"/>
-                                                <exclude reference="VnN-xl-eQM"/>
-                                                <exclude reference="BVM-US-qh7"/>
-                                                <exclude reference="NPO-Dw-K4g"/>
-                                                <exclude reference="gCa-Ko-o2O"/>
-                                                <exclude reference="GKi-yv-GnZ"/>
-                                                <exclude reference="aAq-6e-3bY"/>
-                                                <exclude reference="map-KL-hbb"/>
-                                                <exclude reference="qhZ-L9-Swz"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
@@ -847,22 +854,22 @@
                                                 <include reference="8cF-YB-NEU"/>
                                             </mask>
                                             <mask key="constraints">
+                                                <include reference="BVM-US-qh7"/>
+                                                <include reference="NPO-Dw-K4g"/>
+                                                <include reference="gCa-Ko-o2O"/>
+                                                <include reference="8lM-Ny-lJy"/>
+                                                <include reference="KUn-7J-SOW"/>
+                                                <include reference="VnN-xl-eQM"/>
+                                                <include reference="GKi-yv-GnZ"/>
+                                                <include reference="aAq-6e-3bY"/>
+                                                <include reference="map-KL-hbb"/>
+                                                <include reference="qhZ-L9-Swz"/>
                                                 <include reference="5l2-yB-lWY"/>
                                                 <include reference="T4G-Ec-MEP"/>
                                                 <include reference="r28-1f-y0G"/>
                                                 <include reference="NKy-zt-5tc"/>
                                                 <include reference="anx-I7-nfh"/>
                                                 <include reference="uct-Zq-sSA"/>
-                                                <include reference="8lM-Ny-lJy"/>
-                                                <include reference="KUn-7J-SOW"/>
-                                                <include reference="VnN-xl-eQM"/>
-                                                <include reference="BVM-US-qh7"/>
-                                                <include reference="NPO-Dw-K4g"/>
-                                                <include reference="gCa-Ko-o2O"/>
-                                                <include reference="GKi-yv-GnZ"/>
-                                                <include reference="aAq-6e-3bY"/>
-                                                <include reference="map-KL-hbb"/>
-                                                <include reference="qhZ-L9-Swz"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -890,8 +897,7 @@
                                         <exclude reference="yhO-eY-FA6"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="64" width="400" height="1236"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="P1K-s9-ED4"/>
                                     </mask>
@@ -920,11 +926,11 @@
                                 <exclude reference="YKD-fc-AB5"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="QuY-tH-zcn"/>
+                                <exclude reference="cJk-mt-BvA"/>
                                 <exclude reference="8n9-3C-ZgG"/>
                                 <exclude reference="HNU-Nw-U5Q"/>
                                 <exclude reference="rMT-9f-0l7"/>
-                                <exclude reference="cJk-mt-BvA"/>
+                                <exclude reference="QuY-tH-zcn"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -932,17 +938,20 @@
                                 <include reference="YKD-fc-AB5"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="QuY-tH-zcn"/>
+                                <include reference="cJk-mt-BvA"/>
                                 <include reference="8n9-3C-ZgG"/>
                                 <include reference="HNU-Nw-U5Q"/>
                                 <include reference="rMT-9f-0l7"/>
-                                <include reference="cJk-mt-BvA"/>
+                                <exclude reference="QuY-tH-zcn"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="DW2-DU-FGa"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="400" height="1300"/>
+                    <connections>
+                        <outlet property="dragableViewsHolder" destination="ILl-0g-u9u" id="QJM-hV-Qz7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Rr-rT-LLJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

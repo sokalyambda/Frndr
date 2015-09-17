@@ -120,3 +120,9 @@
 #define COCOAPODS_VERSION_MINOR_SSKeychain 2
 #define COCOAPODS_VERSION_PATCH_SSKeychain 3
 
+// ZLSwipeableView
+#define COCOAPODS_POD_AVAILABLE_ZLSwipeableView
+#define COCOAPODS_VERSION_MAJOR_ZLSwipeableView 0
+#define COCOAPODS_VERSION_MINOR_ZLSwipeableView 0
+#define COCOAPODS_VERSION_PATCH_ZLSwipeableView 7
+

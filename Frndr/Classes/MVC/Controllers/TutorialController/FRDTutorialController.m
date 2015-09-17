@@ -40,23 +40,13 @@
 {
     [super viewDidLoad];
     [self initContentImagesArray];
-}
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self setupTutorialScrollView];
         [self animateTutorialViews];
     });
 }
+
 
 #pragma mark - Actions
 
