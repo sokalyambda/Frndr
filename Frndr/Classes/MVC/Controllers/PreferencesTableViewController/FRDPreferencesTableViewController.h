@@ -6,6 +6,13 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
+typedef NS_ENUM(NSUInteger, FRDPreferenceType) {
+    FRDPreferenceTypeSearchSettings,
+    FRDPreferenceTypeMyProfile,
+    FRDPreferenceTypeSettings,
+    FRDPreferenceTypeShareFrndr
+};
+
 @interface FRDPreferencesTableViewController : UITableViewController
 
 @end

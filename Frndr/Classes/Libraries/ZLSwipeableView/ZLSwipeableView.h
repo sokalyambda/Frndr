@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Zhixuan Lai. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 typedef NS_ENUM(NSUInteger, ZLSwipeableViewDirection) {
     ZLSwipeableViewDirectionNone = 0,
     ZLSwipeableViewDirectionLeft = (1 << 0),
@@ -26,6 +24,12 @@ typedef NS_ENUM(NSUInteger, ZLSwipeableViewDirection) {
 
 /// Delegate
 @protocol ZLSwipeableViewDelegate <NSObject>
+
+@required
+- (BOOL)swipeableView:(ZLSwipeableView *)swipeableView
+     shouldRemoveView:(UIView *)view
+        withDirection:(ZLSwipeableViewDirection)direction;
+
 @optional
 - (void)swipeableView:(ZLSwipeableView *)swipeableView
          didSwipeView:(UIView *)view
@@ -35,8 +39,8 @@ typedef NS_ENUM(NSUInteger, ZLSwipeableViewDirection) {
        didCancelSwipe:(UIView *)view;
 
 - (void)swipeableView:(ZLSwipeableView *)swipeableView
-    didStartSwipingView:(UIView *)view
-             atLocation:(CGPoint)location;
+  didStartSwipingView:(UIView *)view
+           atLocation:(CGPoint)location;
 
 - (void)swipeableView:(ZLSwipeableView *)swipeableView
           swipingView:(UIView *)view
@@ -118,4 +122,5 @@ typedef NS_ENUM(NSUInteger, ZLSwipeableViewDirection) {
 
 /// Swipe top view to the down programmatically
 - (void)swipeTopViewToDown;
+
 @end

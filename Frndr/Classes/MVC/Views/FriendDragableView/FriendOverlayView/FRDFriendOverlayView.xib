@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ZLSwipeableView">
+            <connections>
+                <outlet property="overlayView" destination="iN0-l3-epB" id="ZQI-gw-RTm"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view alpha="0.29999999999999966" contentMode="scaleToFill" id="iN0-l3-epB" customClass="FRDFriendOverlayView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="applyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="oXF-DG-lHt">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="192" id="65q-vR-IL0"/>
+                        <constraint firstAttribute="height" constant="192" id="laM-pY-anG"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="65q-vR-IL0"/>
+                            <exclude reference="laM-pY-anG"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="65q-vR-IL0"/>
+                            <include reference="laM-pY-anG"/>
+                        </mask>
+                    </variation>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerY" secondItem="oXF-DG-lHt" secondAttribute="centerY" id="HmY-70-FGN"/>
+                <constraint firstAttribute="centerX" secondItem="oXF-DG-lHt" secondAttribute="centerX" id="oYW-9U-YKL"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="oXF-DG-lHt"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="HmY-70-FGN"/>
+                    <exclude reference="oYW-9U-YKL"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="subviews">
+                    <include reference="oXF-DG-lHt"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="HmY-70-FGN"/>
+                    <include reference="oYW-9U-YKL"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="currentOverlayImageView" destination="oXF-DG-lHt" id="66j-ZQ-1ch"/>
+            </connections>
+            <point key="canvasLocation" x="297" y="237"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="applyIcon" width="198" height="116"/>
+    </resources>
+</document>
