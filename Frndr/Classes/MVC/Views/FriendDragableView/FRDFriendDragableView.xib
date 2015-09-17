@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="FRDFriendDragableView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TutorialBackground" translatesAutoresizingMaskIntoConstraints="NO" id="ca0-aV-XXH" userLabel="UserPhoto">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="260" id="4LW-ei-iob"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="4LW-ei-iob"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="4LW-ei-iob"/>
+                        </mask>
+                    </variation>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQs-eZ-yHo" userLabel="Info Container">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3.5 miles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S1F-qg-C9U">
+                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
+                            <color key="textColor" red="0.42352941179999998" green="0.3294117647" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Straight" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s2M-gY-leZ">
+                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
+                            <color key="textColor" red="0.42352941179999998" green="0.3294117647" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Non-Smoker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pml-sh-KFH">
+                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
+                            <color key="textColor" red="0.42352941179999998" green="0.3294117647" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Actress &amp; Model" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UoQ-aL-fOr">
+                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
+                            <color key="textColor" red="0.42352941179999998" green="0.3294117647" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="28 years" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QaC-5g-PWd">
+                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
+                            <color key="textColor" red="0.42352941179999998" green="0.3294117647" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="S1F-qg-C9U" firstAttribute="centerY" secondItem="s2M-gY-leZ" secondAttribute="centerY" id="6fX-7p-Ek8"/>
+                        <constraint firstItem="S1F-qg-C9U" firstAttribute="top" secondItem="hQs-eZ-yHo" secondAttribute="top" constant="8" id="6hO-al-aFi"/>
+                        <constraint firstItem="QaC-5g-PWd" firstAttribute="centerX" secondItem="UoQ-aL-fOr" secondAttribute="centerX" constant="-0.5" id="7JR-G2-1iZ"/>
+                        <constraint firstItem="s2M-gY-leZ" firstAttribute="leading" secondItem="S1F-qg-C9U" secondAttribute="trailing" constant="9" id="CSq-X0-KmT"/>
+                        <constraint firstItem="S1F-qg-C9U" firstAttribute="leading" secondItem="QaC-5g-PWd" secondAttribute="trailing" constant="3" id="CpE-Ys-MdF"/>
+                        <constraint firstItem="QaC-5g-PWd" firstAttribute="centerY" secondItem="S1F-qg-C9U" secondAttribute="centerY" id="J67-Sq-NPn"/>
+                        <constraint firstAttribute="centerX" secondItem="S1F-qg-C9U" secondAttribute="centerX" id="atJ-uK-D1t"/>
+                        <constraint firstItem="UoQ-aL-fOr" firstAttribute="top" secondItem="QaC-5g-PWd" secondAttribute="bottom" constant="18" id="fDI-ed-oI0"/>
+                        <constraint firstItem="s2M-gY-leZ" firstAttribute="centerX" secondItem="pml-sh-KFH" secondAttribute="centerX" id="oBR-3m-Gsz"/>
+                        <constraint firstItem="pml-sh-KFH" firstAttribute="top" secondItem="s2M-gY-leZ" secondAttribute="bottom" constant="18" id="zJu-1a-R0y"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="subviews">
+                            <exclude reference="S1F-qg-C9U"/>
+                            <exclude reference="s2M-gY-leZ"/>
+                            <exclude reference="pml-sh-KFH"/>
+                            <exclude reference="UoQ-aL-fOr"/>
+                            <exclude reference="QaC-5g-PWd"/>
+                        </mask>
+                        <mask key="constraints">
+                            <exclude reference="7JR-G2-1iZ"/>
+                            <exclude reference="J67-Sq-NPn"/>
+                            <exclude reference="6fX-7p-Ek8"/>
+                            <exclude reference="6hO-al-aFi"/>
+                            <exclude reference="CpE-Ys-MdF"/>
+                            <exclude reference="atJ-uK-D1t"/>
+                            <exclude reference="fDI-ed-oI0"/>
+                            <exclude reference="zJu-1a-R0y"/>
+                            <exclude reference="CSq-X0-KmT"/>
+                            <exclude reference="oBR-3m-Gsz"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="subviews">
+                            <include reference="S1F-qg-C9U"/>
+                            <include reference="s2M-gY-leZ"/>
+                            <include reference="pml-sh-KFH"/>
+                            <include reference="UoQ-aL-fOr"/>
+                            <include reference="QaC-5g-PWd"/>
+                        </mask>
+                        <mask key="constraints">
+                            <include reference="7JR-G2-1iZ"/>
+                            <include reference="J67-Sq-NPn"/>
+                            <include reference="6fX-7p-Ek8"/>
+                            <include reference="6hO-al-aFi"/>
+                            <include reference="CpE-Ys-MdF"/>
+                            <include reference="atJ-uK-D1t"/>
+                            <include reference="fDI-ed-oI0"/>
+                            <include reference="zJu-1a-R0y"/>
+                            <include reference="CSq-X0-KmT"/>
+                            <include reference="oBR-3m-Gsz"/>
+                        </mask>
+                    </variation>
+                </view>
+                <view alpha="0.5499999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nag-M8-gEg" userLabel="Name Holder View">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Doutzen Croez" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wK2-Wh-Iiy">
+                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
+                            <color key="textColor" red="0.42352941179999998" green="0.3294117647" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Hy5-sd-1jW"/>
+                        <constraint firstAttribute="centerX" secondItem="wK2-Wh-Iiy" secondAttribute="centerX" constant="-0.5" id="QXT-67-dBn"/>
+                        <constraint firstAttribute="centerY" secondItem="wK2-Wh-Iiy" secondAttribute="centerY" constant="0.5" id="sop-ie-Cmz"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="subviews">
+                            <exclude reference="wK2-Wh-Iiy"/>
+                        </mask>
+                        <mask key="constraints">
+                            <exclude reference="Hy5-sd-1jW"/>
+                            <exclude reference="QXT-67-dBn"/>
+                            <exclude reference="sop-ie-Cmz"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="subviews">
+                            <include reference="wK2-Wh-Iiy"/>
+                        </mask>
+                        <mask key="constraints">
+                            <include reference="Hy5-sd-1jW"/>
+                            <include reference="QXT-67-dBn"/>
+                            <include reference="sop-ie-Cmz"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="hQs-eZ-yHo" secondAttribute="bottom" id="0jt-zc-JiL"/>
+                <constraint firstItem="ca0-aV-XXH" firstAttribute="bottom" secondItem="nag-M8-gEg" secondAttribute="bottom" id="4n8-bc-f46"/>
+                <constraint firstItem="ca0-aV-XXH" firstAttribute="leading" secondItem="nag-M8-gEg" secondAttribute="leading" id="IQW-Gw-F24"/>
+                <constraint firstItem="ca0-aV-XXH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ORc-6K-DyX"/>
+                <constraint firstItem="ca0-aV-XXH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="RqI-bL-F6D"/>
+                <constraint firstAttribute="trailing" secondItem="hQs-eZ-yHo" secondAttribute="trailing" id="SSe-n1-Pib"/>
+                <constraint firstItem="ca0-aV-XXH" firstAttribute="trailing" secondItem="nag-M8-gEg" secondAttribute="trailing" id="c1D-fR-GJa"/>
+                <constraint firstItem="hQs-eZ-yHo" firstAttribute="top" secondItem="ca0-aV-XXH" secondAttribute="bottom" id="mJw-Qo-NRk"/>
+                <constraint firstAttribute="trailing" secondItem="ca0-aV-XXH" secondAttribute="trailing" id="qyx-yy-LJp"/>
+                <constraint firstItem="hQs-eZ-yHo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="rvh-3r-a6v"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="ca0-aV-XXH"/>
+                    <exclude reference="hQs-eZ-yHo"/>
+                    <exclude reference="nag-M8-gEg"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="4n8-bc-f46"/>
+                    <exclude reference="IQW-Gw-F24"/>
+                    <exclude reference="ORc-6K-DyX"/>
+                    <exclude reference="RqI-bL-F6D"/>
+                    <exclude reference="c1D-fR-GJa"/>
+                    <exclude reference="qyx-yy-LJp"/>
+                    <exclude reference="0jt-zc-JiL"/>
+                    <exclude reference="SSe-n1-Pib"/>
+                    <exclude reference="mJw-Qo-NRk"/>
+                    <exclude reference="rvh-3r-a6v"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="subviews">
+                    <include reference="ca0-aV-XXH"/>
+                    <include reference="hQs-eZ-yHo"/>
+                    <include reference="nag-M8-gEg"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="4n8-bc-f46"/>
+                    <include reference="IQW-Gw-F24"/>
+                    <include reference="ORc-6K-DyX"/>
+                    <include reference="RqI-bL-F6D"/>
+                    <include reference="c1D-fR-GJa"/>
+                    <include reference="qyx-yy-LJp"/>
+                    <include reference="0jt-zc-JiL"/>
+                    <include reference="SSe-n1-Pib"/>
+                    <include reference="mJw-Qo-NRk"/>
+                    <include reference="rvh-3r-a6v"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="friendAgeLabel" destination="QaC-5g-PWd" id="Kl2-Bh-hxC"/>
+                <outlet property="friendDistanceLabel" destination="S1F-qg-C9U" id="SJr-Y1-OLV"/>
+                <outlet property="friendNameLabel" destination="wK2-Wh-Iiy" id="JEk-uN-aXT"/>
+                <outlet property="friendProfileImageView" destination="ca0-aV-XXH" id="sqD-Ud-62g"/>
+                <outlet property="friendSmokerLabel" destination="pml-sh-KFH" id="53p-xw-HbC"/>
+            </connections>
+            <point key="canvasLocation" x="465" y="461.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="TutorialBackground" width="495" height="775"/>
+    </resources>
+</document>
