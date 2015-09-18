@@ -10,10 +10,17 @@
 
 #import "FRDApplicationSettingsTableHeader.h"
 
-static NSInteger const kNotificationsSection = 0;
-static NSInteger const kOtherSettingsSection = 1;
+typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
+{
+    FRDApplicationSettingsSectionTypeNotifications,
+    FRDApplicationSettingsSectionTypeOther
+};
 
 @interface FRDApplicationSettingsTableContainer ()
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSeparatorHeight;
+@property (weak, nonatomic) IBOutlet UISwitch *friendSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *messageSwitch;
 
 @end
 
@@ -25,8 +32,26 @@ static NSInteger const kOtherSettingsSection = 1;
 {
     [super viewDidLoad];
     
+    [self registerHeader];
+    [self adjustTopSeparatorHeight];
+    
+    [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+}
+
+#pragma mark - Actions
+
+- (void)registerHeader
+{
     UINib *nib = [UINib nibWithNibName:NSStringFromClass([FRDApplicationSettingsTableHeader class]) bundle:nil];
     [self.tableView registerNib:nib forHeaderFooterViewReuseIdentifier:NSStringFromClass([FRDApplicationSettingsTableHeader class])];
+}
+
+/**
+ *  Make top separator 1 pixel tall
+ */
+- (void)adjustTopSeparatorHeight
+{
+    self.topSeparatorHeight.constant = 1.0 / [UIScreen mainScreen].scale;
 }
 
 #pragma mark - UITableViewDelegate
@@ -34,33 +59,23 @@ static NSInteger const kOtherSettingsSection = 1;
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Prevent scrolling if content fits the screen
-    if (CGRectGetMaxY(cell.frame) < CGRectGetHeight([UIScreen mainScreen].bounds)) {
+    if (CGRectGetMaxY(cell.frame) > CGRectGetHeight([UIScreen mainScreen].bounds)) {
         self.tableView.alwaysBounceVertical = NO;
     }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (section == kNotificationsSection) {
-        return [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([FRDApplicationSettingsTableHeader class])];
-    } else {
-        // Make this header, because there is space between sections on design
-        UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0,
-                                                                  0,
-                                                                  CGRectGetWidth(self.tableView.frame),
-                                                                  tableView.sectionHeaderHeight)];
-        
-        // Place this view at the bottom of the header so it'll look like Top Separator
-        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0,
-                                                                     CGRectGetMaxY(header.frame),
-                                                                     CGRectGetWidth(self.tableView.frame),
-                                                                     // Make separator 1 pixel (not point) tall
-                                                                     1.0 / [UIScreen mainScreen].scale)];
-
-        separator.backgroundColor = self.tableView.separatorColor;
-        [header addSubview:separator];
-        
-        return header;
+    FRDApplicationSettingsSectionType sectionType = section;
+    
+    switch (sectionType) {
+        case FRDApplicationSettingsSectionTypeNotifications: {
+            return [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([FRDApplicationSettingsTableHeader class])];
+        }
+            
+        case FRDApplicationSettingsSectionTypeOther: {
+            return [[UIView alloc] initWithFrame:CGRectZero];
+        }
     }
 }
 
@@ -72,11 +87,16 @@ static NSInteger const kOtherSettingsSection = 1;
         header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([FRDApplicationSettingsTableHeader class])];
     });
     
-    if (section == kNotificationsSection) {
-        return CGRectGetHeight(header.frame);
-    } else {
-        // Make header look like top separator
-        return CGRectGetMidY(header.bounds);
+    FRDApplicationSettingsSectionType sectionType = section;
+    
+    switch (sectionType) {
+        case FRDApplicationSettingsSectionTypeNotifications: {
+            return CGRectGetHeight(header.frame);
+        }
+            
+        case FRDApplicationSettingsSectionTypeOther: {
+            return CGRectGetMidY(header.bounds);
+        }
     }
 }
 
@@ -84,34 +104,46 @@ static NSInteger const kOtherSettingsSection = 1;
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    FRDApplicationSettingType settingType = -1;
-    if (indexPath.section == kOtherSettingsSection) {
-        settingType = indexPath.row;
-    }
+    FRDApplicationSettingsSectionType sectionType = indexPath.section;
     
-    switch (settingType) {
-        case FRDApplicationSettingTypeDeleteAccount: {
-            break;
+    if (sectionType == FRDApplicationSettingsSectionTypeOther) {
+        FRDApplicationOtherSettingType otherSettingType = indexPath.row;
+        
+        switch (otherSettingType) {
+            case FRDApplicationOtherSettingDeleteAccount: {
+                break;
+            }
+                
+            case FRDApplicationOtherSettingClearAllMessages: {
+                break;
+            }
+                
+            case FRDApplicationOtherSettingHelp: {
+                break;
+            }
+                
+            case FRDApplicationOtherSettingPrivacyPolicy: {
+                break;
+            }
+                
+            case FRDApplicationOtherSettingTermsOfService: {
+                break;
+            }
         }
-            
-        case FRDApplicationSettingTypeClearAllMessages: {
-            break;
+    } else {
+        FRDApplicationNotificationsSettingType notificationsSettingType = indexPath.row;
+        
+        switch (notificationsSettingType) {
+            case FRDApplicationNotificationSettingNewFriend: {
+                [self.friendSwitch setOn:!self.friendSwitch.isOn animated:YES];
+                break;
+            }
+                
+            case FRDApplicationNotificationSettingNewMessage: {
+                [self.messageSwitch setOn:!self.messageSwitch.isOn animated:YES];
+                break;
+            }
         }
-            
-        case FRDApplicationSettingTypeHelp: {
-            break;
-        }
-            
-        case FRDApplicationSettingTypePrivacyPolicy: {
-            break;
-        }
-            
-        case FRDApplicationSettingTypeTermsOfService: {
-            break;
-        }
-            
-        default:
-            break;
     }
 }
 

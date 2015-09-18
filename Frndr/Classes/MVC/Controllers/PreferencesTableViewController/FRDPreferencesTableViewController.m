@@ -26,7 +26,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Prevent scrolling if content fits the screen
-    if (CGRectGetMaxY(cell.frame) < CGRectGetHeight([UIScreen mainScreen].bounds)) {
+    if (CGRectGetMaxY(cell.frame) > CGRectGetHeight([UIScreen mainScreen].bounds)) {
         self.tableView.alwaysBounceVertical = NO;
     }
 }

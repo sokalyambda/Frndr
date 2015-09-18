@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VVZ-Ve-cwB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VVZ-Ve-cwB">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -91,7 +92,7 @@
             </objects>
             <point key="canvasLocation" x="328.5" y="461.25"/>
         </scene>
-        <!--Tutorial Controller-->
+        <!--Delegate-->
         <scene sceneID="JdV-ua-oed">
             <objects>
                 <viewController storyboardIdentifier="FRDTutorialController" id="XRT-sT-Uge" customClass="FRDTutorialController" sceneMemberID="viewController">
@@ -645,7 +646,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="separatorColor" red="0.84443406018841682" green="1" blue="0.9747817278951254" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="separatorColor" red="0.84313725490196079" green="1" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection id="RSr-Qc-uKQ">
                                 <cells>
@@ -664,9 +665,6 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dzv-9r-JST">
                                                     <rect key="frame" x="-25" y="-15" width="51" height="31"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="177" y="12" width="51" height="31"/>
-                                                    </variation>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -717,9 +715,6 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nq1-tn-vg1">
                                                     <rect key="frame" x="-25" y="-15" width="51" height="31"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="177" y="12" width="51" height="31"/>
-                                                    </variation>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -753,13 +748,13 @@
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
-                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="separatorInset" minX="400" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection id="LLN-lW-NTo">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="xNZ-aa-iF4">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="66" id="xNZ-aa-iF4">
                                         <rect key="frame" x="0.0" y="110" width="240" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xNZ-aa-iF4" id="ifQ-zP-u6l">
@@ -774,23 +769,45 @@
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AccountSettingArrow" translatesAutoresizingMaskIntoConstraints="NO" id="4n4-tx-KBm">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="218" y="21" width="8" height="23"/>
-                                                    </variation>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6hY-7Z-CRS" userLabel="Top Separator View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <color key="backgroundColor" red="0.84313725490196079" green="1" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="sp6-3W-0fv"/>
+                                                    </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="sp6-3W-0fv"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="0.0" y="0.0" width="400" height="0.0"/>
+                                                        <mask key="constraints">
+                                                            <include reference="sp6-3W-0fv"/>
+                                                        </mask>
+                                                    </variation>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="RbA-Ji-uMm" firstAttribute="centerY" secondItem="ifQ-zP-u6l" secondAttribute="centerY" id="0co-d4-Dls"/>
+                                                <constraint firstItem="RbA-Ji-uMm" firstAttribute="centerY" secondItem="ifQ-zP-u6l" secondAttribute="centerY" constant="1" id="0co-d4-Dls"/>
+                                                <constraint firstItem="6hY-7Z-CRS" firstAttribute="top" secondItem="ifQ-zP-u6l" secondAttribute="top" id="Kl6-Wg-XLr"/>
+                                                <constraint firstItem="6hY-7Z-CRS" firstAttribute="trailing" secondItem="ifQ-zP-u6l" secondAttribute="trailing" id="L3T-nE-yJR"/>
                                                 <constraint firstAttribute="trailing" secondItem="4n4-tx-KBm" secondAttribute="trailing" constant="14" id="T9N-x9-Oaw"/>
+                                                <constraint firstItem="6hY-7Z-CRS" firstAttribute="leading" secondItem="ifQ-zP-u6l" secondAttribute="leading" id="atl-yW-NpS"/>
                                                 <constraint firstItem="RbA-Ji-uMm" firstAttribute="leading" secondItem="ifQ-zP-u6l" secondAttribute="leading" constant="23" id="fDc-K2-zIg"/>
-                                                <constraint firstItem="4n4-tx-KBm" firstAttribute="centerY" secondItem="ifQ-zP-u6l" secondAttribute="centerY" id="tyg-FV-bhO"/>
+                                                <constraint firstItem="4n4-tx-KBm" firstAttribute="centerY" secondItem="ifQ-zP-u6l" secondAttribute="centerY" constant="1" id="tyg-FV-bhO"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">
                                                     <exclude reference="RbA-Ji-uMm"/>
                                                     <exclude reference="4n4-tx-KBm"/>
+                                                    <exclude reference="6hY-7Z-CRS"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <exclude reference="Kl6-Wg-XLr"/>
+                                                    <exclude reference="L3T-nE-yJR"/>
+                                                    <exclude reference="atl-yW-NpS"/>
                                                     <exclude reference="0co-d4-Dls"/>
                                                     <exclude reference="fDc-K2-zIg"/>
                                                     <exclude reference="T9N-x9-Oaw"/>
@@ -801,8 +818,12 @@
                                                 <mask key="subviews">
                                                     <include reference="RbA-Ji-uMm"/>
                                                     <include reference="4n4-tx-KBm"/>
+                                                    <include reference="6hY-7Z-CRS"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <include reference="Kl6-Wg-XLr"/>
+                                                    <include reference="L3T-nE-yJR"/>
+                                                    <include reference="atl-yW-NpS"/>
                                                     <include reference="0co-d4-Dls"/>
                                                     <include reference="fDc-K2-zIg"/>
                                                     <include reference="T9N-x9-Oaw"/>
@@ -810,6 +831,7 @@
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
+                                        <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="8"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="pvH-zP-5JV">
@@ -827,9 +849,6 @@
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AccountSettingArrow" translatesAutoresizingMaskIntoConstraints="NO" id="NfA-1B-hGs">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="218" y="21" width="8" height="23"/>
-                                                    </variation>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -863,6 +882,7 @@
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
+                                        <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="8"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="cZi-jz-DfE">
@@ -880,9 +900,6 @@
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AccountSettingArrow" translatesAutoresizingMaskIntoConstraints="NO" id="pUu-Ar-FsS">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="218" y="21" width="8" height="23"/>
-                                                    </variation>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -916,6 +933,7 @@
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
+                                        <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="8"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="bcW-uX-dpL">
@@ -933,9 +951,6 @@
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AccountSettingArrow" translatesAutoresizingMaskIntoConstraints="NO" id="Y97-9g-kgZ">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="218" y="21" width="8" height="23"/>
-                                                    </variation>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -969,6 +984,7 @@
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
+                                        <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="8"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="Y88-dc-2pu">
@@ -986,9 +1002,6 @@
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AccountSettingArrow" translatesAutoresizingMaskIntoConstraints="NO" id="SpS-5D-HSo">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="218" y="21" width="8" height="23"/>
-                                                    </variation>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -1022,6 +1035,7 @@
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
+                                        <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="8"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                 </cells>
@@ -1032,12 +1046,17 @@
                             <outlet property="delegate" destination="AQs-9T-kQV" id="Pyz-fO-hLU"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="friendSwitch" destination="Dzv-9r-JST" id="XMa-fN-CeL"/>
+                        <outlet property="messageSwitch" destination="nq1-tn-vg1" id="FRM-s5-hJ7"/>
+                        <outlet property="topSeparatorHeight" destination="sp6-3W-0fv" id="SuU-uS-lIF"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pHm-MW-FEF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2676" y="1134.75"/>
         </scene>
-        <!--Search Friends Controller-->
+        <!--Delegate-->
         <scene sceneID="Y0y-vf-iQt">
             <objects>
                 <viewController storyboardIdentifier="FRDSearchFriendsController" automaticallyAdjustsScrollViewInsets="NO" id="Eq2-Rl-oTr" customClass="FRDSearchFriendsController" sceneMemberID="viewController">
