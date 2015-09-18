@@ -6,13 +6,19 @@
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-typedef NS_ENUM(NSInteger, FRDApplicationSettingType)
+typedef NS_ENUM(NSInteger, FRDApplicationOtherSettingType)
 {
-    FRDApplicationSettingTypeDeleteAccount,
-    FRDApplicationSettingTypeClearAllMessages,
-    FRDApplicationSettingTypeHelp,
-    FRDApplicationSettingTypePrivacyPolicy,
-    FRDApplicationSettingTypeTermsOfService
+    FRDApplicationOtherSettingDeleteAccount,
+    FRDApplicationOtherSettingClearAllMessages,
+    FRDApplicationOtherSettingHelp,
+    FRDApplicationOtherSettingPrivacyPolicy,
+    FRDApplicationOtherSettingTermsOfService
+};
+
+typedef NS_ENUM(NSInteger, FRDApplicationNotificationsSettingType)
+{
+    FRDApplicationNotificationSettingNewFriend,
+    FRDApplicationNotificationSettingNewMessage
 };
 
 @interface FRDApplicationSettingsTableContainer : UITableViewController

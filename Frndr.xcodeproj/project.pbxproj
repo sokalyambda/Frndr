@@ -372,14 +372,14 @@
 			name = ApplicationSettingsTableContainer;
 			sourceTree = "<group>";
 		};
-		3E0EEC611BAC009F00AB51B0 /* AccountSettingTableViewHeader */ = {
+		3E0EEC611BAC009F00AB51B0 /* ApplicationSettingsTableHeader */ = {
 			isa = PBXGroup;
 			children = (
 				3E0EEC641BAC021800AB51B0 /* FRDApplicationSettingsTableHeader.h */,
 				3E0EEC651BAC021800AB51B0 /* FRDApplicationSettingsTableHeader.m */,
 				3E0EEC661BAC021800AB51B0 /* FRDApplicationSettingsTableHeader.xib */,
 			);
-			name = AccountSettingTableViewHeader;
+			name = ApplicationSettingsTableHeader;
 			sourceTree = "<group>";
 		};
 		3E10E3051BA15A800075C72D /* PhotoGalleryCollectionViewController */ = {
@@ -792,7 +792,7 @@
 		58BC76D11B9EB95100BB8B5A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3E0EEC611BAC009F00AB51B0 /* AccountSettingTableViewHeader */,
+				3E0EEC611BAC009F00AB51B0 /* ApplicationSettingsTableHeader */,
 				3E0EEC521BABE81C00AB51B0 /* RoundedImageView */,
 				58C28C4B1BA99945009D1AC4 /* FriendDragableView */,
 				587B3A9A1BA8281D0098154F /* RoundedView */,
