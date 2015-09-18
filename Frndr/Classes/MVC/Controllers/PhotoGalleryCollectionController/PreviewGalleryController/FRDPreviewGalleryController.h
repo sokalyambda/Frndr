@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-@interface FRDPreviewGalleryController : UIViewController
+#import "FRDBaseViewController.h"
+
+@interface FRDPreviewGalleryController : FRDBaseViewController
 
 @end
