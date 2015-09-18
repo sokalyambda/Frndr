@@ -21,6 +21,9 @@
 static NSString *const kPreferencesImageName = @"PreferencesIcon";
 static NSString *const kMessagesImageName = @"MessagesIcon";
 
+static NSString *const kPreferencesSegueIdentifier = @"preferencesSegueIdentifier";
+static NSString *const kFriendsListSegueIdentifier = @"friendsListSegueIdentifier";
+
 @interface FRDSearchFriendsController ()<ZLSwipeableViewDataSource, ZLSwipeableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet ZLSwipeableView *dragableViewsHolder;
@@ -79,15 +82,12 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 
 - (void)messagesBarButtonClicked:(id)sender
 {
-    FRDFriendsListController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDFriendsListController class])];
-    [self.navigationController pushViewController:controller animated:YES];
+    [self performSegueWithIdentifier:kFriendsListSegueIdentifier sender:self];
 }
 
 - (void)preferencesBarButtonClicked:(id)sender
 {
-//    FRDPreferencesController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
-//    [self.navigationController pushViewController:controller animated:YES];
-    [self performSegueWithIdentifier:@"preferencesSegueIdentifier" sender:self];
+    [self performSegueWithIdentifier:kPreferencesSegueIdentifier sender:self];
 }
 
 - (void)setupPhotosGalleryContainer
@@ -180,8 +180,10 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"preferencesSegueIdentifier"]) {
+    if ([segue.identifier isEqualToString:kPreferencesSegueIdentifier]) {
         FRDPreferencesController *controller = (FRDPreferencesController *)segue.destinationViewController;
+    } else if ([segue.identifier isEqualToString:kFriendsListSegueIdentifier]) {
+        FRDFriendsListController *controller = (FRDFriendsListController *)segue.destinationViewController;
     }
 }
 

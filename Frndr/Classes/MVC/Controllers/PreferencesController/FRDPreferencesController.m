@@ -30,11 +30,9 @@
     
     //set right bar button item
     self.navigationItem.rightBarButtonItem = rightIcon;
-    
-    UIBarButtonItem *fixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    fixedSpace.width = 40.f;
+
     self.navigationItem.hidesBackButton = YES;
-    self.navigationItem.leftBarButtonItems = @[fixedSpace];
+    self.navigationItem.leftBarButtonItem = nil;
 }
 
 - (IBAction)logoutFromFrndrClick:(id)sender
@@ -42,21 +40,21 @@
     NSLog(@"'Logout from Frndr' button clicked");
 }
 
+/**
+ *  Custom pop controller
+ *
+ *  @param sender Sender (Can be a button)
+ */
 - (void)customPopViewController:(id)sender
 {
     [CATransaction begin];
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-    
-    [CATransaction setCompletionBlock:^{
-        NSLog(@"complete!");
-    }];
-    
     CATransition *transition = [CATransition animation];
     transition.duration = .4f;
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     transition.type = kCATransitionReveal;
     transition.subtype = kCATransitionFromRight;
-    [self.navigationController.view.layer addAnimation:transition forKey:@"popController"];
+    [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
     [self.navigationController popViewControllerAnimated:YES];
     [CATransaction commit];
 }
