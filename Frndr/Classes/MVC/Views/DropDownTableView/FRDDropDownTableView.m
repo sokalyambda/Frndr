@@ -61,6 +61,7 @@ static CGFloat const kDropDownHeight = 200.f;
 {
     self.layer.cornerRadius = 5.0;
     self.dropDownList.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.dropDownList.clipsToBounds = YES;
 }
 
 #pragma mark - Accessors
@@ -69,14 +70,22 @@ static CGFloat const kDropDownHeight = 200.f;
 {
     CGFloat actualHeight = kDropDownHeight;
 
-    NSLog(@"presented view frame %@", NSStringFromCGRect(self.presentedView.frame));
-    NSLog(@"anchor view frame %@", NSStringFromCGRect(self.anchorView.frame));
-    
-    if (CGRectContainsPoint(self.presentedView.frame, CGPointMake(CGRectGetMinX(self.anchorView.frame), CGRectGetMaxY(self.anchorView.frame) + actualHeight))) {
-        NSLog(@"OK");
-    } else {
-        NSLog(@"HOOJOK");
+    if ([self.presentedView isKindOfClass:[UIScrollView class]]) {
+        if (CGRectContainsPoint(self.presentedView.frame, CGPointMake(CGRectGetMinX(self.anchorView.frame), CGRectGetMaxY(self.anchorView.frame) + actualHeight))) {
+            NSLog(@"OK");
+        } else {
+            NSLog(@"HOOJOK");
+        }
     }
+    
+//    NSLog(@"presented view frame %@", NSStringFromCGRect(self.presentedView.frame));
+//    NSLog(@"anchor view frame %@", NSStringFromCGRect(self.anchorView.frame));
+//    
+//    if (CGRectContainsPoint(self.presentedView.frame, CGPointMake(CGRectGetMinX(self.anchorView.frame), CGRectGetMaxY(self.anchorView.frame) + actualHeight))) {
+//        NSLog(@"OK");
+//    } else {
+//        NSLog(@"HOOJOK");
+//    }
     return actualHeight;
 }
 
@@ -84,11 +93,11 @@ static CGFloat const kDropDownHeight = 200.f;
 {
     _anchorView = anchorView;
     
-    CGPoint relatedPoint = [_anchorView convertPoint:_anchorView.bounds.origin toView:self.presentedView];
-    
-    savedDropDownTableFrame = CGRectMake(relatedPoint.x, CGRectGetMaxY(_anchorView.bounds) + relatedPoint.y, CGRectGetWidth(_anchorView.frame), 0);
-    
-    self.frame = savedDropDownTableFrame;
+    if (_anchorView) {
+        CGPoint relatedPoint = [_anchorView convertPoint:_anchorView.bounds.origin toView:self.presentedView];
+        savedDropDownTableFrame = CGRectMake(relatedPoint.x, CGRectGetMaxY(_anchorView.bounds) + relatedPoint.y, CGRectGetWidth(_anchorView.frame), 0);
+        self.frame = savedDropDownTableFrame;
+    }
 }
 
 #pragma mark - Actions
@@ -137,18 +146,18 @@ static CGFloat const kAdditionalOffset = 5.f;
 static CGFloat const kSlidingTime = .5f;
 - (void)showDropDownList
 {
+    [self.presentedView addSubview:self];
     WEAK_SELF;
     [UIView animateWithDuration:kSlidingTime
                           delay:0.1f
          usingSpringWithDamping:.5f
           initialSpringVelocity:.5f
-                        options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                            [weakSelf.presentedView addSubview:self];
-                            CGRect newFrame = self.frame;
+                        options:UIViewAnimationOptionCurveEaseOut animations:^{
+                            CGRect newFrame = weakSelf.frame;
                             newFrame.origin.y += kAdditionalOffset;
-                            newFrame.size.height = self.calculatedDropDownHeight;
-                            weakSelf.dropDownList.frame = newFrame;
+                            newFrame.size.height = weakSelf.calculatedDropDownHeight;
                             weakSelf.frame = newFrame;
+                            weakSelf.dropDownList.frame = newFrame;
                         }
                      completion:nil];
 }
@@ -160,13 +169,10 @@ static CGFloat const kSlidingTime = .5f;
                           delay:0.1f
          usingSpringWithDamping:1.f
           initialSpringVelocity:1.f
-                        options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                        options:UIViewAnimationOptionCurveEaseIn animations:^{
                             weakSelf.frame = savedDropDownTableFrame;
                         }
                      completion:^(BOOL finished) {
-                         if ([weakSelf.anchorView isKindOfClass:[UITextField class]]) {
-                             [(UITextField *)weakSelf.anchorView resignFirstResponder];
-                         }
                          weakSelf.anchorView = nil;
                          weakSelf.dropDownDataSource = nil;
                          [weakSelf removeFromSuperview];

@@ -27,11 +27,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.friendsTableView.rowHeight = UITableViewAutomaticDimension;
-    self.friendsTableView.estimatedRowHeight = 20.f;
-    
-    [self.friendsTableView setSeparatorInset:UIEdgeInsetsZero];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.friendsTableView.rowHeight = UITableViewAutomaticDimension;
+        self.friendsTableView.estimatedRowHeight = 20.f;
+        [self.friendsTableView reloadData];
+    });
     [self.friendsTableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
 }
 
