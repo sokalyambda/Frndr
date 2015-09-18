@@ -85,8 +85,9 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 
 - (void)preferencesBarButtonClicked:(id)sender
 {
-    FRDPreferencesController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
-    [self.navigationController pushViewController:controller animated:YES];
+//    FRDPreferencesController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
+//    [self.navigationController pushViewController:controller animated:YES];
+    [self performSegueWithIdentifier:@"preferencesSegueIdentifier" sender:self];
 }
 
 - (void)setupPhotosGalleryContainer
@@ -173,6 +174,15 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)swipeableView:(ZLSwipeableView *)swipeableView didEndSwipingView:(UIView *)view atLocation:(CGPoint)location
 {
 
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"preferencesSegueIdentifier"]) {
+        FRDPreferencesController *controller = (FRDPreferencesController *)segue.destinationViewController;
+    }
 }
 
 @end

@@ -43,8 +43,13 @@
     
     self.navigationTitleView.titleText = LOCALIZED(@"Frnds");
     
-    UIBarButtonItem *topIconItem = [FRDSerialViewConstructor customRightBarButtonForController:self withAction:nil];
-    self.navigationItem.rightBarButtonItem = topIconItem;
+    UIBarButtonItem *topIconItem = [FRDSerialViewConstructor customRightBarButtonForController:self withAction:@selector(popController:)];
+    self.navigationItem.leftBarButtonItem = topIconItem;
+}
+
+- (void)popController:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - UITableViewDataSource
