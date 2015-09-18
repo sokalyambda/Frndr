@@ -11,5 +11,6 @@
 @interface FRDRelationshipCollectionCell : UICollectionViewCell
 
 - (void)configureCellWithRelationshipItem:(FRDRelationshipItem *)item;
+- (void)updateCellWithRelationshipItem:(FRDRelationshipItem *)item;
 
 @end

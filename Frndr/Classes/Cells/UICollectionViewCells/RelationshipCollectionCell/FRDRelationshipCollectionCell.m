@@ -26,7 +26,13 @@
     } else {
         self.relationshipImageView.image = item.relationshipNotActiveImage;
     }
-    self.relationshipTitleLabel.text = item.relationshipTitle;
+    self.relationshipTitleLabel.text = item.isSelected ? item.relationshipTitle : @"";
+}
+
+- (void)updateCellWithRelationshipItem:(FRDRelationshipItem *)item
+{
+    item.isSelected = !item.isSelected;
+    [self configureCellWithRelationshipItem:item];
 }
 
 @end

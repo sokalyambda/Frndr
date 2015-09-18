@@ -69,7 +69,8 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     FRDRelationshipItem *currentItem = self.relationshipStatuses[indexPath.row];
-    currentItem.isSelected = !currentItem.isSelected;
+    FRDRelationshipCollectionCell *cell = (FRDRelationshipCollectionCell *)[self collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    [cell updateCellWithRelationshipItem:currentItem];
     [collectionView reloadItemsAtIndexPaths:@[indexPath]];
 }
 
