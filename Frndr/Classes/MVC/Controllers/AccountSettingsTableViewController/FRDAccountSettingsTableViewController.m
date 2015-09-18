@@ -21,16 +21,16 @@
     
     UINib *nib = [UINib nibWithNibName:NSStringFromClass([FRDAccountSettingTableViewHeader class]) bundle:nil];
     [self.tableView registerNib:nib forHeaderFooterViewReuseIdentifier:NSStringFromClass([FRDAccountSettingTableViewHeader class])];
+    
+    [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
 }
 
 #pragma mark - UITableViewDelegate
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (section == 0) {
-        FRDAccountSettingTableViewHeader *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([FRDAccountSettingTableViewHeader class])];
-        
-        return header;
+    if (section == 0) {        
+        return [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([FRDAccountSettingTableViewHeader class])];
     } else {
         return [[UIView alloc] initWithFrame:CGRectZero];
     }
@@ -47,8 +47,13 @@
     if (section == 0) {
         return CGRectGetHeight(header.frame);
     } else {
-        return 0;
+        return CGRectGetMidY(header.bounds);
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
