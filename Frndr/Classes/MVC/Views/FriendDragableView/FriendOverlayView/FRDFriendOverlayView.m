@@ -46,7 +46,7 @@
 
 - (void)commonInit
 {
-
+    self.layer.cornerRadius = 10.f;
 }
 
 @end

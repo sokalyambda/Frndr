@@ -10,52 +10,86 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view alpha="0.29999999999999966" contentMode="scaleToFill" id="iN0-l3-epB" customClass="FRDFriendOverlayView">
+        <view alpha="0.29999999999999999" contentMode="scaleToFill" id="iN0-l3-epB" customClass="FRDFriendOverlayView">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="applyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="oXF-DG-lHt">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rSB-Rc-tGh" userLabel="Alpha Container">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="applyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="oXF-DG-lHt">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="192" id="5ur-lc-93D"/>
+                                <constraint firstAttribute="height" constant="192" id="nBl-Hg-rld"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="5ur-lc-93D"/>
+                                    <exclude reference="nBl-Hg-rld"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="5ur-lc-93D"/>
+                                    <include reference="nBl-Hg-rld"/>
+                                </mask>
+                            </variation>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="192" id="65q-vR-IL0"/>
-                        <constraint firstAttribute="height" constant="192" id="laM-pY-anG"/>
+                        <constraint firstAttribute="centerY" secondItem="oXF-DG-lHt" secondAttribute="centerY" id="0gJ-KG-rMs"/>
+                        <constraint firstAttribute="centerX" secondItem="oXF-DG-lHt" secondAttribute="centerX" id="c34-I7-iit"/>
                     </constraints>
                     <variation key="default">
+                        <mask key="subviews">
+                            <exclude reference="oXF-DG-lHt"/>
+                        </mask>
                         <mask key="constraints">
-                            <exclude reference="65q-vR-IL0"/>
-                            <exclude reference="laM-pY-anG"/>
+                            <exclude reference="0gJ-KG-rMs"/>
+                            <exclude reference="c34-I7-iit"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="subviews">
+                            <include reference="oXF-DG-lHt"/>
+                        </mask>
                         <mask key="constraints">
-                            <include reference="65q-vR-IL0"/>
-                            <include reference="laM-pY-anG"/>
+                            <include reference="0gJ-KG-rMs"/>
+                            <include reference="c34-I7-iit"/>
                         </mask>
                     </variation>
-                </imageView>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerY" secondItem="oXF-DG-lHt" secondAttribute="centerY" id="HmY-70-FGN"/>
-                <constraint firstAttribute="centerX" secondItem="oXF-DG-lHt" secondAttribute="centerX" id="oYW-9U-YKL"/>
+                <constraint firstAttribute="trailing" secondItem="rSB-Rc-tGh" secondAttribute="trailing" id="DYf-E9-rsY"/>
+                <constraint firstItem="rSB-Rc-tGh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="GuU-Y4-i5e"/>
+                <constraint firstAttribute="bottom" secondItem="rSB-Rc-tGh" secondAttribute="bottom" id="POf-tb-C4L"/>
+                <constraint firstItem="rSB-Rc-tGh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="qc1-HU-Njx"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="subviews">
-                    <exclude reference="oXF-DG-lHt"/>
+                    <exclude reference="rSB-Rc-tGh"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="HmY-70-FGN"/>
-                    <exclude reference="oYW-9U-YKL"/>
+                    <exclude reference="DYf-E9-rsY"/>
+                    <exclude reference="GuU-Y4-i5e"/>
+                    <exclude reference="POf-tb-C4L"/>
+                    <exclude reference="qc1-HU-Njx"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
                 <mask key="subviews">
-                    <include reference="oXF-DG-lHt"/>
+                    <include reference="rSB-Rc-tGh"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="HmY-70-FGN"/>
-                    <include reference="oYW-9U-YKL"/>
+                    <include reference="DYf-E9-rsY"/>
+                    <include reference="GuU-Y4-i5e"/>
+                    <include reference="POf-tb-C4L"/>
+                    <include reference="qc1-HU-Njx"/>
                 </mask>
             </variation>
             <connections>

@@ -139,38 +139,27 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
          didSwipeView:(UIView *)view
           inDirection:(ZLSwipeableViewDirection)direction
 {
-    switch (direction) {
-        case ZLSwipeableViewDirectionLeft: {
-            
-            break;
-        }
-        case ZLSwipeableViewDirectionRight: {
-            break;
-        }
-        default:
-            break;
-    }
-    NSLog(@"did swipe in direction: %zd", direction);
+
 }
 
 - (void)swipeableView:(ZLSwipeableView *)swipeableView didCancelSwipe:(UIView *)view
 {
-    NSLog(@"did cancel swipe");
+
 }
 
 - (void)swipeableView:(ZLSwipeableView *)swipeableView didStartSwipingView:(UIView *)view atLocation:(CGPoint)location
 {
-    NSLog(@"did start swiping at location: x %f, y%f", location.x, location.y);
+
 }
 
 - (void)swipeableView:(ZLSwipeableView *)swipeableView swipingView:(UIView *)view atLocation:(CGPoint)location  translation:(CGPoint)translation
 {
-    NSLog(@"swiping at location: x %f, y %f, translation: x %f, y %f", location.x, location.y, translation.x, translation.y);
+
 }
 
 - (void)swipeableView:(ZLSwipeableView *)swipeableView didEndSwipingView:(UIView *)view atLocation:(CGPoint)location
 {
-    NSLog(@"did start swiping at location: x %f, y%f", location.x, location.y);
+
 }
 
 @end
