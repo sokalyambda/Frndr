@@ -6,13 +6,13 @@
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "FRDAccountSettingsController.h"
+#import "FRDApplicationSettingsViewController.h"
 
-@interface FRDAccountSettingsController ()
+@interface FRDApplicationSettingsViewController ()
 
 @end
 
-@implementation FRDAccountSettingsController
+@implementation FRDApplicationSettingsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

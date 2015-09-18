@@ -22,6 +22,14 @@
 
 #pragma mark - UITableViewDelegate
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Prevent scrolling if content fits the screen
+    if (CGRectGetMaxY(cell.frame) < CGRectGetHeight([UIScreen mainScreen].bounds)) {
+        self.tableView.alwaysBounceVertical = NO;
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

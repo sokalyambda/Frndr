@@ -10,8 +10,8 @@
 		3E00C40E1BAAB91F00AD2D97 /* FRDFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E00C40D1BAAB91F00AD2D97 /* FRDFriendCell.m */; };
 		3E0EEC551BABE85500AB51B0 /* FRDRoundedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEC541BABE85500AB51B0 /* FRDRoundedView.m */; };
 		3E0EEC581BABE89300AB51B0 /* FRDRoundedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEC571BABE89300AB51B0 /* FRDRoundedImageView.m */; };
-		3E0EEC5C1BABEF2300AB51B0 /* FRDAccountSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEC5B1BABEF2300AB51B0 /* FRDAccountSettingsController.m */; };
-		3E0EEC601BABF2CE00AB51B0 /* FRDAccountSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEC5F1BABF2CE00AB51B0 /* FRDAccountSettingsTableViewController.m */; };
+		3E0EEC5C1BABEF2300AB51B0 /* FRDApplicationSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEC5B1BABEF2300AB51B0 /* FRDApplicationSettingsViewController.m */; };
+		3E0EEC601BABF2CE00AB51B0 /* FRDApplicationSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEC5F1BABF2CE00AB51B0 /* FRDApplicationSettingsTableViewController.m */; };
 		3E0EEC671BAC021800AB51B0 /* FRDAccountSettingTableViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEC651BAC021800AB51B0 /* FRDAccountSettingTableViewHeader.m */; };
 		3E0EEC681BAC021800AB51B0 /* FRDAccountSettingTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E0EEC661BAC021800AB51B0 /* FRDAccountSettingTableViewHeader.xib */; };
 		3E10E3081BA15B3E0075C72D /* FRDPhotoGalleryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E10E3071BA15B3E0075C72D /* FRDPhotoGalleryCollectionViewController.m */; };
@@ -122,10 +122,10 @@
 		3E0EEC541BABE85500AB51B0 /* FRDRoundedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRoundedView.m; path = Classes/MVC/Views/RoundedView/FRDRoundedView.m; sourceTree = "<group>"; };
 		3E0EEC561BABE89300AB51B0 /* FRDRoundedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRoundedImageView.h; path = Classes/MVC/Views/RoundedImageView/FRDRoundedImageView.h; sourceTree = "<group>"; };
 		3E0EEC571BABE89300AB51B0 /* FRDRoundedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRoundedImageView.m; path = Classes/MVC/Views/RoundedImageView/FRDRoundedImageView.m; sourceTree = "<group>"; };
-		3E0EEC5A1BABEF2300AB51B0 /* FRDAccountSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDAccountSettingsController.h; path = Classes/MVC/Controllers/AccountSettingsController/FRDAccountSettingsController.h; sourceTree = "<group>"; };
-		3E0EEC5B1BABEF2300AB51B0 /* FRDAccountSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDAccountSettingsController.m; path = Classes/MVC/Controllers/AccountSettingsController/FRDAccountSettingsController.m; sourceTree = "<group>"; };
-		3E0EEC5E1BABF2CE00AB51B0 /* FRDAccountSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDAccountSettingsTableViewController.h; path = Classes/MVC/Controllers/AccountSettingsTableViewController/FRDAccountSettingsTableViewController.h; sourceTree = "<group>"; };
-		3E0EEC5F1BABF2CE00AB51B0 /* FRDAccountSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDAccountSettingsTableViewController.m; path = Classes/MVC/Controllers/AccountSettingsTableViewController/FRDAccountSettingsTableViewController.m; sourceTree = "<group>"; };
+		3E0EEC5A1BABEF2300AB51B0 /* FRDApplicationSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDApplicationSettingsViewController.h; path = Classes/MVC/Controllers/AccountSettingsController/FRDApplicationSettingsViewController.h; sourceTree = "<group>"; };
+		3E0EEC5B1BABEF2300AB51B0 /* FRDApplicationSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDApplicationSettingsViewController.m; path = Classes/MVC/Controllers/AccountSettingsController/FRDApplicationSettingsViewController.m; sourceTree = "<group>"; };
+		3E0EEC5E1BABF2CE00AB51B0 /* FRDApplicationSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDApplicationSettingsTableViewController.h; path = Classes/MVC/Controllers/AccountSettingsTableViewController/FRDApplicationSettingsTableViewController.h; sourceTree = "<group>"; };
+		3E0EEC5F1BABF2CE00AB51B0 /* FRDApplicationSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDApplicationSettingsTableViewController.m; path = Classes/MVC/Controllers/AccountSettingsTableViewController/FRDApplicationSettingsTableViewController.m; sourceTree = "<group>"; };
 		3E0EEC641BAC021800AB51B0 /* FRDAccountSettingTableViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDAccountSettingTableViewHeader.h; path = Classes/MVC/Views/AccountSettingTableViewHeader/FRDAccountSettingTableViewHeader.h; sourceTree = "<group>"; };
 		3E0EEC651BAC021800AB51B0 /* FRDAccountSettingTableViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDAccountSettingTableViewHeader.m; path = Classes/MVC/Views/AccountSettingTableViewHeader/FRDAccountSettingTableViewHeader.m; sourceTree = "<group>"; };
 		3E0EEC661BAC021800AB51B0 /* FRDAccountSettingTableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDAccountSettingTableViewHeader.xib; path = Classes/MVC/Views/AccountSettingTableViewHeader/FRDAccountSettingTableViewHeader.xib; sourceTree = "<group>"; };
@@ -343,22 +343,22 @@
 			name = RoundedImageView;
 			sourceTree = "<group>";
 		};
-		3E0EEC591BABEECF00AB51B0 /* AccountSettingsController */ = {
+		3E0EEC591BABEECF00AB51B0 /* ApplicationSettingsController */ = {
 			isa = PBXGroup;
 			children = (
-				3E0EEC5A1BABEF2300AB51B0 /* FRDAccountSettingsController.h */,
-				3E0EEC5B1BABEF2300AB51B0 /* FRDAccountSettingsController.m */,
+				3E0EEC5A1BABEF2300AB51B0 /* FRDApplicationSettingsViewController.h */,
+				3E0EEC5B1BABEF2300AB51B0 /* FRDApplicationSettingsViewController.m */,
 			);
-			name = AccountSettingsController;
+			name = ApplicationSettingsController;
 			sourceTree = "<group>";
 		};
-		3E0EEC5D1BABF28900AB51B0 /* AccountSettingsTableViewController */ = {
+		3E0EEC5D1BABF28900AB51B0 /* ApplicationSettingsTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				3E0EEC5E1BABF2CE00AB51B0 /* FRDAccountSettingsTableViewController.h */,
-				3E0EEC5F1BABF2CE00AB51B0 /* FRDAccountSettingsTableViewController.m */,
+				3E0EEC5E1BABF2CE00AB51B0 /* FRDApplicationSettingsTableViewController.h */,
+				3E0EEC5F1BABF2CE00AB51B0 /* FRDApplicationSettingsTableViewController.m */,
 			);
-			name = AccountSettingsTableViewController;
+			name = ApplicationSettingsTableViewController;
 			sourceTree = "<group>";
 		};
 		3E0EEC611BAC009F00AB51B0 /* AccountSettingTableViewHeader */ = {
@@ -794,8 +794,8 @@
 		58BC76D21B9EB95600BB8B5A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3E0EEC5D1BABF28900AB51B0 /* AccountSettingsTableViewController */,
-				3E0EEC591BABEECF00AB51B0 /* AccountSettingsController */,
+				3E0EEC5D1BABF28900AB51B0 /* ApplicationSettingsTableViewController */,
+				3E0EEC591BABEECF00AB51B0 /* ApplicationSettingsController */,
 				58C28C3A1BA9524A009D1AC4 /* SearchFriendsController */,
 				58C28C361BA950FA009D1AC4 /* FriendsListController */,
 				587B3A8A1BA814990098154F /* RelationshipStatusController */,
@@ -1562,7 +1562,7 @@
 				58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */,
 				587B3A881BA80F3D0098154F /* FRDDropDownHolderController.m in Sources */,
 				3ED072361BA048460091B7E4 /* FRDPreferencesTableViewController.m in Sources */,
-				3E0EEC5C1BABEF2300AB51B0 /* FRDAccountSettingsController.m in Sources */,
+				3E0EEC5C1BABEF2300AB51B0 /* FRDApplicationSettingsViewController.m in Sources */,
 				58FFDBAE1B9ECF6B00B0490A /* FRDCommonDateFormatter.m in Sources */,
 				58FFDBB81B9ED0A900B0490A /* FRDErrorHandler.m in Sources */,
 				581B9D5C1B9EDCDB0080393B /* FRDFailedOperationManager.m in Sources */,
@@ -1589,7 +1589,7 @@
 				587B3A7A1BA7F7B00098154F /* FRDSmokerDataSource.m in Sources */,
 				581B9D441B9ED7FE0080393B /* FRDFacebookService.m in Sources */,
 				58BC77291B9ECB0300BB8B5A /* FRDKeychainHandler.m in Sources */,
-				3E0EEC601BABF2CE00AB51B0 /* FRDAccountSettingsTableViewController.m in Sources */,
+				3E0EEC601BABF2CE00AB51B0 /* FRDApplicationSettingsTableViewController.m in Sources */,
 				5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */,
 				581B9D561B9EDCA00080393B /* FRDNetworkOperation.m in Sources */,
 				58BC77201B9ECA9C00BB8B5A /* UIFont+Styles.m in Sources */,
