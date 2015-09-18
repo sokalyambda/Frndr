@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VVZ-Ve-cwB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RoC-rl-LAq">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -91,7 +92,7 @@
             </objects>
             <point key="canvasLocation" x="328.5" y="461.25"/>
         </scene>
-        <!--Tutorial Controller-->
+        <!--Delegate-->
         <scene sceneID="JdV-ua-oed">
             <objects>
                 <viewController storyboardIdentifier="FRDTutorialController" id="XRT-sT-Uge" customClass="FRDTutorialController" sceneMemberID="viewController">
@@ -361,8 +362,10 @@
                             <tableViewSection id="KWz-rT-ElK">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="GvH-Ia-aIw">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GvH-Ia-aIw" id="9fk-Q1-cw4">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Za-GX-bvr">
@@ -425,9 +428,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="nGu-5l-iQb">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="70" width="240" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nGu-5l-iQb" id="rF0-6H-r7E">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosureIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="Jpt-X8-4XG">
@@ -490,8 +494,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="Z1h-Vn-frH">
+                                        <rect key="frame" x="0.0" y="140" width="240" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z1h-Vn-frH" id="9J5-ex-hOX">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hs3-SB-I74">
@@ -554,8 +560,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="lWv-0Z-Lvv">
+                                        <rect key="frame" x="0.0" y="210" width="240" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lWv-0Z-Lvv" id="ANj-RC-iqg">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share Frndr" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8by-72-SV8">
@@ -630,7 +638,7 @@
             </objects>
             <point key="canvasLocation" x="1983" y="1037.25"/>
         </scene>
-        <!--Search Friends Controller-->
+        <!--Delegate-->
         <scene sceneID="Y0y-vf-iQt">
             <objects>
                 <viewController storyboardIdentifier="FRDSearchFriendsController" automaticallyAdjustsScrollViewInsets="NO" id="Eq2-Rl-oTr" customClass="FRDSearchFriendsController" sceneMemberID="viewController">
@@ -1048,13 +1056,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" placeholderIntrinsicWidth="400" placeholderIntrinsicHeight="120" selectionStyle="default" indentationWidth="10" reuseIdentifier="FRDFriendCell" id="XgJ-0G-dtj" customClass="FRDFriendCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FRDFriendCell" id="XgJ-0G-dtj" customClass="FRDFriendCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XgJ-0G-dtj" id="L3P-JJ-sEd">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V7r-dE-Nw7">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V7r-dE-Nw7" customClass="FRDRoundedImageView">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="84" id="HBC-4k-sfB"/>
@@ -1172,6 +1181,7 @@
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
+                                        <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                         <connections>
                                             <outlet property="avatarImageView" destination="V7r-dE-Nw7" id="Vmb-Eg-Vbd"/>
                                             <outlet property="messageLabel" destination="vz5-sP-XPD" id="juA-dE-7aw"/>

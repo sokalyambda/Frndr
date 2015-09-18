@@ -27,6 +27,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.friendsTableView.rowHeight = UITableViewAutomaticDimension;
+    self.friendsTableView.estimatedRowHeight = 20.f;
+    
+    [self.friendsTableView setSeparatorInset:UIEdgeInsetsZero];
+    [self.friendsTableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
 }
 
 #pragma mark - Actions
