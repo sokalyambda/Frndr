@@ -9,6 +9,7 @@
 #import "FRDSearchFriendsController.h"
 #import "FRDPreferencesController.h"
 #import "FRDFriendsListController.h"
+#import "FRDPreviewGalleryController.h"
 
 #import "FRDFriendDragableView.h"
 #import "FRDFriendDragableParentView.h"
@@ -28,6 +29,8 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 @property (weak, nonatomic) IBOutlet UILabel *biographyLabel;
 @property (weak, nonatomic) IBOutlet UIView *photosCollectionContainer;
 
+@property (nonatomic) FRDPreviewGalleryController *previewGalleryController;
+
 @end
 
 @implementation FRDSearchFriendsController
@@ -37,6 +40,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setupPhotosGalleryContainer];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self setupDragableViewOptions];
     });
@@ -83,6 +87,15 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 {
     FRDPreferencesController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)setupPhotosGalleryContainer
+{
+    self.previewGalleryController = [[FRDPreviewGalleryController alloc] initWithNibName:NSStringFromClass([FRDPreviewGalleryController class]) bundle:nil];
+    [self.previewGalleryController.view setFrame:self.photosCollectionContainer.frame];
+    [self.photosCollectionContainer addSubview:self.previewGalleryController.view];
+    [self addChildViewController:self.previewGalleryController];
+    [self.previewGalleryController didMoveToParentViewController:self];
 }
 
 /**
