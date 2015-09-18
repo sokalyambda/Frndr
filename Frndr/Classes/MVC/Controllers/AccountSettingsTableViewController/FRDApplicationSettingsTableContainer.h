@@ -15,6 +15,6 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingType)
     FRDApplicationSettingTypeTermsOfService
 };
 
-@interface FRDApplicationSettingsTableViewController : UITableViewController
+@interface FRDApplicationSettingsTableContainer : UITableViewController
 
 @end

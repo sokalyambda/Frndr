@@ -8,6 +8,7 @@
 
 #import "FRDPreferencesTableViewController.h"
 #import "FRDSearchSettingsController.h"
+#import "FRDApplicationSettingsController.h"
 
 @implementation FRDPreferencesTableViewController
 
@@ -46,6 +47,8 @@
             break;
         }
         case FRDPreferenceTypeSettings: {
+            FRDApplicationSettingsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDApplicationSettingsController class])];
+            [self.parentViewController.navigationController pushViewController:controller animated:YES];
             break;
         }
         case FRDPreferenceTypeShareFrndr: {

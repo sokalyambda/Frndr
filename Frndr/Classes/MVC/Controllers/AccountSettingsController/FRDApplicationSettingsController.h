@@ -8,6 +8,6 @@
 
 #import "FRDBaseViewController.h"
 
-@interface FRDApplicationSettingsViewController : FRDBaseViewController
+@interface FRDApplicationSettingsController : FRDBaseViewController
 
 @end

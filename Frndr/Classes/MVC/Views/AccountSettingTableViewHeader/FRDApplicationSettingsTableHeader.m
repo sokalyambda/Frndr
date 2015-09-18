@@ -6,12 +6,8 @@
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "FRDAccountSettingTableViewHeader.h"
+#import "FRDApplicationSettingsTableHeader.h"
 
-@implementation FRDAccountSettingTableViewHeader
-
-- (void)awakeFromNib {
-    // Initialization code
-}
+@implementation FRDApplicationSettingsTableHeader
 
 @end

@@ -6,24 +6,27 @@
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "FRDApplicationSettingsTableViewController.h"
+#import "FRDApplicationSettingsTableContainer.h"
 
-#import "FRDAccountSettingTableViewHeader.h"
+#import "FRDApplicationSettingsTableHeader.h"
 
 static NSInteger const kNotificationsSection = 0;
 static NSInteger const kOtherSettingsSection = 1;
 
-@interface FRDApplicationSettingsTableViewController ()
+@interface FRDApplicationSettingsTableContainer ()
 
 @end
 
-@implementation FRDApplicationSettingsTableViewController
+@implementation FRDApplicationSettingsTableContainer
 
-- (void)viewDidLoad {
+#pragma mark - View Lifecycle
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
-    UINib *nib = [UINib nibWithNibName:NSStringFromClass([FRDAccountSettingTableViewHeader class]) bundle:nil];
-    [self.tableView registerNib:nib forHeaderFooterViewReuseIdentifier:NSStringFromClass([FRDAccountSettingTableViewHeader class])];
+    UINib *nib = [UINib nibWithNibName:NSStringFromClass([FRDApplicationSettingsTableHeader class]) bundle:nil];
+    [self.tableView registerNib:nib forHeaderFooterViewReuseIdentifier:NSStringFromClass([FRDApplicationSettingsTableHeader class])];
 }
 
 #pragma mark - UITableViewDelegate
@@ -39,7 +42,7 @@ static NSInteger const kOtherSettingsSection = 1;
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == kNotificationsSection) {
-        return [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([FRDAccountSettingTableViewHeader class])];
+        return [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([FRDApplicationSettingsTableHeader class])];
     } else {
         // Make this header, because there is space between sections on design
         UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0,
@@ -63,10 +66,10 @@ static NSInteger const kOtherSettingsSection = 1;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    static FRDAccountSettingTableViewHeader *header;
+    static FRDApplicationSettingsTableHeader *header;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([FRDAccountSettingTableViewHeader class])];
+        header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([FRDApplicationSettingsTableHeader class])];
     });
     
     if (section == kNotificationsSection) {
