@@ -93,11 +93,9 @@
         }
             
         case FRDRangeSliderModeRange: {
-            if (![self.leftThumb isDescendantOfView:self]) {
-                [self addSubview:self.leftThumb];
-            }
-            
+            [self addSubview:self.leftThumb];
             [self moveThumbsToDefaultPositions];
+            [self updateInRangeTrack];
         }
     }
     
@@ -114,6 +112,7 @@
                                           trackHeight);
     
     [self updateInRangeTrack];
+    [self updateOutRangeTrack];
 }
 
 - (void)setThumbImage:(UIImage *)image
@@ -127,28 +126,18 @@
                                           CGRectGetMidY(self.bounds) - image.size.height / 2.0,
                                           image.size.width,
                                           image.size.height);
-    
-    if (!self.leftThumb) {
-//        self.leftThumb = [[UIImageView alloc] initWithFrame:newLeftThumbFrame];
-//        self.leftThumb.contentMode = UIViewContentModeScaleToFill;
-//        [self addSubview:self.leftThumb];
-    } else {
-        self.leftThumb.frame = newLeftThumbFrame;
-    }
-    
-    if (!self.rightThumb) {
-//        self.rightThumb = [[UIImageView alloc] initWithFrame:newRightThumbFrame];
-//        self.rightThumb.contentMode = UIViewContentModeScaleToFill;
-//        [self addSubview:self.rightThumb];
-    } else {
-        self.rightThumb.frame = newRightThumbFrame;
-    }
+
+    self.leftThumb.frame = newLeftThumbFrame;
+    self.rightThumb.frame = newRightThumbFrame;
     
     self.leftThumb.backgroundColor = [UIColor clearColor];
     self.leftThumb.image = image;
     
     self.rightThumb.backgroundColor = [UIColor clearColor];
     self.rightThumb.image = image;
+    
+    [self updateInRangeTrack];
+    [self updateOutRangeTrack];
 }
 
 - (void)setInRangeTrackImage:(UIImage *)image
@@ -183,10 +172,18 @@
 
 - (void)updateInRangeTrack
 {
-    self.inRangeTrack.frame = CGRectMake(CGRectGetMinX(self.leftThumb.frame),
+    self.inRangeTrack.frame = CGRectMake(CGRectGetMidX(self.leftThumb.frame),
                                          CGRectGetMidY(self.bounds) - self.tracksHeight / 2.0,
-                                         CGRectGetMaxX(self.rightThumb.frame) - CGRectGetMidX(self.leftThumb.frame),
+                                         CGRectGetMidX(self.rightThumb.frame) - CGRectGetMidX(self.leftThumb.frame),
                                          self.tracksHeight);
+}
+
+- (void)updateOutRangeTrack
+{
+    self.outRangeTrack.frame = CGRectMake(CGRectGetMidX(self.leftThumb.frame),
+                                          CGRectGetMidY(self.bounds) - self.tracksHeight / 2.0,
+                                          CGRectGetMidX(self.rightThumb.frame) - CGRectGetMidX(self.leftThumb.frame),
+                                          self.tracksHeight);
 }
 
 - (void)moveThumbsToDefaultPositions
@@ -202,27 +199,47 @@
                                       CGRectGetHeight(self.rightThumb.frame));
 }
 
+- (void)calculateValues
+{
+    CGFloat denominator;
+    CGFloat divident;
+
+    switch (self.mode) {
+        case FRDRangeSliderModeSingleThumb: {
+            divident = (CGRectGetMidX(self.rightThumb.frame) - CGRectGetWidth(self.rightThumb.frame) / 2.0);
+            denominator = CGRectGetWidth(self.frame) - CGRectGetWidth(self.rightThumb.frame);
+            break;
+        }
+            
+        case FRDRangeSliderModeRange: {
+            divident = (CGRectGetMinX(self.rightThumb.frame) - CGRectGetWidth(self.rightThumb.frame));
+            denominator = CGRectGetWidth(self.frame) - CGRectGetWidth(self.leftThumb.frame) - CGRectGetWidth(self.rightThumb.frame);
+            break;
+        }
+    }
+    
+    if (self.trackedSlider == self.leftThumb) {
+        self.minimumValue = (CGRectGetMaxX(self.leftThumb.frame) - CGRectGetWidth(self.leftThumb.frame)) / denominator;
+    } else {
+        self.maximumValue = divident / denominator;
+    }
+}
+
 #pragma mark - Touch handling
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    [super touchesBegan:touches withEvent:event];
-    
-    UITouch *touch = [touches anyObject];
-    
     if (CGRectContainsPoint(self.leftThumb.frame, [touch locationInView:self]) && self.mode == FRDRangeSliderModeRange) {
         self.trackedSlider = self.leftThumb;
     } else if (CGRectContainsPoint(self.rightThumb.frame, [touch locationInView:self])) {
         self.trackedSlider = self.rightThumb;
     }
+    
+    return YES;
 }
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+- (BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    [super touchesMoved:touches withEvent:event];
-    
-    UITouch *touch = [touches anyObject];
-    
     float deltaX = [touch locationInView:self].x - [touch previousLocationInView:self].x;
     
     CGFloat minimumDistanceBetweenThumbs = CGRectGetWidth(self.frame) * self.minimumRange;
@@ -232,7 +249,7 @@
         
         // Check for minimum distance between thumbs
         if (currentDistanceBetweenThumbs <= minimumDistanceBetweenThumbs && deltaX > 0) {
-            return;
+            return YES;
         }
         
         float newX = MAX(0, CGRectGetMinX(self.leftThumb.frame) + deltaX);
@@ -244,6 +261,12 @@
         
         if (!CGRectIntersectsRect(minSliderNewRect, self.rightThumb.frame)) {
             self.leftThumb.frame = minSliderNewRect;
+        } else {
+            // This thumb will 'stick' to right thumb
+            self.leftThumb.frame = CGRectMake(CGRectGetMinX(self.rightThumb.frame) - CGRectGetWidth(self.leftThumb.frame),
+                                               CGRectGetMinY(self.leftThumb.frame),
+                                               CGRectGetWidth(self.leftThumb.frame),
+                                               CGRectGetHeight(self.leftThumb.frame));
         }
         
     } else if (self.trackedSlider == self.rightThumb) {
@@ -251,7 +274,7 @@
         // Check for minimum distance between thumbs
         if (currentDistanceBetweenThumbs <= minimumDistanceBetweenThumbs && deltaX < 0 &&
             self.mode == FRDRangeSliderModeRange  /* Check for Range Thumb Mode */) {
-            return;
+            return YES;
         }
         
         float newX = MIN(CGRectGetWidth(self.frame) - CGRectGetWidth(self.rightThumb.frame),
@@ -263,42 +286,27 @@
                                              CGRectGetMinY(self.rightThumb.frame),
                                              CGRectGetWidth(self.rightThumb.frame),
                                              CGRectGetHeight(self.rightThumb.frame));
-        
+
         if (!CGRectIntersectsRect(maxSliderNewRect, self.leftThumb.frame) || self.mode == FRDRangeSliderModeSingleThumb) {
             self.rightThumb.frame = maxSliderNewRect;
+        } else {
+            // This thumb will 'stick' to left thumb
+            self.rightThumb.frame = CGRectMake(CGRectGetMaxX(self.leftThumb.frame),
+                                               CGRectGetMinY(self.rightThumb.frame),
+                                               CGRectGetWidth(self.rightThumb.frame),
+                                               CGRectGetHeight(self.rightThumb.frame));
         }
     }
     
     [self updateInRangeTrack];
+    [self calculateValues];
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
+    
+    return YES;
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesEnded:touches withEvent:event];
-    
-    CGFloat denominator = CGRectGetWidth(self.frame) - CGRectGetWidth(self.leftThumb.frame) - CGRectGetWidth(self.rightThumb.frame);
-    
-    CGFloat divident;
-#warning Single mode calculations need fixing
-    switch (self.mode) {
-        case FRDRangeSliderModeSingleThumb: {
-            divident = (CGRectGetMidX(self.rightThumb.frame) - CGRectGetWidth(self.rightThumb.frame));
-            break;
-        }
-            
-        case FRDRangeSliderModeRange: {
-            divident = (CGRectGetMinX(self.rightThumb.frame) - CGRectGetWidth(self.rightThumb.frame));
-            break;
-        }
-    }
-    
-    if (self.trackedSlider == self.leftThumb) {
-        self.minimumValue = (CGRectGetMaxX(self.leftThumb.frame) - CGRectGetWidth(self.leftThumb.frame)) / denominator;
-    } else {
-        self.maximumValue = divident / denominator;
-    }
-    
-    [self sendActionsForControlEvents:UIControlEventValueChanged];
-    NSLog(@"%f", self.maximumValue);
+- (void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
+{
     self.trackedSlider = nil;
 }
 
