@@ -33,9 +33,11 @@
 
 - (void)customizeTopView:(FRDTopContentView *)topContentView
 {
-    topContentView.titleLabel.text = self.titleString;
-    topContentView.leftIcon.image = [UIImage imageNamed:self.leftImageName];
-    topContentView.rightIcon.image = [UIImage imageNamed:self.rightImageName];
+    if (self.titleString.length) {
+        topContentView.topTitleText = self.titleString;
+    }
+    topContentView.leftIconName = self.leftImageName;
+    topContentView.rightIconName = self.rightImageName;
 }
 
 @end

@@ -15,21 +15,42 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JVo-wW-zCU">
-                    <rect key="frame" x="567" y="31" width="25" height="25"/>
+                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JVo-wW-zCU">
+                    <rect key="frame" x="559" y="31" width="25" height="25"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="25" id="SJv-dO-L10"/>
                         <constraint firstAttribute="height" constant="25" id="SSg-Ir-ON6"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XD2-0X-H55">
-                    <rect key="frame" x="41" y="31" width="518" height="25"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XD2-0X-H55">
+                    <rect key="frame" x="49" y="31" width="502" height="25"/>
+                    <attributedString key="attributedText">
+                        <fragment content="f">
+                            <attributes>
+                                <color key="NSColor" red="0.32498972039473684" green="0.32956414473684209" blue="0.52870579769736847" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="21" name="GillSans"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="r">
+                            <attributes>
+                                <color key="NSColor" red="0.32498972039473684" green="0.75313527960526316" blue="0.52870579769736847" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="21" name="GillSans"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="ndr">
+                            <attributes>
+                                <color key="NSColor" red="0.32498972039473684" green="0.32956414473684209" blue="0.52870579769736847" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="21" name="GillSans"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U8P-Ne-1P6">
-                    <rect key="frame" x="8" y="31" width="25" height="25"/>
+                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U8P-Ne-1P6">
+                    <rect key="frame" x="16" y="31" width="25" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="Apn-AD-dA3"/>
                         <constraint firstAttribute="width" constant="25" id="dA5-Sx-neI"/>
@@ -42,10 +63,10 @@
                 <constraint firstItem="XD2-0X-H55" firstAttribute="top" secondItem="U8P-Ne-1P6" secondAttribute="top" id="5nk-qR-7oz"/>
                 <constraint firstItem="XD2-0X-H55" firstAttribute="leading" secondItem="U8P-Ne-1P6" secondAttribute="trailing" constant="8" id="8qX-ai-iku"/>
                 <constraint firstItem="XD2-0X-H55" firstAttribute="bottom" secondItem="U8P-Ne-1P6" secondAttribute="bottom" id="JOg-Ne-2vN"/>
-                <constraint firstAttribute="trailing" secondItem="JVo-wW-zCU" secondAttribute="trailing" constant="8" id="M7J-DG-Am6"/>
+                <constraint firstAttribute="trailing" secondItem="JVo-wW-zCU" secondAttribute="trailing" constant="16" id="M7J-DG-Am6"/>
                 <constraint firstItem="JVo-wW-zCU" firstAttribute="leading" secondItem="XD2-0X-H55" secondAttribute="trailing" constant="8" id="NZX-YG-abI"/>
                 <constraint firstItem="JVo-wW-zCU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="31" id="aAs-IA-u0E"/>
-                <constraint firstItem="U8P-Ne-1P6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="pP5-yW-Qcj"/>
+                <constraint firstItem="U8P-Ne-1P6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="pP5-yW-Qcj"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

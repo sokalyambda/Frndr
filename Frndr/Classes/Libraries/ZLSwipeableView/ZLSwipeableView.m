@@ -278,7 +278,7 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
         }
         [self configureOverlayImageWithDirection:directionType];
         /*****Adjust the center of overlay view*****/
-        self.overlayView.center = location;
+        self.overlayView.center = swipeableView.center;
     }
     
     if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {

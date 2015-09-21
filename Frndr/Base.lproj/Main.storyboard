@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wfm-Av-6BD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VVZ-Ve-cwB">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -1500,8 +1500,6 @@
                         <outlet property="dragableViewsHolder" destination="ILl-0g-u9u" id="QJM-hV-Qz7"/>
                         <outlet property="interestsLabel" destination="Du5-65-9If" id="ruA-mR-9yT"/>
                         <outlet property="photosCollectionContainer" destination="6fH-wy-opm" id="91C-LF-xkp"/>
-                        <segue destination="nL4-sj-XvU" kind="custom" identifier="preferencesSegueIdentifier" customClass="FRDLeftToRightTransitionSegue" id="dsu-TW-bHf"/>
-                        <segue destination="RoC-rl-LAq" kind="custom" identifier="friendsListSegueIdentifier" customClass="FRDRightToLeftTransitionSegue" id="q8p-zF-h5n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Rr-rT-LLJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2355,7 +2353,7 @@
                         <viewControllerLayoutGuide type="bottom" id="jKm-jE-jln"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ikL-zS-2e0">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RgJ-fn-XSa">
@@ -2448,14 +2446,14 @@
                                                 <exclude reference="UFH-Hh-wOr"/>
                                             </mask>
                                             <mask key="constraints">
-                                                <exclude reference="Krz-dh-8jA"/>
-                                                <exclude reference="nrr-Fm-zV4"/>
-                                                <exclude reference="q1P-HE-aDO"/>
+                                                <exclude reference="qFv-V8-L45"/>
+                                                <exclude reference="qIp-X4-Pyu"/>
                                                 <exclude reference="JHo-5L-ncO"/>
                                                 <exclude reference="mTS-96-kEf"/>
                                                 <exclude reference="yOt-Bc-xrb"/>
-                                                <exclude reference="qFv-V8-L45"/>
-                                                <exclude reference="qIp-X4-Pyu"/>
+                                                <exclude reference="Krz-dh-8jA"/>
+                                                <exclude reference="nrr-Fm-zV4"/>
+                                                <exclude reference="q1P-HE-aDO"/>
                                                 <exclude reference="Bps-X0-xc8"/>
                                                 <exclude reference="Wgg-uk-lc3"/>
                                                 <exclude reference="ioA-hb-uCA"/>
@@ -2469,14 +2467,14 @@
                                                 <include reference="UFH-Hh-wOr"/>
                                             </mask>
                                             <mask key="constraints">
-                                                <include reference="Krz-dh-8jA"/>
-                                                <include reference="nrr-Fm-zV4"/>
-                                                <include reference="q1P-HE-aDO"/>
+                                                <include reference="qFv-V8-L45"/>
+                                                <include reference="qIp-X4-Pyu"/>
                                                 <include reference="JHo-5L-ncO"/>
                                                 <include reference="mTS-96-kEf"/>
                                                 <include reference="yOt-Bc-xrb"/>
-                                                <include reference="qFv-V8-L45"/>
-                                                <include reference="qIp-X4-Pyu"/>
+                                                <include reference="Krz-dh-8jA"/>
+                                                <include reference="nrr-Fm-zV4"/>
+                                                <include reference="q1P-HE-aDO"/>
                                                 <include reference="Bps-X0-xc8"/>
                                                 <include reference="Wgg-uk-lc3"/>
                                                 <include reference="ioA-hb-uCA"/>
@@ -2528,12 +2526,12 @@
                                 <exclude reference="RgJ-fn-XSa"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="Irj-jn-hed"/>
+                                <exclude reference="dEs-Qz-52n"/>
+                                <exclude reference="lzd-r6-QyU"/>
                                 <exclude reference="8RJ-4F-eBJ"/>
                                 <exclude reference="aFN-gx-10W"/>
                                 <exclude reference="fNd-Gy-9Fz"/>
-                                <exclude reference="dEs-Qz-52n"/>
-                                <exclude reference="lzd-r6-QyU"/>
-                                <exclude reference="Irj-jn-hed"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2541,12 +2539,12 @@
                                 <include reference="RgJ-fn-XSa"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="Irj-jn-hed"/>
+                                <include reference="dEs-Qz-52n"/>
+                                <include reference="lzd-r6-QyU"/>
                                 <include reference="8RJ-4F-eBJ"/>
                                 <include reference="aFN-gx-10W"/>
                                 <include reference="fNd-Gy-9Fz"/>
-                                <include reference="dEs-Qz-52n"/>
-                                <include reference="lzd-r6-QyU"/>
-                                <include reference="Irj-jn-hed"/>
                             </mask>
                         </variation>
                     </view>

@@ -35,7 +35,6 @@
 #pragma mark -
 
 @interface FRDContainerViewController ()
-//@property (nonatomic, copy, readwrite) NSArray *viewControllers;
 
 @property (weak, nonatomic) IBOutlet UIView *privateButtonsView; /// The view hosting the buttons of the child view controllers.
 @property (weak, nonatomic) IBOutlet UIView *privateContainerView; /// The view hosting the child view controllers views.
@@ -47,6 +46,16 @@
 @end
 
 @implementation FRDContainerViewController
+
+#pragma mark - Accessors
+
+- (void)setSelectedViewController:(FRDBaseContentController *)selectedViewController
+{
+    NSParameterAssert (selectedViewController);
+    [self transitionToChildViewController:selectedViewController];
+    _selectedViewController = selectedViewController;
+    [self updateCustomTopView];
+}
 
 #pragma mark - Lifecycle
 
@@ -71,8 +80,9 @@
         self.currentPageIndex = 1;
         self.selectedViewController = (self.selectedViewController ?: self.viewControllers[self.currentPageIndex]);
     });
-    
 }
+
+#pragma mark - UIStatusBar
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
@@ -84,15 +94,7 @@
     return self.selectedViewController;
 }
 
-- (void)setSelectedViewController:(FRDBaseContentController *)selectedViewController
-{
-    NSParameterAssert (selectedViewController);
-    [self transitionToChildViewController:selectedViewController];
-    _selectedViewController = selectedViewController;
-    [self updateCustomTopView];
-}
-
-#pragma mark - Private Methods
+#pragma mark - Actions
 
 - (IBAction)buttonTapped:(UISwipeGestureRecognizer *)swipeGesture
 {
@@ -184,6 +186,7 @@
 #pragma mark - Private Transitioning Classes
 
 @interface PrivateTransitionContext ()
+
 @property (nonatomic) NSDictionary *privateViewControllers;
 @property (nonatomic) CGRect privateDisappearingFromRect;
 @property (nonatomic) CGRect privateAppearingFromRect;
@@ -191,6 +194,7 @@
 @property (nonatomic) CGRect privateAppearingToRect;
 @property (weak, nonatomic) UIView *containerView;
 @property (nonatomic) UIModalPresentationStyle presentationStyle;
+
 @end
 
 @implementation PrivateTransitionContext
@@ -250,7 +254,6 @@
 - (BOOL)transitionWasCancelled { return NO; } // Our non-interactive transition can't be cancelled (it could be interrupted, though)
 
 // Supress warnings by implementing empty interaction methods for the remainder of the protocol:
-
 - (void)updateInteractiveTransition:(CGFloat)percentComplete {}
 - (void)finishInteractiveTransition {}
 - (void)cancelInteractiveTransition {}

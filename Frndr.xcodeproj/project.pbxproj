@@ -103,8 +103,6 @@
 		58EBC6B21BAC1682003CD598 /* FRDPreviewGalleryController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58EBC6B01BAC1682003CD598 /* FRDPreviewGalleryController.xib */; };
 		58F05ACF1BAC3F730092D767 /* FRDPreviewPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F05ACD1BAC3F730092D767 /* FRDPreviewPhotoCell.m */; };
 		58F05AD01BAC3F730092D767 /* FRDPreviewPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58F05ACE1BAC3F730092D767 /* FRDPreviewPhotoCell.xib */; };
-		58F05AD61BAC4F940092D767 /* FRDLeftToRightTransitionSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F05AD51BAC4F940092D767 /* FRDLeftToRightTransitionSegue.m */; };
-		58F05ADA1BAC58860092D767 /* FRDRightToLeftTransitionSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F05AD91BAC58860092D767 /* FRDRightToLeftTransitionSegue.m */; };
 		58F2F30F1B9EF93F000DC739 /* FRDTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F2F30E1B9EF93F000DC739 /* FRDTutorialController.m */; };
 		58FFDBAB1B9ECF3B00B0490A /* FRDSerialViewConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FFDBAA1B9ECF3B00B0490A /* FRDSerialViewConstructor.m */; };
 		58FFDBAE1B9ECF6B00B0490A /* FRDCommonDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FFDBAD1B9ECF6B00B0490A /* FRDCommonDateFormatter.m */; };
@@ -306,10 +304,6 @@
 		58F05ACC1BAC3F730092D767 /* FRDPreviewPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPreviewPhotoCell.h; path = Classes/Cells/UICollectionViewCells/PreviewPhotoCell/FRDPreviewPhotoCell.h; sourceTree = "<group>"; };
 		58F05ACD1BAC3F730092D767 /* FRDPreviewPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPreviewPhotoCell.m; path = Classes/Cells/UICollectionViewCells/PreviewPhotoCell/FRDPreviewPhotoCell.m; sourceTree = "<group>"; };
 		58F05ACE1BAC3F730092D767 /* FRDPreviewPhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDPreviewPhotoCell.xib; path = Classes/Cells/UICollectionViewCells/PreviewPhotoCell/FRDPreviewPhotoCell.xib; sourceTree = "<group>"; };
-		58F05AD41BAC4F940092D767 /* FRDLeftToRightTransitionSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDLeftToRightTransitionSegue.h; path = Classes/StoryboardSegues/LeftToRightTransitionSegue/FRDLeftToRightTransitionSegue.h; sourceTree = "<group>"; };
-		58F05AD51BAC4F940092D767 /* FRDLeftToRightTransitionSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDLeftToRightTransitionSegue.m; path = Classes/StoryboardSegues/LeftToRightTransitionSegue/FRDLeftToRightTransitionSegue.m; sourceTree = "<group>"; };
-		58F05AD81BAC58860092D767 /* FRDRightToLeftTransitionSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRightToLeftTransitionSegue.h; path = Classes/StoryboardSegues/RightToLeftTransitionSegue/FRDRightToLeftTransitionSegue.h; sourceTree = "<group>"; };
-		58F05AD91BAC58860092D767 /* FRDRightToLeftTransitionSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRightToLeftTransitionSegue.m; path = Classes/StoryboardSegues/RightToLeftTransitionSegue/FRDRightToLeftTransitionSegue.m; sourceTree = "<group>"; };
 		58F2F30D1B9EF93F000DC739 /* FRDTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDTutorialController.h; path = Classes/MVC/Controllers/TutorialController/FRDTutorialController.h; sourceTree = "<group>"; };
 		58F2F30E1B9EF93F000DC739 /* FRDTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDTutorialController.m; path = Classes/MVC/Controllers/TutorialController/FRDTutorialController.m; sourceTree = "<group>"; };
 		58FFDBA91B9ECF3B00B0490A /* FRDSerialViewConstructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSerialViewConstructor.h; path = Classes/Utilities/SerialViewsConstructor/FRDSerialViewConstructor.h; sourceTree = "<group>"; };
@@ -513,6 +507,7 @@
 		3ED0722F1BA0364E0091B7E4 /* PreferencesController */ = {
 			isa = PBXGroup;
 			children = (
+				3ED072331BA047D90091B7E4 /* PreferencesTableViewController */,
 				3ED072301BA0370C0091B7E4 /* FRDPreferencesController.h */,
 				3ED072311BA0370C0091B7E4 /* FRDPreferencesController.m */,
 			);
@@ -869,16 +864,12 @@
 				58CD9AB71BAFED7700A7CADB /* ContainerController */,
 				3E021DC51BAFD90200BDA411 /* MyProfileController */,
 				58F05AD11BAC41BB0092D767 /* ApplicatiomSettingsControllers */,
-				58C28C3A1BA9524A009D1AC4 /* SearchFriendsController */,
-				58C28C361BA950FA009D1AC4 /* FriendsListController */,
 				587B3A8A1BA814990098154F /* RelationshipStatusController */,
 				587B3A841BA80F050098154F /* DropDownHolderController */,
 				3E3D415A1BA6B1020021026A /* SearchSettingsController */,
 				3E3D41561BA6A4B20021026A /* AutologinController */,
 				587727F51BA2D7EB0032D746 /* TermsAndServicesController */,
 				3E10E3051BA15A800075C72D /* PhotoGalleryCollectionViewController */,
-				3ED072331BA047D90091B7E4 /* PreferencesTableViewController */,
-				3ED0722F1BA0364E0091B7E4 /* PreferencesController */,
 				58F2F30C1B9EF911000DC739 /* TutorialController */,
 				58FFDBBD1B9ED1D300B0490A /* BaseViewController */,
 				58FFDBBC1B9ED1CB00B0490A /* BaseNavigationController */,
@@ -1272,7 +1263,6 @@
 		58BC76FF1B9EBCA200BB8B5A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				58F05AD21BAC4F580092D767 /* StoryboardSegues */,
 				587B3A6E1BA7F3D00098154F /* DropDownDataSources */,
 				58BC76CF1B9EB94800BB8B5A /* MVC */,
 				3E10E3111BA16E130075C72D /* Layouts */,
@@ -1415,6 +1405,7 @@
 		58CD9AB71BAFED7700A7CADB /* ContainerController */ = {
 			isa = PBXGroup;
 			children = (
+				58CFA9081BB00593008B3E12 /* ContentControllers */,
 				58CD9AC11BAFF27300A7CADB /* BaseContentController */,
 				58CD9AB81BAFEDC700A7CADB /* FRDContainerController.h */,
 				58CD9AB91BAFEDC700A7CADB /* FRDContainerController.m */,
@@ -1439,6 +1430,16 @@
 				58CD9AC31BAFF29F00A7CADB /* FRDBaseContentController.m */,
 			);
 			name = BaseContentController;
+			sourceTree = "<group>";
+		};
+		58CFA9081BB00593008B3E12 /* ContentControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3ED0722F1BA0364E0091B7E4 /* PreferencesController */,
+				58C28C361BA950FA009D1AC4 /* FriendsListController */,
+				58C28C3A1BA9524A009D1AC4 /* SearchFriendsController */,
+			);
+			name = ContentControllers;
 			sourceTree = "<group>";
 		};
 		58D5A1671BA329A300D552CF /* NavigationTitleView */ = {
@@ -1478,33 +1479,6 @@
 				3E0EEC591BABEECF00AB51B0 /* ApplicationSettingsController */,
 			);
 			name = ApplicatiomSettingsControllers;
-			sourceTree = "<group>";
-		};
-		58F05AD21BAC4F580092D767 /* StoryboardSegues */ = {
-			isa = PBXGroup;
-			children = (
-				58F05AD71BAC583E0092D767 /* RightToLeftTransitionSegue */,
-				58F05AD31BAC4F6C0092D767 /* LeftToRightTransitionSegue */,
-			);
-			name = StoryboardSegues;
-			sourceTree = "<group>";
-		};
-		58F05AD31BAC4F6C0092D767 /* LeftToRightTransitionSegue */ = {
-			isa = PBXGroup;
-			children = (
-				58F05AD41BAC4F940092D767 /* FRDLeftToRightTransitionSegue.h */,
-				58F05AD51BAC4F940092D767 /* FRDLeftToRightTransitionSegue.m */,
-			);
-			name = LeftToRightTransitionSegue;
-			sourceTree = "<group>";
-		};
-		58F05AD71BAC583E0092D767 /* RightToLeftTransitionSegue */ = {
-			isa = PBXGroup;
-			children = (
-				58F05AD81BAC58860092D767 /* FRDRightToLeftTransitionSegue.h */,
-				58F05AD91BAC58860092D767 /* FRDRightToLeftTransitionSegue.m */,
-			);
-			name = RightToLeftTransitionSegue;
 			sourceTree = "<group>";
 		};
 		58F2F30C1B9EF911000DC739 /* TutorialController */ = {
@@ -1728,9 +1702,7 @@
 				3E0EEC5C1BABEF2300AB51B0 /* FRDApplicationSettingsController.m in Sources */,
 				58FFDBAE1B9ECF6B00B0490A /* FRDCommonDateFormatter.m in Sources */,
 				58FFDBB81B9ED0A900B0490A /* FRDErrorHandler.m in Sources */,
-				58F05ADA1BAC58860092D767 /* FRDRightToLeftTransitionSegue.m in Sources */,
 				581B9D5C1B9EDCDB0080393B /* FRDFailedOperationManager.m in Sources */,
-				58F05AD61BAC4F940092D767 /* FRDLeftToRightTransitionSegue.m in Sources */,
 				58FFDBB51B9ED07E00B0490A /* FRDCommonNumberFormatter.m in Sources */,
 				58C28FFC1BAAC69B0099ABE4 /* CAAnimation+CompetionBlock.m in Sources */,
 				581B9D3B1B9ED6090080393B /* FRDStorageManager.m in Sources */,

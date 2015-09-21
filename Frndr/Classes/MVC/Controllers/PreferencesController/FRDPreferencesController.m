@@ -8,8 +8,6 @@
 
 #import "FRDPreferencesController.h"
 
-#import "FRDSerialViewConstructor.h"
-
 #import "FRDTopContentView.h"
 
 @implementation FRDPreferencesController
@@ -44,14 +42,6 @@
 {
     [super customizeNavigationItem];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    
-    UIBarButtonItem *rightIcon = [FRDSerialViewConstructor customRightBarButtonForController:self withAction:@selector(customPopViewController:)];
-    
-    //set right bar button item
-    self.navigationItem.rightBarButtonItem = rightIcon;
-    
-    self.navigationItem.hidesBackButton = YES;
-    self.navigationItem.leftBarButtonItem = nil;
 }
 
 - (IBAction)logoutFromFrndrClick:(id)sender

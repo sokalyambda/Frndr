@@ -8,8 +8,8 @@
 
 @interface FRDTopContentView : UIView
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *leftIcon;
-@property (weak, nonatomic) IBOutlet UIImageView *rightIcon;
+@property (nonatomic) NSString *topTitleText;
+@property (nonatomic) NSString *leftIconName;
+@property (nonatomic) NSString *rightIconName;
 
 @end

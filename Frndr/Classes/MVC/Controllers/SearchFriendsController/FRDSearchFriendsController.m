@@ -16,8 +16,6 @@
 
 #import "UIView+MakeFromXib.h"
 
-#import "FRDSerialViewConstructor.h"
-
 static NSString *const kPreferencesImageName = @"PreferencesIcon";
 static NSString *const kMessagesImageName = @"MessagesIcon";
 
@@ -89,22 +87,16 @@ static NSString *const kFriendsListSegueIdentifier = @"friendsListSegueIdentifie
     [super customizeNavigationItem];
     
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    
-    UIBarButtonItem *preferencesBarButton = [FRDSerialViewConstructor customBarButtonWithImage:[UIImage imageNamed:kPreferencesImageName] forController:self withAction:@selector(preferencesBarButtonClicked:)];
-    self.navigationItem.leftBarButtonItem = preferencesBarButton;
-    
-    UIBarButtonItem *messagesBarButton = [FRDSerialViewConstructor customBarButtonWithImage:[UIImage imageNamed:kMessagesImageName] forController:self withAction:@selector(messagesBarButtonClicked:)];
-    self.navigationItem.rightBarButtonItem = messagesBarButton;
 }
 
 - (void)messagesBarButtonClicked:(id)sender
 {
-    [self performSegueWithIdentifier:kFriendsListSegueIdentifier sender:self];
+
 }
 
 - (void)preferencesBarButtonClicked:(id)sender
 {
-    [self performSegueWithIdentifier:kPreferencesSegueIdentifier sender:self];
+
 }
 
 - (void)setupPhotosGalleryContainer
@@ -191,17 +183,6 @@ static NSString *const kFriendsListSegueIdentifier = @"friendsListSegueIdentifie
 - (void)swipeableView:(ZLSwipeableView *)swipeableView didEndSwipingView:(UIView *)view atLocation:(CGPoint)location
 {
 
-}
-
-#pragma mark - Navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:kPreferencesSegueIdentifier]) {
-        FRDPreferencesController *controller = (FRDPreferencesController *)segue.destinationViewController;
-    } else if ([segue.identifier isEqualToString:kFriendsListSegueIdentifier]) {
-        FRDFriendsListController *controller = (FRDFriendsListController *)segue.destinationViewController;
-    }
 }
 
 @end
