@@ -40,4 +40,20 @@
     _rightIcon.image = [UIImage imageNamed:_rightIconName];
 }
 
+#pragma mark - Actions
+
+- (IBAction)leftItemClick:(id)sender
+{
+    if ([self.delegate respondsToSelector:@selector(topContentView:didPressItemWithType:)]) {
+        [self.delegate topContentView:self didPressItemWithType:FRDTopViewActionTypeLeftIcon];
+    }
+}
+
+- (IBAction)rightItemClick:(id)sender
+{
+    if ([self.delegate respondsToSelector:@selector(topContentView:didPressItemWithType:)]) {
+        [self.delegate topContentView:self didPressItemWithType:FRDTopViewActionTypeRightIcon];
+    }
+}
+
 @end

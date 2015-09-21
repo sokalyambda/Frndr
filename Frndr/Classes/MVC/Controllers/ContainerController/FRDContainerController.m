@@ -6,6 +6,11 @@
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
+typedef NS_ENUM(NSUInteger, FRDPresentedControllerType) {
+    FRDPresentedControllerTypeNext,
+    FRDPresentedControllerTypePrevious
+};
+
 #import "FRDContainerController.h"
 #import "FRDBaseContentController.h"
 
@@ -34,7 +39,7 @@
 
 #pragma mark -
 
-@interface FRDContainerViewController ()
+@interface FRDContainerViewController ()<FRDTopContentViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *privateButtonsView; /// The view hosting the buttons of the child view controllers.
 @property (weak, nonatomic) IBOutlet UIView *privateContainerView; /// The view hosting the child view controllers views.
@@ -74,9 +79,12 @@
 {
     [super viewDidLoad];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
         FRDTopContentView *topView = [FRDTopContentView makeFromXibWithFileOwner:self];
         topView.frame = self.privateButtonsView.frame;
         [self.privateButtonsView addSubview:topView];
+        topView.delegate = self;
+        
         self.currentPageIndex = 1;
         self.selectedViewController = (self.selectedViewController ?: self.viewControllers[self.currentPageIndex]);
     });
@@ -94,24 +102,52 @@
     return self.selectedViewController;
 }
 
+#pragma mark - FRDTopContentViewDelegate
+
+- (void)topContentView:(FRDTopContentView *)contentView didPressItemWithType:(FRDTopViewActionType)type
+{
+    switch (type) {
+        case FRDTopViewActionTypeLeftIcon: {
+            [self showNextPreviousController:FRDPresentedControllerTypePrevious];
+            break;
+        }
+        case FRDTopViewActionTypeRightIcon: {
+            [self showNextPreviousController:FRDPresentedControllerTypeNext];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
 #pragma mark - Actions
 
-- (IBAction)buttonTapped:(UISwipeGestureRecognizer *)swipeGesture
+/**
+ *  Show Controller depends on direction or acion type
+ *
+ *  @param presentedType type of action
+ */
+- (void)showNextPreviousController:(FRDPresentedControllerType)presentedType
 {
-    UISwipeGestureRecognizerDirection currentDirection = swipeGesture.direction;
-    
-    if (currentDirection == UISwipeGestureRecognizerDirectionRight) {
-        if (self.currentPageIndex > 0) {
-            self.currentPageIndex--;
-        } else {
-            return;
+    switch (presentedType) {
+        case FRDPresentedControllerTypeNext: {
+            if (self.currentPageIndex < self.viewControllers.count - 1) {
+                self.currentPageIndex++;
+                break;
+            } else {
+                return;
+            }
         }
-    } else if (currentDirection == UISwipeGestureRecognizerDirectionLeft) {
-        if (self.currentPageIndex < self.viewControllers.count - 1) {
-            self.currentPageIndex++;
-        } else {
-            return;
+        case FRDPresentedControllerTypePrevious: {
+            if (self.currentPageIndex > 0) {
+                self.currentPageIndex--;
+                break;
+            } else {
+                return;
+            }
         }
+        default:
+            break;
     }
     
     FRDBaseContentController *selectedViewController = self.viewControllers[self.currentPageIndex];
@@ -119,6 +155,17 @@
     
     if ([self.delegate respondsToSelector:@selector (containerViewController:didSelectViewController:)]) {
         [self.delegate containerViewController:self didSelectViewController:selectedViewController];
+    }
+}
+
+- (IBAction)buttonTapped:(UISwipeGestureRecognizer *)swipeGesture
+{
+    UISwipeGestureRecognizerDirection currentDirection = swipeGesture.direction;
+    
+    if (currentDirection == UISwipeGestureRecognizerDirectionRight) {
+        [self showNextPreviousController:FRDPresentedControllerTypePrevious];
+    } else if (currentDirection == UISwipeGestureRecognizerDirectionLeft) {
+        [self showNextPreviousController:FRDPresentedControllerTypeNext];
     }
 }
 
@@ -199,6 +246,8 @@
 
 @implementation PrivateTransitionContext
 
+#pragma mark - Lifecycle
+
 - (instancetype)initWithFromViewController:(FRDBaseContentController *)fromViewController toViewController:(FRDBaseContentController *)toViewController goingRight:(BOOL)goingRight
 {
     NSAssert ([fromViewController isViewLoaded] && fromViewController.view.superview, @"The fromViewController view must reside in the container view upon initializing the transition context.");
@@ -220,6 +269,8 @@
     
     return self;
 }
+
+#pragma mark - UIViewControllerTransitioning
 
 - (CGRect)initialFrameForViewController:(UIViewController *)viewController
 {
@@ -257,6 +308,8 @@
 - (void)updateInteractiveTransition:(CGFloat)percentComplete {}
 - (void)finishInteractiveTransition {}
 - (void)cancelInteractiveTransition {}
+- (UIView *)viewForKey:(NSString *)key {return nil;}
+- (CGAffineTransform)targetTransform {return CGAffineTransformIdentity;}
 
 @end
 

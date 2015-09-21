@@ -59,7 +59,7 @@ static NSString *const kFriendsListSegueIdentifier = @"friendsListSegueIdentifie
 {
     [super viewDidLoad];
     [self setupPhotosGalleryContainer];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self setupDragableViewOptions];
     });
 }
@@ -87,16 +87,6 @@ static NSString *const kFriendsListSegueIdentifier = @"friendsListSegueIdentifie
     [super customizeNavigationItem];
     
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
-
-- (void)messagesBarButtonClicked:(id)sender
-{
-
-}
-
-- (void)preferencesBarButtonClicked:(id)sender
-{
-
 }
 
 - (void)setupPhotosGalleryContainer
@@ -162,7 +152,7 @@ static NSString *const kFriendsListSegueIdentifier = @"friendsListSegueIdentifie
          didSwipeView:(UIView *)view
           inDirection:(ZLSwipeableViewDirection)direction
 {
-
+    
 }
 
 - (void)swipeableView:(ZLSwipeableView *)swipeableView didCancelSwipe:(UIView *)view

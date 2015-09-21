@@ -21,6 +21,9 @@
                         <constraint firstAttribute="width" constant="25" id="SJv-dO-L10"/>
                         <constraint firstAttribute="height" constant="25" id="SSg-Ir-ON6"/>
                     </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="cmf-gG-TC4" appends="YES" id="or9-nw-odQ"/>
+                    </connections>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XD2-0X-H55">
                     <rect key="frame" x="49" y="31" width="502" height="25"/>
@@ -55,6 +58,9 @@
                         <constraint firstAttribute="height" constant="25" id="Apn-AD-dA3"/>
                         <constraint firstAttribute="width" constant="25" id="dA5-Sx-neI"/>
                     </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="rGi-z5-9hi" appends="YES" id="Ux8-rH-nyy"/>
+                    </connections>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -76,5 +82,15 @@
             </connections>
             <point key="canvasLocation" x="529" y="291"/>
         </view>
+        <tapGestureRecognizer id="rGi-z5-9hi">
+            <connections>
+                <action selector="leftItemClick:" destination="iN0-l3-epB" id="3fY-dD-dcY"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="cmf-gG-TC4">
+            <connections>
+                <action selector="rightItemClick:" destination="iN0-l3-epB" id="mPA-PZ-cwX"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>
