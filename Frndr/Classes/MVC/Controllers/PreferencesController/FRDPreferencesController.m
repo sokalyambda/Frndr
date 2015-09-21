@@ -10,7 +10,26 @@
 
 #import "FRDSerialViewConstructor.h"
 
+#import "FRDTopContentView.h"
+
 @implementation FRDPreferencesController
+
+#pragma mark - Accessors
+
+- (NSString *)titleString
+{
+    return @"Preferences";
+}
+
+- (NSString *)leftImageName
+{
+    return nil;
+}
+
+- (NSString *)rightImageName
+{
+    return @"preferencesTopIcon";
+}
 
 #pragma mark - View Lifecycle
 
@@ -24,13 +43,13 @@
 - (void)customizeNavigationItem
 {
     [super customizeNavigationItem];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     UIBarButtonItem *rightIcon = [FRDSerialViewConstructor customRightBarButtonForController:self withAction:@selector(customPopViewController:)];
     
     //set right bar button item
     self.navigationItem.rightBarButtonItem = rightIcon;
-
+    
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.leftBarButtonItem = nil;
 }

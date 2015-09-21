@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "FRDBaseViewController.h"
+#import "FRDBaseContentController.h"
 
-@interface FRDFriendsListController : FRDBaseViewController
+@interface FRDFriendsListController : FRDBaseContentController
 
 @end

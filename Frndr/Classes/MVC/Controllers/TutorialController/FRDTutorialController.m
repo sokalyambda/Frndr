@@ -10,6 +10,8 @@
 #import "FRDTermsAndServicesController.h"
 #import "FRDBaseNavigationController.h"
 #import "FRDPreferencesController.h"
+#import "FRDFriendsListController.h"
+#import "FRDContainerController.h"
 
 #import "FRDSearchFriendsController.h"
 
@@ -21,7 +23,9 @@
 #import "UIView+ConfigureAnchorPoint.h"
 #import "CAAnimation+CompetionBlock.h"
 
-@interface FRDTutorialController ()<TTTAttributedLabelDelegate, UIScrollViewDelegate>
+#import "FRDAnimator.h"
+
+@interface FRDTutorialController ()<TTTAttributedLabelDelegate, UIScrollViewDelegate, ContainerViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *tutorialScrollView;
 @property (weak, nonatomic) IBOutlet FRDCustomPageControl *tutorialPageControl;
@@ -128,21 +132,30 @@
  */
 - (void)authorizeWithFacebookAction
 {
-    FRDSearchFriendsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDSearchFriendsController class])];
-//    FRDPreferencesController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
-    [self.navigationController pushViewController:controller animated:YES];
+    FRDPreferencesController *preferencesController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
+    FRDFriendsListController *friendsListController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDFriendsListController class])];
+    FRDSearchFriendsController *searchFriendsController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDSearchFriendsController class])];
+    FRDContainerViewController *container = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDContainerViewController class])];
+    container.delegate = self;
+    container.viewControllers = @[preferencesController, searchFriendsController, friendsListController];
+    
+    //    FRDBasePagerController *pagerController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDBasePagerController class])];
+    
+    //    FRDSearchFriendsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDSearchFriendsController class])];
+    
+    [self.navigationController pushViewController:container animated:YES];
     /*
-    WEAK_SELF;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [FRDFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        
-        FRDPreferencesController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
-        [weakSelf.navigationController pushViewController:controller animated:YES];
-        
-    } onFailure:^(NSError *error, BOOL isCanceled) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-    }];
+     WEAK_SELF;
+     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+     [FRDFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
+     [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+     
+     FRDPreferencesController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
+     [weakSelf.navigationController pushViewController:controller animated:YES];
+     
+     } onFailure:^(NSError *error, BOOL isCanceled) {
+     [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+     }];
      */
 }
 
@@ -212,6 +225,12 @@ static CGFloat const kPageControlAnimDuration = .6f;
 - (BOOL)prefersStatusBarHidden
 {
     return YES;
+}
+
+#pragma mark - ContainerViewControllerDelegate Protocol
+
+- (id<UIViewControllerAnimatedTransitioning>)containerViewController:(FRDContainerViewController *)containerViewController animationControllerForTransitionFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController {
+    return [[FRDAnimator alloc] init];
 }
 
 @end

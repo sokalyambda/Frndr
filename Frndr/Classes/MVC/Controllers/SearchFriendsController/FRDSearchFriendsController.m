@@ -38,13 +38,30 @@ static NSString *const kFriendsListSegueIdentifier = @"friendsListSegueIdentifie
 
 @implementation FRDSearchFriendsController
 
+#pragma mark - Accessors
+
+- (NSString *)titleString
+{
+    return @"frndr";
+}
+
+- (NSString *)leftImageName
+{
+    return @"PreferencesIcon";
+}
+
+- (NSString *)rightImageName
+{
+    return @"MessagesIcon";
+}
+
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self setupPhotosGalleryContainer];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self setupDragableViewOptions];
     });
 }
@@ -71,11 +88,11 @@ static NSString *const kFriendsListSegueIdentifier = @"friendsListSegueIdentifie
 {
     [super customizeNavigationItem];
     
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     UIBarButtonItem *preferencesBarButton = [FRDSerialViewConstructor customBarButtonWithImage:[UIImage imageNamed:kPreferencesImageName] forController:self withAction:@selector(preferencesBarButtonClicked:)];
     self.navigationItem.leftBarButtonItem = preferencesBarButton;
-
+    
     UIBarButtonItem *messagesBarButton = [FRDSerialViewConstructor customBarButtonWithImage:[UIImage imageNamed:kMessagesImageName] forController:self withAction:@selector(messagesBarButtonClicked:)];
     self.navigationItem.rightBarButtonItem = messagesBarButton;
 }

@@ -1072,6 +1072,103 @@
             </objects>
             <point key="canvasLocation" x="2676" y="1134.75"/>
         </scene>
+        <!--Container View Controller-->
+        <scene sceneID="Jdv-X3-Wg6">
+            <objects>
+                <viewController storyboardIdentifier="FRDContainerViewController" id="eZq-NW-QRn" customClass="FRDContainerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="U0W-Eq-hgM"/>
+                        <viewControllerLayoutGuide type="bottom" id="kkq-fa-lKw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lGj-VY-tjc">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DYP-QT-4E5" userLabel="Top View">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="ZpT-IH-twK"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="ZpT-IH-twK"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="ZpT-IH-twK"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="25W-or-cPI" userLabel="Content View">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="KPv-ly-gm6" appends="YES" id="za6-mD-QSw"/>
+                                    <outletCollection property="gestureRecognizers" destination="dg0-iP-nXE" appends="YES" id="MPk-d0-f9r"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="25W-or-cPI" firstAttribute="leading" secondItem="lGj-VY-tjc" secondAttribute="leading" id="FU3-vE-ZT7"/>
+                            <constraint firstItem="DYP-QT-4E5" firstAttribute="top" secondItem="lGj-VY-tjc" secondAttribute="top" id="ILd-Rd-8gW"/>
+                            <constraint firstAttribute="trailing" secondItem="DYP-QT-4E5" secondAttribute="trailing" id="Lxw-5W-gVy"/>
+                            <constraint firstAttribute="trailing" secondItem="25W-or-cPI" secondAttribute="trailing" id="XT2-Yk-X3m"/>
+                            <constraint firstItem="25W-or-cPI" firstAttribute="top" secondItem="DYP-QT-4E5" secondAttribute="bottom" id="his-T4-VT7"/>
+                            <constraint firstItem="DYP-QT-4E5" firstAttribute="leading" secondItem="lGj-VY-tjc" secondAttribute="leading" id="kqD-lh-erw"/>
+                            <constraint firstItem="kkq-fa-lKw" firstAttribute="top" secondItem="25W-or-cPI" secondAttribute="bottom" id="yxR-hU-ino"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="DYP-QT-4E5"/>
+                                <exclude reference="25W-or-cPI"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="ILd-Rd-8gW"/>
+                                <exclude reference="Lxw-5W-gVy"/>
+                                <exclude reference="kqD-lh-erw"/>
+                                <exclude reference="FU3-vE-ZT7"/>
+                                <exclude reference="XT2-Yk-X3m"/>
+                                <exclude reference="his-T4-VT7"/>
+                                <exclude reference="yxR-hU-ino"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="DYP-QT-4E5"/>
+                                <include reference="25W-or-cPI"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="ILd-Rd-8gW"/>
+                                <include reference="Lxw-5W-gVy"/>
+                                <include reference="kqD-lh-erw"/>
+                                <include reference="FU3-vE-ZT7"/>
+                                <include reference="XT2-Yk-X3m"/>
+                                <include reference="his-T4-VT7"/>
+                                <include reference="yxR-hU-ino"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="privateButtonsView" destination="DYP-QT-4E5" id="DXb-eZ-whE"/>
+                        <outlet property="privateContainerView" destination="25W-or-cPI" id="G2O-Af-vui"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8so-ji-kWc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="left" id="KPv-ly-gm6">
+                    <connections>
+                        <action selector="buttonTapped:" destination="eZq-NW-QRn" id="V3P-Qg-cNw"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="dg0-iP-nXE">
+                    <connections>
+                        <action selector="buttonTapped:" destination="eZq-NW-QRn" id="s9L-JP-cGH"/>
+                    </connections>
+                </swipeGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="2676" y="1836"/>
+        </scene>
         <!--Delegate-->
         <scene sceneID="Y0y-vf-iQt">
             <objects>
@@ -2257,6 +2354,7 @@
                         <viewControllerLayoutGuide type="bottom" id="jKm-jE-jln"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ikL-zS-2e0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1X-MD-Spt" userLabel="Top View">

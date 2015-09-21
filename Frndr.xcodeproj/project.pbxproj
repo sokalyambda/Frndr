@@ -92,6 +92,11 @@
 		58C290041BAACDC20099ABE4 /* FRDFriendOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58C290031BAACDC20099ABE4 /* FRDFriendOverlayView.xib */; };
 		58CD17EE1BA19BC70021D948 /* FRDTermsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD17ED1BA19BC70021D948 /* FRDTermsLabel.m */; };
 		58CD17F21BA19BF40021D948 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD17F11BA19BF40021D948 /* TTTAttributedLabel.m */; };
+		58CD9AB51BAFE7C200A7CADB /* FRDAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD9AB41BAFE7C200A7CADB /* FRDAnimator.m */; settings = {ASSET_TAGS = (); }; };
+		58CD9ABA1BAFEDC700A7CADB /* FRDContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD9AB91BAFEDC700A7CADB /* FRDContainerController.m */; settings = {ASSET_TAGS = (); }; };
+		58CD9ABE1BAFF1B500A7CADB /* FRDTopContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD9ABD1BAFF1B500A7CADB /* FRDTopContentView.m */; settings = {ASSET_TAGS = (); }; };
+		58CD9AC01BAFF1C800A7CADB /* FRDTopContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58CD9ABF1BAFF1C800A7CADB /* FRDTopContentView.xib */; settings = {ASSET_TAGS = (); }; };
+		58CD9AC41BAFF29F00A7CADB /* FRDBaseContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD9AC31BAFF29F00A7CADB /* FRDBaseContentController.m */; settings = {ASSET_TAGS = (); }; };
 		58D5A16A1BA329C800D552CF /* FRDNavigationTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D5A1691BA329C800D552CF /* FRDNavigationTitleView.m */; };
 		58D5A16C1BA329E500D552CF /* FRDNavigationTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58D5A16B1BA329E500D552CF /* FRDNavigationTitleView.xib */; };
 		58EBC6B11BAC1682003CD598 /* FRDPreviewGalleryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58EBC6AF1BAC1682003CD598 /* FRDPreviewGalleryController.m */; };
@@ -283,6 +288,15 @@
 		58CD17ED1BA19BC70021D948 /* FRDTermsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDTermsLabel.m; path = Classes/MVC/Views/TermsLabel/FRDTermsLabel.m; sourceTree = "<group>"; };
 		58CD17F01BA19BF40021D948 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTTAttributedLabel.h; path = Classes/Libraries/TTTAttributedLabel/TTTAttributedLabel.h; sourceTree = "<group>"; };
 		58CD17F11BA19BF40021D948 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTAttributedLabel.m; path = Classes/Libraries/TTTAttributedLabel/TTTAttributedLabel.m; sourceTree = "<group>"; };
+		58CD9AB31BAFE7C200A7CADB /* FRDAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDAnimator.h; path = Classes/Utilities/Animator/FRDAnimator.h; sourceTree = "<group>"; };
+		58CD9AB41BAFE7C200A7CADB /* FRDAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDAnimator.m; path = Classes/Utilities/Animator/FRDAnimator.m; sourceTree = "<group>"; };
+		58CD9AB81BAFEDC700A7CADB /* FRDContainerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDContainerController.h; path = Classes/MVC/Controllers/ContainerController/FRDContainerController.h; sourceTree = "<group>"; };
+		58CD9AB91BAFEDC700A7CADB /* FRDContainerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDContainerController.m; path = Classes/MVC/Controllers/ContainerController/FRDContainerController.m; sourceTree = "<group>"; };
+		58CD9ABC1BAFF1B500A7CADB /* FRDTopContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDTopContentView.h; path = Classes/MVC/Views/TopContentView/FRDTopContentView.h; sourceTree = "<group>"; };
+		58CD9ABD1BAFF1B500A7CADB /* FRDTopContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDTopContentView.m; path = Classes/MVC/Views/TopContentView/FRDTopContentView.m; sourceTree = "<group>"; };
+		58CD9ABF1BAFF1C800A7CADB /* FRDTopContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDTopContentView.xib; path = Classes/MVC/Views/TopContentView/FRDTopContentView.xib; sourceTree = "<group>"; };
+		58CD9AC21BAFF29F00A7CADB /* FRDBaseContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDBaseContentController.h; path = Classes/MVC/Controllers/ContainerController/BaseContentController/FRDBaseContentController.h; sourceTree = "<group>"; };
+		58CD9AC31BAFF29F00A7CADB /* FRDBaseContentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDBaseContentController.m; path = Classes/MVC/Controllers/ContainerController/BaseContentController/FRDBaseContentController.m; sourceTree = "<group>"; };
 		58D5A1681BA329C800D552CF /* FRDNavigationTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDNavigationTitleView.h; path = Classes/MVC/Views/NavigationTitleView/FRDNavigationTitleView.h; sourceTree = "<group>"; };
 		58D5A1691BA329C800D552CF /* FRDNavigationTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDNavigationTitleView.m; path = Classes/MVC/Views/NavigationTitleView/FRDNavigationTitleView.m; sourceTree = "<group>"; };
 		58D5A16B1BA329E500D552CF /* FRDNavigationTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDNavigationTitleView.xib; path = Classes/MVC/Views/NavigationTitleView/FRDNavigationTitleView.xib; sourceTree = "<group>"; };
@@ -775,6 +789,7 @@
 		58BC76CC1B9EB93500BB8B5A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				58CD9AB21BAFE7A600A7CADB /* Animator */,
 				58BC76E51B9EBA8A00BB8B5A /* Keychain */,
 				58BC76E41B9EBA8400BB8B5A /* Validator */,
 				58BC76E31B9EBA7E00BB8B5A /* GlobalConstants */,
@@ -835,6 +850,7 @@
 		58BC76D11B9EB95100BB8B5A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				58CD9ABB1BAFF19500A7CADB /* TopContentView */,
 				3E021DC91BAFE0B500BDA411 /* MyProfileTopView */,
 				3E0EEC611BAC009F00AB51B0 /* ApplicationSettingsTableHeader */,
 				3E0EEC521BABE81C00AB51B0 /* RoundedImageView */,
@@ -850,6 +866,7 @@
 		58BC76D21B9EB95600BB8B5A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				58CD9AB71BAFED7700A7CADB /* ContainerController */,
 				3E021DC51BAFD90200BDA411 /* MyProfileController */,
 				58F05AD11BAC41BB0092D767 /* ApplicatiomSettingsControllers */,
 				58C28C3A1BA9524A009D1AC4 /* SearchFriendsController */,
@@ -1386,6 +1403,44 @@
 			name = TTTAttributedLabel;
 			sourceTree = "<group>";
 		};
+		58CD9AB21BAFE7A600A7CADB /* Animator */ = {
+			isa = PBXGroup;
+			children = (
+				58CD9AB31BAFE7C200A7CADB /* FRDAnimator.h */,
+				58CD9AB41BAFE7C200A7CADB /* FRDAnimator.m */,
+			);
+			name = Animator;
+			sourceTree = "<group>";
+		};
+		58CD9AB71BAFED7700A7CADB /* ContainerController */ = {
+			isa = PBXGroup;
+			children = (
+				58CD9AC11BAFF27300A7CADB /* BaseContentController */,
+				58CD9AB81BAFEDC700A7CADB /* FRDContainerController.h */,
+				58CD9AB91BAFEDC700A7CADB /* FRDContainerController.m */,
+			);
+			name = ContainerController;
+			sourceTree = "<group>";
+		};
+		58CD9ABB1BAFF19500A7CADB /* TopContentView */ = {
+			isa = PBXGroup;
+			children = (
+				58CD9ABC1BAFF1B500A7CADB /* FRDTopContentView.h */,
+				58CD9ABD1BAFF1B500A7CADB /* FRDTopContentView.m */,
+				58CD9ABF1BAFF1C800A7CADB /* FRDTopContentView.xib */,
+			);
+			name = TopContentView;
+			sourceTree = "<group>";
+		};
+		58CD9AC11BAFF27300A7CADB /* BaseContentController */ = {
+			isa = PBXGroup;
+			children = (
+				58CD9AC21BAFF29F00A7CADB /* FRDBaseContentController.h */,
+				58CD9AC31BAFF29F00A7CADB /* FRDBaseContentController.m */,
+			);
+			name = BaseContentController;
+			sourceTree = "<group>";
+		};
 		58D5A1671BA329A300D552CF /* NavigationTitleView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1602,6 +1657,7 @@
 				587B3A891BA80F3D0098154F /* FRDDropDownHolderController.xib in Resources */,
 				587B3A951BA815850098154F /* FRDRelationshipCollectionCell.xib in Resources */,
 				58C28FFE1BAAC6C50099ABE4 /* FRDDropDownTableView.xib in Resources */,
+				58CD9AC01BAFF1C800A7CADB /* FRDTopContentView.xib in Resources */,
 				58EBC6B21BAC1682003CD598 /* FRDPreviewGalleryController.xib in Resources */,
 				58BC76AA1B9EB6B500BB8B5A /* Main.storyboard in Resources */,
 				58F05AD01BAC3F730092D767 /* FRDPreviewPhotoCell.xib in Resources */,
@@ -1678,6 +1734,7 @@
 				58FFDBB51B9ED07E00B0490A /* FRDCommonNumberFormatter.m in Sources */,
 				58C28FFC1BAAC69B0099ABE4 /* CAAnimation+CompetionBlock.m in Sources */,
 				581B9D3B1B9ED6090080393B /* FRDStorageManager.m in Sources */,
+				58CD9AC41BAFF29F00A7CADB /* FRDBaseContentController.m in Sources */,
 				58BC77081B9ECA3700BB8B5A /* NSString+Base64Decoding.m in Sources */,
 				581B9D3E1B9ED67B0080393B /* FRDPushNotifiactionService.m in Sources */,
 				58C28FF81BAAC6800099ABE4 /* ZLPanGestureRecognizer.m in Sources */,
@@ -1686,6 +1743,7 @@
 				58FFDBAB1B9ECF3B00B0490A /* FRDSerialViewConstructor.m in Sources */,
 				3E021DC81BAFD97500BDA411 /* FRDMyProfileController.m in Sources */,
 				58BC773D1B9ECDD100BB8B5A /* FRDValidator.m in Sources */,
+				58CD9ABE1BAFF1B500A7CADB /* FRDTopContentView.m in Sources */,
 				58F2F30F1B9EF93F000DC739 /* FRDTutorialController.m in Sources */,
 				58BC770E1B9ECA5000BB8B5A /* UIView+MakeFromXib.m in Sources */,
 				58C28C4E1BA999F2009D1AC4 /* FRDFriendDragableView.m in Sources */,
@@ -1693,6 +1751,7 @@
 				58C28FEC1BAA91670099ABE4 /* FRDFriendDragableParentView.m in Sources */,
 				581B9D531B9EDC740080393B /* FRDNetworkRequest.m in Sources */,
 				581B9D481B9ED8D30080393B /* FRDFacebookProfile.m in Sources */,
+				58CD9ABA1BAFEDC700A7CADB /* FRDContainerController.m in Sources */,
 				58BC77231B9ECAA900BB8B5A /* UIImage+Base64Encoding.m in Sources */,
 				58FFDBB21B9ED00100B0490A /* ISO8601DateFormatter.m in Sources */,
 				58BC77111B9ECA5B00BB8B5A /* UIView+Shaking.m in Sources */,
@@ -1725,6 +1784,7 @@
 				3E10E3101BA16E080075C72D /* FRDPhotoGalleryCollectionViewCell.m in Sources */,
 				3E3D41591BA6A5A90021026A /* FRDAutologinViewController.m in Sources */,
 				3E10E3081BA15B3E0075C72D /* FRDPhotoGalleryCollectionViewController.m in Sources */,
+				58CD9AB51BAFE7C200A7CADB /* FRDAnimator.m in Sources */,
 				58BC772A1B9ECB0300BB8B5A /* KeychainItemWrapper.m in Sources */,
 				581B9D591B9EDCBB0080393B /* FRDProjectFacade.m in Sources */,
 				3E0EEC551BABE85500AB51B0 /* FRDRoundedView.m in Sources */,

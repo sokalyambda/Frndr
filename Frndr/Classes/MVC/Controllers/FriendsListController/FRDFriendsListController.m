@@ -22,12 +22,29 @@
 
 @implementation FRDFriendsListController
 
+#pragma mark - Accessors
+
+- (NSString *)titleString
+{
+    return @"Frnds";
+}
+
+- (NSString *)leftImageName
+{
+    return @"preferencesTopIcon";
+}
+
+- (NSString *)rightImageName
+{
+    return nil;
+}
+
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.friendsTableView.rowHeight = UITableViewAutomaticDimension;
         self.friendsTableView.estimatedRowHeight = 20.f;
         [self.friendsTableView reloadData];
