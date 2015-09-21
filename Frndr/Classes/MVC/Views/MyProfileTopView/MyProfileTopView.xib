@@ -20,14 +20,14 @@
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="bIW-an-0Hp"/>
                             <exclude reference="3NT-R1-6IP"/>
+                            <exclude reference="bIW-an-0Hp"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
                         <mask key="constraints">
-                            <include reference="bIW-an-0Hp"/>
                             <include reference="3NT-R1-6IP"/>
+                            <include reference="bIW-an-0Hp"/>
                         </mask>
                     </variation>
                 </imageView>
@@ -72,13 +72,13 @@
                         </mask>
                         <mask key="constraints">
                             <exclude reference="72K-Ry-iEO"/>
-                            <exclude reference="8Iy-1d-F5b"/>
-                            <exclude reference="MTr-rB-CL3"/>
-                            <exclude reference="JNB-1G-5H7"/>
-                            <exclude reference="nbM-Lr-hvm"/>
                             <exclude reference="8Me-tH-gud"/>
                             <exclude reference="Va6-hu-7HR"/>
                             <exclude reference="kAk-8c-A1L"/>
+                            <exclude reference="JNB-1G-5H7"/>
+                            <exclude reference="nbM-Lr-hvm"/>
+                            <exclude reference="8Iy-1d-F5b"/>
+                            <exclude reference="MTr-rB-CL3"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
@@ -89,13 +89,13 @@
                         </mask>
                         <mask key="constraints">
                             <include reference="72K-Ry-iEO"/>
-                            <include reference="8Iy-1d-F5b"/>
-                            <include reference="MTr-rB-CL3"/>
-                            <include reference="JNB-1G-5H7"/>
-                            <include reference="nbM-Lr-hvm"/>
                             <include reference="8Me-tH-gud"/>
                             <include reference="Va6-hu-7HR"/>
                             <include reference="kAk-8c-A1L"/>
+                            <include reference="JNB-1G-5H7"/>
+                            <include reference="nbM-Lr-hvm"/>
+                            <include reference="8Iy-1d-F5b"/>
+                            <include reference="MTr-rB-CL3"/>
                         </mask>
                     </variation>
                 </view>
@@ -134,6 +134,12 @@
                     <include reference="tHN-je-h4Q"/>
                 </mask>
             </variation>
+            <connections>
+                <outlet property="ageLabel" destination="yGE-ju-WKW" id="W71-cE-0BY"/>
+                <outlet property="avatarImageView" destination="MP5-s1-ynW" id="ul1-DX-AV6"/>
+                <outlet property="genderLabel" destination="MZc-3a-wa8" id="Spc-tU-CAg"/>
+                <outlet property="nameLabel" destination="zTe-69-HRo" id="leN-T3-de3"/>
+            </connections>
             <point key="canvasLocation" x="266" y="5"/>
         </view>
     </objects>

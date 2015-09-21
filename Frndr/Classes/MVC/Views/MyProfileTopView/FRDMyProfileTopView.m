@@ -8,14 +8,15 @@
 
 #import "FRDMyProfileTopView.h"
 
-@implementation FRDMyProfileTopView
+@interface FRDMyProfileTopView ()
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ageLabel;
+@property (weak, nonatomic) IBOutlet UILabel *genderLabel;
+
+@end
+
+@implementation FRDMyProfileTopView
 
 @end
