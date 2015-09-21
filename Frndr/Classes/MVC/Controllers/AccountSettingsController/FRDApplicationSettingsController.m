@@ -8,6 +8,8 @@
 
 #import "FRDApplicationSettingsController.h"
 
+#import "FRDSerialViewConstructor.h"
+
 @interface FRDApplicationSettingsController ()
 
 @end
@@ -19,6 +21,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+#pragma mark - Actions
+
+- (void)customizeNavigationItem
+{
+    [super customizeNavigationItem];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+    UIBarButtonItem *rightIcon = [FRDSerialViewConstructor customRightBarButtonForController:self withAction:nil];
+    
+    //set right bar button item
+    self.navigationItem.rightBarButtonItem = rightIcon;
 }
 
 @end
