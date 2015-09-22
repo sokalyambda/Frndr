@@ -10,6 +10,8 @@
 
 #import "FRDApplicationSettingsTableHeader.h"
 
+#import "FRDSwitch.h"
+
 typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
 {
     FRDApplicationSettingsSectionTypeNotifications,
@@ -19,8 +21,8 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
 @interface FRDApplicationSettingsTableContainer ()
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSeparatorHeight;
-@property (weak, nonatomic) IBOutlet UISwitch *friendSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *messageSwitch;
+@property (weak, nonatomic) IBOutlet FRDSwitch *friendSwitch;
+@property (weak, nonatomic) IBOutlet FRDSwitch *messageSwitch;
 
 @end
 
@@ -35,7 +37,16 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
     [self registerHeader];
     [self adjustTopSeparatorHeight];
     
-    [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+    self.tableView.tableHeaderView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([FRDApplicationSettingsTableHeader class])];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    self.tableView.alwaysBounceVertical = NO;
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    [self configureSwitches];
 }
 
 #pragma mark - Actions
@@ -54,15 +65,54 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
     self.topSeparatorHeight.constant = 1.0 / [UIScreen mainScreen].scale;
 }
 
+- (void)configureSwitches
+{
+    UIColor *labelsColor = [UIColor colorWithRed:53.f / 255.f
+                                           green:184.f / 255.f
+                                            blue:180.f / 255.f
+                                           alpha:1.0];
+    
+    UIFontDescriptor *fontDescriptor = [[UIFontDescriptor alloc]
+                                        initWithFontAttributes:@{ UIFontDescriptorSizeAttribute : @16,
+                                                                  UIFontDescriptorNameAttribute : @"Gill Sans" }];
+    
+    [self.friendSwitch setOnImage:[UIImage imageNamed:@"SwitchBackground"]];
+    [self.friendSwitch setOffImage:[UIImage imageNamed:@"SwitchBackground"]];
+    [self.friendSwitch setSwitchImage:[UIImage imageNamed:@"Slider_Thumb"]];
+    [self.friendSwitch setOnText:@"ON"
+                      withFontDescriptor:fontDescriptor
+                                andColor:labelsColor];
+    
+    [self.friendSwitch setOffText:@"OFF"
+                       withFontDescriptor:fontDescriptor
+                                 andColor:labelsColor];
+    
+    [self.friendSwitch setOn:NO animated:NO];
+    
+    [self.messageSwitch setOnImage:[UIImage imageNamed:@"SwitchBackground"]];
+    [self.messageSwitch setOffImage:[UIImage imageNamed:@"SwitchBackground"]];
+    [self.messageSwitch setSwitchImage:[UIImage imageNamed:@"Slider_Thumb"]];
+    [self.messageSwitch setOnText:@"ON"
+              withFontDescriptor:fontDescriptor
+                        andColor:labelsColor];
+    
+    [self.messageSwitch setOffText:@"OFF"
+               withFontDescriptor:fontDescriptor
+                         andColor:labelsColor];
+    
+    [self.messageSwitch setOn:NO animated:NO];
+    
+}
+
 #pragma mark - UITableViewDelegate
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Prevent scrolling if content fits the screen
-    if (CGRectGetMaxY(cell.frame) > CGRectGetHeight([UIScreen mainScreen].bounds)) {
-        self.tableView.alwaysBounceVertical = NO;
-    }
-}
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    // Prevent scrolling if content fits the screen
+//    if (CGRectGetMaxY(cell.frame) > CGRectGetHeight([UIScreen mainScreen].bounds)) {
+//        self.tableView.alwaysBounceVertical = NO;
+//    }
+//}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -81,21 +131,15 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    static FRDApplicationSettingsTableHeader *header;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([FRDApplicationSettingsTableHeader class])];
-    });
-    
     FRDApplicationSettingsSectionType sectionType = section;
     
     switch (sectionType) {
         case FRDApplicationSettingsSectionTypeNotifications: {
-            return CGRectGetHeight(header.frame);
+            return 0.f;
         }
             
         case FRDApplicationSettingsSectionTypeOther: {
-            return CGRectGetMidY(header.bounds);
+            return CGRectGetMidY(tableView.tableHeaderView.frame);
         }
     }
 }

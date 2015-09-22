@@ -13,6 +13,7 @@
 #import "FRDDropDownTableView.h"
 
 #import "UIView+MakeFromXib.h"
+#import "UIImage+ColoredImage.h"
 
 #import "FRDBaseDropDownDataSource.h"
 
@@ -43,10 +44,8 @@
     [super viewDidLoad];
     [self initDropDownHolderContainer];
     [self initRelationshipStatusesHolderContainer];
-    [self configureAgeRangeSlider];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self configureDistanceSlider];
-        [self configureAgeRangeSlider];
+        [self configureSliders];
     });
 }
 
@@ -71,28 +70,35 @@
     [self.relationshipController didMoveToParentViewController:self];
 }
 
-- (void)configureDistanceSlider
+- (void)configureSliders
 {
-    [self.distanceSlider setThumbImage:[UIImage imageNamed:@"Slider_Thumb"]];
-    [self.distanceSlider setTrackImage:[[UIImage imageNamed:@"SwitchBackground"]
-                                        resizableImageWithCapInsets:UIEdgeInsetsMake(9.0, 35.0, 9.0, 35.0)]];
-    [self.distanceSlider setInRangeTrackImage:[[UIImage imageNamed:@"downArrow"]
-                                               resizableImageWithCapInsets:UIEdgeInsetsMake(1, 1, 1, 1)]];
+    UIImage *outOfRangeImage = [UIImage imageWithColor:[UIColor colorWithRed:215.f / 255.f
+                                                                       green:1.0
+                                                                        blue:249.f / 255.f
+                                                                       alpha:1.0]
+                                               andSize:CGSizeMake(1, 1)];
     
-    self.distanceSlider.tracksHeight = 3.0;
-    self.distanceSlider.mode = FRDRangeSliderModeSingleThumb;
-}
-
-- (void)configureAgeRangeSlider
-{
-    [self.ageRangeSlider setThumbImage:[UIImage imageNamed:@"Slider_Thumb"]];
-    [self.ageRangeSlider setTrackImage:[[UIImage imageNamed:@"SwitchBackground"]
-                                        resizableImageWithCapInsets:UIEdgeInsetsMake(9.0, 35.0, 9.0, 35.0)]];
-    [self.ageRangeSlider setInRangeTrackImage:[[UIImage imageNamed:@"downArrow"]
-                                               resizableImageWithCapInsets:UIEdgeInsetsMake(1, 1, 1, 1)]];
+    UIImage *inRangeImage = [UIImage imageWithColor:[UIColor colorWithRed:53.f / 255.f
+                                                                       green:192.f / 255.f
+                                                                        blue:186.f / 255.f
+                                                                       alpha:1.0]
+                                               andSize:CGSizeMake(1, 1)];
+    
+    UIImage *thumbImage = [UIImage imageNamed:@"Slider_Thumb"];
+    
+    [self.ageRangeSlider setThumbImage:thumbImage];
+    [self.ageRangeSlider setTrackImage:outOfRangeImage];
+    [self.ageRangeSlider setInRangeTrackImage:inRangeImage];
     
     self.ageRangeSlider.tracksHeight = 3.0;
     self.ageRangeSlider.mode = FRDRangeSliderModeRange;
+    
+    [self.distanceSlider setThumbImage:thumbImage];
+    [self.distanceSlider setTrackImage:outOfRangeImage];
+    [self.distanceSlider setInRangeTrackImage:inRangeImage];
+    
+    self.distanceSlider.tracksHeight = 3.0;
+    self.distanceSlider.mode = FRDRangeSliderModeSingleThumb;
 }
 
 - (void)customizeNavigationItem

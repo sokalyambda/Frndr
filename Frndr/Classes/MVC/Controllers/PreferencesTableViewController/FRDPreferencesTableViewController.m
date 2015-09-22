@@ -10,6 +10,9 @@
 #import "FRDSearchSettingsController.h"
 #import "FRDApplicationSettingsController.h"
 
+static CGFloat const kDefaultRowHeight = 70.f;
+static NSInteger const kNumberOfPreferences = 4;
+
 @implementation FRDPreferencesTableViewController
 
 #pragma mark - View Lifecycle
@@ -22,14 +25,6 @@
 }
 
 #pragma mark - UITableViewDelegate
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Prevent scrolling if content fits the screen
-    if (CGRectGetMaxY(cell.frame) > CGRectGetHeight([UIScreen mainScreen].bounds)) {
-        self.tableView.alwaysBounceVertical = NO;
-    }
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -57,6 +52,17 @@
             
         default:
             break;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"Height: %f", self.view.frame.size.height);
+    NSLog(@"Height22222: %f", self.tableView.frame.size.height);
+    if(CGRectGetHeight(self.view.frame) < kDefaultRowHeight * kNumberOfPreferences) {
+        return CGRectGetHeight(self.view.frame) / kNumberOfPreferences;
+    } else {
+        return kDefaultRowHeight;
     }
 }
 
