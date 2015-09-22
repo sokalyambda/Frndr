@@ -74,7 +74,7 @@
 - (void)configureDistanceSlider
 {
     [self.distanceSlider setThumbImage:[UIImage imageNamed:@"Slider_Thumb"]];
-    [self.distanceSlider setTrackImage:[[UIImage imageNamed:@"Shape-9"]
+    [self.distanceSlider setTrackImage:[[UIImage imageNamed:@"SwitchBackground"]
                                         resizableImageWithCapInsets:UIEdgeInsetsMake(9.0, 35.0, 9.0, 35.0)]];
     [self.distanceSlider setInRangeTrackImage:[[UIImage imageNamed:@"downArrow"]
                                                resizableImageWithCapInsets:UIEdgeInsetsMake(1, 1, 1, 1)]];
@@ -86,7 +86,7 @@
 - (void)configureAgeRangeSlider
 {
     [self.ageRangeSlider setThumbImage:[UIImage imageNamed:@"Slider_Thumb"]];
-    [self.ageRangeSlider setTrackImage:[[UIImage imageNamed:@"Shape-9"]
+    [self.ageRangeSlider setTrackImage:[[UIImage imageNamed:@"SwitchBackground"]
                                         resizableImageWithCapInsets:UIEdgeInsetsMake(9.0, 35.0, 9.0, 35.0)]];
     [self.ageRangeSlider setInRangeTrackImage:[[UIImage imageNamed:@"downArrow"]
                                                resizableImageWithCapInsets:UIEdgeInsetsMake(1, 1, 1, 1)]];
