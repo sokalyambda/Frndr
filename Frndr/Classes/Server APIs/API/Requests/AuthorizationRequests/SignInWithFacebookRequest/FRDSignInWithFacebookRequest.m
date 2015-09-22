@@ -13,7 +13,6 @@
 static NSString *const requestAction = @"signIn";
 
 static NSString *const kFacebookAccessToken = @"fbId";
-static NSString *const kPushToken = @"pushToken";
 static NSString *const kOSVersion = @"os";
 static NSString *const kGeolocationCoordinates = @"coordinates";
 
@@ -38,8 +37,7 @@ static NSString *const kOSVersionApple = @"APPLE";
         if (fbAccessTokenString) {
             parameters = [NSMutableDictionary dictionaryWithDictionary:@{kFacebookAccessToken: fbAccessTokenString,
                                                                          kOSVersion: kOSVersionApple,
-                                                                         kGeolocationCoordinates: coords,
-                                                                         kPushToken: @"wefewfrg43rr3fc5tv44s5by"
+                                                                         kGeolocationCoordinates: coords
                                                                          }];
         }
         

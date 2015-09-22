@@ -160,7 +160,7 @@
             
             NSString *errorString = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
             
-            [FRDAlertFacade showAlertWithMessage:errorString forController:weakSelf withCompletion:nil];
+            [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
             
         }];
         

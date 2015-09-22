@@ -10,18 +10,8 @@
 
 #import "NSString+JSONRepresentation.h"
 
-static NSString *const kErrors              = @"errors";
-static NSString *const kErrorMessage        = @"error_message";
-static NSString *const kErrorDescription    = @"error_description";
-static NSString *const kErrorStatusCode     = @"error_code";
-
-static NSString *const kFacebookUserNotFound        = @"FACEBOOK_USER_NOT_FOUND";
-static NSString *const kEmailNotRegistered          = @"EMAIL_NOT_REGISTERED";
-
-static NSString *const kEmailAlreadyExist           = @"EMAIL_ALREADY_REGISTERED";
-static NSString *const kFacebookEmailAlreadyExist   = @"FACEBOOK_USER_ALREADY_REGISTERED";
-
-static NSString *const kErrorsCodesPlistName = @"ErrorsCodes";
+static NSString *const kErrorMessage = @"message";
+static NSString *const kErrorStack = @"stack";
 
 @implementation FRDErrorHandler
 
@@ -115,35 +105,14 @@ static NSString *_errorAlertTitle = nil;
 {
     NSMutableString *outputErrorString = [NSMutableString string];
     
-    NSArray *errors = [self getErrorsArrayDataFromError:error];
-    if (errors) {
-        for (NSDictionary *currentErrorDict in errors) {
-            [outputErrorString appendFormat:@"%@\n", [self localizedStringFromErrorCode:currentErrorDict[kErrorStatusCode]]];
-        }
-    } else {
-        NSDictionary *jsonErrorDict = [self getErrorsDictDataFromError:error];
-        NSString *errorDescriptionString = jsonErrorDict[kErrorDescription];
-        
-        if (errorDescriptionString.length) {
-            [outputErrorString appendString:errorDescriptionString];
-        }
+    NSDictionary *jsonErrorDict = [self getErrorsDictDataFromError:error];
+    
+    NSString *errorDescriptionString = jsonErrorDict[kErrorMessage];
+    if (errorDescriptionString.length) {
+        [outputErrorString appendString:errorDescriptionString];
     }
     
     return outputErrorString.length > 0 ? outputErrorString : nil;
-}
-
-/**
- *  Get array with errors
- *
- *  @param error Error that shoud be parsed
- *
- *  @return Array of dictionaries each of which represents an error
- */
-+ (NSArray *)getErrorsArrayDataFromError:(NSError *)error
-{
-    NSDictionary *jsonErrorDict = [self getErrorsDictDataFromError:error];
-    NSArray *errors = jsonErrorDict[kErrors];
-    return errors;
 }
 
 /**
@@ -207,28 +176,6 @@ static NSString *_errorAlertTitle = nil;
     }
     
     return errString.length > 0 ? errString : nil;
-}
-
-/**
- *  Get localized string that depends on error code (custom error code, API specification.)
- *
- *  @param errorCode String value that represents error's code
- *
- *  @return Localized result string
- */
-+ (NSString *)localizedStringFromErrorCode:(NSString *)errorCode
-{
-    __block NSString *resultString;
-    NSArray *preservedErrorsArray = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:kErrorsCodesPlistName ofType:@"plist"]];
-    
-    [preservedErrorsArray enumerateObjectsUsingBlock:^(NSDictionary *errorDict, NSUInteger idx, BOOL *stop) {
-        if (errorDict[errorCode]) {
-            resultString = LOCALIZED(errorDict[errorCode][kErrorAlertMessage]);
-            [self setErrorAlertTitle:LOCALIZED(errorDict[errorCode][kErrorAlertTitle])];
-            *stop = YES;
-        }
-    }];
-    return resultString;
 }
 
 @end
