@@ -29,7 +29,6 @@ typedef void (^CleanBlock)();
 - (FRDNetworkOperation*)enqueueOperationWithNetworkRequest:(FRDNetworkRequest*)networkRequest success:(SuccessOperationBlock)success failure:(FailureOperationBlock)failure;
 
 //session validation
-- (void)validateSessionWithType:(FRDSessionType)sessionType onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 - (BOOL)isSessionValidWithType:(FRDSessionType)sessionType;
 
 //check whether operation is in process

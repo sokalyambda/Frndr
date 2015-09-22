@@ -16,6 +16,10 @@
 #import "FRDSearchFriendsController.h"
 
 #import "FRDFacebookService.h"
+#import "FRDPushNotifiactionService.h"
+#import "FRDProjectFacade.h"
+
+#import "FRDLocationObserver.h"
 
 #import "FRDTermsLabel.h"
 #import "FRDCustomPageControl.h"
@@ -49,8 +53,11 @@
         [self setupTutorialScrollView];
         [self animateTutorialViews];
     });
+    
+    [FRDPushNotifiactionService registerApplicationForPushNotifications:[UIApplication sharedApplication]];
+    [FRDLocationObserver sharedObserver];
+//    NSLog(@"current locaion %@", [FRDLocationObserver sharedObserver].currentLocation);
 }
-
 
 #pragma mark - Actions
 
@@ -132,31 +139,35 @@
  */
 - (void)authorizeWithFacebookAction
 {
-    FRDPreferencesController *preferencesController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
-    FRDFriendsListController *friendsListController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDFriendsListController class])];
-    FRDSearchFriendsController *searchFriendsController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDSearchFriendsController class])];
-    FRDContainerViewController *container = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDContainerViewController class])];
-    container.delegate = self;
-    container.viewControllers = @[preferencesController, searchFriendsController, friendsListController];
-    
-    //    FRDBasePagerController *pagerController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDBasePagerController class])];
-    
-    //    FRDSearchFriendsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDSearchFriendsController class])];
-    
-    [self.navigationController pushViewController:container animated:YES];
-    /*
-     WEAK_SELF;
-     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-     [FRDFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
-     [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-     
-     FRDPreferencesController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
-     [weakSelf.navigationController pushViewController:controller animated:YES];
-     
-     } onFailure:^(NSError *error, BOOL isCanceled) {
-     [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [FRDFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
+
+        [FRDProjectFacade signInWithFacebookOnSuccess:^(BOOL isSuccess) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            
+            FRDPreferencesController *preferencesController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
+            FRDFriendsListController *friendsListController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDFriendsListController class])];
+            FRDSearchFriendsController *searchFriendsController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDSearchFriendsController class])];
+            FRDContainerViewController *container = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDContainerViewController class])];
+            container.delegate = weakSelf;
+            container.viewControllers = @[preferencesController, searchFriendsController, friendsListController];
+            
+            [weakSelf.navigationController pushViewController:container animated:YES];
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            
+            NSString *errorString = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+            
+            [FRDAlertFacade showAlertWithMessage:errorString forController:weakSelf withCompletion:nil];
+            
+        }];
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
      }];
-     */
+    
 }
 
 /**
