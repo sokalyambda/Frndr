@@ -23,7 +23,7 @@ static NSString *const requestAction = @"users/blockFriend";
         self.action = [self requestAction];
         _method = @"GET";
         
-        NSMutableDictionary *parameters = [@{@"": @(friend.friendId)} mutableCopy];
+        NSMutableDictionary *parameters = [@{@"": @(currentFriend.friendId)} mutableCopy];
         
         self.serializationType = FRDRequestSerializationTypeJSON;
         
