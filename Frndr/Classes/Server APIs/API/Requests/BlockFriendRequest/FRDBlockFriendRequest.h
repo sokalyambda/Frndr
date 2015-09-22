@@ -8,6 +8,10 @@
 
 #import "FRDNetworkRequest.h"
 
+@class FRDFriend;
+
 @interface FRDBlockFriendRequest : FRDNetworkRequest
+
+- (instancetype)initWithFriend:(FRDFriend *)currentFriend;
 
 @end

@@ -13,10 +13,10 @@
 static NSString *const requestAction = @"signIn";
 
 static NSString *const kFacebookAccessToken = @"fbId";
-static NSString *const kOSVersion = @"os";
+//static NSString *const kOSVersion = @"os";
 static NSString *const kGeolocationCoordinates = @"coordinates";
 
-static NSString *const kOSVersionApple = @"APPLE";
+//static NSString *const kOSVersionApple = @"APPLE";
 
 @implementation FRDSignInWithFacebookRequest
 
@@ -36,7 +36,7 @@ static NSString *const kOSVersionApple = @"APPLE";
         NSMutableDictionary *parameters;
         if (fbAccessTokenString) {
             parameters = [NSMutableDictionary dictionaryWithDictionary:@{kFacebookAccessToken: fbAccessTokenString,
-                                                                         kOSVersion: kOSVersionApple,
+                                                                         /*kOSVersion: kOSVersionApple,*/
                                                                          kGeolocationCoordinates: coords
                                                                          }];
         }

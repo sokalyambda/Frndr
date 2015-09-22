@@ -1,5 +1,5 @@
 //
-//  FRDGetFriendsListRequest.h
+//  FRDSendDeviceDataRequest.h
 //  Frndr
 //
 //  Created by Eugenity on 22.09.15.
@@ -8,8 +8,6 @@
 
 #import "FRDNetworkRequest.h"
 
-@interface FRDGetFriendsListRequest : FRDNetworkRequest
-
-@property (nonatomic) NSArray *friendsList;
+@interface FRDSendDeviceDataRequest : FRDNetworkRequest
 
 @end

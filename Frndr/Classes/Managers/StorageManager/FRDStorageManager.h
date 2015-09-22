@@ -7,16 +7,15 @@
 //
 
 #import "FRDFacebookProfile.h"
-#import "FRDUserProfile.h"
 
 @interface FRDStorageManager : NSObject
 
 + (instancetype)sharedStorage;
 
-@property (strong, nonatomic) FRDFacebookProfile *currentFacebookProfile;
+@property (nonatomic) FRDFacebookProfile *currentFacebookProfile;
 
-@property (strong, nonatomic) NSString *deviceToken;
-@property (strong, nonatomic, readonly) NSString *deviceUDID;
-@property (strong, nonatomic, readonly) NSString *deviceName;
+@property (nonatomic) NSString *deviceToken;
+@property (nonatomic, readonly) NSString *deviceUDID;
+@property (nonatomic, readonly) NSString *deviceName;
 
 @end

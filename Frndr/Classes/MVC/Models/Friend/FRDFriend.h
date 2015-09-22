@@ -14,6 +14,10 @@
 @property (nonatomic) NSString *lastName;
 @property (nonatomic, readonly) NSString *fullName;
 
+@property (nonatomic) long long friendId;
+@property (nonatomic) NSString *lastMessage;
+@property (nonatomic) NSString *avatarURL;
+
 @property (nonatomic) CGFloat distanceFromMe;
 @property (nonatomic) BOOL smoker;
 @property (nonatomic) NSUInteger age;

@@ -8,18 +8,56 @@
 
 #import "FRDUpdateProfileRequest.h"
 
+#import "FRDLocationObserver.h"
+
 static NSString *const requestAction = @"users";
+
+static NSString *const kCoordinates = @"";
+static NSString *const kProfile = @"";
+
+static NSString *const kName                = @"name";
+static NSString *const kAge                 = @"age";
+static NSString *const kRelationshipStatus  = @"relStatus";
+static NSString *const kJobTitle            = @"jobTitle";
+static NSString *const kSmoker              = @"smoker";
+static NSString *const kSexualOrientation   = @"sexual";
+static NSString *const kThingsLovedMost     = @"things";
+static NSString *const kBiography           = @"bio";
+static NSString *const kVisible             = @"visible";
+static NSString *const kGender              = @"sex";
 
 @implementation FRDUpdateProfileRequest
 
-- (instancetype)init
+#pragma mark - Lifecycle
+
+- (instancetype)initWithUpdatedProfile:(FRDFacebookProfile *)updatedProfile
 {
     self = [super init];
     if (self) {
         self.action = [self requestAction];
         _method = @"PUT";
         
-        NSMutableDictionary *parameters = [@{} mutableCopy];
+        CLLocation *currentLocation = [FRDLocationObserver sharedObserver].currentLocation;
+        NSArray *coords = @[@(currentLocation.coordinate.longitude), @(currentLocation.coordinate.latitude)];
+        
+        NSDictionary *profile = @{
+                                  kName:                updatedProfile.fullName,
+                                  kAge:                 @(updatedProfile.age),
+                                  kRelationshipStatus:  updatedProfile.relationshipStatus,
+                                  kJobTitle:            updatedProfile.jobTitle,
+                                  kSmoker:              @(updatedProfile.isSmoker),
+                                  kSexualOrientation:   updatedProfile.chosenOrientation,
+                                  kThingsLovedMost:     updatedProfile.thingsLovedMost,
+                                  kBiography:           updatedProfile.biography,
+                                  kVisible:             @(updatedProfile.isVisible),
+                                  kGender:              updatedProfile.genderString
+                                  
+                                  };
+        
+        NSMutableDictionary *parameters = [@{
+                                             kCoordinates: coords,
+                                             kProfile: profile
+                                             } mutableCopy];
         
         self.serializationType = FRDRequestSerializationTypeJSON;
         

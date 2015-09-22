@@ -36,7 +36,7 @@
 @property (weak, nonatomic) IBOutlet FRDTermsLabel *termsLabel;
 @property (weak, nonatomic) IBOutlet UIButton *facebookButton;
 
-@property (strong, nonatomic) NSArray *contentImages;
+@property (nonatomic) NSArray *contentImages;
 
 @end
 

@@ -8,6 +8,8 @@
 
 #import "FRDFacebookProfile.h"
 
+#import "FRDSexualOrientation.h"
+
 static NSString *const kFirstName = @"first_name";
 static NSString *const kLastName = @"last_name";
 static NSString *const kFullName = @"name";
@@ -20,7 +22,36 @@ static NSString *const kData = @"data";
 static NSString *const kURL = @"url";
 static NSString *const kGender = @"gender";
 
+//beckend keys
+
+static NSString *const kId = @"_id";
+
+static NSString *const kProfile = @"profile";
+static NSString *const kVisible = @"visible";
+static NSString *const kThingsLovedMost = @"things";
+static NSString *const kSexualOrientation = @"sexual";
+static NSString *const kRelationshipStatus = @"relStatus";
+static NSString *const kSex = @"sex";
+
+static NSString *const kNotifications = @"notification";
+static NSString *const kNewMessages = @"newMessages";
+static NSString *const kNewFriends = @"newFriends";
+
 @implementation FRDFacebookProfile
+
+#pragma mark - Accessors
+
+- (NSInteger)age
+{
+    NSDate *now = [NSDate date];
+    NSDate *birthDate = self.birthDate;
+    NSDateComponents* ageComponents = [[NSCalendar currentCalendar]
+                                       components:NSCalendarUnitYear
+                                       fromDate:birthDate
+                                       toDate:now
+                                       options:0.f];
+    return [ageComponents year];
+}
 
 #pragma mark - FRDMappingProtocol
 
@@ -36,6 +67,25 @@ static NSString *const kGender = @"gender";
         _genderString = [response[kGender] capitalizedString];
         
         _avararURL = [NSURL URLWithString:response[kPicture][kData][kURL]];
+    }
+    return self;
+}
+
+- (instancetype)updateWithServerResponse:(NSDictionary *)response
+{
+    if (self) {
+        _userId = [response[kId] longLongValue];
+        
+        NSDictionary *profileDict   = response[kProfile];
+        _visible                    = [profileDict[kVisible] boolValue];
+        _thingsLovedMost            = profileDict[kThingsLovedMost];
+        _chosenOrientation          = profileDict[kSexualOrientation];
+        _relationshipStatus         = profileDict[kRelationshipStatus];
+        _genderString               = profileDict[kSex];
+        
+        NSDictionary *notificationsDict = response[kNotifications];
+        _friendsNotificationsEnabled = [notificationsDict[kNewFriends] boolValue];
+        _messagesNotificationsEnabled = [notificationsDict[kNewMessages] boolValue];
     }
     return self;
 }

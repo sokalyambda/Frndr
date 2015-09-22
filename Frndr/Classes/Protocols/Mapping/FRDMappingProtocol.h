@@ -10,4 +10,7 @@
 
 - (instancetype)initWithServerResponse:(NSDictionary *)response;
 
+@optional
+- (instancetype)updateWithServerResponse:(NSDictionary *)response;
+
 @end
