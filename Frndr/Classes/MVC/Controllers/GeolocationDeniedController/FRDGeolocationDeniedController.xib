@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FRDGeolocationDeniedController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QYY-CQ-y8r" userLabel="Container View">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="geolocation_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Sdl-0I-Ede">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="125" id="O2T-Rk-v9G"/>
+                                <constraint firstAttribute="height" constant="175" id="jl5-fY-RVv"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="O2T-Rk-v9G"/>
+                                    <exclude reference="jl5-fY-RVv"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="O2T-Rk-v9G"/>
+                                    <include reference="jl5-fY-RVv"/>
+                                </mask>
+                            </variation>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJL-bP-spu">
+                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                            <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="23"/>
+                            <color key="textColor" red="0.32498972040000002" green="0.32956414470000001" blue="0.52870579770000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In order to suggest potential matches near you, Frndr needs to know where you are." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ung-mU-oBb">
+                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="266" id="1th-Tv-abU"/>
+                                <constraint firstAttribute="height" constant="61" id="XPS-uu-PPF"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
+                            <color key="textColor" red="0.32498972040000002" green="0.32956414470000001" blue="0.52870579770000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="1th-Tv-abU"/>
+                                    <exclude reference="XPS-uu-PPF"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="1th-Tv-abU"/>
+                                    <include reference="XPS-uu-PPF"/>
+                                </mask>
+                            </variation>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go to Settings &gt; Privacy &gt; Location Services, and switch Frndr to ON." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPu-6A-8MB">
+                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
+                            <color key="textColor" red="0.32498972040000002" green="0.32956414470000001" blue="0.52870579770000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Ung-mU-oBb" firstAttribute="centerX" secondItem="Sdl-0I-Ede" secondAttribute="centerX" id="DZY-Sa-dZK"/>
+                        <constraint firstItem="BJL-bP-spu" firstAttribute="centerX" secondItem="Sdl-0I-Ede" secondAttribute="centerX" id="KEw-l3-Lys"/>
+                        <constraint firstItem="dPu-6A-8MB" firstAttribute="leading" secondItem="Ung-mU-oBb" secondAttribute="leading" id="Lx1-se-rWG"/>
+                        <constraint firstItem="dPu-6A-8MB" firstAttribute="trailing" secondItem="Ung-mU-oBb" secondAttribute="trailing" id="PU8-Wj-29B"/>
+                        <constraint firstItem="dPu-6A-8MB" firstAttribute="top" secondItem="Ung-mU-oBb" secondAttribute="bottom" constant="8" id="Ptn-fa-b5Y"/>
+                        <constraint firstItem="Sdl-0I-Ede" firstAttribute="top" secondItem="QYY-CQ-y8r" secondAttribute="top" constant="8" id="bz9-3N-bAA"/>
+                        <constraint firstItem="BJL-bP-spu" firstAttribute="top" secondItem="Sdl-0I-Ede" secondAttribute="bottom" constant="8" id="j7M-uL-0Xd"/>
+                        <constraint firstItem="Sdl-0I-Ede" firstAttribute="centerX" secondItem="QYY-CQ-y8r" secondAttribute="centerX" id="pl1-EG-pY9"/>
+                        <constraint firstItem="Ung-mU-oBb" firstAttribute="top" secondItem="BJL-bP-spu" secondAttribute="bottom" constant="18" id="umT-qR-xUl"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="subviews">
+                            <exclude reference="Sdl-0I-Ede"/>
+                            <exclude reference="BJL-bP-spu"/>
+                            <exclude reference="Ung-mU-oBb"/>
+                            <exclude reference="dPu-6A-8MB"/>
+                        </mask>
+                        <mask key="constraints">
+                            <exclude reference="bz9-3N-bAA"/>
+                            <exclude reference="pl1-EG-pY9"/>
+                            <exclude reference="KEw-l3-Lys"/>
+                            <exclude reference="j7M-uL-0Xd"/>
+                            <exclude reference="DZY-Sa-dZK"/>
+                            <exclude reference="umT-qR-xUl"/>
+                            <exclude reference="Lx1-se-rWG"/>
+                            <exclude reference="PU8-Wj-29B"/>
+                            <exclude reference="Ptn-fa-b5Y"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="subviews">
+                            <include reference="Sdl-0I-Ede"/>
+                            <include reference="BJL-bP-spu"/>
+                            <include reference="Ung-mU-oBb"/>
+                            <include reference="dPu-6A-8MB"/>
+                        </mask>
+                        <mask key="constraints">
+                            <include reference="bz9-3N-bAA"/>
+                            <include reference="pl1-EG-pY9"/>
+                            <include reference="KEw-l3-Lys"/>
+                            <include reference="j7M-uL-0Xd"/>
+                            <include reference="DZY-Sa-dZK"/>
+                            <include reference="umT-qR-xUl"/>
+                            <include reference="Lx1-se-rWG"/>
+                            <include reference="PU8-Wj-29B"/>
+                            <include reference="Ptn-fa-b5Y"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="QYY-CQ-y8r" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="1vZ-zR-poI"/>
+                <constraint firstItem="QYY-CQ-y8r" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8Q0-mh-8Yh"/>
+                <constraint firstItem="QYY-CQ-y8r" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="c3H-NJ-Q1s"/>
+                <constraint firstAttribute="trailing" secondItem="QYY-CQ-y8r" secondAttribute="trailing" id="eBa-Qk-Odf"/>
+                <constraint firstItem="QYY-CQ-y8r" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="86" id="pYo-Oa-fda"/>
+            </constraints>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="QYY-CQ-y8r"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="1vZ-zR-poI"/>
+                    <exclude reference="8Q0-mh-8Yh"/>
+                    <exclude reference="c3H-NJ-Q1s"/>
+                    <exclude reference="eBa-Qk-Odf"/>
+                    <exclude reference="pYo-Oa-fda"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="subviews">
+                    <include reference="QYY-CQ-y8r"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="1vZ-zR-poI"/>
+                    <include reference="8Q0-mh-8Yh"/>
+                    <include reference="c3H-NJ-Q1s"/>
+                    <include reference="eBa-Qk-Odf"/>
+                    <include reference="pYo-Oa-fda"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="463" y="329"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="geolocation_icon" width="125" height="175"/>
+    </resources>
+</document>

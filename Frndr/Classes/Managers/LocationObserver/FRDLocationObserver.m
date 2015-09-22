@@ -8,9 +8,13 @@
 
 #import "FRDLocationObserver.h"
 
+#import "FRDGeolocationDeniedController.h"
+
 @interface FRDLocationObserver ()<CLLocationManagerDelegate>
 
 @property (nonatomic) CLLocationManager *locationManager;
+
+@property (nonatomic) FRDGeolocationDeniedController *geolocationDeniedController;
 
 @end
 
@@ -26,6 +30,14 @@
 - (BOOL)isAuthorized
 {
     return [CLLocationManager authorizationStatus] == (kCLAuthorizationStatusAuthorizedAlways);
+}
+
+- (FRDGeolocationDeniedController *)geolocationDeniedController
+{
+    if (!_geolocationDeniedController) {
+        _geolocationDeniedController = [[FRDGeolocationDeniedController alloc] initWithNibName:NSStringFromClass([FRDGeolocationDeniedController class]) bundle:nil];
+    }
+    return _geolocationDeniedController;
 }
 
 #pragma mark - Lifecycle
@@ -74,9 +86,31 @@
 
 #pragma mark - CLLocationManagerDelegate
 
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     self.currentLocation = manager.location;
+}
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    BOOL isGeolocationEnable = NO;
+    BOOL isGeolocationStatusDetermine = YES;
+    
+    if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        isGeolocationEnable = YES;
+    } else if (status == kCLAuthorizationStatusDenied) {
+        isGeolocationEnable = NO;
+    } else if (status == kCLAuthorizationStatusNotDetermined) {
+        isGeolocationStatusDetermine = NO;
+    }
+    
+    UIViewController *root = [UIApplication sharedApplication].keyWindow.rootViewController;
+    
+    if (isGeolocationEnable && root.presentedViewController) {
+        [self.geolocationDeniedController dismissViewControllerAnimated:YES completion:nil];
+    } else if (!isGeolocationEnable && isGeolocationStatusDetermine) {
+        [root presentViewController:self.geolocationDeniedController animated:YES completion:nil];
+    }
 }
 
 @end
