@@ -41,12 +41,10 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     self.tableView.alwaysBounceVertical = NO;
-}
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    [self configureSwitches];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self configureSwitches];
+    });
 }
 
 #pragma mark - Actions

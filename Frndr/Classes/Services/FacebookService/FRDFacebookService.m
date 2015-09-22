@@ -85,7 +85,7 @@ static NSString *const kFBAppSecret = @"0591ca317dbda06c3f8aefe2fc624952";
 + (void)getFacebookUserProfileOnSuccess:(FacebookProfileSuccessBlock)success onFailure:(FacebookProfileFailureBlock)failure
 {
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-    [parameters setValue:@"picture.type(large), id, name, first_name, last_name, email, gender" forKey:kFields];
+    [parameters setValue:@"picture.type(large), id, name, first_name, last_name, email, gender, user_birthday" forKey:kFields];
     
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:parameters HTTPMethod:@"GET"];
     
