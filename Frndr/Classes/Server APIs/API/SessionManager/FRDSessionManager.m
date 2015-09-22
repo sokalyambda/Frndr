@@ -15,9 +15,6 @@
 
 #import "FRDErrorHandler.h"
 
-//#import "FRDRenewSessionTokenRequest.h"
-//#import "FRDGetClientCredentialsRequest.h"
-
 static CGFloat const kRequestTimeInterval = 60.f;
 static NSInteger const kMaxConcurentRequests = 100.f;
 static NSInteger const kAllCleansCount = 1.f;
@@ -310,46 +307,6 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
 }
 
 /**
- *  Validate session and renew token if needed
- *
- *  @param sessionType Type of session for validation
- *  @param success     Success Block
- *  @param failure     Failure Block
- */
-- (void)validateSessionWithType:(FRDSessionType)sessionType onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
-{
-    /*
-    BOOL isValid = [self isSessionValidWithType:sessionType];
-    
-    if (!isValid && sessionType == BZRSessionTypeUser) {
-        [self renewSessionTokenOnSuccess:^(BOOL isSuccess) {
-            if (success) {
-                success(isSuccess);
-            }
-        } onFailure:^(NSError *error, BOOL isCanceled) {
-            if (failure) {
-                failure(error, isCanceled);
-            }
-        }];
-    } else if (!isValid && sessionType == BZRSessionTypeApplication) {
-        [self getClientCredentialsOnSuccess:^(BOOL isSuccess) {
-            if (success) {
-                success(isSuccess);
-            }
-        } onFailure:^(NSError *error, BOOL isCanceled) {
-            if (failure) {
-                failure(error, isCanceled);
-            }
-        }];
-    } else {
-        if (success) {
-            success(YES);
-        }
-    }
-     */
-}
-
-/**
  *  Validate current session with specific type
  *
  *  @param sessionType Type of session for validation
@@ -379,78 +336,5 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
     return (accessToken.length && ([[NSDate date] compare:tokenExpirationDate] == NSOrderedAscending));
 }
 
-#pragma mark - Renew Session Token
-#warning should be configured for current API
-
-/**
- *  Reauthorize user session
- *
- *  @param success Success Block
- *  @param failure Failure Block
- *
- *  @return BZRNetworkOperation
- */
-/*
-- (FRDNetworkOperation *)renewSessionTokenOnSuccess:(void (^)(BOOL isSuccess))success
-                                              onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
-{
-    BZRRenewSessionTokenRequest *request = [[BZRRenewSessionTokenRequest alloc] init];
-    BZRNetworkOperation *operation = [self enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
-        
-        BZRRenewSessionTokenRequest *request = (BZRRenewSessionTokenRequest *)operation.networkRequest;
-        
-        [BZRStorageManager sharedStorage].userToken = request.token;
-        
-        if (success) {
-            success(YES);
-        }
-        
-    } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
-        
-        if (failure) {
-            failure(error, isCanceled);
-        }
-        
-    }];
-    return operation;
-}
- */
-
-#pragma mark - Get Application Token
-
-/**
- *  Authorize application session
- *
- *  @param success Success Block
- *  @param failure Failure Block
- *
- *  @return BZRNetworkOperation
- */
-/*
-- (FRDNetworkOperation *)getClientCredentialsOnSuccess:(void (^)(BOOL success))success onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
-{
-    FRDGetClientCredentialsRequest *request = [[FRDGetClientCredentialsRequest alloc] init];
-    
-    FRDNetworkOperation *operation = [self enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
-        
-        FRDGetClientCredentialsRequest *request = (FRDGetClientCredentialsRequest*)operation.networkRequest;
-        
-        [FRDStorageManager sharedStorage].applicationToken = request.token;
-        
-        if (success) {
-            success(YES);
-        }
-        
-    } failure:^(FRDNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-        [FRDAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:^{
-            
-        }];
-        if (failure) {
-            failure(error, isCanceled);
-        }
-    }];
-    return operation;
-}
- */
 
 @end

@@ -9,5 +9,6 @@
 #ifndef Frndr_Requests_h
 #define Frndr_Requests_h
 
+#import "FRDSignInWithFacebookRequest.h"
 
 #endif
