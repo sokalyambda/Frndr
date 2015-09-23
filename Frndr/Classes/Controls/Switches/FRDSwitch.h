@@ -8,7 +8,7 @@
 
 @interface FRDSwitch : UIControl
 
-@property (readonly, getter=isOn, nonatomic) BOOL on;
+@property (readonly, nonatomic, getter=isOn) BOOL on;
 
 - (void)setOn:(BOOL)on animated:(BOOL)animated;
 

@@ -24,25 +24,60 @@
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    if (self = [super initWithCoder:aDecoder]) {
-        [self initialize];
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self commonInit];
     }
     return self;
 }
 
-- (void)initialize
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    _switchImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    _onImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    _offImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    if (self = [super initWithCoder:aDecoder]) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self commonInit];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self commonInit];
+}
+
+- (void)commonInit
+{
+    UIColor *labelsColor = UIColorFromRGB(0x35B8B4);
     
-    _onLabel = [[UILabel alloc] initWithFrame:self.frame];
+    UIFontDescriptor *fontDescriptor = [[UIFontDescriptor alloc]
+                                        initWithFontAttributes:@{ UIFontDescriptorSizeAttribute : @16,
+                                                                  UIFontDescriptorNameAttribute : @"Gill Sans" }];
+    
+    _switchImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Slider_Thumb"]];
+    _onImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SwitchBackground"]];
+    _offImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SwitchBackground"]];
+    
+    _onLabel = [[UILabel alloc] initWithFrame:self.bounds];
     _onLabel.textAlignment = NSTextAlignmentCenter;
     
-    _offLabel = [[UILabel alloc] initWithFrame:self.frame];
-    _onLabel.textAlignment = NSTextAlignmentCenter;
+    _offLabel = [[UILabel alloc] initWithFrame:self.bounds];
+    _offLabel.textAlignment = NSTextAlignmentCenter;
+
+    [self setOnText:@"YES"
+ withFontDescriptor:fontDescriptor
+           andColor:labelsColor];
+    
+    [self setOffText:@"NO"
+  withFontDescriptor:fontDescriptor
+            andColor:labelsColor];
     
     [self addSubview:_onImageView];
     [self addSubview:_onLabel];
@@ -54,6 +89,7 @@
     
     _tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self addGestureRecognizer:_tapRecognizer];
+  
 }
 
 #pragma mark - Accessors
@@ -80,21 +116,6 @@
         
         [self moveSwitchToOffPosition:animated];
     }
-    
-//    static CGFloat f = 0.0;
-//    f += 0.1;
-//    
-//    CGPoint destination = self.switchImageView.layer.position;
-//    destination.x = CGRectGetWidth(self.frame) - CGRectGetMidX(self.switchImageView.bounds);
-//    
-//    CABasicAnimation *switching = [CABasicAnimation animationWithKeyPath:@"position.x"];
-//    switching.fromValue = @(self.switchImageView.layer.position.x);
-//    switching.toValue = @(destination.x);
-//    switching.duration = 1.0;
-//    switching.speed = 0.0;
-//    switching.timeOffset = f;
-//    
-//    [self.switchImageView.layer addAnimation:switching forKey:@"position.x"];
 }
 
 - (void)setSwitchImage:(UIImage *)image
@@ -160,7 +181,7 @@
 
 - (void)handleTap:(UITapGestureRecognizer *)recognizer
 {
-    [self setOn:![self isOn] animated:YES];
+    [self setOn:!self.isOn animated:YES];
 }
 
 - (void)updateLabels
@@ -187,8 +208,6 @@
 
 - (void)moveSwitchToOffPosition:(BOOL)animated
 {
-    
-    
     CGPoint destination = self.switchImageView.layer.position;
     destination.x = CGRectGetMidX(self.switchImageView.bounds);
     

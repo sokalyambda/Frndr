@@ -8,6 +8,6 @@
 
 @interface UIResponder (FirstResponder)
 
-+(id)currentFirstResponder;
++ (id)currentFirstResponder;
 
 @end

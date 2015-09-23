@@ -139,7 +139,9 @@
  */
 - (void)authorizeWithFacebookAction
 {
+    
     WEAK_SELF;
+    /*
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [FRDFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
 
@@ -167,7 +169,15 @@
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
      }];
+    */
+    FRDPreferencesController *preferencesController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
+    FRDFriendsListController *friendsListController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDFriendsListController class])];
+    FRDSearchFriendsController *searchFriendsController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDSearchFriendsController class])];
+    FRDContainerViewController *container = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDContainerViewController class])];
+    container.delegate = weakSelf;
+    container.viewControllers = @[preferencesController, searchFriendsController, friendsListController];
     
+    [weakSelf.navigationController pushViewController:container animated:YES];
 }
 
 /**

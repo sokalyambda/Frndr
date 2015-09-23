@@ -17,19 +17,24 @@
 
 #import "UIResponder+FirstResponder.h"
 
+#import "UIView+MakeFromXib.h"
+
+#import "FRDSerialViewConstructor.h"
+
 static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalBioTableControllerSegue";
 
 @interface FRDMyProfileController ()
 
-@property (assign, nonatomic) CGFloat previousVerticalOffset;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet FRDPersonalBioTableController *personalBioTableController;
+@property (weak, nonatomic) FRDPersonalBioTableController *personalBioTableController;
 
 @property (weak, nonatomic) IBOutlet FRDSwitch *visibleOnFrndrSwitch;
 
 @property (weak, nonatomic) IBOutlet UIView *topViewContainer;
 @property (weak, nonatomic) IBOutlet UIView *relationshipsContainer;
 @property (weak, nonatomic) IBOutlet UIView *dropDownHolderContainer;
+
+@property (assign, nonatomic) CGFloat previousVerticalOffset;
 
 @property (strong, nonatomic) FRDMyProfileTopView *topView;
 @property (strong, nonatomic) FRDRelationshipStatusController *relationshipController;
@@ -61,16 +66,22 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
     [self unsubscribeFromNotifications];
 }
 
-- (void)viewDidLayoutSubviews
-{
-    [self configureVisibleOnFrndrSwitch];
-}
-
 #pragma mark - Actions
+
+- (void)customizeNavigationItem
+{
+    [super customizeNavigationItem];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    self.navigationTitleView.titleText = LOCALIZED(@"My Profile");
+    
+    UIBarButtonItem *rightItem = [FRDSerialViewConstructor customRightBarButtonForController:self withAction:nil];
+    self.navigationItem.rightBarButtonItem = rightItem;
+}
 
 - (void)initTopViewHolderContainer
 {
-    self.topView = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([FRDMyProfileTopView class]) owner:self options:nil].firstObject;
+    self.topView = [FRDMyProfileTopView makeFromXib];
     self.topView.frame = self.topViewContainer.frame;
     [self.topViewContainer addSubview:self.topView];
 }
@@ -92,31 +103,6 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
     [self.dropDownHolderContainer addSubview:self.dropDownHolderController.view];
     [self addChildViewController:self.dropDownHolderController];
     [self.dropDownHolderController didMoveToParentViewController:self];
-}
-
-- (void)configureVisibleOnFrndrSwitch
-{
-    UIColor *labelsColor = [UIColor colorWithRed:53.f / 255.f
-                                           green:184.f / 255.f
-                                            blue:180.f / 255.f
-                                           alpha:1.0];
-    
-    UIFontDescriptor *fontDescriptor = [[UIFontDescriptor alloc]
-                                        initWithFontAttributes:@{ UIFontDescriptorSizeAttribute : @16,
-                                                                  UIFontDescriptorNameAttribute : @"Gill Sans" }];
-    
-    [self.visibleOnFrndrSwitch setOnImage:[UIImage imageNamed:@"SwitchBackground"]];
-    [self.visibleOnFrndrSwitch setOffImage:[UIImage imageNamed:@"SwitchBackground"]];
-    [self.visibleOnFrndrSwitch setSwitchImage:[UIImage imageNamed:@"Slider_Thumb"]];
-    [self.visibleOnFrndrSwitch setOnText:@"YES"
-           withFontDescriptor:fontDescriptor
-                     andColor:labelsColor];
-    
-    [self.visibleOnFrndrSwitch setOffText:@"NO"
-            withFontDescriptor:fontDescriptor
-                      andColor:labelsColor];
-    
-    [self.visibleOnFrndrSwitch setOn:NO animated:NO];
 }
 
 - (void)subscribeForNotifications
@@ -179,7 +165,7 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:kPersonalBioTableControllerSegueIdentifier]) {
-        self.personalBioTableController = [segue destinationViewController];
+        self.personalBioTableController = (FRDPersonalBioTableController *)[segue destinationViewController];
     }
 }
 
