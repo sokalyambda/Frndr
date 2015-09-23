@@ -20,6 +20,7 @@
 		3E3D41591BA6A5A90021026A /* FRDAutologinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D41581BA6A5A90021026A /* FRDAutologinViewController.m */; };
 		3E3D415D1BA6B1530021026A /* FRDSearchSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D415C1BA6B1530021026A /* FRDSearchSettingsController.m */; };
 		3E5DEE701BAEB59800832CD6 /* FRDRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DEE6F1BAEB59800832CD6 /* FRDRangeSlider.m */; settings = {ASSET_TAGS = (); }; };
+		3E84DE9A1BB2EE7200FFCB7C /* FRDPhotoGalleryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E84DE991BB2EE7200FFCB7C /* FRDPhotoGalleryController.m */; settings = {ASSET_TAGS = (); }; };
 		3E941A341BB1809700F034E6 /* FRDPersonalBioTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E941A331BB1809700F034E6 /* FRDPersonalBioTableController.m */; settings = {ASSET_TAGS = (); }; };
 		3E941A371BB180B400F034E6 /* FRDSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E941A361BB180B400F034E6 /* FRDSwitch.m */; settings = {ASSET_TAGS = (); }; };
 		3E941A3C1BB180E200F034E6 /* UIResponder+FirstResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E941A3B1BB180E200F034E6 /* UIResponder+FirstResponder.m */; settings = {ASSET_TAGS = (); }; };
@@ -173,6 +174,8 @@
 		3E3D415C1BA6B1530021026A /* FRDSearchSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSearchSettingsController.m; path = Classes/MVC/Controllers/SearchSettingsController/FRDSearchSettingsController.m; sourceTree = "<group>"; };
 		3E5DEE6E1BAEB59800832CD6 /* FRDRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRangeSlider.h; path = Classes/Controls/Sliders/RangeSlider/FRDRangeSlider.h; sourceTree = "<group>"; };
 		3E5DEE6F1BAEB59800832CD6 /* FRDRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRangeSlider.m; path = Classes/Controls/Sliders/RangeSlider/FRDRangeSlider.m; sourceTree = "<group>"; };
+		3E84DE981BB2EE7200FFCB7C /* FRDPhotoGalleryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPhotoGalleryController.h; path = Classes/MVC/Controllers/PhotoGalleryCollectionController/FRDPhotoGalleryController.h; sourceTree = "<group>"; };
+		3E84DE991BB2EE7200FFCB7C /* FRDPhotoGalleryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPhotoGalleryController.m; path = Classes/MVC/Controllers/PhotoGalleryCollectionController/FRDPhotoGalleryController.m; sourceTree = "<group>"; };
 		3E941A321BB1809700F034E6 /* FRDPersonalBioTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPersonalBioTableController.h; path = Classes/MVC/Controllers/MyProfileController/PersonalBioTableController/FRDPersonalBioTableController.h; sourceTree = "<group>"; };
 		3E941A331BB1809700F034E6 /* FRDPersonalBioTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPersonalBioTableController.m; path = Classes/MVC/Controllers/MyProfileController/PersonalBioTableController/FRDPersonalBioTableController.m; sourceTree = "<group>"; };
 		3E941A351BB180B400F034E6 /* FRDSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSwitch.h; path = Classes/Controls/Switches/FRDSwitch.h; sourceTree = "<group>"; };
@@ -472,7 +475,6 @@
 		3E10E3051BA15A800075C72D /* PhotoGalleryCollectionViewController */ = {
 			isa = PBXGroup;
 			children = (
-				58EBC6AD1BAC1638003CD598 /* PreviewGalleryController */,
 				3E10E3061BA15B3E0075C72D /* FRDPhotoGalleryCollectionViewController.h */,
 				3E10E3071BA15B3E0075C72D /* FRDPhotoGalleryCollectionViewController.m */,
 			);
@@ -556,6 +558,17 @@
 				3E5DEE6F1BAEB59800832CD6 /* FRDRangeSlider.m */,
 			);
 			name = RangeSlider;
+			sourceTree = "<group>";
+		};
+		3E84DE971BB2ECBA00FFCB7C /* PhotoGalleryController */ = {
+			isa = PBXGroup;
+			children = (
+				3E10E3051BA15A800075C72D /* PhotoGalleryCollectionViewController */,
+				58EBC6AD1BAC1638003CD598 /* PreviewGalleryController */,
+				3E84DE981BB2EE7200FFCB7C /* FRDPhotoGalleryController.h */,
+				3E84DE991BB2EE7200FFCB7C /* FRDPhotoGalleryController.m */,
+			);
+			name = PhotoGalleryController;
 			sourceTree = "<group>";
 		};
 		3E941A311BB1808100F034E6 /* PersonalBioTableController */ = {
@@ -982,6 +995,7 @@
 		58BC76D21B9EB95600BB8B5A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3E84DE971BB2ECBA00FFCB7C /* PhotoGalleryController */,
 				58ED54F51BB189C800F9B378 /* GeolocationDeniedController */,
 				58CD9AB71BAFED7700A7CADB /* ContainerController */,
 				3E021DC51BAFD90200BDA411 /* MyProfileController */,
@@ -991,7 +1005,6 @@
 				3E3D415A1BA6B1020021026A /* SearchSettingsController */,
 				3E3D41561BA6A4B20021026A /* AutologinController */,
 				587727F51BA2D7EB0032D746 /* TermsAndServicesController */,
-				3E10E3051BA15A800075C72D /* PhotoGalleryCollectionViewController */,
 				58F2F30C1B9EF911000DC739 /* TutorialController */,
 				58FFDBBD1B9ED1D300B0490A /* BaseViewController */,
 				58FFDBBC1B9ED1CB00B0490A /* BaseNavigationController */,
@@ -1959,6 +1972,7 @@
 				58ED54F41BB1648B00F9B378 /* FRDUpdateProfileRequest.m in Sources */,
 				58BC77051B9ECA2200BB8B5A /* NSString+JSONRepresentation.m in Sources */,
 				58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */,
+				3E84DE9A1BB2EE7200FFCB7C /* FRDPhotoGalleryController.m in Sources */,
 				587B3A881BA80F3D0098154F /* FRDDropDownHolderController.m in Sources */,
 				3ED072361BA048460091B7E4 /* FRDPreferencesTableViewController.m in Sources */,
 				58F05ACF1BAC3F730092D767 /* FRDPreviewPhotoCell.m in Sources */,

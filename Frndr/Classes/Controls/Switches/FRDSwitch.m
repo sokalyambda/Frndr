@@ -18,6 +18,9 @@
 
 @property (nonatomic) UITapGestureRecognizer *tapRecognizer;
 
+@property (nonatomic) CGRect savedOnFrame;
+@property (nonatomic) CGRect savedOffFrame;
+
 @end
 
 @implementation FRDSwitch
@@ -41,29 +44,17 @@
     return self;
 }
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    [self commonInit];
-}
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    [self commonInit];
-}
-
 - (void)commonInit
 {
     UIColor *labelsColor = UIColorFromRGB(0x35B8B4);
     
-    UIFontDescriptor *fontDescriptor = [[UIFontDescriptor alloc]
-                                        initWithFontAttributes:@{ UIFontDescriptorSizeAttribute : @16,
-                                                                  UIFontDescriptorNameAttribute : @"Gill Sans" }];
-    
     _switchImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Slider_Thumb"]];
+    
     _onImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SwitchBackground"]];
+    _savedOnFrame = _onImageView.frame;
+    
     _offImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SwitchBackground"]];
+    _savedOffFrame = _offImageView.frame;
     
     _onLabel = [[UILabel alloc] initWithFrame:self.bounds];
     _onLabel.textAlignment = NSTextAlignmentCenter;
@@ -71,13 +62,8 @@
     _offLabel = [[UILabel alloc] initWithFrame:self.bounds];
     _offLabel.textAlignment = NSTextAlignmentCenter;
 
-    [self setOnText:@"YES"
- withFontDescriptor:fontDescriptor
-           andColor:labelsColor];
-    
-    [self setOffText:@"NO"
-  withFontDescriptor:fontDescriptor
-            andColor:labelsColor];
+    [self setOnText:@"YES" withFont:[UIFont fontWithName:@"Gill Sans" size:16] andColor:labelsColor];
+    [self setOffText:@"NO" withFont:[UIFont fontWithName:@"Gill Sans" size:16] andColor:labelsColor];
     
     [self addSubview:_onImageView];
     [self addSubview:_onLabel];
@@ -89,7 +75,6 @@
     
     _tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self addGestureRecognizer:_tapRecognizer];
-  
 }
 
 #pragma mark - Accessors
@@ -129,50 +114,54 @@
 
 - (void)setOnImage:(UIImage *)image
 {
+    CGRect frame = CGRectMake(0,
+                              CGRectGetMidY(self.bounds) - image.size.height / 2.0,
+                              image.size.width,
+                              image.size.height);
     self.onImageView.image = image;
-    self.onImageView.frame = CGRectMake(0,
-                                        CGRectGetMidY(self.bounds) - image.size.height / 2.0,
-                                        image.size.width,
-                                        image.size.height);
+    self.onImageView.frame = frame;
+    self.savedOnFrame = frame;
 }
 
 - (void)setOffImage:(UIImage *)image
 {
+    CGRect frame = CGRectMake(0,
+                              CGRectGetMidY(self.bounds) - image.size.height / 2.0,
+                              image.size.width,
+                              image.size.height);
     self.offImageView.image = image;
-    self.offImageView.frame = CGRectMake(0,
-                                        CGRectGetMidY(self.bounds) - image.size.height / 2.0,
-                                        image.size.width,
-                                        image.size.height);
+    self.offImageView.frame = frame;
+    self.savedOffFrame = frame;
 }
 
-- (void)setOnText:(NSString *)text withFontDescriptor:(UIFontDescriptor *)descriptor andColor:(UIColor *)color
+- (void)setOnText:(NSString *)text withFont:(UIFont *)font andColor:(UIColor *)color
 {
     self.onLabel.text = text;
-    self.onLabel.font = [UIFont fontWithDescriptor:descriptor size:0.0];
+    self.onLabel.font = font;
     self.onLabel.textColor = color;
     [self.onLabel sizeToFit];
 
-    CGFloat xPosition = (CGRectGetWidth(self.frame) - CGRectGetWidth(self.switchImageView.frame)) / 2.0;
+    CGFloat xPosition = (CGRectGetWidth(self.savedOnFrame) - CGRectGetWidth(self.switchImageView.frame)) / 2.0;
     xPosition -= CGRectGetMidX(self.onLabel.bounds);
     
     self.onLabel.frame = CGRectMake(xPosition,
-                                    CGRectGetMidY(self.bounds) - CGRectGetMidY(self.onLabel.bounds),
+                                    CGRectGetMidY(self.savedOnFrame) - CGRectGetMidY(self.onLabel.bounds),
                                     CGRectGetWidth(self.onLabel.frame),
                                     CGRectGetHeight(self.onLabel.frame));
 }
 
-- (void)setOffText:(NSString *)text withFontDescriptor:(UIFontDescriptor *)descriptor andColor:(UIColor *)color
+- (void)setOffText:(NSString *)text withFont:(UIFont *)font andColor:(UIColor *)color
 {
     self.offLabel.text = text;
-    self.offLabel.font = [UIFont fontWithDescriptor:descriptor size:0.0];
+    self.offLabel.font = font;
     self.offLabel.textColor = color;
     [self.offLabel sizeToFit];
     
-    CGFloat xPosition = (CGRectGetWidth(self.frame) + CGRectGetMaxX(self.switchImageView.frame)) / 2.0;
+    CGFloat xPosition = (CGRectGetWidth(self.savedOffFrame) + CGRectGetMaxX(self.switchImageView.frame)) / 2.0;
     xPosition -= CGRectGetMidX(self.offLabel.bounds);
     
     self.offLabel.frame = CGRectMake(xPosition,
-                                    CGRectGetMidY(self.bounds) - CGRectGetMidY(self.offLabel.bounds),
+                                    CGRectGetMidY(self.savedOffFrame) - CGRectGetMidY(self.offLabel.bounds),
                                     CGRectGetWidth(self.offLabel.frame),
                                     CGRectGetHeight(self.offLabel.frame));
 }

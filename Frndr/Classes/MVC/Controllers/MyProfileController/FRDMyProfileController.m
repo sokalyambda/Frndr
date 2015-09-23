@@ -10,6 +10,7 @@
 #import "FRDRelationshipStatusController.h"
 #import "FRDDropDownHolderController.h"
 #import "FRDPersonalBioTableController.h"
+#import "FRDPhotoGalleryController.h"
 
 #import "FRDMyProfileTopView.h"
 
@@ -67,6 +68,12 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
 }
 
 #pragma mark - Actions
+
+- (IBAction)managePhotosPress:(id)sender
+{
+    FRDPhotoGalleryController *photoGalleryController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPhotoGalleryController class])];
+    [self.navigationController showViewController:photoGalleryController sender:self];
+}
 
 - (void)customizeNavigationItem
 {

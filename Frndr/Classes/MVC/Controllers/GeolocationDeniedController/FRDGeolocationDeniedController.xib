@@ -93,8 +93,6 @@
                             <exclude reference="dPu-6A-8MB"/>
                         </mask>
                         <mask key="constraints">
-                            <exclude reference="bz9-3N-bAA"/>
-                            <exclude reference="pl1-EG-pY9"/>
                             <exclude reference="KEw-l3-Lys"/>
                             <exclude reference="j7M-uL-0Xd"/>
                             <exclude reference="DZY-Sa-dZK"/>
@@ -102,6 +100,8 @@
                             <exclude reference="Lx1-se-rWG"/>
                             <exclude reference="PU8-Wj-29B"/>
                             <exclude reference="Ptn-fa-b5Y"/>
+                            <exclude reference="bz9-3N-bAA"/>
+                            <exclude reference="pl1-EG-pY9"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
@@ -112,8 +112,6 @@
                             <include reference="dPu-6A-8MB"/>
                         </mask>
                         <mask key="constraints">
-                            <include reference="bz9-3N-bAA"/>
-                            <include reference="pl1-EG-pY9"/>
                             <include reference="KEw-l3-Lys"/>
                             <include reference="j7M-uL-0Xd"/>
                             <include reference="DZY-Sa-dZK"/>
@@ -121,6 +119,8 @@
                             <include reference="Lx1-se-rWG"/>
                             <include reference="PU8-Wj-29B"/>
                             <include reference="Ptn-fa-b5Y"/>
+                            <include reference="bz9-3N-bAA"/>
+                            <include reference="pl1-EG-pY9"/>
                         </mask>
                     </variation>
                 </view>
