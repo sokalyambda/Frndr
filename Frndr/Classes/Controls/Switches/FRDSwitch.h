@@ -15,7 +15,7 @@
 - (void)setSwitchImage:(UIImage *)image;
 - (void)setOnImage:(UIImage *)image;
 - (void)setOffImage:(UIImage *)image;
-- (void)setOnText:(NSString *)text withFontDescriptor:(UIFontDescriptor *)descriptor andColor:(UIColor *)color;
-- (void)setOffText:(NSString *)text withFontDescriptor:(UIFontDescriptor *)descriptor andColor:(UIColor *)color;
+- (void)setOnText:(NSString *)text withFont:(UIFont *)font andColor:(UIColor *)color;
+- (void)setOffText:(NSString *)text withFont:(UIFont *)font andColor:(UIColor *)color;
 
 @end

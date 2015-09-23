@@ -60,8 +60,6 @@ static NSInteger const kNumberOfPreferences = 4;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSLog(@"Height: %f", self.view.frame.size.height);
-//    NSLog(@"Height22222: %f", self.tableView.frame.size.height);
     if(CGRectGetHeight(self.view.frame) < kDefaultRowHeight * kNumberOfPreferences) {
         return CGRectGetHeight(self.view.frame) / kNumberOfPreferences;
     } else {

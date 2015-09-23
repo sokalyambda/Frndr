@@ -8,6 +8,8 @@
 
 #import "FRDRangeSlider.h"
 
+#import "UIImage+ColoredImage.h"
+
 @interface FRDRangeSlider ()
 
 @property (nonatomic) UIImageView *leftThumb;
@@ -17,6 +19,8 @@
 
 @property (nonatomic) id trackedSlider;
 
+@property (nonatomic) BOOL isInitialized;
+
 @end
 
 
@@ -24,16 +28,21 @@
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
+- (void)layoutSubviews
 {
-    if (self = [super initWithCoder:aDecoder]) {
-        [self initialize];
-    }
-    return self;
+    [super layoutSubviews];
+    [self commonInit];
 }
 
-- (void)initialize
+- (void)commonInit
 {
+    NSLog(@"%f %f %f %f", self.frame.origin.x, self.frame.origin.y, self.frame.size.width,
+          self.frame.size.height);
+    
+    if (self.isInitialized) {
+        return;
+    }
+    
     _minimumValue = 0.0;
     _maximumValue = 1.0;
     _minimumRange = 0.0;
@@ -54,23 +63,28 @@
     _inRangeTrack.contentMode = UIViewContentModeScaleToFill;
     [self addSubview:_inRangeTrack];
     
-    self.leftThumb = [[UIImageView alloc] initWithFrame:
-                      CGRectMake(self.minimumValue * CGRectGetWidth(self.frame),
-                                 CGRectGetMidY(self.bounds) - CGRectGetHeight(self.frame) / 2.0,
-                                 CGRectGetHeight(self.frame),
-                                 CGRectGetHeight(self.frame))];
-    self.leftThumb.contentMode = UIViewContentModeScaleToFill;
-    [self addSubview:self.leftThumb];
+    _leftThumb = [[UIImageView alloc] initWithFrame:
+                  CGRectMake(self.minimumValue * CGRectGetWidth(self.frame),
+                             CGRectGetMidY(self.bounds) - CGRectGetHeight(self.frame) / 2.0,
+                             CGRectGetHeight(self.frame),
+                             CGRectGetHeight(self.frame))];
+    _leftThumb.contentMode = UIViewContentModeScaleToFill;
+    [self addSubview:_leftThumb];
     
-    self.rightThumb = [[UIImageView alloc] initWithFrame:
-                       CGRectMake(self.maximumValue * CGRectGetWidth(self.frame) - CGRectGetHeight(self.frame),
-                                  CGRectGetMidY(self.bounds) - CGRectGetHeight(self.frame) / 2.0,
-                                  CGRectGetHeight(self.frame),
-                                  CGRectGetHeight(self.frame))];
-    self.rightThumb.contentMode = UIViewContentModeScaleToFill;
-    [self addSubview:self.rightThumb];
+    _rightThumb = [[UIImageView alloc] initWithFrame:
+                   CGRectMake(self.maximumValue * CGRectGetWidth(self.frame) - CGRectGetHeight(self.frame),
+                              CGRectGetMidY(self.bounds) - CGRectGetHeight(self.frame) / 2.0,
+                              CGRectGetHeight(self.frame),
+                              CGRectGetHeight(self.frame))];
+    _rightThumb.contentMode = UIViewContentModeScaleToFill;
+    [self addSubview:_rightThumb];
+    
+    [self setThumbImage:[UIImage imageNamed:@"Slider_Thumb"]];
+    [self setTrackImage:[UIImage imageWithColor:UIColorFromRGB(0xD7FFF9) andSize:CGSizeMake(1, 1)]];
+    [self setInRangeTrackImage:[UIImage imageWithColor:UIColorFromRGB(0x35C0BA) andSize:CGSizeMake(1, 1)]];
+    
+    self.isInitialized = YES;
 }
-
 
 #pragma mark - Setters
 

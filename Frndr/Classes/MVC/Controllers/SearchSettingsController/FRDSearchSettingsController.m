@@ -72,30 +72,8 @@
 
 - (void)configureSliders
 {
-    UIImage *outOfRangeImage = [UIImage imageWithColor:[UIColor colorWithRed:215.f / 255.f
-                                                                       green:1.0
-                                                                        blue:249.f / 255.f
-                                                                       alpha:1.0]
-                                               andSize:CGSizeMake(1, 1)];
-    
-    UIImage *inRangeImage = [UIImage imageWithColor:[UIColor colorWithRed:53.f / 255.f
-                                                                       green:192.f / 255.f
-                                                                        blue:186.f / 255.f
-                                                                       alpha:1.0]
-                                               andSize:CGSizeMake(1, 1)];
-    
-    UIImage *thumbImage = [UIImage imageNamed:@"Slider_Thumb"];
-    
-    [self.ageRangeSlider setThumbImage:thumbImage];
-    [self.ageRangeSlider setTrackImage:outOfRangeImage];
-    [self.ageRangeSlider setInRangeTrackImage:inRangeImage];
-    
     self.ageRangeSlider.tracksHeight = 3.0;
     self.ageRangeSlider.mode = FRDRangeSliderModeRange;
-    
-    [self.distanceSlider setThumbImage:thumbImage];
-    [self.distanceSlider setTrackImage:outOfRangeImage];
-    [self.distanceSlider setInRangeTrackImage:inRangeImage];
     
     self.distanceSlider.tracksHeight = 3.0;
     self.distanceSlider.mode = FRDRangeSliderModeSingleThumb;
