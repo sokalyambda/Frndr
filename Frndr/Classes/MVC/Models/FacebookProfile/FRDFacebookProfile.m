@@ -10,12 +10,15 @@
 
 #import "FRDSexualOrientation.h"
 
+#import "FRDCommonDateFormatter.h"
+
 static NSString *const kFirstName = @"first_name";
 static NSString *const kLastName = @"last_name";
 static NSString *const kFullName = @"name";
 static NSString *const kUserId = @"id";
 static NSString *const kEmail = @"email";
 static NSString *const kAvatarURL = @"avatarURL";
+static NSString *const kBirthDate = @"birthday";
 
 static NSString *const kPicture = @"picture";
 static NSString *const kData = @"data";
@@ -53,6 +56,46 @@ static NSString *const kNewFriends = @"newFriends";
     return [ageComponents year];
 }
 
+- (NSString *)relationshipStatus
+{
+    if (!_relationshipStatus) {
+        _relationshipStatus = @"";
+    }
+    return _relationshipStatus;
+}
+
+- (NSString *)jobTitle
+{
+    if (!_jobTitle) {
+        _jobTitle = @"";
+    }
+    return _jobTitle;
+}
+
+- (FRDSexualOrientation *)chosenOrientation
+{
+    if (!_chosenOrientation) {
+        _chosenOrientation = [[FRDSexualOrientation alloc] initWithOrientationString:@"straight"];
+    }
+    return _chosenOrientation;
+}
+
+- (NSArray *)thingsLovedMost
+{
+    if (!_thingsLovedMost) {
+        _thingsLovedMost = @[];
+    }
+    return _thingsLovedMost;
+}
+
+- (NSString *)biography
+{
+    if (!_biography) {
+        _biography = @"";
+    }
+    return _biography;
+}
+
 #pragma mark - FRDMappingProtocol
 
 - (instancetype)initWithServerResponse:(NSDictionary *)response
@@ -65,6 +108,7 @@ static NSString *const kNewFriends = @"newFriends";
         _userId = [response[kUserId] longLongValue];
         _email = response[kEmail];
         _genderString = [response[kGender] capitalizedString];
+        _birthDate = [[FRDCommonDateFormatter commonDateFormatter] dateFromString:response[kBirthDate]];
         
         _avararURL = [NSURL URLWithString:response[kPicture][kData][kURL]];
     }
@@ -102,6 +146,7 @@ static NSString *const kNewFriends = @"newFriends";
     [encoder encodeObject:@(self.userId) forKey:kUserId];
     [encoder encodeObject:self.avararURL forKey:kAvatarURL];
     [encoder encodeObject:self.genderString forKey:kGender];
+    [encoder encodeObject:self.birthDate forKey:kBirthDate];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -115,6 +160,7 @@ static NSString *const kNewFriends = @"newFriends";
         _userId         = [[decoder decodeObjectForKey:kUserId] longLongValue];
         _avararURL      = [decoder decodeObjectForKey:kAvatarURL];
         _genderString   = [decoder decodeObjectForKey:kGender];
+        _birthDate      = [decoder decodeObjectForKey:kBirthDate];
     }
     return self;
 }

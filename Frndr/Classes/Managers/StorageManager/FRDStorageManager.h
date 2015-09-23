@@ -12,9 +12,9 @@
 
 + (instancetype)sharedStorage;
 
-@property (nonatomic) FRDFacebookProfile *currentFacebookProfile;
+@property (strong, nonatomic) FRDFacebookProfile *currentFacebookProfile;
 
-@property (nonatomic) NSString *deviceToken;
+@property (strong, nonatomic) NSString *deviceToken;
 @property (nonatomic, readonly) NSString *deviceUDID;
 @property (nonatomic, readonly) NSString *deviceName;
 

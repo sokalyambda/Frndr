@@ -16,6 +16,10 @@
 
 #import "UIView+MakeFromXib.h"
 
+#import "FRDProjectFacade.h"
+
+#import "FRDNearestUser.h"
+
 static NSString *const kPreferencesImageName = @"PreferencesIcon";
 static NSString *const kMessagesImageName = @"MessagesIcon";
 
@@ -31,6 +35,11 @@ static NSString *const kFriendsListSegueIdentifier = @"friendsListSegueIdentifie
 @property (weak, nonatomic) IBOutlet UIView *photosCollectionContainer;
 
 @property (nonatomic) FRDPreviewGalleryController *previewGalleryController;
+
+@property (nonatomic) NSMutableArray *nearestUsers;
+@property (nonatomic) FRDNearestUser *currentNearestUser;
+
+@property (assign, nonatomic) NSInteger currentPage;
 
 @end
 
@@ -53,12 +62,22 @@ static NSString *const kFriendsListSegueIdentifier = @"friendsListSegueIdentifie
     return @"MessagesIcon";
 }
 
+- (void)setNearestUsers:(NSMutableArray *)nearestUsers
+{
+    _nearestUsers = nearestUsers;
+    _currentNearestUser = (FRDNearestUser *)nearestUsers.firstObject;
+}
+
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.currentPage = 1;
+    
     [self setupPhotosGalleryContainer];
+    [self updateCurrentProfileAndGetSuggestedFriends];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self setupDragableViewOptions];
     });
@@ -96,6 +115,34 @@ static NSString *const kFriendsListSegueIdentifier = @"friendsListSegueIdentifie
     [self.photosCollectionContainer addSubview:self.previewGalleryController.view];
     [self addChildViewController:self.previewGalleryController];
     [self.previewGalleryController didMoveToParentViewController:self];
+}
+
+- (void)updateCurrentProfileAndGetSuggestedFriends
+{
+    FRDFacebookProfile *currentProfile = [FRDStorageManager sharedStorage].currentFacebookProfile;
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [FRDProjectFacade updatedProfile:currentProfile onSuccess:^(FRDFacebookProfile *confirmedProfile) {
+        
+        [FRDProjectFacade findNearestUsersWithPage:weakSelf.currentPage onSuccess:^(NSArray *nearestUsers) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            
+            weakSelf.nearestUsers = [nearestUsers mutableCopy];
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            
+        }];
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+        NSLog(@"failure");
+    }];
+}
+
+- (void)updateNearestUserInformation
+{
+    
 }
 
 /**

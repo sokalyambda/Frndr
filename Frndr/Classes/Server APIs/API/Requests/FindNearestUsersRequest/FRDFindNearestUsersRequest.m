@@ -8,13 +8,13 @@
 
 #import "FRDFindNearestUsersRequest.h"
 
-static NSString *const requestAction = @"users/find";
+static NSString *const requestAction = @"users/find/1";
 
 @implementation FRDFindNearestUsersRequest
 
 #pragma mark - Lifecycle
 
-- (instancetype)init
+- (instancetype)initWithPage:(NSInteger)page
 {
     self = [super init];
     if (self) {
@@ -32,6 +32,7 @@ static NSString *const requestAction = @"users/find";
 
 - (BOOL)parseJSONDataSucessfully:(id)responseObject error:(NSError *__autoreleasing *)error
 {
+    NSLog(@"response %@", responseObject);
     return !!responseObject;
 }
 

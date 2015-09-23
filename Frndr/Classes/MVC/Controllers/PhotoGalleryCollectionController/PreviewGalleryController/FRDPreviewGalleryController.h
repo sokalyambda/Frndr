@@ -10,4 +10,6 @@
 
 @interface FRDPreviewGalleryController : FRDBaseViewController
 
+@property (nonatomic) NSArray *photos;
+
 @end

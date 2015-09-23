@@ -10,4 +10,8 @@
 
 @interface FRDFindNearestUsersRequest : FRDNetworkRequest
 
+@property (strong, nonatomic) NSArray *nearestUsers;
+
+- (instancetype)initWithPage:(NSInteger)page;
+
 @end

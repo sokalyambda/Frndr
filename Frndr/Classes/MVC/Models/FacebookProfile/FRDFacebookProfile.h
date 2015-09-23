@@ -12,24 +12,24 @@
 
 @interface FRDFacebookProfile : NSObject<FRDMappingProtocol>
 
-@property (nonatomic) NSString *firstName;
-@property (nonatomic) NSString *lastName;
-@property (nonatomic) NSString *fullName;
+@property (strong, nonatomic) NSString *firstName;
+@property (strong, nonatomic) NSString *lastName;
+@property (strong, nonatomic) NSString *fullName;
 
-@property (nonatomic) NSString *email;
-@property (nonatomic) NSURL *avararURL;
-@property (nonatomic) NSString *genderString;
+@property (strong, nonatomic) NSString *email;
+@property (strong, nonatomic) NSURL *avararURL;
+@property (strong, nonatomic) NSString *genderString;
 @property (nonatomic) long long userId;
 
 @property (nonatomic, getter=isVisible) BOOL visible;
-@property (nonatomic) NSString *biography;
-@property (nonatomic) NSArray *thingsLovedMost;
-@property (nonatomic) FRDSexualOrientation *chosenOrientation;
+@property (strong, nonatomic) NSString *biography;
+@property (strong, nonatomic) NSArray *thingsLovedMost;
+@property (strong, nonatomic) FRDSexualOrientation *chosenOrientation;
 @property (nonatomic, getter=isSmoker) BOOL smoker;
-@property (nonatomic) NSString *jobTitle;
-@property (nonatomic) NSString *relationshipStatus;
+@property (strong, nonatomic) NSString *jobTitle;
+@property (strong, nonatomic) NSString *relationshipStatus;
 
-@property (nonatomic) NSDate *birthDate;
+@property (strong, nonatomic) NSDate *birthDate;
 @property (nonatomic, readonly) NSInteger age;
 
 @property (nonatomic, getter=isMessagesNotificationsEnabled) BOOL messagesNotificationsEnabled;

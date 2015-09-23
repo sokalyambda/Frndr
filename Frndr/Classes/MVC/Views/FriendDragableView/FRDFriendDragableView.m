@@ -8,7 +8,7 @@
 
 #import "FRDFriendDragableView.h"
 
-#import "FRDFriend.h"
+#import "FRDNearestUser.h"
 
 @interface FRDFriendDragableView ()
 
@@ -24,12 +24,14 @@
 
 #pragma mark - Actions
 
-- (void)configureWithFriend:(FRDFriend *)friend
+- (void)configureWithNearestUser:(FRDNearestUser *)nearestUser
 {
-    self.friendNameLabel.text = friend.fullName;
-    self.friendAgeLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)friend.age];
-    self.friendDistanceLabel.text = [NSString stringWithFormat:@"%f", friend.distanceFromMe];
-    self.friendSmokerLabel.text = [NSString stringWithFormat:@"%@", friend.smoker ? LOCALIZED(@"Smoker") : LOCALIZED(@"Non-Smoker")];
+    self.friendNameLabel.text = nearestUser.fullName;
+    self.friendAgeLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)nearestUser.age];
+    self.friendDistanceLabel.text = [NSString stringWithFormat:@"%f", nearestUser.distanceFromMe];
+    self.friendSmokerLabel.text = [NSString stringWithFormat:@"%@", nearestUser.isSmoker ? LOCALIZED(@"Smoker") : LOCALIZED(@"Non-Smoker")];
+    
+    [self.friendProfileImageView sd_setImageWithURL:nearestUser.avatarURL];
 }
 
 @end

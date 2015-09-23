@@ -141,35 +141,40 @@
 {
     
     WEAK_SELF;
-    /*
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [FRDFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
 
-        [FRDProjectFacade signInWithFacebookOnSuccess:^(BOOL isSuccess) {
+        [FRDFacebookService getFacebookUserProfileOnSuccess:^(FRDFacebookProfile *facebookProfile) {
+            
+            [FRDProjectFacade signInWithFacebookOnSuccess:^(BOOL isSuccess) {
+                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                
+                FRDPreferencesController *preferencesController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
+                FRDFriendsListController *friendsListController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDFriendsListController class])];
+                FRDSearchFriendsController *searchFriendsController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDSearchFriendsController class])];
+                FRDContainerViewController *container = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDContainerViewController class])];
+                container.delegate = weakSelf;
+                container.viewControllers = @[preferencesController, searchFriendsController, friendsListController];
+                
+                [weakSelf.navigationController pushViewController:container animated:YES];
+                
+            } onFailure:^(NSError *error, BOOL isCanceled) {
+                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+            }];
+
+        } onFailure:^(NSError *error) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            
-            FRDPreferencesController *preferencesController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
-            FRDFriendsListController *friendsListController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDFriendsListController class])];
-            FRDSearchFriendsController *searchFriendsController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDSearchFriendsController class])];
-            FRDContainerViewController *container = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDContainerViewController class])];
-            container.delegate = weakSelf;
-            container.viewControllers = @[preferencesController, searchFriendsController, friendsListController];
-            
-            [weakSelf.navigationController pushViewController:container animated:YES];
-            
-        } onFailure:^(NSError *error, BOOL isCanceled) {
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            
-            NSString *errorString = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
-            
             [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-            
         }];
+        
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
      }];
-    */
+    
+    /*
     FRDPreferencesController *preferencesController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
     FRDFriendsListController *friendsListController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDFriendsListController class])];
     FRDSearchFriendsController *searchFriendsController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDSearchFriendsController class])];
@@ -178,6 +183,7 @@
     container.viewControllers = @[preferencesController, searchFriendsController, friendsListController];
     
     [weakSelf.navigationController pushViewController:container animated:YES];
+     */
 }
 
 /**

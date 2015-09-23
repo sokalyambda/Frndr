@@ -54,7 +54,7 @@ static NSString *const kFBAppSecret = @"0591ca317dbda06c3f8aefe2fc624952";
 + (void)authorizeWithFacebookOnSuccess:(FacebookAuthSuccessBlock)success onFailure:(FacebookAuthFailureBlock)failure
 {
     WEAK_SELF;
-    [[self facebookLoginManager] logInWithReadPermissions:@[kPublicProfile, kEmail] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+    [[self facebookLoginManager] logInWithReadPermissions:@[kPublicProfile, kEmail, @"user_birthday"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         
         if (error && failure) {
             failure(error, result.isCancelled);
@@ -85,14 +85,14 @@ static NSString *const kFBAppSecret = @"0591ca317dbda06c3f8aefe2fc624952";
 + (void)getFacebookUserProfileOnSuccess:(FacebookProfileSuccessBlock)success onFailure:(FacebookProfileFailureBlock)failure
 {
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-    [parameters setValue:@"picture.type(large), id, name, first_name, last_name, email, gender, user_birthday" forKey:kFields];
+    [parameters setValue:@"picture.type(large), id, name, first_name, last_name, email, gender, age_range, birthday" forKey:kFields];
     
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:parameters HTTPMethod:@"GET"];
     
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id response, NSError *error) {
         if (error && failure) {
             failure(error);
-        } else {
+        } else if (!error) {
             NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary *)response];
             FRDFacebookProfile *facebookProfile = [[FRDFacebookProfile alloc] initWithServerResponse:userProfile];
             [facebookProfile setFacebookProfileToDefaultsForKey:FBCurrentProfile];

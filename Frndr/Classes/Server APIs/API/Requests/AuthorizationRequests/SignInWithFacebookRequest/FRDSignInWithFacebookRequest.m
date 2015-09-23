@@ -29,17 +29,14 @@ static NSString *const kGeolocationCoordinates = @"coordinates";
         self.action = [self requestAction];
         _method = @"POST";
         
-        NSString *fbAccessTokenString = [[NSUserDefaults standardUserDefaults] objectForKey:FBAccessToken];
+        long long facebookId = [FRDStorageManager sharedStorage].currentFacebookProfile.userId;
         CLLocation *currentLocaion = [FRDLocationObserver sharedObserver].currentLocation;
         NSArray *coords = @[@(currentLocaion.coordinate.longitude), @(currentLocaion.coordinate.latitude)];
         
         NSMutableDictionary *parameters;
-        if (fbAccessTokenString) {
-            parameters = [NSMutableDictionary dictionaryWithDictionary:@{kFacebookAccessToken: fbAccessTokenString,
-                                                                         /*kOSVersion: kOSVersionApple,*/
-                                                                         kGeolocationCoordinates: coords
-                                                                         }];
-        }
+        parameters = [NSMutableDictionary dictionaryWithDictionary:@{kFacebookAccessToken: @(facebookId),
+                                                                     kGeolocationCoordinates: coords
+                                                                     }];
         
         self.serializationType = FRDRequestSerializationTypeJSON;
         

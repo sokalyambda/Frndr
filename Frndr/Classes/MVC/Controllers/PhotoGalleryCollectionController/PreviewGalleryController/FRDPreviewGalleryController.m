@@ -16,11 +16,17 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionView *photosCollectionView;
 
-@property (nonatomic) NSArray *photos;
-
 @end
 
 @implementation FRDPreviewGalleryController
+
+#pragma mark - Accessors
+
+- (void)setPhotos:(NSArray *)photos
+{
+    _photos = photos;
+    [self.photosCollectionView reloadData];
+}
 
 #pragma mark - View Lifecycle
 

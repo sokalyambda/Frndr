@@ -10,5 +10,7 @@
 #define Frndr_Requests_h
 
 #import "FRDSignInWithFacebookRequest.h"
+#import "FRDUpdateProfileRequest.h"
+#import "FRDFindNearestUsersRequest.h"
 
 #endif

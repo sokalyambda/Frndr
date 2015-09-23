@@ -10,10 +10,12 @@
 
 #import "FRDLocationObserver.h"
 
+#import "FRDSexualOrientation.h"
+
 static NSString *const requestAction = @"users";
 
-static NSString *const kCoordinates = @"";
-static NSString *const kProfile = @"";
+static NSString *const kCoordinates = @"coordinates";
+static NSString *const kProfile = @"profile";
 
 static NSString *const kName                = @"name";
 static NSString *const kAge                 = @"age";
@@ -26,6 +28,12 @@ static NSString *const kBiography           = @"bio";
 static NSString *const kVisible             = @"visible";
 static NSString *const kGender              = @"sex";
 
+@interface FRDUpdateProfileRequest ()
+
+@property (strong, nonatomic) FRDFacebookProfile *profileForUpdating;
+
+@end
+
 @implementation FRDUpdateProfileRequest
 
 #pragma mark - Lifecycle
@@ -34,6 +42,8 @@ static NSString *const kGender              = @"sex";
 {
     self = [super init];
     if (self) {
+        _profileForUpdating = updatedProfile;
+        
         self.action = [self requestAction];
         _method = @"PUT";
         
@@ -41,12 +51,13 @@ static NSString *const kGender              = @"sex";
         NSArray *coords = @[@(currentLocation.coordinate.longitude), @(currentLocation.coordinate.latitude)];
         
         NSDictionary *profile = @{
+                                  
                                   kName:                updatedProfile.fullName,
                                   kAge:                 @(updatedProfile.age),
                                   kRelationshipStatus:  updatedProfile.relationshipStatus,
                                   kJobTitle:            updatedProfile.jobTitle,
                                   kSmoker:              @(updatedProfile.isSmoker),
-                                  kSexualOrientation:   updatedProfile.chosenOrientation,
+                                  kSexualOrientation:   updatedProfile.chosenOrientation.orientationString,
                                   kThingsLovedMost:     updatedProfile.thingsLovedMost,
                                   kBiography:           updatedProfile.biography,
                                   kVisible:             @(updatedProfile.isVisible),
@@ -68,7 +79,8 @@ static NSString *const kGender              = @"sex";
 
 - (BOOL)parseJSONDataSucessfully:(id)responseObject error:(NSError *__autoreleasing *)error
 {
-    return !!responseObject;
+    self.confirmedProfile = self.profileForUpdating;
+    return !!self.confirmedProfile;
 }
 
 - (NSString *)requestAction

@@ -105,7 +105,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
         return (self = [super init]);
     }
     
-    [self.urlRequest setHTTPShouldHandleCookies:NO];
+    [self.urlRequest setHTTPShouldHandleCookies:YES];
     
     WEAK_SELF;
     [networkRequest.customHeaders enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {

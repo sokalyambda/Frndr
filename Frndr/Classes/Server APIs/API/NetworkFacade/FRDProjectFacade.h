@@ -36,6 +36,16 @@ extern NSString *defaultBaseURLString;
 //Sign Out
 + (void)signOutOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
+//User Profile
++ (FRDNetworkOperation *)updatedProfile:(FRDFacebookProfile *)updatedProfile
+                              onSuccess:(void (^)(FRDFacebookProfile *confirmedProfile))success
+
+                              onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
+
+//Nearest Users
++ (FRDNetworkOperation *)findNearestUsersWithPage:(NSInteger)page onSuccess:(void (^)(NSArray *nearestUsers))success
+                                        onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
+
 //Facebook
 + (FRDNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(BOOL isSuccess))success
                                            onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
