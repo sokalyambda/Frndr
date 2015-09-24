@@ -13,17 +13,20 @@
 #import "FRDPreferencesController.h"
 #import "FRDFriendsListController.h"
 #import "FRDBaseNavigationController.h"
+#import "FRDTermsAndServicesController.h"
 
 #import "FRDAnimator.h"
 
 static NSString *const kMainStoryboardName = @"Main";
 
-@interface FRDRedirectionHelper ()
-
-@end
-
 @implementation FRDRedirectionHelper
 
+/**
+ *  Redirect to main container view controller
+ *
+ *  @param navigationController Navigation controller which will be pushing the container controller
+ *  @param delegate             Delegate for container controlelr
+ */
 + (void)redirectToMainContainerControllerWithNavigationController:(FRDBaseNavigationController *)navigationController andDelegate:(id<ContainerViewControllerDelegate>)delegate
 {
     UIStoryboard *mainBoard = [UIStoryboard storyboardWithName:kMainStoryboardName bundle:nil];
@@ -36,6 +39,24 @@ static NSString *const kMainStoryboardName = @"Main";
     container.viewControllers = @[preferencesController, searchFriendsController, friendsListController];
     
     [navigationController pushViewController:container animated:YES];
+}
+
+/**
+ *  Redirect to terms&services
+ *
+ *  @param url                  Current URL for webView
+ *  @param presentingController Controller which will be presenting the terms controller
+ */
++ (void)redirectToTermsAndServicesWithURL:(NSURL *)url andPresentingController:(FRDBaseViewController *)presentingController
+{
+    UIStoryboard *mainBoard = [UIStoryboard storyboardWithName:kMainStoryboardName bundle:nil];
+    
+    FRDTermsAndServicesController *controller = [mainBoard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDTermsAndServicesController class])];
+    FRDBaseNavigationController *navigationController = [[FRDBaseNavigationController alloc] initWithRootViewController:controller];
+    controller.currentURL = url;
+    
+    [presentingController presentViewController:navigationController animated:YES completion:nil];
+    NSLog(@"url string %@", url.absoluteString);
 }
 
 @end

@@ -169,17 +169,6 @@
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
      }];
-    
-    /*
-    FRDPreferencesController *preferencesController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
-    FRDFriendsListController *friendsListController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDFriendsListController class])];
-    FRDSearchFriendsController *searchFriendsController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDSearchFriendsController class])];
-    FRDContainerViewController *container = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDContainerViewController class])];
-    container.delegate = weakSelf;
-    container.viewControllers = @[preferencesController, searchFriendsController, friendsListController];
-    
-    [weakSelf.navigationController pushViewController:container animated:YES];
-     */
 }
 
 /**
@@ -227,12 +216,7 @@ static CGFloat const kPageControlAnimDuration = .6f;
 
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
 {
-    FRDTermsAndServicesController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDTermsAndServicesController class])];
-    FRDBaseNavigationController *navigationController = [[FRDBaseNavigationController alloc] initWithRootViewController:controller];
-    controller.currentURL = url;
-
-    [self presentViewController:navigationController animated:YES completion:nil];
-    NSLog(@"url string %@", url.absoluteString);
+    [FRDRedirectionHelper redirectToTermsAndServicesWithURL:url andPresentingController:self];
 }
 
 #pragma mark - UIScrollViewDelegate

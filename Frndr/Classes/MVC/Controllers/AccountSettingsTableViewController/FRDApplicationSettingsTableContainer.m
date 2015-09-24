@@ -7,11 +7,14 @@
 //
 
 #import "FRDApplicationSettingsTableContainer.h"
+#import "FRDBaseViewController.h"
 
 #import "FRDApplicationSettingsTableHeader.h"
 #import "FRDSwitch.h"
 
 #import "FRDProjectFacade.h"
+
+#import "FRDRedirectionHelper.h"
 
 typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
 {
@@ -116,10 +119,12 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
             }
                 
             case FRDApplicationOtherSettingPrivacyPolicy: {
+                [FRDRedirectionHelper redirectToTermsAndServicesWithURL:[NSURL URLWithString:@"http://Privacy policy URL"] andPresentingController:(FRDBaseViewController *)self.parentViewController];
                 break;
             }
                 
             case FRDApplicationOtherSettingTermsOfService: {
+                [FRDRedirectionHelper redirectToTermsAndServicesWithURL:[NSURL URLWithString:@"http://Terms of services URL"] andPresentingController:(FRDBaseViewController *)self.parentViewController];
                 break;
             }
         }
