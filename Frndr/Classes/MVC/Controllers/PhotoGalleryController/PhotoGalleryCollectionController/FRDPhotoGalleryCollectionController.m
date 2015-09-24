@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "FRDPhotoGalleryCollectionViewController.h"
+#import "FRDPhotoGalleryCollectionController.h"
 
 #import "FRDPhotoGalleryCollectionViewCell.h"
 
-@implementation FRDPhotoGalleryCollectionViewController
+@implementation FRDPhotoGalleryCollectionController
 
 #pragma mark - View Lifecycle
 
