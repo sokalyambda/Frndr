@@ -44,11 +44,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.friendsTableView.rowHeight = UITableViewAutomaticDimension;
-        self.friendsTableView.estimatedRowHeight = 20.f;
-        [self.friendsTableView reloadData];
-    });
+
+    self.friendsTableView.rowHeight = UITableViewAutomaticDimension;
+    self.friendsTableView.estimatedRowHeight = 120.f;
+    [self.friendsTableView reloadData];
     [self.friendsTableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
 }
 
@@ -74,6 +73,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewAutomaticDimension;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewAutomaticDimension;
 }
 
 @end
