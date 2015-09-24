@@ -23,9 +23,6 @@
 static NSString *const kPreferencesImageName = @"PreferencesIcon";
 static NSString *const kMessagesImageName = @"MessagesIcon";
 
-static NSInteger const usersAtTime = 3.f;
-
-
 @interface FRDSearchFriendsController ()<ZLSwipeableViewDataSource, ZLSwipeableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet ZLSwipeableView *dragableViewsHolder;
@@ -92,7 +89,7 @@ static NSInteger const usersAtTime = 3.f;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self updateCurrentProfileAndGetSuggestedFriends];
+//    [self updateCurrentProfileAndGetSuggestedFriends];
     self.swipableViewsCounter = 0;
 }
 
@@ -210,22 +207,22 @@ static NSInteger const usersAtTime = 3.f;
 {
     FRDFriendDragableParentView *parentView;
     
-    NSLog(@"self.nearestUsers.count = %d, self.swipableViewsCounter = %d", self.nearestUsers.count, self.swipableViewsCounter);
+//    NSLog(@"self.nearestUsers.count = %d, self.swipableViewsCounter = %d", self.nearestUsers.count, self.swipableViewsCounter);
+//    
+//    if (self.nearestUsers.count && self.swipableViewsCounter < self.nearestUsers.count) {
     
-    if (self.nearestUsers.count && self.swipableViewsCounter < self.nearestUsers.count) {
-        
-        FRDNearestUser *currentNearesUser = self.nearestUsers[self.swipableViewsCounter];
-        
+//        FRDNearestUser *currentNearesUser = self.nearestUsers[self.swipableViewsCounter];
+    
         parentView = [[FRDFriendDragableParentView alloc] initWithFrame:swipeableView.bounds];
         FRDFriendDragableView *friendView = [FRDFriendDragableView makeFromXib];
         friendView.translatesAutoresizingMaskIntoConstraints = NO;
         [parentView addSubview:friendView];
         [self addConstraintsForParentView:parentView andContentView:friendView];
         
-        [friendView configureWithNearestUser:currentNearesUser];
-        
+//        [friendView configureWithNearestUser:currentNearesUser];
+    
         self.swipableViewsCounter++;
-    }
+//    }
     
     return parentView;
 }
@@ -266,9 +263,11 @@ static NSInteger const usersAtTime = 3.f;
     
 }
 
+
 - (void)swipeableView:(ZLSwipeableView *)swipeableView didThrowSwipingView:(UIView *)swipingView inDirection:(ZLSwipeableViewDirection)direction
 {
     /*****Like&dislike nearest users*****/
+    /*
     switch (direction) {
         case ZLSwipeableViewDirectionLeft: {
             NSLog(@"User has been removed");
@@ -296,6 +295,8 @@ static NSInteger const usersAtTime = 3.f;
         //        self.currentPage++;
         [self findNearestUsers];
     }
+     */
 }
+
 
 @end

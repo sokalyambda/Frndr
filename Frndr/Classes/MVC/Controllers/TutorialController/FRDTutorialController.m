@@ -139,6 +139,7 @@
  */
 - (void)authorizeWithFacebookAction
 {
+    /*
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [FRDFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
@@ -169,6 +170,10 @@
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
      }];
+     */
+    
+    //redirect to search friends
+    [FRDRedirectionHelper redirectToMainContainerControllerWithNavigationController:(FRDBaseNavigationController *)self.navigationController andDelegate:self];
 }
 
 /**
