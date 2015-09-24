@@ -301,6 +301,13 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
             (signum(translation.y) == signum(normalizedVelocity.y)) && // sign Y
             shouldRemoveView) {
             [self pushAnchorViewForCover:swipeableView inDirection:directionVector andCollideInRect:self.collisionRect];
+            
+            /*****One more delegate method which needed for determine whether view was threw*****/
+            ZLSwipeableViewDirection direction = ZLDirectionVectorToSwipeableViewDirection(directionVector);
+            if ([self.delegate respondsToSelector:@selector(swipeableView:didThrowSwipingView:inDirection:)]) {
+                [self.delegate swipeableView:self didThrowSwipingView:swipeableView inDirection:direction];
+            }
+            
         } else {
             [self.animator removeBehavior:self.swipeableViewAttachmentBehavior];
             [self.animator removeBehavior:self.anchorViewAttachmentBehavior];

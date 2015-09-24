@@ -52,37 +52,6 @@
     [self.friendsTableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
 }
 
-#pragma mark - Actions
-
-- (void)customizeNavigationItem
-{
-    [super customizeNavigationItem];
-    
-    self.navigationTitleView.titleText = LOCALIZED(@"Frnds");
-    
-    UIBarButtonItem *topIconItem = [FRDSerialViewConstructor customRightBarButtonForController:self withAction:@selector(customPopViewController:)];
-    self.navigationItem.leftBarButtonItem = topIconItem;
-}
-
-/**
- *  Custom pop controller
- *
- *  @param sender Sender (Can be a button)
- */
-- (void)customPopViewController:(id)sender
-{
-    [CATransaction begin];
-    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-    CATransition *transition = [CATransition animation];
-    transition.duration = .4f;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    transition.type = kCATransitionReveal;
-    transition.subtype = kCATransitionFromLeft;
-    [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
-    [self.navigationController popViewControllerAnimated:YES];
-    [CATransaction commit];
-}
-
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

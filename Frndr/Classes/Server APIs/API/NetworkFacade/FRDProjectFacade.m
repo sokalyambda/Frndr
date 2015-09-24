@@ -21,7 +21,7 @@
 
 static FRDSessionManager *sharedHTTPClient = nil;
 
-NSString *baseURLString = @"http://192.168.88.99:8859/";
+NSString *baseURLString = @"http://192.168.88.55:8859/";
 
 @implementation FRDProjectFacade
 
@@ -81,6 +81,18 @@ NSString *baseURLString = @"http://192.168.88.99:8859/";
     return [[self HTTPClient] isOperationInProcess];
 }
 
+/**
+ *  Clear current user data
+ */
++ (void)clearUserData
+{
+    [self cancelAllOperations];
+    
+    [FRDStorageManager sharedStorage].currentFacebookProfile = nil;
+    
+    [FRDFacebookService logoutFromFacebook];
+}
+
 #pragma mark - Requests builder
 
 /**
@@ -89,49 +101,54 @@ NSString *baseURLString = @"http://192.168.88.99:8859/";
  *  @param success Success Block
  *  @param failure Failure Block
  */
-+ (void)signOutOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
++ (FRDNetworkOperation *)signOutOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
-    [self cancelAllOperations];
+    FRDSignOutRequest *request = [[FRDSignOutRequest alloc] init];
     
-    /*
-    [BZRStorageManager sharedStorage].currentProfile = nil;
-    [BZRStorageManager sharedStorage].applicationToken = nil;
-    [BZRStorageManager sharedStorage].userToken = nil;
-    [BZRStorageManager sharedStorage].facebookProfile = nil;
+    WEAK_SELF;
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        [weakSelf clearUserData];
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
     
-    [BZRKeychainHandler resetKeychainForService:UserCredentialsKey];
-    
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:RememberMeKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    [BZRFacebookService logoutFromFacebook];
-    */
-    
-    if (success) {
-        success(YES);
-    }
+    return operation;
 }
 
 /**
- *  Session validation, if not valid - renew session token
+ *  Delete current account
  *
- *  @param sessionType Type of session (application or user)
- *  @param success     Success Block
- *  @param failure     Failure Block
+ *  @param success Success Block
+ *  @param failure Failure Block
  */
-+ (void)validateSessionWithType:(FRDSessionType)sessionType onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
++ (FRDNetworkOperation *)deleteAccountOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
-
-}
-
-/**
- *  Check whether user session is valid
- *
- *  @return Returns 'YES' if user session is valid
- */
-+ (BOOL)isUserSessionValid
-{
-    return [[self HTTPClient] isSessionValidWithType:FRDSessionTypeUser];
+    FRDDeleteCurrentUserRequest *request = [[FRDDeleteCurrentUserRequest alloc] init];
+    
+    WEAK_SELF;
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        [weakSelf clearUserData];
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
 }
 
 /**
@@ -165,7 +182,7 @@ NSString *baseURLString = @"http://192.168.88.99:8859/";
         if (failure) {
             failure(error, isCanceled);
         }
-    }];;
+    }];
     
     return operation;
 }

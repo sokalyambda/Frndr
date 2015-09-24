@@ -22,7 +22,6 @@ extern NSString *defaultBaseURLString;
 + (BOOL)isInternetReachable;
 
 //session validation
-+ (BOOL)isUserSessionValid;
 + (BOOL)isFacebookSessionValid;
 
 //cancel operations
@@ -34,7 +33,10 @@ extern NSString *defaultBaseURLString;
 //Authorization Requests
 
 //Sign Out
-+ (void)signOutOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
++ (FRDNetworkOperation *)signOutOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
+
+//Delete account
++ (FRDNetworkOperation *)deleteAccountOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 //User Profile
 + (FRDNetworkOperation *)updatedProfile:(FRDFacebookProfile *)updatedProfile

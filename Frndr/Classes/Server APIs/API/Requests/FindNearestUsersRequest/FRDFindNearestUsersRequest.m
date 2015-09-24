@@ -8,9 +8,25 @@
 
 #import "FRDFindNearestUsersRequest.h"
 
-static NSString *const requestAction = @"users/find/1";
+#import "FRDNearestUser.h"
+
+static NSString *const kRequestAction = @"users/find";
+
+@interface FRDFindNearestUsersRequest ()
+
+@property (nonatomic) NSString *requestAction;
+@property (nonatomic) NSInteger currentPage;
+
+@end
 
 @implementation FRDFindNearestUsersRequest
+
+#pragma mark - Accessors
+
+- (NSString *)requestAction
+{
+    return [NSString stringWithFormat:@"%@/%d", kRequestAction, self.currentPage];
+}
 
 #pragma mark - Lifecycle
 
@@ -18,7 +34,10 @@ static NSString *const requestAction = @"users/find/1";
 {
     self = [super init];
     if (self) {
-        self.action = [self requestAction];
+        
+        _currentPage = page;
+        
+        self.action = self.requestAction;
         _method = @"GET";
         
         NSMutableDictionary *parameters = [@{} mutableCopy];
@@ -30,15 +49,25 @@ static NSString *const requestAction = @"users/find/1";
     return self;
 }
 
+#pragma mark - Actions
+
 - (BOOL)parseJSONDataSucessfully:(id)responseObject error:(NSError *__autoreleasing *)error
 {
-    NSLog(@"response %@", responseObject);
-    return !!responseObject;
-}
+    @autoreleasepool {
+        
+        NSMutableArray *nearestUsers = [NSMutableArray array];
+        for (NSDictionary *responseDict in responseObject) {
+            FRDNearestUser *currentNearestUser = [[FRDNearestUser alloc] initWithServerResponse:responseDict];
+            @synchronized(self) {
+                [nearestUsers addObject:currentNearestUser];
+            }
+        }
+        
+        self.nearestUsers = nearestUsers;
+        
+    }
 
-- (NSString *)requestAction
-{
-    return requestAction;
+    return !!self.nearestUsers;
 }
 
 @end

@@ -12,6 +12,7 @@
 
 #import "FRDCommonDateFormatter.h"
 
+//facebook keys
 static NSString *const kFirstName = @"first_name";
 static NSString *const kLastName = @"last_name";
 static NSString *const kFullName = @"name";
@@ -26,7 +27,6 @@ static NSString *const kURL = @"url";
 static NSString *const kGender = @"gender";
 
 //beckend keys
-
 static NSString *const kId = @"_id";
 
 static NSString *const kProfile = @"profile";

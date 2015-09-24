@@ -10,6 +10,8 @@
 
 #import "FRDTopContentView.h"
 
+#import "FRDProjectFacade.h"
+
 @implementation FRDPreferencesController
 
 #pragma mark - Accessors
@@ -21,7 +23,7 @@
 
 - (NSString *)leftImageName
 {
-    return nil;
+    return @"";
 }
 
 - (NSString *)rightImageName
@@ -46,26 +48,43 @@
 
 - (IBAction)logoutFromFrndrClick:(id)sender
 {
-    NSLog(@"'Logout from Frndr' button clicked");
+    [self showSignOutActionSheet];
 }
 
 /**
- *  Custom pop controller
- *
- *  @param sender Sender (Can be a button)
+ *  Show sign out action sheet
  */
-- (void)customPopViewController:(id)sender
+- (void)showSignOutActionSheet
 {
-    [CATransaction begin];
-    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-    CATransition *transition = [CATransition animation];
-    transition.duration = .4f;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    transition.type = kCATransitionReveal;
-    transition.subtype = kCATransitionFromRight;
-    [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
-    [self.navigationController popViewControllerAnimated:YES];
-    [CATransaction commit];
+    UIAlertController *signOutController = [UIAlertController alertControllerWithTitle:@"" message:LOCALIZED(@"Do you want to sign out?") preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    WEAK_SELF;
+    UIAlertAction *signOutAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Logout") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        [weakSelf signOut];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleCancel handler:nil];
+    
+    [signOutController addAction:signOutAction];
+    [signOutController addAction:cancelAction];
+    
+    [self presentViewController:signOutController animated:YES completion:nil];
+}
+
+/**
+ *  Sign out
+ */
+- (void)signOut
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [FRDProjectFacade signOutOnSuccess:^(BOOL isSuccess) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+    }];
 }
 
 @end
