@@ -9,8 +9,9 @@
 #import "FRDApplicationSettingsTableContainer.h"
 
 #import "FRDApplicationSettingsTableHeader.h"
-
 #import "FRDSwitch.h"
+
+#import "FRDProjectFacade.h"
 
 typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
 {
@@ -102,6 +103,7 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
         
         switch (otherSettingType) {
             case FRDApplicationOtherSettingDeleteAccount: {
+                [self showDeleteAccountActionSheet];
                 break;
             }
                 
@@ -136,6 +138,44 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
             }
         }
     }
+}
+
+/**
+ *  Show delete account action sheet
+ */
+- (void)showDeleteAccountActionSheet
+{
+    UIAlertController *signOutController = [UIAlertController alertControllerWithTitle:@"" message:LOCALIZED(@"Do you want to delete your account?") preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    WEAK_SELF;
+    UIAlertAction *deleteAccountAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Delete profile") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        [weakSelf deleteAccount];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleCancel handler:nil];
+    
+    [signOutController addAction:deleteAccountAction];
+    [signOutController addAction:cancelAction];
+    
+    [self presentViewController:signOutController animated:YES completion:nil];
+}
+
+/**
+ *  Delete account
+ */
+- (void)deleteAccount
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.parentViewController.view animated:YES];
+    [FRDProjectFacade deleteAccountOnSuccess:^(BOOL isSuccess) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.parentViewController.view animated:YES];
+        
+        [weakSelf.parentViewController.navigationController popToRootViewControllerAnimated:YES];
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.parentViewController.view animated:YES];
+        
+    }];
 }
 
 @end

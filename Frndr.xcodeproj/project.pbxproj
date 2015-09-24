@@ -34,6 +34,7 @@
 		3E941A4F1BB18E2000F034E6 /* UIImage+ColoredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E941A4E1BB18E2000F034E6 /* UIImage+ColoredImage.m */; settings = {ASSET_TAGS = (); }; };
 		3ED072321BA0370C0091B7E4 /* FRDPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED072311BA0370C0091B7E4 /* FRDPreferencesController.m */; };
 		3ED072361BA048460091B7E4 /* FRDPreferencesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED072351BA048460091B7E4 /* FRDPreferencesTableViewController.m */; };
+		5812BD0D1BB3E87300BCB90B /* FRDRedirectionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5812BD0C1BB3E87300BCB90B /* FRDRedirectionHelper.m */; settings = {ASSET_TAGS = (); }; };
 		581661CF1BB2DEEC00371967 /* FRDNearestUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 581661CE1BB2DEEC00371967 /* FRDNearestUser.m */; settings = {ASSET_TAGS = (); }; };
 		581B9D3B1B9ED6090080393B /* FRDStorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D3A1B9ED6090080393B /* FRDStorageManager.m */; };
 		581B9D3E1B9ED67B0080393B /* FRDPushNotifiactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D3D1B9ED67B0080393B /* FRDPushNotifiactionService.m */; };
@@ -200,6 +201,8 @@
 		3ED072351BA048460091B7E4 /* FRDPreferencesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPreferencesTableViewController.m; path = Classes/MVC/Controllers/PreferencesTableViewController/FRDPreferencesTableViewController.m; sourceTree = "<group>"; };
 		3ED281275AA17DB13D1C36A1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		4E086F2D4037543EBA52BEA4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5812BD0B1BB3E87300BCB90B /* FRDRedirectionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRedirectionHelper.h; path = Classes/Utilities/RedirectionHelper/FRDRedirectionHelper.h; sourceTree = "<group>"; };
+		5812BD0C1BB3E87300BCB90B /* FRDRedirectionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRedirectionHelper.m; path = Classes/Utilities/RedirectionHelper/FRDRedirectionHelper.m; sourceTree = "<group>"; };
 		581661CD1BB2DEEC00371967 /* FRDNearestUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDNearestUser.h; path = Classes/MVC/Models/NearestUser/FRDNearestUser.h; sourceTree = "<group>"; };
 		581661CE1BB2DEEC00371967 /* FRDNearestUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDNearestUser.m; path = Classes/MVC/Models/NearestUser/FRDNearestUser.m; sourceTree = "<group>"; };
 		581B9D391B9ED6090080393B /* FRDStorageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDStorageManager.h; path = Classes/Managers/StorageManager/FRDStorageManager.h; sourceTree = "<group>"; };
@@ -654,6 +657,15 @@
 			name = PreferencesTableViewController;
 			sourceTree = "<group>";
 		};
+		5812BD0A1BB3E85A00BCB90B /* RedirectionHelper */ = {
+			isa = PBXGroup;
+			children = (
+				5812BD0B1BB3E87300BCB90B /* FRDRedirectionHelper.h */,
+				5812BD0C1BB3E87300BCB90B /* FRDRedirectionHelper.m */,
+			);
+			name = RedirectionHelper;
+			sourceTree = "<group>";
+		};
 		581661CC1BB2DEBC00371967 /* NearestUser */ = {
 			isa = PBXGroup;
 			children = (
@@ -917,6 +929,7 @@
 		58BC76CC1B9EB93500BB8B5A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				5812BD0A1BB3E85A00BCB90B /* RedirectionHelper */,
 				58CD9AB21BAFE7A600A7CADB /* Animator */,
 				58BC76E51B9EBA8A00BB8B5A /* Keychain */,
 				58BC76E41B9EBA8400BB8B5A /* Validator */,
@@ -1977,6 +1990,7 @@
 				3E0EEC5C1BABEF2300AB51B0 /* FRDApplicationSettingsController.m in Sources */,
 				58FFDBAE1B9ECF6B00B0490A /* FRDCommonDateFormatter.m in Sources */,
 				58FFDBB81B9ED0A900B0490A /* FRDErrorHandler.m in Sources */,
+				5812BD0D1BB3E87300BCB90B /* FRDRedirectionHelper.m in Sources */,
 				581B9D5C1B9EDCDB0080393B /* FRDFailedOperationManager.m in Sources */,
 				58FFDBB51B9ED07E00B0490A /* FRDCommonNumberFormatter.m in Sources */,
 				58C28FFC1BAAC69B0099ABE4 /* CAAnimation+CompetionBlock.m in Sources */,

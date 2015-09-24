@@ -28,6 +28,7 @@
 #import "CAAnimation+CompetionBlock.h"
 
 #import "FRDAnimator.h"
+#import "FRDRedirectionHelper.h"
 
 @interface FRDTutorialController ()<TTTAttributedLabelDelegate, UIScrollViewDelegate, ContainerViewControllerDelegate>
 
@@ -56,7 +57,6 @@
     
     [FRDPushNotifiactionService registerApplicationForPushNotifications:[UIApplication sharedApplication]];
     [FRDLocationObserver sharedObserver];
-//    NSLog(@"current locaion %@", [FRDLocationObserver sharedObserver].currentLocation);
 }
 
 #pragma mark - Actions
@@ -139,7 +139,6 @@
  */
 - (void)authorizeWithFacebookAction
 {
-    
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [FRDFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
@@ -149,14 +148,11 @@
             [FRDProjectFacade signInWithFacebookOnSuccess:^(BOOL isSuccess) {
                 [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                 
-                FRDPreferencesController *preferencesController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
-                FRDFriendsListController *friendsListController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDFriendsListController class])];
-                FRDSearchFriendsController *searchFriendsController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDSearchFriendsController class])];
-                FRDContainerViewController *container = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDContainerViewController class])];
-                container.delegate = weakSelf;
-                container.viewControllers = @[preferencesController, searchFriendsController, friendsListController];
-                
-                [weakSelf.navigationController pushViewController:container animated:YES];
+                //set successfull login
+                [FRDFacebookService setLoginSuccess:isSuccess];
+
+                //redirect to search friends
+                [FRDRedirectionHelper redirectToMainContainerControllerWithNavigationController:(FRDBaseNavigationController *)weakSelf.navigationController andDelegate:weakSelf];
                 
             } onFailure:^(NSError *error, BOOL isCanceled) {
                 [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];

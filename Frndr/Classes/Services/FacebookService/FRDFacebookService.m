@@ -172,7 +172,7 @@ static NSString *const kFBAppSecret = @"0591ca317dbda06c3f8aefe2fc624952";
     
     [defaults removeObjectForKey:FBAccessToken];
     [defaults removeObjectForKey:FBAccessTokenExpirationDate];
-//    [defaults removeObjectForKey:FBCurrentProfile];
+    [defaults removeObjectForKey:FBCurrentProfile];
     [self setLoginSuccess:NO];
     
     [defaults synchronize];
@@ -186,7 +186,7 @@ static NSString *const kFBAppSecret = @"0591ca317dbda06c3f8aefe2fc624952";
 + (BOOL)isLoginedWithFacebook
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    return [defaults objectForKey:FBAccessToken] && [defaults objectForKey:FBAccessTokenExpirationDate] && [defaults boolForKey:FBLoginSuccess];
+    return [defaults objectForKey:FBAccessToken] && [defaults objectForKey:FBAccessTokenExpirationDate] && [defaults boolForKey:FBLoginSuccess] && [defaults objectForKey:FBCurrentProfile];
 }
 
 @end

@@ -12,5 +12,7 @@
 #import "FRDSignInWithFacebookRequest.h"
 #import "FRDUpdateProfileRequest.h"
 #import "FRDFindNearestUsersRequest.h"
+#import "FRDSignOutRequest.h"
+#import "FRDDeleteCurrentUserRequest.h"
 
 #endif

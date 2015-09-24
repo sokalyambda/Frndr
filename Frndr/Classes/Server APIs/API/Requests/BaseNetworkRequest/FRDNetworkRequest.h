@@ -11,6 +11,18 @@ typedef enum : NSUInteger {
     FRDRequestSerializationTypeHTTP
 } FRDRequestSerializationType;
 
+dispatch_queue_t base_mapping_queue() {
+    
+    static dispatch_queue_t base_mapping_queue;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        base_mapping_queue = dispatch_queue_create("base_mapping_queue", DISPATCH_QUEUE_CONCURRENT);
+    });
+    
+    return base_mapping_queue;
+}
+
 @interface FRDNetworkRequest : NSObject {
     NSString            *_path;
     NSMutableDictionary *_parameters;

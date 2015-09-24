@@ -8,7 +8,7 @@
 
 #import "FRDSignOutRequest.h"
 
-static NSString *const requestAction = @"singOut";
+static NSString *const requestAction = @"signOut";
 
 @implementation FRDSignOutRequest
 

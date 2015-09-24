@@ -77,10 +77,15 @@ static NSString *const kFriendsListSegueIdentifier = @"friendsListSegueIdentifie
     self.currentPage = 1;
     
     [self setupPhotosGalleryContainer];
-    [self updateCurrentProfileAndGetSuggestedFriends];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self setupDragableViewOptions];
     });
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self updateCurrentProfileAndGetSuggestedFriends];
 }
 
 #pragma mark - Actions
