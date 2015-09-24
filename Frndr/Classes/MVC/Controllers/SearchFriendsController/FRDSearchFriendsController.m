@@ -23,8 +23,8 @@
 static NSString *const kPreferencesImageName = @"PreferencesIcon";
 static NSString *const kMessagesImageName = @"MessagesIcon";
 
-static NSString *const kPreferencesSegueIdentifier = @"preferencesSegueIdentifier";
-static NSString *const kFriendsListSegueIdentifier = @"friendsListSegueIdentifier";
+static NSInteger const usersAtTime = 3.f;
+
 
 @interface FRDSearchFriendsController ()<ZLSwipeableViewDataSource, ZLSwipeableViewDelegate>
 
@@ -40,6 +40,7 @@ static NSString *const kFriendsListSegueIdentifier = @"friendsListSegueIdentifie
 @property (nonatomic) FRDNearestUser *currentNearestUser;
 
 @property (assign, nonatomic) NSInteger currentPage;
+@property (assign, nonatomic) NSInteger swipableViewsCounter;
 
 @end
 
@@ -65,7 +66,13 @@ static NSString *const kFriendsListSegueIdentifier = @"friendsListSegueIdentifie
 - (void)setNearestUsers:(NSMutableArray *)nearestUsers
 {
     _nearestUsers = nearestUsers;
-    _currentNearestUser = (FRDNearestUser *)nearestUsers.firstObject;
+    self.currentNearestUser = (FRDNearestUser *)nearestUsers.firstObject;
+}
+
+- (void)setCurrentNearestUser:(FRDNearestUser *)currentNearestUser
+{
+    _currentNearestUser = currentNearestUser;
+    [self updateNearestUserInformation];
 }
 
 #pragma mark - View Lifecycle
@@ -86,6 +93,7 @@ static NSString *const kFriendsListSegueIdentifier = @"friendsListSegueIdentifie
 {
     [super viewDidAppear:animated];
     [self updateCurrentProfileAndGetSuggestedFriends];
+    self.swipableViewsCounter = 0;
 }
 
 #pragma mark - Actions
@@ -129,25 +137,44 @@ static NSString *const kFriendsListSegueIdentifier = @"friendsListSegueIdentifie
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [FRDProjectFacade updatedProfile:currentProfile onSuccess:^(FRDFacebookProfile *confirmedProfile) {
         
-        [FRDProjectFacade findNearestUsersWithPage:weakSelf.currentPage onSuccess:^(NSArray *nearestUsers) {
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            
-            weakSelf.nearestUsers = [nearestUsers mutableCopy];
-            
-        } onFailure:^(NSError *error, BOOL isCanceled) {
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            
-        }];
+        [weakSelf findNearestUsers];
+        
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-        NSLog(@"failure");
     }];
 }
 
+- (void)findNearestUsers
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [FRDProjectFacade findNearestUsersWithPage:self.currentPage onSuccess:^(NSArray *nearestUsers) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
+        self.nearestUsers = [nearestUsers mutableCopy];
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
+    }];
+}
+
+/**
+ *  Update information relative to current nearest user
+ */
 - (void)updateNearestUserInformation
 {
+    self.biographyLabel.text = self.currentNearestUser.biography;
     
+    NSMutableString *interests = [NSMutableString string];
+    
+    for (NSString *interest in self.currentNearestUser.thingsLovedMost) {
+        [interests appendFormat:@"%@\n", interest];
+    }
+    
+    self.interestsLabel.text = interests;
+    
+    [self.dragableViewsHolder loadNextSwipeableViewsIfNeeded];
 }
 
 /**
@@ -181,13 +208,25 @@ static NSString *const kFriendsListSegueIdentifier = @"friendsListSegueIdentifie
 
 - (UIView *)nextViewForSwipeableView:(ZLSwipeableView *)swipeableView
 {
-    FRDFriendDragableParentView *parentView = [[FRDFriendDragableParentView alloc] initWithFrame:swipeableView.bounds];
-
-    FRDFriendDragableView *friendView = [FRDFriendDragableView makeFromXib];
-    friendView.translatesAutoresizingMaskIntoConstraints = NO;
-    [parentView addSubview:friendView];
-    [self addConstraintsForParentView:parentView andContentView:friendView];
-
+    FRDFriendDragableParentView *parentView;
+    
+    NSLog(@"self.nearestUsers.count = %d, self.swipableViewsCounter = %d", self.nearestUsers.count, self.swipableViewsCounter);
+    
+    if (self.nearestUsers.count && self.swipableViewsCounter < self.nearestUsers.count) {
+        
+        FRDNearestUser *currentNearesUser = self.nearestUsers[self.swipableViewsCounter];
+        
+        parentView = [[FRDFriendDragableParentView alloc] initWithFrame:swipeableView.bounds];
+        FRDFriendDragableView *friendView = [FRDFriendDragableView makeFromXib];
+        friendView.translatesAutoresizingMaskIntoConstraints = NO;
+        [parentView addSubview:friendView];
+        [self addConstraintsForParentView:parentView andContentView:friendView];
+        
+        [friendView configureWithNearestUser:currentNearesUser];
+        
+        self.swipableViewsCounter++;
+    }
+    
     return parentView;
 }
 
@@ -217,14 +256,46 @@ static NSString *const kFriendsListSegueIdentifier = @"friendsListSegueIdentifie
 
 }
 
-- (void)swipeableView:(ZLSwipeableView *)swipeableView swipingView:(UIView *)view atLocation:(CGPoint)location  translation:(CGPoint)translation
+- (void)swipeableView:(ZLSwipeableView *)swipeableView swipingView:(UIView *)view atLocation:(CGPoint)location translation:(CGPoint)translation
 {
 
 }
 
 - (void)swipeableView:(ZLSwipeableView *)swipeableView didEndSwipingView:(UIView *)view atLocation:(CGPoint)location
 {
+    
+}
 
+- (void)swipeableView:(ZLSwipeableView *)swipeableView didThrowSwipingView:(UIView *)swipingView inDirection:(ZLSwipeableViewDirection)direction
+{
+    /*****Like&dislike nearest users*****/
+    switch (direction) {
+        case ZLSwipeableViewDirectionLeft: {
+            NSLog(@"User has been removed");
+            break;
+        }
+        case ZLSwipeableViewDirectionRight: {
+            NSLog(@"User has been added");
+            break;
+        }
+        default:
+            break;
+    }
+    
+    if (self.nearestUsers.count) {
+        [self.nearestUsers removeObject:self.nearestUsers.firstObject];
+    }
+    
+    if (self.nearestUsers.count) {
+        self.currentNearestUser = self.nearestUsers.firstObject;
+        [self updateNearestUserInformation];
+    }
+    
+    if (!self.nearestUsers.count) {
+        self.swipableViewsCounter = 0;
+        //        self.currentPage++;
+        [self findNearestUsers];
+    }
 }
 
 @end

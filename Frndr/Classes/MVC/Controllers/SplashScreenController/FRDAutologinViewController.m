@@ -69,7 +69,9 @@ static NSString *const kTutorialSegueIdentifier = @"tutorialSegueIdentifier";
     } onFailure:^(NSError *error, BOOL isCanceled) {
         
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
+            [weakSelf moveToTutorialAfterDelay:0.f];
+        }];
     }];
 }
 
