@@ -13,6 +13,6 @@ typedef NS_ENUM(NSInteger, FRDGalleryLayoutItemType)
     FRDGalleryItemTypeSecondSide = 2
 };
 
-@interface FRDPhotoGalleryCollectionViewLayout : UICollectionViewLayout
+@interface FRDPhotoGalleryLayout : UICollectionViewLayout
 
 @end

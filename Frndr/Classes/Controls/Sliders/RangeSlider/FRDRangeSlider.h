@@ -40,4 +40,8 @@ typedef NS_ENUM(NSInteger, FRDRangeSliderMode)
 - (void)setTrackImage:(UIImage *)image;
 - (void)setInRangeTrackImage:(UIImage *)image;
 
+- (void)updateWithMinimumValue:(CGFloat)minimum andMaximumValue:(CGFloat)maximum;
+- (void)updateWithMinimumValue:(CGFloat)minimum;
+- (void)updateWithMaximumValue:(CGFloat)maximum;
+
 @end

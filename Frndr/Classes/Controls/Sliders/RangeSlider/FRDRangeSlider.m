@@ -36,9 +36,6 @@
 
 - (void)commonInit
 {
-    NSLog(@"%f %f %f %f", self.frame.origin.x, self.frame.origin.y, self.frame.size.width,
-          self.frame.size.height);
-    
     if (self.isInitialized) {
         return;
     }
@@ -184,6 +181,44 @@
 
 #pragma mark - Actions
 
+- (void)updateWithMinimumValue:(CGFloat)minimum andMaximumValue:(CGFloat)maximum
+{
+    NSLog(@"Max: %f, Min: %f", maximum, minimum);
+    minimum = MAX(0, minimum);
+    minimum = MIN(minimum, maximum);
+    
+    maximum = MIN(maximum, 1.0);
+    maximum = MAX(minimum, maximum);
+    
+    
+    
+    _minimumValue = minimum;
+    _maximumValue = maximum;
+    
+    self.leftThumb.frame = CGRectMake(self.minimumValue * CGRectGetWidth(self.frame),
+                                      CGRectGetMinY(self.leftThumb.frame),
+                                      CGRectGetWidth(self.leftThumb.frame),
+                                      CGRectGetHeight(self.leftThumb.frame));
+    
+    self.rightThumb.frame = CGRectMake(self.maximumValue * CGRectGetWidth(self.frame),
+                                       CGRectGetMinY(self.rightThumb.frame),
+                                       CGRectGetWidth(self.rightThumb.frame),
+                                       CGRectGetHeight(self.rightThumb.frame));
+    
+    [self calculateValues];
+    [self updateInRangeTrack];
+}
+
+- (void)updateWithMinimumValue:(CGFloat)minimum
+{
+    [self updateWithMinimumValue:minimum andMaximumValue:self.maximumValue];
+}
+
+- (void)updateWithMaximumValue:(CGFloat)maximum
+{
+    [self updateWithMinimumValue:self.minimumValue andMaximumValue:maximum];
+}
+
 - (void)updateInRangeTrack
 {
     self.inRangeTrack.frame = CGRectMake(CGRectGetMidX(self.leftThumb.frame),
@@ -257,15 +292,8 @@
     float deltaX = [touch locationInView:self].x - [touch previousLocationInView:self].x;
     
     CGFloat minimumDistanceBetweenThumbs = CGRectGetWidth(self.frame) * self.minimumRange;
-    CGFloat currentDistanceBetweenThumbs = CGRectGetMinX(self.rightThumb.frame) - CGRectGetMaxX(self.leftThumb.frame);
     
     if (self.trackedSlider == self.leftThumb) {
-        
-        // Check for minimum distance between thumbs
-        if (currentDistanceBetweenThumbs <= minimumDistanceBetweenThumbs && deltaX > 0) {
-            return YES;
-        }
-        
         float newX = MAX(0, CGRectGetMinX(self.leftThumb.frame) + deltaX);
         
         CGRect minSliderNewRect = CGRectMake(newX,
@@ -273,24 +301,17 @@
                                              CGRectGetWidth(self.leftThumb.frame),
                                              CGRectGetHeight(self.leftThumb.frame));
         
-        if (!CGRectIntersectsRect(minSliderNewRect, self.rightThumb.frame)) {
+        if (newX + CGRectGetWidth(self.leftThumb.frame) + minimumDistanceBetweenThumbs <= CGRectGetMinX(self.rightThumb.frame)) {
             self.leftThumb.frame = minSliderNewRect;
         } else {
             // This thumb will 'stick' to right thumb
-            self.leftThumb.frame = CGRectMake(CGRectGetMinX(self.rightThumb.frame) - CGRectGetWidth(self.leftThumb.frame),
-                                               CGRectGetMinY(self.leftThumb.frame),
-                                               CGRectGetWidth(self.leftThumb.frame),
-                                               CGRectGetHeight(self.leftThumb.frame));
+            self.leftThumb.frame = CGRectMake(CGRectGetMinX(self.rightThumb.frame) - CGRectGetWidth(self.leftThumb.frame) - minimumDistanceBetweenThumbs,
+                                              CGRectGetMinY(self.leftThumb.frame),
+                                              CGRectGetWidth(self.leftThumb.frame),
+                                              CGRectGetHeight(self.leftThumb.frame));
         }
         
     } else if (self.trackedSlider == self.rightThumb) {
-        
-        // Check for minimum distance between thumbs
-        if (currentDistanceBetweenThumbs <= minimumDistanceBetweenThumbs && deltaX < 0 &&
-            self.mode == FRDRangeSliderModeRange  /* Check for Range Thumb Mode */) {
-            return YES;
-        }
-        
         float newX = MIN(CGRectGetWidth(self.frame) - CGRectGetWidth(self.rightThumb.frame),
                          CGRectGetMinX(self.rightThumb.frame) + deltaX);
         
@@ -301,11 +322,11 @@
                                              CGRectGetWidth(self.rightThumb.frame),
                                              CGRectGetHeight(self.rightThumb.frame));
 
-        if (!CGRectIntersectsRect(maxSliderNewRect, self.leftThumb.frame) || self.mode == FRDRangeSliderModeSingleThumb) {
+        if (newX - minimumDistanceBetweenThumbs > CGRectGetMaxX(self.leftThumb.frame) || self.mode == FRDRangeSliderModeSingleThumb) {
             self.rightThumb.frame = maxSliderNewRect;
         } else {
             // This thumb will 'stick' to left thumb
-            self.rightThumb.frame = CGRectMake(CGRectGetMaxX(self.leftThumb.frame),
+            self.rightThumb.frame = CGRectMake(CGRectGetMaxX(self.leftThumb.frame) + minimumDistanceBetweenThumbs,
                                                CGRectGetMinY(self.rightThumb.frame),
                                                CGRectGetWidth(self.rightThumb.frame),
                                                CGRectGetHeight(self.rightThumb.frame));

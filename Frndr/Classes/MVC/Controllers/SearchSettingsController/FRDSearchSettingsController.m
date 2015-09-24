@@ -23,6 +23,9 @@
 
 @interface FRDSearchSettingsController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ageRangeLabel;
+
 @property (weak, nonatomic) IBOutlet UIView *dropDownHolderContainer;
 @property (weak, nonatomic) IBOutlet UIView *relationshipsContainer;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -32,6 +35,13 @@
 
 @property (nonatomic) FRDDropDownHolderController *dropDownHolderController;
 @property (nonatomic) FRDRelationshipStatusController *relationshipController;
+
+@property (nonatomic) NSRange ageValidRange;
+@property (nonatomic) NSRange distanceValidRange;
+
+@property (nonatomic) NSInteger currentMinimumAge;
+@property (nonatomic) NSInteger currentMaximumAge;
+@property (nonatomic) NSInteger currentDistance;
 
 @end
 
@@ -45,8 +55,39 @@
     [self initDropDownHolderContainer];
     [self initRelationshipStatusesHolderContainer];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self configureSliders];
+#warning Temporary magic numbers!
+        [self setupDistanceSliderWithValidRange:NSMakeRange(1, 999) andDefaultValue:400];
+        [self setupAgeSliderWithValidRange:NSMakeRange(18, 30) minimumRange:0 defaultMinimum:22 maximum:40];
     });
+}
+
+#pragma mark - Accessors
+
+- (void)setCurrentDistance:(NSInteger)currentDistance
+{
+    if (currentDistance >= self.distanceValidRange.location &&
+        currentDistance <= self.distanceValidRange.location + self.distanceValidRange.length) {
+        _currentDistance = currentDistance;
+        self.distanceLabel.text = [NSString stringWithFormat:@"%ld miles", currentDistance];
+    }
+}
+
+- (void)setCurrentMinimumAge:(NSInteger)currentMinimumAge
+{
+    if (currentMinimumAge >= self.ageValidRange.location &&
+        currentMinimumAge <= self.ageValidRange.location + self.ageValidRange.length) {
+        _currentMinimumAge = currentMinimumAge;
+        self.ageRangeLabel.text = [NSString stringWithFormat:@"%ld - %ld years", currentMinimumAge, self.currentMaximumAge];
+    }
+}
+
+- (void)setCurrentMaximumAge:(NSInteger)currentMaximumAge
+{
+    if (currentMaximumAge >= self.ageValidRange.location &&
+        currentMaximumAge <= self.ageValidRange.location + self.ageValidRange.length) {
+        _currentMaximumAge = currentMaximumAge;
+        self.ageRangeLabel.text = [NSString stringWithFormat:@"%ld - %ld years", self.currentMinimumAge, currentMaximumAge];
+    }
 }
 
 #pragma mark - Actions
@@ -70,13 +111,36 @@
     [self.relationshipController didMoveToParentViewController:self];
 }
 
-- (void)configureSliders
+- (void)setupDistanceSliderWithValidRange:(NSRange)validRange andDefaultValue:(NSInteger)value
 {
-    self.ageRangeSlider.tracksHeight = 3.0;
-    self.ageRangeSlider.mode = FRDRangeSliderModeRange;
-    
-    self.distanceSlider.tracksHeight = 3.0;
+    self.distanceSlider.tracksHeight = 5.0;
     self.distanceSlider.mode = FRDRangeSliderModeSingleThumb;
+    [self.distanceSlider addTarget:self
+                            action:@selector(distanceSliderValueChanged:)
+                  forControlEvents:UIControlEventValueChanged];
+    
+    self.distanceValidRange = validRange;
+    [self.distanceSlider updateWithMaximumValue:(CGFloat)value / validRange.length];
+    self.currentDistance = value;
+}
+
+- (void)setupAgeSliderWithValidRange:(NSRange)validRange minimumRange:(NSInteger)minimumRange
+                      defaultMinimum:(NSInteger)minimum maximum:(NSInteger)maximum
+{
+    NSAssert(minimum < maximum, @"Minimum must be less than maximum!");
+    
+    self.ageRangeSlider.tracksHeight = 5.0;
+    self.ageRangeSlider.mode = FRDRangeSliderModeRange;
+    self.ageRangeSlider.minimumRange = (CGFloat)minimumRange / validRange.length;
+    [self.ageRangeSlider addTarget:self
+                            action:@selector(ageRangeSliderValueChanged:)
+                  forControlEvents:UIControlEventValueChanged];
+    
+    self.ageValidRange = validRange;
+    [self.ageRangeSlider updateWithMinimumValue:((CGFloat)minimum - validRange.location) / validRange.length
+                                andMaximumValue:((CGFloat)maximum - validRange.location) / validRange.length];
+    self.currentMinimumAge = minimum;
+    self.currentMaximumAge = maximum;
 }
 
 - (void)customizeNavigationItem
@@ -90,6 +154,23 @@
     
     //set right bar button item
     self.navigationItem.rightBarButtonItem = rightIcon;
+}
+
+#pragma mark - Event listeners
+
+- (void)distanceSliderValueChanged:(id)sender
+{
+    NSInteger distance = self.distanceValidRange.location + (self.distanceValidRange.length * self.distanceSlider.maximumValue);
+    self.currentDistance = distance;
+}
+
+- (void)ageRangeSliderValueChanged:(id)sender
+{
+    NSInteger leftValue = self.ageValidRange.location + (self.ageValidRange.length * self.ageRangeSlider.minimumValue);
+    NSInteger rightValue = self.ageValidRange.location + (self.ageValidRange.length * self.ageRangeSlider.maximumValue);
+    
+    self.currentMinimumAge = leftValue;
+    self.currentMaximumAge = rightValue;
 }
 
 @end

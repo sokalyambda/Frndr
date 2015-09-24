@@ -10,6 +10,10 @@
 
 #import "FRDPhotoGalleryCollectionViewCell.h"
 
+@interface FRDPhotoGalleryCollectionController () <UICollectionViewDelegateFlowLayout>
+
+@end
+
 @implementation FRDPhotoGalleryCollectionController
 
 #pragma mark - View Lifecycle

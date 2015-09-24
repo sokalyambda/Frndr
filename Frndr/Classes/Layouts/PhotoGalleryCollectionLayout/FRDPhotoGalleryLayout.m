@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "FRDPhotoGalleryCollectionViewLayout.h"
+#import "FRDPhotoGalleryLayout.h"
 
-static CGFloat const kFullSpace = 2.f;
+static CGFloat const kFullSpace = 4.f;
 static CGFloat const kHalfSpace = kFullSpace / 2;
 static CGFloat const kQuarterSpace = kHalfSpace / 2;
 
-@interface FRDPhotoGalleryCollectionViewLayout ()
+@interface FRDPhotoGalleryLayout ()
 
 @property (nonatomic) CGFloat oneThirdOfScreenWidth;
 @property (nonatomic) CGFloat twoThirdsOfScreenWidth;
@@ -26,7 +26,7 @@ static CGFloat const kQuarterSpace = kHalfSpace / 2;
 @end
 
 
-@implementation FRDPhotoGalleryCollectionViewLayout
+@implementation FRDPhotoGalleryLayout
 
 #pragma mark - Accessors
 

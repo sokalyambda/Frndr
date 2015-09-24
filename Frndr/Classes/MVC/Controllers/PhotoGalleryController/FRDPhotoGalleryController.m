@@ -10,6 +10,10 @@
 
 #import "FRDSerialViewConstructor.h"
 
+@interface FRDPhotoGalleryController ()
+
+@end
+
 @implementation FRDPhotoGalleryController
 
 #pragma mark - View's Lifecycle
