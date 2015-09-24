@@ -14,6 +14,8 @@ static CGFloat const kQuarterSpace = kHalfSpace / 2;
 
 @interface FRDPhotoGalleryLayout ()
 
+@property (nonatomic) NSInteger row;
+
 @property (nonatomic) CGFloat oneThirdOfScreenWidth;
 @property (nonatomic) CGFloat twoThirdsOfScreenWidth;
 
@@ -89,11 +91,9 @@ static CGFloat const kQuarterSpace = kHalfSpace / 2;
 
 - (CGRect)frameForElementAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSInteger row = 0;
-    
     NSInteger column = indexPath.item % 3;
     if (column == 0) {
-        row++;
+        self.row++;
     }
     
     // Offsets for items that are not Main or Side
@@ -125,7 +125,7 @@ static CGFloat const kQuarterSpace = kHalfSpace / 2;
             widthOffset = (column == 1) ? kFullSpace : kHalfSpace;
             
             return CGRectMake((self.secondaryPhotoSize.width + xOffset) * column,
-                              (self.secondaryPhotoSize.height + kHalfSpace) * row,
+                              (self.secondaryPhotoSize.height + kHalfSpace) * self.row,
                               self.secondaryPhotoSize.width - widthOffset,
                               self.secondaryPhotoSize.height - kHalfSpace);
     }
