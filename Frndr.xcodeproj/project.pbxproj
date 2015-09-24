@@ -17,7 +17,6 @@
 		3E10E3101BA16E080075C72D /* FRDPhotoGalleryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E10E30F1BA16E080075C72D /* FRDPhotoGalleryCollectionViewCell.m */; };
 		3E10E3151BA16E780075C72D /* FRDPhotoGalleryLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E10E3141BA16E780075C72D /* FRDPhotoGalleryLayout.m */; };
 		3E1D9BE61BB3CE34003A1E5C /* FRDPhotoGalleryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1D9BE51BB3CE34003A1E5C /* FRDPhotoGalleryController.m */; settings = {ASSET_TAGS = (); }; };
-		3E1D9BE91BB3CE3B003A1E5C /* FRDPhotoGalleryCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1D9BE81BB3CE3B003A1E5C /* FRDPhotoGalleryCollectionController.m */; settings = {ASSET_TAGS = (); }; };
 		3E1D9BED1BB3CE46003A1E5C /* FRDPreviewGalleryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1D9BEB1BB3CE46003A1E5C /* FRDPreviewGalleryController.m */; settings = {ASSET_TAGS = (); }; };
 		3E1D9BEE1BB3CE46003A1E5C /* FRDPreviewGalleryController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E1D9BEC1BB3CE46003A1E5C /* FRDPreviewGalleryController.xib */; settings = {ASSET_TAGS = (); }; };
 		3E3D41591BA6A5A90021026A /* FRDAutologinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D41581BA6A5A90021026A /* FRDAutologinViewController.m */; };
@@ -169,8 +168,6 @@
 		3E10E3141BA16E780075C72D /* FRDPhotoGalleryLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPhotoGalleryLayout.m; path = Classes/Layouts/PhotoGalleryCollectionLayout/FRDPhotoGalleryLayout.m; sourceTree = "<group>"; };
 		3E1D9BE41BB3CE34003A1E5C /* FRDPhotoGalleryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPhotoGalleryController.h; path = Classes/MVC/Controllers/PhotoGalleryController/FRDPhotoGalleryController.h; sourceTree = "<group>"; };
 		3E1D9BE51BB3CE34003A1E5C /* FRDPhotoGalleryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPhotoGalleryController.m; path = Classes/MVC/Controllers/PhotoGalleryController/FRDPhotoGalleryController.m; sourceTree = "<group>"; };
-		3E1D9BE71BB3CE3B003A1E5C /* FRDPhotoGalleryCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPhotoGalleryCollectionController.h; path = Classes/MVC/Controllers/PhotoGalleryController/PhotoGalleryCollectionController/FRDPhotoGalleryCollectionController.h; sourceTree = "<group>"; };
-		3E1D9BE81BB3CE3B003A1E5C /* FRDPhotoGalleryCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPhotoGalleryCollectionController.m; path = Classes/MVC/Controllers/PhotoGalleryController/PhotoGalleryCollectionController/FRDPhotoGalleryCollectionController.m; sourceTree = "<group>"; };
 		3E1D9BEA1BB3CE46003A1E5C /* FRDPreviewGalleryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPreviewGalleryController.h; path = Classes/MVC/Controllers/PhotoGalleryController/PreviewGalleryController/FRDPreviewGalleryController.h; sourceTree = "<group>"; };
 		3E1D9BEB1BB3CE46003A1E5C /* FRDPreviewGalleryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPreviewGalleryController.m; path = Classes/MVC/Controllers/PhotoGalleryController/PreviewGalleryController/FRDPreviewGalleryController.m; sourceTree = "<group>"; };
 		3E1D9BEC1BB3CE46003A1E5C /* FRDPreviewGalleryController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDPreviewGalleryController.xib; path = Classes/MVC/Controllers/PhotoGalleryController/PreviewGalleryController/FRDPreviewGalleryController.xib; sourceTree = "<group>"; };
@@ -475,15 +472,6 @@
 			name = ApplicationSettingsTableContainer;
 			sourceTree = "<group>";
 		};
-		3E10E3051BA15A800075C72D /* PhotoGalleryCollectionController */ = {
-			isa = PBXGroup;
-			children = (
-				3E1D9BE71BB3CE3B003A1E5C /* FRDPhotoGalleryCollectionController.h */,
-				3E1D9BE81BB3CE3B003A1E5C /* FRDPhotoGalleryCollectionController.m */,
-			);
-			name = PhotoGalleryCollectionController;
-			sourceTree = "<group>";
-		};
 		3E10E30D1BA16DEE0075C72D /* PhotoGalleryCollectionCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -568,7 +556,6 @@
 			children = (
 				3E1D9BE41BB3CE34003A1E5C /* FRDPhotoGalleryController.h */,
 				3E1D9BE51BB3CE34003A1E5C /* FRDPhotoGalleryController.m */,
-				3E10E3051BA15A800075C72D /* PhotoGalleryCollectionController */,
 				58EBC6AD1BAC1638003CD598 /* PreviewGalleryController */,
 			);
 			name = PhotoGalleryController;
@@ -2044,7 +2031,6 @@
 				58BC77141B9ECA6700BB8B5A /* UIView+ConfigureAnchorPoint.m in Sources */,
 				58C28FE81BAA8F850099ABE4 /* FRDFriend.m in Sources */,
 				58CD17F21BA19BF40021D948 /* TTTAttributedLabel.m in Sources */,
-				3E1D9BE91BB3CE3B003A1E5C /* FRDPhotoGalleryCollectionController.m in Sources */,
 				3E941A4F1BB18E2000F034E6 /* UIImage+ColoredImage.m in Sources */,
 				58C290021BAAC7110099ABE4 /* FRDFriendOverlayView.m in Sources */,
 				58ED54E81BB1641100F9B378 /* FRDGetUserByIdRequest.m in Sources */,

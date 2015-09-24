@@ -10,7 +10,11 @@
 
 #import "FRDSerialViewConstructor.h"
 
-@interface FRDPhotoGalleryController ()
+#import "FRDPhotoGalleryCollectionViewCell.h"
+
+@interface FRDPhotoGalleryController () <UICollectionViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
@@ -36,6 +40,20 @@
     
     //set right bar button item
     self.navigationItem.rightBarButtonItem = rightIcon;
+}
+
+#pragma mark - UICollectionViewDataSource
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 30;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    FRDPhotoGalleryCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([FRDPhotoGalleryCollectionViewCell class]) forIndexPath:indexPath];
+    cell.imageView.image = [UIImage imageNamed:@"Tutorial01"];
+    return cell;
 }
 
 @end
