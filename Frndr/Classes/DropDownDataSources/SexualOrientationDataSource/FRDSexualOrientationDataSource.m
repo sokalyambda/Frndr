@@ -10,6 +10,10 @@
 
 #import "FRDDropDownCell.h"
 
+#import "FRDSexualOrientation.h"
+
+static NSString *const kSexualOrientationsPlist = @"SexualOrientations";
+
 @interface FRDSexualOrientationDataSource ()
 
 @property (nonatomic) NSArray *sexualOrientations;
@@ -23,7 +27,7 @@
 - (NSArray *)sexualOrientations
 {
     if (!_sexualOrientations) {
-        _sexualOrientations = @[@"GETERO", @"BI"];
+        _sexualOrientations = [self createOrientationItemsArray];
     }
     return _sexualOrientations;
 }
@@ -43,7 +47,22 @@
 - (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath
 {
     FRDDropDownCell *dropDownCell = (FRDDropDownCell *)cell;
-    dropDownCell.textLabel.text = self.sexualOrientations[indexPath.row];
+    FRDSexualOrientation *currentOrientation = self.sexualOrientations[indexPath.row];
+    dropDownCell.textLabel.text = currentOrientation.orientationString;
+}
+
+#pragma mark - Actions
+
+- (NSArray *)createOrientationItemsArray
+{
+    NSArray *orientationTitles = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:kSexualOrientationsPlist ofType:@"plist"]];
+    NSMutableArray *array = [NSMutableArray array];
+    for (NSString *title in orientationTitles) {
+        FRDSexualOrientation *orientation = [FRDSexualOrientation orientationWithOrientationString:title];
+        [array addObject:orientation];
+    }
+    
+    return array;
 }
 
 @end

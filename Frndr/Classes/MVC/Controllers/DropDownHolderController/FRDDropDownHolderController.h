@@ -8,8 +8,13 @@
 
 #import "FRDBaseViewController.h"
 
+@class FRDSexualOrientation;
+
 @interface FRDDropDownHolderController : FRDBaseViewController
 
 @property (nonatomic) UIView *viewForDisplaying;
+
+@property (nonatomic) BOOL smoker;
+@property (nonatomic) FRDSexualOrientation *chosenOrientation;
 
 @end

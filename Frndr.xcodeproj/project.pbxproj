@@ -111,6 +111,7 @@
 		58DE5B411BB5415A0020A34C /* FRDFacebookProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE5B401BB5415A0020A34C /* FRDFacebookProfile.m */; settings = {ASSET_TAGS = (); }; };
 		58DE5B441BB541E10020A34C /* FRDRelationshipItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE5B431BB541E10020A34C /* FRDRelationshipItem.m */; settings = {ASSET_TAGS = (); }; };
 		58DE5B471BB541EC0020A34C /* FRDSexualOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE5B461BB541EC0020A34C /* FRDSexualOrientation.m */; settings = {ASSET_TAGS = (); }; };
+		58DE5B4A1BB5956D0020A34C /* SexualOrientations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58DE5B491BB5956D0020A34C /* SexualOrientations.plist */; settings = {ASSET_TAGS = (); }; };
 		58ED54CE1BB1472100F9B378 /* FRDSignInWithFacebookRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ED54CD1BB1472100F9B378 /* FRDSignInWithFacebookRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58ED54D21BB14C5E00F9B378 /* FRDLocationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ED54D11BB14C5E00F9B378 /* FRDLocationObserver.m */; settings = {ASSET_TAGS = (); }; };
 		58ED54D41BB14FD500F9B378 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58ED54D31BB14FD400F9B378 /* CoreLocation.framework */; };
@@ -344,6 +345,7 @@
 		58DE5B431BB541E10020A34C /* FRDRelationshipItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRelationshipItem.m; path = Classes/MVC/Models/RelationshipItem/FRDRelationshipItem.m; sourceTree = "<group>"; };
 		58DE5B451BB541EC0020A34C /* FRDSexualOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSexualOrientation.h; path = Classes/MVC/Models/SexualOrientation/FRDSexualOrientation.h; sourceTree = "<group>"; };
 		58DE5B461BB541EC0020A34C /* FRDSexualOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSexualOrientation.m; path = Classes/MVC/Models/SexualOrientation/FRDSexualOrientation.m; sourceTree = "<group>"; };
+		58DE5B491BB5956D0020A34C /* SexualOrientations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SexualOrientations.plist; path = Classes/MVC/Models/SexualOrientation/SexualOrientations.plist; sourceTree = "<group>"; };
 		58ED54CC1BB1472100F9B378 /* FRDSignInWithFacebookRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSignInWithFacebookRequest.h; path = "Classes/Server APIs/API/Requests/AuthorizationRequests/SignInWithFacebookRequest/FRDSignInWithFacebookRequest.h"; sourceTree = "<group>"; };
 		58ED54CD1BB1472100F9B378 /* FRDSignInWithFacebookRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSignInWithFacebookRequest.m; path = "Classes/Server APIs/API/Requests/AuthorizationRequests/SignInWithFacebookRequest/FRDSignInWithFacebookRequest.m"; sourceTree = "<group>"; };
 		58ED54D01BB14C5E00F9B378 /* FRDLocationObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDLocationObserver.h; path = Classes/Managers/LocationObserver/FRDLocationObserver.h; sourceTree = "<group>"; };
@@ -738,6 +740,7 @@
 			children = (
 				587B3A7B1BA7F7C30098154F /* FRDSexualOrientationDataSource.h */,
 				587B3A7C1BA7F7C30098154F /* FRDSexualOrientationDataSource.m */,
+				58DE5B491BB5956D0020A34C /* SexualOrientations.plist */,
 			);
 			name = SexualOrientationDataSource;
 			sourceTree = "<group>";
@@ -1940,6 +1943,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				587B3A8F1BA814C40098154F /* FRDRelationshipStatusController.xib in Resources */,
+				58DE5B4A1BB5956D0020A34C /* SexualOrientations.plist in Resources */,
 				3E941A491BB1815D00F034E6 /* FRDPersonalBioTableHeader.xib in Resources */,
 				58D5A16C1BA329E500D552CF /* FRDNavigationTitleView.xib in Resources */,
 				58C28C501BA99A6E009D1AC4 /* FRDFriendDragableView.xib in Resources */,

@@ -14,6 +14,8 @@
 
 #import "UIView+MakeFromXib.h"
 
+#import "FRDSexualOrientation.h"
+
 @interface FRDDropDownHolderController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *smokerLabel;
@@ -45,9 +47,11 @@
     UIView *tapView = tap.view;
     FRDBaseDropDownDataSource *smokerDataSource = [FRDBaseDropDownDataSource dataSourceWithType:FRDDataSourceTypeSmoker];
     WEAK_SELF;
-    [self.dropDownList dropDownTableBecomeActiveInView:self.viewForDisplaying fromAnchorView:tapView withDataSource:smokerDataSource withCompletion:^(FRDDropDownTableView *table, NSString *chosenValue) {
-        NSLog(@"chosen value %@", chosenValue);
-        weakSelf.smokerLabel.text = chosenValue;
+    [self.dropDownList dropDownTableBecomeActiveInView:self.viewForDisplaying fromAnchorView:tapView withDataSource:smokerDataSource withCompletion:^(FRDDropDownTableView *table, id chosenValue) {
+        if ([chosenValue isKindOfClass:[NSString class]]) {
+            weakSelf.smokerLabel.text = chosenValue;
+            weakSelf.smoker = [chosenValue isEqualToString:@"SMOKER"] ? YES : NO;
+        }
     }];
 }
 
@@ -56,9 +60,12 @@
     UIView *tapView = tap.view;
     FRDBaseDropDownDataSource *smokerDataSource = [FRDBaseDropDownDataSource dataSourceWithType:FRDDataSourceTypeSexualOrientation];
     WEAK_SELF;
-    [self.dropDownList dropDownTableBecomeActiveInView:self.viewForDisplaying fromAnchorView:tapView withDataSource:smokerDataSource withCompletion:^(FRDDropDownTableView *table, NSString *chosenValue) {
-        NSLog(@"chosen value %@", chosenValue);
-        weakSelf.sexualOrientationLabel.text = chosenValue;
+    [self.dropDownList dropDownTableBecomeActiveInView:self.viewForDisplaying fromAnchorView:tapView withDataSource:smokerDataSource withCompletion:^(FRDDropDownTableView *table, id chosenValue) {
+        if ([chosenValue isKindOfClass:[FRDSexualOrientation class]]) {
+            FRDSexualOrientation *chosenOrientation = (FRDSexualOrientation *)chosenValue;
+            weakSelf.sexualOrientationLabel.text = chosenOrientation.orientationString;
+            weakSelf.chosenOrientation = chosenOrientation;
+        }
     }];
 }
 

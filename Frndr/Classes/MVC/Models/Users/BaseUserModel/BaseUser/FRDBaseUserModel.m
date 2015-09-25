@@ -39,7 +39,7 @@ static NSString *const kUserId              = @"userId";
         _jobTitle = response[kJobTitle];
         _thingsLovedMost = response[kThingsLovedMost];
         _fullName = response[kName];
-        _sexualOrientation = [[FRDSexualOrientation alloc] initWithOrientationString:response[kSexualOrientation]];
+        _sexualOrientation = [FRDSexualOrientation orientationWithOrientationString:response[kSexualOrientation]];
         /*
          _relationshipStatus = [[FRDRelationshipItem alloc] init];
          */

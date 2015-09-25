@@ -69,6 +69,27 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
 
 #pragma mark - Actions
 
+- (IBAction)updateProfileClick:(id)sender
+{
+    
+}
+
+/**
+ *  Set profile information to fields
+ */
+- (void)setProfileInformationToFields
+{
+    
+}
+
+/**
+ *  Get profile information from fields
+ */
+- (void)getProfileInformationFromFields
+{
+    
+}
+
 - (IBAction)managePhotosPress:(id)sender
 {
     FRDPhotoGalleryController *photoGalleryController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPhotoGalleryController class])];

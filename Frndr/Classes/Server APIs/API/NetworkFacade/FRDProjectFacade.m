@@ -21,8 +21,8 @@
 
 static FRDSessionManager *sharedHTTPClient = nil;
 
-NSString *baseURLString = @"http://192.168.88.55:8859/";
-//NSString *baseURLString = @"http://134.249.164.53:8859/"
+//NSString *baseURLString = @"http://192.168.88.55:8859/";
+NSString *baseURLString = @"http://134.249.164.53:8859/";
 
 @implementation FRDProjectFacade
 

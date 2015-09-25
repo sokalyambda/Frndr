@@ -2441,6 +2441,9 @@
                                                         <include reference="dLn-lq-7d2"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <action selector="saveSettingsClick:" destination="3DG-li-SHm" eventType="touchUpInside" id="ChD-d2-waM"/>
+                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="csk-97-CcD" customClass="FRDRangeSlider">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -2901,6 +2904,9 @@
                                                         <include reference="1AG-KI-zci"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <action selector="updateProfileClick:" destination="wfm-Av-6BD" eventType="touchUpInside" id="Kg5-ut-wXO"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
