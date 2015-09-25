@@ -12,6 +12,12 @@ typedef NS_ENUM(NSInteger, FRDRangeSliderMode)
     FRDRangeSliderModeRange
 };
 
+typedef struct
+{
+    CGFloat location;
+    CGFloat length;
+} FRDRange;
+
 @interface FRDRangeSlider : UIControl
 
 @property (nonatomic) FRDRangeSliderMode mode;
@@ -36,12 +42,22 @@ typedef NS_ENUM(NSInteger, FRDRangeSliderMode)
  */
 @property (nonatomic) CGFloat tracksHeight;
 
+
 - (void)setThumbImage:(UIImage *)image;
 - (void)setTrackImage:(UIImage *)image;
 - (void)setInRangeTrackImage:(UIImage *)image;
 
-- (void)updateWithMinimumValue:(CGFloat)minimum andMaximumValue:(CGFloat)maximum;
-- (void)updateWithMinimumValue:(CGFloat)minimum;
-- (void)updateWithMaximumValue:(CGFloat)maximum;
+- (void)setupWithMode:(FRDRangeSliderMode)mode
+           validRange:(NSRange)validRange
+         minimumRange:(NSInteger)minimumRange
+    startMinimumValue:(NSInteger)startMinimum
+    startMaximumValue:(NSInteger)startMaximum;
+
+- (void)setupWithMode:(FRDRangeSliderMode)mode
+           validRange:(FRDRange)validRange
+         minimumRange:(CGFloat)minimumRange
+                 step:(CGFloat)step
+    startMinimumValue:(CGFloat)startMinimum
+    startMaximumValue:(CGFloat)startMaximum;
 
 @end

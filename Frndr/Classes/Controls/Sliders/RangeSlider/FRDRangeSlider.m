@@ -18,8 +18,12 @@
 @property (nonatomic) UIImageView *inRangeTrack;
 
 @property (nonatomic) id trackedSlider;
-
 @property (nonatomic) BOOL isInitialized;
+
+@property (nonatomic) FRDRange validRange;
+@property (nonatomic) CGFloat step;
+
+@property (readonly, nonatomic) CGFloat frameWidthMinusThumbsFrames;
 
 @end
 
@@ -40,9 +44,12 @@
         return;
     }
     
-    _minimumValue = 0.0;
-    _maximumValue = 1.0;
-    _minimumRange = 0.0;
+    _minimumValue = 0.f;
+    _maximumValue = 1.f;
+    _minimumRange = 0.f;
+    _validRange.location = 0.f;
+    _validRange.length = 1.f;
+    _step = 0.1;
     
     _outRangeTrack = [[UIImageView alloc] initWithFrame:CGRectMake(0,
                                                                    CGRectGetMidY(self.frame),
@@ -84,6 +91,11 @@
 }
 
 #pragma mark - Setters
+
+- (CGFloat)frameWidthMinusThumbsFrames
+{
+    return CGRectGetWidth(self.frame) - CGRectGetWidth(self.leftThumb.frame) - CGRectGetWidth(self.rightThumb.frame);
+}
 
 - (void)setMode:(FRDRangeSliderMode)mode
 {
@@ -173,50 +185,59 @@
     [self updateInRangeTrack];
 }
 
-- (void)setMinimumRange:(CGFloat)length
+- (void)setMinimumRange:(CGFloat)minimumRange
 {
-    _minimumRange = MIN(1.0, MAX(length, 0.0)); //length must be between 0 and 1
-    [self updateInRangeTrack];
+    _minimumRange = minimumRange;
 }
 
 #pragma mark - Actions
 
-- (void)updateWithMinimumValue:(CGFloat)minimum andMaximumValue:(CGFloat)maximum
+- (void)setupWithMode:(FRDRangeSliderMode)mode validRange:(FRDRange)validRange minimumRange:(CGFloat)minimumRange
+                 step:(CGFloat)step startMinimumValue:(CGFloat)startMinimum startMaximumValue:(CGFloat)startMaximum
 {
-    NSLog(@"Max: %f, Min: %f", maximum, minimum);
-    minimum = MAX(0, minimum);
-    minimum = MIN(minimum, maximum);
+    CGFloat validMaxValue = validRange.location + validRange.length;
     
-    maximum = MIN(maximum, 1.0);
-    maximum = MAX(minimum, maximum);
+    self.mode = mode;
+    self.minimumRange = minimumRange;
+    self.validRange = validRange;
+    self.step = step;
     
+    // Clip start minimum between lowest possible value and start maximum
+    startMinimum = MAX(validRange.location, startMinimum);
+    startMinimum = MIN(startMinimum, startMaximum);
     
+    // Clip start maximum between biggest possible value and start minimum
+    startMaximum = MIN(startMaximum, validMaxValue);
+    startMaximum = MAX(startMaximum, startMinimum);
     
-    _minimumValue = minimum;
-    _maximumValue = maximum;
+    self.minimumValue = startMinimum;
+    self.maximumValue = startMaximum;
     
-    self.leftThumb.frame = CGRectMake(self.minimumValue * CGRectGetWidth(self.frame),
+    // Normalize
+    startMinimum = (startMinimum - validRange.location) / validRange.length;
+    startMaximum = (startMaximum - validRange.location) / validRange.length;
+    
+    self.leftThumb.frame = CGRectMake(startMinimum * CGRectGetWidth(self.frame),
                                       CGRectGetMinY(self.leftThumb.frame),
                                       CGRectGetWidth(self.leftThumb.frame),
                                       CGRectGetHeight(self.leftThumb.frame));
     
-    self.rightThumb.frame = CGRectMake(self.maximumValue * CGRectGetWidth(self.frame),
+    self.rightThumb.frame = CGRectMake(startMaximum * CGRectGetWidth(self.frame),
                                        CGRectGetMinY(self.rightThumb.frame),
                                        CGRectGetWidth(self.rightThumb.frame),
                                        CGRectGetHeight(self.rightThumb.frame));
     
-    [self calculateValues];
     [self updateInRangeTrack];
+    [self updateOutRangeTrack];
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
-- (void)updateWithMinimumValue:(CGFloat)minimum
+- (void)setupWithMode:(FRDRangeSliderMode)mode validRange:(NSRange)validRange minimumRange:(NSInteger)minimumRange
+    startMinimumValue:(NSInteger)startMinimum startMaximumValue:(NSInteger)startMaximum
 {
-    [self updateWithMinimumValue:minimum andMaximumValue:self.maximumValue];
-}
-
-- (void)updateWithMaximumValue:(CGFloat)maximum
-{
-    [self updateWithMinimumValue:self.minimumValue andMaximumValue:maximum];
+    FRDRange vRange = { (CGFloat)validRange.location, (CGFloat)validRange.length };
+    [self setupWithMode:mode validRange:vRange minimumRange:(CGFloat)minimumRange
+                   step:1.f startMinimumValue:(CGFloat)startMinimum startMaximumValue:(CGFloat)startMaximum];
 }
 
 - (void)updateInRangeTrack
@@ -229,9 +250,9 @@
 
 - (void)updateOutRangeTrack
 {
-    self.outRangeTrack.frame = CGRectMake(CGRectGetMidX(self.leftThumb.frame),
+    self.outRangeTrack.frame = CGRectMake(CGRectGetMidX(self.leftThumb.bounds),
                                           CGRectGetMidY(self.bounds) - self.tracksHeight / 2.0,
-                                          CGRectGetMidX(self.rightThumb.frame) - CGRectGetMidX(self.leftThumb.frame),
+                                          CGRectGetWidth(self.frame) - CGRectGetWidth(self.rightThumb.frame),
                                           self.tracksHeight);
 }
 
@@ -255,22 +276,24 @@
 
     switch (self.mode) {
         case FRDRangeSliderModeSingleThumb: {
-            divident = (CGRectGetMidX(self.rightThumb.frame) - CGRectGetWidth(self.rightThumb.frame) / 2.0);
+            divident = (CGRectGetMidX(self.rightThumb.frame) - CGRectGetMidX(self.rightThumb.bounds));
             denominator = CGRectGetWidth(self.frame) - CGRectGetWidth(self.rightThumb.frame);
             break;
         }
             
         case FRDRangeSliderModeRange: {
             divident = (CGRectGetMinX(self.rightThumb.frame) - CGRectGetWidth(self.rightThumb.frame));
-            denominator = CGRectGetWidth(self.frame) - CGRectGetWidth(self.leftThumb.frame) - CGRectGetWidth(self.rightThumb.frame);
+            denominator = self.frameWidthMinusThumbsFrames;
             break;
         }
     }
     
     if (self.trackedSlider == self.leftThumb) {
-        self.minimumValue = (CGRectGetMaxX(self.leftThumb.frame) - CGRectGetWidth(self.leftThumb.frame)) / denominator;
+        self.minimumValue = (CGRectGetMaxX(self.leftThumb.frame) - CGRectGetWidth(self.leftThumb.frame)) / denominator * self.validRange.length + self.validRange.location;
+        NSLog(@"Minimum value: %f", self.minimumValue);
     } else {
-        self.maximumValue = divident / denominator;
+        self.maximumValue = divident / denominator * self.validRange.length + self.validRange.location;
+        NSLog(@"MAximum value: %f", self.maximumValue);
     }
 }
 
@@ -291,7 +314,8 @@
 {
     float deltaX = [touch locationInView:self].x - [touch previousLocationInView:self].x;
     
-    CGFloat minimumDistanceBetweenThumbs = CGRectGetWidth(self.frame) * self.minimumRange;
+    CGFloat normilizedMinimumRange = self.minimumRange / self.validRange.length;
+    CGFloat minimumDistanceBetweenThumbs = CGRectGetWidth(self.frame) * normilizedMinimumRange;
     
     if (self.trackedSlider == self.leftThumb) {
         float newX = MAX(0, CGRectGetMinX(self.leftThumb.frame) + deltaX);
@@ -305,6 +329,7 @@
             self.leftThumb.frame = minSliderNewRect;
         } else {
             // This thumb will 'stick' to right thumb
+            
             self.leftThumb.frame = CGRectMake(CGRectGetMinX(self.rightThumb.frame) - CGRectGetWidth(self.leftThumb.frame) - minimumDistanceBetweenThumbs,
                                               CGRectGetMinY(self.leftThumb.frame),
                                               CGRectGetWidth(self.leftThumb.frame),
@@ -322,7 +347,7 @@
                                              CGRectGetWidth(self.rightThumb.frame),
                                              CGRectGetHeight(self.rightThumb.frame));
 
-        if (newX - minimumDistanceBetweenThumbs > CGRectGetMaxX(self.leftThumb.frame) || self.mode == FRDRangeSliderModeSingleThumb) {
+        if (newX - minimumDistanceBetweenThumbs >= CGRectGetMaxX(self.leftThumb.frame) || self.mode == FRDRangeSliderModeSingleThumb) {
             self.rightThumb.frame = maxSliderNewRect;
         } else {
             // This thumb will 'stick' to left thumb
