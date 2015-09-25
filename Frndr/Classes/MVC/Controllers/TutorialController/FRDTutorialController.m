@@ -113,6 +113,18 @@
         contentSize.width *= self.contentImages.count;
         self.tutorialScrollView.contentSize = contentSize;
     }
+    
+    [self showBottomViews];
+    
+}
+
+/**
+ *  By default these views are hidden. It helps avoid incorrect frames at beginning of animation
+ */
+- (void)showBottomViews
+{
+    [self.facebookButton setHidden:NO];
+    [self.termsLabel setHidden:NO];
 }
 
 /**
@@ -139,7 +151,7 @@
  */
 - (void)authorizeWithFacebookAction
 {
-    /*
+    
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [FRDFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
@@ -170,10 +182,6 @@
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
      }];
-     */
-    
-    //redirect to search friends
-    [FRDRedirectionHelper redirectToMainContainerControllerWithNavigationController:(FRDBaseNavigationController *)self.navigationController andDelegate:self];
 }
 
 /**
