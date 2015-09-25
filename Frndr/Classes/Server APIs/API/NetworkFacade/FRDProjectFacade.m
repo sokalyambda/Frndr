@@ -164,8 +164,8 @@ NSString *baseURLString = @"http://192.168.88.55:8859/";
 
 #pragma mark - Requests Builder
 
-+ (FRDNetworkOperation *)updatedProfile:(FRDFacebookProfile *)updatedProfile
-                                        onSuccess:(void (^)(FRDFacebookProfile *confirmedProfile))success
++ (FRDNetworkOperation *)updatedProfile:(FRDCurrentUserProfile *)updatedProfile
+                                        onSuccess:(void (^)(FRDCurrentUserProfile *confirmedProfile))success
 
                                         onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
 {

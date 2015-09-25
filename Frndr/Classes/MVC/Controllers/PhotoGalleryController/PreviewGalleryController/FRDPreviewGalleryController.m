@@ -40,9 +40,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-//    return self.photos.count;
-#warning temporary!
-    return 10.f;
+    return self.photos.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -53,7 +51,14 @@
         cell = [FRDPreviewPhotoCell makeFromXib];
     }
     
-    cell.photoImageView.image = [UIImage imageNamed:@"Tutorial01"];
+    NSURL *currentPhotoURL = self.photos[indexPath.row];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:cell animated:YES];
+    hud.color = [[UIColor clearColor] copy];
+    hud.activityIndicatorColor = [UIColor blackColor];
+    
+    [cell.photoImageView sd_setImageWithURL:currentPhotoURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [MBProgressHUD hideAllHUDsForView:cell animated:YES];
+    }];
     
     return cell;
 }

@@ -34,12 +34,10 @@
 		3ED072321BA0370C0091B7E4 /* FRDPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED072311BA0370C0091B7E4 /* FRDPreferencesController.m */; };
 		3ED072361BA048460091B7E4 /* FRDPreferencesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED072351BA048460091B7E4 /* FRDPreferencesTableViewController.m */; };
 		5812BD0D1BB3E87300BCB90B /* FRDRedirectionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5812BD0C1BB3E87300BCB90B /* FRDRedirectionHelper.m */; settings = {ASSET_TAGS = (); }; };
-		581661CF1BB2DEEC00371967 /* FRDNearestUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 581661CE1BB2DEEC00371967 /* FRDNearestUser.m */; settings = {ASSET_TAGS = (); }; };
 		581B9D3B1B9ED6090080393B /* FRDStorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D3A1B9ED6090080393B /* FRDStorageManager.m */; };
 		581B9D3E1B9ED67B0080393B /* FRDPushNotifiactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D3D1B9ED67B0080393B /* FRDPushNotifiactionService.m */; };
 		581B9D411B9ED71A0080393B /* FRDReachabilityHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D401B9ED71A0080393B /* FRDReachabilityHelper.m */; };
 		581B9D441B9ED7FE0080393B /* FRDFacebookService.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D431B9ED7FE0080393B /* FRDFacebookService.m */; };
-		581B9D481B9ED8D30080393B /* FRDFacebookProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D471B9ED8D30080393B /* FRDFacebookProfile.m */; };
 		581B9D4F1B9EDC350080393B /* FRDSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D4E1B9EDC350080393B /* FRDSessionManager.m */; };
 		581B9D531B9EDC740080393B /* FRDNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D521B9EDC740080393B /* FRDNetworkRequest.m */; };
 		581B9D561B9EDCA00080393B /* FRDNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D551B9EDCA00080393B /* FRDNetworkOperation.m */; };
@@ -57,7 +55,6 @@
 		587B3A8F1BA814C40098154F /* FRDRelationshipStatusController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587B3A8D1BA814C40098154F /* FRDRelationshipStatusController.xib */; };
 		587B3A941BA815850098154F /* FRDRelationshipCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A921BA815850098154F /* FRDRelationshipCollectionCell.m */; };
 		587B3A951BA815850098154F /* FRDRelationshipCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587B3A931BA815850098154F /* FRDRelationshipCollectionCell.xib */; };
-		587B3A991BA817440098154F /* FRDRelationshipItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A981BA817440098154F /* FRDRelationshipItem.m */; };
 		5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */; };
 		58BC76A11B9EB6B500BB8B5A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A01B9EB6B500BB8B5A /* main.m */; };
 		58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A31B9EB6B500BB8B5A /* AppDelegate.m */; };
@@ -91,7 +88,6 @@
 		58C28C3D1BA9527A009D1AC4 /* FRDSearchFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C28C3C1BA9527A009D1AC4 /* FRDSearchFriendsController.m */; };
 		58C28C4E1BA999F2009D1AC4 /* FRDFriendDragableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C28C4D1BA999F2009D1AC4 /* FRDFriendDragableView.m */; };
 		58C28C501BA99A6E009D1AC4 /* FRDFriendDragableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58C28C4F1BA99A6E009D1AC4 /* FRDFriendDragableView.xib */; };
-		58C28FE81BAA8F850099ABE4 /* FRDFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C28FE71BAA8F850099ABE4 /* FRDFriend.m */; };
 		58C28FEC1BAA91670099ABE4 /* FRDFriendDragableParentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C28FEB1BAA91670099ABE4 /* FRDFriendDragableParentView.m */; };
 		58C28FF81BAAC6800099ABE4 /* ZLPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C28FF51BAAC6800099ABE4 /* ZLPanGestureRecognizer.m */; };
 		58C28FF91BAAC6800099ABE4 /* ZLSwipeableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C28FF71BAAC6800099ABE4 /* ZLSwipeableView.m */; };
@@ -108,6 +104,13 @@
 		58CD9AC41BAFF29F00A7CADB /* FRDBaseContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD9AC31BAFF29F00A7CADB /* FRDBaseContentController.m */; settings = {ASSET_TAGS = (); }; };
 		58D5A16A1BA329C800D552CF /* FRDNavigationTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D5A1691BA329C800D552CF /* FRDNavigationTitleView.m */; };
 		58D5A16C1BA329E500D552CF /* FRDNavigationTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58D5A16B1BA329E500D552CF /* FRDNavigationTitleView.xib */; };
+		58DE5B351BB541020020A34C /* FRDBaseUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE5B341BB541020020A34C /* FRDBaseUserModel.m */; settings = {ASSET_TAGS = (); }; };
+		58DE5B381BB541160020A34C /* FRDFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE5B371BB541160020A34C /* FRDFriend.m */; settings = {ASSET_TAGS = (); }; };
+		58DE5B3B1BB541280020A34C /* FRDNearestUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE5B3A1BB541280020A34C /* FRDNearestUser.m */; settings = {ASSET_TAGS = (); }; };
+		58DE5B3E1BB541480020A34C /* FRDCurrentUserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE5B3D1BB541480020A34C /* FRDCurrentUserProfile.m */; settings = {ASSET_TAGS = (); }; };
+		58DE5B411BB5415A0020A34C /* FRDFacebookProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE5B401BB5415A0020A34C /* FRDFacebookProfile.m */; settings = {ASSET_TAGS = (); }; };
+		58DE5B441BB541E10020A34C /* FRDRelationshipItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE5B431BB541E10020A34C /* FRDRelationshipItem.m */; settings = {ASSET_TAGS = (); }; };
+		58DE5B471BB541EC0020A34C /* FRDSexualOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE5B461BB541EC0020A34C /* FRDSexualOrientation.m */; settings = {ASSET_TAGS = (); }; };
 		58ED54CE1BB1472100F9B378 /* FRDSignInWithFacebookRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ED54CD1BB1472100F9B378 /* FRDSignInWithFacebookRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58ED54D21BB14C5E00F9B378 /* FRDLocationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ED54D11BB14C5E00F9B378 /* FRDLocationObserver.m */; settings = {ASSET_TAGS = (); }; };
 		58ED54D41BB14FD500F9B378 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58ED54D31BB14FD400F9B378 /* CoreLocation.framework */; };
@@ -121,7 +124,6 @@
 		58ED54F41BB1648B00F9B378 /* FRDUpdateProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ED54F31BB1648B00F9B378 /* FRDUpdateProfileRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58ED54F91BB189EA00F9B378 /* FRDGeolocationDeniedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ED54F71BB189EA00F9B378 /* FRDGeolocationDeniedController.m */; settings = {ASSET_TAGS = (); }; };
 		58ED54FA1BB189EA00F9B378 /* FRDGeolocationDeniedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58ED54F81BB189EA00F9B378 /* FRDGeolocationDeniedController.xib */; settings = {ASSET_TAGS = (); }; };
-		58ED54FE1BB1A4E300F9B378 /* FRDSexualOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ED54FD1BB1A4E300F9B378 /* FRDSexualOrientation.m */; settings = {ASSET_TAGS = (); }; };
 		58ED55021BB1B3E000F9B378 /* FRDSendDeviceDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ED55011BB1B3E000F9B378 /* FRDSendDeviceDataRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58F05ACF1BAC3F730092D767 /* FRDPreviewPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F05ACD1BAC3F730092D767 /* FRDPreviewPhotoCell.m */; };
 		58F05AD01BAC3F730092D767 /* FRDPreviewPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58F05ACE1BAC3F730092D767 /* FRDPreviewPhotoCell.xib */; };
@@ -200,8 +202,6 @@
 		4E086F2D4037543EBA52BEA4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5812BD0B1BB3E87300BCB90B /* FRDRedirectionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRedirectionHelper.h; path = Classes/Utilities/RedirectionHelper/FRDRedirectionHelper.h; sourceTree = "<group>"; };
 		5812BD0C1BB3E87300BCB90B /* FRDRedirectionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRedirectionHelper.m; path = Classes/Utilities/RedirectionHelper/FRDRedirectionHelper.m; sourceTree = "<group>"; };
-		581661CD1BB2DEEC00371967 /* FRDNearestUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDNearestUser.h; path = Classes/MVC/Models/NearestUser/FRDNearestUser.h; sourceTree = "<group>"; };
-		581661CE1BB2DEEC00371967 /* FRDNearestUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDNearestUser.m; path = Classes/MVC/Models/NearestUser/FRDNearestUser.m; sourceTree = "<group>"; };
 		581B9D391B9ED6090080393B /* FRDStorageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDStorageManager.h; path = Classes/Managers/StorageManager/FRDStorageManager.h; sourceTree = "<group>"; };
 		581B9D3A1B9ED6090080393B /* FRDStorageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDStorageManager.m; path = Classes/Managers/StorageManager/FRDStorageManager.m; sourceTree = "<group>"; };
 		581B9D3C1B9ED67B0080393B /* FRDPushNotifiactionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPushNotifiactionService.h; path = Classes/Services/PushNotificationsService/FRDPushNotifiactionService.h; sourceTree = "<group>"; };
@@ -210,8 +210,6 @@
 		581B9D401B9ED71A0080393B /* FRDReachabilityHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDReachabilityHelper.m; path = Classes/Services/ReachabilityHelper/FRDReachabilityHelper.m; sourceTree = "<group>"; };
 		581B9D421B9ED7FE0080393B /* FRDFacebookService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDFacebookService.h; path = Classes/Services/FacebookService/FRDFacebookService.h; sourceTree = "<group>"; };
 		581B9D431B9ED7FE0080393B /* FRDFacebookService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDFacebookService.m; path = Classes/Services/FacebookService/FRDFacebookService.m; sourceTree = "<group>"; };
-		581B9D461B9ED8D30080393B /* FRDFacebookProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDFacebookProfile.h; path = Classes/MVC/Models/FacebookProfile/FRDFacebookProfile.h; sourceTree = "<group>"; };
-		581B9D471B9ED8D30080393B /* FRDFacebookProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDFacebookProfile.m; path = Classes/MVC/Models/FacebookProfile/FRDFacebookProfile.m; sourceTree = "<group>"; };
 		581B9D4D1B9EDC350080393B /* FRDSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSessionManager.h; path = "Classes/Server APIs/API/SessionManager/FRDSessionManager.h"; sourceTree = "<group>"; };
 		581B9D4E1B9EDC350080393B /* FRDSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSessionManager.m; path = "Classes/Server APIs/API/SessionManager/FRDSessionManager.m"; sourceTree = "<group>"; };
 		581B9D511B9EDC740080393B /* FRDNetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDNetworkRequest.h; path = "Classes/Server APIs/API/Requests/BaseNetworkRequest/FRDNetworkRequest.h"; sourceTree = "<group>"; };
@@ -244,8 +242,6 @@
 		587B3A911BA815850098154F /* FRDRelationshipCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRelationshipCollectionCell.h; path = Classes/Cells/UICollectionViewCells/RelationshipCollectionCell/FRDRelationshipCollectionCell.h; sourceTree = "<group>"; };
 		587B3A921BA815850098154F /* FRDRelationshipCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRelationshipCollectionCell.m; path = Classes/Cells/UICollectionViewCells/RelationshipCollectionCell/FRDRelationshipCollectionCell.m; sourceTree = "<group>"; };
 		587B3A931BA815850098154F /* FRDRelationshipCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDRelationshipCollectionCell.xib; path = Classes/Cells/UICollectionViewCells/RelationshipCollectionCell/FRDRelationshipCollectionCell.xib; sourceTree = "<group>"; };
-		587B3A971BA817440098154F /* FRDRelationshipItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRelationshipItem.h; path = Classes/MVC/Models/RelationshipItem/FRDRelationshipItem.h; sourceTree = "<group>"; };
-		587B3A981BA817440098154F /* FRDRelationshipItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRelationshipItem.m; path = Classes/MVC/Models/RelationshipItem/FRDRelationshipItem.m; sourceTree = "<group>"; };
 		5895FD931BA2D55C00079F9D /* FRDCustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDCustomPageControl.h; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.h; sourceTree = "<group>"; };
 		5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDCustomPageControl.m; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.m; sourceTree = "<group>"; };
 		58BC769B1B9EB6B500BB8B5A /* Frndr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frndr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -306,8 +302,6 @@
 		58C28C4C1BA999F2009D1AC4 /* FRDFriendDragableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDFriendDragableView.h; path = Classes/MVC/Views/FriendDragableView/FRDFriendDragableView.h; sourceTree = "<group>"; };
 		58C28C4D1BA999F2009D1AC4 /* FRDFriendDragableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDFriendDragableView.m; path = Classes/MVC/Views/FriendDragableView/FRDFriendDragableView.m; sourceTree = "<group>"; };
 		58C28C4F1BA99A6E009D1AC4 /* FRDFriendDragableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDFriendDragableView.xib; path = Classes/MVC/Views/FriendDragableView/FRDFriendDragableView.xib; sourceTree = "<group>"; };
-		58C28FE61BAA8F850099ABE4 /* FRDFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDFriend.h; path = Classes/MVC/Models/Friend/FRDFriend.h; sourceTree = "<group>"; };
-		58C28FE71BAA8F850099ABE4 /* FRDFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDFriend.m; path = Classes/MVC/Models/Friend/FRDFriend.m; sourceTree = "<group>"; };
 		58C28FEA1BAA91670099ABE4 /* FRDFriendDragableParentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDFriendDragableParentView.h; path = Classes/MVC/Views/FriendDragableView/FriendDragableParentView/FRDFriendDragableParentView.h; sourceTree = "<group>"; };
 		58C28FEB1BAA91670099ABE4 /* FRDFriendDragableParentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDFriendDragableParentView.m; path = Classes/MVC/Views/FriendDragableView/FriendDragableParentView/FRDFriendDragableParentView.m; sourceTree = "<group>"; };
 		58C28FF41BAAC6800099ABE4 /* ZLPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZLPanGestureRecognizer.h; path = Frndr/Classes/Libraries/ZLSwipeableView/ZLPanGestureRecognizer.h; sourceTree = SOURCE_ROOT; };
@@ -336,6 +330,20 @@
 		58D5A1681BA329C800D552CF /* FRDNavigationTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDNavigationTitleView.h; path = Classes/MVC/Views/NavigationTitleView/FRDNavigationTitleView.h; sourceTree = "<group>"; };
 		58D5A1691BA329C800D552CF /* FRDNavigationTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDNavigationTitleView.m; path = Classes/MVC/Views/NavigationTitleView/FRDNavigationTitleView.m; sourceTree = "<group>"; };
 		58D5A16B1BA329E500D552CF /* FRDNavigationTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDNavigationTitleView.xib; path = Classes/MVC/Views/NavigationTitleView/FRDNavigationTitleView.xib; sourceTree = "<group>"; };
+		58DE5B331BB541020020A34C /* FRDBaseUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDBaseUserModel.h; path = Classes/MVC/Models/Users/BaseUserModel/BaseUser/FRDBaseUserModel.h; sourceTree = "<group>"; };
+		58DE5B341BB541020020A34C /* FRDBaseUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDBaseUserModel.m; path = Classes/MVC/Models/Users/BaseUserModel/BaseUser/FRDBaseUserModel.m; sourceTree = "<group>"; };
+		58DE5B361BB541160020A34C /* FRDFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDFriend.h; path = Classes/MVC/Models/Users/BaseUserModel/Friend/FRDFriend.h; sourceTree = "<group>"; };
+		58DE5B371BB541160020A34C /* FRDFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDFriend.m; path = Classes/MVC/Models/Users/BaseUserModel/Friend/FRDFriend.m; sourceTree = "<group>"; };
+		58DE5B391BB541280020A34C /* FRDNearestUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDNearestUser.h; path = Classes/MVC/Models/Users/BaseUserModel/NearestUser/FRDNearestUser.h; sourceTree = "<group>"; };
+		58DE5B3A1BB541280020A34C /* FRDNearestUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDNearestUser.m; path = Classes/MVC/Models/Users/BaseUserModel/NearestUser/FRDNearestUser.m; sourceTree = "<group>"; };
+		58DE5B3C1BB541480020A34C /* FRDCurrentUserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDCurrentUserProfile.h; path = Classes/MVC/Models/Users/BaseUserModel/CurrentUserProfile/FRDCurrentUserProfile.h; sourceTree = "<group>"; };
+		58DE5B3D1BB541480020A34C /* FRDCurrentUserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDCurrentUserProfile.m; path = Classes/MVC/Models/Users/BaseUserModel/CurrentUserProfile/FRDCurrentUserProfile.m; sourceTree = "<group>"; };
+		58DE5B3F1BB5415A0020A34C /* FRDFacebookProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDFacebookProfile.h; path = Classes/MVC/Models/Users/FacebookProfile/FRDFacebookProfile.h; sourceTree = "<group>"; };
+		58DE5B401BB5415A0020A34C /* FRDFacebookProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDFacebookProfile.m; path = Classes/MVC/Models/Users/FacebookProfile/FRDFacebookProfile.m; sourceTree = "<group>"; };
+		58DE5B421BB541E10020A34C /* FRDRelationshipItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRelationshipItem.h; path = Classes/MVC/Models/RelationshipItem/FRDRelationshipItem.h; sourceTree = "<group>"; };
+		58DE5B431BB541E10020A34C /* FRDRelationshipItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRelationshipItem.m; path = Classes/MVC/Models/RelationshipItem/FRDRelationshipItem.m; sourceTree = "<group>"; };
+		58DE5B451BB541EC0020A34C /* FRDSexualOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSexualOrientation.h; path = Classes/MVC/Models/SexualOrientation/FRDSexualOrientation.h; sourceTree = "<group>"; };
+		58DE5B461BB541EC0020A34C /* FRDSexualOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSexualOrientation.m; path = Classes/MVC/Models/SexualOrientation/FRDSexualOrientation.m; sourceTree = "<group>"; };
 		58ED54CC1BB1472100F9B378 /* FRDSignInWithFacebookRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSignInWithFacebookRequest.h; path = "Classes/Server APIs/API/Requests/AuthorizationRequests/SignInWithFacebookRequest/FRDSignInWithFacebookRequest.h"; sourceTree = "<group>"; };
 		58ED54CD1BB1472100F9B378 /* FRDSignInWithFacebookRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSignInWithFacebookRequest.m; path = "Classes/Server APIs/API/Requests/AuthorizationRequests/SignInWithFacebookRequest/FRDSignInWithFacebookRequest.m"; sourceTree = "<group>"; };
 		58ED54D01BB14C5E00F9B378 /* FRDLocationObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDLocationObserver.h; path = Classes/Managers/LocationObserver/FRDLocationObserver.h; sourceTree = "<group>"; };
@@ -360,8 +368,6 @@
 		58ED54F61BB189EA00F9B378 /* FRDGeolocationDeniedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDGeolocationDeniedController.h; path = Classes/MVC/Controllers/GeolocationDeniedController/FRDGeolocationDeniedController.h; sourceTree = "<group>"; };
 		58ED54F71BB189EA00F9B378 /* FRDGeolocationDeniedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDGeolocationDeniedController.m; path = Classes/MVC/Controllers/GeolocationDeniedController/FRDGeolocationDeniedController.m; sourceTree = "<group>"; };
 		58ED54F81BB189EA00F9B378 /* FRDGeolocationDeniedController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDGeolocationDeniedController.xib; path = Classes/MVC/Controllers/GeolocationDeniedController/FRDGeolocationDeniedController.xib; sourceTree = "<group>"; };
-		58ED54FC1BB1A4E300F9B378 /* FRDSexualOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSexualOrientation.h; path = Classes/MVC/Models/FacebookProfile/SexualOrientatiom/FRDSexualOrientation.h; sourceTree = "<group>"; };
-		58ED54FD1BB1A4E300F9B378 /* FRDSexualOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSexualOrientation.m; path = Classes/MVC/Models/FacebookProfile/SexualOrientatiom/FRDSexualOrientation.m; sourceTree = "<group>"; };
 		58ED55001BB1B3E000F9B378 /* FRDSendDeviceDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSendDeviceDataRequest.h; path = "Classes/Server APIs/API/Requests/SendDeviceDataRequest/FRDSendDeviceDataRequest.h"; sourceTree = "<group>"; };
 		58ED55011BB1B3E000F9B378 /* FRDSendDeviceDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSendDeviceDataRequest.m; path = "Classes/Server APIs/API/Requests/SendDeviceDataRequest/FRDSendDeviceDataRequest.m"; sourceTree = "<group>"; };
 		58F05ACC1BAC3F730092D767 /* FRDPreviewPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPreviewPhotoCell.h; path = Classes/Cells/UICollectionViewCells/PreviewPhotoCell/FRDPreviewPhotoCell.h; sourceTree = "<group>"; };
@@ -656,8 +662,8 @@
 		581661CC1BB2DEBC00371967 /* NearestUser */ = {
 			isa = PBXGroup;
 			children = (
-				581661CD1BB2DEEC00371967 /* FRDNearestUser.h */,
-				581661CE1BB2DEEC00371967 /* FRDNearestUser.m */,
+				58DE5B391BB541280020A34C /* FRDNearestUser.h */,
+				58DE5B3A1BB541280020A34C /* FRDNearestUser.m */,
 			);
 			name = NearestUser;
 			sourceTree = "<group>";
@@ -665,9 +671,8 @@
 		581B9D451B9ED8B90080393B /* FacebookProfile */ = {
 			isa = PBXGroup;
 			children = (
-				58ED54FB1BB1A4C600F9B378 /* SexualOrientatiom */,
-				581B9D461B9ED8D30080393B /* FRDFacebookProfile.h */,
-				581B9D471B9ED8D30080393B /* FRDFacebookProfile.m */,
+				58DE5B3F1BB5415A0020A34C /* FRDFacebookProfile.h */,
+				58DE5B401BB5415A0020A34C /* FRDFacebookProfile.m */,
 			);
 			name = FacebookProfile;
 			sourceTree = "<group>";
@@ -779,8 +784,8 @@
 		587B3A961BA817260098154F /* RelationshipItem */ = {
 			isa = PBXGroup;
 			children = (
-				587B3A971BA817440098154F /* FRDRelationshipItem.h */,
-				587B3A981BA817440098154F /* FRDRelationshipItem.m */,
+				58DE5B421BB541E10020A34C /* FRDRelationshipItem.h */,
+				58DE5B431BB541E10020A34C /* FRDRelationshipItem.m */,
 			);
 			name = RelationshipItem;
 			sourceTree = "<group>";
@@ -968,10 +973,9 @@
 		58BC76D01B9EB94C00BB8B5A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				581661CC1BB2DEBC00371967 /* NearestUser */,
-				58C28FE51BAA8F6C0099ABE4 /* Friend */,
 				587B3A961BA817260098154F /* RelationshipItem */,
-				581B9D451B9ED8B90080393B /* FacebookProfile */,
+				58ED54FB1BB1A4C600F9B378 /* SexualOrientatiom */,
+				58DE5B301BB540750020A34C /* Users */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1467,8 +1471,8 @@
 		58C28FE51BAA8F6C0099ABE4 /* Friend */ = {
 			isa = PBXGroup;
 			children = (
-				58C28FE61BAA8F850099ABE4 /* FRDFriend.h */,
-				58C28FE71BAA8F850099ABE4 /* FRDFriend.m */,
+				58DE5B361BB541160020A34C /* FRDFriend.h */,
+				58DE5B371BB541160020A34C /* FRDFriend.m */,
 			);
 			name = Friend;
 			sourceTree = "<group>";
@@ -1597,6 +1601,44 @@
 			name = NavigationTitleView;
 			sourceTree = "<group>";
 		};
+		58DE5B2C1BB52DDD0020A34C /* BaseUserModel */ = {
+			isa = PBXGroup;
+			children = (
+				58DE5B321BB540BD0020A34C /* CurrentUserProfile */,
+				581661CC1BB2DEBC00371967 /* NearestUser */,
+				58C28FE51BAA8F6C0099ABE4 /* Friend */,
+				58DE5B311BB540A00020A34C /* BaseUser */,
+			);
+			name = BaseUserModel;
+			sourceTree = "<group>";
+		};
+		58DE5B301BB540750020A34C /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				58DE5B2C1BB52DDD0020A34C /* BaseUserModel */,
+				581B9D451B9ED8B90080393B /* FacebookProfile */,
+			);
+			name = Users;
+			sourceTree = "<group>";
+		};
+		58DE5B311BB540A00020A34C /* BaseUser */ = {
+			isa = PBXGroup;
+			children = (
+				58DE5B331BB541020020A34C /* FRDBaseUserModel.h */,
+				58DE5B341BB541020020A34C /* FRDBaseUserModel.m */,
+			);
+			name = BaseUser;
+			sourceTree = "<group>";
+		};
+		58DE5B321BB540BD0020A34C /* CurrentUserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				58DE5B3C1BB541480020A34C /* FRDCurrentUserProfile.h */,
+				58DE5B3D1BB541480020A34C /* FRDCurrentUserProfile.m */,
+			);
+			name = CurrentUserProfile;
+			sourceTree = "<group>";
+		};
 		58EBC6AD1BAC1638003CD598 /* PreviewGalleryController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1719,8 +1761,8 @@
 		58ED54FB1BB1A4C600F9B378 /* SexualOrientatiom */ = {
 			isa = PBXGroup;
 			children = (
-				58ED54FC1BB1A4E300F9B378 /* FRDSexualOrientation.h */,
-				58ED54FD1BB1A4E300F9B378 /* FRDSexualOrientation.m */,
+				58DE5B451BB541EC0020A34C /* FRDSexualOrientation.h */,
+				58DE5B461BB541EC0020A34C /* FRDSexualOrientation.m */,
 			);
 			name = SexualOrientatiom;
 			sourceTree = "<group>";
@@ -1965,15 +2007,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				587B3A8E1BA814C40098154F /* FRDRelationshipStatusController.m in Sources */,
+				58DE5B471BB541EC0020A34C /* FRDSexualOrientation.m in Sources */,
 				3E021DCC1BAFE1D300BDA411 /* FRDMyProfileTopView.m in Sources */,
 				58C28FF91BAAC6800099ABE4 /* ZLSwipeableView.m in Sources */,
 				58BC771A1B9ECA8100BB8B5A /* UIView+Flashable.m in Sources */,
+				58DE5B351BB541020020A34C /* FRDBaseUserModel.m in Sources */,
 				58ED54F41BB1648B00F9B378 /* FRDUpdateProfileRequest.m in Sources */,
 				58BC77051B9ECA2200BB8B5A /* NSString+JSONRepresentation.m in Sources */,
 				58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */,
 				587B3A881BA80F3D0098154F /* FRDDropDownHolderController.m in Sources */,
 				3ED072361BA048460091B7E4 /* FRDPreferencesTableViewController.m in Sources */,
 				58F05ACF1BAC3F730092D767 /* FRDPreviewPhotoCell.m in Sources */,
+				58DE5B381BB541160020A34C /* FRDFriend.m in Sources */,
 				3E0EEC5C1BABEF2300AB51B0 /* FRDApplicationSettingsController.m in Sources */,
 				58FFDBAE1B9ECF6B00B0490A /* FRDCommonDateFormatter.m in Sources */,
 				58FFDBB81B9ED0A900B0490A /* FRDErrorHandler.m in Sources */,
@@ -1989,9 +2034,12 @@
 				58C28C3D1BA9527A009D1AC4 /* FRDSearchFriendsController.m in Sources */,
 				3ED072321BA0370C0091B7E4 /* FRDPreferencesController.m in Sources */,
 				58FFDBAB1B9ECF3B00B0490A /* FRDSerialViewConstructor.m in Sources */,
+				58DE5B411BB5415A0020A34C /* FRDFacebookProfile.m in Sources */,
 				3E021DC81BAFD97500BDA411 /* FRDMyProfileController.m in Sources */,
 				58BC773D1B9ECDD100BB8B5A /* FRDValidator.m in Sources */,
+				58DE5B3E1BB541480020A34C /* FRDCurrentUserProfile.m in Sources */,
 				58CD9ABE1BAFF1B500A7CADB /* FRDTopContentView.m in Sources */,
+				58DE5B3B1BB541280020A34C /* FRDNearestUser.m in Sources */,
 				58ED54F91BB189EA00F9B378 /* FRDGeolocationDeniedController.m in Sources */,
 				3E941A371BB180B400F034E6 /* FRDSwitch.m in Sources */,
 				58F2F30F1B9EF93F000DC739 /* FRDTutorialController.m in Sources */,
@@ -2002,7 +2050,6 @@
 				58C28FEC1BAA91670099ABE4 /* FRDFriendDragableParentView.m in Sources */,
 				581B9D531B9EDC740080393B /* FRDNetworkRequest.m in Sources */,
 				58ED54E41BB163E800F9B378 /* FRDGetFriendsListRequest.m in Sources */,
-				581B9D481B9ED8D30080393B /* FRDFacebookProfile.m in Sources */,
 				3E941A481BB1815D00F034E6 /* FRDPersonalBioTableHeader.m in Sources */,
 				58CD9ABA1BAFEDC700A7CADB /* FRDContainerController.m in Sources */,
 				58BC77231B9ECAA900BB8B5A /* UIImage+Base64Encoding.m in Sources */,
@@ -2023,13 +2070,11 @@
 				58BC77171B9ECA7400BB8B5A /* UIView+SoftRemoving.m in Sources */,
 				58CD17EE1BA19BC70021D948 /* FRDTermsLabel.m in Sources */,
 				58FFDBC31B9ED32000B0490A /* FRDBaseNavigationController.m in Sources */,
-				58ED54FE1BB1A4E300F9B378 /* FRDSexualOrientation.m in Sources */,
 				58FFDBC01B9ED2FB00B0490A /* FRDBaseViewController.m in Sources */,
 				3E1D9BED1BB3CE46003A1E5C /* FRDPreviewGalleryController.m in Sources */,
 				3E00C40E1BAAB91F00AD2D97 /* FRDFriendCell.m in Sources */,
 				587B3A751BA7F4450098154F /* FRDBaseDropDownDataSource.m in Sources */,
 				58BC77141B9ECA6700BB8B5A /* UIView+ConfigureAnchorPoint.m in Sources */,
-				58C28FE81BAA8F850099ABE4 /* FRDFriend.m in Sources */,
 				58CD17F21BA19BF40021D948 /* TTTAttributedLabel.m in Sources */,
 				3E941A4F1BB18E2000F034E6 /* UIImage+ColoredImage.m in Sources */,
 				58C290021BAAC7110099ABE4 /* FRDFriendOverlayView.m in Sources */,
@@ -2049,10 +2094,10 @@
 				581B9D4F1B9EDC350080393B /* FRDSessionManager.m in Sources */,
 				3E1D9BE61BB3CE34003A1E5C /* FRDPhotoGalleryController.m in Sources */,
 				3E941A431BB1815400F034E6 /* FRDApplicationSettingsTableHeader.m in Sources */,
+				58DE5B441BB541E10020A34C /* FRDRelationshipItem.m in Sources */,
 				58ED54D21BB14C5E00F9B378 /* FRDLocationObserver.m in Sources */,
 				58BC771D1B9ECA9000BB8B5A /* UIViewController+fixOrientation.m in Sources */,
 				581B9D411B9ED71A0080393B /* FRDReachabilityHelper.m in Sources */,
-				587B3A991BA817440098154F /* FRDRelationshipItem.m in Sources */,
 				58ED54F01BB1646800F9B378 /* FRDUpdateNotificationsSettingsRequest.m in Sources */,
 				58D5A16A1BA329C800D552CF /* FRDNavigationTitleView.m in Sources */,
 				58BC770B1B9ECA4400BB8B5A /* UIImagePickerController+fixOrientation.m in Sources */,
@@ -2061,7 +2106,6 @@
 				587B3A941BA815850098154F /* FRDRelationshipCollectionCell.m in Sources */,
 				58BC77021B9ECA1700BB8B5A /* NSDictionary+JSONRepresentation.m in Sources */,
 				3E5DEE701BAEB59800832CD6 /* FRDRangeSlider.m in Sources */,
-				581661CF1BB2DEEC00371967 /* FRDNearestUser.m in Sources */,
 				587B3A6D1BA7F2A20098154F /* FRDDropDownTableView.m in Sources */,
 				58ED54EC1BB1643F00F9B378 /* FRDSignOutRequest.m in Sources */,
 				587727F81BA2D8150032D746 /* FRDTermsAndServicesController.m in Sources */,

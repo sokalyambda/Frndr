@@ -79,6 +79,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     [super viewDidLoad];
     
     self.currentPage = 1;
+    self.swipableViewsCounter = 0;
     
     [self setupPhotosGalleryContainer];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -89,8 +90,11 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-//    [self updateCurrentProfileAndGetSuggestedFriends];
-    self.swipableViewsCounter = 0;
+    NSLog(@"nearest users %@ and it's count is %d", self.nearestUsers, self.nearestUsers.count);
+//    [self performNeededUpdateAction];
+    if (!self.nearestUsers.count) {
+        [self findNearestUsers];
+    }
 }
 
 #pragma mark - Actions
@@ -127,31 +131,62 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     [self.previewGalleryController didMoveToParentViewController:self];
 }
 
-- (void)updateCurrentProfileAndGetSuggestedFriends
+/**
+ *  Update current profile
+ */
+//- (void)updateCurrentProfileOnSuccess:(void(^)(void))success onFailure:(void(^)(NSError *error))failure
+//{
+//    FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
+//
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [FRDProjectFacade updatedProfile:currentProfile onSuccess:^(FRDCurrentUserProfile *confirmedProfile) {
+//        
+//        if (success) {
+//            success();
+//        }
+//        
+//    } onFailure:^(NSError *error, BOOL isCanceled) {
+//        
+//        if (failure) {
+//            failure(error);
+//        }
+//
+//    }];
+//}
+
+/**
+ *  Perform needed update action. It can be either update+findUsers or only findUsers.
+ */
+//- (void)performNeededUpdateAction
+//{
+//    if (self.updateNeeded) {
+//        WEAK_SELF;
+//        [self updateCurrentProfileOnSuccess:^{
+//            weakSelf.updateNeeded = NO;
+//            [weakSelf findNearestUsers];
+//        } onFailure:^(NSError *error) {
+//            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//            [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+//        }];
+//    } else if (!self.nearestUsers.count) {
+//        [self findNearestUsers];
+//    }
+//}
+
+/**
+ *  Find nearest users
+ */
+- (void)findNearestUsers
 {
-    FRDFacebookProfile *currentProfile = [FRDStorageManager sharedStorage].currentFacebookProfile;
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [FRDProjectFacade updatedProfile:currentProfile onSuccess:^(FRDFacebookProfile *confirmedProfile) {
+    [FRDProjectFacade findNearestUsersWithPage:weakSelf.currentPage onSuccess:^(NSArray *nearestUsers) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
-        [weakSelf findNearestUsers];
+        weakSelf.nearestUsers = [nearestUsers mutableCopy];
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-    }];
-}
-
-- (void)findNearestUsers
-{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [FRDProjectFacade findNearestUsersWithPage:self.currentPage onSuccess:^(NSArray *nearestUsers) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        
-        self.nearestUsers = [nearestUsers mutableCopy];
-        
-    } onFailure:^(NSError *error, BOOL isCanceled) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         
     }];
 }
@@ -172,6 +207,8 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     self.interestsLabel.text = interests;
     
     [self.dragableViewsHolder loadNextSwipeableViewsIfNeeded];
+    
+    self.previewGalleryController.photos = self.currentNearestUser.galleryPhotos;
 }
 
 /**
@@ -207,11 +244,11 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 {
     FRDFriendDragableParentView *parentView;
     
-//    NSLog(@"self.nearestUsers.count = %d, self.swipableViewsCounter = %d", self.nearestUsers.count, self.swipableViewsCounter);
-//    
-//    if (self.nearestUsers.count && self.swipableViewsCounter < self.nearestUsers.count) {
+    NSLog(@"self.nearestUsers.count = %d, self.swipableViewsCounter = %d", self.nearestUsers.count, self.swipableViewsCounter);
     
-//        FRDNearestUser *currentNearesUser = self.nearestUsers[self.swipableViewsCounter];
+    if (self.nearestUsers.count && self.swipableViewsCounter < self.nearestUsers.count) {
+    
+        FRDNearestUser *currentNearesUser = self.nearestUsers[self.swipableViewsCounter];
     
         parentView = [[FRDFriendDragableParentView alloc] initWithFrame:swipeableView.bounds];
         FRDFriendDragableView *friendView = [FRDFriendDragableView makeFromXib];
@@ -219,10 +256,10 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
         [parentView addSubview:friendView];
         [self addConstraintsForParentView:parentView andContentView:friendView];
         
-//        [friendView configureWithNearestUser:currentNearesUser];
+        [friendView configureWithNearestUser:currentNearesUser];
     
         self.swipableViewsCounter++;
-//    }
+    }
     
     return parentView;
 }
@@ -267,7 +304,6 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)swipeableView:(ZLSwipeableView *)swipeableView didThrowSwipingView:(UIView *)swipingView inDirection:(ZLSwipeableViewDirection)direction
 {
     /*****Like&dislike nearest users*****/
-    /*
     switch (direction) {
         case ZLSwipeableViewDirectionLeft: {
             NSLog(@"User has been removed");
@@ -295,7 +331,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
         //        self.currentPage++;
         [self findNearestUsers];
     }
-     */
+    
 }
 
 

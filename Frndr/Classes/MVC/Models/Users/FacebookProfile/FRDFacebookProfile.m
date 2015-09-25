@@ -8,8 +8,6 @@
 
 #import "FRDFacebookProfile.h"
 
-#import "FRDSexualOrientation.h"
-
 #import "FRDCommonDateFormatter.h"
 
 //facebook keys
@@ -25,20 +23,6 @@ static NSString *const kPicture = @"picture";
 static NSString *const kData = @"data";
 static NSString *const kURL = @"url";
 static NSString *const kGender = @"gender";
-
-//beckend keys
-static NSString *const kId = @"_id";
-
-static NSString *const kProfile = @"profile";
-static NSString *const kVisible = @"visible";
-static NSString *const kThingsLovedMost = @"things";
-static NSString *const kSexualOrientation = @"sexual";
-static NSString *const kRelationshipStatus = @"relStatus";
-static NSString *const kSex = @"sex";
-
-static NSString *const kNotifications = @"notification";
-static NSString *const kNewMessages = @"newMessages";
-static NSString *const kNewFriends = @"newFriends";
 
 @implementation FRDFacebookProfile
 
@@ -56,44 +40,9 @@ static NSString *const kNewFriends = @"newFriends";
     return [ageComponents year];
 }
 
-- (NSString *)relationshipStatus
+- (NSString *)fullName
 {
-    if (!_relationshipStatus) {
-        _relationshipStatus = @"";
-    }
-    return _relationshipStatus;
-}
-
-- (NSString *)jobTitle
-{
-    if (!_jobTitle) {
-        _jobTitle = @"";
-    }
-    return _jobTitle;
-}
-
-- (FRDSexualOrientation *)chosenOrientation
-{
-    if (!_chosenOrientation) {
-        _chosenOrientation = [[FRDSexualOrientation alloc] initWithOrientationString:@"straight"];
-    }
-    return _chosenOrientation;
-}
-
-- (NSArray *)thingsLovedMost
-{
-    if (!_thingsLovedMost) {
-        _thingsLovedMost = @[];
-    }
-    return _thingsLovedMost;
-}
-
-- (NSString *)biography
-{
-    if (!_biography) {
-        _biography = @"";
-    }
-    return _biography;
+    return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
 }
 
 #pragma mark - FRDMappingProtocol
@@ -104,32 +53,13 @@ static NSString *const kNewFriends = @"newFriends";
     if (self) {
         _firstName = response[kFirstName];
         _lastName = response[kLastName];
-        _fullName = response[kFullName];
-        _userId = [response[kUserId] longLongValue];
+
+        _facebookUserId = [response[kUserId] longLongValue];
         _email = response[kEmail];
         _genderString = [response[kGender] capitalizedString];
         _birthDate = [[FRDCommonDateFormatter commonDateFormatter] dateFromString:response[kBirthDate]];
         
         _avararURL = [NSURL URLWithString:response[kPicture][kData][kURL]];
-    }
-    return self;
-}
-
-- (instancetype)updateWithServerResponse:(NSDictionary *)response
-{
-    if (self) {
-        _userId = [response[kId] longLongValue];
-        
-        NSDictionary *profileDict   = response[kProfile];
-        _visible                    = [profileDict[kVisible] boolValue];
-        _thingsLovedMost            = profileDict[kThingsLovedMost];
-        _chosenOrientation          = profileDict[kSexualOrientation];
-        _relationshipStatus         = profileDict[kRelationshipStatus];
-        _genderString               = profileDict[kSex];
-        
-        NSDictionary *notificationsDict = response[kNotifications];
-        _friendsNotificationsEnabled = [notificationsDict[kNewFriends] boolValue];
-        _messagesNotificationsEnabled = [notificationsDict[kNewMessages] boolValue];
     }
     return self;
 }
@@ -142,8 +72,7 @@ static NSString *const kNewFriends = @"newFriends";
     [encoder encodeObject:self.firstName forKey:kFirstName];
     [encoder encodeObject:self.lastName forKey:kLastName];
     [encoder encodeObject:self.email forKey:kEmail];
-    [encoder encodeObject:self.fullName forKey:kFullName];
-    [encoder encodeObject:@(self.userId) forKey:kUserId];
+    [encoder encodeObject:@(self.facebookUserId) forKey:kUserId];
     [encoder encodeObject:self.avararURL forKey:kAvatarURL];
     [encoder encodeObject:self.genderString forKey:kGender];
     [encoder encodeObject:self.birthDate forKey:kBirthDate];
@@ -156,8 +85,7 @@ static NSString *const kNewFriends = @"newFriends";
         _firstName      = [decoder decodeObjectForKey:kFirstName];
         _lastName       = [decoder decodeObjectForKey:kLastName];
         _email          = [decoder decodeObjectForKey:kEmail];
-        _fullName       = [decoder decodeObjectForKey:kFullName];
-        _userId         = [[decoder decodeObjectForKey:kUserId] longLongValue];
+        _facebookUserId = [[decoder decodeObjectForKey:kUserId] longLongValue];
         _avararURL      = [decoder decodeObjectForKey:kAvatarURL];
         _genderString   = [decoder decodeObjectForKey:kGender];
         _birthDate      = [decoder decodeObjectForKey:kBirthDate];
@@ -192,6 +120,5 @@ static NSString *const kNewFriends = @"newFriends";
     FRDFacebookProfile *userProfile = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
     return userProfile;
 }
-
 
 @end

@@ -29,7 +29,7 @@ static NSString *const kGeolocationCoordinates = @"coordinates";
         self.action = [self requestAction];
         _method = @"POST";
         
-        long long facebookId = [FRDStorageManager sharedStorage].currentFacebookProfile.userId;
+        long long facebookId = [FRDStorageManager sharedStorage].currentFacebookProfile.facebookUserId;
         CLLocation *currentLocaion = [FRDLocationObserver sharedObserver].currentLocation;
         NSArray *coords = @[@(currentLocaion.coordinate.longitude), @(currentLocaion.coordinate.latitude)];
         
