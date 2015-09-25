@@ -110,7 +110,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="maskBackground" translatesAutoresizingMaskIntoConstraints="NO" id="VKy-Ec-wi1" userLabel="Mask Image View">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mbj-Hd-iYU">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mbj-Hd-iYU">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Nsz-As-9ER"/>
@@ -134,7 +134,7 @@
                                     <action selector="facebookLoginClick:" destination="XRT-sT-Uge" eventType="touchUpInside" id="JmH-bM-Snk"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By continuing you agree to our Terms of Service and Privacy Policy. Frndr does not post anything to Facebook" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgk-7h-Ry8" customClass="FRDTermsLabel">
+                            <label hidden="YES" opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By continuing you agree to our Terms of Service and Privacy Policy. Frndr does not post anything to Facebook" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgk-7h-Ry8" customClass="FRDTermsLabel">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="10"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3110,7 +3110,6 @@
         <!--Photo Gallery Controller-->
         <scene sceneID="L5k-Kc-0V9">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ukB-2A-mX9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="FRDPhotoGalleryController" id="Rb1-LH-zzd" customClass="FRDPhotoGalleryController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="H41-Da-VSm"/>
@@ -3148,10 +3147,10 @@
                                                 <exclude reference="ZZ3-aI-rs8"/>
                                             </mask>
                                             <mask key="constraints">
-                                                <exclude reference="kQT-Yg-E9N"/>
-                                                <exclude reference="uay-98-ua3"/>
-                                                <exclude reference="rST-zJ-1Wz"/>
                                                 <exclude reference="b5V-ed-pWo"/>
+                                                <exclude reference="kQT-Yg-E9N"/>
+                                                <exclude reference="rST-zJ-1Wz"/>
+                                                <exclude reference="uay-98-ua3"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
@@ -3159,10 +3158,10 @@
                                                 <include reference="ZZ3-aI-rs8"/>
                                             </mask>
                                             <mask key="constraints">
-                                                <include reference="kQT-Yg-E9N"/>
-                                                <include reference="uay-98-ua3"/>
-                                                <include reference="rST-zJ-1Wz"/>
                                                 <include reference="b5V-ed-pWo"/>
+                                                <include reference="kQT-Yg-E9N"/>
+                                                <include reference="rST-zJ-1Wz"/>
+                                                <include reference="uay-98-ua3"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -3189,9 +3188,9 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="82d-QQ-Mr6"/>
-                                <exclude reference="AvX-Ny-5YS"/>
-                                <exclude reference="Afx-hw-ERr"/>
                                 <exclude reference="5wh-1p-w26"/>
+                                <exclude reference="Afx-hw-ERr"/>
+                                <exclude reference="AvX-Ny-5YS"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -3200,9 +3199,9 @@
                             </mask>
                             <mask key="constraints">
                                 <include reference="82d-QQ-Mr6"/>
-                                <include reference="AvX-Ny-5YS"/>
-                                <include reference="Afx-hw-ERr"/>
                                 <include reference="5wh-1p-w26"/>
+                                <include reference="Afx-hw-ERr"/>
+                                <include reference="AvX-Ny-5YS"/>
                             </mask>
                         </variation>
                     </view>
@@ -3210,6 +3209,7 @@
                         <outlet property="collectionView" destination="Q7g-QJ-9mh" id="ghc-8z-oWW"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ukB-2A-mX9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4144.5" y="458.25"/>
         </scene>
