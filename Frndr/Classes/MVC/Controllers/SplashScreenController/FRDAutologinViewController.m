@@ -63,6 +63,11 @@ static NSString *const kTutorialSegueIdentifier = @"tutorialSegueIdentifier";
     [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
     [FRDProjectFacade signInWithFacebookOnSuccess:^(BOOL isSuccess) {
         
+        //Init Current Profile
+        FRDFacebookProfile *currentFacebookProfile = [FRDStorageManager sharedStorage].currentFacebookProfile;
+        FRDCurrentUserProfile *currentProfile = [FRDCurrentUserProfile userProfileWithFacebookProfile:currentFacebookProfile];
+        [FRDStorageManager sharedStorage].currentUserProfile = currentProfile;
+        
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [weakSelf moveToSearchFriendsController];
         

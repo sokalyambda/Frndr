@@ -379,6 +379,10 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
     [self pushAnchorViewForCover:topSwipeableView
                      inDirection:direction
                 andCollideInRect:self.collisionRect];
+    /*****One more delegate method which needed for determine whether view was threw*****/
+    if ([self.delegate respondsToSelector:@selector(swipeableView:didThrowSwipingView:inDirection:)]) {
+        [self.delegate swipeableView:self didThrowSwipingView:topSwipeableView inDirection:directionType];
+    }
 }
 
 - (void)swipeTopViewToUp:(BOOL)up

@@ -39,8 +39,8 @@ extern NSString *defaultBaseURLString;
 + (FRDNetworkOperation *)deleteAccountOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 //User Profile
-+ (FRDNetworkOperation *)updatedProfile:(FRDFacebookProfile *)updatedProfile
-                              onSuccess:(void (^)(FRDFacebookProfile *confirmedProfile))success
++ (FRDNetworkOperation *)updatedProfile:(FRDCurrentUserProfile *)updatedProfile
+                              onSuccess:(void (^)(FRDCurrentUserProfile *confirmedProfile))success
 
                               onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 

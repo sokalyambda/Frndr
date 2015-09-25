@@ -151,12 +151,14 @@
  */
 - (void)authorizeWithFacebookAction
 {
-    
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [FRDFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
 
         [FRDFacebookService getFacebookUserProfileOnSuccess:^(FRDFacebookProfile *facebookProfile) {
+            
+            //Init current user profile
+            [FRDStorageManager sharedStorage].currentUserProfile = [FRDCurrentUserProfile userProfileWithFacebookProfile:facebookProfile];
             
             [FRDProjectFacade signInWithFacebookOnSuccess:^(BOOL isSuccess) {
                 [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];

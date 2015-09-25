@@ -10,8 +10,8 @@
 
 @interface FRDUpdateProfileRequest : FRDNetworkRequest
 
-@property (strong, nonatomic) FRDFacebookProfile *confirmedProfile;
+@property (strong, nonatomic) FRDCurrentUserProfile *confirmedProfile;
 
-- (instancetype)initWithUpdatedProfile:(FRDFacebookProfile *)updatedProfile;
+- (instancetype)initWithUpdatedProfile:(FRDCurrentUserProfile *)updatedProfile;
 
 @end

@@ -11,6 +11,7 @@
 #import "FRDLocationObserver.h"
 
 #import "FRDSexualOrientation.h"
+#import "FRDRelationshipItem.h"
 
 static NSString *const requestAction = @"users";
 
@@ -30,7 +31,7 @@ static NSString *const kGender              = @"sex";
 
 @interface FRDUpdateProfileRequest ()
 
-@property (strong, nonatomic) FRDFacebookProfile *profileForUpdating;
+@property (strong, nonatomic) FRDCurrentUserProfile *profileForUpdating;
 
 @end
 
@@ -38,7 +39,7 @@ static NSString *const kGender              = @"sex";
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithUpdatedProfile:(FRDFacebookProfile *)updatedProfile
+- (instancetype)initWithUpdatedProfile:(FRDCurrentUserProfile *)updatedProfile
 {
     self = [super init];
     if (self) {
@@ -54,10 +55,10 @@ static NSString *const kGender              = @"sex";
                                   
                                   kName:                updatedProfile.fullName,
                                   kAge:                 @(updatedProfile.age),
-                                  kRelationshipStatus:  updatedProfile.relationshipStatus,
+                                  kRelationshipStatus:  updatedProfile.relationshipStatus.relationshipTitle,
                                   kJobTitle:            updatedProfile.jobTitle,
                                   kSmoker:              @(updatedProfile.isSmoker),
-                                  kSexualOrientation:   updatedProfile.chosenOrientation.orientationString,
+                                  kSexualOrientation:   updatedProfile.sexualOrientation.orientationString,
                                   kThingsLovedMost:     updatedProfile.thingsLovedMost,
                                   kBiography:           updatedProfile.biography,
                                   kVisible:             @(updatedProfile.isVisible),

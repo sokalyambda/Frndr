@@ -1,12 +1,12 @@
 //
-//  FRDNearestUser.m
+//  FRDBaseUserModel.m
 //  Frndr
 //
-//  Created by Eugenity on 23.09.15.
+//  Created by Eugenity on 25.09.15.
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "FRDNearestUser.h"
+#import "FRDBaseUserModel.h"
 
 #import "FRDSexualOrientation.h"
 #import "FRDRelationshipItem.h"
@@ -23,7 +23,7 @@ static NSString *const kSexualOrientation   = @"sexual";
 static NSString *const kSmoker              = @"smoker";
 static NSString *const kUserId              = @"userId";
 
-@implementation FRDNearestUser
+@implementation FRDBaseUserModel
 
 #pragma mark - FRDMappingProtocol
 
@@ -41,12 +41,25 @@ static NSString *const kUserId              = @"userId";
         _fullName = response[kName];
         _sexualOrientation = [[FRDSexualOrientation alloc] initWithOrientationString:response[kSexualOrientation]];
         /*
-        _relationshipStatus = [[FRDRelationshipItem alloc] init];
-        */
+         _relationshipStatus = [[FRDRelationshipItem alloc] init];
+         */
         _smoker = [response[kSmoker] boolValue];
         _userId = [response[kUserId] longLongValue];
     }
     return self;
 }
-
+/*
+ "profile": {
+ "name": "Petrovich",
+ "age": "25",
+ "relStatus": "single",
+ "jobTitle": "Doctor",
+ "smoker": "true",
+ "sexual": "straight",
+ "things": ["tennis", "box", "cars"],
+ "bio": "Some biography",
+ "visible": "true",
+ "sex": "M"
+ }
+ */
 @end
