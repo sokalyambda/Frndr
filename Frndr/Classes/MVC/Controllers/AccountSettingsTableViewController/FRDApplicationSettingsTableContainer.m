@@ -49,6 +49,18 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
 
 #pragma mark - Actions
 
+- (IBAction)newFriendsNotificationsClick:(id)sender
+{
+    [FRDStorageManager sharedStorage].currentUserProfile.friendsNotificationsEnabled = self.friendSwitch.isOn;
+    [self updateNotificationsSettings];
+}
+
+- (IBAction)newMessagesNotificationsClick:(id)sender
+{
+    [FRDStorageManager sharedStorage].currentUserProfile.messagesNotificationsEnabled = self.messageSwitch.isOn;
+    [self updateNotificationsSettings];
+}
+
 - (void)registerHeader
 {
     UINib *nib = [UINib nibWithNibName:NSStringFromClass([FRDApplicationSettingsTableHeader class]) bundle:nil];
@@ -134,11 +146,15 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
         switch (notificationsSettingType) {
             case FRDApplicationNotificationSettingNewFriend: {
                 [self.friendSwitch setOn:!self.friendSwitch.isOn animated:YES];
+                [FRDStorageManager sharedStorage].currentUserProfile.friendsNotificationsEnabled = self.friendSwitch.isOn;
+                [self updateNotificationsSettings];
                 break;
             }
                 
             case FRDApplicationNotificationSettingNewMessage: {
                 [self.messageSwitch setOn:!self.messageSwitch.isOn animated:YES];
+                [FRDStorageManager sharedStorage].currentUserProfile.messagesNotificationsEnabled = self.messageSwitch.isOn;
+                [self updateNotificationsSettings];
                 break;
             }
         }
@@ -180,6 +196,21 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.parentViewController.view animated:YES];
         
+    }];
+}
+
+/**
+ *  Update current notifications settingss
+ */
+- (void)updateNotificationsSettings
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.parentViewController.view animated:YES];
+    [FRDProjectFacade updateNotificationsSettingsOnSuccess:^(BOOL isSuccess) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.parentViewController.view animated:YES];
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.parentViewController.view animated:YES];
+//        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
     }];
 }
 

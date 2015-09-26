@@ -14,5 +14,6 @@
 #import "FRDFindNearestUsersRequest.h"
 #import "FRDSignOutRequest.h"
 #import "FRDDeleteCurrentUserRequest.h"
+#import "FRDUpdateNotificationsSettingsRequest.h"
 
 #endif

@@ -17,12 +17,17 @@ static NSString *const kNewMessagesNotification = @"newMessages";
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithFriendsNotificationsEnabled:(BOOL)friendNotificationsEnabled andMessagesNotificationsEnabled:(BOOL)messagesNotificationEnabled
+- (instancetype)init
 {
     self = [super init];
     if (self) {
         self.action = [self requestAction];
         _method = @"PUT";
+        
+        FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
+        
+        BOOL friendNotificationsEnabled = currentProfile.isFriendsNotificationsEnabled;
+        BOOL messagesNotificationEnabled = currentProfile.isMessagesNotificationsEnabled;
         
         NSMutableDictionary *parameters = [@{
                                              kNewFriendsNotification: @(friendNotificationsEnabled),
