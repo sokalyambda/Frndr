@@ -97,6 +97,60 @@ NSString *baseURLString = @"http://134.249.164.53:8859/";
 #pragma mark - Requests builder
 
 /**
+ *  Get user profile by ID
+ *
+ *  @param success Success Block
+ *  @param failure Failure Block
+ */
++ (FRDNetworkOperation *)getUserById:(NSInteger)userId onSuccess:(void(^)(FRDCurrentUserProfile *userProfile))success onFailure:(FailureBlock)failure
+{
+    FRDGetUserByIdRequest *request = [[FRDGetUserByIdRequest alloc] initWithUserId:userId];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        FRDGetUserByIdRequest *request = (FRDGetUserByIdRequest *)operation.networkRequest;
+        
+        if (success) {
+            success(request.userProfile);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
+/**
+ *  Get current user profile
+ *
+ *  @param success Success Block
+ *  @param failure Failure Block
+ *
+ */
++ (FRDNetworkOperation *)getCurrentUserProfileOnSuccess:(SuccessBlock)success
+                                              onFailure:(FailureBlock)failure
+{
+    FRDGetCurrentUserProfileRequest *request = [[FRDGetCurrentUserProfileRequest alloc] init];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
+/**
  *  Update notifications settings
  *
  *  @param success Success Block

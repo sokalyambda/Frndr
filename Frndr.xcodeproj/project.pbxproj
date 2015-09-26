@@ -56,6 +56,7 @@
 		587B3A941BA815850098154F /* FRDRelationshipCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A921BA815850098154F /* FRDRelationshipCollectionCell.m */; };
 		587B3A951BA815850098154F /* FRDRelationshipCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587B3A931BA815850098154F /* FRDRelationshipCollectionCell.xib */; };
 		5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */; };
+		58BB5D431BB70AB900FD1A56 /* FRDGetCurrentUserProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BB5D421BB70AB800FD1A56 /* FRDGetCurrentUserProfileRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58BC76A11B9EB6B500BB8B5A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A01B9EB6B500BB8B5A /* main.m */; };
 		58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A31B9EB6B500BB8B5A /* AppDelegate.m */; };
 		58BC76AA1B9EB6B500BB8B5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58BC76A81B9EB6B500BB8B5A /* Main.storyboard */; };
@@ -245,6 +246,8 @@
 		587B3A931BA815850098154F /* FRDRelationshipCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDRelationshipCollectionCell.xib; path = Classes/Cells/UICollectionViewCells/RelationshipCollectionCell/FRDRelationshipCollectionCell.xib; sourceTree = "<group>"; };
 		5895FD931BA2D55C00079F9D /* FRDCustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDCustomPageControl.h; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.h; sourceTree = "<group>"; };
 		5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDCustomPageControl.m; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.m; sourceTree = "<group>"; };
+		58BB5D411BB70AB800FD1A56 /* FRDGetCurrentUserProfileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDGetCurrentUserProfileRequest.h; path = "Classes/Server APIs/API/Requests/GetUserByIdRequest/GetCurrentUserProfileRequest/FRDGetCurrentUserProfileRequest.h"; sourceTree = "<group>"; };
+		58BB5D421BB70AB800FD1A56 /* FRDGetCurrentUserProfileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDGetCurrentUserProfileRequest.m; path = "Classes/Server APIs/API/Requests/GetUserByIdRequest/GetCurrentUserProfileRequest/FRDGetCurrentUserProfileRequest.m"; sourceTree = "<group>"; };
 		58BC769B1B9EB6B500BB8B5A /* Frndr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frndr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58BC769F1B9EB6B500BB8B5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58BC76A01B9EB6B500BB8B5A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -809,6 +812,15 @@
 				5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */,
 			);
 			name = StyledPageControl;
+			sourceTree = "<group>";
+		};
+		58BB5D401BB70A4E00FD1A56 /* GetCurrentUserProfileRequest */ = {
+			isa = PBXGroup;
+			children = (
+				58BB5D411BB70AB800FD1A56 /* FRDGetCurrentUserProfileRequest.h */,
+				58BB5D421BB70AB800FD1A56 /* FRDGetCurrentUserProfileRequest.m */,
+			);
+			name = GetCurrentUserProfileRequest;
 			sourceTree = "<group>";
 		};
 		58BC76921B9EB6B500BB8B5A = {
@@ -1718,6 +1730,7 @@
 		58ED54E51BB163F900F9B378 /* GetUserByIdRequest */ = {
 			isa = PBXGroup;
 			children = (
+				58BB5D401BB70A4E00FD1A56 /* GetCurrentUserProfileRequest */,
 				58ED54E61BB1641100F9B378 /* FRDGetUserByIdRequest.h */,
 				58ED54E71BB1641100F9B378 /* FRDGetUserByIdRequest.m */,
 			);
@@ -2102,6 +2115,7 @@
 				58ED54D21BB14C5E00F9B378 /* FRDLocationObserver.m in Sources */,
 				58BC771D1B9ECA9000BB8B5A /* UIViewController+fixOrientation.m in Sources */,
 				581B9D411B9ED71A0080393B /* FRDReachabilityHelper.m in Sources */,
+				58BB5D431BB70AB900FD1A56 /* FRDGetCurrentUserProfileRequest.m in Sources */,
 				58ED54F01BB1646800F9B378 /* FRDUpdateNotificationsSettingsRequest.m in Sources */,
 				58D5A16A1BA329C800D552CF /* FRDNavigationTitleView.m in Sources */,
 				58BC770B1B9ECA4400BB8B5A /* UIImagePickerController+fixOrientation.m in Sources */,

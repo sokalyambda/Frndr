@@ -47,6 +47,14 @@ extern NSString *defaultBaseURLString;
 
                               onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
++ (FRDNetworkOperation *)getUserById:(NSInteger)userId
+                           onSuccess:(void(^)(FRDCurrentUserProfile *userProfile))success
+                           onFailure:(FailureBlock)failure;
+
++ (FRDNetworkOperation *)getCurrentUserProfileOnSuccess:(SuccessBlock)success
+                           onFailure:(FailureBlock)failure;
+
+
 //Nearest Users
 + (FRDNetworkOperation *)findNearestUsersWithPage:(NSInteger)page onSuccess:(void (^)(NSArray *nearestUsers))success
                                         onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;

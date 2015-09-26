@@ -69,4 +69,13 @@
     }];
 }
 
+#pragma mark - Public Methods
+
+- (void)update
+{
+    FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
+    self.sexualOrientationLabel.text = currentProfile.sexualOrientation.orientationString;
+    self.smokerLabel.text = currentProfile.isSmoker ? @"SMOKER" : @"NOT A SMOKER";
+}
+
 @end

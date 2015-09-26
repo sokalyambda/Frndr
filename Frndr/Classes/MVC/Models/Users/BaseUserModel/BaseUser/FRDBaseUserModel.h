@@ -21,6 +21,7 @@
     NSString *_fullName;
     NSString *_genderString;
     BOOL _smoker;
+    long long _userId;
 }
 
 @property (strong, nonatomic) NSString *fullName;

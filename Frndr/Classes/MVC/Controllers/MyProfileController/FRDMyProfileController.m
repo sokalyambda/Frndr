@@ -22,6 +22,8 @@
 
 #import "FRDSerialViewConstructor.h"
 
+#import "FRDProjectFacade.h"
+
 static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalBioTableControllerSegue";
 
 @interface FRDMyProfileController ()
@@ -34,6 +36,7 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
 @property (weak, nonatomic) IBOutlet UIView *topViewContainer;
 @property (weak, nonatomic) IBOutlet UIView *relationshipsContainer;
 @property (weak, nonatomic) IBOutlet UIView *dropDownHolderContainer;
+@property (weak, nonatomic) IBOutlet UITextField *jobTitleField;
 
 @property (assign, nonatomic) CGFloat previousVerticalOffset;
 
@@ -53,6 +56,10 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
     [self initTopViewHolderContainer];
     [self initRelationshipStatusesHolderContainer];
     [self initDropDownHolderContainer];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self setProfileInformationToFields];
+    });
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -71,7 +78,39 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
 
 - (IBAction)updateProfileClick:(id)sender
 {
+    [self updateCurrentProfile];
+}
+
+- (void)updateCurrentProfile
+{
+    FRDCurrentUserProfile *profileForUpdating = [[FRDCurrentUserProfile alloc] init];
+    FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
     
+    profileForUpdating.age = currentProfile.age;
+    profileForUpdating.fullName = currentProfile.fullName;
+    profileForUpdating.genderString = currentProfile.genderString;
+    
+    profileForUpdating.jobTitle = self.jobTitleField.text;
+    profileForUpdating.smoker = self.dropDownHolderController.smoker;
+    profileForUpdating.sexualOrientation = self.dropDownHolderController.chosenOrientation;
+    
+    NSMutableArray *lovedThings = [@[] mutableCopy];
+    for (UITextField *interestField in self.personalBioTableController.mostLovedThingsFields) {
+        [lovedThings addObject:interestField.text];
+    }
+    
+    profileForUpdating.thingsLovedMost = lovedThings;
+    profileForUpdating.visible = self.visibleOnFrndrSwitch.isOn;
+    
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [FRDProjectFacade updatedProfile:profileForUpdating onSuccess:^(FRDCurrentUserProfile *confirmedProfile) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [currentProfile updateWithUserProfile:confirmedProfile];
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+    }];
 }
 
 /**
@@ -79,7 +118,11 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
  */
 - (void)setProfileInformationToFields
 {
-    
+    FRDCurrentUserProfile *profile = [FRDStorageManager sharedStorage].currentUserProfile;
+    [self.dropDownHolderController update];
+    [self.personalBioTableController update];
+    self.jobTitleField.text = profile.jobTitle;
+    [self.visibleOnFrndrSwitch setOn:profile.isVisible animated:NO];
 }
 
 /**

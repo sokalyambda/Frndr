@@ -8,4 +8,8 @@
 
 @interface FRDPersonalBioTableController : UITableViewController
 
+@property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *mostLovedThingsFields;
+
+- (void)update;
+
 @end

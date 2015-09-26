@@ -8,6 +8,12 @@
 
 #import "FRDNetworkRequest.h"
 
+@class FRDCurrentUserProfile;
+
 @interface FRDGetUserByIdRequest : FRDNetworkRequest
+
+@property (strong, nonatomic) FRDCurrentUserProfile *userProfile;
+
+- (instancetype)initWithUserId:(NSInteger)userId;
 
 @end
