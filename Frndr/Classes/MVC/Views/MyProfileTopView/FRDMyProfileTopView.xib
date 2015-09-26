@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MP5-s1-ynW" userLabel="Avatar Image View" customClass="FRDRoundedImageView">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MP5-s1-ynW" userLabel="Avatar Image View" customClass="FRDRoundedImageView">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="MP5-s1-ynW" secondAttribute="height" multiplier="1:1" id="3NT-R1-6IP"/>
@@ -34,68 +34,77 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mEd-pH-Sci" userLabel="Container View">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Female" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZc-3a-wa8">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Female" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZc-3a-wa8">
                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                             <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
-                            <color key="textColor" red="0.19537168560000001" green="0.19537168560000001" blue="0.19537168560000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.32498972040000002" green="0.32956414470000001" blue="0.52870579770000004" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Doutzen Kroes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTe-69-HRo">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="28 Years" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGE-ju-WKW">
                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                             <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
-                            <color key="textColor" red="0.19537168560000001" green="0.19537168560000001" blue="0.19537168560000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.32498972040000002" green="0.32956414470000001" blue="0.52870579770000004" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="28 Years" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGE-ju-WKW">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Doutzen Kroes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTe-69-HRo">
                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                             <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
-                            <color key="textColor" red="0.19537168560000001" green="0.19537168560000001" blue="0.19537168560000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.32498972040000002" green="0.32956414470000001" blue="0.52870579770000004" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="72K-Ry-iEO"/>
-                        <constraint firstItem="zTe-69-HRo" firstAttribute="leading" secondItem="mEd-pH-Sci" secondAttribute="leading" constant="89" id="8Iy-1d-F5b"/>
-                        <constraint firstAttribute="trailing" secondItem="MZc-3a-wa8" secondAttribute="trailing" constant="89" id="8Me-tH-gud"/>
-                        <constraint firstItem="yGE-ju-WKW" firstAttribute="top" secondItem="mEd-pH-Sci" secondAttribute="top" id="JNB-1G-5H7"/>
-                        <constraint firstItem="zTe-69-HRo" firstAttribute="top" secondItem="mEd-pH-Sci" secondAttribute="top" id="MTr-rB-CL3"/>
-                        <constraint firstItem="MZc-3a-wa8" firstAttribute="leading" secondItem="yGE-ju-WKW" secondAttribute="trailing" constant="18" id="Va6-hu-7HR"/>
-                        <constraint firstItem="MZc-3a-wa8" firstAttribute="top" secondItem="mEd-pH-Sci" secondAttribute="top" id="kAk-8c-A1L"/>
-                        <constraint firstItem="yGE-ju-WKW" firstAttribute="leading" secondItem="zTe-69-HRo" secondAttribute="trailing" constant="17" id="nbM-Lr-hvm"/>
+                        <constraint firstItem="yGE-ju-WKW" firstAttribute="top" secondItem="mEd-pH-Sci" secondAttribute="top" constant="-2" id="EYX-fX-5VH"/>
+                        <constraint firstItem="zTe-69-HRo" firstAttribute="top" secondItem="yGE-ju-WKW" secondAttribute="top" id="JN2-mF-q4m"/>
+                        <constraint firstAttribute="bottom" secondItem="yGE-ju-WKW" secondAttribute="bottom" constant="-1" id="KAv-Cq-lSb"/>
+                        <constraint firstItem="zTe-69-HRo" firstAttribute="bottom" secondItem="yGE-ju-WKW" secondAttribute="bottom" id="NEy-g9-bfM"/>
+                        <constraint firstItem="MZc-3a-wa8" firstAttribute="top" secondItem="yGE-ju-WKW" secondAttribute="top" id="ejE-bQ-rib"/>
+                        <constraint firstItem="MZc-3a-wa8" firstAttribute="leading" secondItem="yGE-ju-WKW" secondAttribute="trailing" constant="10" id="f6A-D4-vnW"/>
+                        <constraint firstItem="MZc-3a-wa8" firstAttribute="bottom" secondItem="yGE-ju-WKW" secondAttribute="bottom" id="fMy-de-1cy"/>
+                        <constraint firstItem="yGE-ju-WKW" firstAttribute="leading" secondItem="zTe-69-HRo" secondAttribute="trailing" constant="10" id="pm5-0e-T2r"/>
+                        <constraint firstItem="zTe-69-HRo" firstAttribute="leading" secondItem="mEd-pH-Sci" secondAttribute="leading" constant="30" id="qh2-Qh-VR0"/>
+                        <constraint firstAttribute="trailing" secondItem="MZc-3a-wa8" secondAttribute="trailing" constant="30" id="zPA-DU-tXy"/>
                     </constraints>
                     <variation key="default">
                         <mask key="subviews">
                             <exclude reference="MZc-3a-wa8"/>
-                            <exclude reference="zTe-69-HRo"/>
                             <exclude reference="yGE-ju-WKW"/>
+                            <exclude reference="zTe-69-HRo"/>
                         </mask>
                         <mask key="constraints">
                             <exclude reference="72K-Ry-iEO"/>
-                            <exclude reference="8Me-tH-gud"/>
-                            <exclude reference="Va6-hu-7HR"/>
-                            <exclude reference="kAk-8c-A1L"/>
-                            <exclude reference="JNB-1G-5H7"/>
-                            <exclude reference="nbM-Lr-hvm"/>
-                            <exclude reference="8Iy-1d-F5b"/>
-                            <exclude reference="MTr-rB-CL3"/>
+                            <exclude reference="JN2-mF-q4m"/>
+                            <exclude reference="NEy-g9-bfM"/>
+                            <exclude reference="qh2-Qh-VR0"/>
+                            <exclude reference="EYX-fX-5VH"/>
+                            <exclude reference="KAv-Cq-lSb"/>
+                            <exclude reference="pm5-0e-T2r"/>
+                            <exclude reference="ejE-bQ-rib"/>
+                            <exclude reference="f6A-D4-vnW"/>
+                            <exclude reference="fMy-de-1cy"/>
+                            <exclude reference="zPA-DU-tXy"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
                         <mask key="subviews">
                             <include reference="MZc-3a-wa8"/>
-                            <include reference="zTe-69-HRo"/>
                             <include reference="yGE-ju-WKW"/>
+                            <include reference="zTe-69-HRo"/>
                         </mask>
                         <mask key="constraints">
                             <include reference="72K-Ry-iEO"/>
-                            <include reference="8Me-tH-gud"/>
-                            <include reference="Va6-hu-7HR"/>
-                            <include reference="kAk-8c-A1L"/>
-                            <include reference="JNB-1G-5H7"/>
-                            <include reference="nbM-Lr-hvm"/>
-                            <include reference="8Iy-1d-F5b"/>
-                            <include reference="MTr-rB-CL3"/>
+                            <include reference="JN2-mF-q4m"/>
+                            <include reference="NEy-g9-bfM"/>
+                            <include reference="qh2-Qh-VR0"/>
+                            <include reference="EYX-fX-5VH"/>
+                            <include reference="KAv-Cq-lSb"/>
+                            <include reference="pm5-0e-T2r"/>
+                            <include reference="ejE-bQ-rib"/>
+                            <include reference="f6A-D4-vnW"/>
+                            <include reference="fMy-de-1cy"/>
+                            <include reference="zPA-DU-tXy"/>
                         </mask>
                     </variation>
                 </view>
@@ -104,6 +113,8 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="mEd-pH-Sci" secondAttribute="trailing" id="32L-6V-jR9"/>
                 <constraint firstItem="mEd-pH-Sci" firstAttribute="top" secondItem="MP5-s1-ynW" secondAttribute="bottom" constant="18" id="AG7-3q-Pda"/>
+                <constraint firstItem="yGE-ju-WKW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="BQe-XQ-pEm"/>
+                <constraint firstItem="mEd-pH-Sci" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Cka-GU-3yG"/>
                 <constraint firstItem="MP5-s1-ynW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="LhO-Fj-L8l"/>
                 <constraint firstItem="MP5-s1-ynW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="VCz-eE-TGr"/>
                 <constraint firstItem="mEd-pH-Sci" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tHN-je-h4Q"/>
@@ -118,7 +129,9 @@
                     <exclude reference="VCz-eE-TGr"/>
                     <exclude reference="32L-6V-jR9"/>
                     <exclude reference="AG7-3q-Pda"/>
+                    <exclude reference="Cka-GU-3yG"/>
                     <exclude reference="tHN-je-h4Q"/>
+                    <exclude reference="BQe-XQ-pEm"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
@@ -131,7 +144,9 @@
                     <include reference="VCz-eE-TGr"/>
                     <include reference="32L-6V-jR9"/>
                     <include reference="AG7-3q-Pda"/>
+                    <include reference="Cka-GU-3yG"/>
                     <include reference="tHN-je-h4Q"/>
+                    <include reference="BQe-XQ-pEm"/>
                 </mask>
             </variation>
             <connections>
