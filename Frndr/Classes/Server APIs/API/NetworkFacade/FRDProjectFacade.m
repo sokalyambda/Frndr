@@ -21,8 +21,8 @@
 
 static FRDSessionManager *sharedHTTPClient = nil;
 
-NSString *baseURLString = @"http://192.168.88.55:8859/";
-//NSString *baseURLString = @"http://134.249.164.53:8859/"
+//NSString *baseURLString = @"http://192.168.88.55:8859/";
+NSString *baseURLString = @"http://134.249.164.53:8859/";
 
 @implementation FRDProjectFacade
 
@@ -95,6 +95,31 @@ NSString *baseURLString = @"http://192.168.88.55:8859/";
 }
 
 #pragma mark - Requests builder
+
+/**
+ *  Update notifications settings
+ *
+ *  @param success Success Block
+ *  @param failure Failure Block
+ */
++ (FRDNetworkOperation *)updateNotificationsSettingsOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+{
+    FRDUpdateNotificationsSettingsRequest *request = [[FRDUpdateNotificationsSettingsRequest alloc] init];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
 
 /**
  *  Sign out from current account

@@ -38,6 +38,9 @@ extern NSString *defaultBaseURLString;
 //Delete account
 + (FRDNetworkOperation *)deleteAccountOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
+//Update notifications settings
++ (FRDNetworkOperation *)updateNotificationsSettingsOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
+
 //User Profile
 + (FRDNetworkOperation *)updatedProfile:(FRDCurrentUserProfile *)updatedProfile
                               onSuccess:(void (^)(FRDCurrentUserProfile *confirmedProfile))success

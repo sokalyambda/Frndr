@@ -64,22 +64,27 @@
 - (void)setCurrentDistance:(NSInteger)currentDistance
 {
     _currentDistance = currentDistance;
-    self.distanceLabel.text = [NSString stringWithFormat:@"%ld miles", currentDistance];
+    self.distanceLabel.text = [NSString stringWithFormat:@"%ld miles", (long)currentDistance];
 }
 
 - (void)setCurrentMinimumAge:(NSInteger)currentMinimumAge
 {
     _currentMinimumAge = currentMinimumAge;
-    self.ageRangeLabel.text = [NSString stringWithFormat:@"%ld - %ld years", currentMinimumAge, self.currentMaximumAge];
+    self.ageRangeLabel.text = [NSString stringWithFormat:@"%ld - %ld years", (long)currentMinimumAge, (long)self.currentMaximumAge];
 }
 
 - (void)setCurrentMaximumAge:(NSInteger)currentMaximumAge
 {
     _currentMaximumAge = currentMaximumAge;
-    self.ageRangeLabel.text = [NSString stringWithFormat:@"%ld - %ld years", self.currentMinimumAge, currentMaximumAge];
+    self.ageRangeLabel.text = [NSString stringWithFormat:@"%ld - %ld years", (long)self.currentMinimumAge, (long)currentMaximumAge];
 }
 
 #pragma mark - Actions
+
+- (IBAction)saveSettingsClick:(id)sender
+{
+    
+}
 
 - (void)initDropDownHolderContainer
 {

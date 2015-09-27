@@ -8,7 +8,7 @@
 
 @class FRDBaseDropDownDataSource, FRDDropDownTableView;
 
-typedef void(^DropDownCompletion)(FRDDropDownTableView *table, NSString *chosenValue);
+typedef void(^DropDownCompletion)(FRDDropDownTableView *table, id chosenValue);
 
 @interface FRDDropDownTableView : UIView
 

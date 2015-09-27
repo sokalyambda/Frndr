@@ -21,4 +21,9 @@
     return self;
 }
 
++ (instancetype)orientationWithOrientationString:(NSString *)string
+{
+    return [[self alloc] initWithOrientationString:string];
+}
+
 @end

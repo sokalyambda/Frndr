@@ -10,6 +10,6 @@
 
 @property (nonatomic) NSString *orientationString;
 
-- (instancetype)initWithOrientationString:(NSString *)string;
++ (instancetype)orientationWithOrientationString:(NSString *)string;
 
 @end
