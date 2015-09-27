@@ -22,7 +22,7 @@
 - (void)configureCellWithRelationshipItem:(FRDRelationshipItem *)item
 {
     if (item.isSelected) {
-        self.relationshipImageView.image = item.relationshipImage;
+        self.relationshipImageView.image = item.relationshipActiveImage;
     } else {
         self.relationshipImageView.image = item.relationshipNotActiveImage;
     }

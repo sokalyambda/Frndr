@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Common</key>
+	<dict>
+		<key>Family</key>
+		<dict>
+			<key>ActiveImageName</key>
+			<string>FamilyActiveIcon</string>
+			<key>NotActiveImageName</key>
+			<string>FamilyNonActiveIcon</string>
+		</dict>
+		<key>Couple</key>
+		<dict>
+			<key>ActiveImageName</key>
+			<string>CoupleActiveIcon</string>
+			<key>NotActiveImageName</key>
+			<string>CoupleNonActiveIcon</string>
+		</dict>
+	</dict>
+	<key>Male</key>
+	<dict>
+		<key>Single Male</key>
+		<dict>
+			<key>ActiveImageName</key>
+			<string>SingleMaleActive</string>
+			<key>NotActiveImageName</key>
+			<string>SingleMaleNonActive</string>
+		</dict>
+		<key>Single Father</key>
+		<dict>
+			<key>ActiveImageName</key>
+			<string>SingleFatherActiveIcon</string>
+			<key>NotActiveImageName</key>
+			<string>SingleFatherNonActiveIcon</string>
+		</dict>
+	</dict>
+	<key>Female</key>
+	<dict>
+		<key>Single Female</key>
+		<dict>
+			<key>ActiveImageName</key>
+			<string>SingleFemaleActiveIcon</string>
+			<key>NotActiveImageName</key>
+			<string>SingleFemaleNonActiveIcon</string>
+		</dict>
+		<key>Single Mother</key>
+		<dict>
+			<key>ActiveImageName</key>
+			<string>SingleMotherActiveIcon</string>
+			<key>NotActiveImageName</key>
+			<string>SingleMotherNonActiveIcon</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

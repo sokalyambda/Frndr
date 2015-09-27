@@ -105,6 +105,7 @@
 		58CD9AC41BAFF29F00A7CADB /* FRDBaseContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD9AC31BAFF29F00A7CADB /* FRDBaseContentController.m */; settings = {ASSET_TAGS = (); }; };
 		58D5A16A1BA329C800D552CF /* FRDNavigationTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D5A1691BA329C800D552CF /* FRDNavigationTitleView.m */; };
 		58D5A16C1BA329E500D552CF /* FRDNavigationTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58D5A16B1BA329E500D552CF /* FRDNavigationTitleView.xib */; };
+		58DD73161BB832D9009D5536 /* RelationshipStatuses.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58DD73151BB832D9009D5536 /* RelationshipStatuses.plist */; settings = {ASSET_TAGS = (); }; };
 		58DE5B351BB541020020A34C /* FRDBaseUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE5B341BB541020020A34C /* FRDBaseUserModel.m */; settings = {ASSET_TAGS = (); }; };
 		58DE5B381BB541160020A34C /* FRDFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE5B371BB541160020A34C /* FRDFriend.m */; settings = {ASSET_TAGS = (); }; };
 		58DE5B3B1BB541280020A34C /* FRDNearestUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE5B3A1BB541280020A34C /* FRDNearestUser.m */; settings = {ASSET_TAGS = (); }; };
@@ -334,6 +335,7 @@
 		58D5A1681BA329C800D552CF /* FRDNavigationTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDNavigationTitleView.h; path = Classes/MVC/Views/NavigationTitleView/FRDNavigationTitleView.h; sourceTree = "<group>"; };
 		58D5A1691BA329C800D552CF /* FRDNavigationTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDNavigationTitleView.m; path = Classes/MVC/Views/NavigationTitleView/FRDNavigationTitleView.m; sourceTree = "<group>"; };
 		58D5A16B1BA329E500D552CF /* FRDNavigationTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDNavigationTitleView.xib; path = Classes/MVC/Views/NavigationTitleView/FRDNavigationTitleView.xib; sourceTree = "<group>"; };
+		58DD73151BB832D9009D5536 /* RelationshipStatuses.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = RelationshipStatuses.plist; path = Classes/MVC/Controllers/RelationshipStatusController/RelationshipStatuses.plist; sourceTree = "<group>"; };
 		58DE5B331BB541020020A34C /* FRDBaseUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDBaseUserModel.h; path = Classes/MVC/Models/Users/BaseUserModel/BaseUser/FRDBaseUserModel.h; sourceTree = "<group>"; };
 		58DE5B341BB541020020A34C /* FRDBaseUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDBaseUserModel.m; path = Classes/MVC/Models/Users/BaseUserModel/BaseUser/FRDBaseUserModel.m; sourceTree = "<group>"; };
 		58DE5B361BB541160020A34C /* FRDFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDFriend.h; path = Classes/MVC/Models/Users/BaseUserModel/Friend/FRDFriend.h; sourceTree = "<group>"; };
@@ -770,6 +772,7 @@
 		587B3A8A1BA814990098154F /* RelationshipStatusController */ = {
 			isa = PBXGroup;
 			children = (
+				58DD73151BB832D9009D5536 /* RelationshipStatuses.plist */,
 				587B3A8B1BA814C40098154F /* FRDRelationshipStatusController.h */,
 				587B3A8C1BA814C40098154F /* FRDRelationshipStatusController.m */,
 				587B3A8D1BA814C40098154F /* FRDRelationshipStatusController.xib */,
@@ -1961,6 +1964,7 @@
 				58D5A16C1BA329E500D552CF /* FRDNavigationTitleView.xib in Resources */,
 				58C28C501BA99A6E009D1AC4 /* FRDFriendDragableView.xib in Resources */,
 				3E1D9BEE1BB3CE46003A1E5C /* FRDPreviewGalleryController.xib in Resources */,
+				58DD73161BB832D9009D5536 /* RelationshipStatuses.plist in Resources */,
 				587B3A891BA80F3D0098154F /* FRDDropDownHolderController.xib in Resources */,
 				587B3A951BA815850098154F /* FRDRelationshipCollectionCell.xib in Resources */,
 				58ED54FA1BB189EA00F9B378 /* FRDGeolocationDeniedController.xib in Resources */,

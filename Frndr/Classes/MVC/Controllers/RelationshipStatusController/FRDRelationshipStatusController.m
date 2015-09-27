@@ -14,11 +14,16 @@
 
 #import "UIView+MakeFromXib.h"
 
+static NSString *const kActiveImageName = @"ActiveImageName";
+static NSString *const kNotActiveImageName = @"NotActiveImageName";
+
 @interface FRDRelationshipStatusController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @property (nonatomic) NSArray *relationshipStatuses;
+
+@property (nonatomic) NSInteger selectionCounter;
 
 @end
 
@@ -70,8 +75,21 @@
 {
     FRDRelationshipItem *currentItem = self.relationshipStatuses[indexPath.row];
     FRDRelationshipCollectionCell *cell = (FRDRelationshipCollectionCell *)[self collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    
     [cell updateCellWithRelationshipItem:currentItem];
     [collectionView reloadItemsAtIndexPaths:@[indexPath]];
+    
+    /*
+    if (!currentItem.isSelected) {
+        self.selectionCounter++;
+    } else if (self.selectionCounter > 0) {
+        self.selectionCounter--;
+    }
+    
+    if (self.selectionCounter < 1 || collectionView.allowsMultipleSelection) {
+        
+    }
+     */
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
@@ -105,14 +123,75 @@
  */
 - (NSArray *)setupRelationshipsArray
 {
-    FRDRelationshipItem *relItem1 = [FRDRelationshipItem relationshipItemWithTitle:LOCALIZED(@"Single Female") andActiveImage:[UIImage imageNamed:@"SingleFemaleActiveIcon"] andNotActiveImage:[UIImage imageNamed:@"SingleFemaleNonActiveIcon"]];
-    FRDRelationshipItem *relItem2 = [FRDRelationshipItem relationshipItemWithTitle:LOCALIZED(@"Single Male") andActiveImage:[UIImage imageNamed:@"SingleMaleActive"] andNotActiveImage:[UIImage imageNamed:@"SingleMaleNonActive"]];
-    FRDRelationshipItem *relItem3 = [FRDRelationshipItem relationshipItemWithTitle:LOCALIZED(@"Couple") andActiveImage:[UIImage imageNamed:@"CoupleActiveIcon"] andNotActiveImage:[UIImage imageNamed:@"CoupleNonActiveIcon"]];
-    FRDRelationshipItem *relItem4 = [FRDRelationshipItem relationshipItemWithTitle:LOCALIZED(@"Family") andActiveImage:[UIImage imageNamed:@"FamilyActiveIcon"] andNotActiveImage:[UIImage imageNamed:@"FamilyNonActiveIcon"]];
-    FRDRelationshipItem *relItem5 = [FRDRelationshipItem relationshipItemWithTitle:LOCALIZED(@"Single Mother") andActiveImage:[UIImage imageNamed:@"SingleFemaleActiveIcon"] andNotActiveImage:[UIImage imageNamed:@"SingleFemaleNonActiveIcon"]];
-    FRDRelationshipItem *relItem6 = [FRDRelationshipItem relationshipItemWithTitle:LOCALIZED(@"Single Father") andActiveImage:[UIImage imageNamed:@"SingleFatherActiveIcon"] andNotActiveImage:[UIImage imageNamed:@"SingleFatherNonActiveIcon"]];
     
-    return @[relItem1, relItem2, relItem3, relItem4, relItem5, relItem6];
+    NSDictionary *relDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"RelationshipStatuses" ofType:@"plist"]];
+    NSDictionary *commonRelStatuses = relDict[@"Common"];
+    NSDictionary *femaleRelStatuses = relDict[@"Female"];
+    NSDictionary *maleRelStatuses = relDict[@"Male"];
+    
+    NSMutableArray *currentRelStatuses = [NSMutableArray array];
+    
+    FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
+    
+    switch (self.sourceType) {
+        case FRDRelationshipsDataSourceTypeMyProfile: {
+            
+            self.collectionView.allowsMultipleSelection = NO;
+            
+            [commonRelStatuses enumerateKeysAndObjectsUsingBlock:^(NSString  *_Nonnull key, NSDictionary  * _Nonnull obj, BOOL * _Nonnull stop) {
+                
+                FRDRelationshipItem *item = [FRDRelationshipItem relationshipItemWithTitle:key andActiveImage:obj[kActiveImageName] andNotActiveImage:obj[kNotActiveImageName]];
+                [currentRelStatuses addObject:item];
+            }];
+            
+            if (currentProfile.isMale) {
+                
+                [maleRelStatuses enumerateKeysAndObjectsUsingBlock:^(NSString  *_Nonnull key, NSDictionary  * _Nonnull obj, BOOL * _Nonnull stop) {
+                    
+                    FRDRelationshipItem *item = [FRDRelationshipItem relationshipItemWithTitle:key andActiveImage:obj[kActiveImageName] andNotActiveImage:obj[kNotActiveImageName]];
+                    [currentRelStatuses addObject:item];
+                }];
+                
+            } else {
+                
+                [femaleRelStatuses enumerateKeysAndObjectsUsingBlock:^(NSString  *_Nonnull key, NSDictionary  * _Nonnull obj, BOOL * _Nonnull stop) {
+                    
+                    FRDRelationshipItem *item = [FRDRelationshipItem relationshipItemWithTitle:key andActiveImage:obj[kActiveImageName] andNotActiveImage:obj[kNotActiveImageName]];
+                    [currentRelStatuses addObject:item];
+                }];
+                
+            }
+            
+            break;
+        }
+        case FRDRelationshipsDataSourceTypeSearchSettings: {
+            
+            self.collectionView.allowsMultipleSelection = YES;
+            
+            [maleRelStatuses enumerateKeysAndObjectsUsingBlock:^(NSString  *_Nonnull key, NSDictionary  * _Nonnull obj, BOOL * _Nonnull stop) {
+                
+                FRDRelationshipItem *item = [FRDRelationshipItem relationshipItemWithTitle:key andActiveImage:obj[kActiveImageName] andNotActiveImage:obj[kNotActiveImageName]];
+                [currentRelStatuses addObject:item];
+            }];
+            [commonRelStatuses enumerateKeysAndObjectsUsingBlock:^(NSString  *_Nonnull key, NSDictionary  * _Nonnull obj, BOOL * _Nonnull stop) {
+                
+                FRDRelationshipItem *item = [FRDRelationshipItem relationshipItemWithTitle:key andActiveImage:obj[kActiveImageName] andNotActiveImage:obj[kNotActiveImageName]];
+                [currentRelStatuses addObject:item];
+            }];
+            [femaleRelStatuses enumerateKeysAndObjectsUsingBlock:^(NSString  *_Nonnull key, NSDictionary  * _Nonnull obj, BOOL * _Nonnull stop) {
+                
+                FRDRelationshipItem *item = [FRDRelationshipItem relationshipItemWithTitle:key andActiveImage:obj[kActiveImageName] andNotActiveImage:obj[kNotActiveImageName]];
+                [currentRelStatuses addObject:item];
+            }];
+            
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
+    return currentRelStatuses;
 }
 
 @end

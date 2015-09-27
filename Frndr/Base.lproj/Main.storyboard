@@ -683,6 +683,9 @@
                                                             <include reference="mOQ-zz-mbI"/>
                                                         </mask>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="newFriendsNotificationsClick:" destination="AQs-9T-kQV" eventType="valueChanged" id="Pll-Jz-7oE"/>
+                                                    </connections>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -751,6 +754,9 @@
                                                             <include reference="mpa-Pj-Upe"/>
                                                         </mask>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="newMessagesNotificationsClick:" destination="AQs-9T-kQV" eventType="valueChanged" id="4F6-Xq-lem"/>
+                                                    </connections>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -1566,13 +1572,14 @@
                                                     </constraints>
                                                     <color key="textColor" red="0.32498972040000002" green="0.32956414470000001" blue="0.52870579770000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="QnB-y6-Rgc"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="0.0" y="11" width="240" height="37"/>
                                                         <mask key="constraints">
                                                             <include reference="QnB-y6-Rgc"/>
                                                         </mask>
@@ -1623,13 +1630,14 @@
                                                     </constraints>
                                                     <color key="textColor" red="0.32498972040000002" green="0.32956414470000001" blue="0.52870579770000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="Vo2-o2-vYJ"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="0.0" y="11" width="240" height="37"/>
                                                         <mask key="constraints">
                                                             <include reference="Vo2-o2-vYJ"/>
                                                         </mask>
@@ -1680,13 +1688,14 @@
                                                     </constraints>
                                                     <color key="textColor" red="0.32498972040000002" green="0.32956414470000001" blue="0.52870579770000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="v3S-Ie-p3D"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="0.0" y="11" width="240" height="37"/>
                                                         <mask key="constraints">
                                                             <include reference="v3S-Ie-p3D"/>
                                                         </mask>
@@ -1737,13 +1746,14 @@
                                                     </constraints>
                                                     <color key="textColor" red="0.32498972040000002" green="0.32956414470000001" blue="0.52870579770000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="MoH-By-NtL"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="0.0" y="11" width="240" height="37"/>
                                                         <mask key="constraints">
                                                             <include reference="MoH-By-NtL"/>
                                                         </mask>
@@ -1794,13 +1804,14 @@
                                                     </constraints>
                                                     <color key="textColor" red="0.32498972040000002" green="0.32956414470000001" blue="0.52870579770000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="ZfU-fQ-bF1"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="0.0" y="11" width="240" height="37"/>
                                                         <mask key="constraints">
                                                             <include reference="ZfU-fQ-bF1"/>
                                                         </mask>
@@ -1858,9 +1869,10 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                     <color key="textColor" red="0.32498972040000002" green="0.32956414470000001" blue="0.52870579770000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                                         <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
+                                                        <rect key="frame" x="0.0" y="7" width="240" height="150"/>
                                                     </variation>
                                                     <connections>
                                                         <outlet property="delegate" destination="Ovd-Im-Zfl" id="7VC-ME-v3W"/>
@@ -1923,6 +1935,11 @@
                         <outlet property="personalBioThingILoveTextView" destination="Jed-CK-Yl5" id="hbH-aq-zAO"/>
                         <outlet property="secondThingILoveTextField" destination="QWv-Uf-XV5" id="Qkh-SG-8PT"/>
                         <outlet property="thirdThingILoveTextField" destination="lEV-6h-HZM" id="a5B-Us-lRN"/>
+                        <outletCollection property="mostLovedThingsFields" destination="DMu-GP-uEQ" id="k5I-dd-ypZ"/>
+                        <outletCollection property="mostLovedThingsFields" destination="QWv-Uf-XV5" id="oa5-Qc-nli"/>
+                        <outletCollection property="mostLovedThingsFields" destination="lEV-6h-HZM" id="lmp-dy-u3H"/>
+                        <outletCollection property="mostLovedThingsFields" destination="atQ-5K-8GT" id="GDc-QS-OMI"/>
+                        <outletCollection property="mostLovedThingsFields" destination="aCa-C9-iP2" id="ncj-o7-gq0"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dKk-Av-na0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2785,7 +2802,7 @@
                                                 </constraints>
                                                 <color key="textColor" red="0.32498972040000002" green="0.32956414470000001" blue="0.52870579770000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                                 <variation key="default">
                                                     <mask key="constraints">
                                                         <exclude reference="k9i-UZ-DQH"/>
@@ -2796,6 +2813,9 @@
                                                         <include reference="k9i-UZ-DQH"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <outlet property="delegate" destination="wfm-Av-6BD" id="Tya-zt-h8X"/>
+                                                </connections>
                                             </textField>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m0m-uc-nnL">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -2902,6 +2922,9 @@
                                                         <include reference="1AG-KI-zci"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <action selector="updateProfileClick:" destination="wfm-Av-6BD" eventType="touchUpInside" id="G9q-sS-opl"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3098,6 +3121,7 @@
                     <size key="freeformSize" width="400" height="1350"/>
                     <connections>
                         <outlet property="dropDownHolderContainer" destination="Oge-ME-dce" id="MTa-zS-d24"/>
+                        <outlet property="jobTitleField" destination="82V-fg-PeQ" id="B7k-vn-eM9"/>
                         <outlet property="relationshipsContainer" destination="UFH-Hh-wOr" id="lwX-uA-lSh"/>
                         <outlet property="scrollView" destination="RgJ-fn-XSa" id="PeE-p2-48S"/>
                         <outlet property="topViewContainer" destination="B1X-MD-Spt" id="6LZ-17-zUT"/>

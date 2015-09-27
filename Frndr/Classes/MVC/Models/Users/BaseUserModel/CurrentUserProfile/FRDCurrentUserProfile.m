@@ -94,7 +94,7 @@ static NSString *const kNewFriends = @"newFriends";
         _userId = [response[kId] longLongValue];
         
         NSDictionary *profileDict   = response[kProfile];
-        _visible                    = [profileDict[kVisible] boolValue];
+        _visible = [profileDict[kVisible] boolValue];
         _thingsLovedMost = profileDict[kThingsLovedMost];
         _sexualOrientation = [FRDSexualOrientation orientationWithOrientationString:profileDict[kSexualOrientation]];
         _relationshipStatus = [FRDRelationshipItem relationshipItemWithTitle:profileDict[kRelationshipStatus] andActiveImage:nil andNotActiveImage:nil];

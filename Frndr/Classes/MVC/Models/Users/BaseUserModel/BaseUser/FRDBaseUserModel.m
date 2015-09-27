@@ -25,6 +25,16 @@ static NSString *const kUserId              = @"userId";
 
 @implementation FRDBaseUserModel
 
+#pragma mark - Accessors
+
+- (BOOL)isMale
+{
+    if ([self.genderString isEqualToString:@"Male"]) {
+        return YES;
+    }
+    return NO;
+}
+
 #pragma mark - FRDMappingProtocol
 
 - (instancetype)initWithServerResponse:(NSDictionary *)response

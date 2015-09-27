@@ -40,5 +40,6 @@
 @property (assign, nonatomic) NSInteger age;
 @property (assign, nonatomic) CGFloat distanceFromMe;
 @property (assign, nonatomic, getter=isSmoker) BOOL smoker;
+@property (assign, nonatomic, getter=isMale, readonly) BOOL male;
 
 @end

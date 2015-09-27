@@ -10,26 +10,44 @@
 
 @interface FRDRelationshipItem ()
 
+@property (nonatomic) NSString *relationshipActiveImageName;
+@property (nonatomic) NSString *relationshipNotActiveImageName;
+
 @end
 
 @implementation FRDRelationshipItem
 
+#pragma mark - Accessors
+
+- (void)setRelationshipActiveImageName:(NSString *)relationshipActiveImageName
+{
+    _relationshipActiveImageName = relationshipActiveImageName;
+    _relationshipActiveImage = [UIImage imageNamed:_relationshipActiveImageName];
+}
+
+- (void)setRelationshipNotActiveImageName:(NSString *)relationshipNotActiveImageName
+{
+    _relationshipNotActiveImageName = relationshipNotActiveImageName;
+    _relationshipNotActiveImage = [UIImage imageNamed:_relationshipNotActiveImageName];
+}
+
 #pragma mark - Lifecycle
 
-- (instancetype)initWithTitle:(NSString *)title andActiveImage:(UIImage *)image andNotActiveImage:(UIImage *)notActiveImage
+- (instancetype)initWithTitle:(NSString *)title andActiveImageName:(NSString *)activeImageName andNotActiveImage:(NSString *)notActiveImageName
 {
     self = [super init];
     if (self) {
         _relationshipTitle = title;
-        _relationshipImage = image;
-        _relationshipNotActiveImage = notActiveImage;
+        
+        self.relationshipActiveImageName = activeImageName;
+        self.relationshipNotActiveImageName = notActiveImageName;
     }
     return self;
 }
 
-+ (instancetype)relationshipItemWithTitle:(NSString *)title andActiveImage:(UIImage *)activeImage andNotActiveImage:(UIImage *)notActiveImage
++ (instancetype)relationshipItemWithTitle:(NSString *)title andActiveImage:(NSString *)activeImageName andNotActiveImage:(NSString *)notActiveImageName
 {
-    return [[self alloc] initWithTitle:title andActiveImage:activeImage andNotActiveImage:notActiveImage];
+    return [[self alloc] initWithTitle:title andActiveImageName:activeImageName andNotActiveImage:notActiveImageName];
 }
 
 @end

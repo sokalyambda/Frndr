@@ -107,6 +107,7 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
     [FRDProjectFacade updatedProfile:profileForUpdating onSuccess:^(FRDCurrentUserProfile *confirmedProfile) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [currentProfile updateWithUserProfile:confirmedProfile];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
@@ -164,6 +165,7 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
     [self.relationshipsContainer addSubview:self.relationshipController.view];
     [self addChildViewController:self.relationshipController];
     [self.relationshipController didMoveToParentViewController:self];
+    self.relationshipController.sourceType = FRDRelationshipsDataSourceTypeMyProfile;
 }
 
 - (void)initDropDownHolderContainer
@@ -232,6 +234,8 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
     self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x,
                                                 self.previousVerticalOffset);
 }
+
+#pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
