@@ -6,8 +6,12 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@class FRDFriendOverlayView;
 
 @interface FRDFriendDragableParentView : UIView
+
+@property (strong, nonatomic) FRDFriendOverlayView *currentOverlayView;
+
+@property (strong, nonatomic) NSString *currentOverlayImageName;
 
 @end

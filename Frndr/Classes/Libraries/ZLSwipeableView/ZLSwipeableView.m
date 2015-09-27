@@ -10,6 +10,7 @@
 #import "ZLPanGestureRecognizer.h"
 
 #import "FRDFriendOverlayView.h"
+#import "FRDFriendDragableParentView.h"
 #import "UIView+MakeFromXib.h"
 
 const NSUInteger ZLPrefetchedViewsNumber = 3;
@@ -48,9 +49,6 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
 @property (strong, nonatomic) UIView *reuseCoverContainerView;
 @property (strong, nonatomic) UIView *containerView;
 
-/*****Overlay View*****/
-@property (nonatomic) IBOutlet FRDFriendOverlayView *overlayView;
-
 @end
 
 @implementation ZLSwipeableView
@@ -77,9 +75,6 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
 
 - (void)setup
 {
-    /*****Create overlay view*****/
-    self.overlayView = [FRDFriendOverlayView makeFromXibWithFileOwner:self];
-    
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self];
     self.animator.delegate = self;
     self.anchorContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
@@ -255,6 +250,11 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
                                             translation.x / translationMagnitude * scale,
                                             translation.y / translationMagnitude * scale
                                             );
+    //Get the current overlay view
+    FRDFriendOverlayView *currentOverlay;
+    if ([swipeableView isKindOfClass:[FRDFriendDragableParentView class]]) {
+        currentOverlay = ((FRDFriendDragableParentView *)swipeableView).currentOverlayView;;
+    }
     
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         [self createAnchorViewForCover:swipeableView atLocation:location shouldAttachAnchorViewToPoint:YES];
@@ -272,20 +272,18 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
 
         /*****Add overlay view if needed when swiping*****/
         ZLSwipeableViewDirection directionType = ZLDirectionVectorToSwipeableViewDirection(directionVector);
-        if (![swipeableView.subviews containsObject:self.overlayView] && (directionType == ZLSwipeableViewDirectionLeft || directionType == ZLSwipeableViewDirectionRight)) {
-            [self.overlayView setFrame:swipeableView.frame];
-            [swipeableView addSubview:self.overlayView];
+        
+        if (currentOverlay.isHidden && (directionType == ZLSwipeableViewDirectionLeft || directionType == ZLSwipeableViewDirectionRight)) {
+            currentOverlay.hidden = NO;
         }
-        [self configureOverlayImageWithDirection:directionType];
-        /*****Adjust the center of overlay view*****/
-        self.overlayView.center = swipeableView.center;
+        [self configureOverlayImageView:currentOverlay withDirection:directionType];
     }
     
     if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
         
         /*****Remove overlay*****/
-        if ([swipeableView.subviews containsObject:self.overlayView]) {
-            [self.overlayView removeFromSuperview];
+        if (!currentOverlay.isHidden) {
+            currentOverlay.hidden = YES;
         }
 
         /*****New delegate method*****/
@@ -355,7 +353,11 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
         return;
     }
     
-    
+    //Get the current overlay view
+    FRDFriendOverlayView *currentOverlay;
+    if ([topSwipeableView isKindOfClass:[FRDFriendDragableParentView class]]) {
+        currentOverlay = ((FRDFriendDragableParentView *)topSwipeableView).currentOverlayView;
+    }
     
     CGPoint location = CGPointMake(
                                    topSwipeableView.center.x,
@@ -370,11 +372,10 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
 
     /***** Add overlay view if needed when press button *****/
     ZLSwipeableViewDirection directionType = ZLDirectionVectorToSwipeableViewDirection(direction);
-    if (![topSwipeableView.subviews containsObject:self.overlayView]) {
-        [self.overlayView setFrame:topSwipeableView.frame];
-        [topSwipeableView addSubview:self.overlayView];
+    if (currentOverlay.isHidden) {
+        currentOverlay.hidden = NO;
     }
-    [self configureOverlayImageWithDirection:directionType];
+    [self configureOverlayImageView:currentOverlay withDirection:directionType];
 
     [self pushAnchorViewForCover:topSwipeableView
                      inDirection:direction
@@ -663,12 +664,14 @@ atOffsetFromCenter:(CGPoint)offset
 
 #pragma mark - OverlayView
 /*****Custom methods*****/
-- (void)configureOverlayImageWithDirection:(ZLSwipeableViewDirection)directionType
+- (void)configureOverlayImageView:(FRDFriendOverlayView *)overlayView withDirection:(ZLSwipeableViewDirection)directionType
 {
     if (directionType == ZLSwipeableViewDirectionLeft) {
-        self.overlayView.currentOverlayImageName = @"discardIcon";
+        overlayView.currentOverlayImageName = @"discardIcon";
     } else if (directionType == ZLSwipeableViewDirectionRight) {
-        self.overlayView.currentOverlayImageName = @"applyIcon";
+        overlayView.currentOverlayImageName = @"applyIcon";
+    } else {
+        overlayView.hidden = YES;
     }
 }
 

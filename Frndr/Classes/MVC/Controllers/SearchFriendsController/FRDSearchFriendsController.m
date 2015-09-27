@@ -267,6 +267,10 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
         FRDFriendDragableView *friendView = [FRDFriendDragableView makeFromXib];
         friendView.translatesAutoresizingMaskIntoConstraints = NO;
         [parentView addSubview:friendView];
+        
+        //bring overlay to front
+        [parentView bringSubviewToFront:(UIView *)parentView.currentOverlayView];
+        
         [self addConstraintsForParentView:parentView andContentView:friendView];
         
         [friendView configureWithNearestUser:currentNearesUser];
