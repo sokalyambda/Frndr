@@ -103,6 +103,7 @@
     [self.relationshipsContainer addSubview:self.relationshipController.view];
     [self addChildViewController:self.relationshipController];
     [self.relationshipController didMoveToParentViewController:self];
+    self.relationshipController.sourceType = FRDRelationshipsDataSourceTypeSearchSettings;
 }
 
 - (void)configureSliders

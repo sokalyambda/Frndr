@@ -8,16 +8,32 @@
 
 #import "FRDGetUserByIdRequest.h"
 
-static NSString *const requestAction = @"users";
+static NSString *const kRequestAction = @"users";
+
+@interface FRDGetUserByIdRequest ()
+
+@property (strong, nonatomic) NSString *requestAction;
+@property (assign, nonatomic) NSInteger userId;
+
+@end
 
 @implementation FRDGetUserByIdRequest
 
+#pragma mark - Accessors
+
+- (NSString *)requestAction
+{
+    return _userId != 0 ? [NSString stringWithFormat:@"%@/%d", kRequestAction, _userId] : kRequestAction;
+}
+
 #pragma mark - Lifecycle
 
-- (instancetype)init
+- (instancetype)initWithUserId:(NSInteger)userId
 {
     self = [super init];
     if (self) {
+        
+        _userId = userId;
         self.action = [self requestAction];
         _method = @"GET";
         
@@ -32,12 +48,9 @@ static NSString *const requestAction = @"users";
 
 - (BOOL)parseJSONDataSucessfully:(id)responseObject error:(NSError *__autoreleasing *)error
 {
-    return !!responseObject;
-}
-
-- (NSString *)requestAction
-{
-    return requestAction;
+    FRDCurrentUserProfile *profile = [[FRDCurrentUserProfile alloc] initWithServerResponse:responseObject];
+    self.userProfile = profile;
+    return !!self.userProfile;
 }
 
 @end

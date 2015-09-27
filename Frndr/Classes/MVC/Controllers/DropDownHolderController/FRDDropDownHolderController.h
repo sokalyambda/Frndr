@@ -17,4 +17,6 @@
 @property (nonatomic) BOOL smoker;
 @property (nonatomic) FRDSexualOrientation *chosenOrientation;
 
+- (void)update;
+
 @end

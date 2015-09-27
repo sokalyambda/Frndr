@@ -20,6 +20,7 @@ static NSString *const kThingsLovedMost = @"things";
 static NSString *const kSexualOrientation = @"sexual";
 static NSString *const kRelationshipStatus = @"relStatus";
 static NSString *const kSex = @"sex";
+static NSString *const kJobTitle = @"jobTitle";
 
 static NSString *const kNotifications = @"notification";
 static NSString *const kNewMessages = @"newMessages";
@@ -90,16 +91,34 @@ static NSString *const kNewFriends = @"newFriends";
 - (instancetype)updateWithServerResponse:(NSDictionary *)response
 {
     if (self) {
-//        _userId = [response[kId] longLongValue];
+        _userId = [response[kId] longLongValue];
         
         NSDictionary *profileDict   = response[kProfile];
-        _visible                    = [profileDict[kVisible] boolValue];
-//        _chosenOrientation          = profileDict[kSexualOrientation];
-//        _genderString               = profileDict[kSex];
+        _visible = [profileDict[kVisible] boolValue];
+        _thingsLovedMost = profileDict[kThingsLovedMost];
+        _sexualOrientation = [FRDSexualOrientation orientationWithOrientationString:profileDict[kSexualOrientation]];
+        _relationshipStatus = [FRDRelationshipItem relationshipItemWithTitle:profileDict[kRelationshipStatus] andActiveImage:nil andNotActiveImage:nil];
+        _jobTitle = profileDict[kJobTitle];
         
         NSDictionary *notificationsDict = response[kNotifications];
         _friendsNotificationsEnabled = [notificationsDict[kNewFriends] boolValue];
         _messagesNotificationsEnabled = [notificationsDict[kNewMessages] boolValue];
+    }
+    return self;
+}
+
+- (instancetype)updateWithUserProfile:(FRDCurrentUserProfile *)profile
+{
+    if (self) {
+        _visible = profile.isVisible;
+        _thingsLovedMost = profile.thingsLovedMost;
+        _sexualOrientation = profile.sexualOrientation;
+        _relationshipStatus = profile.relationshipStatus;
+        _biography = profile.biography;
+        _jobTitle = profile.jobTitle;
+        
+        _friendsNotificationsEnabled = profile.friendsNotificationsEnabled;
+        _messagesNotificationsEnabled = profile.messagesNotificationsEnabled;
     }
     return self;
 }

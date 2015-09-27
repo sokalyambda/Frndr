@@ -35,6 +35,7 @@ typedef NS_ENUM(NSInteger, FRDPersonalBioSectionType)
 @implementation FRDPersonalBioTableController
 
 #pragma mark - View's Lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -60,6 +61,20 @@ typedef NS_ENUM(NSInteger, FRDPersonalBioSectionType)
 - (void)dismissKeyboard
 {
     [[UIResponder currentFirstResponder] resignFirstResponder];
+}
+
+#pragma mark - Public Methods
+
+- (void)update
+{
+    FRDCurrentUserProfile *profile = [FRDStorageManager sharedStorage].currentUserProfile;
+    self.personalBioThingILoveTextView.text = profile.biography;
+    
+    for (NSString *lovedThing in profile.thingsLovedMost) {
+        int idx = [profile.thingsLovedMost indexOfObject:lovedThing];
+        UITextField *currentField = self.mostLovedThingsFields[idx];
+        currentField.text = lovedThing;
+    }
 }
 
 #pragma mark - UITextFieldDelegate methods

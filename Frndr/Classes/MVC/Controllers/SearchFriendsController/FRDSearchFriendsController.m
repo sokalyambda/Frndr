@@ -1,3 +1,4 @@
+
 //
 //  FRDSearchFriendsController.m
 //  Frndr
@@ -92,6 +93,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     [super viewDidAppear:animated];
     NSLog(@"nearest users %@ and it's count is %d", self.nearestUsers, self.nearestUsers.count);
 //    [self performNeededUpdateAction];
+    [self getCurrentUserProfile];
     if (!self.nearestUsers.count) {
         [self findNearestUsers];
     }
@@ -129,6 +131,17 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     [self.photosCollectionContainer addSubview:self.previewGalleryController.view];
     [self addChildViewController:self.previewGalleryController];
     [self.previewGalleryController didMoveToParentViewController:self];
+}
+
+- (void)getCurrentUserProfile
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [FRDProjectFacade getCurrentUserProfileOnSuccess:^(BOOL isSuccess) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+    }];
 }
 
 /**

@@ -21,6 +21,7 @@
     NSString *_fullName;
     NSString *_genderString;
     BOOL _smoker;
+    long long _userId;
 }
 
 @property (strong, nonatomic) NSString *fullName;
@@ -39,5 +40,6 @@
 @property (assign, nonatomic) NSInteger age;
 @property (assign, nonatomic) CGFloat distanceFromMe;
 @property (assign, nonatomic, getter=isSmoker) BOOL smoker;
+@property (assign, nonatomic, getter=isMale, readonly) BOOL male;
 
 @end

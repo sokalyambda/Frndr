@@ -9,10 +9,12 @@
 @interface FRDRelationshipItem : NSObject
 
 @property (nonatomic, readonly) NSString *relationshipTitle;
-@property (nonatomic, readonly) UIImage *relationshipImage;
+
+@property (nonatomic, readonly) UIImage *relationshipActiveImage;
 @property (nonatomic, readonly) UIImage *relationshipNotActiveImage;
+
 @property (nonatomic) BOOL isSelected;
 
-+ (instancetype)relationshipItemWithTitle:(NSString *)title andActiveImage:(UIImage *)activeImage andNotActiveImage:(UIImage *)notActiveImage;
++ (instancetype)relationshipItemWithTitle:(NSString *)title andActiveImage:(NSString *)activeImageName andNotActiveImage:(NSString *)notActiveImageName;
 
 @end

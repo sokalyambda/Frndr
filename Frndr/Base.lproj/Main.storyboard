@@ -683,6 +683,9 @@
                                                             <include reference="mOQ-zz-mbI"/>
                                                         </mask>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="newFriendsNotificationsClick:" destination="AQs-9T-kQV" eventType="valueChanged" id="Pll-Jz-7oE"/>
+                                                    </connections>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -751,6 +754,9 @@
                                                             <include reference="mpa-Pj-Upe"/>
                                                         </mask>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="newMessagesNotificationsClick:" destination="AQs-9T-kQV" eventType="valueChanged" id="4F6-Xq-lem"/>
+                                                    </connections>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -1545,14 +1551,14 @@
         <scene sceneID="P0C-bg-CRs">
             <objects>
                 <tableViewController automaticallyAdjustsScrollViewInsets="NO" id="Ovd-Im-Zfl" customClass="FRDPersonalBioTableController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="48" sectionHeaderHeight="45" sectionFooterHeight="1" id="UNJ-nC-ydA">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="48" sectionHeaderHeight="45" sectionFooterHeight="1" id="UNJ-nC-ydA">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
                             <tableViewSection id="0wq-aC-Btb">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="XX2-ds-JIS">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="XX2-ds-JIS">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XX2-ds-JIS" id="19z-Iz-6Dp">
@@ -1564,8 +1570,9 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="37" id="QnB-y6-Rgc"/>
                                                     </constraints>
+                                                    <color key="textColor" red="0.32498972040000002" green="0.32956414470000001" blue="0.52870579770000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="QnB-y6-Rgc"/>
@@ -1609,7 +1616,7 @@
                                             </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="qaK-aW-wDY">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="qaK-aW-wDY">
                                         <rect key="frame" x="0.0" y="48" width="240" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qaK-aW-wDY" id="FI2-s9-L2p">
@@ -1621,8 +1628,9 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="37" id="Vo2-o2-vYJ"/>
                                                     </constraints>
+                                                    <color key="textColor" red="0.32498972040000002" green="0.32956414470000001" blue="0.52870579770000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="Vo2-o2-vYJ"/>
@@ -1666,7 +1674,7 @@
                                             </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="hI6-dn-cFZ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="hI6-dn-cFZ">
                                         <rect key="frame" x="0.0" y="96" width="240" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hI6-dn-cFZ" id="RPC-44-0Eq">
@@ -1678,8 +1686,9 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="37" id="v3S-Ie-p3D"/>
                                                     </constraints>
+                                                    <color key="textColor" red="0.32498972040000002" green="0.32956414470000001" blue="0.52870579770000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="v3S-Ie-p3D"/>
@@ -1723,7 +1732,7 @@
                                             </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="oSu-vz-w1Z">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="oSu-vz-w1Z">
                                         <rect key="frame" x="0.0" y="144" width="240" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oSu-vz-w1Z" id="FmJ-oR-qMM">
@@ -1735,8 +1744,9 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="37" id="MoH-By-NtL"/>
                                                     </constraints>
+                                                    <color key="textColor" red="0.32498972040000002" green="0.32956414470000001" blue="0.52870579770000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="MoH-By-NtL"/>
@@ -1780,7 +1790,7 @@
                                             </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="pBM-VO-0Gy">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="pBM-VO-0Gy">
                                         <rect key="frame" x="0.0" y="192" width="240" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pBM-VO-0Gy" id="Qjc-K1-oNz">
@@ -1792,8 +1802,9 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="37" id="ZfU-fQ-bF1"/>
                                                     </constraints>
+                                                    <color key="textColor" red="0.32498972040000002" green="0.32956414470000001" blue="0.52870579770000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="ZfU-fQ-bF1"/>
@@ -1841,7 +1852,7 @@
                             </tableViewSection>
                             <tableViewSection id="D3n-Ub-qnK">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="160" id="fjB-x7-Zso">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="160" id="fjB-x7-Zso">
                                         <rect key="frame" x="0.0" y="240" width="240" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fjB-x7-Zso" id="GYb-Zz-RI5">
@@ -1856,8 +1867,9 @@
                                                 </imageView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jed-CK-Yl5">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <color key="textColor" red="0.32498972040000002" green="0.32956414470000001" blue="0.52870579770000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                                         <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                                         <rect key="frame" x="0.0" y="7" width="240" height="150"/>
@@ -1923,6 +1935,11 @@
                         <outlet property="personalBioThingILoveTextView" destination="Jed-CK-Yl5" id="hbH-aq-zAO"/>
                         <outlet property="secondThingILoveTextField" destination="QWv-Uf-XV5" id="Qkh-SG-8PT"/>
                         <outlet property="thirdThingILoveTextField" destination="lEV-6h-HZM" id="a5B-Us-lRN"/>
+                        <outletCollection property="mostLovedThingsFields" destination="DMu-GP-uEQ" id="k5I-dd-ypZ"/>
+                        <outletCollection property="mostLovedThingsFields" destination="QWv-Uf-XV5" id="oa5-Qc-nli"/>
+                        <outletCollection property="mostLovedThingsFields" destination="lEV-6h-HZM" id="lmp-dy-u3H"/>
+                        <outletCollection property="mostLovedThingsFields" destination="atQ-5K-8GT" id="GDc-QS-OMI"/>
+                        <outletCollection property="mostLovedThingsFields" destination="aCa-C9-iP2" id="ncj-o7-gq0"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dKk-Av-na0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2783,8 +2800,9 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="k9i-UZ-DQH"/>
                                                 </constraints>
+                                                <color key="textColor" red="0.32498972040000002" green="0.32956414470000001" blue="0.52870579770000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                                 <variation key="default">
                                                     <mask key="constraints">
                                                         <exclude reference="k9i-UZ-DQH"/>
@@ -2795,6 +2813,9 @@
                                                         <include reference="k9i-UZ-DQH"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <outlet property="delegate" destination="wfm-Av-6BD" id="Tya-zt-h8X"/>
+                                                </connections>
                                             </textField>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m0m-uc-nnL">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -2901,6 +2922,9 @@
                                                         <include reference="1AG-KI-zci"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <action selector="updateProfileClick:" destination="wfm-Av-6BD" eventType="touchUpInside" id="G9q-sS-opl"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2928,7 +2952,7 @@
                                             <constraint firstAttribute="trailing" secondItem="82V-fg-PeQ" secondAttribute="trailing" constant="15" id="lK7-cV-Kzm"/>
                                             <constraint firstItem="ErF-6g-Iev" firstAttribute="top" secondItem="B1X-MD-Spt" secondAttribute="bottom" constant="15" id="mTS-96-kEf"/>
                                             <constraint firstItem="B1X-MD-Spt" firstAttribute="leading" secondItem="R2w-vI-UAr" secondAttribute="leading" id="nrr-Fm-zV4"/>
-                                            <constraint firstItem="B1X-MD-Spt" firstAttribute="top" secondItem="R2w-vI-UAr" secondAttribute="top" id="q1P-HE-aDO"/>
+                                            <constraint firstItem="B1X-MD-Spt" firstAttribute="top" secondItem="R2w-vI-UAr" secondAttribute="top" constant="10" id="q1P-HE-aDO"/>
                                             <constraint firstItem="h5J-cO-dPQ" firstAttribute="top" secondItem="ErF-6g-Iev" secondAttribute="bottom" constant="15" id="qFv-V8-L45"/>
                                             <constraint firstItem="h5J-cO-dPQ" firstAttribute="leading" secondItem="R2w-vI-UAr" secondAttribute="leading" constant="15" id="qIp-X4-Pyu"/>
                                             <constraint firstItem="m0m-uc-nnL" firstAttribute="leading" secondItem="R2w-vI-UAr" secondAttribute="leading" constant="15" id="v9t-FK-4wO"/>
@@ -3097,6 +3121,7 @@
                     <size key="freeformSize" width="400" height="1350"/>
                     <connections>
                         <outlet property="dropDownHolderContainer" destination="Oge-ME-dce" id="MTa-zS-d24"/>
+                        <outlet property="jobTitleField" destination="82V-fg-PeQ" id="B7k-vn-eM9"/>
                         <outlet property="relationshipsContainer" destination="UFH-Hh-wOr" id="lwX-uA-lSh"/>
                         <outlet property="scrollView" destination="RgJ-fn-XSa" id="PeE-p2-48S"/>
                         <outlet property="topViewContainer" destination="B1X-MD-Spt" id="6LZ-17-zUT"/>

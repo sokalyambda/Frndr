@@ -15,5 +15,7 @@
 #import "FRDSignOutRequest.h"
 #import "FRDDeleteCurrentUserRequest.h"
 #import "FRDUpdateNotificationsSettingsRequest.h"
+#import "FRDGetUserByIdRequest.h"
+#import "FRDGetCurrentUserProfileRequest.h"
 
 #endif

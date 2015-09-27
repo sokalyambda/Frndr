@@ -56,6 +56,7 @@
 		587B3A941BA815850098154F /* FRDRelationshipCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A921BA815850098154F /* FRDRelationshipCollectionCell.m */; };
 		587B3A951BA815850098154F /* FRDRelationshipCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587B3A931BA815850098154F /* FRDRelationshipCollectionCell.xib */; };
 		5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */; };
+		58BB5D431BB70AB900FD1A56 /* FRDGetCurrentUserProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BB5D421BB70AB800FD1A56 /* FRDGetCurrentUserProfileRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58BC76A11B9EB6B500BB8B5A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A01B9EB6B500BB8B5A /* main.m */; };
 		58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A31B9EB6B500BB8B5A /* AppDelegate.m */; };
 		58BC76AA1B9EB6B500BB8B5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58BC76A81B9EB6B500BB8B5A /* Main.storyboard */; };
@@ -104,6 +105,7 @@
 		58CD9AC41BAFF29F00A7CADB /* FRDBaseContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD9AC31BAFF29F00A7CADB /* FRDBaseContentController.m */; settings = {ASSET_TAGS = (); }; };
 		58D5A16A1BA329C800D552CF /* FRDNavigationTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D5A1691BA329C800D552CF /* FRDNavigationTitleView.m */; };
 		58D5A16C1BA329E500D552CF /* FRDNavigationTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58D5A16B1BA329E500D552CF /* FRDNavigationTitleView.xib */; };
+		58DD73161BB832D9009D5536 /* RelationshipStatuses.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58DD73151BB832D9009D5536 /* RelationshipStatuses.plist */; settings = {ASSET_TAGS = (); }; };
 		58DE5B351BB541020020A34C /* FRDBaseUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE5B341BB541020020A34C /* FRDBaseUserModel.m */; settings = {ASSET_TAGS = (); }; };
 		58DE5B381BB541160020A34C /* FRDFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE5B371BB541160020A34C /* FRDFriend.m */; settings = {ASSET_TAGS = (); }; };
 		58DE5B3B1BB541280020A34C /* FRDNearestUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE5B3A1BB541280020A34C /* FRDNearestUser.m */; settings = {ASSET_TAGS = (); }; };
@@ -245,6 +247,8 @@
 		587B3A931BA815850098154F /* FRDRelationshipCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDRelationshipCollectionCell.xib; path = Classes/Cells/UICollectionViewCells/RelationshipCollectionCell/FRDRelationshipCollectionCell.xib; sourceTree = "<group>"; };
 		5895FD931BA2D55C00079F9D /* FRDCustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDCustomPageControl.h; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.h; sourceTree = "<group>"; };
 		5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDCustomPageControl.m; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.m; sourceTree = "<group>"; };
+		58BB5D411BB70AB800FD1A56 /* FRDGetCurrentUserProfileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDGetCurrentUserProfileRequest.h; path = "Classes/Server APIs/API/Requests/GetUserByIdRequest/GetCurrentUserProfileRequest/FRDGetCurrentUserProfileRequest.h"; sourceTree = "<group>"; };
+		58BB5D421BB70AB800FD1A56 /* FRDGetCurrentUserProfileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDGetCurrentUserProfileRequest.m; path = "Classes/Server APIs/API/Requests/GetUserByIdRequest/GetCurrentUserProfileRequest/FRDGetCurrentUserProfileRequest.m"; sourceTree = "<group>"; };
 		58BC769B1B9EB6B500BB8B5A /* Frndr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frndr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58BC769F1B9EB6B500BB8B5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58BC76A01B9EB6B500BB8B5A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -331,6 +335,7 @@
 		58D5A1681BA329C800D552CF /* FRDNavigationTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDNavigationTitleView.h; path = Classes/MVC/Views/NavigationTitleView/FRDNavigationTitleView.h; sourceTree = "<group>"; };
 		58D5A1691BA329C800D552CF /* FRDNavigationTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDNavigationTitleView.m; path = Classes/MVC/Views/NavigationTitleView/FRDNavigationTitleView.m; sourceTree = "<group>"; };
 		58D5A16B1BA329E500D552CF /* FRDNavigationTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDNavigationTitleView.xib; path = Classes/MVC/Views/NavigationTitleView/FRDNavigationTitleView.xib; sourceTree = "<group>"; };
+		58DD73151BB832D9009D5536 /* RelationshipStatuses.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = RelationshipStatuses.plist; path = Classes/MVC/Controllers/RelationshipStatusController/RelationshipStatuses.plist; sourceTree = "<group>"; };
 		58DE5B331BB541020020A34C /* FRDBaseUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDBaseUserModel.h; path = Classes/MVC/Models/Users/BaseUserModel/BaseUser/FRDBaseUserModel.h; sourceTree = "<group>"; };
 		58DE5B341BB541020020A34C /* FRDBaseUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDBaseUserModel.m; path = Classes/MVC/Models/Users/BaseUserModel/BaseUser/FRDBaseUserModel.m; sourceTree = "<group>"; };
 		58DE5B361BB541160020A34C /* FRDFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDFriend.h; path = Classes/MVC/Models/Users/BaseUserModel/Friend/FRDFriend.h; sourceTree = "<group>"; };
@@ -775,6 +780,7 @@
 		587B3A8A1BA814990098154F /* RelationshipStatusController */ = {
 			isa = PBXGroup;
 			children = (
+				58DD73151BB832D9009D5536 /* RelationshipStatuses.plist */,
 				587B3A8B1BA814C40098154F /* FRDRelationshipStatusController.h */,
 				587B3A8C1BA814C40098154F /* FRDRelationshipStatusController.m */,
 				587B3A8D1BA814C40098154F /* FRDRelationshipStatusController.xib */,
@@ -817,6 +823,15 @@
 				5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */,
 			);
 			name = StyledPageControl;
+			sourceTree = "<group>";
+		};
+		58BB5D401BB70A4E00FD1A56 /* GetCurrentUserProfileRequest */ = {
+			isa = PBXGroup;
+			children = (
+				58BB5D411BB70AB800FD1A56 /* FRDGetCurrentUserProfileRequest.h */,
+				58BB5D421BB70AB800FD1A56 /* FRDGetCurrentUserProfileRequest.m */,
+			);
+			name = GetCurrentUserProfileRequest;
 			sourceTree = "<group>";
 		};
 		58BC76921B9EB6B500BB8B5A = {
@@ -1726,6 +1741,7 @@
 		58ED54E51BB163F900F9B378 /* GetUserByIdRequest */ = {
 			isa = PBXGroup;
 			children = (
+				58BB5D401BB70A4E00FD1A56 /* GetCurrentUserProfileRequest */,
 				58ED54E61BB1641100F9B378 /* FRDGetUserByIdRequest.h */,
 				58ED54E71BB1641100F9B378 /* FRDGetUserByIdRequest.m */,
 			);
@@ -1956,6 +1972,7 @@
 				58D5A16C1BA329E500D552CF /* FRDNavigationTitleView.xib in Resources */,
 				58C28C501BA99A6E009D1AC4 /* FRDFriendDragableView.xib in Resources */,
 				3E1D9BEE1BB3CE46003A1E5C /* FRDPreviewGalleryController.xib in Resources */,
+				58DD73161BB832D9009D5536 /* RelationshipStatuses.plist in Resources */,
 				587B3A891BA80F3D0098154F /* FRDDropDownHolderController.xib in Resources */,
 				587B3A951BA815850098154F /* FRDRelationshipCollectionCell.xib in Resources */,
 				58ED54FA1BB189EA00F9B378 /* FRDGeolocationDeniedController.xib in Resources */,
@@ -2110,6 +2127,7 @@
 				58ED54D21BB14C5E00F9B378 /* FRDLocationObserver.m in Sources */,
 				58BC771D1B9ECA9000BB8B5A /* UIViewController+fixOrientation.m in Sources */,
 				581B9D411B9ED71A0080393B /* FRDReachabilityHelper.m in Sources */,
+				58BB5D431BB70AB900FD1A56 /* FRDGetCurrentUserProfileRequest.m in Sources */,
 				58ED54F01BB1646800F9B378 /* FRDUpdateNotificationsSettingsRequest.m in Sources */,
 				58D5A16A1BA329C800D552CF /* FRDNavigationTitleView.m in Sources */,
 				58BC770B1B9ECA4400BB8B5A /* UIImagePickerController+fixOrientation.m in Sources */,

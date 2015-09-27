@@ -6,8 +6,15 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
+typedef NS_ENUM(NSUInteger, FRDRelationshipsDataSourceType) {
+    FRDRelationshipsDataSourceTypeSearchSettings,
+    FRDRelationshipsDataSourceTypeMyProfile
+};
+
 #import "FRDBaseViewController.h"
 
 @interface FRDRelationshipStatusController : FRDBaseViewController
+
+@property (nonatomic) FRDRelationshipsDataSourceType sourceType;
 
 @end

@@ -16,5 +16,6 @@
 @property (assign, nonatomic, getter=isMessagesNotificationsEnabled) BOOL messagesNotificationsEnabled;
 
 + (instancetype)userProfileWithFacebookProfile:(FRDFacebookProfile *)facebookProfile;
+- (instancetype)updateWithUserProfile:(FRDCurrentUserProfile *)profile;
 
 @end
