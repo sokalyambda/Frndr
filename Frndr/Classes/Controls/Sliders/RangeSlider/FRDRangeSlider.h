@@ -25,12 +25,12 @@ typedef struct
 /**
  *  Value of left thumb
  */
-@property (readonly, nonatomic) CGFloat minimumValue;
+@property (nonatomic) CGFloat minimumValue;
 
 /**
  *  Value of right thumb
  */
-@property (readonly, nonatomic) CGFloat maximumValue;
+@property (nonatomic) CGFloat maximumValue;
 
 /**
  *  Minimum distance between thumbs (should be between 0.0 and 1.0)
@@ -42,22 +42,9 @@ typedef struct
  */
 @property (nonatomic) CGFloat tracksHeight;
 
-
-- (void)setThumbImage:(UIImage *)image;
-- (void)setTrackImage:(UIImage *)image;
-- (void)setInRangeTrackImage:(UIImage *)image;
-
-- (void)setupWithMode:(FRDRangeSliderMode)mode
-           validRange:(NSRange)validRange
-         minimumRange:(NSInteger)minimumRange
-    startMinimumValue:(NSInteger)startMinimum
-    startMaximumValue:(NSInteger)startMaximum;
-
-- (void)setupWithMode:(FRDRangeSliderMode)mode
-           validRange:(FRDRange)validRange
-         minimumRange:(CGFloat)minimumRange
-                 step:(CGFloat)step
-    startMinimumValue:(CGFloat)startMinimum
-    startMaximumValue:(CGFloat)startMaximum;
+@property (nonatomic) FRDRange validRange;
+@property (nonatomic) UIImage *thumbImage;
+@property (nonatomic) UIImage *outRangeTrackImage;
+@property (nonatomic) UIImage *inRangeTrackImage;
 
 @end

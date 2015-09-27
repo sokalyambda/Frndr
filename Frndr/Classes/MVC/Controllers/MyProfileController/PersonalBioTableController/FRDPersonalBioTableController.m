@@ -42,7 +42,7 @@ typedef NS_ENUM(NSInteger, FRDPersonalBioSectionType)
 }
 
 /**
- * Not calling [super viewWillApper:] to disable autoscrolling when keyboard appears
+ * Not calling [super viewWillAppear:] to disable autoscrolling when keyboard appears
  */
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -110,8 +110,12 @@ typedef NS_ENUM(NSInteger, FRDPersonalBioSectionType)
     dispatch_once(&onceToken, ^{
         header = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([FRDPersonalBioTableHeader class])];
     });
-    NSLog(@"Header height: %f", header.frame.size.height);
     return CGRectGetHeight(header.frame);
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 @end

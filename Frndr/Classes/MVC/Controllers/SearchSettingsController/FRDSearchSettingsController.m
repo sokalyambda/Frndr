@@ -55,9 +55,7 @@
     [self initDropDownHolderContainer];
     [self initRelationshipStatusesHolderContainer];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-#warning Temporary magic numbers!
-        [self setupDistanceSliderWithValidRange:NSMakeRange(1, 999) andDefaultValue:400];
-        [self setupAgeSliderWithValidRange:NSMakeRange(16, 34) minimumRange:0 defaultMinimum:22 maximum:40];
+        [self configureSliders];
     });
 }
 
@@ -102,28 +100,32 @@
     [self.relationshipController didMoveToParentViewController:self];
 }
 
-- (void)setupDistanceSliderWithValidRange:(NSRange)validRange andDefaultValue:(NSInteger)value
+- (void)configureSliders
 {
-    [self.distanceSlider setupWithMode:FRDRangeSliderModeSingleThumb validRange:validRange minimumRange:0 startMinimumValue:0 startMaximumValue:value];
-    self.distanceSlider.tracksHeight = 5.0;
+    FRDRange range = { 1, 999 };
+    self.distanceSlider.mode = FRDRangeSliderModeSingleThumb;
+    self.distanceSlider.validRange = range;
+    self.distanceSlider.maximumValue = 400;
+    
+    self.currentDistance = 400;
+    
+    range.location = 18;
+    range.length = 32;
+    self.ageRangeSlider.validRange = range;
+    self.ageRangeSlider.minimumRange = 2;
+    self.ageRangeSlider.minimumValue = 22;
+    self.ageRangeSlider.maximumValue = 40;
+    
+    self.currentMinimumAge = 22;
+    self.currentMaximumAge = 40;
+    
     [self.distanceSlider addTarget:self
                             action:@selector(distanceSliderValueChanged:)
                   forControlEvents:UIControlEventValueChanged];
     
-    self.currentDistance = self.distanceSlider.maximumValue;
-}
-
-- (void)setupAgeSliderWithValidRange:(NSRange)validRange minimumRange:(NSInteger)minimumRange
-                      defaultMinimum:(NSInteger)minimum maximum:(NSInteger)maximum
-{    
-    [self.ageRangeSlider setupWithMode:FRDRangeSliderModeRange validRange:validRange minimumRange:minimumRange startMinimumValue:minimum startMaximumValue:maximum];
-    self.ageRangeSlider.tracksHeight = 5.0;
     [self.ageRangeSlider addTarget:self
                             action:@selector(ageRangeSliderValueChanged:)
                   forControlEvents:UIControlEventValueChanged];
-    
-    self.currentMinimumAge = self.ageRangeSlider.minimumValue;
-    self.currentMaximumAge = self.ageRangeSlider.maximumValue;
 }
 
 - (void)customizeNavigationItem

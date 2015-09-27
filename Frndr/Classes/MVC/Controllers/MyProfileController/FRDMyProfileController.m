@@ -41,6 +41,8 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
 @property (strong, nonatomic) FRDRelationshipStatusController *relationshipController;
 @property (strong, nonatomic) FRDDropDownHolderController *dropDownHolderController;
 
+@property (strong, nonatomic) UITapGestureRecognizer *tap;
+
 @end
 
 @implementation FRDMyProfileController
@@ -53,6 +55,9 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
     [self initTopViewHolderContainer];
     [self initRelationshipStatusesHolderContainer];
     [self initDropDownHolderContainer];
+    
+    self.tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
+    [self.view addGestureRecognizer:self.tap];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -68,6 +73,18 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
 }
 
 #pragma mark - Actions
+
+- (void)dismissKeyboard:(UIGestureRecognizer *)recognizer
+{
+    [[UIResponder currentFirstResponder] resignFirstResponder];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:kPersonalBioTableControllerSegueIdentifier]) {
+        self.personalBioTableController = (FRDPersonalBioTableController *)[segue destinationViewController];
+    }
+}
 
 - (IBAction)managePhotosPress:(id)sender
 {
@@ -167,13 +184,6 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
     self.scrollView.scrollIndicatorInsets = contentInsets;
     self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x,
                                                 self.previousVerticalOffset);
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:kPersonalBioTableControllerSegueIdentifier]) {
-        self.personalBioTableController = (FRDPersonalBioTableController *)[segue destinationViewController];
-    }
 }
 
 @end
