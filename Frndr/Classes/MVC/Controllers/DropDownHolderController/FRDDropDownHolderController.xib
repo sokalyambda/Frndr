@@ -8,7 +8,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FRDDropDownHolderController">
             <connections>
                 <outlet property="sexualOrientationLabel" destination="GJh-rd-QlQ" id="87Y-YC-35z"/>
+                <outlet property="sexualOrientationPointingArrow" destination="Cao-uY-JI3" id="cMJ-KV-GCD"/>
                 <outlet property="smokerLabel" destination="GVU-1i-rf2" id="Zgz-HK-rei"/>
+                <outlet property="smokerPointingArrow" destination="Idx-Wd-jFd" id="4ko-gb-MoE"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -70,15 +72,18 @@
                                 <constraint firstAttribute="width" constant="20" id="91L-Pq-kOY">
                                     <variation key="heightClass=regular-widthClass=compact" constant="18"/>
                                 </constraint>
+                                <constraint firstAttribute="height" constant="16" id="I8J-Ni-j2u"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="91L-Pq-kOY"/>
+                                    <exclude reference="I8J-Ni-j2u"/>
                                 </mask>
                             </variation>
                             <variation key="heightClass=regular-widthClass=compact">
                                 <mask key="constraints">
                                     <include reference="91L-Pq-kOY"/>
+                                    <include reference="I8J-Ni-j2u"/>
                                 </mask>
                             </variation>
                         </imageView>
@@ -140,17 +145,20 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downArrow" translatesAutoresizingMaskIntoConstraints="NO" id="Idx-Wd-jFd">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <constraints>
+                                <constraint firstAttribute="height" constant="16" id="J5t-wO-kFt"/>
                                 <constraint firstAttribute="width" constant="20" id="ZV1-0E-rk5">
                                     <variation key="heightClass=regular-widthClass=compact" constant="18"/>
                                 </constraint>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
+                                    <exclude reference="J5t-wO-kFt"/>
                                     <exclude reference="ZV1-0E-rk5"/>
                                 </mask>
                             </variation>
                             <variation key="heightClass=regular-widthClass=compact">
                                 <mask key="constraints">
+                                    <include reference="J5t-wO-kFt"/>
                                     <include reference="ZV1-0E-rk5"/>
                                 </mask>
                             </variation>

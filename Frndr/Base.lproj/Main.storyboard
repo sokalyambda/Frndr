@@ -2436,6 +2436,9 @@
                                                         <include reference="RkP-Kz-Wmn"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <action selector="ageRangeSliderValueChanged:" destination="3DG-li-SHm" eventType="valueChanged" id="rig-Jo-XOW"/>
+                                                </connections>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaP-jn-fM8">
                                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -2475,6 +2478,9 @@
                                                         <include reference="Oci-Wn-qXN"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <action selector="distanceSliderValueChanged:" destination="3DG-li-SHm" eventType="valueChanged" id="XmX-Sw-3eg"/>
+                                                </connections>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20 miles" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6x4-Qx-h8e" userLabel="Distance Label">
                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -3116,6 +3122,9 @@
                                 <include reference="fNd-Gy-9Fz"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="zA6-6B-6gV" appends="YES" id="m9P-Um-ftU"/>
+                        </connections>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="400" height="1350"/>
@@ -3129,6 +3138,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="idh-AV-Rcl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="zA6-6B-6gV">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="wfm-Av-6BD" id="LX0-P2-j4w"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="4867.5" y="476.25"/>
         </scene>

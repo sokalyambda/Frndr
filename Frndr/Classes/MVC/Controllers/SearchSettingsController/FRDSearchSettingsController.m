@@ -124,14 +124,6 @@
     
     self.currentMinimumAge = 22;
     self.currentMaximumAge = 40;
-    
-    [self.distanceSlider addTarget:self
-                            action:@selector(distanceSliderValueChanged:)
-                  forControlEvents:UIControlEventValueChanged];
-    
-    [self.ageRangeSlider addTarget:self
-                            action:@selector(ageRangeSliderValueChanged:)
-                  forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)customizeNavigationItem
@@ -149,12 +141,12 @@
 
 #pragma mark - Event listeners
 
-- (void)distanceSliderValueChanged:(id)sender
+- (IBAction)distanceSliderValueChanged:(id)sender
 {
     self.currentDistance = self.distanceSlider.maximumValue;
 }
 
-- (void)ageRangeSliderValueChanged:(id)sender
+- (IBAction)ageRangeSliderValueChanged:(id)sender
 {
     self.currentMinimumAge = self.ageRangeSlider.minimumValue;
     self.currentMaximumAge = self.ageRangeSlider.maximumValue;

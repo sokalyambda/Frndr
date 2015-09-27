@@ -16,16 +16,49 @@
 
 #import "FRDSexualOrientation.h"
 
+static NSString * const kDownArrow = @"downArrow";
+static NSString * const kUpArrow = @"upArrow";
+
 @interface FRDDropDownHolderController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *smokerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sexualOrientationLabel;
 
-@property (nonatomic) FRDDropDownTableView *dropDownList;
+@property (weak, nonatomic) IBOutlet UIImageView *smokerPointingArrow;
+@property (weak, nonatomic) IBOutlet UIImageView *sexualOrientationPointingArrow;
+
+@property (strong, nonatomic) FRDDropDownTableView *dropDownList;
+
+@property (assign, nonatomic) BOOL isSmokerExpanded;
+@property (assign, nonatomic) BOOL isSexualOrientationExpanded;
 
 @end
 
 @implementation FRDDropDownHolderController
+
+#pragma mark - Accessors
+
+- (void)setIsSmokerExpanded:(BOOL)isSmokerExpanded
+{
+    _isSmokerExpanded = isSmokerExpanded;
+    
+    if (isSmokerExpanded) {
+        self.smokerPointingArrow.image = [UIImage imageNamed:kUpArrow];
+    } else {
+        self.smokerPointingArrow.image = [UIImage imageNamed:kDownArrow];
+    }
+}
+
+- (void)setIsSexualOrientationExpanded:(BOOL)isSexualOrientationExpanded
+{
+    _isSexualOrientationExpanded = isSexualOrientationExpanded;
+    
+    if (isSexualOrientationExpanded) {
+        self.sexualOrientationPointingArrow.image = [UIImage imageNamed:kUpArrow];
+    } else {
+        self.sexualOrientationPointingArrow.image = [UIImage imageNamed:kDownArrow];
+    }
+}
 
 #pragma mark - View Lifecycle
 
@@ -40,6 +73,8 @@
 - (void)initDropDownTable
 {
     self.dropDownList = [FRDDropDownTableView makeFromXib];
+    self.isSmokerExpanded = NO;
+    self.isSexualOrientationExpanded = NO;
 }
 
 - (IBAction)smokerClick:(UITapGestureRecognizer *)tap
@@ -53,6 +88,8 @@
             weakSelf.smoker = [chosenValue isEqualToString:@"SMOKER"] ? YES : NO;
         }
     }];
+    
+    self.isSmokerExpanded = !self.isSmokerExpanded;
 }
 
 - (IBAction)sexualOrientationClick:(UITapGestureRecognizer *)tap
@@ -67,6 +104,8 @@
             weakSelf.chosenOrientation = chosenOrientation;
         }
     }];
+    
+    self.isSexualOrientationExpanded = !self.isSexualOrientationExpanded;
 }
 
 #pragma mark - Public Methods

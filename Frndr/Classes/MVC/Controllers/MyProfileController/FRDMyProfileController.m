@@ -26,7 +26,7 @@
 
 static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalBioTableControllerSegue";
 
-@interface FRDMyProfileController ()
+@interface FRDMyProfileController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) FRDPersonalBioTableController *personalBioTableController;
@@ -44,8 +44,6 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
 @property (strong, nonatomic) FRDRelationshipStatusController *relationshipController;
 @property (strong, nonatomic) FRDDropDownHolderController *dropDownHolderController;
 
-@property (strong, nonatomic) UITapGestureRecognizer *tap;
-
 @end
 
 @implementation FRDMyProfileController
@@ -58,9 +56,6 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
     [self initTopViewHolderContainer];
     [self initRelationshipStatusesHolderContainer];
     [self initDropDownHolderContainer];
-    
-    self.tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
-    [self.view addGestureRecognizer:self.tap];
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self setProfileInformationToFields];
@@ -79,9 +74,17 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
     [self unsubscribeFromNotifications];
 }
 
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self dismissKeyboard:self];
+    return YES;
+}
+
 #pragma mark - Actions
 
-- (void)dismissKeyboard:(UIGestureRecognizer *)recognizer
+- (IBAction)dismissKeyboard:(id)sender
 {
     [[UIResponder currentFirstResponder] resignFirstResponder];
 }
@@ -216,16 +219,22 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
     
     UIView *currentResponder = [UIResponder currentFirstResponder];
     
-    // Get cell that contains current responder (a text field or a text view)
-    UITableViewCell *responderContainingCell = (UITableViewCell *)currentResponder.superview.superview;
+    CGRect responderFrame;
     
-    // Convert responder's frame to top view coordinate system
-    CGRect responderFrame = [self.personalBioTableController.tableView
-                 convertRect:responderContainingCell.frame
-                 toView:self.personalBioTableController.tableView.superview];
-    responderFrame = [self.personalBioTableController.tableView.superview
-                 convertRect:responderFrame
-                 toView:self.view];
+    if (currentResponder == self.jobTitleField) {
+        responderFrame = self.jobTitleField.frame;
+    } else {
+        // Convert responder's frame to top view coordinate system
+        // Get cell that contains current responder (a text field or a text view)
+        UITableViewCell *responderContainingCell = (UITableViewCell *)currentResponder.superview.superview;
+        
+        responderFrame = [self.personalBioTableController.tableView
+                          convertRect:responderContainingCell.frame
+                          toView:self.personalBioTableController.tableView.superview];
+        responderFrame = [self.personalBioTableController.tableView.superview
+                          convertRect:responderFrame
+                          toView:self.view];
+    }
     
     self.previousVerticalOffset = self.scrollView.contentOffset.y;
     

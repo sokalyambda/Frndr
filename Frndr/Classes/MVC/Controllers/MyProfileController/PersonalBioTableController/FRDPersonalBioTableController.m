@@ -90,7 +90,7 @@ typedef NS_ENUM(NSInteger, FRDPersonalBioSectionType)
     } else if ([self.fourthThingILoveTextField isFirstResponder]) {
         [self.fifthThingILoveTextField becomeFirstResponder];
     } else if ([self.fifthThingILoveTextField isFirstResponder]) {
-        [self.personalBioThingILoveTextView becomeFirstResponder];
+        [self dismissKeyboard];
     }
     return YES;
 }
