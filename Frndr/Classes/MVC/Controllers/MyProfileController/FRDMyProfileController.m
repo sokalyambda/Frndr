@@ -13,6 +13,8 @@
 #import "FRDPhotoGalleryController.h"
 
 #import "FRDMyProfileTopView.h"
+#import "FRDDropDownCell.h"
+#import "FRDRelationshipCollectionCell.h"
 
 #import "FRDSwitch.h"
 
@@ -26,7 +28,7 @@
 
 static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalBioTableControllerSegue";
 
-@interface FRDMyProfileController () <UITextFieldDelegate>
+@interface FRDMyProfileController () <UITextFieldDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) FRDPersonalBioTableController *personalBioTableController;
@@ -221,10 +223,11 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
     
     CGRect responderFrame;
     
+    // Convert responder's frame to top view coordinate system
     if (currentResponder == self.jobTitleField) {
         responderFrame = self.jobTitleField.frame;
+        responderFrame = [self.jobTitleField.superview convertRect:responderFrame toView:self.view];
     } else {
-        // Convert responder's frame to top view coordinate system
         // Get cell that contains current responder (a text field or a text view)
         UITableViewCell *responderContainingCell = (UITableViewCell *)currentResponder.superview.superview;
         
@@ -261,6 +264,20 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
     if ([segue.identifier isEqualToString:kPersonalBioTableControllerSegueIdentifier]) {
         self.personalBioTableController = (FRDPersonalBioTableController *)[segue destinationViewController];
     }
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+
+/**
+ *  Allow tapping on ralationship statuses and drop down elements
+ */
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if ([touch.view.superview isKindOfClass:[FRDDropDownCell class]] ||
+        [touch.view isDescendantOfView:self.relationshipsContainer]) {
+        return NO;
+    }
+    return YES;
 }
 
 @end

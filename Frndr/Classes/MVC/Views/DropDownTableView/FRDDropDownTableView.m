@@ -12,10 +12,10 @@
 
 #import "CAAnimation+CompetionBlock.h"
 
-static CGFloat const kDropDownHeight = 200.f;
+static CGFloat const kDropDownDefaultHeight = 200.f;
+static CGFloat const kAdditionalOffset = 5.f;
 
 @interface FRDDropDownTableView ()
-
 @property (weak, nonatomic) IBOutlet UITableView *dropDownList;
 
 @property (nonatomic) FRDBaseDropDownDataSource *dropDownDataSource;
@@ -66,27 +66,46 @@ static CGFloat const kDropDownHeight = 200.f;
 
 #pragma mark - Accessors
 
+// Value indicates the number of rows to which the height is adjusted dynamically
+static NSInteger const kRowsNumberThreshold = 4;
+
 - (CGFloat)calculatedDropDownHeight
 {
-    CGFloat actualHeight = kDropDownHeight;
-
+    CGFloat calculatedHeight = 0;
+    NSInteger numberOfRows = [self.dropDownList numberOfRowsInSection:0];
+    UITableViewCell *firstCell = [self.dropDownList cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    CGFloat rowHeight = CGRectGetHeight(firstCell.frame);
+    
+    if (numberOfRows <= kRowsNumberThreshold) {
+        calculatedHeight = rowHeight * numberOfRows;
+    } else {
+        calculatedHeight = kDropDownDefaultHeight;
+    }
+    
+    // If this view will exceed screen bounds then adjust its height to fit them
+    CGRect expectedFrame = CGRectMake(CGRectGetMinX(self.frame),
+                                      CGRectGetMinY(self.frame) + kAdditionalOffset,
+                                      CGRectGetWidth(self.frame),
+                                      calculatedHeight);
+    
+    CGFloat verticalIntersection = 0;
     if ([self.presentedView isKindOfClass:[UIScrollView class]]) {
-        if (CGRectContainsPoint(self.presentedView.frame, CGPointMake(CGRectGetMinX(self.anchorView.frame), CGRectGetMaxY(self.anchorView.frame) + actualHeight))) {
+        verticalIntersection = CGRectGetMaxY(expectedFrame) - ((UIScrollView *)self.presentedView).contentSize.height;
+    } else {
+        verticalIntersection = CGRectGetMaxY(expectedFrame) - CGRectGetMaxY(self.presentedView.frame);
+    }
+    verticalIntersection = (verticalIntersection <= 0) ? 0 : verticalIntersection + kAdditionalOffset; 
+    calculatedHeight -= verticalIntersection;
+    
+    if ([self.presentedView isKindOfClass:[UIScrollView class]]) {
+        if (CGRectContainsPoint(self.presentedView.frame, CGPointMake(CGRectGetMinX(self.anchorView.frame), CGRectGetMaxY(self.anchorView.frame) + calculatedHeight))) {
             NSLog(@"OK");
         } else {
             NSLog(@"HOOJOK");
         }
     }
     
-//    NSLog(@"presented view frame %@", NSStringFromCGRect(self.presentedView.frame));
-//    NSLog(@"anchor view frame %@", NSStringFromCGRect(self.anchorView.frame));
-//    
-//    if (CGRectContainsPoint(self.presentedView.frame, CGPointMake(CGRectGetMinX(self.anchorView.frame), CGRectGetMaxY(self.anchorView.frame) + actualHeight))) {
-//        NSLog(@"OK");
-//    } else {
-//        NSLog(@"HOOJOK");
-//    }
-    return actualHeight;
+    return calculatedHeight;
 }
 
 - (void)setAnchorView:(UIView *)anchorView
@@ -142,7 +161,6 @@ static CGFloat const kDropDownHeight = 200.f;
     self.isExpanded = !self.isExpanded;
 }
 
-static CGFloat const kAdditionalOffset = 5.f;
 static CGFloat const kSlidingTime = .5f;
 - (void)showDropDownList
 {

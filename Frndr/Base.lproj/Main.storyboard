@@ -2652,7 +2652,7 @@
                             <constraint firstItem="Irf-VN-Iy7" firstAttribute="top" secondItem="ow9-h3-Y0D" secondAttribute="bottom" id="ZNp-5B-eGk"/>
                             <constraint firstItem="ow9-h3-Y0D" firstAttribute="leading" secondItem="Dfc-b3-17c" secondAttribute="leading" id="dup-xB-3dF"/>
                             <constraint firstAttribute="height" secondItem="3Lk-CV-Lt5" secondAttribute="height" id="lF4-TR-hdH"/>
-                            <constraint firstItem="ow9-h3-Y0D" firstAttribute="top" secondItem="92e-Om-x6M" secondAttribute="bottom" constant="-20" id="nY9-As-f7S"/>
+                            <constraint firstItem="ow9-h3-Y0D" firstAttribute="top" secondItem="92e-Om-x6M" secondAttribute="bottom" id="nY9-As-f7S"/>
                             <constraint firstItem="ow9-h3-Y0D" firstAttribute="top" secondItem="Dfc-b3-17c" secondAttribute="top" id="shd-MQ-beK"/>
                         </constraints>
                         <variation key="default">
@@ -3141,6 +3141,7 @@
                 <tapGestureRecognizer id="zA6-6B-6gV">
                     <connections>
                         <action selector="dismissKeyboard:" destination="wfm-Av-6BD" id="LX0-P2-j4w"/>
+                        <outlet property="delegate" destination="wfm-Av-6BD" id="awH-Qc-XzK"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

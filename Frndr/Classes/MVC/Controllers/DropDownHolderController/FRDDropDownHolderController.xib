@@ -269,11 +269,13 @@
         <tapGestureRecognizer id="rBb-KL-GYH" userLabel="SmokerTap">
             <connections>
                 <action selector="smokerClick:" destination="-1" id="tyd-Qr-abh"/>
+                <outlet property="delegate" destination="-1" id="hho-ZZ-RXf"/>
             </connections>
         </tapGestureRecognizer>
         <tapGestureRecognizer id="3FM-g9-9KO" userLabel="SexualOrientationTap">
             <connections>
                 <action selector="sexualOrientationClick:" destination="-1" id="HPN-8S-xLv"/>
+                <outlet property="delegate" destination="-1" id="VMI-br-3MV"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

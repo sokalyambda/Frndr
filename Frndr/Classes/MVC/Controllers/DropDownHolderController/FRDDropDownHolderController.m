@@ -16,6 +16,8 @@
 
 #import "FRDSexualOrientation.h"
 
+#import "UIResponder+FirstResponder.h"
+
 static NSString * const kDownArrow = @"downArrow";
 static NSString * const kUpArrow = @"upArrow";
 
@@ -86,10 +88,16 @@ static NSString * const kUpArrow = @"upArrow";
         if ([chosenValue isKindOfClass:[NSString class]]) {
             weakSelf.smokerLabel.text = chosenValue;
             weakSelf.smoker = [chosenValue isEqualToString:@"SMOKER"] ? YES : NO;
+            
+            weakSelf.isSmokerExpanded = !weakSelf.isSmokerExpanded;
         }
     }];
     
+    // Dismiss keyboard if there is any on screen
+    [[UIResponder currentFirstResponder] resignFirstResponder];
+    
     self.isSmokerExpanded = !self.isSmokerExpanded;
+    self.isSexualOrientationExpanded = NO;
 }
 
 - (IBAction)sexualOrientationClick:(UITapGestureRecognizer *)tap
@@ -102,10 +110,16 @@ static NSString * const kUpArrow = @"upArrow";
             FRDSexualOrientation *chosenOrientation = (FRDSexualOrientation *)chosenValue;
             weakSelf.sexualOrientationLabel.text = chosenOrientation.orientationString;
             weakSelf.chosenOrientation = chosenOrientation;
+            
+            weakSelf.isSexualOrientationExpanded = !weakSelf.isSexualOrientationExpanded;
         }
     }];
     
+    // Dismiss keyboard if there is any on screen
+    [[UIResponder currentFirstResponder] resignFirstResponder];
+    
     self.isSexualOrientationExpanded = !self.isSexualOrientationExpanded;
+    self.isSmokerExpanded = NO;
 }
 
 #pragma mark - Public Methods
