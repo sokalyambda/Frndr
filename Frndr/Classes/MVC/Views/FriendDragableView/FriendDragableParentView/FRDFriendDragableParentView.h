@@ -6,8 +6,10 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@class FRDFriendDragableView;
 
 @interface FRDFriendDragableParentView : UIView
+
+@property (weak, nonatomic) FRDFriendDragableView *friendDragableView;
 
 @end

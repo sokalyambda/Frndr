@@ -71,8 +71,14 @@ typedef NS_ENUM(NSUInteger, ZLSwipeableViewDirection) {
 ///
 @property (nonatomic, weak) IBOutlet id<ZLSwipeableViewDelegate> delegate;
 
-/// Enable this to rotate the views behind the top view. Default to `YES`.
+/// General bool value that responds to customization of views behind the top view.
+@property (nonatomic) BOOL isBehindViewsCustomizationEnabled;
+
+/// Enable this to rotate the views behind the top view. Default to `NO`.
 @property (nonatomic) BOOL isRotationEnabled;
+
+/// Enable this to stack the views behind the top view. Default to `YES`.
+@property (nonatomic) BOOL isStackEnabled;
 
 /// Magnitude of the rotation in degrees
 @property (nonatomic) float rotationDegree;
