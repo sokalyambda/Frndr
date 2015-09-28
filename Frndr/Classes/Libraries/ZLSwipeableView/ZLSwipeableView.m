@@ -9,8 +9,9 @@
 #import "ZLSwipeableView.h"
 #import "ZLPanGestureRecognizer.h"
 
-#import "FRDFriendOverlayView.h"
+#import "FRDFriendDragableView.h"
 #import "FRDFriendDragableParentView.h"
+
 #import "UIView+MakeFromXib.h"
 
 const NSUInteger ZLPrefetchedViewsNumber = 3;
@@ -251,9 +252,11 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
                                             translation.y / translationMagnitude * scale
                                             );
     //Get the current overlay view
-    FRDFriendOverlayView *currentOverlay;
+    FRDFriendDragableView *currentDragableView;
+    UIView *currentOverlay;
     if ([swipeableView isKindOfClass:[FRDFriendDragableParentView class]]) {
-        currentOverlay = ((FRDFriendDragableParentView *)swipeableView).currentOverlayView;;
+        currentDragableView = ((FRDFriendDragableParentView *)swipeableView).friendDragableView;
+        currentOverlay = currentDragableView.overlayView;
     }
     
     if (recognizer.state == UIGestureRecognizerStateBegan) {
@@ -276,7 +279,7 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
         if (currentOverlay.isHidden && (directionType == ZLSwipeableViewDirectionLeft || directionType == ZLSwipeableViewDirectionRight)) {
             currentOverlay.hidden = NO;
         }
-        [self configureOverlayImageView:currentOverlay withDirection:directionType];
+        [self configureDragableFriendViewForOverlaying:currentDragableView withDirection:directionType];
     }
     
     if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
@@ -354,9 +357,11 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
     }
     
     //Get the current overlay view
-    FRDFriendOverlayView *currentOverlay;
+    FRDFriendDragableView *currentDragableView;
+    UIView *currentOverlay;
     if ([topSwipeableView isKindOfClass:[FRDFriendDragableParentView class]]) {
-        currentOverlay = ((FRDFriendDragableParentView *)topSwipeableView).currentOverlayView;
+        currentDragableView = ((FRDFriendDragableParentView *)topSwipeableView).friendDragableView;
+        currentOverlay = currentDragableView.overlayView;
     }
     
     CGPoint location = CGPointMake(
@@ -375,7 +380,7 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
     if (currentOverlay.isHidden) {
         currentOverlay.hidden = NO;
     }
-    [self configureOverlayImageView:currentOverlay withDirection:directionType];
+    [self configureDragableFriendViewForOverlaying:currentDragableView withDirection:directionType];
 
     [self pushAnchorViewForCover:topSwipeableView
                      inDirection:direction
@@ -664,14 +669,14 @@ atOffsetFromCenter:(CGPoint)offset
 
 #pragma mark - OverlayView
 /*****Custom methods*****/
-- (void)configureOverlayImageView:(FRDFriendOverlayView *)overlayView withDirection:(ZLSwipeableViewDirection)directionType
+- (void)configureDragableFriendViewForOverlaying:(FRDFriendDragableView *)dragableView withDirection:(ZLSwipeableViewDirection)directionType
 {
     if (directionType == ZLSwipeableViewDirectionLeft) {
-        overlayView.currentOverlayImageName = @"discardIcon";
+        dragableView.overlayImageName = @"discardIcon";
     } else if (directionType == ZLSwipeableViewDirectionRight) {
-        overlayView.currentOverlayImageName = @"applyIcon";
+        dragableView.overlayImageName = @"applyIcon";
     } else {
-        overlayView.hidden = YES;
+        dragableView.overlayView.hidden = YES;
     }
 }
 

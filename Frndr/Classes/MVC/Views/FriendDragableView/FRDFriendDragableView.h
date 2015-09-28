@@ -12,6 +12,10 @@
 
 @interface FRDFriendDragableView : UIView
 
+@property (weak, nonatomic) IBOutlet UIView *overlayView;
+
+@property (strong, nonatomic) NSString *overlayImageName;
+
 - (void)configureWithNearestUser:(FRDNearestUser *)nearestUser;
 
 @end

@@ -269,7 +269,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
         [parentView addSubview:friendView];
         
         //bring overlay to front
-        [parentView bringSubviewToFront:(UIView *)parentView.currentOverlayView];
+        [friendView bringSubviewToFront:(UIView *)friendView.overlayView];
         
         [self addConstraintsForParentView:parentView andContentView:friendView];
         

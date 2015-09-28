@@ -10,6 +10,8 @@
 
 #import "FRDNearestUser.h"
 
+#import "UIView+MakeFromXib.h"
+
 @interface FRDFriendDragableView ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *friendProfileImageView;
@@ -17,10 +19,19 @@
 @property (weak, nonatomic) IBOutlet UILabel *friendAgeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *friendDistanceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *friendSmokerLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *overlayImageView;
 
 @end
 
 @implementation FRDFriendDragableView
+
+#pragma mark - Accessors
+
+- (void)setOverlayImageName:(NSString *)overlayImageName
+{
+    _overlayImageName = overlayImageName;
+    self.overlayImageView.image = [UIImage imageNamed:overlayImageName];
+}
 
 #pragma mark - Actions
 

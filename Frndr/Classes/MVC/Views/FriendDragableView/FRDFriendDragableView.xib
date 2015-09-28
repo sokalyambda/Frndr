@@ -155,17 +155,68 @@
                         </mask>
                     </variation>
                 </view>
+                <view hidden="YES" alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wkw-vP-Ht7" customClass="FRDOverlayView">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bak-3c-d7v">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="192" id="26x-bX-M4X"/>
+                                <constraint firstAttribute="height" constant="192" id="sCV-Wb-KFK"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="26x-bX-M4X"/>
+                                    <exclude reference="sCV-Wb-KFK"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="26x-bX-M4X"/>
+                                    <include reference="sCV-Wb-KFK"/>
+                                </mask>
+                            </variation>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="bak-3c-d7v" firstAttribute="centerY" secondItem="wkw-vP-Ht7" secondAttribute="centerY" id="Z0X-7r-3Yi"/>
+                        <constraint firstItem="bak-3c-d7v" firstAttribute="centerX" secondItem="wkw-vP-Ht7" secondAttribute="centerX" id="gkl-OY-PKP"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="subviews">
+                            <exclude reference="bak-3c-d7v"/>
+                        </mask>
+                        <mask key="constraints">
+                            <exclude reference="Z0X-7r-3Yi"/>
+                            <exclude reference="gkl-OY-PKP"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="subviews">
+                            <include reference="bak-3c-d7v"/>
+                        </mask>
+                        <mask key="constraints">
+                            <include reference="Z0X-7r-3Yi"/>
+                            <include reference="gkl-OY-PKP"/>
+                        </mask>
+                    </variation>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="hQs-eZ-yHo" secondAttribute="bottom" id="0jt-zc-JiL"/>
                 <constraint firstItem="ca0-aV-XXH" firstAttribute="bottom" secondItem="nag-M8-gEg" secondAttribute="bottom" id="4n8-bc-f46"/>
+                <constraint firstItem="wkw-vP-Ht7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="5D0-5N-Iyo"/>
+                <constraint firstItem="wkw-vP-Ht7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="HUj-ea-1XA"/>
                 <constraint firstItem="ca0-aV-XXH" firstAttribute="leading" secondItem="nag-M8-gEg" secondAttribute="leading" id="IQW-Gw-F24"/>
                 <constraint firstItem="ca0-aV-XXH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ORc-6K-DyX"/>
                 <constraint firstItem="ca0-aV-XXH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="RqI-bL-F6D"/>
                 <constraint firstAttribute="trailing" secondItem="hQs-eZ-yHo" secondAttribute="trailing" id="SSe-n1-Pib"/>
                 <constraint firstItem="ca0-aV-XXH" firstAttribute="trailing" secondItem="nag-M8-gEg" secondAttribute="trailing" id="c1D-fR-GJa"/>
+                <constraint firstAttribute="trailing" secondItem="wkw-vP-Ht7" secondAttribute="trailing" id="d3Q-bP-2Cg"/>
                 <constraint firstItem="hQs-eZ-yHo" firstAttribute="top" secondItem="ca0-aV-XXH" secondAttribute="bottom" id="mJw-Qo-NRk"/>
+                <constraint firstAttribute="bottom" secondItem="wkw-vP-Ht7" secondAttribute="bottom" id="qaA-8z-Rp3"/>
                 <constraint firstAttribute="trailing" secondItem="ca0-aV-XXH" secondAttribute="trailing" id="qyx-yy-LJp"/>
                 <constraint firstItem="hQs-eZ-yHo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="rvh-3r-a6v"/>
             </constraints>
@@ -175,6 +226,7 @@
                     <exclude reference="ca0-aV-XXH"/>
                     <exclude reference="hQs-eZ-yHo"/>
                     <exclude reference="nag-M8-gEg"/>
+                    <exclude reference="wkw-vP-Ht7"/>
                 </mask>
                 <mask key="constraints">
                     <exclude reference="4n8-bc-f46"/>
@@ -183,6 +235,10 @@
                     <exclude reference="RqI-bL-F6D"/>
                     <exclude reference="c1D-fR-GJa"/>
                     <exclude reference="qyx-yy-LJp"/>
+                    <exclude reference="5D0-5N-Iyo"/>
+                    <exclude reference="HUj-ea-1XA"/>
+                    <exclude reference="d3Q-bP-2Cg"/>
+                    <exclude reference="qaA-8z-Rp3"/>
                     <exclude reference="0jt-zc-JiL"/>
                     <exclude reference="SSe-n1-Pib"/>
                     <exclude reference="mJw-Qo-NRk"/>
@@ -194,6 +250,7 @@
                     <include reference="ca0-aV-XXH"/>
                     <include reference="hQs-eZ-yHo"/>
                     <include reference="nag-M8-gEg"/>
+                    <include reference="wkw-vP-Ht7"/>
                 </mask>
                 <mask key="constraints">
                     <include reference="4n8-bc-f46"/>
@@ -202,6 +259,10 @@
                     <include reference="RqI-bL-F6D"/>
                     <include reference="c1D-fR-GJa"/>
                     <include reference="qyx-yy-LJp"/>
+                    <include reference="5D0-5N-Iyo"/>
+                    <include reference="HUj-ea-1XA"/>
+                    <include reference="d3Q-bP-2Cg"/>
+                    <include reference="qaA-8z-Rp3"/>
                     <include reference="0jt-zc-JiL"/>
                     <include reference="SSe-n1-Pib"/>
                     <include reference="mJw-Qo-NRk"/>
@@ -214,8 +275,10 @@
                 <outlet property="friendNameLabel" destination="wK2-Wh-Iiy" id="JEk-uN-aXT"/>
                 <outlet property="friendProfileImageView" destination="ca0-aV-XXH" id="sqD-Ud-62g"/>
                 <outlet property="friendSmokerLabel" destination="pml-sh-KFH" id="53p-xw-HbC"/>
+                <outlet property="overlayImageView" destination="bak-3c-d7v" id="34H-Ka-fsr"/>
+                <outlet property="overlayView" destination="wkw-vP-Ht7" id="mC2-KM-KLC"/>
             </connections>
-            <point key="canvasLocation" x="465" y="461.5"/>
+            <point key="canvasLocation" x="465" y="461"/>
         </view>
     </objects>
     <resources>

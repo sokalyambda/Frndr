@@ -1,31 +1,14 @@
 //
-//  FRDFriendDragableParentView.m
+//  FRDOverlayVIew.m
 //  Frndr
 //
-//  Created by Eugenity on 17.09.15.
-//  Copyright (c) 2015 ThinkMobiles. All rights reserved.
+//  Created by Eugenity on 28.09.15.
+//  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "FRDFriendDragableParentView.h"
-#import "FRDFriendDragableView.h"
+#import "FRDOverlayView.h"
 
-#import "UIView+MakeFromXib.h"
-
-@implementation FRDFriendDragableParentView
-
-#pragma mark - Accessors
-
-- (FRDFriendDragableView *)friendDragableView
-{
-    FRDFriendDragableView *friendDragableView;
-    for (UIView *view in self.subviews) {
-        if ([view isKindOfClass:[FRDFriendDragableView class]]) {
-            friendDragableView = (FRDFriendDragableView *)view;
-        }
-    }
-    return friendDragableView;
-}
-
+@implementation FRDOverlayView
 
 #pragma mark - Lifecycle
 
