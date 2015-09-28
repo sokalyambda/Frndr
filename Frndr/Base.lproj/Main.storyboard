@@ -1393,7 +1393,7 @@
                                             <constraint firstItem="Du5-65-9If" firstAttribute="leading" secondItem="P1K-s9-ED4" secondAttribute="leading" constant="8" id="KUn-7J-SOW"/>
                                             <constraint firstItem="lr3-R0-X7D" firstAttribute="leading" secondItem="P1K-s9-ED4" secondAttribute="leading" id="NKy-zt-5tc"/>
                                             <constraint firstItem="8cF-YB-NEU" firstAttribute="leading" secondItem="Du5-65-9If" secondAttribute="leading" id="NPO-Dw-K4g"/>
-                                            <constraint firstItem="ILl-0g-u9u" firstAttribute="top" secondItem="P1K-s9-ED4" secondAttribute="top" constant="10" id="T4G-Ec-MEP"/>
+                                            <constraint firstItem="ILl-0g-u9u" firstAttribute="top" secondItem="P1K-s9-ED4" secondAttribute="top" constant="20" id="T4G-Ec-MEP"/>
                                             <constraint firstItem="Du5-65-9If" firstAttribute="top" secondItem="lr3-R0-X7D" secondAttribute="bottom" constant="8" id="VnN-xl-eQM"/>
                                             <constraint firstItem="6fH-wy-opm" firstAttribute="leading" secondItem="P1K-s9-ED4" secondAttribute="leading" constant="8" id="aAq-6e-3bY"/>
                                             <constraint firstItem="lr3-R0-X7D" firstAttribute="top" secondItem="ILl-0g-u9u" secondAttribute="bottom" constant="8" id="anx-I7-nfh"/>
@@ -2614,6 +2614,7 @@
                                     <constraint firstAttribute="bottom" secondItem="3Lk-CV-Lt5" secondAttribute="bottom" id="KrB-mA-aAU"/>
                                     <constraint firstAttribute="trailing" secondItem="3Lk-CV-Lt5" secondAttribute="trailing" id="afC-Uw-DyB"/>
                                     <constraint firstItem="3Lk-CV-Lt5" firstAttribute="leading" secondItem="ow9-h3-Y0D" secondAttribute="leading" id="dhm-la-udg"/>
+                                    <constraint firstItem="3Lk-CV-Lt5" firstAttribute="height" secondItem="ow9-h3-Y0D" secondAttribute="height" id="j7d-VS-krn"/>
                                     <constraint firstItem="3Lk-CV-Lt5" firstAttribute="top" secondItem="ow9-h3-Y0D" secondAttribute="top" id="wLn-Rx-5mC"/>
                                     <constraint firstAttribute="width" secondItem="3Lk-CV-Lt5" secondAttribute="width" id="xby-NF-bvt"/>
                                 </constraints>
@@ -2625,6 +2626,7 @@
                                         <exclude reference="KrB-mA-aAU"/>
                                         <exclude reference="afC-Uw-DyB"/>
                                         <exclude reference="dhm-la-udg"/>
+                                        <exclude reference="j7d-VS-krn"/>
                                         <exclude reference="wLn-Rx-5mC"/>
                                         <exclude reference="xby-NF-bvt"/>
                                     </mask>
@@ -2637,6 +2639,7 @@
                                         <include reference="KrB-mA-aAU"/>
                                         <include reference="afC-Uw-DyB"/>
                                         <include reference="dhm-la-udg"/>
+                                        <include reference="j7d-VS-krn"/>
                                         <include reference="wLn-Rx-5mC"/>
                                         <include reference="xby-NF-bvt"/>
                                     </mask>
@@ -2651,7 +2654,6 @@
                             <constraint firstAttribute="trailing" secondItem="ow9-h3-Y0D" secondAttribute="trailing" id="VWA-V6-iuZ"/>
                             <constraint firstItem="Irf-VN-Iy7" firstAttribute="top" secondItem="ow9-h3-Y0D" secondAttribute="bottom" id="ZNp-5B-eGk"/>
                             <constraint firstItem="ow9-h3-Y0D" firstAttribute="leading" secondItem="Dfc-b3-17c" secondAttribute="leading" id="dup-xB-3dF"/>
-                            <constraint firstAttribute="height" secondItem="3Lk-CV-Lt5" secondAttribute="height" id="lF4-TR-hdH"/>
                             <constraint firstItem="ow9-h3-Y0D" firstAttribute="top" secondItem="92e-Om-x6M" secondAttribute="bottom" id="nY9-As-f7S"/>
                             <constraint firstItem="ow9-h3-Y0D" firstAttribute="top" secondItem="Dfc-b3-17c" secondAttribute="top" id="shd-MQ-beK"/>
                         </constraints>
@@ -2660,12 +2662,11 @@
                                 <exclude reference="ow9-h3-Y0D"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="ZNp-5B-eGk"/>
-                                <exclude reference="lF4-TR-hdH"/>
                                 <exclude reference="VWA-V6-iuZ"/>
                                 <exclude reference="dup-xB-3dF"/>
                                 <exclude reference="nY9-As-f7S"/>
                                 <exclude reference="shd-MQ-beK"/>
+                                <exclude reference="ZNp-5B-eGk"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2673,12 +2674,11 @@
                                 <include reference="ow9-h3-Y0D"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="ZNp-5B-eGk"/>
-                                <include reference="lF4-TR-hdH"/>
                                 <include reference="VWA-V6-iuZ"/>
                                 <include reference="dup-xB-3dF"/>
                                 <include reference="nY9-As-f7S"/>
                                 <exclude reference="shd-MQ-beK"/>
+                                <include reference="ZNp-5B-eGk"/>
                             </mask>
                         </variation>
                     </view>
