@@ -13,8 +13,14 @@ typedef NS_ENUM(NSUInteger, FRDRelationshipsDataSourceType) {
 
 #import "FRDBaseViewController.h"
 
+@class FRDRelationshipItem;
+
 @interface FRDRelationshipStatusController : FRDBaseViewController
 
 @property (nonatomic) FRDRelationshipsDataSourceType sourceType;
+
+@property (strong, nonatomic) FRDRelationshipItem *currentRelationshipStatus;;
+
+- (void)update;
 
 @end

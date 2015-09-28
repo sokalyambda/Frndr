@@ -684,7 +684,7 @@
                                                         </mask>
                                                     </variation>
                                                     <connections>
-                                                        <action selector="newFriendsNotificationsClick:" destination="AQs-9T-kQV" eventType="valueChanged" id="Pll-Jz-7oE"/>
+                                                        <action selector="newFriendsNotificationsClick:" destination="AQs-9T-kQV" eventType="touchUpInside" id="Gyh-yr-ykH"/>
                                                     </connections>
                                                 </view>
                                             </subviews>
@@ -755,7 +755,7 @@
                                                         </mask>
                                                     </variation>
                                                     <connections>
-                                                        <action selector="newMessagesNotificationsClick:" destination="AQs-9T-kQV" eventType="valueChanged" id="4F6-Xq-lem"/>
+                                                        <action selector="newMessagesNotificationsClick:" destination="AQs-9T-kQV" eventType="touchUpInside" id="dvd-0W-CQZ"/>
                                                     </connections>
                                                 </view>
                                             </subviews>
@@ -1341,12 +1341,11 @@
                                                     </mask>
                                                 </variation>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Du5-65-9If">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Du5-65-9If">
                                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="10" id="xmd-hy-5ef"/>
                                                 </constraints>
-                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.lLorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.l</string>
                                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                                 <color key="textColor" red="0.42352941179999998" green="0.3294117647" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1361,12 +1360,11 @@
                                                     </mask>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cF-YB-NEU">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cF-YB-NEU">
                                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="10" id="Cuv-yx-yc9"/>
                                                 </constraints>
-                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.lLorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.l</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" red="0.20784313730000001" green="0.72156862749999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2662,11 +2660,11 @@
                                 <exclude reference="ow9-h3-Y0D"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="ZNp-5B-eGk"/>
                                 <exclude reference="VWA-V6-iuZ"/>
                                 <exclude reference="dup-xB-3dF"/>
                                 <exclude reference="nY9-As-f7S"/>
                                 <exclude reference="shd-MQ-beK"/>
-                                <exclude reference="ZNp-5B-eGk"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2674,11 +2672,11 @@
                                 <include reference="ow9-h3-Y0D"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="ZNp-5B-eGk"/>
                                 <include reference="VWA-V6-iuZ"/>
                                 <include reference="dup-xB-3dF"/>
                                 <include reference="nY9-As-f7S"/>
                                 <exclude reference="shd-MQ-beK"/>
-                                <include reference="ZNp-5B-eGk"/>
                             </mask>
                         </variation>
                     </view>
@@ -2801,7 +2799,7 @@
                                                 <color key="textColor" red="0.20784313730000001" green="0.72156862749999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Actress &amp; Model" textAlignment="center" minimumFontSize="17" background="MyProfileCellFrame" translatesAutoresizingMaskIntoConstraints="NO" id="82V-fg-PeQ">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" background="MyProfileCellFrame" translatesAutoresizingMaskIntoConstraints="NO" id="82V-fg-PeQ">
                                                 <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="k9i-UZ-DQH"/>

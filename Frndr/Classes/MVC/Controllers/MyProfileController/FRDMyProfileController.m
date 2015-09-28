@@ -58,18 +58,15 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
     [self initTopViewHolderContainer];
     [self initRelationshipStatusesHolderContainer];
     [self initDropDownHolderContainer];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self getCurrentUserProfile];
+    });
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self subscribeForNotifications];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    [self getCurrentUserProfile];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -113,6 +110,8 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
     profileForUpdating.jobTitle = self.jobTitleField.text;
     profileForUpdating.smoker = self.dropDownHolderController.smoker;
     profileForUpdating.sexualOrientation = self.dropDownHolderController.chosenOrientation;
+    
+    profileForUpdating.relationshipStatus = self.relationshipController.currentRelationshipStatus;
     
     NSMutableArray *lovedThings = [@[] mutableCopy];
     for (UITextField *interestField in self.personalBioTableController.mostLovedThingsFields) {
@@ -161,6 +160,8 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
     [self.personalBioTableController update];
     self.jobTitleField.text = profile.jobTitle;
     [self.visibleOnFrndrSwitch setOn:profile.isVisible animated:NO];
+    
+    [self.relationshipController update];
 }
 
 - (IBAction)managePhotosPress:(id)sender

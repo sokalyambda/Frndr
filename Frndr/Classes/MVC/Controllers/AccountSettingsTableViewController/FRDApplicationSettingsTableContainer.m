@@ -45,12 +45,10 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     self.tableView.alwaysBounceVertical = NO;
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    [self getCurrentUserProfile];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self getCurrentUserProfile];
+    });
 }
 
 #pragma mark - Actions

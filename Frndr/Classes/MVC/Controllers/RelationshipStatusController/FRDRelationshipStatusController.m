@@ -31,12 +31,31 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
 
 #pragma mark - Accessors
 
+- (FRDRelationshipItem *)currentRelationshipStatus
+{
+    if (!_currentRelationshipStatus) {
+        _currentRelationshipStatus = [FRDRelationshipItem relationshipItemWithTitle:@"" andActiveImage:@"" andNotActiveImage:@""];
+    }
+    return _currentRelationshipStatus;
+}
+
 - (NSArray *)relationshipStatuses
 {
     if (!_relationshipStatuses) {
         _relationshipStatuses = [self setupRelationshipsArray];
     }
     return _relationshipStatuses;
+}
+
+- (NSInteger)selectionCounter
+{
+    _selectionCounter = 0;
+    for (FRDRelationshipItem *item in self.relationshipStatuses) {
+        if (item.isSelected) {
+            _selectionCounter++;
+        }
+    }
+    return _selectionCounter;
 }
 
 #pragma mark - View Lifecycle
@@ -71,24 +90,46 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
 
 #pragma mark - UICollectionViewDelegate
 
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    FRDRelationshipItem *currentItem = self.relationshipStatuses[indexPath.row];
+    if ([currentItem isEqual:self.currentRelationshipStatus] || [self.currentRelationshipStatus.relationshipTitle isEqualToString:@""]) {
+        return YES;
+    }
+    return NO;
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     FRDRelationshipItem *currentItem = self.relationshipStatuses[indexPath.row];
     FRDRelationshipCollectionCell *cell = (FRDRelationshipCollectionCell *)[self collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
+    if (![currentItem isEqual:self.currentRelationshipStatus]) {
+        self.currentRelationshipStatus = currentItem;
+    } else {
+        self.currentRelationshipStatus = nil;
+    }
+    
     [cell updateCellWithRelationshipItem:currentItem];
+
     [collectionView reloadItemsAtIndexPaths:@[indexPath]];
-    
+
     /*
-    if (!currentItem.isSelected) {
-        self.selectionCounter++;
-    } else if (self.selectionCounter > 0) {
-        self.selectionCounter--;
-    }
-    
-    if (self.selectionCounter < 1 || collectionView.allowsMultipleSelection) {
-        
-    }
+     if (!currentItem.isSelected) {
+     self.selectionCounter++;
+     } else if (self.selectionCounter > 0) {
+     self.selectionCounter--;
+     }
+     
+     if (self.selectionCounter < 1 || collectionView.allowsMultipleSelection) {
+     
+     }
+     
+     if (currentItem.isSelected) {
+     self.selectionCounter++;
+     } else if (self.selectionCounter > 0) {
+     self.selectionCounter--;
+     }
      */
 }
 
@@ -105,6 +146,23 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
 }
 
 #pragma mark - Actions
+
+- (void)update
+{
+    FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
+    NSString *relStatus = currentProfile.relationshipStatus.relationshipTitle;
+    
+    for (FRDRelationshipItem *item in self.relationshipStatuses) {
+        if ([item.relationshipTitle isEqualToString:relStatus] || [item.relationshipTitle containsString:relStatus]) {
+            self.currentRelationshipStatus = item;
+            self.currentRelationshipStatus.isSelected = YES;
+        }
+    }
+    if (self.currentRelationshipStatus) {
+        [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:[self.relationshipStatuses indexOfObject:self.currentRelationshipStatus] inSection:0]]];
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[self.relationshipStatuses indexOfObject:self.currentRelationshipStatus] inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    }
+}
 
 /**
  *  Register custom cell's class
