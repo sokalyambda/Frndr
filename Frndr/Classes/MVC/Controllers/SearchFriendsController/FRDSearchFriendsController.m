@@ -259,9 +259,9 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     
     NSLog(@"self.nearestUsers.count = %d, self.swipableViewsCounter = %d", self.nearestUsers.count, self.swipableViewsCounter);
     
-    if (self.nearestUsers.count && self.swipableViewsCounter < self.nearestUsers.count) {
+//    if (self.nearestUsers.count && self.swipableViewsCounter < self.nearestUsers.count) {
     
-        FRDNearestUser *currentNearesUser = self.nearestUsers[self.swipableViewsCounter];
+//        FRDNearestUser *currentNearesUser = self.nearestUsers[self.swipableViewsCounter];
     
         parentView = [[FRDFriendDragableParentView alloc] initWithFrame:swipeableView.bounds];
         FRDFriendDragableView *friendView = [FRDFriendDragableView makeFromXib];
@@ -273,10 +273,10 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
         
         [self addConstraintsForParentView:parentView andContentView:friendView];
         
-        [friendView configureWithNearestUser:currentNearesUser];
+//        [friendView configureWithNearestUser:currentNearesUser];
     
         self.swipableViewsCounter++;
-    }
+//    }
     
     return parentView;
 }

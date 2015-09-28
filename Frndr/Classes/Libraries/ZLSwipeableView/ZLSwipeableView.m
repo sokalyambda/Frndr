@@ -35,6 +35,9 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
     return direction;
 }
 
+static NSString *const kDiscardIconName = @"discardIcon";
+static NSString *const kApplyIconName = @"applyIcon";
+
 @interface ZLSwipeableView () <UICollisionBehaviorDelegate, UIDynamicAnimatorDelegate>
 
 // UIDynamicAnimators
@@ -88,7 +91,10 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
     [self addSubview:self.reuseCoverContainerView];
     
     // Default properties
-    self.isRotationEnabled = YES;
+    self.isBehindViewsCustomizationEnabled = YES;
+    self.isRotationEnabled = NO;
+    self.isStackEnabled = YES;
+    
     self.rotationDegree = 1;
     self.rotationRelativeYOffsetFromCenter = 0.3f;
     
@@ -204,8 +210,8 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
         }
     }
     
-    if (self.isRotationEnabled) {
-        // rotation
+    if (self.isBehindViewsCustomizationEnabled) {
+        
         NSUInteger numSwipeableViews = self.containerView.subviews.count;
         if (numSwipeableViews >= 1) {
             [self.animator removeBehavior:self.swipeableViewSnapBehavior];
@@ -215,16 +221,21 @@ ZLSwipeableViewDirection ZLDirectionVectorToSwipeableViewDirection(CGVector dire
                                               toPoint:self.swipeableViewsCenter];
             [self.animator addBehavior:self.swipeableViewSnapBehavior];
         }
-        CGPoint rotationCenterOffset = {
-            0, CGRectGetHeight(topSwipeableView.frame) *
-            self.rotationRelativeYOffsetFromCenter};
-        if (numSwipeableViews >= 2) {
+        
+        CGPoint rotationCenterOffset = {0, CGRectGetHeight(topSwipeableView.frame) * self.rotationRelativeYOffsetFromCenter};
+        
+        if (self.isStackEnabled && numSwipeableViews >= 2) {
+            [self transformView:self.containerView.subviews[numSwipeableViews - 2] atIndex:1];
+        } else if (self.isRotationEnabled && numSwipeableViews >= 2) {
             [self rotateView:self.containerView.subviews[numSwipeableViews - 2]
                    forDegree:self.rotationDegree
           atOffsetFromCenter:rotationCenterOffset
                     animated:YES];
         }
-        if (numSwipeableViews >= 3) {
+        
+        if (self.isStackEnabled && numSwipeableViews >= 3) {
+            [self transformView:self.containerView.subviews[numSwipeableViews - 3] atIndex:2];
+        } else if (self.isRotationEnabled && numSwipeableViews >= 3) {
             [self rotateView:self.containerView.subviews[numSwipeableViews - 3]
                    forDegree:-self.rotationDegree
           atOffsetFromCenter:rotationCenterOffset
@@ -641,6 +652,7 @@ int signum(CGFloat n)
     return nextView;
 }
 
+//Views rotating
 - (void)rotateView:(UIView *)view
          forDegree:(float)degree
 atOffsetFromCenter:(CGPoint)offset
@@ -650,15 +662,28 @@ atOffsetFromCenter:(CGPoint)offset
     float rotationRadian = [self degreesToRadians:degree];
     [UIView animateWithDuration:duration animations:^{
         view.center = self.swipeableViewsCenter;
-        CGAffineTransform transform =
-        CGAffineTransformMakeTranslation(offset.x,
-                                         offset.y);
-        transform =
-        CGAffineTransformRotate(transform, rotationRadian);
-        transform = CGAffineTransformTranslate(
-                                               transform, -offset.x, -offset.y);
+        CGAffineTransform transform = CGAffineTransformMakeTranslation(offset.x,offset.y);
+        transform = CGAffineTransformRotate(transform, rotationRadian);
+        transform = CGAffineTransformTranslate(transform, -offset.x, -offset.y);
         view.transform = transform;
     }];
+}
+
+//Views stack
+static CGFloat const kYOffset = 20.f;
+- (void)transformView:(UIView *)view atIndex:(NSInteger)index
+{
+    //for second and third photos
+    CGFloat scaleCoef = 1 - index/kYOffset;
+    if (index == 1 || index == 2) {
+        [UIView animateWithDuration:.25f animations:^{
+            view.center = self.swipeableViewsCenter;
+            CGAffineTransform transform = CGAffineTransformMakeTranslation(0, kYOffset*index);
+            transform = CGAffineTransformMakeScale(scaleCoef, scaleCoef);
+            transform = CGAffineTransformTranslate(transform, 0, -kYOffset*index);
+            view.transform = transform;
+        }];
+    }
 }
 
 - (UIView *)topSwipeableView
@@ -672,11 +697,9 @@ atOffsetFromCenter:(CGPoint)offset
 - (void)configureDragableFriendViewForOverlaying:(FRDFriendDragableView *)dragableView withDirection:(ZLSwipeableViewDirection)directionType
 {
     if (directionType == ZLSwipeableViewDirectionLeft) {
-        dragableView.overlayImageName = @"discardIcon";
+        dragableView.overlayImageName = kDiscardIconName;
     } else if (directionType == ZLSwipeableViewDirectionRight) {
-        dragableView.overlayImageName = @"applyIcon";
-    } else {
-        dragableView.overlayView.hidden = YES;
+        dragableView.overlayImageName = kApplyIconName;
     }
 }
 
