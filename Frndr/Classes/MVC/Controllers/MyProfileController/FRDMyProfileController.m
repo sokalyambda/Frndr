@@ -58,10 +58,6 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
     [self initTopViewHolderContainer];
     [self initRelationshipStatusesHolderContainer];
     [self initDropDownHolderContainer];
-
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [self setProfileInformationToFields];
-//    });
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -74,7 +70,6 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
 {
     [super viewDidAppear:animated];
     [self getCurrentUserProfile];
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -166,14 +161,6 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
     [self.personalBioTableController update];
     self.jobTitleField.text = profile.jobTitle;
     [self.visibleOnFrndrSwitch setOn:profile.isVisible animated:NO];
-}
-
-/**
- *  Get profile information from fields
- */
-- (void)getProfileInformationFromFields
-{
-    
 }
 
 - (IBAction)managePhotosPress:(id)sender
