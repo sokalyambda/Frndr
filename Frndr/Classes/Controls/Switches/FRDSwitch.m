@@ -82,7 +82,6 @@
 - (void)setOn:(BOOL)on animated:(BOOL)animated
 {
     _on = on;
-    [self sendActionsForControlEvents:UIControlEventValueChanged];
     
     if (on) {
         self.offLabel.layer.opacity = 0.0;
@@ -171,6 +170,7 @@
 - (void)handleTap:(UITapGestureRecognizer *)recognizer
 {
     [self setOn:!self.isOn animated:YES];
+    [self sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)updateLabels
@@ -211,5 +211,7 @@
     
     self.switchImageView.layer.position = destination;
 }
+
+#pragma mark - Touch handling
 
 @end
