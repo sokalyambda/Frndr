@@ -26,7 +26,7 @@
 
 #import "FRDProjectFacade.h"
 
-static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalBioTableControllerSegue";
+static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBioTableControllerSegue";
 
 @interface FRDMyProfileController () <UITextFieldDelegate, UIGestureRecognizerDelegate>
 
@@ -59,15 +59,22 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
     [self initRelationshipStatusesHolderContainer];
     [self initDropDownHolderContainer];
 
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self setProfileInformationToFields];
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self setProfileInformationToFields];
+//    });
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self subscribeForNotifications];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self getCurrentUserProfile];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -96,6 +103,9 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
     [self updateCurrentProfile];
 }
 
+/**
+ *  Update current user profile
+ */
 - (void)updateCurrentProfile
 {
     FRDCurrentUserProfile *profileForUpdating = [[FRDCurrentUserProfile alloc] init];
@@ -114,6 +124,8 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
         [lovedThings addObject:interestField.text];
     }
     
+    profileForUpdating.biography = self.personalBioTableController.personalBioThingILoveTextView.text;
+    
     profileForUpdating.thingsLovedMost = lovedThings;
     profileForUpdating.visible = self.visibleOnFrndrSwitch.isOn;
     
@@ -126,6 +138,21 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+    }];
+}
+
+/**
+ *  Get current user profile
+ */
+- (void)getCurrentUserProfile
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [FRDProjectFacade getCurrentUserProfileOnSuccess:^(BOOL isSuccess) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [weakSelf setProfileInformationToFields];
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
     }];
 }
 

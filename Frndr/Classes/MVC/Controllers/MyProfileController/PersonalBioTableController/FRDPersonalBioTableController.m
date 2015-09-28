@@ -28,7 +28,6 @@ typedef NS_ENUM(NSInteger, FRDPersonalBioSectionType)
 @property (weak, nonatomic) IBOutlet UITextField *thirdThingILoveTextField;
 @property (weak, nonatomic) IBOutlet UITextField *fourthThingILoveTextField;
 @property (weak, nonatomic) IBOutlet UITextField *fifthThingILoveTextField;
-@property (weak, nonatomic) IBOutlet UITextView *personalBioThingILoveTextView;
 
 @end
 
