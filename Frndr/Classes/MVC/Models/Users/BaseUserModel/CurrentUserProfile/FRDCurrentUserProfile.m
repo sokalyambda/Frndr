@@ -21,26 +21,12 @@ static NSString *const kSexualOrientation = @"sexual";
 static NSString *const kRelationshipStatus = @"relStatus";
 static NSString *const kSex = @"sex";
 static NSString *const kJobTitle = @"jobTitle";
+static NSString *const kSmoker = @"smoker";
+static NSString *const kBiography = @"bio";
 
 static NSString *const kNotifications = @"notification";
 static NSString *const kNewMessages = @"newMessages";
 static NSString *const kNewFriends = @"newFriends";
-
-/*
- "coordinates": [15, 25],
- "profile": {
- "name": "Petrovich",
- "age": "25",
- "relStatus": "single",
- "jobTitle": "Doctor",
- "smoker": "true",
- "sexual": "straight",
- "things": ["tennis", "box", "cars"],
- "bio": "Some biography",
- "visible": "true",
- "sex": "M"
- }
- */
 
 @implementation FRDCurrentUserProfile
 
@@ -93,12 +79,14 @@ static NSString *const kNewFriends = @"newFriends";
     if (self) {
         _userId = [response[kId] longLongValue];
         
-        NSDictionary *profileDict   = response[kProfile];
+        NSDictionary *profileDict = response[kProfile];
         _visible = [profileDict[kVisible] boolValue];
         _thingsLovedMost = profileDict[kThingsLovedMost];
         _sexualOrientation = [FRDSexualOrientation orientationWithOrientationString:profileDict[kSexualOrientation]];
         _relationshipStatus = [FRDRelationshipItem relationshipItemWithTitle:profileDict[kRelationshipStatus] andActiveImage:nil andNotActiveImage:nil];
         _jobTitle = profileDict[kJobTitle];
+        _smoker = [profileDict[kSmoker] boolValue];
+        _biography = profileDict[kBiography];
         
         NSDictionary *notificationsDict = response[kNotifications];
         _friendsNotificationsEnabled = [notificationsDict[kNewFriends] boolValue];

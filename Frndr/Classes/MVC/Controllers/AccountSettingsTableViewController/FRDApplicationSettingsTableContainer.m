@@ -47,6 +47,12 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
     self.tableView.alwaysBounceVertical = NO;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self getCurrentUserProfile];
+}
+
 #pragma mark - Actions
 
 - (IBAction)newFriendsNotificationsClick:(id)sender
@@ -162,6 +168,32 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
 }
 
 /**
+ *  Get current user profile
+ */
+- (void)getCurrentUserProfile
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.parentViewController.view animated:YES];
+    [FRDProjectFacade getCurrentUserProfileOnSuccess:^(BOOL isSuccess) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.parentViewController.view animated:YES];
+        [weakSelf updateNotificationsSettingsSwitches];
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.parentViewController.view animated:YES];
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+    }];
+}
+
+/**
+ *  Update notifications settings switches
+ */
+- (void)updateNotificationsSettingsSwitches
+{
+    FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
+    [self.friendSwitch setOn:currentProfile.friendsNotificationsEnabled animated:YES];
+    [self.messageSwitch setOn:currentProfile.messagesNotificationsEnabled animated:YES];
+}
+
+/**
  *  Show delete account action sheet
  */
 - (void)showDeleteAccountActionSheet
@@ -190,12 +222,10 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
     [MBProgressHUD showHUDAddedTo:self.parentViewController.view animated:YES];
     [FRDProjectFacade deleteAccountOnSuccess:^(BOOL isSuccess) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.parentViewController.view animated:YES];
-        
         [weakSelf.parentViewController.navigationController popToRootViewControllerAnimated:YES];
-        
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.parentViewController.view animated:YES];
-        
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
     }];
 }
 
@@ -210,7 +240,7 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
         [MBProgressHUD hideAllHUDsForView:weakSelf.parentViewController.view animated:YES];
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.parentViewController.view animated:YES];
-//        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
     }];
 }
 
