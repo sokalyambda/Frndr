@@ -127,6 +127,7 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
             }
                 
             case FRDApplicationOtherSettingClearAllMessages: {
+                [self showClearAllMessagesActionSheet];
                 break;
             }
                 
@@ -209,6 +210,42 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
     [signOutController addAction:cancelAction];
     
     [self presentViewController:signOutController animated:YES completion:nil];
+}
+
+/**
+ *  Show clear all messages action sheet
+ */
+- (void)showClearAllMessagesActionSheet
+{
+    UIAlertController *signOutController = [UIAlertController alertControllerWithTitle:@"" message:LOCALIZED(@"Do you want to clear all messages?") preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    WEAK_SELF;
+    UIAlertAction *clearMessagesAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Clear messages") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        [weakSelf clearMessages];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleCancel handler:nil];
+    
+    [signOutController addAction:clearMessagesAction];
+    [signOutController addAction:cancelAction];
+    
+    [self presentViewController:signOutController animated:YES completion:nil];
+}
+
+/**
+ *  Clear all messages
+ */
+- (void)clearMessages
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.parentViewController.view animated:YES];
+    [FRDProjectFacade clearAllMessagesOnSuccess:^(BOOL isSuccess) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.parentViewController.view animated:YES];
+        [FRDAlertFacade showAlertWithMessage:LOCALIZED(@"All messages have been removed.") forController:weakSelf withCompletion:nil];
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.parentViewController.view animated:YES];
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+    }];
 }
 
 /**

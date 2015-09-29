@@ -60,6 +60,9 @@
 		58B99E991BBA5A0A0057DB54 /* FRDGetSearchSettingsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B99E981BBA5A0A0057DB54 /* FRDGetSearchSettingsRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58B99E9D1BBA5A9E0057DB54 /* FRDSearchSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B99E9C1BBA5A9E0057DB54 /* FRDSearchSettings.m */; settings = {ASSET_TAGS = (); }; };
 		58B99EA21BBA5ECE0057DB54 /* FRDUpdateSearchSettingsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B99EA11BBA5ECE0057DB54 /* FRDUpdateSearchSettingsRequest.m */; settings = {ASSET_TAGS = (); }; };
+		58B99EA71BBA83980057DB54 /* FRDLikeUserByIdRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B99EA61BBA83980057DB54 /* FRDLikeUserByIdRequest.m */; settings = {ASSET_TAGS = (); }; };
+		58B99EAB1BBA83CA0057DB54 /* FRDDislikeUserByIdRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B99EAA1BBA83CA0057DB54 /* FRDDislikeUserByIdRequest.m */; settings = {ASSET_TAGS = (); }; };
+		58B99EB01BBA87E60057DB54 /* FRDClearAllMessagesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B99EAF1BBA87E60057DB54 /* FRDClearAllMessagesRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58BB5D431BB70AB900FD1A56 /* FRDGetCurrentUserProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BB5D421BB70AB800FD1A56 /* FRDGetCurrentUserProfileRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58BC76A11B9EB6B500BB8B5A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A01B9EB6B500BB8B5A /* main.m */; };
 		58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A31B9EB6B500BB8B5A /* AppDelegate.m */; };
@@ -257,6 +260,12 @@
 		58B99E9C1BBA5A9E0057DB54 /* FRDSearchSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSearchSettings.m; path = Classes/MVC/Models/SearchSettings/FRDSearchSettings.m; sourceTree = "<group>"; };
 		58B99EA01BBA5ECE0057DB54 /* FRDUpdateSearchSettingsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDUpdateSearchSettingsRequest.h; path = "Classes/Server APIs/API/Requests/SearchSettingsModule/UpdateSearchSettingsRequest/FRDUpdateSearchSettingsRequest.h"; sourceTree = "<group>"; };
 		58B99EA11BBA5ECE0057DB54 /* FRDUpdateSearchSettingsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDUpdateSearchSettingsRequest.m; path = "Classes/Server APIs/API/Requests/SearchSettingsModule/UpdateSearchSettingsRequest/FRDUpdateSearchSettingsRequest.m"; sourceTree = "<group>"; };
+		58B99EA51BBA83980057DB54 /* FRDLikeUserByIdRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDLikeUserByIdRequest.h; path = "Classes/Server APIs/API/Requests/LikesModule/LikeUserByIdRequest/FRDLikeUserByIdRequest.h"; sourceTree = "<group>"; };
+		58B99EA61BBA83980057DB54 /* FRDLikeUserByIdRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDLikeUserByIdRequest.m; path = "Classes/Server APIs/API/Requests/LikesModule/LikeUserByIdRequest/FRDLikeUserByIdRequest.m"; sourceTree = "<group>"; };
+		58B99EA91BBA83CA0057DB54 /* FRDDislikeUserByIdRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDDislikeUserByIdRequest.h; path = "Classes/Server APIs/API/Requests/LikesModule/DislikeUserByIdRequest/FRDDislikeUserByIdRequest.h"; sourceTree = "<group>"; };
+		58B99EAA1BBA83CA0057DB54 /* FRDDislikeUserByIdRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDDislikeUserByIdRequest.m; path = "Classes/Server APIs/API/Requests/LikesModule/DislikeUserByIdRequest/FRDDislikeUserByIdRequest.m"; sourceTree = "<group>"; };
+		58B99EAE1BBA87E60057DB54 /* FRDClearAllMessagesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDClearAllMessagesRequest.h; path = "Classes/Server APIs/API/Requests/MessagesModule/ClearAllMessagesRequest/FRDClearAllMessagesRequest.h"; sourceTree = "<group>"; };
+		58B99EAF1BBA87E60057DB54 /* FRDClearAllMessagesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDClearAllMessagesRequest.m; path = "Classes/Server APIs/API/Requests/MessagesModule/ClearAllMessagesRequest/FRDClearAllMessagesRequest.m"; sourceTree = "<group>"; };
 		58BB5D411BB70AB800FD1A56 /* FRDGetCurrentUserProfileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDGetCurrentUserProfileRequest.h; path = "Classes/Server APIs/API/Requests/GetUserByIdRequest/GetCurrentUserProfileRequest/FRDGetCurrentUserProfileRequest.h"; sourceTree = "<group>"; };
 		58BB5D421BB70AB800FD1A56 /* FRDGetCurrentUserProfileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDGetCurrentUserProfileRequest.m; path = "Classes/Server APIs/API/Requests/GetUserByIdRequest/GetCurrentUserProfileRequest/FRDGetCurrentUserProfileRequest.m"; sourceTree = "<group>"; };
 		58BC769B1B9EB6B500BB8B5A /* Frndr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frndr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -893,6 +902,50 @@
 			name = UpdateSearchSettings;
 			sourceTree = "<group>";
 		};
+		58B99EA31BBA83520057DB54 /* LikesModule */ = {
+			isa = PBXGroup;
+			children = (
+				58B99EA81BBA83A90057DB54 /* DislikeUserByIdRequest */,
+				58B99EA41BBA83670057DB54 /* LikeUserByIdRequest */,
+			);
+			name = LikesModule;
+			sourceTree = "<group>";
+		};
+		58B99EA41BBA83670057DB54 /* LikeUserByIdRequest */ = {
+			isa = PBXGroup;
+			children = (
+				58B99EA51BBA83980057DB54 /* FRDLikeUserByIdRequest.h */,
+				58B99EA61BBA83980057DB54 /* FRDLikeUserByIdRequest.m */,
+			);
+			name = LikeUserByIdRequest;
+			sourceTree = "<group>";
+		};
+		58B99EA81BBA83A90057DB54 /* DislikeUserByIdRequest */ = {
+			isa = PBXGroup;
+			children = (
+				58B99EA91BBA83CA0057DB54 /* FRDDislikeUserByIdRequest.h */,
+				58B99EAA1BBA83CA0057DB54 /* FRDDislikeUserByIdRequest.m */,
+			);
+			name = DislikeUserByIdRequest;
+			sourceTree = "<group>";
+		};
+		58B99EAC1BBA86CD0057DB54 /* MessagesModule */ = {
+			isa = PBXGroup;
+			children = (
+				58B99EAD1BBA87C00057DB54 /* ClearAllMessagesRequest */,
+			);
+			name = MessagesModule;
+			sourceTree = "<group>";
+		};
+		58B99EAD1BBA87C00057DB54 /* ClearAllMessagesRequest */ = {
+			isa = PBXGroup;
+			children = (
+				58B99EAE1BBA87E60057DB54 /* FRDClearAllMessagesRequest.h */,
+				58B99EAF1BBA87E60057DB54 /* FRDClearAllMessagesRequest.m */,
+			);
+			name = ClearAllMessagesRequest;
+			sourceTree = "<group>";
+		};
 		58BB5D401BB70A4E00FD1A56 /* GetCurrentUserProfileRequest */ = {
 			isa = PBXGroup;
 			children = (
@@ -1197,6 +1250,8 @@
 		58BC76DC1B9EB9FD00BB8B5A /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				58B99EAC1BBA86CD0057DB54 /* MessagesModule */,
+				58B99EA31BBA83520057DB54 /* LikesModule */,
 				58B99E961BBA59D50057DB54 /* SearchSettingsModule */,
 				58B99E951BBA59A60057DB54 /* UserProfileModule */,
 				581B9D501B9EDC550080393B /* BaseNetworkRequest */,
@@ -2102,6 +2157,7 @@
 				3E0EEC5C1BABEF2300AB51B0 /* FRDApplicationSettingsController.m in Sources */,
 				58FFDBAE1B9ECF6B00B0490A /* FRDCommonDateFormatter.m in Sources */,
 				58FFDBB81B9ED0A900B0490A /* FRDErrorHandler.m in Sources */,
+				58B99EB01BBA87E60057DB54 /* FRDClearAllMessagesRequest.m in Sources */,
 				5812BD0D1BB3E87300BCB90B /* FRDRedirectionHelper.m in Sources */,
 				581B9D5C1B9EDCDB0080393B /* FRDFailedOperationManager.m in Sources */,
 				58FFDBB51B9ED07E00B0490A /* FRDCommonNumberFormatter.m in Sources */,
@@ -2122,6 +2178,7 @@
 				58DE5B3B1BB541280020A34C /* FRDNearestUser.m in Sources */,
 				58ED54F91BB189EA00F9B378 /* FRDGeolocationDeniedController.m in Sources */,
 				3E941A371BB180B400F034E6 /* FRDSwitch.m in Sources */,
+				58B99EAB1BBA83CA0057DB54 /* FRDDislikeUserByIdRequest.m in Sources */,
 				58F2F30F1B9EF93F000DC739 /* FRDTutorialController.m in Sources */,
 				58BC770E1B9ECA5000BB8B5A /* UIView+MakeFromXib.m in Sources */,
 				58ED55021BB1B3E000F9B378 /* FRDSendDeviceDataRequest.m in Sources */,
@@ -2174,6 +2231,7 @@
 				58B99E9D1BBA5A9E0057DB54 /* FRDSearchSettings.m in Sources */,
 				58A1A12E1BB926AD00E29789 /* FRDOverlayView.m in Sources */,
 				581B9D4F1B9EDC350080393B /* FRDSessionManager.m in Sources */,
+				58B99EA71BBA83980057DB54 /* FRDLikeUserByIdRequest.m in Sources */,
 				3E1D9BE61BB3CE34003A1E5C /* FRDPhotoGalleryController.m in Sources */,
 				3E941A431BB1815400F034E6 /* FRDApplicationSettingsTableHeader.m in Sources */,
 				58DE5B441BB541E10020A34C /* FRDRelationshipItem.m in Sources */,

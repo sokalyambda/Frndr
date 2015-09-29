@@ -70,4 +70,17 @@ extern NSString *defaultBaseURLString;
 + (FRDNetworkOperation *)updateCurrentSearchSettings:(FRDSearchSettings *)searchSettingsForUpdating onSuccess:(void(^)(FRDSearchSettings *currentSearchSettings))success
                                            onFailure:(FailureBlock)failure;
 
+#pragma mark - Likes Module
+
++ (FRDNetworkOperation *)dislikeUserById:(long long)userId onSuccess:(SuccessBlock)success
+                               onFailure:(FailureBlock)failure;
++ (FRDNetworkOperation *)likeUserById:(long long)userId onSuccess:(SuccessBlock)success
+                            onFailure:(FailureBlock)failure;
+
+#pragma mark - Messages Module
+
++ (FRDNetworkOperation *)clearAllMessagesOnSuccess:(SuccessBlock)success
+                                         onFailure:(FailureBlock)failure;
+
+
 @end
