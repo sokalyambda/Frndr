@@ -8,6 +8,10 @@
 
 #import "FRDGetSearchSettingsRequest.h"
 
+@class FRDSearchSettings;
+
 @interface FRDUpdateSearchSettingsRequest : FRDGetSearchSettingsRequest
+
+- (instancetype)initWithSearchSettingsForUpdating:(FRDSearchSettings *)searchSettingsForUpdating;
 
 @end

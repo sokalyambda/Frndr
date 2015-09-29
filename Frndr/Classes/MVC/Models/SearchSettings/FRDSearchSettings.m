@@ -19,7 +19,27 @@ static NSString *const kSmoker                  = @"smoker";
 static NSString *const kRelationshipStatuses    = @"relationship";
 static NSString *const kDistance                = @"distance";
 
+@interface FRDSearchSettings ()
+
+@property (strong, nonatomic) NSDictionary *ageRange;
+
+@end
+
 @implementation FRDSearchSettings
+
+#pragma mark - Accessors
+
+- (CGFloat)minAgeValue
+{
+    _minAgeValue = [self.ageRange[kMinAge] floatValue];
+    return _minAgeValue;
+}
+
+- (CGFloat)maxAgeValue
+{
+    _maxAgeValue = [self.ageRange[kMaxAge] floatValue];
+    return _maxAgeValue;
+}
 
 #pragma mark - FRDMappingProtocol
 

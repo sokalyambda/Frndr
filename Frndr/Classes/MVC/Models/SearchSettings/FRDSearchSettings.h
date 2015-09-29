@@ -12,10 +12,11 @@
 
 @interface FRDSearchSettings : NSObject<FRDMappingProtocol>
 
-@property (strong, nonatomic) NSDictionary *ageRange;
 @property (strong, nonatomic) FRDSexualOrientation *sexualOrientation;
 @property (strong, nonatomic) NSSet *relationshipStatuses;
 @property (assign, nonatomic, getter=isSmoker) BOOL smoker;
 @property (assign, nonatomic) CGFloat distance;
+@property (assign, nonatomic) CGFloat minAgeValue;
+@property (assign, nonatomic) CGFloat maxAgeValue;
 
 @end

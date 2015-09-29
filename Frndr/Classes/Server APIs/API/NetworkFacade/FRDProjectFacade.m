@@ -268,13 +268,13 @@ NSString *baseURLString = @"http://134.249.164.53:8859/";
     return operation;
 }
 
-+ (FRDNetworkOperation *)updateCurrentSearchSettingsOnSuccess:(void(^)(FRDSearchSettings *currentSearchSettings))success onFailure:(FailureBlock)failure
++ (FRDNetworkOperation *)updateCurrentSearchSettings:(FRDSearchSettings *)searchSettingsForUpdating onSuccess:(void(^)(FRDSearchSettings *currentSearchSettings))success onFailure:(FailureBlock)failure
 {
-    FRDGetSearchSettingsRequest *request = [[FRDGetSearchSettingsRequest alloc] init];
+    FRDUpdateSearchSettingsRequest *request = [[FRDUpdateSearchSettingsRequest alloc] initWithSearchSettingsForUpdating:searchSettingsForUpdating];
     
     FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
         
-        FRDGetSearchSettingsRequest *request = (FRDGetSearchSettingsRequest *)operation.networkRequest;
+        FRDUpdateSearchSettingsRequest *request = (FRDUpdateSearchSettingsRequest *)operation.networkRequest;
         
         if (success) {
             success(request.currentSearchSettings);
