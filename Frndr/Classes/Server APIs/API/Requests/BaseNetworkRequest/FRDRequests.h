@@ -18,4 +18,7 @@
 #import "FRDGetUserByIdRequest.h"
 #import "FRDGetCurrentUserProfileRequest.h"
 
+#import "FRDGetSearchSettingsRequest.h"
+#import "FRDUpdateSearchSettingsRequest.h"
+
 #endif

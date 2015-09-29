@@ -21,6 +21,10 @@
 
 #import "FRDRangeSlider.h"
 
+#import "FRDProjectFacade.h"
+
+#import "FRDSearchSettings.h"
+
 @interface FRDSearchSettingsController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
@@ -41,7 +45,7 @@
 
 @property (nonatomic) NSInteger currentMinimumAge;
 @property (nonatomic) NSInteger currentMaximumAge;
-@property (nonatomic) NSInteger currentDistance;
+@property (nonatomic) long long currentDistance;
 
 @end
 
@@ -56,15 +60,16 @@
     [self initRelationshipStatusesHolderContainer];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self configureSliders];
+        [self getCurrentSearchSettings];
     });
 }
 
 #pragma mark - Accessors
 
-- (void)setCurrentDistance:(NSInteger)currentDistance
+- (void)setCurrentDistance:(long long)currentDistance
 {
     _currentDistance = currentDistance;
-    self.distanceLabel.text = [NSString stringWithFormat:@"%ld miles", (long)currentDistance];
+    self.distanceLabel.text = [NSString stringWithFormat:@"%lld miles", (long long)currentDistance];
 }
 
 - (void)setCurrentMinimumAge:(NSInteger)currentMinimumAge
@@ -80,6 +85,48 @@
 }
 
 #pragma mark - Actions
+
+/**
+ *  Get search settings for current user
+ */
+- (void)getCurrentSearchSettings
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [FRDProjectFacade getCurrentSearchSettingsOnSuccess:^(FRDSearchSettings *currentSearchSettings) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        FRDCurrentUserProfile *profile = [FRDStorageManager sharedStorage].currentUserProfile;
+        profile.currentSearchSettings = currentSearchSettings;
+        [weakSelf updateSearchSettingsFields];
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+    }];
+}
+
+/**
+ *  Update views relative to just obtained settings
+ */
+- (void)updateSearchSettingsFields
+{
+    FRDSearchSettings *currentSettings = [FRDStorageManager sharedStorage].currentUserProfile.currentSearchSettings;
+    self.currentDistance = currentSettings.distance;
+    //update relationship statuses
+    
+    //update drop down controller
+    
+    //update age range
+    self.currentMinimumAge = currentSettings.minAgeValue;
+    self.currentMaximumAge = currentSettings.maxAgeValue;
+}
+
+- (void)updateCurrentSearchSettings
+{
+    FRDSearchSettings *tempSearchSettings = [[FRDSearchSettings alloc] init];
+    //set data to temp settings and update it
+}
 
 - (IBAction)saveSettingsClick:(id)sender
 {

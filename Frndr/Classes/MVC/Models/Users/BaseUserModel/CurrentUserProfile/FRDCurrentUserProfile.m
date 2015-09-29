@@ -10,6 +10,7 @@
 
 #import "FRDSexualOrientation.h"
 #import "FRDRelationshipItem.h"
+#import "FRDSearchSettings.h"
 
 //beckend keys
 static NSString *const kId = @"_id";
