@@ -18,5 +18,6 @@
 @property (assign, nonatomic) CGFloat distance;
 @property (assign, nonatomic) CGFloat minAgeValue;
 @property (assign, nonatomic) CGFloat maxAgeValue;
+@property (strong, nonatomic) NSDictionary *ageRange;
 
 @end

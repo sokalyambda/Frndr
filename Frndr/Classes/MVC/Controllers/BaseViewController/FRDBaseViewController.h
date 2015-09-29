@@ -6,11 +6,18 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
+typedef NS_ENUM(NSUInteger, FRDSourceType) {
+    FRDSourceTypeSearchSettings,
+    FRDSourceTypeMyProfile
+};
+
 #import "FRDNavigationTitleView.h"
 
 @interface FRDBaseViewController : UIViewController
 
 @property (strong, nonatomic) FRDNavigationTitleView *navigationTitleView;
+
+@property (assign, nonatomic) FRDSourceType currentSourceType;
 
 - (void)customizeNavigationItem;
 

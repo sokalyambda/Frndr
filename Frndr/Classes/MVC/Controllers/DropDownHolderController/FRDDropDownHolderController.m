@@ -15,6 +15,7 @@
 #import "UIView+MakeFromXib.h"
 
 #import "FRDSexualOrientation.h"
+#import "FRDSearchSettings.h"
 
 #import "UIResponder+FirstResponder.h"
 
@@ -39,6 +40,14 @@ static NSString * const kUpArrow = @"upArrow";
 @implementation FRDDropDownHolderController
 
 #pragma mark - Accessors
+
+- (FRDSexualOrientation *)chosenOrientation
+{
+    if (!_chosenOrientation) {
+        _chosenOrientation = [FRDSexualOrientation orientationWithOrientationString:LOCALIZED(@"ANY")];
+    }
+    return _chosenOrientation;
+}
 
 - (void)setIsSmokerExpanded:(BOOL)isSmokerExpanded
 {
@@ -124,11 +133,27 @@ static NSString * const kUpArrow = @"upArrow";
 
 #pragma mark - Public Methods
 
-- (void)update
+- (void)updateWithSourceType:(FRDSourceType)sourceType
 {
     FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
-    self.sexualOrientationLabel.text = currentProfile.sexualOrientation.orientationString;
-    self.smokerLabel.text = currentProfile.isSmoker ? @"SMOKER" : @"NOT A SMOKER";
+    switch (sourceType) {
+        case FRDSourceTypeMyProfile: {
+            self.sexualOrientationLabel.text = currentProfile.sexualOrientation.orientationString.uppercaseString;
+            self.smokerLabel.text = currentProfile.isSmoker ? @"SMOKER" : @"NOT A SMOKER";
+            break;
+        }
+        case FRDSourceTypeSearchSettings: {
+            FRDSearchSettings *currentSearchSettings = currentProfile.currentSearchSettings;
+            self.sexualOrientationLabel.text = currentSearchSettings.sexualOrientation.orientationString.uppercaseString;
+            self.smokerLabel.text = currentSearchSettings.isSmoker ? @"SMOKER" : @"NOT A SMOKER";
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
+    
 }
 
 @end

@@ -2454,12 +2454,14 @@
                                                         <exclude reference="dLn-lq-7d2"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="10" y="724" width="380" height="40"/>
+                                                <variation key="heightClass=regular-widthClass=compact">
                                                     <mask key="constraints">
                                                         <include reference="dLn-lq-7d2"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <action selector="saveSettingsClick:" destination="3DG-li-SHm" eventType="touchUpInside" id="ClH-HE-KhQ"/>
+                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="csk-97-CcD" customClass="FRDRangeSlider">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -2565,8 +2567,7 @@
                                                 <exclude reference="aA5-SP-u01"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="0.0" width="400" height="780"/>
+                                        <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="subviews">
                                                 <include reference="V97-fX-oa5"/>
                                                 <include reference="fLl-CY-w0Z"/>
@@ -2660,12 +2661,12 @@
                                 <exclude reference="ow9-h3-Y0D"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="ZNp-5B-eGk"/>
                                 <exclude reference="rl2-Nk-CuR"/>
                                 <exclude reference="VWA-V6-iuZ"/>
                                 <exclude reference="dup-xB-3dF"/>
                                 <exclude reference="nY9-As-f7S"/>
                                 <exclude reference="shd-MQ-beK"/>
-                                <exclude reference="ZNp-5B-eGk"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2673,12 +2674,12 @@
                                 <include reference="ow9-h3-Y0D"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="ZNp-5B-eGk"/>
                                 <include reference="rl2-Nk-CuR"/>
                                 <include reference="VWA-V6-iuZ"/>
                                 <include reference="dup-xB-3dF"/>
                                 <include reference="nY9-As-f7S"/>
                                 <exclude reference="shd-MQ-beK"/>
-                                <include reference="ZNp-5B-eGk"/>
                             </mask>
                         </variation>
                     </view>

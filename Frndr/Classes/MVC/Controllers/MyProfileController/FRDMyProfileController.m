@@ -156,12 +156,12 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
 - (void)setProfileInformationToFields
 {
     FRDCurrentUserProfile *profile = [FRDStorageManager sharedStorage].currentUserProfile;
-    [self.dropDownHolderController update];
+    [self.dropDownHolderController updateWithSourceType:FRDSourceTypeMyProfile];
     [self.personalBioTableController update];
     self.jobTitleField.text = profile.jobTitle;
     [self.visibleOnFrndrSwitch setOn:profile.isVisible animated:NO];
     
-    [self.relationshipController update];
+    [self.relationshipController updateWithSourceType:FRDSourceTypeMyProfile];
 }
 
 - (IBAction)managePhotosPress:(id)sender
@@ -195,7 +195,7 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
     [self.relationshipsContainer addSubview:self.relationshipController.view];
     [self addChildViewController:self.relationshipController];
     [self.relationshipController didMoveToParentViewController:self];
-    self.relationshipController.sourceType = FRDRelationshipsDataSourceTypeMyProfile;
+    self.relationshipController.currentSourceType = FRDSourceTypeMyProfile;
 }
 
 - (void)initDropDownHolderContainer

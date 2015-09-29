@@ -19,27 +19,32 @@ static NSString *const kSmoker                  = @"smoker";
 static NSString *const kRelationshipStatuses    = @"relationship";
 static NSString *const kDistance                = @"distance";
 
-@interface FRDSearchSettings ()
-
-@property (strong, nonatomic) NSDictionary *ageRange;
-
-@end
-
 @implementation FRDSearchSettings
 
 #pragma mark - Accessors
 
-- (CGFloat)minAgeValue
+- (void)setAgeRange:(NSDictionary *)ageRange
 {
-    _minAgeValue = [self.ageRange[kMinAge] floatValue];
-    return _minAgeValue;
+    _ageRange = ageRange;
+    _minAgeValue = [_ageRange[kMinAge] floatValue];
+    _maxAgeValue = [_ageRange[kMaxAge] floatValue];
 }
 
-- (CGFloat)maxAgeValue
-{
-    _maxAgeValue = [self.ageRange[kMaxAge] floatValue];
-    return _maxAgeValue;
-}
+//- (CGFloat)minAgeValue
+//{
+//    if (_minAgeValue == 0) {
+//        _minAgeValue = [self.ageRange[kMinAge] floatValue];
+//    }
+//    return _minAgeValue;
+//}
+//
+//- (CGFloat)maxAgeValue
+//{
+//    if (_maxAgeValue) {
+//        _maxAgeValue = [self.ageRange[kMaxAge] floatValue];
+//    }
+//    return _maxAgeValue;
+//}
 
 #pragma mark - FRDMappingProtocol
 
@@ -47,7 +52,7 @@ static NSString *const kDistance                = @"distance";
 {
     self = [super init];
     if (self) {
-        _ageRange = response[kAgeRange];
+        self.ageRange = response[kAgeRange];
         _sexualOrientation = [FRDSexualOrientation orientationWithOrientationString:response[kSexualOrientation]];
         _smoker = [response[kSmoker] boolValue];
         _relationshipStatuses = [NSSet setWithSet:[self relationshipStatusesFromServerResponse:response]];
@@ -59,7 +64,7 @@ static NSString *const kDistance                = @"distance";
 - (instancetype)updateWithServerResponse:(NSDictionary *)response
 {
     if (self) {
-        _ageRange = response[kAgeRange];
+        self.ageRange = response[kAgeRange];
         _sexualOrientation = [FRDSexualOrientation orientationWithOrientationString:response[kSexualOrientation]];
         _smoker = [response[kSmoker] boolValue];
         _relationshipStatuses = [NSSet setWithSet:[self relationshipStatusesFromServerResponse:response]];

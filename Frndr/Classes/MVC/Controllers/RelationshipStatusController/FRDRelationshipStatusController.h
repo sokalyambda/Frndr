@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-typedef NS_ENUM(NSUInteger, FRDRelationshipsDataSourceType) {
-    FRDRelationshipsDataSourceTypeSearchSettings,
-    FRDRelationshipsDataSourceTypeMyProfile
-};
+//typedef NS_ENUM(NSUInteger, FRDRelationshipsDataSourceType) {
+//    FRDRelationshipsDataSourceTypeSearchSettings,
+//    FRDRelationshipsDataSourceTypeMyProfile
+//};
 
 #import "FRDBaseViewController.h"
 
@@ -17,11 +17,9 @@ typedef NS_ENUM(NSUInteger, FRDRelationshipsDataSourceType) {
 
 @interface FRDRelationshipStatusController : FRDBaseViewController
 
-@property (nonatomic) FRDRelationshipsDataSourceType sourceType;
-
 @property (strong, nonatomic) FRDRelationshipItem *currentRelationshipStatus;
 @property (strong, nonatomic) NSMutableSet *relationshipStatusesForSearch;
 
-- (void)update;
+- (void)updateWithSourceType:(FRDSourceType)sourceType;
 
 @end

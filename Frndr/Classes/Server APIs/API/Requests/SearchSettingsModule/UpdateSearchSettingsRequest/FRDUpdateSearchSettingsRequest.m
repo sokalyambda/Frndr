@@ -50,7 +50,7 @@ static NSString *const kDistance                = @"distance";
 
 - (NSArray *)relationsipStatusesForUpdatingFromSearchSettings:(FRDSearchSettings *)searchSettings
 {
-    NSMutableArray *statusesForSending = [@{} mutableCopy];
+    NSMutableArray *statusesForSending = [@[] mutableCopy];
     
     [searchSettings.relationshipStatuses enumerateObjectsUsingBlock:^(FRDRelationshipItem  *_Nonnull relItem, BOOL * _Nonnull stop) {
         [statusesForSending addObject:relItem.relationshipTitle];

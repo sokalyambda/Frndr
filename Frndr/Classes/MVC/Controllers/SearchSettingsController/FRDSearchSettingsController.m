@@ -114,23 +114,46 @@
     FRDSearchSettings *currentSettings = [FRDStorageManager sharedStorage].currentUserProfile.currentSearchSettings;
     self.currentDistance = currentSettings.distance;
     //update relationship statuses
-    
+    [self.relationshipController updateWithSourceType:FRDSourceTypeSearchSettings];
     //update drop down controller
-    
+    [self.dropDownHolderController updateWithSourceType:FRDSourceTypeSearchSettings];
     //update age range
     self.currentMinimumAge = currentSettings.minAgeValue;
     self.currentMaximumAge = currentSettings.maxAgeValue;
 }
 
+/**
+ *  Update search settings for current user
+ */
 - (void)updateCurrentSearchSettings
 {
     FRDSearchSettings *tempSearchSettings = [[FRDSearchSettings alloc] init];
+    tempSearchSettings.minAgeValue = self.ageRangeSlider.minimumValue;
+    tempSearchSettings.maxAgeValue = self.ageRangeSlider.maximumValue;
+    tempSearchSettings.sexualOrientation = self.dropDownHolderController.chosenOrientation;
+    tempSearchSettings.smoker = self.dropDownHolderController.smoker;
+    tempSearchSettings.relationshipStatuses = self.relationshipController.relationshipStatusesForSearch;
+    tempSearchSettings.distance = self.distanceSlider.maximumValue;
     //set data to temp settings and update it
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [FRDProjectFacade updateCurrentSearchSettings:tempSearchSettings onSuccess:^(FRDSearchSettings *currentSearchSettings) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        FRDCurrentUserProfile *profile = [FRDStorageManager sharedStorage].currentUserProfile;
+        profile.currentSearchSettings = currentSearchSettings;
+        
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+    }];
 }
 
 - (IBAction)saveSettingsClick:(id)sender
 {
-    
+    [self updateCurrentSearchSettings];
 }
 
 - (void)initDropDownHolderContainer
@@ -150,7 +173,7 @@
     [self.relationshipsContainer addSubview:self.relationshipController.view];
     [self addChildViewController:self.relationshipController];
     [self.relationshipController didMoveToParentViewController:self];
-    self.relationshipController.sourceType = FRDRelationshipsDataSourceTypeSearchSettings;
+    self.relationshipController.currentSourceType = FRDSourceTypeSearchSettings;
 }
 
 - (void)configureSliders
