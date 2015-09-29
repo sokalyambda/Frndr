@@ -10,9 +10,23 @@
 
 #import "FRDFriend.h"
 
-static NSString *const requestAction = @"users/blockFriend";
+static NSString *const kRequestAction = @"users/blockFriend";
+
+@interface FRDBlockFriendRequest ()
+
+@property (strong, nonatomic) FRDFriend *currentFriend;
+@property (strong, nonatomic) NSString *requestAction;
+
+@end
 
 @implementation FRDBlockFriendRequest
+
+#pragma mark - Accessors
+
+- (NSString *)requestAction
+{
+    return [NSString stringWithFormat:@"%@/%@", kRequestAction, self.currentFriend.userId];
+}
 
 #pragma mark - Lifecycle
 
@@ -23,7 +37,7 @@ static NSString *const requestAction = @"users/blockFriend";
         self.action = [self requestAction];
         _method = @"GET";
         
-        NSMutableDictionary *parameters = [@{@"": @(currentFriend.userId)} mutableCopy];
+        NSMutableDictionary *parameters = [@{} mutableCopy];
         
         self.serializationType = FRDRequestSerializationTypeJSON;
         
@@ -35,11 +49,6 @@ static NSString *const requestAction = @"users/blockFriend";
 - (BOOL)parseJSONDataSucessfully:(id)responseObject error:(NSError *__autoreleasing *)error
 {
     return !!responseObject;
-}
-
-- (NSString *)requestAction
-{
-    return requestAction;
 }
 
 @end

@@ -47,7 +47,7 @@ extern NSString *defaultBaseURLString;
 
                               onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
-+ (FRDNetworkOperation *)getUserById:(NSInteger)userId
++ (FRDNetworkOperation *)getUserById:(NSString *)userId
                            onSuccess:(void(^)(FRDCurrentUserProfile *userProfile))success
                            onFailure:(FailureBlock)failure;
 
@@ -72,9 +72,9 @@ extern NSString *defaultBaseURLString;
 
 #pragma mark - Likes Module
 
-+ (FRDNetworkOperation *)dislikeUserById:(long long)userId onSuccess:(SuccessBlock)success
++ (FRDNetworkOperation *)dislikeUserById:(NSString *)userId onSuccess:(SuccessBlock)success
                                onFailure:(FailureBlock)failure;
-+ (FRDNetworkOperation *)likeUserById:(long long)userId onSuccess:(SuccessBlock)success
++ (FRDNetworkOperation *)likeUserById:(NSString *)userId onSuccess:(SuccessBlock)success
                             onFailure:(FailureBlock)failure;
 
 #pragma mark - Messages Module

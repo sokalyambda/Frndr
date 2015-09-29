@@ -12,4 +12,11 @@ static NSString *const kRequestAction = @"users/dislike";
 
 @implementation FRDDislikeUserByIdRequest
 
+#pragma mark - Accessors
+
+- (NSString *)requestAction
+{
+    return [NSString stringWithFormat:@"%@/%@", kRequestAction, self.currentUserId];
+}
+
 @end

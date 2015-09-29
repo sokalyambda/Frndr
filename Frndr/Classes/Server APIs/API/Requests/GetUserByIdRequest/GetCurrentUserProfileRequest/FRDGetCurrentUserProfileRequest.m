@@ -16,7 +16,7 @@
 
 - (instancetype)init
 {
-    self = [super initWithUserId:0];
+    self = [super initWithUserId:@""];
     if (self) {
         
     }

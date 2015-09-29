@@ -13,10 +13,7 @@
 static NSString *const requestAction = @"signIn";
 
 static NSString *const kFacebookAccessToken = @"fbId";
-//static NSString *const kOSVersion = @"os";
 static NSString *const kGeolocationCoordinates = @"coordinates";
-
-//static NSString *const kOSVersionApple = @"APPLE";
 
 @implementation FRDSignInWithFacebookRequest
 

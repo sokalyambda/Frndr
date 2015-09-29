@@ -13,7 +13,7 @@ static NSString *const kRequestAction = @"users";
 @interface FRDGetUserByIdRequest ()
 
 @property (strong, nonatomic) NSString *requestAction;
-@property (assign, nonatomic) NSInteger userId;
+@property (strong, nonatomic) NSString *userId;
 
 @end
 
@@ -23,12 +23,12 @@ static NSString *const kRequestAction = @"users";
 
 - (NSString *)requestAction
 {
-    return _userId != 0 ? [NSString stringWithFormat:@"%@/%d", kRequestAction, _userId] : kRequestAction;
+    return _userId.length ? [NSString stringWithFormat:@"%@/%@", kRequestAction, _userId] : kRequestAction;
 }
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithUserId:(NSInteger)userId
+- (instancetype)initWithUserId:(NSString *)userId
 {
     self = [super init];
     if (self) {

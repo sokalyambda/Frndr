@@ -10,6 +10,8 @@
 
 @interface FRDLikeUserByIdRequest : FRDNetworkRequest
 
-- (instancetype)initWithUserId:(long long)userId;
+@property (strong, nonatomic) NSString *currentUserId;
+
+- (instancetype)initWithUserId:(NSString *)userId;
 
 @end

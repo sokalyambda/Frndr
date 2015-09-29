@@ -106,7 +106,7 @@ NSString *baseURLString = @"http://134.249.164.53:8859/";
  *  @param success Success Block
  *  @param failure Failure Block
  */
-+ (FRDNetworkOperation *)getUserById:(NSInteger)userId onSuccess:(void(^)(FRDCurrentUserProfile *userProfile))success onFailure:(FailureBlock)failure
++ (FRDNetworkOperation *)getUserById:(NSString *)userId onSuccess:(void(^)(FRDCurrentUserProfile *userProfile))success onFailure:(FailureBlock)failure
 {
     FRDGetUserByIdRequest *request = [[FRDGetUserByIdRequest alloc] initWithUserId:userId];
     
@@ -361,7 +361,7 @@ NSString *baseURLString = @"http://134.249.164.53:8859/";
 
 #pragma mark - Likes Module
 
-+ (FRDNetworkOperation *)dislikeUserById:(long long)userId onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
++ (FRDNetworkOperation *)dislikeUserById:(NSString *)userId onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     FRDDislikeUserByIdRequest *request = [[FRDDislikeUserByIdRequest alloc] initWithUserId:userId];
     
@@ -380,7 +380,7 @@ NSString *baseURLString = @"http://134.249.164.53:8859/";
     return operation;
 }
 
-+ (FRDNetworkOperation *)likeUserById:(long long)userId onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
++ (FRDNetworkOperation *)likeUserById:(NSString *)userId onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     FRDLikeUserByIdRequest *request = [[FRDLikeUserByIdRequest alloc] initWithUserId:userId];
     

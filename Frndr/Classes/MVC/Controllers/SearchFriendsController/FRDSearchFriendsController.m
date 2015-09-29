@@ -206,6 +206,54 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
                                 views:views]];
 }
 
+/**
+ *  Like current friend
+ */
+- (void)likeCurrentFriendOnSuccess:(void(^)(void))success onFalilure:(void(^)(NSError *error))failure
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [FRDProjectFacade likeUserById:self.currentNearestUser.userId onSuccess:^(BOOL isSuccess) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        if (success) {
+            success();
+        }
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        if (failure) {
+            failure(error);
+        }
+        
+    }];
+}
+
+/**
+ *  Dislike current friend
+ */
+- (void)dislikeCurrentFriendOnSuccess:(void(^)(void))success onFalilure:(void(^)(NSError *error))failure
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [FRDProjectFacade dislikeUserById:self.currentNearestUser.userId onSuccess:^(BOOL isSuccess) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        if (success) {
+            success();
+        }
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        if (failure) {
+            failure(error);
+        }
+        
+    }];
+}
+
 #pragma mark - ZLSwipeableViewDataSource
 
 - (UIView *)nextViewForSwipeableView:(ZLSwipeableView *)swipeableView
@@ -275,19 +323,48 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)swipeableView:(ZLSwipeableView *)swipeableView didThrowSwipingView:(UIView *)swipingView inDirection:(ZLSwipeableViewDirection)direction
 {
     /*****Like&dislike nearest users*****/
+    /*
+    WEAK_SELF;
     switch (direction) {
         case ZLSwipeableViewDirectionLeft: {
-            NSLog(@"User has been removed");
+            
+            [self dislikeCurrentFriendOnSuccess:^{
+                NSLog(@"User has been removed");
+                [weakSelf updateNearestUsersInformationOrLoadMore];
+                
+            } onFalilure:^(NSError *error) {
+                
+                [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+                
+            }];
+            
+            
             break;
         }
         case ZLSwipeableViewDirectionRight: {
-            NSLog(@"User has been added");
+            
+            [self likeCurrentFriendOnSuccess:^{
+                NSLog(@"User has been added");
+                [weakSelf updateNearestUsersInformationOrLoadMore];
+                
+            } onFalilure:^(NSError *error) {
+                
+                [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+                
+            }];
+            
+            
             break;
         }
         default:
             break;
     }
-    
+        */
+    [self updateNearestUsersInformationOrLoadMore];
+}
+
+- (void)updateNearestUsersInformationOrLoadMore
+{
     if (self.nearestUsers.count) {
         [self.nearestUsers removeObject:self.nearestUsers.firstObject];
     }
@@ -303,6 +380,5 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
         [self findNearestUsers];
     }
 }
-
 
 @end

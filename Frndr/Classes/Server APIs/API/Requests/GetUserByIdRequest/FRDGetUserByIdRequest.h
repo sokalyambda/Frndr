@@ -14,6 +14,6 @@
 
 @property (strong, nonatomic) FRDCurrentUserProfile *userProfile;
 
-- (instancetype)initWithUserId:(NSInteger)userId;
+- (instancetype)initWithUserId:(NSString *)userId;
 
 @end

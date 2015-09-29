@@ -78,7 +78,7 @@ static NSString *const kNewFriends = @"newFriends";
 - (instancetype)updateWithServerResponse:(NSDictionary *)response
 {
     if (self) {
-        _userId = [response[kId] longLongValue];
+        _userId = response[kId];
         
         NSDictionary *profileDict = response[kProfile];
         _visible = [profileDict[kVisible] boolValue];

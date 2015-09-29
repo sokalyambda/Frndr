@@ -13,7 +13,6 @@ static NSString *const kRequestAction = @"users/like";
 @interface FRDLikeUserByIdRequest ()
 
 @property (strong, nonatomic) NSString *requestAction;
-@property (assign, nonatomic) long long currentUserId;
 
 @end
 
@@ -23,12 +22,12 @@ static NSString *const kRequestAction = @"users/like";
 
 - (NSString *)requestAction
 {
-    return [NSString stringWithFormat:@"%@/%lld", kRequestAction, self.currentUserId];
+    return [NSString stringWithFormat:@"%@/%@", kRequestAction, self.currentUserId];
 }
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithUserId:(long long)userId
+- (instancetype)initWithUserId:(NSString *)userId
 {
     self = [super init];
     if (self) {
