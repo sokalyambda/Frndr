@@ -23,16 +23,16 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb867267406728699</string>
+				<string>fb570383696448411</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>3</string>
 	<key>FacebookAppID</key>
-	<string>867267406728699</string>
+	<string>570383696448411</string>
 	<key>FacebookDisplayName</key>
-	<string>FrienderProj</string>
+	<string>Frndr</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -44,28 +44,30 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>akamaihd.net</key>
 			<dict>
-				<key>NSExceptionRequiresForwardSecrecy</key>
-				<false/>
 				<key>NSIncludesSubdomains</key>
 				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
 			</dict>
 			<key>facebook.com</key>
 			<dict>
-				<key>NSExceptionRequiresForwardSecrecy</key>
-				<false/>
 				<key>NSIncludesSubdomains</key>
 				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
 			</dict>
 			<key>fbcdn.net</key>
 			<dict>
-				<key>NSExceptionRequiresForwardSecrecy</key>
-				<false/>
 				<key>NSIncludesSubdomains</key>
 				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
 			</dict>
 		</dict>
 	</dict>
