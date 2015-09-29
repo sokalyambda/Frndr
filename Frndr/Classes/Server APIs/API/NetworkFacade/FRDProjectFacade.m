@@ -17,6 +17,8 @@
 
 #import "FRDKeychainHandler.h"
 
+#import "FRDSearchSettings.h"
+
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 
 static FRDSessionManager *sharedHTTPClient = nil;
@@ -95,6 +97,8 @@ NSString *baseURLString = @"http://134.249.164.53:8859/";
 }
 
 #pragma mark - Requests builder
+
+#pragma mark - User Profile Module
 
 /**
  *  Get user profile by ID
@@ -239,6 +243,50 @@ NSString *baseURLString = @"http://134.249.164.53:8859/";
 + (BOOL)isFacebookSessionValid
 {
     return [FRDFacebookService isFacebookSessionValid];
+}
+
+#pragma mark - Search Settings Module
+
++ (FRDNetworkOperation *)getCurrentSearchSettingsOnSuccess:(void(^)(FRDSearchSettings *currentSearchSettings))success onFailure:(FailureBlock)failure
+{
+    FRDGetSearchSettingsRequest *request = [[FRDGetSearchSettingsRequest alloc] init];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        FRDGetSearchSettingsRequest *request = (FRDGetSearchSettingsRequest *)operation.networkRequest;
+        
+        if (success) {
+            success(request.currentSearchSettings);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
++ (FRDNetworkOperation *)updateCurrentSearchSettingsOnSuccess:(void(^)(FRDSearchSettings *currentSearchSettings))success onFailure:(FailureBlock)failure
+{
+    FRDGetSearchSettingsRequest *request = [[FRDGetSearchSettingsRequest alloc] init];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        FRDGetSearchSettingsRequest *request = (FRDGetSearchSettingsRequest *)operation.networkRequest;
+        
+        if (success) {
+            success(request.currentSearchSettings);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
 }
 
 #pragma mark - Requests Builder

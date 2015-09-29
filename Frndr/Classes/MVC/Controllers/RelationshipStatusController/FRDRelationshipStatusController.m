@@ -136,23 +136,6 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
     [collectionView reloadItemsAtIndexPaths:@[indexPath]];
     
     NSLog(@"set of statuses %@", self.relationshipStatusesForSearch);
-    /*
-     if (!currentItem.isSelected) {
-     self.selectionCounter++;
-     } else if (self.selectionCounter > 0) {
-     self.selectionCounter--;
-     }
-     
-     if (self.selectionCounter < 1 || collectionView.allowsMultipleSelection) {
-     
-     }
-     
-     if (currentItem.isSelected) {
-     self.selectionCounter++;
-     } else if (self.selectionCounter > 0) {
-     self.selectionCounter--;
-     }
-     */
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout

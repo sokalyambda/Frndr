@@ -57,6 +57,9 @@
 		587B3A951BA815850098154F /* FRDRelationshipCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587B3A931BA815850098154F /* FRDRelationshipCollectionCell.xib */; };
 		5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */; };
 		58A1A12E1BB926AD00E29789 /* FRDOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A1A12D1BB926AD00E29789 /* FRDOverlayView.m */; settings = {ASSET_TAGS = (); }; };
+		58B99E991BBA5A0A0057DB54 /* FRDGetSearchSettingsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B99E981BBA5A0A0057DB54 /* FRDGetSearchSettingsRequest.m */; settings = {ASSET_TAGS = (); }; };
+		58B99E9D1BBA5A9E0057DB54 /* FRDSearchSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B99E9C1BBA5A9E0057DB54 /* FRDSearchSettings.m */; settings = {ASSET_TAGS = (); }; };
+		58B99EA21BBA5ECE0057DB54 /* FRDUpdateSearchSettingsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B99EA11BBA5ECE0057DB54 /* FRDUpdateSearchSettingsRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58BB5D431BB70AB900FD1A56 /* FRDGetCurrentUserProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BB5D421BB70AB800FD1A56 /* FRDGetCurrentUserProfileRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58BC76A11B9EB6B500BB8B5A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A01B9EB6B500BB8B5A /* main.m */; };
 		58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A31B9EB6B500BB8B5A /* AppDelegate.m */; };
@@ -248,6 +251,12 @@
 		5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDCustomPageControl.m; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.m; sourceTree = "<group>"; };
 		58A1A12C1BB926AD00E29789 /* FRDOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDOverlayView.h; path = Classes/MVC/Views/FriendDragableView/FriendOverlayView/FRDOverlayView.h; sourceTree = "<group>"; };
 		58A1A12D1BB926AD00E29789 /* FRDOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDOverlayView.m; path = Classes/MVC/Views/FriendDragableView/FriendOverlayView/FRDOverlayView.m; sourceTree = "<group>"; };
+		58B99E971BBA5A0A0057DB54 /* FRDGetSearchSettingsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDGetSearchSettingsRequest.h; path = "Classes/Server APIs/API/Requests/SearchSettingsModule/GetSearchSettingsRequest/FRDGetSearchSettingsRequest.h"; sourceTree = "<group>"; };
+		58B99E981BBA5A0A0057DB54 /* FRDGetSearchSettingsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDGetSearchSettingsRequest.m; path = "Classes/Server APIs/API/Requests/SearchSettingsModule/GetSearchSettingsRequest/FRDGetSearchSettingsRequest.m"; sourceTree = "<group>"; };
+		58B99E9B1BBA5A9E0057DB54 /* FRDSearchSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSearchSettings.h; path = Classes/MVC/Models/SearchSettings/FRDSearchSettings.h; sourceTree = "<group>"; };
+		58B99E9C1BBA5A9E0057DB54 /* FRDSearchSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSearchSettings.m; path = Classes/MVC/Models/SearchSettings/FRDSearchSettings.m; sourceTree = "<group>"; };
+		58B99EA01BBA5ECE0057DB54 /* FRDUpdateSearchSettingsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDUpdateSearchSettingsRequest.h; path = "Classes/Server APIs/API/Requests/SearchSettingsModule/UpdateSearchSettingsRequest/FRDUpdateSearchSettingsRequest.h"; sourceTree = "<group>"; };
+		58B99EA11BBA5ECE0057DB54 /* FRDUpdateSearchSettingsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDUpdateSearchSettingsRequest.m; path = "Classes/Server APIs/API/Requests/SearchSettingsModule/UpdateSearchSettingsRequest/FRDUpdateSearchSettingsRequest.m"; sourceTree = "<group>"; };
 		58BB5D411BB70AB800FD1A56 /* FRDGetCurrentUserProfileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDGetCurrentUserProfileRequest.h; path = "Classes/Server APIs/API/Requests/GetUserByIdRequest/GetCurrentUserProfileRequest/FRDGetCurrentUserProfileRequest.h"; sourceTree = "<group>"; };
 		58BB5D421BB70AB800FD1A56 /* FRDGetCurrentUserProfileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDGetCurrentUserProfileRequest.m; path = "Classes/Server APIs/API/Requests/GetUserByIdRequest/GetCurrentUserProfileRequest/FRDGetCurrentUserProfileRequest.m"; sourceTree = "<group>"; };
 		58BC769B1B9EB6B500BB8B5A /* Frndr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frndr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -832,6 +841,58 @@
 			name = StyledPageControl;
 			sourceTree = "<group>";
 		};
+		58B99E951BBA59A60057DB54 /* UserProfileModule */ = {
+			isa = PBXGroup;
+			children = (
+				58ED54FF1BB1B3BE00F9B378 /* SendDeviceDataRequest */,
+				58ED54F11BB1647300F9B378 /* UpdateProfileRequest */,
+				58ED54ED1BB1644C00F9B378 /* UpdateNotificationsSettingsRequest */,
+				58ED54E51BB163F900F9B378 /* GetUserByIdRequest */,
+				58ED54E11BB163CF00F9B378 /* GetFriendsListRequest */,
+				58ED54DD1BB163A600F9B378 /* FindNearestUsersRequest */,
+				58ED54D91BB1638000F9B378 /* DeleteCurrentUserRequest */,
+				58ED54D51BB1634E00F9B378 /* BlockFriendRequest */,
+				58ED54CA1BB1465F00F9B378 /* AuthorizationRequests */,
+			);
+			name = UserProfileModule;
+			sourceTree = "<group>";
+		};
+		58B99E961BBA59D50057DB54 /* SearchSettingsModule */ = {
+			isa = PBXGroup;
+			children = (
+				58B99E9F1BBA5E8C0057DB54 /* UpdateSearchSettings */,
+				58B99E9E1BBA5E820057DB54 /* GetSearchSettings */,
+			);
+			name = SearchSettingsModule;
+			sourceTree = "<group>";
+		};
+		58B99E9A1BBA5A7B0057DB54 /* SearchSettings */ = {
+			isa = PBXGroup;
+			children = (
+				58B99E9B1BBA5A9E0057DB54 /* FRDSearchSettings.h */,
+				58B99E9C1BBA5A9E0057DB54 /* FRDSearchSettings.m */,
+			);
+			name = SearchSettings;
+			sourceTree = "<group>";
+		};
+		58B99E9E1BBA5E820057DB54 /* GetSearchSettings */ = {
+			isa = PBXGroup;
+			children = (
+				58B99E971BBA5A0A0057DB54 /* FRDGetSearchSettingsRequest.h */,
+				58B99E981BBA5A0A0057DB54 /* FRDGetSearchSettingsRequest.m */,
+			);
+			name = GetSearchSettings;
+			sourceTree = "<group>";
+		};
+		58B99E9F1BBA5E8C0057DB54 /* UpdateSearchSettings */ = {
+			isa = PBXGroup;
+			children = (
+				58B99EA01BBA5ECE0057DB54 /* FRDUpdateSearchSettingsRequest.h */,
+				58B99EA11BBA5ECE0057DB54 /* FRDUpdateSearchSettingsRequest.m */,
+			);
+			name = UpdateSearchSettings;
+			sourceTree = "<group>";
+		};
 		58BB5D401BB70A4E00FD1A56 /* GetCurrentUserProfileRequest */ = {
 			isa = PBXGroup;
 			children = (
@@ -1006,6 +1067,7 @@
 		58BC76D01B9EB94C00BB8B5A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				58B99E9A1BBA5A7B0057DB54 /* SearchSettings */,
 				587B3A961BA817260098154F /* RelationshipItem */,
 				58ED54FB1BB1A4C600F9B378 /* SexualOrientatiom */,
 				58DE5B301BB540750020A34C /* Users */,
@@ -1135,15 +1197,8 @@
 		58BC76DC1B9EB9FD00BB8B5A /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				58ED54FF1BB1B3BE00F9B378 /* SendDeviceDataRequest */,
-				58ED54F11BB1647300F9B378 /* UpdateProfileRequest */,
-				58ED54ED1BB1644C00F9B378 /* UpdateNotificationsSettingsRequest */,
-				58ED54E51BB163F900F9B378 /* GetUserByIdRequest */,
-				58ED54E11BB163CF00F9B378 /* GetFriendsListRequest */,
-				58ED54DD1BB163A600F9B378 /* FindNearestUsersRequest */,
-				58ED54D91BB1638000F9B378 /* DeleteCurrentUserRequest */,
-				58ED54D51BB1634E00F9B378 /* BlockFriendRequest */,
-				58ED54CA1BB1465F00F9B378 /* AuthorizationRequests */,
+				58B99E961BBA59D50057DB54 /* SearchSettingsModule */,
+				58B99E951BBA59A60057DB54 /* UserProfileModule */,
 				581B9D501B9EDC550080393B /* BaseNetworkRequest */,
 				581B9D5D1B9EDE020080393B /* FRDRequests.h */,
 			);
@@ -2089,6 +2144,7 @@
 				5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */,
 				581B9D561B9EDCA00080393B /* FRDNetworkOperation.m in Sources */,
 				58BC77201B9ECA9C00BB8B5A /* UIFont+Styles.m in Sources */,
+				58B99E991BBA5A0A0057DB54 /* FRDGetSearchSettingsRequest.m in Sources */,
 				587B3A811BA7F8510098154F /* FRDDropDownCell.m in Sources */,
 				3E3D415D1BA6B1530021026A /* FRDSearchSettingsController.m in Sources */,
 				58ED54CE1BB1472100F9B378 /* FRDSignInWithFacebookRequest.m in Sources */,
@@ -2115,6 +2171,7 @@
 				58BC772A1B9ECB0300BB8B5A /* KeychainItemWrapper.m in Sources */,
 				581B9D591B9EDCBB0080393B /* FRDProjectFacade.m in Sources */,
 				3E0EEC551BABE85500AB51B0 /* FRDRoundedView.m in Sources */,
+				58B99E9D1BBA5A9E0057DB54 /* FRDSearchSettings.m in Sources */,
 				58A1A12E1BB926AD00E29789 /* FRDOverlayView.m in Sources */,
 				581B9D4F1B9EDC350080393B /* FRDSessionManager.m in Sources */,
 				3E1D9BE61BB3CE34003A1E5C /* FRDPhotoGalleryController.m in Sources */,
@@ -2128,6 +2185,7 @@
 				58D5A16A1BA329C800D552CF /* FRDNavigationTitleView.m in Sources */,
 				58BC770B1B9ECA4400BB8B5A /* UIImagePickerController+fixOrientation.m in Sources */,
 				58ED54D81BB1636F00F9B378 /* FRDBlockFriendRequest.m in Sources */,
+				58B99EA21BBA5ECE0057DB54 /* FRDUpdateSearchSettingsRequest.m in Sources */,
 				58ED54DC1BB1639B00F9B378 /* FRDDeleteCurrentUserRequest.m in Sources */,
 				587B3A941BA815850098154F /* FRDRelationshipCollectionCell.m in Sources */,
 				58BC77021B9ECA1700BB8B5A /* NSDictionary+JSONRepresentation.m in Sources */,

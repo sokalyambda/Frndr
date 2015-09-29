@@ -10,7 +10,7 @@
 
 extern NSString *defaultBaseURLString;
 
-@class BZRUserProfile, BZRLocationEvent;
+@class FRDSearchSettings;
 
 @interface FRDProjectFacade : NSObject
 
@@ -30,7 +30,7 @@ extern NSString *defaultBaseURLString;
 //check whether any operation is in process
 + (BOOL)isOperationInProcess;
 
-//Authorization Requests
+#pragma mark - User Profile Module
 
 //Sign Out
 + (FRDNetworkOperation *)signOutOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
@@ -63,5 +63,11 @@ extern NSString *defaultBaseURLString;
 + (FRDNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(BOOL isSuccess))success
                                            onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
+#pragma mark - Search Settings Module
+
++ (FRDNetworkOperation *)getCurrentSearchSettingsOnSuccess:(void(^)(FRDSearchSettings *currentSearchSettings))success
+                                                 onFailure:(FailureBlock)failure;
++ (FRDNetworkOperation *)updateCurrentSearchSettingsOnSuccess:(void(^)(FRDSearchSettings *currentSearchSettings))success
+                                                    onFailure:(FailureBlock)failure;
 
 @end
