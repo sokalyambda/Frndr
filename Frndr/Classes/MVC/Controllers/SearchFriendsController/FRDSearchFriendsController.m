@@ -91,9 +91,6 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    NSLog(@"nearest users %@ and it's count is %d", self.nearestUsers, self.nearestUsers.count);
-//    [self performNeededUpdateAction];
-    [self getCurrentUserProfile];
     if (!self.nearestUsers.count) {
         [self findNearestUsers];
     }
@@ -143,48 +140,6 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
     }];
 }
-
-/**
- *  Update current profile
- */
-//- (void)updateCurrentProfileOnSuccess:(void(^)(void))success onFailure:(void(^)(NSError *error))failure
-//{
-//    FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
-//
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    [FRDProjectFacade updatedProfile:currentProfile onSuccess:^(FRDCurrentUserProfile *confirmedProfile) {
-//        
-//        if (success) {
-//            success();
-//        }
-//        
-//    } onFailure:^(NSError *error, BOOL isCanceled) {
-//        
-//        if (failure) {
-//            failure(error);
-//        }
-//
-//    }];
-//}
-
-/**
- *  Perform needed update action. It can be either update+findUsers or only findUsers.
- */
-//- (void)performNeededUpdateAction
-//{
-//    if (self.updateNeeded) {
-//        WEAK_SELF;
-//        [self updateCurrentProfileOnSuccess:^{
-//            weakSelf.updateNeeded = NO;
-//            [weakSelf findNearestUsers];
-//        } onFailure:^(NSError *error) {
-//            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-//            [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-//        }];
-//    } else if (!self.nearestUsers.count) {
-//        [self findNearestUsers];
-//    }
-//}
 
 /**
  *  Find nearest users
@@ -259,9 +214,9 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     
     NSLog(@"self.nearestUsers.count = %d, self.swipableViewsCounter = %d", self.nearestUsers.count, self.swipableViewsCounter);
     
-//    if (self.nearestUsers.count && self.swipableViewsCounter < self.nearestUsers.count) {
+    if (self.nearestUsers.count && self.swipableViewsCounter < self.nearestUsers.count) {
     
-//        FRDNearestUser *currentNearesUser = self.nearestUsers[self.swipableViewsCounter];
+        FRDNearestUser *currentNearesUser = self.nearestUsers[self.swipableViewsCounter];
     
         parentView = [[FRDFriendDragableParentView alloc] initWithFrame:swipeableView.bounds];
         FRDFriendDragableView *friendView = [FRDFriendDragableView makeFromXib];
@@ -273,10 +228,10 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
         
         [self addConstraintsForParentView:parentView andContentView:friendView];
         
-//        [friendView configureWithNearestUser:currentNearesUser];
+        [friendView configureWithNearestUser:currentNearesUser];
     
         self.swipableViewsCounter++;
-//    }
+    }
     
     return parentView;
 }
@@ -317,7 +272,6 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     
 }
 
-
 - (void)swipeableView:(ZLSwipeableView *)swipeableView didThrowSwipingView:(UIView *)swipingView inDirection:(ZLSwipeableViewDirection)direction
 {
     /*****Like&dislike nearest users*****/
@@ -348,7 +302,6 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
         //        self.currentPage++;
         [self findNearestUsers];
     }
-    
 }
 
 

@@ -26,7 +26,7 @@
 
 #import "FRDProjectFacade.h"
 
-static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalBioTableControllerSegue";
+static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBioTableControllerSegue";
 
 @interface FRDMyProfileController () <UITextFieldDelegate, UIGestureRecognizerDelegate>
 
@@ -58,9 +58,8 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
     [self initTopViewHolderContainer];
     [self initRelationshipStatusesHolderContainer];
     [self initDropDownHolderContainer];
-
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self setProfileInformationToFields];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self getCurrentUserProfile];
     });
 }
 
@@ -96,6 +95,9 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
     [self updateCurrentProfile];
 }
 
+/**
+ *  Update current user profile
+ */
 - (void)updateCurrentProfile
 {
     FRDCurrentUserProfile *profileForUpdating = [[FRDCurrentUserProfile alloc] init];
@@ -109,10 +111,14 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
     profileForUpdating.smoker = self.dropDownHolderController.smoker;
     profileForUpdating.sexualOrientation = self.dropDownHolderController.chosenOrientation;
     
+    profileForUpdating.relationshipStatus = self.relationshipController.currentRelationshipStatus;
+    
     NSMutableArray *lovedThings = [@[] mutableCopy];
     for (UITextField *interestField in self.personalBioTableController.mostLovedThingsFields) {
         [lovedThings addObject:interestField.text];
     }
+    
+    profileForUpdating.biography = self.personalBioTableController.personalBioThingILoveTextView.text;
     
     profileForUpdating.thingsLovedMost = lovedThings;
     profileForUpdating.visible = self.visibleOnFrndrSwitch.isOn;
@@ -130,6 +136,21 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
 }
 
 /**
+ *  Get current user profile
+ */
+- (void)getCurrentUserProfile
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [FRDProjectFacade getCurrentUserProfileOnSuccess:^(BOOL isSuccess) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [weakSelf setProfileInformationToFields];
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+    }];
+}
+
+/**
  *  Set profile information to fields
  */
 - (void)setProfileInformationToFields
@@ -139,14 +160,8 @@ static NSString * const kPersonalBioTableControllerSegueIdentifier = @"personalB
     [self.personalBioTableController update];
     self.jobTitleField.text = profile.jobTitle;
     [self.visibleOnFrndrSwitch setOn:profile.isVisible animated:NO];
-}
-
-/**
- *  Get profile information from fields
- */
-- (void)getProfileInformationFromFields
-{
     
+    [self.relationshipController update];
 }
 
 - (IBAction)managePhotosPress:(id)sender

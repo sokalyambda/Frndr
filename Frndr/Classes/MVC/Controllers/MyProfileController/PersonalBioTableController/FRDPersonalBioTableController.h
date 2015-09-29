@@ -10,6 +10,8 @@
 
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *mostLovedThingsFields;
 
+@property (weak, nonatomic) IBOutlet UITextView *personalBioThingILoveTextView;
+
 - (void)update;
 
 @end
