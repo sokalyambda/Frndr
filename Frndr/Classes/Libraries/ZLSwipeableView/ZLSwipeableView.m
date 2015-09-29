@@ -53,6 +53,9 @@ static NSString *const kApplyIconName = @"applyIcon";
 @property (strong, nonatomic) UIView *reuseCoverContainerView;
 @property (strong, nonatomic) UIView *containerView;
 
+// Animations
+@property (strong, nonatomic) CAAnimationGroup *dragAnimationGroup;
+
 @end
 
 @implementation ZLSwipeableView
@@ -246,13 +249,17 @@ static NSString *const kApplyIconName = @"applyIcon";
 
 #pragma mark - Action
 
+static NSString * const kTransformBackViewAnimationKey = @"TransformBackViewAnimation";
+static NSString * const kTransformMiddleViewAnimationKey = @"TransformMiddleViewAnimation";
+static CGFloat const kRadiusFactor = 0.75;
+
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer
 {
     CGPoint translation = [recognizer translationInView:self];
     CGPoint location = [recognizer locationInView:self];
     UIView *swipeableView = recognizer.view;
     
-    
+
     CGPoint velocity = [recognizer velocityInView:self];
     CGFloat velocityMagnitude = sqrtf(powf(velocity.x, 2) + powf(velocity.y, 2));
     CGPoint normalizedVelocity = CGPointMake(velocity.x / velocityMagnitude, velocity.y / velocityMagnitude);
@@ -270,12 +277,23 @@ static NSString *const kApplyIconName = @"applyIcon";
         currentOverlay = currentDragableView.overlayView;
     }
     
+    // Setup animations which will accompany swipeable view's movement
+    UIView *backView = self.containerView.subviews[0];
+    UIView *middleView = self.containerView.subviews[1];
+    
+    CABasicAnimation *transformBackView = [self transformAnimationForView:backView atIndex:2];
+    CABasicAnimation *transformMiddleView = [self transformAnimationForView:middleView atIndex:1];
+    
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         [self createAnchorViewForCover:swipeableView atLocation:location shouldAttachAnchorViewToPoint:YES];
         
         if ([self.delegate respondsToSelector:@selector(swipeableView:didStartSwipingView:atLocation:)]) {
             [self.delegate swipeableView:self didStartSwipingView:swipeableView atLocation:location];
         }
+
+        // Begin animating neccessary views
+        [backView.layer addAnimation:transformBackView forKey:kTransformBackViewAnimationKey];
+        [middleView.layer addAnimation:transformMiddleView forKey:kTransformMiddleViewAnimationKey];
     }
     
     if (recognizer.state == UIGestureRecognizerStateChanged) {
@@ -283,7 +301,7 @@ static NSString *const kApplyIconName = @"applyIcon";
         if ([self.delegate respondsToSelector:@selector(swipeableView:swipingView:atLocation:translation:)]) {
             [self.delegate swipeableView:self swipingView:swipeableView atLocation:location translation:translation];
         }
-
+        
         /*****Add overlay view if needed when swiping*****/
         ZLSwipeableViewDirection directionType = ZLDirectionVectorToSwipeableViewDirection(directionVector);
         
@@ -291,6 +309,28 @@ static NSString *const kApplyIconName = @"applyIcon";
             currentOverlay.hidden = NO;
         }
         [self configureDragableFriendViewForOverlaying:currentDragableView withDirection:directionType];
+        
+        // Vector that points from the center of this view to the center of the swipeable view
+        CGPoint distanceFromCenterVector = CGPointMake(swipeableView.center.x - self.swipeableViewsCenter.x,
+                                                       swipeableView.center.y - self.swipeableViewsCenter.y);
+        
+        // Calculate absolut distance between two centers (this view's center and swipeable view's center)
+        CGFloat swipeableViewDistanceFromCenter = ABS(sqrtf(distanceFromCenterVector.x * distanceFromCenterVector.x +
+                                                            distanceFromCenterVector.y * distanceFromCenterVector.y));
+        
+        // Calculate the radius which will be used to normalize just calculated distance between centers
+        CGFloat radius = self.swipeableViewsCenter.x * kRadiusFactor;
+        
+        // Normalize distance between centers and clip it to 1 if it's >1
+        CGFloat normalizedDistance = MIN(1.f, swipeableViewDistanceFromCenter / radius);
+        
+        // Manually controll transform animations
+        transformBackView.timeOffset = normalizedDistance;
+        transformMiddleView.timeOffset = normalizedDistance;
+
+        // Update layer's animations
+        [backView.layer addAnimation:transformBackView forKey:kTransformBackViewAnimationKey];
+        [middleView.layer addAnimation:transformMiddleView forKey:kTransformMiddleViewAnimationKey];
     }
     
     if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
@@ -299,7 +339,7 @@ static NSString *const kApplyIconName = @"applyIcon";
         if (!currentOverlay.isHidden) {
             currentOverlay.hidden = YES;
         }
-
+        
         /*****New delegate method*****/
         BOOL shouldRemoveView = NO;
         if ([self.delegate respondsToSelector:@selector(swipeableView:shouldRemoveView:withDirection:)]) {
@@ -312,6 +352,15 @@ static NSString *const kApplyIconName = @"applyIcon";
             (signum(translation.x) == signum(normalizedVelocity.x)) && // sign X
             (signum(translation.y) == signum(normalizedVelocity.y)) && // sign Y
             shouldRemoveView) {
+            
+            // Update model layer with destination values
+            backView.layer.transform = ((NSValue *)transformBackView.toValue).CATransform3DValue;
+            middleView.layer.transform = ((NSValue *)transformMiddleView.toValue).CATransform3DValue;
+            
+            // Remove drag animations (transform in our case)
+            [backView.layer removeAnimationForKey:kTransformBackViewAnimationKey];
+            [middleView.layer removeAnimationForKey:kTransformMiddleViewAnimationKey];
+            
             [self pushAnchorViewForCover:swipeableView inDirection:directionVector andCollideInRect:self.collisionRect];
             
             /*****One more delegate method which needed for determine whether view was threw*****/
@@ -319,7 +368,6 @@ static NSString *const kApplyIconName = @"applyIcon";
             if ([self.delegate respondsToSelector:@selector(swipeableView:didThrowSwipingView:inDirection:)]) {
                 [self.delegate swipeableView:self didThrowSwipingView:swipeableView inDirection:direction];
             }
-            
         } else {
             [self.animator removeBehavior:self.swipeableViewAttachmentBehavior];
             [self.animator removeBehavior:self.anchorViewAttachmentBehavior];
@@ -332,6 +380,15 @@ static NSString *const kApplyIconName = @"applyIcon";
             if ([self.delegate respondsToSelector:@selector(swipeableView:didCancelSwipe:)]) {
                 [self.delegate swipeableView:self didCancelSwipe:swipeableView];
             }
+            
+            // Transform views back to starting values with animation
+            transformBackView.speed = -1;
+            transformBackView.duration = 0.2;
+            [backView.layer addAnimation:transformBackView forKey:kTransformBackViewAnimationKey];
+            
+            transformMiddleView.speed = -1;
+            transformMiddleView.duration = 0.2;
+            [middleView.layer addAnimation:transformMiddleView forKey:kTransformMiddleViewAnimationKey];
         }
         
         if ([self.delegate respondsToSelector:@selector(swipeableView:didEndSwipingView:atLocation:)]) {
@@ -385,14 +442,14 @@ static NSString *const kApplyIconName = @"applyIcon";
     CGVector direction =
     CGVectorMake((left ? -1 : 1) * self.escapeVelocityThreshold, 0);
     
-
+    
     /***** Add overlay view if needed when press button *****/
     ZLSwipeableViewDirection directionType = ZLDirectionVectorToSwipeableViewDirection(direction);
     if (currentOverlay.isHidden) {
         currentOverlay.hidden = NO;
     }
     [self configureDragableFriendViewForOverlaying:currentDragableView withDirection:directionType];
-
+    
     [self pushAnchorViewForCover:topSwipeableView
                      inDirection:direction
                 andCollideInRect:self.collisionRect];
@@ -421,6 +478,43 @@ static NSString *const kApplyIconName = @"applyIcon";
     [self pushAnchorViewForCover:topSwipeableView
                      inDirection:direction
                 andCollideInRect:self.collisionRect];
+}
+
+#pragma mark - Drag Animations (CABasicAnimation)
+
+- (CABasicAnimation *)transformAnimationForView:(UIView *)view atIndex:(NSInteger)index
+{
+    if (index < 1) {
+        return nil;
+    }
+    
+    CABasicAnimation *transformAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
+    
+    CGAffineTransform startingTransform = [self transformForViewAtIndex:index];
+    CATransform3D startingTransform3D = CATransform3DMakeAffineTransform(startingTransform);
+    
+    CGAffineTransform destinationTransform = [self transformForViewAtIndex:index - 1];
+    CATransform3D destinationTransform3D = CATransform3DMakeAffineTransform(destinationTransform);
+    
+    transformAnimation.fromValue = [NSValue valueWithCATransform3D:startingTransform3D];
+    transformAnimation.toValue = [NSValue valueWithCATransform3D:destinationTransform3D];
+    transformAnimation.speed = 0.f;
+    transformAnimation.duration = 1.01;
+    transformAnimation.timeOffset = 0.f;
+    
+    return transformAnimation;
+}
+
+- (CABasicAnimation *)appearAnimation
+{
+    CABasicAnimation *fadeAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    fadeAnimation.fromValue = @0.f;
+    fadeAnimation.toValue = @1.f;
+    fadeAnimation.speed = 0.f;
+    fadeAnimation.duration = 1.01;
+    fadeAnimation.timeOffset= 0.f;
+    
+    return fadeAnimation;
 }
 
 #pragma mark - UIDynamicAnimationHelpers
@@ -536,7 +630,7 @@ static NSString *const kApplyIconName = @"applyIcon";
     if ([self.delegate respondsToSelector:@selector(swipeableView:didSwipeView:inDirection:)]) {
         [self.delegate swipeableView:self didSwipeView:swipeableView inDirection:direction];
     }
-
+    
     [self.animator removeBehavior:self.anchorViewAttachmentBehavior];
     
     UICollisionBehavior *collisionBehavior = [self collisionBehaviorThatBoundsView:self.anchorView
@@ -673,18 +767,22 @@ atOffsetFromCenter:(CGPoint)offset
 static CGFloat const kYOffset = 20.f;
 - (void)transformView:(UIView *)view atIndex:(NSInteger)index
 {
-    //for second and third photos
-    CGFloat scaleCoef = 1 - index/kYOffset;
-    if (index == 1 || index == 2) {
-        [UIView animateWithDuration:.25f animations:^{
-            view.center = self.swipeableViewsCenter;
-            CGAffineTransform transform = CGAffineTransformMakeTranslation(0, kYOffset*index);
-            transform = CGAffineTransformMakeScale(scaleCoef, scaleCoef);
-            transform = CGAffineTransformTranslate(transform, 0, -kYOffset*index);
-            view.transform = transform;
-        }];
-    }
+    [UIView animateWithDuration:.25f animations:^{
+        view.center = self.swipeableViewsCenter;
+        view.transform = [self transformForViewAtIndex:index];
+    }];
 }
+
+- (CGAffineTransform)transformForViewAtIndex:(NSInteger)index
+{
+    CGFloat scaleCoef = 1 - index/kYOffset;
+    CGAffineTransform transform = CGAffineTransformMakeTranslation(0, kYOffset*index);
+    transform = CGAffineTransformMakeScale(scaleCoef, scaleCoef);
+    transform = CGAffineTransformTranslate(transform, 0, -kYOffset*index);
+    return transform;
+}
+
+#pragma warning Temporary!
 
 - (UIView *)topSwipeableView
 {
