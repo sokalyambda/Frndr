@@ -1,43 +1,43 @@
 //
-//  FRDBlockFriendRequest.m
+//  FRDLikeUserByIdRequest.m
 //  Frndr
 //
-//  Created by Eugenity on 22.09.15.
+//  Created by Eugenity on 29.09.15.
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "FRDBlockFriendRequest.h"
+#import "FRDLikeUserByIdRequest.h"
 
-#import "FRDFriend.h"
+static NSString *const kRequestAction = @"users/like";
 
-static NSString *const kRequestAction = @"users/blockFriend";
+@interface FRDLikeUserByIdRequest ()
 
-@interface FRDBlockFriendRequest ()
-
-@property (strong, nonatomic) FRDFriend *currentFriend;
 @property (strong, nonatomic) NSString *requestAction;
 
 @end
 
-@implementation FRDBlockFriendRequest
+@implementation FRDLikeUserByIdRequest
 
 #pragma mark - Accessors
 
 - (NSString *)requestAction
 {
-    return [NSString stringWithFormat:@"%@/%@", kRequestAction, self.currentFriend.userId];
+    return [NSString stringWithFormat:@"%@/%@", kRequestAction, self.currentUserId];
 }
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithFriend:(FRDFriend *)currentFriend
+- (instancetype)initWithUserId:(NSString *)userId
 {
     self = [super init];
     if (self) {
-        self.action = [self requestAction];
+        _currentUserId = userId;
+        
+        self.action = self.requestAction;
         _method = @"GET";
         
-        NSMutableDictionary *parameters = [@{} mutableCopy];
+        NSMutableDictionary *parameters = [@{
+                                             } mutableCopy];
         
         self.serializationType = FRDRequestSerializationTypeJSON;
         

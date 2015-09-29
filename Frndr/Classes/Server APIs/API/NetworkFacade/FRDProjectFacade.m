@@ -106,7 +106,7 @@ NSString *baseURLString = @"http://134.249.164.53:8859/";
  *  @param success Success Block
  *  @param failure Failure Block
  */
-+ (FRDNetworkOperation *)getUserById:(NSInteger)userId onSuccess:(void(^)(FRDCurrentUserProfile *userProfile))success onFailure:(FailureBlock)failure
++ (FRDNetworkOperation *)getUserById:(NSString *)userId onSuccess:(void(^)(FRDCurrentUserProfile *userProfile))success onFailure:(FailureBlock)failure
 {
     FRDGetUserByIdRequest *request = [[FRDGetUserByIdRequest alloc] initWithUserId:userId];
     
@@ -235,6 +235,74 @@ NSString *baseURLString = @"http://134.249.164.53:8859/";
     return operation;
 }
 
++ (FRDNetworkOperation *)updatedProfile:(FRDCurrentUserProfile *)updatedProfile
+                              onSuccess:(void (^)(FRDCurrentUserProfile *confirmedProfile))success
+
+                              onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
+{
+    FRDUpdateProfileRequest *request = [[FRDUpdateProfileRequest alloc] initWithUpdatedProfile:updatedProfile];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        FRDUpdateProfileRequest *request = (FRDUpdateProfileRequest*)operation.networkRequest;
+        
+        if (success) {
+            success(request.confirmedProfile);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
++ (FRDNetworkOperation *)findNearestUsersWithPage:(NSInteger)page onSuccess:(void (^)(NSArray *nearestUsers))success
+                                        onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
+{
+    FRDFindNearestUsersRequest *request = [[FRDFindNearestUsersRequest alloc] initWithPage:page];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        FRDFindNearestUsersRequest *request = (FRDFindNearestUsersRequest*)operation.networkRequest;
+        
+        if (success) {
+            success(request.nearestUsers);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];;
+    
+    return operation;
+}
+
+/******* FaceBook *******/
+
++ (FRDNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(BOOL isSuccess))success
+                                           onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
+{
+    FRDSignInWithFacebookRequest *request = [[FRDSignInWithFacebookRequest alloc] init];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];;
+    
+    return operation;
+}
+
 /**
  *  Check whether facebook session is valid
  *
@@ -244,6 +312,8 @@ NSString *baseURLString = @"http://134.249.164.53:8859/";
 {
     return [FRDFacebookService isFacebookSessionValid];
 }
+
+/******* FaceBook *******/
 
 #pragma mark - Search Settings Module
 
@@ -289,60 +359,11 @@ NSString *baseURLString = @"http://134.249.164.53:8859/";
     return operation;
 }
 
-#pragma mark - Requests Builder
+#pragma mark - Likes Module
 
-+ (FRDNetworkOperation *)updatedProfile:(FRDCurrentUserProfile *)updatedProfile
-                                        onSuccess:(void (^)(FRDCurrentUserProfile *confirmedProfile))success
-
-                                        onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
++ (FRDNetworkOperation *)dislikeUserById:(NSString *)userId onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
-    FRDUpdateProfileRequest *request = [[FRDUpdateProfileRequest alloc] initWithUpdatedProfile:updatedProfile];
-    
-    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
-        
-        FRDUpdateProfileRequest *request = (FRDUpdateProfileRequest*)operation.networkRequest;
-        
-        if (success) {
-            success(request.confirmedProfile);
-        }
-        
-    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
-        if (failure) {
-            failure(error, isCanceled);
-        }
-    }];
-    
-    return operation;
-}
-
-+ (FRDNetworkOperation *)findNearestUsersWithPage:(NSInteger)page onSuccess:(void (^)(NSArray *nearestUsers))success
-                                         onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
-{
-    FRDFindNearestUsersRequest *request = [[FRDFindNearestUsersRequest alloc] initWithPage:page];
-    
-    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
-        
-        FRDFindNearestUsersRequest *request = (FRDFindNearestUsersRequest*)operation.networkRequest;
-        
-        if (success) {
-            success(request.nearestUsers);
-        }
-        
-    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
-        if (failure) {
-            failure(error, isCanceled);
-        }
-    }];;
-    
-    return operation;
-}
-
-/******* FaceBook *******/
-
-+ (FRDNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(BOOL isSuccess))success
-                                           onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
-{
-    FRDSignInWithFacebookRequest *request = [[FRDSignInWithFacebookRequest alloc] init];
+    FRDDislikeUserByIdRequest *request = [[FRDDislikeUserByIdRequest alloc] initWithUserId:userId];
     
     FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
         
@@ -354,12 +375,52 @@ NSString *baseURLString = @"http://134.249.164.53:8859/";
         if (failure) {
             failure(error, isCanceled);
         }
-    }];;
-
+    }];
+    
     return operation;
 }
 
-/******* FaceBook *******/
++ (FRDNetworkOperation *)likeUserById:(NSString *)userId onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+{
+    FRDLikeUserByIdRequest *request = [[FRDLikeUserByIdRequest alloc] initWithUserId:userId];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
+#pragma mark - Messages Module
+
++ (FRDNetworkOperation *)clearAllMessagesOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+{
+    FRDClearAllMessagesRequest *request = [[FRDClearAllMessagesRequest alloc] init];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
+#pragma mark - Reachability
 
 + (BOOL)isInternetReachable
 {

@@ -158,16 +158,17 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
     FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
     switch (sourceType) {
         case FRDSourceTypeMyProfile: {
-            NSString *relStatus = currentProfile.relationshipStatus.relationshipTitle;
             
-            for (FRDRelationshipItem *item in self.relationshipStatuses) {
-                if ([item.relationshipTitle isEqualToString:relStatus] || [item.relationshipTitle.lowercaseString containsString:relStatus]) {
-                    self.currentRelationshipStatus = item;
-                    self.currentRelationshipStatus.isSelected = YES;
-                    break;
+            @autoreleasepool {
+                NSString *relStatus = currentProfile.relationshipStatus.relationshipTitle;
+                for (FRDRelationshipItem *item in self.relationshipStatuses) {
+                    if ([item.relationshipTitle isEqualToString:relStatus] || [item.relationshipTitle.lowercaseString containsString:relStatus] || [item.relationshipTitle containsString:relStatus]) {
+                        self.currentRelationshipStatus = item;
+                        self.currentRelationshipStatus.isSelected = YES;
+                        break;
+                    }
                 }
             }
-            
             if (self.currentRelationshipStatus) {
                 [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:[self.relationshipStatuses indexOfObject:self.currentRelationshipStatus] inSection:0]]];
                 NSInteger idx = [self.relationshipStatuses indexOfObject:self.currentRelationshipStatus];
@@ -182,16 +183,18 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
             
             FRDSearchSettings *currentSearchSettings = currentProfile.currentSearchSettings;
             
-            for (FRDRelationshipItem *localRelItem in self.relationshipStatuses) {
-                for (FRDRelationshipItem *relItemFromSettings in currentSearchSettings.relationshipStatuses) {
-                    
-                    if ([localRelItem.relationshipTitle isEqualToString:relItemFromSettings.relationshipTitle] || [localRelItem.relationshipTitle.lowercaseString containsString:relItemFromSettings.relationshipTitle]) {
+            @autoreleasepool {
+                for (FRDRelationshipItem *localRelItem in self.relationshipStatuses) {
+                    for (FRDRelationshipItem *relItemFromSettings in currentSearchSettings.relationshipStatuses) {
                         
-                        localRelItem.isSelected = YES;
-                        [self.relationshipStatusesForSearch addObject:localRelItem];
+                        if ([localRelItem.relationshipTitle isEqualToString:relItemFromSettings.relationshipTitle] || [localRelItem.relationshipTitle.lowercaseString containsString:relItemFromSettings.relationshipTitle]) {
+                            
+                            localRelItem.isSelected = YES;
+                            [self.relationshipStatusesForSearch addObject:localRelItem];
+                            
+                        }
                         
                     }
-                    
                 }
             }
             

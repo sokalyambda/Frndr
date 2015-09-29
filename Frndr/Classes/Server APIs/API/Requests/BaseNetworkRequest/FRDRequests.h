@@ -21,4 +21,9 @@
 #import "FRDGetSearchSettingsRequest.h"
 #import "FRDUpdateSearchSettingsRequest.h"
 
+#import "FRDLikeUserByIdRequest.h"
+#import "FRDDislikeUserByIdRequest.h"
+
+#import "FRDClearAllMessagesRequest.h"
+
 #endif

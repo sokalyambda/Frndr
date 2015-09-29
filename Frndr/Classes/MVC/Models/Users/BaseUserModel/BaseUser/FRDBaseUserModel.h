@@ -21,7 +21,7 @@
     NSString *_fullName;
     NSString *_genderString;
     BOOL _smoker;
-    long long _userId;
+    NSString *_userId;
 }
 
 @property (strong, nonatomic) NSString *fullName;
@@ -36,7 +36,7 @@
 @property (strong, nonatomic) NSArray *galleryPhotos;
 @property (strong, nonatomic) NSArray *thingsLovedMost;
 
-@property (assign, nonatomic) long long userId;
+@property (strong, nonatomic) NSString *userId;
 @property (assign, nonatomic) NSInteger age;
 @property (assign, nonatomic) CGFloat distanceFromMe;
 @property (assign, nonatomic, getter=isSmoker) BOOL smoker;

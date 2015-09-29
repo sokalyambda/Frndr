@@ -54,22 +54,9 @@ static NSString *const kUserId              = @"userId";
          _relationshipStatus = [[FRDRelationshipItem alloc] init];
          */
         _smoker = [response[kSmoker] boolValue];
-        _userId = [response[kUserId] longLongValue];
+        _userId = response[kUserId];
     }
     return self;
 }
-/*
- "profile": {
- "name": "Petrovich",
- "age": "25",
- "relStatus": "single",
- "jobTitle": "Doctor",
- "smoker": "true",
- "sexual": "straight",
- "things": ["tennis", "box", "cars"],
- "bio": "Some biography",
- "visible": "true",
- "sex": "M"
- }
- */
+
 @end

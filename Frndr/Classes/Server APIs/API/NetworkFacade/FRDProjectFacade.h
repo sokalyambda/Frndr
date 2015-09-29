@@ -47,7 +47,7 @@ extern NSString *defaultBaseURLString;
 
                               onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
-+ (FRDNetworkOperation *)getUserById:(NSInteger)userId
++ (FRDNetworkOperation *)getUserById:(NSString *)userId
                            onSuccess:(void(^)(FRDCurrentUserProfile *userProfile))success
                            onFailure:(FailureBlock)failure;
 
@@ -69,5 +69,18 @@ extern NSString *defaultBaseURLString;
                                                  onFailure:(FailureBlock)failure;
 + (FRDNetworkOperation *)updateCurrentSearchSettings:(FRDSearchSettings *)searchSettingsForUpdating onSuccess:(void(^)(FRDSearchSettings *currentSearchSettings))success
                                            onFailure:(FailureBlock)failure;
+
+#pragma mark - Likes Module
+
++ (FRDNetworkOperation *)dislikeUserById:(NSString *)userId onSuccess:(SuccessBlock)success
+                               onFailure:(FailureBlock)failure;
++ (FRDNetworkOperation *)likeUserById:(NSString *)userId onSuccess:(SuccessBlock)success
+                            onFailure:(FailureBlock)failure;
+
+#pragma mark - Messages Module
+
++ (FRDNetworkOperation *)clearAllMessagesOnSuccess:(SuccessBlock)success
+                                         onFailure:(FailureBlock)failure;
+
 
 @end

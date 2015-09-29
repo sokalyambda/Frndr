@@ -184,6 +184,7 @@
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
      }];
+//    [FRDRedirectionHelper redirectToMainContainerControllerWithNavigationController:(FRDBaseNavigationController *)self.navigationController andDelegate:self];
 }
 
 /**
