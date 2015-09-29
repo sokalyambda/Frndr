@@ -18,6 +18,8 @@ typedef NS_ENUM(NSUInteger, FRDPresentedControllerType) {
 
 #import "UIView+MakeFromXib.h"
 
+#import "FRDProjectFacade.h"
+
 /** A private UIViewControllerContextTransitioning class to be provided transitioning delegates.
  @discussion Because we are a custom UIVievController class, with our own containment implementation, we have to provide an object conforming to the UIViewControllerContextTransitioning protocol. The system view controllers use one provided by the framework, which we cannot configure, let alone create. This class will be used even if the developer provides their own transitioning objects.
  @note The only methods that will be called on objects of this class are the ones defined in the UIViewControllerContextTransitioning protocol. The rest is our own private implementation.
@@ -129,6 +131,10 @@ typedef NS_ENUM(NSUInteger, FRDPresentedControllerType) {
  */
 - (void)showNextPreviousController:(FRDPresentedControllerType)presentedType
 {
+    if ([FRDProjectFacade isOperationInProcess]) {
+        return;
+    }
+    
     switch (presentedType) {
         case FRDPresentedControllerTypeNext: {
             if (self.currentPageIndex < self.viewControllers.count - 1) {

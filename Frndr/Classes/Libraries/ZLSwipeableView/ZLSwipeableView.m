@@ -278,12 +278,23 @@ static CGFloat const kRadiusFactor = 0.75;
     }
     
     // Setup animations which will accompany swipeable view's movement
-    UIView *backView = self.containerView.subviews[0];
-    UIView *middleView = self.containerView.subviews[1];
+    NSUInteger numSwipeableViews = self.containerView.subviews.count;
     
-    CABasicAnimation *transformBackView = [self transformAnimationForView:backView atIndex:2];
-    CABasicAnimation *transformMiddleView = [self transformAnimationForView:middleView atIndex:1];
+    UIView *backView = nil;
+    UIView *middleView = nil;
+    CABasicAnimation *transformBackView = nil;
+    CABasicAnimation *transformMiddleView = nil;
     
+    if (numSwipeableViews >= 3) {
+        backView = self.containerView.subviews[0];
+        middleView = self.containerView.subviews[1];
+        transformBackView = [self transformAnimationForView:backView atIndex:2];
+        transformMiddleView = [self transformAnimationForView:middleView atIndex:1];
+    } else if (numSwipeableViews == 2) {
+        middleView = self.containerView.subviews[0];
+        transformMiddleView = [self transformAnimationForView:middleView atIndex:1];
+    }
+
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         [self createAnchorViewForCover:swipeableView atLocation:location shouldAttachAnchorViewToPoint:YES];
         
@@ -292,8 +303,10 @@ static CGFloat const kRadiusFactor = 0.75;
         }
 
         // Begin animating neccessary views
-        [backView.layer addAnimation:transformBackView forKey:kTransformBackViewAnimationKey];
-        [middleView.layer addAnimation:transformMiddleView forKey:kTransformMiddleViewAnimationKey];
+        if (middleView) {
+            [backView.layer addAnimation:transformBackView forKey:kTransformBackViewAnimationKey];
+            [middleView.layer addAnimation:transformMiddleView forKey:kTransformMiddleViewAnimationKey];
+        }
     }
     
     if (recognizer.state == UIGestureRecognizerStateChanged) {
