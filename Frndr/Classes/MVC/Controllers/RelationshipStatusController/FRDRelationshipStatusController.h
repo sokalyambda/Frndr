@@ -19,7 +19,8 @@ typedef NS_ENUM(NSUInteger, FRDRelationshipsDataSourceType) {
 
 @property (nonatomic) FRDRelationshipsDataSourceType sourceType;
 
-@property (strong, nonatomic) FRDRelationshipItem *currentRelationshipStatus;;
+@property (strong, nonatomic) FRDRelationshipItem *currentRelationshipStatus;
+@property (strong, nonatomic) NSMutableSet *relationshipStatusesForSearch;
 
 - (void)update;
 
