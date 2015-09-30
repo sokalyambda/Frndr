@@ -41,13 +41,10 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
     [self registerHeader];
     [self adjustTopSeparatorHeight];
     
-    self.tableView.tableHeaderView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([FRDApplicationSettingsTableHeader class])];
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
-    self.tableView.alwaysBounceVertical = NO;
+    [self configureTableView];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self getCurrentUserProfile];
+        [self performUpdatingActions];
     });
 }
 
@@ -69,6 +66,13 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
 {
     UINib *nib = [UINib nibWithNibName:NSStringFromClass([FRDApplicationSettingsTableHeader class]) bundle:nil];
     [self.tableView registerNib:nib forHeaderFooterViewReuseIdentifier:NSStringFromClass([FRDApplicationSettingsTableHeader class])];
+}
+
+- (void)configureTableView
+{
+    self.tableView.tableHeaderView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([FRDApplicationSettingsTableHeader class])];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.alwaysBounceVertical = NO;
 }
 
 /**
@@ -166,6 +170,17 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
     }
 }
 
+- (void)performUpdatingActions
+{
+    BOOL isUserUpdateNeeded = [FRDStorageManager sharedStorage].isUserProfileUpdateNeeded;
+    
+    if (isUserUpdateNeeded) {
+        [self getCurrentUserProfile];
+    } else {
+        [self updateNotificationsSettingsSwitches];
+    }
+}
+
 /**
  *  Get current user profile
  */
@@ -175,6 +190,9 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
     [MBProgressHUD showHUDAddedTo:self.parentViewController.view animated:YES];
     [FRDProjectFacade getCurrentUserProfileOnSuccess:^(BOOL isSuccess) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.parentViewController.view animated:YES];
+        
+        [FRDStorageManager sharedStorage].userProfileUpdateNeeded = NO;
+        
         [weakSelf updateNotificationsSettingsSwitches];
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.parentViewController.view animated:YES];
@@ -257,6 +275,10 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
     [MBProgressHUD showHUDAddedTo:self.parentViewController.view animated:YES];
     [FRDProjectFacade deleteAccountOnSuccess:^(BOOL isSuccess) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.parentViewController.view animated:YES];
+        
+        [FRDStorageManager sharedStorage].userProfileUpdateNeeded = YES;
+        [FRDStorageManager sharedStorage].searchSettingsUpdateNeeded = YES;
+        
         [weakSelf.parentViewController.navigationController popToRootViewControllerAnimated:YES];
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.parentViewController.view animated:YES];

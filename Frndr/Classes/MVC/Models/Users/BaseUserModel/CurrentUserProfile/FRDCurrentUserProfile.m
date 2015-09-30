@@ -105,9 +105,7 @@ static NSString *const kNewFriends = @"newFriends";
         _relationshipStatus = profile.relationshipStatus;
         _biography = profile.biography;
         _jobTitle = profile.jobTitle;
-        
-        _friendsNotificationsEnabled = profile.friendsNotificationsEnabled;
-        _messagesNotificationsEnabled = profile.messagesNotificationsEnabled;
+        _smoker = profile.isSmoker;
     }
     return self;
 }

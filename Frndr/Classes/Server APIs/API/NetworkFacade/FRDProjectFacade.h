@@ -67,7 +67,7 @@ extern NSString *defaultBaseURLString;
 
 + (FRDNetworkOperation *)getCurrentSearchSettingsOnSuccess:(void(^)(FRDSearchSettings *currentSearchSettings))success
                                                  onFailure:(FailureBlock)failure;
-+ (FRDNetworkOperation *)updateCurrentSearchSettings:(FRDSearchSettings *)searchSettingsForUpdating onSuccess:(void(^)(FRDSearchSettings *currentSearchSettings))success
++ (FRDNetworkOperation *)updateCurrentSearchSettings:(FRDSearchSettings *)searchSettingsForUpdating onSuccess:(SuccessBlock)success
                                            onFailure:(FailureBlock)failure;
 
 #pragma mark - Likes Module

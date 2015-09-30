@@ -8,6 +8,8 @@
 
 #import "FRDTopContentView.h"
 
+static NSString *const kBaseNavigationTitle = @"frndr";
+
 @interface FRDTopContentView ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -23,8 +25,17 @@
 - (void)setTopTitleText:(NSString *)topTitleText
 {
     _topTitleText = topTitleText;
-    _titleLabel.text = _topTitleText;
-    _titleLabel.textColor = UIColorFromRGB(0x58406B);
+    if ([topTitleText isEqualToString:kBaseNavigationTitle]) {
+        
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:_topTitleText];
+        [attributedString setAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0x35B8B4)} range:NSMakeRange(1, 1)];
+        _titleLabel.attributedText = attributedString;
+        
+    } else {
+        _titleLabel.text = _topTitleText;
+        _titleLabel.textColor = UIColorFromRGB(0x58406B);
+    }
+    
     _titleLabel.font = [UIFont fontWithName:@"GillSans" size:25.f];
 }
 

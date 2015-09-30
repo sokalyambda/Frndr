@@ -26,25 +26,9 @@ static NSString *const kDistance                = @"distance";
 - (void)setAgeRange:(NSDictionary *)ageRange
 {
     _ageRange = ageRange;
-    _minAgeValue = [_ageRange[kMinAge] floatValue];
-    _maxAgeValue = [_ageRange[kMaxAge] floatValue];
+    _minAgeValue = [_ageRange[kMinAge] integerValue];
+    _maxAgeValue = [_ageRange[kMaxAge] integerValue];
 }
-
-//- (CGFloat)minAgeValue
-//{
-//    if (_minAgeValue == 0) {
-//        _minAgeValue = [self.ageRange[kMinAge] floatValue];
-//    }
-//    return _minAgeValue;
-//}
-//
-//- (CGFloat)maxAgeValue
-//{
-//    if (_maxAgeValue) {
-//        _maxAgeValue = [self.ageRange[kMaxAge] floatValue];
-//    }
-//    return _maxAgeValue;
-//}
 
 #pragma mark - FRDMappingProtocol
 

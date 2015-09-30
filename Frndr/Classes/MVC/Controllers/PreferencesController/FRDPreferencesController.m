@@ -18,7 +18,7 @@
 
 - (NSString *)titleString
 {
-    return @"Preferences";
+    return @"frndr";
 }
 
 - (NSString *)leftImageName
@@ -80,6 +80,10 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [FRDProjectFacade signOutOnSuccess:^(BOOL isSuccess) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        [FRDStorageManager sharedStorage].userProfileUpdateNeeded = YES;
+        [FRDStorageManager sharedStorage].searchSettingsUpdateNeeded = YES;
+        
         [weakSelf.navigationController popToRootViewControllerAnimated:YES];
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];

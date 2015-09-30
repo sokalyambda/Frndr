@@ -20,4 +20,7 @@
 @property (nonatomic, readonly) NSString *deviceUDID;
 @property (nonatomic, readonly) NSString *deviceName;
 
+@property (assign, nonatomic, getter=isSearchSettingsUpdateNeeded) BOOL searchSettingsUpdateNeeded;
+@property (assign, nonatomic, getter=isUserProfileUpdateNeeded) BOOL userProfileUpdateNeeded;
+
 @end
