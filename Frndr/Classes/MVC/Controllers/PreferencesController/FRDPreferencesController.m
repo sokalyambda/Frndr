@@ -18,7 +18,7 @@
 
 - (NSString *)titleString
 {
-    return @"Preferences";
+    return @"frndr";
 }
 
 - (NSString *)leftImageName
