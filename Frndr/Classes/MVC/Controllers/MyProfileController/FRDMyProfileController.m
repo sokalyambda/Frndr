@@ -59,7 +59,7 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
     [self initRelationshipStatusesHolderContainer];
     [self initDropDownHolderContainer];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self getCurrentUserProfile];
+        [self performUpdatingActions];
     });
 }
 
@@ -128,11 +128,25 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
     [FRDProjectFacade updatedProfile:profileForUpdating onSuccess:^(FRDCurrentUserProfile *confirmedProfile) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [currentProfile updateWithUserProfile:confirmedProfile];
+        
+        
+        
         [weakSelf.navigationController popViewControllerAnimated:YES];
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
     }];
+}
+
+- (void)performUpdatingActions
+{
+    BOOL isSearchSettingsUpdateNeeded = [FRDStorageManager sharedStorage].isSearchSettingsUpdateNeeded;
+    
+    if (isSearchSettingsUpdateNeeded) {
+        [self getCurrentUserProfile];
+    } else {
+        [self setProfileInformationToFields];
+    }
 }
 
 /**
@@ -144,6 +158,9 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [FRDProjectFacade getCurrentUserProfileOnSuccess:^(BOOL isSuccess) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        [FRDStorageManager sharedStorage].userProfileUpdateNeeded = NO;
+        
         [weakSelf setProfileInformationToFields];
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];

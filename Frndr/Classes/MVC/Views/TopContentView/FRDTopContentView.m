@@ -36,7 +36,7 @@ static NSString *const kBaseNavigationTitle = @"frndr";
         _titleLabel.textColor = UIColorFromRGB(0x58406B);
     }
     
-    _titleLabel.font = [UIFont fontWithName:@"GillSans-Semibold" size:25.f];
+    _titleLabel.font = [UIFont fontWithName:@"GillSans" size:25.f];
 }
 
 - (void)setLeftIconName:(NSString *)leftIconName

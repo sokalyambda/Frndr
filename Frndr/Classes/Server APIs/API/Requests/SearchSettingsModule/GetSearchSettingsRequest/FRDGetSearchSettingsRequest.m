@@ -38,6 +38,10 @@ static NSString *const requestAction = @"users/searchSettings";
 {
     FRDSearchSettings *searchSettings = [[FRDSearchSettings alloc] initWithServerResponse:responseObject];
     self.currentSearchSettings = searchSettings;
+    
+    FRDCurrentUserProfile *profile = [FRDStorageManager sharedStorage].currentUserProfile;
+    profile.currentSearchSettings = self.currentSearchSettings;
+    
     return !!self.currentSearchSettings;
 }
 

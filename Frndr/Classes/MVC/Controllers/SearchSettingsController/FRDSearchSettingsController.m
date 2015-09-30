@@ -65,7 +65,7 @@ static CGFloat const kMaxDistanceValue = 10000.f;
     [self initRelationshipStatusesHolderContainer];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self configureDefaulSliders];
-        [self getCurrentSearchSettings];
+        [self performUpdatingActions];
     });
 }
 
@@ -92,6 +92,20 @@ static CGFloat const kMaxDistanceValue = 10000.f;
 #pragma mark - Actions
 
 /**
+ *  Perform needed update actios
+ */
+- (void)performUpdatingActions
+{
+    BOOL isSearchSettingsUpdateNeeded = [FRDStorageManager sharedStorage].isSearchSettingsUpdateNeeded;
+    
+    if (isSearchSettingsUpdateNeeded) {
+        [self getCurrentSearchSettings];
+    } else {
+        [self updateSearchSettingsFields];
+    }
+}
+
+/**
  *  Get search settings for current user
  */
 - (void)getCurrentSearchSettings
@@ -101,8 +115,9 @@ static CGFloat const kMaxDistanceValue = 10000.f;
     [FRDProjectFacade getCurrentSearchSettingsOnSuccess:^(FRDSearchSettings *currentSearchSettings) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
-        FRDCurrentUserProfile *profile = [FRDStorageManager sharedStorage].currentUserProfile;
-        profile.currentSearchSettings = currentSearchSettings;
+        [FRDStorageManager sharedStorage].searchSettingsUpdateNeeded = NO;
+        
+        
         [weakSelf updateSearchSettingsFields];
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
@@ -162,11 +177,10 @@ static CGFloat const kMaxDistanceValue = 10000.f;
     //set data to temp settings and update it
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [FRDProjectFacade updateCurrentSearchSettings:tempSearchSettings onSuccess:^(FRDSearchSettings *currentSearchSettings) {
+    [FRDProjectFacade updateCurrentSearchSettings:tempSearchSettings onSuccess:^(BOOL success) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
-        FRDCurrentUserProfile *profile = [FRDStorageManager sharedStorage].currentUserProfile;
-        profile.currentSearchSettings = currentSearchSettings;
+        [FRDStorageManager sharedStorage].searchSettingsUpdateNeeded = YES;
         
         [weakSelf.navigationController popViewControllerAnimated:YES];
         

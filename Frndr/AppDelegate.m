@@ -20,6 +20,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //set flag for needed updating
+    [FRDStorageManager sharedStorage].userProfileUpdateNeeded = YES;
+    [FRDStorageManager sharedStorage].searchSettingsUpdateNeeded = YES;
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 }

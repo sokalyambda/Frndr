@@ -46,6 +46,11 @@ static NSString *const kDistance                = @"distance";
     return self;
 }
 
+- (BOOL)parseJSONDataSucessfully:(id)responseObject error:(NSError *__autoreleasing *)error
+{
+    return !!responseObject;
+}
+
 #pragma mark - Actions
 
 - (NSArray *)relationsipStatusesForUpdatingFromSearchSettings:(FRDSearchSettings *)searchSettings

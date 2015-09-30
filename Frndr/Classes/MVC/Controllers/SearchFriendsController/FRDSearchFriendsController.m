@@ -91,9 +91,8 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    if (!self.nearestUsers.count) {
-        [self findNearestUsers];
-    }
+    //updating actions
+    [self performNeededUpdatingActions];
 }
 
 #pragma mark - Actions
@@ -130,15 +129,117 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     [self.previewGalleryController didMoveToParentViewController:self];
 }
 
-- (void)getCurrentUserProfile
+#pragma mark - Updating Actions
+- (void)getCurrentUserProfileOnSuccess:(void(^)(void))success onFailure:(void(^)(NSError *error))failure
 {
+    [FRDProjectFacade getCurrentUserProfileOnSuccess:^(BOOL isSuccess) {
+        
+        if (success) {
+            success();
+        }
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        
+        if (failure) {
+            failure(error);
+        }
+        
+    }];
+}
+
+- (void)getCurrentSearchSettingsOnSuccess:(void(^)(void))success onFailure:(void(^)(NSError *error))failure
+{
+    [FRDProjectFacade getCurrentSearchSettingsOnSuccess:^(FRDSearchSettings *currentSearchSettings) {
+        
+        if (success) {
+            success();
+        }
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        
+        if (failure) {
+            failure(error);
+        }
+        
+    }];
+}
+
+/**
+ *  Perform needed updating actions
+ */
+- (void)performNeededUpdatingActions
+{
+    BOOL isUserUpdateNeeded = [FRDStorageManager sharedStorage].isUserProfileUpdateNeeded;
+    BOOL isSearchSettingsUpdateNeeded = [FRDStorageManager sharedStorage].isSearchSettingsUpdateNeeded;
+    
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [FRDProjectFacade getCurrentUserProfileOnSuccess:^(BOOL isSuccess) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-    } onFailure:^(NSError *error, BOOL isCanceled) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-    }];
+    if (isUserUpdateNeeded && isSearchSettingsUpdateNeeded) {
+        
+        [self getCurrentUserProfileOnSuccess:^{
+            
+            [FRDStorageManager sharedStorage].userProfileUpdateNeeded = NO;
+            
+            [weakSelf getCurrentSearchSettingsOnSuccess:^{
+                
+                [FRDStorageManager sharedStorage].searchSettingsUpdateNeeded = NO;
+                
+                [weakSelf findNearestUsers];
+                
+            } onFailure:^(NSError *error) {
+                
+                [weakSelf findNearestUsers];
+                
+            }];
+            
+        } onFailure:^(NSError *error) {
+            
+            [weakSelf getCurrentSearchSettingsOnSuccess:^{
+                
+                [FRDStorageManager sharedStorage].searchSettingsUpdateNeeded = NO;
+                
+                [weakSelf findNearestUsers];
+                
+            } onFailure:^(NSError *error) {
+                
+                [weakSelf findNearestUsers];
+                
+            }];
+        }];
+        
+    } else if (isUserUpdateNeeded) {
+        
+        [self getCurrentUserProfileOnSuccess:^{
+            
+            [FRDStorageManager sharedStorage].userProfileUpdateNeeded = NO;
+            
+            [weakSelf findNearestUsers];
+            
+        } onFailure:^(NSError *error) {
+            
+            [weakSelf findNearestUsers];
+            
+        }];
+        
+    } else if (isSearchSettingsUpdateNeeded) {
+        
+        [self getCurrentSearchSettingsOnSuccess:^{
+            
+            [FRDStorageManager sharedStorage].searchSettingsUpdateNeeded = NO;
+            
+            [weakSelf findNearestUsers];
+            
+        } onFailure:^(NSError *error) {
+            
+            [weakSelf findNearestUsers];
+            
+        }];
+        
+    } else {
+        
+        [self findNearestUsers];
+        
+    }
 }
 
 /**
@@ -147,16 +248,25 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)findNearestUsers
 {
     WEAK_SELF;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [FRDProjectFacade findNearestUsersWithPage:weakSelf.currentPage onSuccess:^(NSArray *nearestUsers) {
+    if (!self.nearestUsers.count) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [FRDProjectFacade findNearestUsersWithPage:weakSelf.currentPage onSuccess:^(NSArray *nearestUsers) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            
+            weakSelf.nearestUsers = [nearestUsers mutableCopy];
+            
+            if (!weakSelf.nearestUsers.count) {
+                //MARK: show pulsing view and schedule timer
+            }
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+        }];
+    } else {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        
-        weakSelf.nearestUsers = [nearestUsers mutableCopy];
-        
-    } onFailure:^(NSError *error, BOOL isCanceled) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        
-    }];
+    }
+    
 }
 
 /**
