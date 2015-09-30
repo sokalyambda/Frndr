@@ -32,9 +32,6 @@ static NSString * const kUpArrow = @"upArrow";
 
 @property (strong, nonatomic) FRDDropDownTableView *dropDownList;
 
-@property (assign, nonatomic) BOOL isSmokerExpanded;
-@property (assign, nonatomic) BOOL isSexualOrientationExpanded;
-
 @end
 
 @implementation FRDDropDownHolderController
@@ -47,28 +44,6 @@ static NSString * const kUpArrow = @"upArrow";
         _chosenOrientation = [FRDSexualOrientation orientationWithOrientationString:LOCALIZED(@"ANY")];
     }
     return _chosenOrientation;
-}
-
-- (void)setIsSmokerExpanded:(BOOL)isSmokerExpanded
-{
-    _isSmokerExpanded = isSmokerExpanded;
-    
-    if (isSmokerExpanded) {
-        self.smokerPointingArrow.image = [UIImage imageNamed:kUpArrow];
-    } else {
-        self.smokerPointingArrow.image = [UIImage imageNamed:kDownArrow];
-    }
-}
-
-- (void)setIsSexualOrientationExpanded:(BOOL)isSexualOrientationExpanded
-{
-    _isSexualOrientationExpanded = isSexualOrientationExpanded;
-    
-    if (isSexualOrientationExpanded) {
-        self.sexualOrientationPointingArrow.image = [UIImage imageNamed:kUpArrow];
-    } else {
-        self.sexualOrientationPointingArrow.image = [UIImage imageNamed:kDownArrow];
-    }
 }
 
 #pragma mark - View Lifecycle
@@ -84,8 +59,6 @@ static NSString * const kUpArrow = @"upArrow";
 - (void)initDropDownTable
 {
     self.dropDownList = [FRDDropDownTableView makeFromXib];
-    self.isSmokerExpanded = NO;
-    self.isSexualOrientationExpanded = NO;
 }
 
 - (IBAction)smokerClick:(UITapGestureRecognizer *)tap
@@ -98,15 +71,15 @@ static NSString * const kUpArrow = @"upArrow";
             weakSelf.smokerLabel.text = chosenValue;
             weakSelf.smoker = [chosenValue isEqualToString:@"SMOKER"] ? YES : NO;
             
-            weakSelf.isSmokerExpanded = !weakSelf.isSmokerExpanded;
+            [self rotateArrow:self.smokerPointingArrow];
         }
     }];
     
     // Dismiss keyboard if there is any on screen
     [[UIResponder currentFirstResponder] resignFirstResponder];
     
-    self.isSmokerExpanded = !self.isSmokerExpanded;
-    self.isSexualOrientationExpanded = NO;
+    [self rotateArrow:self.smokerPointingArrow];
+    [self resetArrowTransform:self.sexualOrientationPointingArrow];
 }
 
 - (IBAction)sexualOrientationClick:(UITapGestureRecognizer *)tap
@@ -120,15 +93,29 @@ static NSString * const kUpArrow = @"upArrow";
             weakSelf.sexualOrientationLabel.text = chosenOrientation.orientationString;
             weakSelf.chosenOrientation = chosenOrientation;
             
-            weakSelf.isSexualOrientationExpanded = !weakSelf.isSexualOrientationExpanded;
+            [self rotateArrow:self.sexualOrientationPointingArrow];
         }
     }];
     
     // Dismiss keyboard if there is any on screen
     [[UIResponder currentFirstResponder] resignFirstResponder];
     
-    self.isSexualOrientationExpanded = !self.isSexualOrientationExpanded;
-    self.isSmokerExpanded = NO;
+    [self rotateArrow:self.sexualOrientationPointingArrow];
+    [self resetArrowTransform:self.smokerPointingArrow];
+}
+
+- (void)rotateArrow:(UIImageView *)arrow
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        arrow.transform = CGAffineTransformRotate(arrow.transform, M_PI);
+    }];
+}
+
+- (void)resetArrowTransform:(UIImageView *)arrow
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        arrow.transform = CGAffineTransformMakeRotation(0);
+    }];
 }
 
 #pragma mark - Public Methods
@@ -152,8 +139,6 @@ static NSString * const kUpArrow = @"upArrow";
         default:
             break;
     }
-    
-    
 }
 
 @end
