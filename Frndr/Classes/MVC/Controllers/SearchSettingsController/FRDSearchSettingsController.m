@@ -25,6 +25,11 @@
 
 #import "FRDSearchSettings.h"
 
+static CGFloat const kMinValidAge = 18.f;
+static CGFloat const kMaxValidAge = 50.f;
+static CGFloat const kYearsSpace = 2.f;
+static CGFloat const kMaxDistanceValue = 10000.f;
+
 @interface FRDSearchSettingsController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
@@ -59,7 +64,7 @@
     [self initDropDownHolderContainer];
     [self initRelationshipStatusesHolderContainer];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self configureSliders];
+        [self configureDefaulSliders];
         [self getCurrentSearchSettings];
     });
 }
@@ -68,20 +73,20 @@
 
 - (void)setCurrentDistance:(long long)currentDistance
 {
-    _currentDistance = currentDistance;
-    self.distanceLabel.text = [NSString stringWithFormat:@"%lld miles", (long long)currentDistance];
+    _currentDistance = currentDistance > kMaxDistanceValue ? kMaxDistanceValue : currentDistance;
+    self.distanceLabel.text = [NSString stringWithFormat:@"%lld miles", (long long)_currentDistance];
 }
 
 - (void)setCurrentMinimumAge:(NSInteger)currentMinimumAge
 {
-    _currentMinimumAge = currentMinimumAge;
-    self.ageRangeLabel.text = [NSString stringWithFormat:@"%ld - %ld years", (long)currentMinimumAge, (long)self.currentMaximumAge];
+    _currentMinimumAge = currentMinimumAge < kMinValidAge ? kMinValidAge : currentMinimumAge;
+    self.ageRangeLabel.text = [NSString stringWithFormat:@"%ld - %ld years", (long)_currentMinimumAge, (long)self.currentMaximumAge];
 }
 
 - (void)setCurrentMaximumAge:(NSInteger)currentMaximumAge
 {
-    _currentMaximumAge = currentMaximumAge;
-    self.ageRangeLabel.text = [NSString stringWithFormat:@"%ld - %ld years", (long)self.currentMinimumAge, (long)currentMaximumAge];
+    _currentMaximumAge = currentMaximumAge > kMaxValidAge ? kMaxValidAge : currentMaximumAge;
+    self.ageRangeLabel.text = [NSString stringWithFormat:@"%ld - %ld years", (long)self.currentMinimumAge, (long)_currentMaximumAge];
 }
 
 #pragma mark - Actions
@@ -106,6 +111,23 @@
     }];
 }
 
+- (void)configureDefaulSliders
+{
+    FRDRange distanceRange = { 1, kMaxDistanceValue };
+    self.distanceSlider.mode = FRDRangeSliderModeSingleThumb;
+    self.distanceSlider.validRange = distanceRange;
+    self.distanceSlider.maximumValue = kMaxDistanceValue;
+    
+    FRDRange ageRange = { kMinValidAge, kMaxValidAge - kMinValidAge };
+    self.ageRangeSlider.validRange = ageRange;
+    self.ageRangeSlider.minimumRange = kYearsSpace;
+    self.ageRangeSlider.minimumValue = kMinValidAge;
+    self.ageRangeSlider.maximumValue = kMaxValidAge;
+    
+    self.currentMinimumAge = self.ageRangeSlider.minimumValue;
+    self.currentMaximumAge = self.ageRangeSlider.maximumValue;
+}
+
 /**
  *  Update views relative to just obtained settings
  */
@@ -113,6 +135,7 @@
 {
     FRDSearchSettings *currentSettings = [FRDStorageManager sharedStorage].currentUserProfile.currentSearchSettings;
     self.currentDistance = currentSettings.distance;
+    self.distanceSlider.maximumValue = self.currentDistance;
     //update relationship statuses
     [self.relationshipController updateWithSourceType:FRDSourceTypeSearchSettings];
     //update drop down controller
@@ -120,6 +143,8 @@
     //update age range
     self.currentMinimumAge = currentSettings.minAgeValue;
     self.currentMaximumAge = currentSettings.maxAgeValue;
+    self.ageRangeSlider.minimumValue = self.currentMinimumAge;
+    self.ageRangeSlider.maximumValue = self.currentMaximumAge;
 }
 
 /**
@@ -128,8 +153,8 @@
 - (void)updateCurrentSearchSettings
 {
     FRDSearchSettings *tempSearchSettings = [[FRDSearchSettings alloc] init];
-    tempSearchSettings.minAgeValue = self.ageRangeSlider.minimumValue;
-    tempSearchSettings.maxAgeValue = self.ageRangeSlider.maximumValue;
+    tempSearchSettings.minAgeValue = self.currentMinimumAge;
+    tempSearchSettings.maxAgeValue = self.currentMaximumAge;
     tempSearchSettings.sexualOrientation = self.dropDownHolderController.chosenOrientation;
     tempSearchSettings.smoker = self.dropDownHolderController.smoker;
     tempSearchSettings.relationshipStatuses = self.relationshipController.relationshipStatusesForSearch;
@@ -176,26 +201,6 @@
     self.relationshipController.currentSourceType = FRDSourceTypeSearchSettings;
 }
 
-- (void)configureSliders
-{
-    FRDRange range = { 1, 999 };
-    self.distanceSlider.mode = FRDRangeSliderModeSingleThumb;
-    self.distanceSlider.validRange = range;
-    self.distanceSlider.maximumValue = 400;
-    
-    self.currentDistance = 400;
-    
-    range.location = 18;
-    range.length = 32;
-    self.ageRangeSlider.validRange = range;
-    self.ageRangeSlider.minimumRange = 2;
-    self.ageRangeSlider.minimumValue = 22;
-    self.ageRangeSlider.maximumValue = 40;
-    
-    self.currentMinimumAge = 22;
-    self.currentMaximumAge = 40;
-}
-
 - (void)customizeNavigationItem
 {
     [super customizeNavigationItem];
@@ -214,6 +219,7 @@
 - (IBAction)distanceSliderValueChanged:(id)sender
 {
     self.currentDistance = self.distanceSlider.maximumValue;
+    NSLog(@"distance maximum value %f", self.distanceSlider.maximumValue);
 }
 
 - (IBAction)ageRangeSliderValueChanged:(id)sender

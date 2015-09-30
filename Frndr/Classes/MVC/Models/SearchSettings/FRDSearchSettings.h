@@ -16,8 +16,8 @@
 @property (strong, nonatomic) NSSet *relationshipStatuses;
 @property (assign, nonatomic, getter=isSmoker) BOOL smoker;
 @property (assign, nonatomic) CGFloat distance;
-@property (assign, nonatomic) CGFloat minAgeValue;
-@property (assign, nonatomic) CGFloat maxAgeValue;
+@property (assign, nonatomic) NSInteger minAgeValue;
+@property (assign, nonatomic) NSInteger maxAgeValue;
 @property (strong, nonatomic) NSDictionary *ageRange;
 
 @end
