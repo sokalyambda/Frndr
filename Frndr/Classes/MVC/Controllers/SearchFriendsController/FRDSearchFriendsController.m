@@ -184,7 +184,9 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     BOOL isSearchSettingsUpdateNeeded = [FRDStorageManager sharedStorage].isSearchSettingsUpdateNeeded;
     
     WEAK_SELF;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if (![self.view.subviews containsObject:self.pulsingOverlay]) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    }
     if (isUserUpdateNeeded && isSearchSettingsUpdateNeeded) {
         
         [self getCurrentUserProfileOnSuccess:^{
@@ -260,16 +262,15 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 {
     WEAK_SELF;
     if (!self.nearestUsers.count) {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        if (![self.view.subviews containsObject:self.pulsingOverlay]) {
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        }
         [FRDProjectFacade findNearestUsersWithPage:weakSelf.currentPage onSuccess:^(NSArray *nearestUsers) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             
             weakSelf.nearestUsers = [nearestUsers mutableCopy];
-            
-            if (!weakSelf.nearestUsers.count) {
-                //MARK: show pulsing view and schedule timer
-                //[weakSelf.pulsingOverlay showHide];
-            }
+
+            [weakSelf configureOverlapPulsingView];
             
         } onFailure:^(NSError *error, BOOL isCanceled) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
@@ -278,7 +279,22 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     } else {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
     }
-    
+}
+
+/**
+ *  Configure overlap view
+ */
+- (void)configureOverlapPulsingView
+{
+    if (!self.nearestUsers.count && ![self.view.subviews containsObject:self.pulsingOverlay]) {
+        //MARK: show pulsing view and schedule timer
+        [self.pulsingOverlay showInView:self.view];
+    } else if (!self.nearestUsers.count && [self.view.subviews containsObject:self.pulsingOverlay]) {
+        [self.pulsingOverlay addPulsingAnimations];
+    } else {
+        [self.pulsingOverlay dismissFromView:self.view];
+        [self updateNearestUserInformation];
+    }
 }
 
 /**

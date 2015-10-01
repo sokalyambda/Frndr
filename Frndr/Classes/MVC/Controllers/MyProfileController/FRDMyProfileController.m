@@ -140,7 +140,7 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
 
 - (void)performUpdatingActions
 {
-    BOOL isSearchSettingsUpdateNeeded = [FRDStorageManager sharedStorage].isSearchSettingsUpdateNeeded;
+    BOOL isSearchSettingsUpdateNeeded = [FRDStorageManager sharedStorage].isUserProfileUpdateNeeded;
     
     if (isSearchSettingsUpdateNeeded) {
         [self getCurrentUserProfile];

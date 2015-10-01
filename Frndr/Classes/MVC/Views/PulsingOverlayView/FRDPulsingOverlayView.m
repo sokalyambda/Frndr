@@ -56,8 +56,15 @@ static CGFloat const kDuration = .2f;
     [self.avatarImageView sd_setImageWithURL:profile.avatarURL];
 }
 
+- (IBAction)avatarClick:(id)sender
+{
+    [self.avatarImageView pulsingWithWavesInView:self.superview repeating:NO];
+}
+
+#pragma mark - Public Methods
+
 /**
- *  Show or hide pulsing overlap view
+ *  Show or hide pulsing modal overlap view
  */
 - (void)showHide
 {
@@ -65,29 +72,72 @@ static CGFloat const kDuration = .2f;
     WEAK_SELF;
     
     if (![mainWindow.subviews containsObject:self]) {
-        
         [self setAlpha:0.f];
         [self setFrame:mainWindow.frame];
+        
+        [self.bluredView blurView];
+        
         [mainWindow addSubview:self];
+        
+        [UIView animateWithDuration:kDuration animations:^{
+            [weakSelf setAlpha:1.f];
+        } completion:^(BOOL finished) {
+            if (finished) {
+                [weakSelf.avatarImageView pulsingWithWavesInView:self.superview repeating:YES];
+            }
+        }];
+    } else {
+        [UIView animateWithDuration:kDuration animations:^{
+            weakSelf.alpha = 0.f;
+        }completion:^(BOOL finished) {
+            if (finished) {
+                [weakSelf removeFromSuperview];
+            }
+        }];
+    }
+}
+
+/**
+ *  Show overlap view
+ *
+ *  @param view View for presenting
+ */
+- (void)showInView:(UIView *)view
+{
+    WEAK_SELF;
+    if (![view.subviews containsObject:self]) {
+        [self setAlpha:0.f];
+        [self setFrame:view.frame];
+        [view addSubview:self];
         
         [self setTransform:CGAffineTransformMakeScale(0.1f, 0.1f)];
         
         [UIView animateWithDuration:kDuration animations:^{
             [weakSelf setTransform:CGAffineTransformMakeScale(1.f, 1.f)];
             [weakSelf setAlpha:1.f];
-            [weakSelf.bluredView blurView];
             
         } completion:^(BOOL finished) {
             if (finished) {
-                [weakSelf.avatarImageView pulsingWithWavesInView:self.superview repeating:YES];
+                [weakSelf.bluredView blurView];
+                [weakSelf addPulsingAnimations];
             }
         }];
+    }
+}
 
-    } else {
+/**
+ *  Dismiss  view from presented view
+ *
+ *  @param view Presented view
+ */
+- (void)dismissFromView:(UIView *)view
+{
+    WEAK_SELF;
+    if ([view.subviews containsObject:self]) {
         [UIView animateWithDuration:kDuration animations:^{
             [weakSelf setTransform:CGAffineTransformMakeScale(2.f, 2.f)];
             weakSelf.alpha = 0.f;
-        }completion:^(BOOL finished) {
+        } completion:^(BOOL finished) {
             if (finished) {
                 [weakSelf setTransform:CGAffineTransformMakeScale(1.f, 1.f)];
                 [weakSelf removeFromSuperview];
@@ -96,9 +146,12 @@ static CGFloat const kDuration = .2f;
     }
 }
 
-- (IBAction)avatarClick:(id)sender
+/**
+ *  Configure animations and blur
+ */
+- (void)addPulsingAnimations
 {
-    [self.avatarImageView pulsingWithWavesInView:self.superview repeating:NO];
+    [self.avatarImageView pulsingWithWavesInView:self.superview repeating:YES];
 }
 
 @end

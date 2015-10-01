@@ -175,7 +175,7 @@ static CGFloat const kMaxDistanceValue = 10000.f;
     tempSearchSettings.sexualOrientation = self.dropDownHolderController.chosenOrientation;
     tempSearchSettings.smoker = self.dropDownHolderController.smoker;
     tempSearchSettings.relationshipStatuses = self.relationshipController.relationshipStatusesForSearch;
-    tempSearchSettings.distance = self.distanceSlider.maximumValue;
+    tempSearchSettings.distance = self.currentDistance;
     //set data to temp settings and update it
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];

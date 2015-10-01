@@ -10,4 +10,9 @@
 
 - (void)showHide;
 
+- (void)showInView:(UIView *)view;
+- (void)dismissFromView:(UIView *)view;
+
+- (void)addPulsingAnimations;
+
 @end

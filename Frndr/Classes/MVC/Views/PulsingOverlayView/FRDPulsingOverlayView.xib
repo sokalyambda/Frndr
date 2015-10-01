@@ -15,11 +15,14 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TutorialBackground" translatesAutoresizingMaskIntoConstraints="NO" id="kqQ-at-bNJ">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68k-SS-QIL" userLabel="BluredView">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FamilyActiveIcon" translatesAutoresizingMaskIntoConstraints="NO" id="gk9-st-wea" customClass="FRDRoundedImageView">
+                <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="discardIcon" translatesAutoresizingMaskIntoConstraints="NO" id="gk9-st-wea" customClass="FRDRoundedImageView">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="100" id="8ha-YP-sQW"/>
@@ -44,15 +47,20 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="kqQ-at-bNJ" secondAttribute="trailing" id="B2s-pT-jXX"/>
                 <constraint firstAttribute="bottom" secondItem="68k-SS-QIL" secondAttribute="bottom" id="QxD-hM-chi"/>
                 <constraint firstAttribute="trailing" secondItem="68k-SS-QIL" secondAttribute="trailing" id="UpL-LZ-Pzp"/>
                 <constraint firstItem="68k-SS-QIL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Wfl-r0-teP"/>
+                <constraint firstItem="kqQ-at-bNJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="f8Y-G4-vV5"/>
+                <constraint firstAttribute="bottom" secondItem="kqQ-at-bNJ" secondAttribute="bottom" id="gfC-Ka-eOD"/>
                 <constraint firstItem="gk9-st-wea" firstAttribute="centerX" secondItem="68k-SS-QIL" secondAttribute="centerX" id="ivZ-x9-mh6"/>
                 <constraint firstItem="gk9-st-wea" firstAttribute="centerY" secondItem="68k-SS-QIL" secondAttribute="centerY" id="tLl-RR-npO"/>
                 <constraint firstItem="68k-SS-QIL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="urt-eO-KTI"/>
+                <constraint firstItem="kqQ-at-bNJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="uvL-5C-rbg"/>
             </constraints>
             <variation key="default">
                 <mask key="subviews">
+                    <exclude reference="kqQ-at-bNJ"/>
                     <exclude reference="68k-SS-QIL"/>
                     <exclude reference="gk9-st-wea"/>
                 </mask>
@@ -61,12 +69,17 @@
                     <exclude reference="UpL-LZ-Pzp"/>
                     <exclude reference="Wfl-r0-teP"/>
                     <exclude reference="urt-eO-KTI"/>
+                    <exclude reference="B2s-pT-jXX"/>
+                    <exclude reference="f8Y-G4-vV5"/>
+                    <exclude reference="gfC-Ka-eOD"/>
+                    <exclude reference="uvL-5C-rbg"/>
                     <exclude reference="ivZ-x9-mh6"/>
                     <exclude reference="tLl-RR-npO"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
                 <mask key="subviews">
+                    <include reference="kqQ-at-bNJ"/>
                     <include reference="68k-SS-QIL"/>
                     <include reference="gk9-st-wea"/>
                 </mask>
@@ -75,6 +88,10 @@
                     <include reference="UpL-LZ-Pzp"/>
                     <include reference="Wfl-r0-teP"/>
                     <include reference="urt-eO-KTI"/>
+                    <include reference="B2s-pT-jXX"/>
+                    <include reference="f8Y-G4-vV5"/>
+                    <include reference="gfC-Ka-eOD"/>
+                    <include reference="uvL-5C-rbg"/>
                     <include reference="ivZ-x9-mh6"/>
                     <include reference="tLl-RR-npO"/>
                 </mask>
@@ -83,7 +100,7 @@
                 <outlet property="avatarImageView" destination="gk9-st-wea" id="acY-s9-kjf"/>
                 <outlet property="bluredView" destination="68k-SS-QIL" id="lkQ-rl-Ia0"/>
             </connections>
-            <point key="canvasLocation" x="352" y="297"/>
+            <point key="canvasLocation" x="351" y="297"/>
         </view>
         <tapGestureRecognizer id="wAF-aJ-I5y">
             <connections>
@@ -92,6 +109,7 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="FamilyActiveIcon" width="30" height="29"/>
+        <image name="TutorialBackground" width="495" height="775"/>
+        <image name="discardIcon" width="194" height="192"/>
     </resources>
 </document>

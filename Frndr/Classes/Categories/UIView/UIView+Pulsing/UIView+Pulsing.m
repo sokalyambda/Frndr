@@ -17,13 +17,13 @@ static CGFloat const kToPulsingValue = 1.f;
 
 - (CABasicAnimation *)pulsingAnimation
 {
-    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-    scaleAnimation.duration = kDuration;
-    scaleAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    scaleAnimation.fromValue = [NSNumber numberWithFloat:kFromPulsingValue];
-    scaleAnimation.toValue = [NSNumber numberWithFloat:kToPulsingValue];
+    CABasicAnimation *pulsingAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    pulsingAnimation.duration = kDuration;
+    pulsingAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    pulsingAnimation.fromValue = [NSNumber numberWithFloat:kFromPulsingValue];
+    pulsingAnimation.toValue = [NSNumber numberWithFloat:kToPulsingValue];
     
-    return scaleAnimation;
+    return pulsingAnimation;
 }
 
 - (void)pulsingWithWavesInView:(UIView *)viewForWaves repeating:(BOOL)repeating
@@ -33,7 +33,7 @@ static CGFloat const kToPulsingValue = 1.f;
     CGRect pathFrame = CGRectMake(-CGRectGetMidX(self.bounds), -CGRectGetMidY(self.bounds), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:pathFrame cornerRadius:self.layer.cornerRadius];
     
-    CGPoint shapePosition = [viewForWaves convertPoint:self.center fromView:nil];
+    CGPoint shapePosition = [viewForWaves convertPoint:self.center fromView:viewForWaves];
     
     CAShapeLayer *circleShape = [CAShapeLayer layer];
     circleShape.path = path.CGPath;
@@ -74,9 +74,10 @@ static CGFloat const kToPulsingValue = 1.f;
         pulsingAnimation.autoreverses = YES;
         animation.repeatCount = HUGE_VAL;
     }
- 
+    
     [circleShape addAnimation:animation forKey:NULL];
-    [self.layer addAnimation:pulsingAnimation forKey:NULL];
+    
+    [self.layer addAnimation:pulsingAnimation forKey: repeating ? @"repeatingPulsing" : @"notRepeatingPulsing"];
     
     [CATransaction commit];
 }

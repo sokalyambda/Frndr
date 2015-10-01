@@ -43,6 +43,7 @@
 		581B9D561B9EDCA00080393B /* FRDNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D551B9EDCA00080393B /* FRDNetworkOperation.m */; };
 		581B9D591B9EDCBB0080393B /* FRDProjectFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D581B9EDCBB0080393B /* FRDProjectFacade.m */; };
 		581B9D5C1B9EDCDB0080393B /* FRDFailedOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D5B1B9EDCDB0080393B /* FRDFailedOperationManager.m */; };
+		583A48091BBD599C0015436D /* FRDNearestUsersService.m in Sources */ = {isa = PBXBuildFile; fileRef = 583A48081BBD599C0015436D /* FRDNearestUsersService.m */; settings = {ASSET_TAGS = (); }; };
 		586264C21BBD04DE00824BA3 /* UIView+Pulsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 586264C11BBD04DE00824BA3 /* UIView+Pulsing.m */; settings = {ASSET_TAGS = (); }; };
 		586264C61BBD067F00824BA3 /* FRDPulsingOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 586264C51BBD067F00824BA3 /* FRDPulsingOverlayView.m */; settings = {ASSET_TAGS = (); }; };
 		586264C81BBD069B00824BA3 /* FRDPulsingOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586264C71BBD069B00824BA3 /* FRDPulsingOverlayView.xib */; settings = {ASSET_TAGS = (); }; };
@@ -233,6 +234,8 @@
 		581B9D5A1B9EDCDB0080393B /* FRDFailedOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDFailedOperationManager.h; path = "Classes/Server APIs/API/FailedOperationManager/FRDFailedOperationManager.h"; sourceTree = "<group>"; };
 		581B9D5B1B9EDCDB0080393B /* FRDFailedOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDFailedOperationManager.m; path = "Classes/Server APIs/API/FailedOperationManager/FRDFailedOperationManager.m"; sourceTree = "<group>"; };
 		581B9D5D1B9EDE020080393B /* FRDRequests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FRDRequests.h; path = "Classes/Server APIs/API/Requests/BaseNetworkRequest/FRDRequests.h"; sourceTree = "<group>"; };
+		583A48071BBD599C0015436D /* FRDNearestUsersService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDNearestUsersService.h; path = Classes/MVC/Models/ModelsServices/NearestUsersService/FRDNearestUsersService.h; sourceTree = "<group>"; };
+		583A48081BBD599C0015436D /* FRDNearestUsersService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDNearestUsersService.m; path = Classes/MVC/Models/ModelsServices/NearestUsersService/FRDNearestUsersService.m; sourceTree = "<group>"; };
 		586264C01BBD04DE00824BA3 /* UIView+Pulsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Pulsing.h"; path = "Classes/Categories/UIView/UIView+Pulsing/UIView+Pulsing.h"; sourceTree = "<group>"; };
 		586264C11BBD04DE00824BA3 /* UIView+Pulsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Pulsing.m"; path = "Classes/Categories/UIView/UIView+Pulsing/UIView+Pulsing.m"; sourceTree = "<group>"; };
 		586264C41BBD067F00824BA3 /* FRDPulsingOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPulsingOverlayView.h; path = Classes/MVC/Views/PulsingOverlayView/FRDPulsingOverlayView.h; sourceTree = "<group>"; };
@@ -728,6 +731,23 @@
 			name = BaseNetworkRequest;
 			sourceTree = "<group>";
 		};
+		583A48051BBD59500015436D /* ModelsServices */ = {
+			isa = PBXGroup;
+			children = (
+				583A48061BBD596D0015436D /* NearestUsersService */,
+			);
+			name = ModelsServices;
+			sourceTree = "<group>";
+		};
+		583A48061BBD596D0015436D /* NearestUsersService */ = {
+			isa = PBXGroup;
+			children = (
+				583A48071BBD599C0015436D /* FRDNearestUsersService.h */,
+				583A48081BBD599C0015436D /* FRDNearestUsersService.m */,
+			);
+			name = NearestUsersService;
+			sourceTree = "<group>";
+		};
 		586264BF1BBD04AD00824BA3 /* UIView+Pulsing */ = {
 			isa = PBXGroup;
 			children = (
@@ -1159,6 +1179,7 @@
 		58BC76D01B9EB94C00BB8B5A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				583A48051BBD59500015436D /* ModelsServices */,
 				58B99E9A1BBA5A7B0057DB54 /* SearchSettings */,
 				587B3A961BA817260098154F /* RelationshipItem */,
 				58ED54FB1BB1A4C600F9B378 /* SexualOrientatiom */,
@@ -2250,6 +2271,7 @@
 				587B3A811BA7F8510098154F /* FRDDropDownCell.m in Sources */,
 				3E3D415D1BA6B1530021026A /* FRDSearchSettingsController.m in Sources */,
 				58ED54CE1BB1472100F9B378 /* FRDSignInWithFacebookRequest.m in Sources */,
+				583A48091BBD599C0015436D /* FRDNearestUsersService.m in Sources */,
 				58BC77171B9ECA7400BB8B5A /* UIView+SoftRemoving.m in Sources */,
 				58CD17EE1BA19BC70021D948 /* FRDTermsLabel.m in Sources */,
 				58FFDBC31B9ED32000B0490A /* FRDBaseNavigationController.m in Sources */,
