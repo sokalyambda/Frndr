@@ -30,7 +30,13 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    [FRDPushNotifiactionService cleanPushNotificationsBadges];
     [FBSDKAppEvents activateApp];
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    [FRDPushNotifiactionService cleanPushNotificationsBadges];
 }
 
 - (BOOL)application:(UIApplication *)application

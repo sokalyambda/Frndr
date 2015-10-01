@@ -23,10 +23,9 @@
 
 static FRDSessionManager *sharedHTTPClient = nil;
 
-NSString *baseURLString = @"http://192.168.88.99:8859/"; //Misha
+//NSString *baseURLString = @"http://192.168.88.99:8859/"; //Misha
 //NSString *baseURLString = @"http://192.168.88.55:8859/"; //Vanya
-//NSString *baseURLString = @"http://134.249.164.53:8859/"; //Live
-
+NSString *baseURLString = @"http://134.249.164.53:8859/"; //Live
 
 @implementation FRDProjectFacade
 

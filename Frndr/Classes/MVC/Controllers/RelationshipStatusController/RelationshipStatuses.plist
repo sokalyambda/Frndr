@@ -21,14 +21,14 @@
 	</dict>
 	<key>Male</key>
 	<dict>
-		<key>Single Male</key>
+		<key>Single</key>
 		<dict>
 			<key>ActiveImageName</key>
 			<string>SingleMaleActive</string>
 			<key>NotActiveImageName</key>
 			<string>SingleMaleNonActive</string>
 		</dict>
-		<key>Single Father</key>
+		<key>With Baby</key>
 		<dict>
 			<key>ActiveImageName</key>
 			<string>SingleFatherActiveIcon</string>
@@ -38,14 +38,14 @@
 	</dict>
 	<key>Female</key>
 	<dict>
-		<key>Single Female</key>
+		<key>Single</key>
 		<dict>
 			<key>ActiveImageName</key>
 			<string>SingleFemaleActiveIcon</string>
 			<key>NotActiveImageName</key>
 			<string>SingleFemaleNonActiveIcon</string>
 		</dict>
-		<key>Single Mother</key>
+		<key>With Baby</key>
 		<dict>
 			<key>ActiveImageName</key>
 			<string>SingleMotherActiveIcon</string>

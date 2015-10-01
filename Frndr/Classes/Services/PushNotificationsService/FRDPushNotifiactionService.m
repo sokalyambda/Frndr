@@ -67,7 +67,7 @@
  */
 + (void)recivedPushNotification:(NSDictionary*)userInfo
 {
-    
+    NSLog(@"user info %@", userInfo);
 }
 
 /**
@@ -89,7 +89,14 @@
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:nil];
         NSLog(@"Failure");
     }];
+}
 
+/**
+ *  Clean notifications badges
+ */
++ (void)cleanPushNotificationsBadges
+{
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
 @end

@@ -18,4 +18,6 @@
 
 + (BOOL)pushNotificationsEnabled;
 
++ (void)cleanPushNotificationsBadges;
+
 @end
