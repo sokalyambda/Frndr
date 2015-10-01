@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FRDSearchFriendsController">
+            <connections>
+                <outlet property="pulsingOverlay" destination="iN0-l3-epB" id="pDe-Sk-UDp"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="FRDPulsingOverlayView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68k-SS-QIL" userLabel="BluredView">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FamilyActiveIcon" translatesAutoresizingMaskIntoConstraints="NO" id="gk9-st-wea" customClass="FRDRoundedImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="8ha-YP-sQW"/>
+                        <constraint firstAttribute="width" constant="100" id="YRJ-g3-i3w"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="8ha-YP-sQW"/>
+                            <exclude reference="YRJ-g3-i3w"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="8ha-YP-sQW"/>
+                            <include reference="YRJ-g3-i3w"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="wAF-aJ-I5y" appends="YES" id="yGb-po-RtR"/>
+                    </connections>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="68k-SS-QIL" secondAttribute="bottom" id="QxD-hM-chi"/>
+                <constraint firstAttribute="trailing" secondItem="68k-SS-QIL" secondAttribute="trailing" id="UpL-LZ-Pzp"/>
+                <constraint firstItem="68k-SS-QIL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Wfl-r0-teP"/>
+                <constraint firstItem="gk9-st-wea" firstAttribute="centerX" secondItem="68k-SS-QIL" secondAttribute="centerX" id="ivZ-x9-mh6"/>
+                <constraint firstItem="gk9-st-wea" firstAttribute="centerY" secondItem="68k-SS-QIL" secondAttribute="centerY" id="tLl-RR-npO"/>
+                <constraint firstItem="68k-SS-QIL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="urt-eO-KTI"/>
+            </constraints>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="68k-SS-QIL"/>
+                    <exclude reference="gk9-st-wea"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="QxD-hM-chi"/>
+                    <exclude reference="UpL-LZ-Pzp"/>
+                    <exclude reference="Wfl-r0-teP"/>
+                    <exclude reference="urt-eO-KTI"/>
+                    <exclude reference="ivZ-x9-mh6"/>
+                    <exclude reference="tLl-RR-npO"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="subviews">
+                    <include reference="68k-SS-QIL"/>
+                    <include reference="gk9-st-wea"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="QxD-hM-chi"/>
+                    <include reference="UpL-LZ-Pzp"/>
+                    <include reference="Wfl-r0-teP"/>
+                    <include reference="urt-eO-KTI"/>
+                    <include reference="ivZ-x9-mh6"/>
+                    <include reference="tLl-RR-npO"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="avatarImageView" destination="gk9-st-wea" id="acY-s9-kjf"/>
+                <outlet property="bluredView" destination="68k-SS-QIL" id="lkQ-rl-Ia0"/>
+            </connections>
+            <point key="canvasLocation" x="352" y="297"/>
+        </view>
+        <tapGestureRecognizer id="wAF-aJ-I5y">
+            <connections>
+                <action selector="avatarClick:" destination="iN0-l3-epB" id="fkz-Tk-Xem"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="FamilyActiveIcon" width="30" height="29"/>
+    </resources>
+</document>

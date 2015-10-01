@@ -14,6 +14,7 @@
 
 #import "FRDFriendDragableView.h"
 #import "FRDFriendDragableParentView.h"
+#import "FRDPulsingOverlayView.h"
 
 #import "UIView+MakeFromXib.h"
 
@@ -27,6 +28,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 @interface FRDSearchFriendsController ()<ZLSwipeableViewDataSource, ZLSwipeableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet ZLSwipeableView *dragableViewsHolder;
+@property (strong, nonatomic) IBOutlet FRDPulsingOverlayView *pulsingOverlay;
 
 @property (weak, nonatomic) IBOutlet UILabel *interestsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *biographyLabel;
@@ -85,6 +87,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     [self setupPhotosGalleryContainer];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self setupDragableViewOptions];
+        [self setupPulsingOverlayView];
     });
 }
 
@@ -107,10 +110,18 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     [self.dragableViewsHolder swipeTopViewToRight];
 }
 
+/**
+ *  Setup options for dragable view
+ */
 - (void)setupDragableViewOptions
 {
     self.dragableViewsHolder.dataSource = self;
     self.dragableViewsHolder.direction = ZLSwipeableViewDirectionHorizontal;
+}
+
+- (void)setupPulsingOverlayView
+{
+    self.pulsingOverlay = [FRDPulsingOverlayView makeFromXibWithFileOwner:self];
 }
 
 - (void)customizeNavigationItem
@@ -257,6 +268,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
             
             if (!weakSelf.nearestUsers.count) {
                 //MARK: show pulsing view and schedule timer
+                //[weakSelf.pulsingOverlay showHide];
             }
             
         } onFailure:^(NSError *error, BOOL isCanceled) {

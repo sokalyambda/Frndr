@@ -43,6 +43,10 @@
 		581B9D561B9EDCA00080393B /* FRDNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D551B9EDCA00080393B /* FRDNetworkOperation.m */; };
 		581B9D591B9EDCBB0080393B /* FRDProjectFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D581B9EDCBB0080393B /* FRDProjectFacade.m */; };
 		581B9D5C1B9EDCDB0080393B /* FRDFailedOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D5B1B9EDCDB0080393B /* FRDFailedOperationManager.m */; };
+		586264C21BBD04DE00824BA3 /* UIView+Pulsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 586264C11BBD04DE00824BA3 /* UIView+Pulsing.m */; settings = {ASSET_TAGS = (); }; };
+		586264C61BBD067F00824BA3 /* FRDPulsingOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 586264C51BBD067F00824BA3 /* FRDPulsingOverlayView.m */; settings = {ASSET_TAGS = (); }; };
+		586264C81BBD069B00824BA3 /* FRDPulsingOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586264C71BBD069B00824BA3 /* FRDPulsingOverlayView.xib */; settings = {ASSET_TAGS = (); }; };
+		586264CC1BBD0ADD00824BA3 /* UIView+Bluring.m in Sources */ = {isa = PBXBuildFile; fileRef = 586264CB1BBD0ADD00824BA3 /* UIView+Bluring.m */; settings = {ASSET_TAGS = (); }; };
 		587727F81BA2D8150032D746 /* FRDTermsAndServicesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 587727F71BA2D8150032D746 /* FRDTermsAndServicesController.m */; };
 		587B3A6D1BA7F2A20098154F /* FRDDropDownTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A6C1BA7F2A20098154F /* FRDDropDownTableView.m */; };
 		587B3A751BA7F4450098154F /* FRDBaseDropDownDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A741BA7F4450098154F /* FRDBaseDropDownDataSource.m */; };
@@ -229,6 +233,13 @@
 		581B9D5A1B9EDCDB0080393B /* FRDFailedOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDFailedOperationManager.h; path = "Classes/Server APIs/API/FailedOperationManager/FRDFailedOperationManager.h"; sourceTree = "<group>"; };
 		581B9D5B1B9EDCDB0080393B /* FRDFailedOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDFailedOperationManager.m; path = "Classes/Server APIs/API/FailedOperationManager/FRDFailedOperationManager.m"; sourceTree = "<group>"; };
 		581B9D5D1B9EDE020080393B /* FRDRequests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FRDRequests.h; path = "Classes/Server APIs/API/Requests/BaseNetworkRequest/FRDRequests.h"; sourceTree = "<group>"; };
+		586264C01BBD04DE00824BA3 /* UIView+Pulsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Pulsing.h"; path = "Classes/Categories/UIView/UIView+Pulsing/UIView+Pulsing.h"; sourceTree = "<group>"; };
+		586264C11BBD04DE00824BA3 /* UIView+Pulsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Pulsing.m"; path = "Classes/Categories/UIView/UIView+Pulsing/UIView+Pulsing.m"; sourceTree = "<group>"; };
+		586264C41BBD067F00824BA3 /* FRDPulsingOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPulsingOverlayView.h; path = Classes/MVC/Views/PulsingOverlayView/FRDPulsingOverlayView.h; sourceTree = "<group>"; };
+		586264C51BBD067F00824BA3 /* FRDPulsingOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPulsingOverlayView.m; path = Classes/MVC/Views/PulsingOverlayView/FRDPulsingOverlayView.m; sourceTree = "<group>"; };
+		586264C71BBD069B00824BA3 /* FRDPulsingOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDPulsingOverlayView.xib; path = Classes/MVC/Views/PulsingOverlayView/FRDPulsingOverlayView.xib; sourceTree = "<group>"; };
+		586264CA1BBD0ADD00824BA3 /* UIView+Bluring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Bluring.h"; path = "Classes/Categories/UIView/UIView+Bluring/UIView+Bluring.h"; sourceTree = "<group>"; };
+		586264CB1BBD0ADD00824BA3 /* UIView+Bluring.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Bluring.m"; path = "Classes/Categories/UIView/UIView+Bluring/UIView+Bluring.m"; sourceTree = "<group>"; };
 		587727F61BA2D8150032D746 /* FRDTermsAndServicesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDTermsAndServicesController.h; path = Classes/MVC/Controllers/TermsAndServicesController/FRDTermsAndServicesController.h; sourceTree = "<group>"; };
 		587727F71BA2D8150032D746 /* FRDTermsAndServicesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDTermsAndServicesController.m; path = Classes/MVC/Controllers/TermsAndServicesController/FRDTermsAndServicesController.m; sourceTree = "<group>"; };
 		587B3A6B1BA7F2A20098154F /* FRDDropDownTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDDropDownTableView.h; path = Classes/MVC/Views/DropDownTableView/FRDDropDownTableView.h; sourceTree = "<group>"; };
@@ -717,6 +728,34 @@
 			name = BaseNetworkRequest;
 			sourceTree = "<group>";
 		};
+		586264BF1BBD04AD00824BA3 /* UIView+Pulsing */ = {
+			isa = PBXGroup;
+			children = (
+				586264C01BBD04DE00824BA3 /* UIView+Pulsing.h */,
+				586264C11BBD04DE00824BA3 /* UIView+Pulsing.m */,
+			);
+			name = "UIView+Pulsing";
+			sourceTree = "<group>";
+		};
+		586264C31BBD064800824BA3 /* PulsingOverlayView */ = {
+			isa = PBXGroup;
+			children = (
+				586264C41BBD067F00824BA3 /* FRDPulsingOverlayView.h */,
+				586264C51BBD067F00824BA3 /* FRDPulsingOverlayView.m */,
+				586264C71BBD069B00824BA3 /* FRDPulsingOverlayView.xib */,
+			);
+			name = PulsingOverlayView;
+			sourceTree = "<group>";
+		};
+		586264C91BBD0AA700824BA3 /* UIView+Bluring */ = {
+			isa = PBXGroup;
+			children = (
+				586264CA1BBD0ADD00824BA3 /* UIView+Bluring.h */,
+				586264CB1BBD0ADD00824BA3 /* UIView+Bluring.m */,
+			);
+			name = "UIView+Bluring";
+			sourceTree = "<group>";
+		};
 		587727F51BA2D7EB0032D746 /* TermsAndServicesController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1131,6 +1170,7 @@
 		58BC76D11B9EB95100BB8B5A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				586264C31BBD064800824BA3 /* PulsingOverlayView */,
 				3E1D29FA1BB58D650051C52F /* MyProfile */,
 				3E941A3D1BB1811D00F034E6 /* TableHeaders */,
 				58CD9ABB1BAFF19500A7CADB /* TopContentView */,
@@ -1369,6 +1409,8 @@
 		58BC76E91B9EBAC500BB8B5A /* UIView */ = {
 			isa = PBXGroup;
 			children = (
+				586264C91BBD0AA700824BA3 /* UIView+Bluring */,
+				586264BF1BBD04AD00824BA3 /* UIView+Pulsing */,
 				58BC76F51B9EBB5300BB8B5A /* UIView+MakeFromXib */,
 				58BC76F41B9EBB3800BB8B5A /* UIView+Shaking */,
 				58BC76F31B9EBB3200BB8B5A /* UIView+ConfigureAnchorPoint */,
@@ -2084,6 +2126,7 @@
 				587B3A951BA815850098154F /* FRDRelationshipCollectionCell.xib in Resources */,
 				58ED54FA1BB189EA00F9B378 /* FRDGeolocationDeniedController.xib in Resources */,
 				58C28FFE1BAAC6C50099ABE4 /* FRDDropDownTableView.xib in Resources */,
+				586264C81BBD069B00824BA3 /* FRDPulsingOverlayView.xib in Resources */,
 				58CD9AC01BAFF1C800A7CADB /* FRDTopContentView.xib in Resources */,
 				3E941A441BB1815400F034E6 /* FRDApplicationSettingsTableHeader.xib in Resources */,
 				3E941A4B1BB1818F00F034E6 /* FRDMyProfileTopView.xib in Resources */,
@@ -2156,11 +2199,13 @@
 				58DE5B381BB541160020A34C /* FRDFriend.m in Sources */,
 				3E0EEC5C1BABEF2300AB51B0 /* FRDApplicationSettingsController.m in Sources */,
 				58FFDBAE1B9ECF6B00B0490A /* FRDCommonDateFormatter.m in Sources */,
+				586264CC1BBD0ADD00824BA3 /* UIView+Bluring.m in Sources */,
 				58FFDBB81B9ED0A900B0490A /* FRDErrorHandler.m in Sources */,
 				58B99EB01BBA87E60057DB54 /* FRDClearAllMessagesRequest.m in Sources */,
 				5812BD0D1BB3E87300BCB90B /* FRDRedirectionHelper.m in Sources */,
 				581B9D5C1B9EDCDB0080393B /* FRDFailedOperationManager.m in Sources */,
 				58FFDBB51B9ED07E00B0490A /* FRDCommonNumberFormatter.m in Sources */,
+				586264C21BBD04DE00824BA3 /* UIView+Pulsing.m in Sources */,
 				58C28FFC1BAAC69B0099ABE4 /* CAAnimation+CompetionBlock.m in Sources */,
 				581B9D3B1B9ED6090080393B /* FRDStorageManager.m in Sources */,
 				58CD9AC41BAFF29F00A7CADB /* FRDBaseContentController.m in Sources */,
@@ -2233,6 +2278,7 @@
 				581B9D4F1B9EDC350080393B /* FRDSessionManager.m in Sources */,
 				58B99EA71BBA83980057DB54 /* FRDLikeUserByIdRequest.m in Sources */,
 				3E1D9BE61BB3CE34003A1E5C /* FRDPhotoGalleryController.m in Sources */,
+				586264C61BBD067F00824BA3 /* FRDPulsingOverlayView.m in Sources */,
 				3E941A431BB1815400F034E6 /* FRDApplicationSettingsTableHeader.m in Sources */,
 				58DE5B441BB541E10020A34C /* FRDRelationshipItem.m in Sources */,
 				58ED54D21BB14C5E00F9B378 /* FRDLocationObserver.m in Sources */,

@@ -24,8 +24,12 @@
     [self customize];
 }
 
+#pragma mark - Actions
+
 - (void)customize
 {
+//    self.layer.borderColor = [UIColor redColor].CGColor;
+//    self.layer.borderWidth = 1.f;
     self.layer.cornerRadius = CGRectGetHeight(self.bounds) / 2.f;
     self.layer.masksToBounds = YES;
 }

@@ -116,6 +116,7 @@ static NSString *const kNewFriends = @"newFriends";
         _age = profile.age;
         _fullName = profile.fullName;
         _genderString = profile.genderString;
+        _avatarURL = profile.avararURL;
     }
     return self;
 }
