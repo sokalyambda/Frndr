@@ -23,8 +23,10 @@
 
 static FRDSessionManager *sharedHTTPClient = nil;
 
-//NSString *baseURLString = @"http://192.168.88.55:8859/";
-NSString *baseURLString = @"http://134.249.164.53:8859/";
+NSString *baseURLString = @"http://192.168.88.99:8859/"; //Misha
+//NSString *baseURLString = @"http://192.168.88.55:8859/"; //Vanya
+//NSString *baseURLString = @"http://134.249.164.53:8859/"; //Live
+
 
 @implementation FRDProjectFacade
 
@@ -99,6 +101,34 @@ NSString *baseURLString = @"http://134.249.164.53:8859/";
 #pragma mark - Requests builder
 
 #pragma mark - User Profile Module
+
+/**
+ *  Send Current Device APNS Token
+ *
+ *  @param success Success Block
+ *  @param failure Failure Block
+ *
+ *  @return Current Orepation
+ */
++ (FRDNetworkOperation *)sendDeviceDataOnSuccess:(SuccessBlock)success
+                                       onFailure:(FailureBlock)failure
+{
+    FRDSendDeviceDataRequest *request = [[FRDSendDeviceDataRequest alloc] init];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
 
 /**
  *  Get user profile by ID

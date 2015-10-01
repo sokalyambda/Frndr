@@ -8,7 +8,7 @@
 
 #import "FRDSendDeviceDataRequest.h"
 
-static NSString *const requestAction = @"pushToken";
+static NSString *const requestAction = @"users/pushToken";
 
 static NSString *const kPushToken = @"pushToken";
 static NSString *const kOSVersion = @"os";
@@ -28,9 +28,12 @@ static NSString *const kAppleOSVersion = @"APPLE";
         
         NSString *pushToken = [FRDStorageManager sharedStorage].deviceToken;
         
-        NSMutableDictionary *parameters = [@{kPushToken: pushToken,
-                                             kOSVersion: kAppleOSVersion
-                                             } mutableCopy];
+        NSMutableDictionary *parameters;
+        if (pushToken.length) {
+            parameters = [@{kPushToken: pushToken,
+                            kOSVersion: kAppleOSVersion
+                            } mutableCopy];
+        }
         
         self.serializationType = FRDRequestSerializationTypeJSON;
         

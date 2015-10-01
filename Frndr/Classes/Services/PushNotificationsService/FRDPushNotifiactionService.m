@@ -7,6 +7,7 @@
 //
 
 #import "FRDPushNotifiactionService.h"
+#import "FRDProjectFacade.h"
 
 @implementation FRDPushNotifiactionService
 
@@ -82,6 +83,12 @@
     
     //save the apns token
     [FRDStorageManager sharedStorage].deviceToken = deviceToken;
+    [FRDProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
+        NSLog(@"Success");
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:nil];
+        NSLog(@"Failure");
+    }];
 
 }
 

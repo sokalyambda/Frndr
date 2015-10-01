@@ -16,7 +16,6 @@
 #import "FRDSearchFriendsController.h"
 
 #import "FRDFacebookService.h"
-#import "FRDPushNotifiactionService.h"
 #import "FRDProjectFacade.h"
 
 #import "FRDLocationObserver.h"
@@ -55,7 +54,6 @@
         [self animateTutorialViews];
     });
     
-    [FRDPushNotifiactionService registerApplicationForPushNotifications:[UIApplication sharedApplication]];
     [FRDLocationObserver sharedObserver];
 }
 

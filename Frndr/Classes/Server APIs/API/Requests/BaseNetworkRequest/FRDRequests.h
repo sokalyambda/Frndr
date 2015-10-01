@@ -17,6 +17,7 @@
 #import "FRDUpdateNotificationsSettingsRequest.h"
 #import "FRDGetUserByIdRequest.h"
 #import "FRDGetCurrentUserProfileRequest.h"
+#import "FRDSendDeviceDataRequest.h"
 
 #import "FRDGetSearchSettingsRequest.h"
 #import "FRDUpdateSearchSettingsRequest.h"

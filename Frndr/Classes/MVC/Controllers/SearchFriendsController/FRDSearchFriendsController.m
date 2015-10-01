@@ -22,6 +22,8 @@
 
 #import "FRDNearestUser.h"
 
+#import "FRDPushNotifiactionService.h"
+
 static NSString *const kPreferencesImageName = @"PreferencesIcon";
 static NSString *const kMessagesImageName = @"MessagesIcon";
 
@@ -83,6 +85,8 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     
     self.currentPage = 1;
     self.swipableViewsCounter = 0;
+    
+    [FRDPushNotifiactionService registerApplicationForPushNotifications:[UIApplication sharedApplication]];
     
     [self setupPhotosGalleryContainer];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -468,7 +472,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
             
             [self dislikeCurrentFriendOnSuccess:^{
                 NSLog(@"User has been removed");
-                [weakSelf updateNearestUsersInformationOrLoadMore];
+                [weakSelf checkNearestUsersInformationOrLoadMore];
                 
             } onFalilure:^(NSError *error) {
                 
@@ -483,7 +487,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
             
             [self likeCurrentFriendOnSuccess:^{
                 NSLog(@"User has been added");
-                [weakSelf updateNearestUsersInformationOrLoadMore];
+                [weakSelf checkNearestUsersInformationOrLoadMore];
                 
             } onFalilure:^(NSError *error) {
                 
@@ -498,10 +502,10 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
             break;
     }
         */
-    [self updateNearestUsersInformationOrLoadMore];
+    [self checkNearestUsersInformationOrLoadMore];
 }
 
-- (void)updateNearestUsersInformationOrLoadMore
+- (void)checkNearestUsersInformationOrLoadMore
 {
     if (self.nearestUsers.count) {
         [self.nearestUsers removeObject:self.nearestUsers.firstObject];

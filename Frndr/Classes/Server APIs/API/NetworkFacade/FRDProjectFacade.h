@@ -32,6 +32,9 @@ extern NSString *defaultBaseURLString;
 
 #pragma mark - User Profile Module
 
+//Send Device Data
++ (FRDNetworkOperation *)sendDeviceDataOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
+
 //Sign Out
 + (FRDNetworkOperation *)signOutOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
