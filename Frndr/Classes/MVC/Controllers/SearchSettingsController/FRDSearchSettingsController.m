@@ -128,10 +128,12 @@ static CGFloat const kMaxDistanceValue = 10000.f;
 
 - (void)configureDefaulSliders
 {
-    FRDRange distanceRange = { 1, kMaxDistanceValue };
+    FRDRange distanceRange = { 1, kMaxDistanceValue - 1 };
     self.distanceSlider.mode = FRDRangeSliderModeSingleThumb;
     self.distanceSlider.validRange = distanceRange;
     self.distanceSlider.maximumValue = kMaxDistanceValue;
+    
+    self.currentDistance = self.distanceSlider.maximumValue;
     
     FRDRange ageRange = { kMinValidAge, kMaxValidAge - kMinValidAge };
     self.ageRangeSlider.validRange = ageRange;
