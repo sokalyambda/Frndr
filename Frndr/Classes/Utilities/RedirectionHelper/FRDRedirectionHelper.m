@@ -59,7 +59,6 @@ static NSString *const kMainStoryboardName = @"Main";
     controller.currentURL = url;
     
     [presentingController presentViewController:navigationController animated:YES completion:nil];
-    NSLog(@"url string %@", url.absoluteString);
 }
 
 @end

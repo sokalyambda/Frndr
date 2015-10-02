@@ -27,7 +27,6 @@
 {
     FRDCurrentUserProfile *profile = [FRDStorageManager sharedStorage].currentUserProfile;
     [profile updateWithServerResponse:responseObject];
-    NSLog(@"profile %@", [FRDStorageManager sharedStorage].currentUserProfile);
     
     return !!responseObject;
 }

@@ -22,8 +22,8 @@
 static NSString *const kDownArrow = @"downArrow";
 static NSString *const kUpArrow = @"upArrow";
 
-static NSString *const kSmokerString = @"SMOKER";
-static NSString *const kNotSmokerString = @"NOT A SMOKER";
+static NSString *const kSmokerString = @"Smoker";
+static NSString *const kNotSmokerString = @"Non-Smoker";
 
 @interface FRDDropDownHolderController ()
 
@@ -44,7 +44,7 @@ static NSString *const kNotSmokerString = @"NOT A SMOKER";
 - (FRDSexualOrientation *)chosenOrientation
 {
     if (!_chosenOrientation) {
-        _chosenOrientation = [FRDSexualOrientation orientationWithOrientationString:LOCALIZED(@"ANY")];
+        _chosenOrientation = [FRDSexualOrientation orientationWithOrientationString:LOCALIZED(@"Any")];
     }
     return _chosenOrientation;
 }
@@ -115,13 +115,13 @@ static NSString *const kNotSmokerString = @"NOT A SMOKER";
     FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
     switch (sourceType) {
         case FRDSourceTypeMyProfile: {
-            self.sexualOrientationLabel.text = currentProfile.sexualOrientation.orientationString.uppercaseString;
+            self.sexualOrientationLabel.text = currentProfile.sexualOrientation.orientationString;
             self.smokerLabel.text = currentProfile.isSmoker ? kSmokerString : kNotSmokerString;
             break;
         }
         case FRDSourceTypeSearchSettings: {
             FRDSearchSettings *currentSearchSettings = currentProfile.currentSearchSettings;
-            self.sexualOrientationLabel.text = currentSearchSettings.sexualOrientation.orientationString.uppercaseString;
+            self.sexualOrientationLabel.text = currentSearchSettings.sexualOrientation.orientationString;
             self.smokerLabel.text = currentSearchSettings.isSmoker ? kSmokerString : kNotSmokerString;
             break;
         }

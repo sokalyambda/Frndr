@@ -23,6 +23,7 @@
 #import "FRDNearestUser.h"
 
 #import "FRDPushNotifiactionService.h"
+#import "FRDNearestUsersService.h"
 
 static NSString *const kPreferencesImageName = @"PreferencesIcon";
 static NSString *const kMessagesImageName = @"MessagesIcon";
@@ -45,7 +46,6 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 @property (nonatomic) NSInteger swipableViewsCounter;
 
 @property (nonatomic, readonly) BOOL isOverlayPresented;
-@property (nonatomic) BOOL pulsingOverlayConfigureNeeded;
 
 @end
 
@@ -106,14 +106,9 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
     //updating actions
     [self performNeededUpdatingActions];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    self.pulsingOverlayConfigureNeeded = YES;
-    [super viewDidDisappear:animated];
 }
 
 #pragma mark - Actions
@@ -140,7 +135,6 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)setupPulsingOverlayView
 {
     self.pulsingOverlay = [FRDPulsingOverlayView makeFromXibWithFileOwner:self];
-    self.pulsingOverlayConfigureNeeded = YES;
 }
 
 - (void)customizeNavigationItem
@@ -205,9 +199,10 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     WEAK_SELF;
     if (!self.isOverlayPresented) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    } else if (self.pulsingOverlayConfigureNeeded) {
-        [self configureOverlapPulsingView];
+    } else if (self.isOverlayPresented) {
+        [self.pulsingOverlay addPulsingAnimations];
     }
+    
     if (isUserUpdateNeeded && isSearchSettingsUpdateNeeded) {
         
         [self getCurrentUserProfileOnSuccess:^{
@@ -282,28 +277,31 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)findNearestUsers
 {
     WEAK_SELF;
-    if (!self.nearestUsers.count) {
+    if (!self.nearestUsers.count && ![FRDNearestUsersService isSearchInProcess]) {
         if (!self.isOverlayPresented) {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         }
-        [FRDProjectFacade findNearestUsersWithPage:weakSelf.currentPage onSuccess:^(NSArray *nearestUsers) {
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            
-            weakSelf.nearestUsers = [nearestUsers mutableCopy];
-
-            if (!weakSelf.nearestUsers.count) {
-                weakSelf.currentPage = 1;
-            }
-            
-            if (weakSelf.pulsingOverlayConfigureNeeded) {
-                [weakSelf configureOverlapPulsingView];
-            }
-            
-        } onFailure:^(NSError *error, BOOL isCanceled) {
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-        }];
+    [FRDNearestUsersService getNearestUsersWithPage:self.currentPage onSuccess:^(NSArray *nearestUsers) {
+        
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        weakSelf.nearestUsers = [nearestUsers mutableCopy];
+        
+        if (!weakSelf.nearestUsers.count) {
+            weakSelf.currentPage = 1;
+            [weakSelf showPulsingView];
+        } else {
+            [weakSelf dismissPulsingView];
+        }
+        
+    } onFailure:^(NSError *error) {
+        
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+        
+    }];
     } else {
+        [self updateNearestUserInformation];
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
     }
 }
@@ -311,17 +309,25 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 /**
  *  Configure overlap view
  */
-- (void)configureOverlapPulsingView
+- (void)showPulsingView
 {
-    if (!self.nearestUsers.count && !self.isOverlayPresented) {
+    if (!self.isOverlayPresented) {
         [self.pulsingOverlay showInView:self.view];
-        self.pulsingOverlayConfigureNeeded = NO;
-    } else if (!self.nearestUsers.count && self.isOverlayPresented) {
-        [self.pulsingOverlay addPulsingAnimations];
-        self.pulsingOverlayConfigureNeeded = NO;
-    } else if (self.nearestUsers.count && self.isOverlayPresented) {
+    }
+}
+
+- (void)dismissPulsingView
+{
+    if (self.isOverlayPresented) {
         [self.pulsingOverlay dismissFromView:self.view];
         [self updateNearestUserInformation];
+    }
+}
+
+- (void)updatePulsingView
+{
+    if (self.isOverlayPresented) {
+        [self.pulsingOverlay addPulsingAnimations];
     }
 }
 
@@ -340,6 +346,8 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     
     self.interestsLabel.text = interests;
     
+    self.swipableViewsCounter = 0;
+    [self.dragableViewsHolder discardAllSwipeableViews];
     [self.dragableViewsHolder loadNextSwipeableViewsIfNeeded];
     
     self.previewGalleryController.photos = self.currentNearestUser.galleryPhotos;
@@ -426,8 +434,6 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 {
     FRDFriendDragableParentView *parentView;
     
-    NSLog(@"self.nearestUsers.count = %d, self.swipableViewsCounter = %d", self.nearestUsers.count, self.swipableViewsCounter);
-    
     if (self.nearestUsers.count && self.swipableViewsCounter < self.nearestUsers.count) {
     
         FRDNearestUser *currentNearesUser = self.nearestUsers[self.swipableViewsCounter];
@@ -489,13 +495,12 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)swipeableView:(ZLSwipeableView *)swipeableView didThrowSwipingView:(UIView *)swipingView inDirection:(ZLSwipeableViewDirection)direction
 {
     /*****Like&dislike nearest users*****/
-    /*
     WEAK_SELF;
     switch (direction) {
         case ZLSwipeableViewDirectionLeft: {
             
             [self dislikeCurrentFriendOnSuccess:^{
-                NSLog(@"User has been removed");
+
                 [weakSelf checkNearestUsersInformationOrLoadMore];
                 
             } onFalilure:^(NSError *error) {
@@ -503,14 +508,13 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
                 [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
                 
             }];
-            
             
             break;
         }
         case ZLSwipeableViewDirectionRight: {
             
             [self likeCurrentFriendOnSuccess:^{
-                NSLog(@"User has been added");
+
                 [weakSelf checkNearestUsersInformationOrLoadMore];
                 
             } onFalilure:^(NSError *error) {
@@ -519,14 +523,13 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
                 
             }];
             
-            
             break;
         }
         default:
             break;
     }
-        */
-    [self checkNearestUsersInformationOrLoadMore];
+    
+//    [self checkNearestUsersInformationOrLoadMore];
 }
 
 - (void)checkNearestUsersInformationOrLoadMore
@@ -542,7 +545,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     
     if (!self.nearestUsers.count) {
         self.swipableViewsCounter = 0;
-        //        self.currentPage++;
+        self.currentPage++;
         [self findNearestUsers];
     }
 }

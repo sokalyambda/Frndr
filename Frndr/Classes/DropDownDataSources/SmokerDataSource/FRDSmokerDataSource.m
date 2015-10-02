@@ -23,7 +23,7 @@
 - (NSArray *)smokerTypes
 {
     if (!_smokerTypes) {
-        _smokerTypes = @[@"SMOKER", @"NOT A SMOKER"];
+        _smokerTypes = @[@"Smoker", @"Non-Smoker"];
     }
     return _smokerTypes;
 }

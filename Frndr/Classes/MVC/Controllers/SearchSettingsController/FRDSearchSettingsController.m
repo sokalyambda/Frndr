@@ -235,7 +235,6 @@ static CGFloat const kMaxDistanceValue = 10000.f;
 - (IBAction)distanceSliderValueChanged:(id)sender
 {
     self.currentDistance = self.distanceSlider.maximumValue;
-    NSLog(@"distance maximum value %f", self.distanceSlider.maximumValue);
 }
 
 - (IBAction)ageRangeSliderValueChanged:(id)sender

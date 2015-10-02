@@ -42,9 +42,17 @@ static CGFloat const kToPulsingValue = 1.f;
     circleShape.opacity = 0.f;
     circleShape.strokeColor = stroke.CGColor;
     circleShape.lineWidth = 2.f;
-    
-    [viewForWaves.layer addSublayer:circleShape];
 
+    @autoreleasepool {
+        for (CALayer *layer in viewForWaves.layer.sublayers) {
+            if ([layer animationForKey:@"waves"] && repeating) {
+                [layer removeAllAnimations];
+            }
+        }
+    }
+
+    [viewForWaves.layer addSublayer:circleShape];
+    
     [CATransaction begin];
     
     //Remove circleShape layer after completion

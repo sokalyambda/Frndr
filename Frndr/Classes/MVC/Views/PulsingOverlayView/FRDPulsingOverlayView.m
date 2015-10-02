@@ -104,6 +104,7 @@ static CGFloat const kDuration = .2f;
  */
 - (void)showInView:(UIView *)view
 {
+    [self cleanFromAnimations];
     WEAK_SELF;
     if (![view.subviews containsObject:self]) {
         [self setAlpha:0.f];
@@ -114,9 +115,7 @@ static CGFloat const kDuration = .2f;
         [UIView animateWithDuration:kDuration animations:^{
             [weakSelf setAlpha:1.f];
         } completion:^(BOOL finished) {
-            if (finished) {
-                [weakSelf addPulsingAnimations];
-            }
+            [weakSelf addPulsingAnimations];
         }];
     }
 }
@@ -128,14 +127,14 @@ static CGFloat const kDuration = .2f;
  */
 - (void)dismissFromView:(UIView *)view
 {
+    [self cleanFromAnimations];
+    
     WEAK_SELF;
     if ([view.subviews containsObject:self]) {
         [UIView animateWithDuration:kDuration animations:^{
             weakSelf.alpha = 0.f;
         } completion:^(BOOL finished) {
-            if (finished) {
-                [weakSelf removeFromSuperview];
-            }
+            [weakSelf removeFromSuperview];
         }];
     }
 }
@@ -145,7 +144,20 @@ static CGFloat const kDuration = .2f;
  */
 - (void)addPulsingAnimations
 {
+    [self cleanFromAnimations];
     [self.avatarImageView pulsingWithWavesInView:self.superview repeating:YES];
+}
+
+/**
+ *  Remove all animations
+ */
+- (void)cleanFromAnimations
+{
+    @autoreleasepool {
+        for (CALayer *layer in self.superview.layer.sublayers) {
+            [layer removeAllAnimations];
+        }
+    }
 }
 
 @end
