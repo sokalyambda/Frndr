@@ -16,7 +16,7 @@ typedef enum : NSUInteger {
 @interface FRDBaseDropDownDataSource : NSObject<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic) FRDDropDownTableView *dropDownTableView;
-@property (copy, nonatomic) DropDownCompletion completion;
+@property (copy, nonatomic) DropDownResult result;
 
 + (instancetype)dataSourceWithType:(FRDDataSourceType)sourceType;
 

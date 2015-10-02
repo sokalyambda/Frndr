@@ -8,16 +8,20 @@
 
 @class FRDBaseDropDownDataSource, FRDDropDownTableView;
 
-typedef void(^DropDownCompletion)(FRDDropDownTableView *table, id chosenValue);
+typedef void(^DropDownResult)(FRDDropDownTableView *table, id chosenValue);
+typedef void(^PresentingCompletion)(FRDDropDownTableView *table);
 
 @interface FRDDropDownTableView : UIView
 
+
+@property (strong, nonatomic) UIImageView *arrowImageView;
 @property (nonatomic) BOOL isExpanded;
 
 - (void)dropDownTableBecomeActiveInView:(UIView *)presentedView
                          fromAnchorView:(UIView *)anchorView
                          withDataSource:(FRDBaseDropDownDataSource *)dataSource
-                         withCompletion:(DropDownCompletion)completion;
+                  withShowingCompletion:(PresentingCompletion)presentingCompletion
+                         withCompletion:(DropDownResult)result;
 
 - (void)hideDropDownList;
 

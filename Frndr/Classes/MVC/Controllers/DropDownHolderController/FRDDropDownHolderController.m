@@ -69,56 +69,45 @@ static NSString *const kNotSmokerString = @"NOT A SMOKER";
     UIView *tapView = tap.view;
     FRDBaseDropDownDataSource *smokerDataSource = [FRDBaseDropDownDataSource dataSourceWithType:FRDDataSourceTypeSmoker];
     WEAK_SELF;
-    [self.dropDownList dropDownTableBecomeActiveInView:self.viewForDisplaying fromAnchorView:tapView withDataSource:smokerDataSource withCompletion:^(FRDDropDownTableView *table, id chosenValue) {
+    [self.dropDownList dropDownTableBecomeActiveInView:self.viewForDisplaying fromAnchorView:tapView withDataSource:smokerDataSource withShowingCompletion:^(FRDDropDownTableView *table) {
+        
+        table.arrowImageView = self.smokerPointingArrow;
+        
+    } withCompletion:^(FRDDropDownTableView *table, id chosenValue) {
+        
         if ([chosenValue isKindOfClass:[NSString class]]) {
             weakSelf.smokerLabel.text = chosenValue;
             weakSelf.smoker = [chosenValue isEqualToString:kSmokerString] ? YES : NO;
-            
-            [self rotateArrow:self.smokerPointingArrow];
         }
+        
     }];
     
     // Dismiss keyboard if there is any on screen
     [[UIResponder currentFirstResponder] resignFirstResponder];
-    
-    [self rotateArrow:self.smokerPointingArrow];
-    [self resetArrowTransform:self.sexualOrientationPointingArrow];
 }
 
 - (IBAction)sexualOrientationClick:(UITapGestureRecognizer *)tap
 {
     UIView *tapView = tap.view;
-    FRDBaseDropDownDataSource *smokerDataSource = [FRDBaseDropDownDataSource dataSourceWithType:FRDDataSourceTypeSexualOrientation];
+    FRDBaseDropDownDataSource *sexualDataSource = [FRDBaseDropDownDataSource dataSourceWithType:FRDDataSourceTypeSexualOrientation];
     WEAK_SELF;
-    [self.dropDownList dropDownTableBecomeActiveInView:self.viewForDisplaying fromAnchorView:tapView withDataSource:smokerDataSource withCompletion:^(FRDDropDownTableView *table, id chosenValue) {
+
+    [self.dropDownList dropDownTableBecomeActiveInView:self.viewForDisplaying fromAnchorView:tapView withDataSource:sexualDataSource withShowingCompletion:^(FRDDropDownTableView *table) {
+        
+        table.arrowImageView = self.sexualOrientationPointingArrow;
+        
+    } withCompletion:^(FRDDropDownTableView *table, id chosenValue) {
+        
         if ([chosenValue isKindOfClass:[FRDSexualOrientation class]]) {
             FRDSexualOrientation *chosenOrientation = (FRDSexualOrientation *)chosenValue;
             weakSelf.sexualOrientationLabel.text = chosenOrientation.orientationString;
             weakSelf.chosenOrientation = chosenOrientation;
-            
-            [self rotateArrow:self.sexualOrientationPointingArrow];
         }
+        
     }];
     
     // Dismiss keyboard if there is any on screen
     [[UIResponder currentFirstResponder] resignFirstResponder];
-    
-    [self rotateArrow:self.sexualOrientationPointingArrow];
-    [self resetArrowTransform:self.smokerPointingArrow];
-}
-
-- (void)rotateArrow:(UIImageView *)arrow
-{
-    [UIView animateWithDuration:0.2 animations:^{
-        arrow.transform = CGAffineTransformRotate(arrow.transform, M_PI);
-    }];
-}
-
-- (void)resetArrowTransform:(UIImageView *)arrow
-{
-    [UIView animateWithDuration:0.2 animations:^{
-        arrow.transform = CGAffineTransformMakeRotation(0);
-    }];
 }
 
 #pragma mark - Public Methods

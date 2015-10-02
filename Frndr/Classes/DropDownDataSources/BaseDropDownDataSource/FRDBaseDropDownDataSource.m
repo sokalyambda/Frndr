@@ -82,10 +82,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.completion) {
+    if (self.result) {
         [self.dropDownTableView hideDropDownList];
-        self.completion(self.dropDownTableView, self.currentDataSourceArray[indexPath.row]);
-        self.completion = nil;
+        self.result(self.dropDownTableView, self.currentDataSourceArray[indexPath.row]);
+        self.result = nil;
     }
 }
 

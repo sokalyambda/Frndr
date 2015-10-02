@@ -20,10 +20,14 @@ static CGFloat const kAdditionalOffset = 5.f;
 
 @property (nonatomic) FRDBaseDropDownDataSource *dropDownDataSource;
 
+@property (copy, nonatomic) PresentingCompletion presentingCompletion;
+
 @property (weak, nonatomic) UIView *anchorView;
 @property (weak, nonatomic) UIView *presentedView;
 
 @property (nonatomic) CGFloat calculatedDropDownHeight;
+
+@property (nonatomic) BOOL expandingNeeded;
 
 @end
 
@@ -125,31 +129,33 @@ static NSInteger const kRowsNumberThreshold = 4;
 - (void)dropDownTableBecomeActiveInView:(UIView *)presentedView
                          fromAnchorView:(UIView *)anchorView
                          withDataSource:(FRDBaseDropDownDataSource *)dataSource
-                         withCompletion:(DropDownCompletion)completion
+                  withShowingCompletion:(PresentingCompletion)presentingCompletion
+                         withCompletion:(DropDownResult)result
 {
     self.presentedView = presentedView;
     
     //If any action hasn't been called yet, but data source has been changed
     if (![dataSource isKindOfClass:[self.dropDownDataSource class]]) {
         self.anchorView = anchorView;
-        self.isExpanded = NO;
+        self.expandingNeeded = NO;
     }
     
+    self.presentingCompletion = presentingCompletion;
     //changing the table's data source and reload table's data
     self.dropDownDataSource = dataSource;
-    self.dropDownDataSource.completion = completion;
+    self.dropDownDataSource.result = result;
     self.dropDownDataSource.dropDownTableView = self;
     self.dropDownList.dataSource = self.dropDownDataSource;
     self.dropDownList.delegate = self.dropDownDataSource;
     [self.dropDownList reloadData];
     
-    if (!self.isExpanded) {
+    if (!self.expandingNeeded) {
         [self showDropDownList];
     } else {
         [self hideDropDownList];
     }
     
-    self.isExpanded = !self.isExpanded;
+    self.expandingNeeded = !self.expandingNeeded;
 }
 
 static CGFloat const kSlidingTime = .5f;
@@ -168,7 +174,14 @@ static CGFloat const kSlidingTime = .5f;
                             weakSelf.frame = newFrame;
                             weakSelf.dropDownList.frame = newFrame;
                         }
-                     completion:nil];
+                     completion:^(BOOL finished) {
+                         if (finished && weakSelf.presentingCompletion) {
+                             [weakSelf rotateArrow];
+                             weakSelf.isExpanded = YES;
+                             weakSelf.presentingCompletion(weakSelf);
+                             [weakSelf rotateArrow];
+                         }
+                     }];
 }
 
 - (void)hideDropDownList
@@ -185,7 +198,24 @@ static CGFloat const kSlidingTime = .5f;
                          weakSelf.anchorView = nil;
                          weakSelf.dropDownDataSource = nil;
                          [weakSelf removeFromSuperview];
+                         
+                         if (finished && weakSelf.presentingCompletion) {
+                             [weakSelf rotateArrow];
+                             weakSelf.isExpanded = NO;
+                             weakSelf.presentingCompletion(weakSelf);
+                             [weakSelf rotateArrow];
+                         }
                      }];
+}
+
+/**
+ *  Rotate current arrow
+ */
+- (void)rotateArrow
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        self.arrowImageView.transform = self.isExpanded ? CGAffineTransformRotate(self.arrowImageView.transform, M_PI) : CGAffineTransformMakeRotation(0);
+    }];
 }
 
 @end
