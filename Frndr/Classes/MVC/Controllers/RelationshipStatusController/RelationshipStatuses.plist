@@ -63,7 +63,7 @@
 			<key>NotActiveImageName</key>
 			<string>CoupleNonActiveIcon</string>
 		</dict>
-		<key>With Baby</key>
+		<key>Single With Baby</key>
 		<dict>
 			<key>ActiveImageName</key>
 			<string>SingleFatherActiveIcon</string>
@@ -94,7 +94,7 @@
 			<key>NotActiveImageName</key>
 			<string>CoupleNonActiveIcon</string>
 		</dict>
-		<key>With Baby</key>
+		<key>Single With Baby</key>
 		<dict>
 			<key>ActiveImageName</key>
 			<string>SingleMotherActiveIcon</string>

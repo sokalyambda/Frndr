@@ -275,8 +275,10 @@
                 <outlet property="friendNameLabel" destination="wK2-Wh-Iiy" id="JEk-uN-aXT"/>
                 <outlet property="friendProfileImageView" destination="ca0-aV-XXH" id="sqD-Ud-62g"/>
                 <outlet property="friendSmokerLabel" destination="pml-sh-KFH" id="53p-xw-HbC"/>
+                <outlet property="jobTitleLabel" destination="UoQ-aL-fOr" id="j27-gE-PVB"/>
                 <outlet property="overlayImageView" destination="bak-3c-d7v" id="34H-Ka-fsr"/>
                 <outlet property="overlayView" destination="wkw-vP-Ht7" id="mC2-KM-KLC"/>
+                <outlet property="sexualOrientationLabel" destination="s2M-gY-leZ" id="AWZ-cF-rn8"/>
             </connections>
             <point key="canvasLocation" x="465" y="461"/>
         </view>

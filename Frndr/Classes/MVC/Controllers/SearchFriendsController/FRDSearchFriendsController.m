@@ -41,8 +41,11 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 @property (nonatomic) NSMutableArray *nearestUsers;
 @property (nonatomic) FRDNearestUser *currentNearestUser;
 
-@property (assign, nonatomic) NSInteger currentPage;
-@property (assign, nonatomic) NSInteger swipableViewsCounter;
+@property (nonatomic) NSInteger currentPage;
+@property (nonatomic) NSInteger swipableViewsCounter;
+
+@property (nonatomic, readonly) BOOL isOverlayPresented;
+@property (nonatomic) BOOL pulsingOverlayConfigureNeeded;
 
 @end
 
@@ -63,6 +66,11 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (NSString *)rightImageName
 {
     return @"MessagesIcon";
+}
+
+- (BOOL)isOverlayPresented
+{
+    return [self.view.subviews containsObject:self.pulsingOverlay];
 }
 
 - (void)setNearestUsers:(NSMutableArray *)nearestUsers
@@ -102,6 +110,12 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     [self performNeededUpdatingActions];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    self.pulsingOverlayConfigureNeeded = YES;
+    [super viewDidDisappear:animated];
+}
+
 #pragma mark - Actions
 
 - (IBAction)noClick:(id)sender
@@ -126,6 +140,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)setupPulsingOverlayView
 {
     self.pulsingOverlay = [FRDPulsingOverlayView makeFromXibWithFileOwner:self];
+    self.pulsingOverlayConfigureNeeded = YES;
 }
 
 - (void)customizeNavigationItem
@@ -188,8 +203,10 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     BOOL isSearchSettingsUpdateNeeded = [FRDStorageManager sharedStorage].isSearchSettingsUpdateNeeded;
     
     WEAK_SELF;
-    if (![self.view.subviews containsObject:self.pulsingOverlay]) {
+    if (!self.isOverlayPresented) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    } else if (self.pulsingOverlayConfigureNeeded) {
+        [self configureOverlapPulsingView];
     }
     if (isUserUpdateNeeded && isSearchSettingsUpdateNeeded) {
         
@@ -266,7 +283,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 {
     WEAK_SELF;
     if (!self.nearestUsers.count) {
-        if (![self.view.subviews containsObject:self.pulsingOverlay]) {
+        if (!self.isOverlayPresented) {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         }
         [FRDProjectFacade findNearestUsersWithPage:weakSelf.currentPage onSuccess:^(NSArray *nearestUsers) {
@@ -274,7 +291,13 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
             
             weakSelf.nearestUsers = [nearestUsers mutableCopy];
 
-            [weakSelf configureOverlapPulsingView];
+            if (!weakSelf.nearestUsers.count) {
+                weakSelf.currentPage = 1;
+            }
+            
+            if (weakSelf.pulsingOverlayConfigureNeeded) {
+                [weakSelf configureOverlapPulsingView];
+            }
             
         } onFailure:^(NSError *error, BOOL isCanceled) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
@@ -290,12 +313,13 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
  */
 - (void)configureOverlapPulsingView
 {
-    if (!self.nearestUsers.count && ![self.view.subviews containsObject:self.pulsingOverlay]) {
-        //MARK: show pulsing view and schedule timer
+    if (!self.nearestUsers.count && !self.isOverlayPresented) {
         [self.pulsingOverlay showInView:self.view];
-    } else if (!self.nearestUsers.count && [self.view.subviews containsObject:self.pulsingOverlay]) {
+        self.pulsingOverlayConfigureNeeded = NO;
+    } else if (!self.nearestUsers.count && self.isOverlayPresented) {
         [self.pulsingOverlay addPulsingAnimations];
-    } else {
+        self.pulsingOverlayConfigureNeeded = NO;
+    } else if (self.nearestUsers.count && self.isOverlayPresented) {
         [self.pulsingOverlay dismissFromView:self.view];
         [self updateNearestUserInformation];
     }

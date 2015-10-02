@@ -108,17 +108,13 @@ static CGFloat const kDuration = .2f;
     if (![view.subviews containsObject:self]) {
         [self setAlpha:0.f];
         [self setFrame:view.frame];
+        [self.bluredView blurView];
         [view addSubview:self];
         
-        [self setTransform:CGAffineTransformMakeScale(0.1f, 0.1f)];
-        
         [UIView animateWithDuration:kDuration animations:^{
-            [weakSelf setTransform:CGAffineTransformMakeScale(1.f, 1.f)];
             [weakSelf setAlpha:1.f];
-            
         } completion:^(BOOL finished) {
             if (finished) {
-                [weakSelf.bluredView blurView];
                 [weakSelf addPulsingAnimations];
             }
         }];
@@ -135,11 +131,9 @@ static CGFloat const kDuration = .2f;
     WEAK_SELF;
     if ([view.subviews containsObject:self]) {
         [UIView animateWithDuration:kDuration animations:^{
-            [weakSelf setTransform:CGAffineTransformMakeScale(2.f, 2.f)];
             weakSelf.alpha = 0.f;
         } completion:^(BOOL finished) {
             if (finished) {
-                [weakSelf setTransform:CGAffineTransformMakeScale(1.f, 1.f)];
                 [weakSelf removeFromSuperview];
             }
         }];

@@ -68,14 +68,14 @@ static CGFloat const kToPulsingValue = 1.f;
     animation.animations = @[scaleWavesAnimation, alphaAnimation];
     animation.duration = kDuration * 2.f;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-
+    
     if (repeating) {
         pulsingAnimation.repeatCount = HUGE_VAL;
         pulsingAnimation.autoreverses = YES;
         animation.repeatCount = HUGE_VAL;
     }
     
-    [circleShape addAnimation:animation forKey:NULL];
+    [circleShape addAnimation:animation forKey:@"waves"];
     
     [self.layer addAnimation:pulsingAnimation forKey: repeating ? @"repeatingPulsing" : @"notRepeatingPulsing"];
     

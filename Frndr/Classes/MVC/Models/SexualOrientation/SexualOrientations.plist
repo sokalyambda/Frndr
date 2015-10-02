@@ -2,9 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
-	<string>STRAIGHT</string>
-	<string>LESBIAN</string>
-	<string>BISEXUAL</string>
-	<string>ANY</string>
+	<string>Straight</string>
+	<string>Lesbian</string>
+	<string>Bisexual</string>
+	<string>Any</string>
 </array>
 </plist>

@@ -79,7 +79,6 @@ static NSString *const kNotSmokerString = @"NOT A SMOKER";
             weakSelf.smokerLabel.text = chosenValue;
             weakSelf.smoker = [chosenValue isEqualToString:kSmokerString] ? YES : NO;
         }
-        
     }];
     
     // Dismiss keyboard if there is any on screen
@@ -103,7 +102,6 @@ static NSString *const kNotSmokerString = @"NOT A SMOKER";
             weakSelf.sexualOrientationLabel.text = chosenOrientation.orientationString;
             weakSelf.chosenOrientation = chosenOrientation;
         }
-        
     }];
     
     // Dismiss keyboard if there is any on screen

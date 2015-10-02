@@ -9,6 +9,7 @@
 #import "FRDFriendDragableView.h"
 
 #import "FRDNearestUser.h"
+#import "FRDSexualOrientation.h"
 
 #import "UIView+MakeFromXib.h"
 
@@ -20,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *friendDistanceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *friendSmokerLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *overlayImageView;
+@property (weak, nonatomic) IBOutlet UILabel *sexualOrientationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *jobTitleLabel;
 
 @end
 
@@ -41,8 +44,22 @@
     self.friendAgeLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)nearestUser.age];
     self.friendDistanceLabel.text = [NSString stringWithFormat:@"%f", nearestUser.distanceFromMe];
     self.friendSmokerLabel.text = [NSString stringWithFormat:@"%@", nearestUser.isSmoker ? LOCALIZED(@"Smoker") : LOCALIZED(@"Non-Smoker")];
+    self.sexualOrientationLabel.text = nearestUser.sexualOrientation.orientationString;
+    self.jobTitleLabel.text = nearestUser.jobTitle;
     
     [self.friendProfileImageView sd_setImageWithURL:nearestUser.avatarURL];
+}
+
+- (void)clearNearestUsersFields
+{
+    self.friendNameLabel.text = @"";
+    self.friendAgeLabel.text = @"";
+    self.friendDistanceLabel.text = @"";
+    self.friendSmokerLabel.text = @"";
+    self.sexualOrientationLabel.text = @"";
+    self.jobTitleLabel.text = @"";
+    
+    self.friendProfileImageView.image = nil;
 }
 
 @end
