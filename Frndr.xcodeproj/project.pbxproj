@@ -31,8 +31,15 @@
 		3E941A491BB1815D00F034E6 /* FRDPersonalBioTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E941A471BB1815D00F034E6 /* FRDPersonalBioTableHeader.xib */; settings = {ASSET_TAGS = (); }; };
 		3E941A4B1BB1818F00F034E6 /* FRDMyProfileTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E941A4A1BB1818F00F034E6 /* FRDMyProfileTopView.xib */; settings = {ASSET_TAGS = (); }; };
 		3E941A4F1BB18E2000F034E6 /* UIImage+ColoredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E941A4E1BB18E2000F034E6 /* UIImage+ColoredImage.m */; settings = {ASSET_TAGS = (); }; };
+		3E945CC61BBE732E00BD5820 /* FRDFriendChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E945CC41BBE732E00BD5820 /* FRDFriendChatCell.m */; settings = {ASSET_TAGS = (); }; };
+		3E945CCB1BBE733700BD5820 /* FRDUserChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E945CC91BBE733700BD5820 /* FRDUserChatCell.m */; settings = {ASSET_TAGS = (); }; };
+		3E945CCC1BBE733700BD5820 /* FRDUserChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E945CCA1BBE733700BD5820 /* FRDUserChatCell.xib */; settings = {ASSET_TAGS = (); }; };
+		3E945CD01BBE734200BD5820 /* FRDSystemChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E945CCE1BBE734200BD5820 /* FRDSystemChatCell.m */; settings = {ASSET_TAGS = (); }; };
+		3E945CD41BBE7EA300BD5820 /* FRDBaseChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E945CD31BBE7EA300BD5820 /* FRDBaseChatCell.m */; settings = {ASSET_TAGS = (); }; };
 		3ED072321BA0370C0091B7E4 /* FRDPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED072311BA0370C0091B7E4 /* FRDPreferencesController.m */; };
 		3ED072361BA048460091B7E4 /* FRDPreferencesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED072351BA048460091B7E4 /* FRDPreferencesTableViewController.m */; };
+		3EF22FB41BBE851100E23F72 /* FRDFriendChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EF22FB31BBE851100E23F72 /* FRDFriendChatCell.xib */; settings = {ASSET_TAGS = (); }; };
+		3EF22FB61BBE87E700E23F72 /* FRDSystemChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EF22FB51BBE87E700E23F72 /* FRDSystemChatCell.xib */; settings = {ASSET_TAGS = (); }; };
 		5812BD0D1BB3E87300BCB90B /* FRDRedirectionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5812BD0C1BB3E87300BCB90B /* FRDRedirectionHelper.m */; settings = {ASSET_TAGS = (); }; };
 		581B9D3B1B9ED6090080393B /* FRDStorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D3A1B9ED6090080393B /* FRDStorageManager.m */; };
 		581B9D3E1B9ED67B0080393B /* FRDPushNotifiactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B9D3D1B9ED67B0080393B /* FRDPushNotifiactionService.m */; };
@@ -207,11 +214,22 @@
 		3E941A4A1BB1818F00F034E6 /* FRDMyProfileTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDMyProfileTopView.xib; path = Classes/MVC/Views/MyProfileTopView/FRDMyProfileTopView.xib; sourceTree = "<group>"; };
 		3E941A4D1BB18E2000F034E6 /* UIImage+ColoredImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ColoredImage.h"; path = "Classes/Categories/UIImage/UIImage+ColoredImage/UIImage+ColoredImage.h"; sourceTree = "<group>"; };
 		3E941A4E1BB18E2000F034E6 /* UIImage+ColoredImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ColoredImage.m"; path = "Classes/Categories/UIImage/UIImage+ColoredImage/UIImage+ColoredImage.m"; sourceTree = "<group>"; };
+		3E945CC31BBE732E00BD5820 /* FRDFriendChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDFriendChatCell.h; path = Classes/Cells/UITableViewCells/ChatCells/FriendChatCell/FRDFriendChatCell.h; sourceTree = "<group>"; };
+		3E945CC41BBE732E00BD5820 /* FRDFriendChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDFriendChatCell.m; path = Classes/Cells/UITableViewCells/ChatCells/FriendChatCell/FRDFriendChatCell.m; sourceTree = "<group>"; };
+		3E945CC81BBE733700BD5820 /* FRDUserChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDUserChatCell.h; path = Classes/Cells/UITableViewCells/ChatCells/UserChatCell/FRDUserChatCell.h; sourceTree = "<group>"; };
+		3E945CC91BBE733700BD5820 /* FRDUserChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDUserChatCell.m; path = Classes/Cells/UITableViewCells/ChatCells/UserChatCell/FRDUserChatCell.m; sourceTree = "<group>"; };
+		3E945CCA1BBE733700BD5820 /* FRDUserChatCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDUserChatCell.xib; path = Classes/Cells/UITableViewCells/ChatCells/UserChatCell/FRDUserChatCell.xib; sourceTree = "<group>"; };
+		3E945CCD1BBE734200BD5820 /* FRDSystemChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSystemChatCell.h; path = Classes/Cells/UITableViewCells/ChatCells/SystemChatCell/FRDSystemChatCell.h; sourceTree = "<group>"; };
+		3E945CCE1BBE734200BD5820 /* FRDSystemChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSystemChatCell.m; path = Classes/Cells/UITableViewCells/ChatCells/SystemChatCell/FRDSystemChatCell.m; sourceTree = "<group>"; };
+		3E945CD21BBE7EA300BD5820 /* FRDBaseChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDBaseChatCell.h; path = Classes/Cells/UITableViewCells/ChatCells/FRDBaseChatCell.h; sourceTree = "<group>"; };
+		3E945CD31BBE7EA300BD5820 /* FRDBaseChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDBaseChatCell.m; path = Classes/Cells/UITableViewCells/ChatCells/FRDBaseChatCell.m; sourceTree = "<group>"; };
 		3ED072301BA0370C0091B7E4 /* FRDPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPreferencesController.h; path = Classes/MVC/Controllers/PreferencesController/FRDPreferencesController.h; sourceTree = "<group>"; };
 		3ED072311BA0370C0091B7E4 /* FRDPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPreferencesController.m; path = Classes/MVC/Controllers/PreferencesController/FRDPreferencesController.m; sourceTree = "<group>"; };
 		3ED072341BA048460091B7E4 /* FRDPreferencesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPreferencesTableViewController.h; path = Classes/MVC/Controllers/PreferencesTableViewController/FRDPreferencesTableViewController.h; sourceTree = "<group>"; };
 		3ED072351BA048460091B7E4 /* FRDPreferencesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPreferencesTableViewController.m; path = Classes/MVC/Controllers/PreferencesTableViewController/FRDPreferencesTableViewController.m; sourceTree = "<group>"; };
 		3ED281275AA17DB13D1C36A1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		3EF22FB31BBE851100E23F72 /* FRDFriendChatCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDFriendChatCell.xib; path = Classes/Cells/UITableViewCells/ChatCells/FriendChatCell/FRDFriendChatCell.xib; sourceTree = "<group>"; };
+		3EF22FB51BBE87E700E23F72 /* FRDSystemChatCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDSystemChatCell.xib; path = Classes/Cells/UITableViewCells/ChatCells/SystemChatCell/FRDSystemChatCell.xib; sourceTree = "<group>"; };
 		4E086F2D4037543EBA52BEA4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5812BD0B1BB3E87300BCB90B /* FRDRedirectionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRedirectionHelper.h; path = Classes/Utilities/RedirectionHelper/FRDRedirectionHelper.h; sourceTree = "<group>"; };
 		5812BD0C1BB3E87300BCB90B /* FRDRedirectionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRedirectionHelper.m; path = Classes/Utilities/RedirectionHelper/FRDRedirectionHelper.m; sourceTree = "<group>"; };
@@ -674,6 +692,48 @@
 				3E941A4E1BB18E2000F034E6 /* UIImage+ColoredImage.m */,
 			);
 			name = "UIImage+ColoredImage";
+			sourceTree = "<group>";
+		};
+		3E945CB01BBE707C00BD5820 /* ChatCells */ = {
+			isa = PBXGroup;
+			children = (
+				3E945CB11BBE70C300BD5820 /* UserChatCell */,
+				3E945CB21BBE70D400BD5820 /* FriendChatCell */,
+				3E945CB31BBE70DE00BD5820 /* SystemChatCell */,
+				3E945CD21BBE7EA300BD5820 /* FRDBaseChatCell.h */,
+				3E945CD31BBE7EA300BD5820 /* FRDBaseChatCell.m */,
+			);
+			name = ChatCells;
+			sourceTree = "<group>";
+		};
+		3E945CB11BBE70C300BD5820 /* UserChatCell */ = {
+			isa = PBXGroup;
+			children = (
+				3E945CC81BBE733700BD5820 /* FRDUserChatCell.h */,
+				3E945CC91BBE733700BD5820 /* FRDUserChatCell.m */,
+				3E945CCA1BBE733700BD5820 /* FRDUserChatCell.xib */,
+			);
+			name = UserChatCell;
+			sourceTree = "<group>";
+		};
+		3E945CB21BBE70D400BD5820 /* FriendChatCell */ = {
+			isa = PBXGroup;
+			children = (
+				3E945CC31BBE732E00BD5820 /* FRDFriendChatCell.h */,
+				3E945CC41BBE732E00BD5820 /* FRDFriendChatCell.m */,
+				3EF22FB31BBE851100E23F72 /* FRDFriendChatCell.xib */,
+			);
+			name = FriendChatCell;
+			sourceTree = "<group>";
+		};
+		3E945CB31BBE70DE00BD5820 /* SystemChatCell */ = {
+			isa = PBXGroup;
+			children = (
+				3E945CCD1BBE734200BD5820 /* FRDSystemChatCell.h */,
+				3E945CCE1BBE734200BD5820 /* FRDSystemChatCell.m */,
+				3EF22FB51BBE87E700E23F72 /* FRDSystemChatCell.xib */,
+			);
+			name = SystemChatCell;
 			sourceTree = "<group>";
 		};
 		3ED0722F1BA0364E0091B7E4 /* PreferencesController */ = {
@@ -1586,6 +1646,7 @@
 		58BC76FA1B9EBB8B00BB8B5A /* UITableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				3E945CB01BBE707C00BD5820 /* ChatCells */,
 				3E00C40B1BAAB89E00AD2D97 /* FriendCell */,
 				587B3A7E1BA7F8310098154F /* DropDownCell */,
 			);
@@ -2138,11 +2199,14 @@
 			files = (
 				587B3A8F1BA814C40098154F /* FRDRelationshipStatusController.xib in Resources */,
 				58DE5B4A1BB5956D0020A34C /* SexualOrientations.plist in Resources */,
+				3E945CCC1BBE733700BD5820 /* FRDUserChatCell.xib in Resources */,
 				3E941A491BB1815D00F034E6 /* FRDPersonalBioTableHeader.xib in Resources */,
+				3EF22FB41BBE851100E23F72 /* FRDFriendChatCell.xib in Resources */,
 				58D5A16C1BA329E500D552CF /* FRDNavigationTitleView.xib in Resources */,
 				58C28C501BA99A6E009D1AC4 /* FRDFriendDragableView.xib in Resources */,
 				3E1D9BEE1BB3CE46003A1E5C /* FRDPreviewGalleryController.xib in Resources */,
 				58DD73161BB832D9009D5536 /* RelationshipStatuses.plist in Resources */,
+				3EF22FB61BBE87E700E23F72 /* FRDSystemChatCell.xib in Resources */,
 				587B3A891BA80F3D0098154F /* FRDDropDownHolderController.xib in Resources */,
 				587B3A951BA815850098154F /* FRDRelationshipCollectionCell.xib in Resources */,
 				58ED54FA1BB189EA00F9B378 /* FRDGeolocationDeniedController.xib in Resources */,
@@ -2229,6 +2293,7 @@
 				586264C21BBD04DE00824BA3 /* UIView+Pulsing.m in Sources */,
 				58C28FFC1BAAC69B0099ABE4 /* CAAnimation+CompetionBlock.m in Sources */,
 				581B9D3B1B9ED6090080393B /* FRDStorageManager.m in Sources */,
+				3E945CC61BBE732E00BD5820 /* FRDFriendChatCell.m in Sources */,
 				58CD9AC41BAFF29F00A7CADB /* FRDBaseContentController.m in Sources */,
 				58BC77081B9ECA3700BB8B5A /* NSString+Base64Decoding.m in Sources */,
 				581B9D3E1B9ED67B0080393B /* FRDPushNotifiactionService.m in Sources */,
@@ -2241,6 +2306,7 @@
 				58BC773D1B9ECDD100BB8B5A /* FRDValidator.m in Sources */,
 				58DE5B3E1BB541480020A34C /* FRDCurrentUserProfile.m in Sources */,
 				58CD9ABE1BAFF1B500A7CADB /* FRDTopContentView.m in Sources */,
+				3E945CD01BBE734200BD5820 /* FRDSystemChatCell.m in Sources */,
 				58DE5B3B1BB541280020A34C /* FRDNearestUser.m in Sources */,
 				58ED54F91BB189EA00F9B378 /* FRDGeolocationDeniedController.m in Sources */,
 				3E941A371BB180B400F034E6 /* FRDSwitch.m in Sources */,
@@ -2260,9 +2326,11 @@
 				58ED54E01BB163BE00F9B378 /* FRDFindNearestUsersRequest.m in Sources */,
 				58BC77111B9ECA5B00BB8B5A /* UIView+Shaking.m in Sources */,
 				587B3A7A1BA7F7B00098154F /* FRDSmokerDataSource.m in Sources */,
+				3E945CD41BBE7EA300BD5820 /* FRDBaseChatCell.m in Sources */,
 				581B9D441B9ED7FE0080393B /* FRDFacebookService.m in Sources */,
 				58BC77291B9ECB0300BB8B5A /* FRDKeychainHandler.m in Sources */,
 				3E0EEC601BABF2CE00AB51B0 /* FRDApplicationSettingsTableContainer.m in Sources */,
+				3E945CCB1BBE733700BD5820 /* FRDUserChatCell.m in Sources */,
 				3E941A3C1BB180E200F034E6 /* UIResponder+FirstResponder.m in Sources */,
 				5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */,
 				581B9D561B9EDCA00080393B /* FRDNetworkOperation.m in Sources */,
