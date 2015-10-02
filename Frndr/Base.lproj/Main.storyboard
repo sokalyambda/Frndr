@@ -1538,6 +1538,7 @@
                         <outlet property="biographyLabel" destination="8cF-YB-NEU" id="1pT-7K-8lI"/>
                         <outlet property="dragableViewsHolder" destination="ILl-0g-u9u" id="QJM-hV-Qz7"/>
                         <outlet property="interestsLabel" destination="Du5-65-9If" id="ruA-mR-9yT"/>
+                        <outlet property="likeButtonsContainer" destination="lr3-R0-X7D" id="FJ0-7A-lSk"/>
                         <outlet property="photosCollectionContainer" destination="6fH-wy-opm" id="91C-LF-xkp"/>
                     </connections>
                 </viewController>

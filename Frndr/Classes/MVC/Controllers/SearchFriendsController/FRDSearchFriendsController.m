@@ -36,6 +36,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 @property (weak, nonatomic) IBOutlet UILabel *interestsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *biographyLabel;
 @property (weak, nonatomic) IBOutlet UIView *photosCollectionContainer;
+@property (weak, nonatomic) IBOutlet UIView *likeButtonsContainer;
 
 @property (nonatomic) FRDPreviewGalleryController *previewGalleryController;
 
@@ -101,6 +102,12 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
         [self setupDragableViewOptions];
         [self setupPulsingOverlayView];
     });
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    //Show/hide like buttons container
+//    [self changeButtonsContainerAlpha];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -294,6 +301,8 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
             [weakSelf dismissPulsingView];
         }
         
+//        [weakSelf changeButtonsContainerAlpha];
+        
     } onFailure:^(NSError *error) {
         
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
@@ -426,6 +435,25 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
         }
         
     }];
+}
+
+/**
+ *  Show/hide buttons container relative to nearest users array
+ */
+- (void)changeButtonsContainerAlpha
+{
+    WEAK_SELF;
+    if (!self.nearestUsers.count) {
+        [self.likeButtonsContainer setAlpha:1.f];
+        [UIView animateWithDuration:.2f animations:^{
+            [weakSelf.likeButtonsContainer setAlpha:0.f];
+        } completion:nil];
+    } else {
+        [self.likeButtonsContainer setAlpha:0.f];
+        [UIView animateWithDuration:.2f animations:^{
+            [weakSelf.likeButtonsContainer setAlpha:1.f];
+        } completion:nil];
+    }
 }
 
 #pragma mark - ZLSwipeableViewDataSource

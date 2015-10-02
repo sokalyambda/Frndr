@@ -185,8 +185,7 @@
                                     <exclude reference="sCV-Wb-KFK"/>
                                 </mask>
                             </variation>
-                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                <rect key="frame" x="204" y="-275" width="192" height="192"/>
+                            <variation key="heightClass=regular-widthClass=compact">
                                 <mask key="constraints">
                                     <include reference="26x-bX-M4X"/>
                                     <include reference="sCV-Wb-KFK"/>
@@ -208,8 +207,7 @@
                             <exclude reference="gkl-OY-PKP"/>
                         </mask>
                     </variation>
-                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                        <rect key="frame" x="0.0" y="479" width="600" height="121"/>
+                    <variation key="heightClass=regular-widthClass=compact">
                         <mask key="subviews">
                             <include reference="bak-3c-d7v"/>
                         </mask>
