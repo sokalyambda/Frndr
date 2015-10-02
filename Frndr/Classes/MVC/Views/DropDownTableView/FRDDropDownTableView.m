@@ -31,7 +31,6 @@ static CGFloat const kAdditionalOffset = 5.f;
     CGRect savedDropDownTableFrame;
 }
 
-
 #pragma mark - Lifecycle
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -96,14 +95,6 @@ static NSInteger const kRowsNumberThreshold = 4;
     }
     verticalIntersection = (verticalIntersection <= 0) ? 0 : verticalIntersection + kAdditionalOffset; 
     calculatedHeight -= verticalIntersection;
-    
-    if ([self.presentedView isKindOfClass:[UIScrollView class]]) {
-        if (CGRectContainsPoint(self.presentedView.frame, CGPointMake(CGRectGetMinX(self.anchorView.frame), CGRectGetMaxY(self.anchorView.frame) + calculatedHeight))) {
-            NSLog(@"OK");
-        } else {
-            NSLog(@"HOOJOK");
-        }
-    }
     
     return calculatedHeight;
 }

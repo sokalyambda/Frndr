@@ -99,20 +99,6 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
 
 #pragma mark - UICollectionViewDelegate
 
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (self.currentSourceType == FRDSourceTypeMyProfile) {
-        FRDRelationshipItem *currentItem = self.relationshipStatuses[indexPath.row];
-        if ([currentItem isEqual:self.currentRelationshipStatus] || [self.currentRelationshipStatus.relationshipTitle isEqualToString:@""]) {
-            return YES;
-        }
-    } else if (self.currentSourceType == FRDSourceTypeSearchSettings) {
-        return YES;
-    }
-    
-    return NO;
-}
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     FRDRelationshipItem *currentItem = self.relationshipStatuses[indexPath.row];
@@ -120,9 +106,12 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
     
     if (self.currentSourceType == FRDSourceTypeMyProfile) {
         if (![currentItem isEqual:self.currentRelationshipStatus]) {
+            [cell updateCellWithRelationshipItem:self.currentRelationshipStatus];
             self.currentRelationshipStatus = currentItem;
+            [cell updateCellWithRelationshipItem:self.currentRelationshipStatus];
         } else {
             self.currentRelationshipStatus = nil;
+            [cell updateCellWithRelationshipItem:currentItem];
         }
     } else if (self.currentSourceType == FRDSourceTypeSearchSettings) {
         if (![self.relationshipStatusesForSearch member:currentItem]) {
@@ -130,13 +119,11 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
         } else {
             [self.relationshipStatusesForSearch removeObject:currentItem];
         }
+        [cell updateCellWithRelationshipItem:currentItem];
     }
     
-    [cell updateCellWithRelationshipItem:currentItem];
-
-    [collectionView reloadItemsAtIndexPaths:@[indexPath]];
+    [collectionView reloadData];
     
-    NSLog(@"set of statuses %@", self.relationshipStatusesForSearch);
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
@@ -245,12 +232,6 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
     switch (self.currentSourceType) {
         case FRDSourceTypeMyProfile: {
             
-            [commonRelStatuses enumerateKeysAndObjectsUsingBlock:^(NSString  *_Nonnull key, NSDictionary  * _Nonnull obj, BOOL * _Nonnull stop) {
-                
-                FRDRelationshipItem *item = [FRDRelationshipItem relationshipItemWithTitle:key andActiveImage:obj[kActiveImageName] andNotActiveImage:obj[kNotActiveImageName]];
-                [currentRelStatuses addObject:item];
-            }];
-            
             if (currentProfile.isMale) {
                 
                 [maleRelStatuses enumerateKeysAndObjectsUsingBlock:^(NSString  *_Nonnull key, NSDictionary  * _Nonnull obj, BOOL * _Nonnull stop) {
@@ -266,24 +247,13 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
                     FRDRelationshipItem *item = [FRDRelationshipItem relationshipItemWithTitle:key andActiveImage:obj[kActiveImageName] andNotActiveImage:obj[kNotActiveImageName]];
                     [currentRelStatuses addObject:item];
                 }];
-                
             }
             
             break;
         }
         case FRDSourceTypeSearchSettings: {
-            
-            [maleRelStatuses enumerateKeysAndObjectsUsingBlock:^(NSString  *_Nonnull key, NSDictionary  * _Nonnull obj, BOOL * _Nonnull stop) {
-                
-                FRDRelationshipItem *item = [FRDRelationshipItem relationshipItemWithTitle:key andActiveImage:obj[kActiveImageName] andNotActiveImage:obj[kNotActiveImageName]];
-                [currentRelStatuses addObject:item];
-            }];
+
             [commonRelStatuses enumerateKeysAndObjectsUsingBlock:^(NSString  *_Nonnull key, NSDictionary  * _Nonnull obj, BOOL * _Nonnull stop) {
-                
-                FRDRelationshipItem *item = [FRDRelationshipItem relationshipItemWithTitle:key andActiveImage:obj[kActiveImageName] andNotActiveImage:obj[kNotActiveImageName]];
-                [currentRelStatuses addObject:item];
-            }];
-            [femaleRelStatuses enumerateKeysAndObjectsUsingBlock:^(NSString  *_Nonnull key, NSDictionary  * _Nonnull obj, BOOL * _Nonnull stop) {
                 
                 FRDRelationshipItem *item = [FRDRelationshipItem relationshipItemWithTitle:key andActiveImage:obj[kActiveImageName] andNotActiveImage:obj[kNotActiveImageName]];
                 [currentRelStatuses addObject:item];

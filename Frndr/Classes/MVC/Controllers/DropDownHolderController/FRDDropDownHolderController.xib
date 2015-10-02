@@ -88,7 +88,7 @@
                             </variation>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" red="0.85227536110000002" green="0.93606985119999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.91947451069999997" green="0.99480879929999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="centerY" secondItem="GJh-rd-QlQ" secondAttribute="centerY" id="IPX-W6-rK3"/>
                         <constraint firstAttribute="trailing" secondItem="Cao-uY-JI3" secondAttribute="trailing" constant="8" id="ZIv-iw-n8m"/>
@@ -164,7 +164,7 @@
                             </variation>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" red="0.85227536110000002" green="0.93606985119999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.91947451069999997" green="0.99480879929999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="Idx-Wd-jFd" secondAttribute="trailing" constant="8" id="2FI-FP-Ysq"/>
                         <constraint firstItem="GVU-1i-rf2" firstAttribute="top" secondItem="Idx-Wd-jFd" secondAttribute="top" constant="-2" id="VIP-bW-Vcd">

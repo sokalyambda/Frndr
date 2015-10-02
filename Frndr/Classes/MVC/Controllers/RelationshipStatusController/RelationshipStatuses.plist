@@ -4,12 +4,19 @@
 <dict>
 	<key>Common</key>
 	<dict>
-		<key>Family</key>
+		<key>Single Female</key>
 		<dict>
 			<key>ActiveImageName</key>
-			<string>FamilyActiveIcon</string>
+			<string>SingleFemaleActiveIcon</string>
 			<key>NotActiveImageName</key>
-			<string>FamilyNonActiveIcon</string>
+			<string>SingleFemaleNonActiveIcon</string>
+		</dict>
+		<key>Single Male</key>
+		<dict>
+			<key>ActiveImageName</key>
+			<string>SingleMaleActive</string>
+			<key>NotActiveImageName</key>
+			<string>SingleMaleNonActive</string>
 		</dict>
 		<key>Couple</key>
 		<dict>
@@ -17,6 +24,27 @@
 			<string>CoupleActiveIcon</string>
 			<key>NotActiveImageName</key>
 			<string>CoupleNonActiveIcon</string>
+		</dict>
+		<key>Family</key>
+		<dict>
+			<key>ActiveImageName</key>
+			<string>FamilyActiveIcon</string>
+			<key>NotActiveImageName</key>
+			<string>FamilyNonActiveIcon</string>
+		</dict>
+		<key>Single Mother</key>
+		<dict>
+			<key>ActiveImageName</key>
+			<string>SingleMotherActiveIcon</string>
+			<key>NotActiveImageName</key>
+			<string>SingleMotherNonActiveIcon</string>
+		</dict>
+		<key>Single Father</key>
+		<dict>
+			<key>ActiveImageName</key>
+			<string>SingleFatherActiveIcon</string>
+			<key>NotActiveImageName</key>
+			<string>SingleFatherNonActiveIcon</string>
 		</dict>
 	</dict>
 	<key>Male</key>
@@ -28,12 +56,26 @@
 			<key>NotActiveImageName</key>
 			<string>SingleMaleNonActive</string>
 		</dict>
+		<key>Couple</key>
+		<dict>
+			<key>ActiveImageName</key>
+			<string>CoupleActiveIcon</string>
+			<key>NotActiveImageName</key>
+			<string>CoupleNonActiveIcon</string>
+		</dict>
 		<key>With Baby</key>
 		<dict>
 			<key>ActiveImageName</key>
 			<string>SingleFatherActiveIcon</string>
 			<key>NotActiveImageName</key>
 			<string>SingleFatherNonActiveIcon</string>
+		</dict>
+		<key>Family</key>
+		<dict>
+			<key>ActiveImageName</key>
+			<string>FamilyActiveIcon</string>
+			<key>NotActiveImageName</key>
+			<string>FamilyNonActiveIcon</string>
 		</dict>
 	</dict>
 	<key>Female</key>
@@ -45,12 +87,26 @@
 			<key>NotActiveImageName</key>
 			<string>SingleFemaleNonActiveIcon</string>
 		</dict>
+		<key>Couple</key>
+		<dict>
+			<key>ActiveImageName</key>
+			<string>CoupleActiveIcon</string>
+			<key>NotActiveImageName</key>
+			<string>CoupleNonActiveIcon</string>
+		</dict>
 		<key>With Baby</key>
 		<dict>
 			<key>ActiveImageName</key>
 			<string>SingleMotherActiveIcon</string>
 			<key>NotActiveImageName</key>
 			<string>SingleMotherNonActiveIcon</string>
+		</dict>
+		<key>Family</key>
+		<dict>
+			<key>ActiveImageName</key>
+			<string>FamilyActiveIcon</string>
+			<key>NotActiveImageName</key>
+			<string>FamilyNonActiveIcon</string>
 		</dict>
 	</dict>
 </dict>

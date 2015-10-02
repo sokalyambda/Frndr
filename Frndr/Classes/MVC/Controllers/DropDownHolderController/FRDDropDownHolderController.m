@@ -19,8 +19,11 @@
 
 #import "UIResponder+FirstResponder.h"
 
-static NSString * const kDownArrow = @"downArrow";
-static NSString * const kUpArrow = @"upArrow";
+static NSString *const kDownArrow = @"downArrow";
+static NSString *const kUpArrow = @"upArrow";
+
+static NSString *const kSmokerString = @"SMOKER";
+static NSString *const kNotSmokerString = @"NOT A SMOKER";
 
 @interface FRDDropDownHolderController ()
 
@@ -69,7 +72,7 @@ static NSString * const kUpArrow = @"upArrow";
     [self.dropDownList dropDownTableBecomeActiveInView:self.viewForDisplaying fromAnchorView:tapView withDataSource:smokerDataSource withCompletion:^(FRDDropDownTableView *table, id chosenValue) {
         if ([chosenValue isKindOfClass:[NSString class]]) {
             weakSelf.smokerLabel.text = chosenValue;
-            weakSelf.smoker = [chosenValue isEqualToString:@"SMOKER"] ? YES : NO;
+            weakSelf.smoker = [chosenValue isEqualToString:kSmokerString] ? YES : NO;
             
             [self rotateArrow:self.smokerPointingArrow];
         }
@@ -126,13 +129,13 @@ static NSString * const kUpArrow = @"upArrow";
     switch (sourceType) {
         case FRDSourceTypeMyProfile: {
             self.sexualOrientationLabel.text = currentProfile.sexualOrientation.orientationString.uppercaseString;
-            self.smokerLabel.text = currentProfile.isSmoker ? @"SMOKER" : @"NOT A SMOKER";
+            self.smokerLabel.text = currentProfile.isSmoker ? kSmokerString : kNotSmokerString;
             break;
         }
         case FRDSourceTypeSearchSettings: {
             FRDSearchSettings *currentSearchSettings = currentProfile.currentSearchSettings;
             self.sexualOrientationLabel.text = currentSearchSettings.sexualOrientation.orientationString.uppercaseString;
-            self.smokerLabel.text = currentSearchSettings.isSmoker ? @"SMOKER" : @"NOT A SMOKER";
+            self.smokerLabel.text = currentSearchSettings.isSmoker ? kSmokerString : kNotSmokerString;
             break;
         }
             
