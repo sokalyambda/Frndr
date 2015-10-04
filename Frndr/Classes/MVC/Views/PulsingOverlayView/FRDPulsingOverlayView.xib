@@ -69,12 +69,12 @@
                     <exclude reference="UpL-LZ-Pzp"/>
                     <exclude reference="Wfl-r0-teP"/>
                     <exclude reference="urt-eO-KTI"/>
+                    <exclude reference="ivZ-x9-mh6"/>
+                    <exclude reference="tLl-RR-npO"/>
                     <exclude reference="B2s-pT-jXX"/>
                     <exclude reference="f8Y-G4-vV5"/>
                     <exclude reference="gfC-Ka-eOD"/>
                     <exclude reference="uvL-5C-rbg"/>
-                    <exclude reference="ivZ-x9-mh6"/>
-                    <exclude reference="tLl-RR-npO"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
@@ -88,12 +88,12 @@
                     <include reference="UpL-LZ-Pzp"/>
                     <include reference="Wfl-r0-teP"/>
                     <include reference="urt-eO-KTI"/>
+                    <include reference="ivZ-x9-mh6"/>
+                    <include reference="tLl-RR-npO"/>
                     <include reference="B2s-pT-jXX"/>
                     <include reference="f8Y-G4-vV5"/>
                     <include reference="gfC-Ka-eOD"/>
                     <include reference="uvL-5C-rbg"/>
-                    <include reference="ivZ-x9-mh6"/>
-                    <include reference="tLl-RR-npO"/>
                 </mask>
             </variation>
             <connections>

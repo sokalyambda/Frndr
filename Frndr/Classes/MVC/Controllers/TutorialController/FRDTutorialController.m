@@ -151,7 +151,7 @@
 {
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [FRDFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
+    [FRDFacebookService authorizeWithFacebookInController:self onSuccess:^(BOOL isSuccess) {
 
         [FRDFacebookService getFacebookUserProfileOnSuccess:^(FRDFacebookProfile *facebookProfile) {
             

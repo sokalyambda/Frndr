@@ -16,6 +16,7 @@
 #import "FRDErrorHandler.h"
 
 #import "FRDKeychainHandler.h"
+#import "FRDNearestUsersService.h"
 
 #import "FRDSearchSettings.h"
 
@@ -91,6 +92,12 @@ NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
 + (void)clearUserData
 {
     [self cancelAllOperations];
+    
+    if ([FRDNearestUsersService isSearchInProcess]) {
+        [[FRDNearestUsersService searchTimer] invalidate];
+        [FRDNearestUsersService setSearchTimer:nil];
+        [FRDNearestUsersService setSearchInProcess:NO];
+    }
     
     [FRDStorageManager sharedStorage].currentFacebookProfile = nil;
     

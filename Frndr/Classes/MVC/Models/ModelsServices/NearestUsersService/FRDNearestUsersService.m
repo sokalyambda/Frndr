@@ -16,6 +16,7 @@ static NSString *const kFailureKey = @"failure";
 @implementation FRDNearestUsersService
 
 static BOOL _isSearchInProcess = NO;
+static NSTimer *_searchTimer;
 
 #pragma mark - Accessors
 
@@ -30,6 +31,20 @@ static BOOL _isSearchInProcess = NO;
 {
     @synchronized(self) {
         _isSearchInProcess = searchInProcess;
+    }
+}
+
++ (NSTimer *)searchTimer
+{
+    @synchronized(self) {
+        return _searchTimer;
+    }
+}
+
++ (void)setSearchTimer:(NSTimer *)searchTimer
+{
+    @synchronized(self) {
+        _searchTimer = searchTimer;
     }
 }
 
@@ -79,12 +94,12 @@ static BOOL _isSearchInProcess = NO;
 + (void)scheduleTimerForFriendsSearchOnSuccess:(SuccessNearestUsersBlock)success onFailure:(FailureNearestUsersBlock)failure
 {
     [self setSearchInProcess:YES];
-    [NSTimer scheduledTimerWithTimeInterval:10.f
-                                     target:self
-                                   selector:@selector(findNearestFriendsWithTimer:)
-                                   userInfo:@{kSuccessKey: success,
-                                              kFailureKey: failure
-                                              } repeats:YES];
+    [self setSearchTimer:[NSTimer scheduledTimerWithTimeInterval:10.f
+                                                          target:self
+                                                        selector:@selector(findNearestFriendsWithTimer:)
+                                                        userInfo:@{kSuccessKey: success,
+                                                                   kFailureKey: failure
+                                                                   } repeats:YES]];
 }
 
 + (void)findNearestFriendsWithTimer:(NSTimer *)timer

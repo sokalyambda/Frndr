@@ -28,10 +28,14 @@
 
 - (void)customize
 {
-//    self.layer.borderColor = [UIColor redColor].CGColor;
-//    self.layer.borderWidth = 1.f;
     self.layer.cornerRadius = CGRectGetHeight(self.bounds) / 2.f;
     self.layer.masksToBounds = YES;
+}
+
+- (void)addBorder
+{
+    self.layer.borderColor = UIColorFromRGB(0x535487).CGColor;
+    self.layer.borderWidth = 1.f;
 }
 
 @end

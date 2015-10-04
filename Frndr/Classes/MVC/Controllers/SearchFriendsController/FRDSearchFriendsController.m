@@ -86,28 +86,41 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     [self updateNearestUserInformation];
 }
 
+#pragma mark - Lifecycle
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        _currentPage = 1;
+        _swipableViewsCounter = 0;
+        
+        [FRDPushNotifiactionService registerApplicationForPushNotifications:[UIApplication sharedApplication]];
+        
+        [self setupPulsingOverlayView];
+    }
+    return self;
+}
+
+
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.currentPage = 1;
-    self.swipableViewsCounter = 0;
-    
-    [FRDPushNotifiactionService registerApplicationForPushNotifications:[UIApplication sharedApplication]];
-    
+
     [self setupPhotosGalleryContainer];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self setupDragableViewOptions];
-        [self setupPulsingOverlayView];
     });
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     //Show/hide like buttons container
-//    [self changeButtonsContainerAlpha];
+    [self changeButtonsContainerAlpha];
+    [self.pulsingOverlay subscribeForNotifications];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -116,6 +129,11 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     
     //updating actions
     [self performNeededUpdatingActions];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.pulsingOverlay unsibscribeFromNotifications];
 }
 
 #pragma mark - Actions
@@ -153,11 +171,13 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 
 - (void)setupPhotosGalleryContainer
 {
-    self.previewGalleryController = [[FRDPreviewGalleryController alloc] initWithNibName:NSStringFromClass([FRDPreviewGalleryController class]) bundle:nil];
-    [self.previewGalleryController.view setFrame:self.photosCollectionContainer.frame];
-    [self.photosCollectionContainer addSubview:self.previewGalleryController.view];
-    [self addChildViewController:self.previewGalleryController];
-    [self.previewGalleryController didMoveToParentViewController:self];
+    if (!_previewGalleryController) {
+        self.previewGalleryController = [[FRDPreviewGalleryController alloc] initWithNibName:NSStringFromClass([FRDPreviewGalleryController class]) bundle:nil];
+        [self.previewGalleryController.view setFrame:self.photosCollectionContainer.frame];
+        [self.photosCollectionContainer addSubview:self.previewGalleryController.view];
+        [self addChildViewController:self.previewGalleryController];
+        [self.previewGalleryController didMoveToParentViewController:self];
+    }
 }
 
 #pragma mark - Updating Actions
@@ -284,7 +304,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)findNearestUsers
 {
     WEAK_SELF;
-    if (!self.nearestUsers.count && ![FRDNearestUsersService isSearchInProcess]) {
+    if ((!self.nearestUsers.count && ![FRDNearestUsersService isSearchInProcess]) || [FRDStorageManager sharedStorage].isNearestUsersUpdateNeeded) {
         if (!self.isOverlayPresented) {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         }
@@ -301,7 +321,9 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
             [weakSelf dismissPulsingView];
         }
         
-//        [weakSelf changeButtonsContainerAlpha];
+        [FRDStorageManager sharedStorage].nearestUsersUpdateNeeded = NO;
+        
+        [weakSelf changeButtonsContainerAlpha];
         
     } onFailure:^(NSError *error) {
         
@@ -443,12 +465,12 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)changeButtonsContainerAlpha
 {
     WEAK_SELF;
-    if (!self.nearestUsers.count) {
+    if (!self.nearestUsers.count && self.likeButtonsContainer.alpha > 0.f) {
         [self.likeButtonsContainer setAlpha:1.f];
-        [UIView animateWithDuration:.2f animations:^{
+        [UIView animateWithDuration:0.f animations:^{
             [weakSelf.likeButtonsContainer setAlpha:0.f];
         } completion:nil];
-    } else {
+    } else if (self.likeButtonsContainer.alpha < 1.f) {
         [self.likeButtonsContainer setAlpha:0.f];
         [UIView animateWithDuration:.2f animations:^{
             [weakSelf.likeButtonsContainer setAlpha:1.f];

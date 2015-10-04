@@ -54,7 +54,7 @@
                             <color key="textColor" red="0.42352941179999998" green="0.3294117647" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Actress &amp; Model" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UoQ-aL-fOr">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Actress &amp; Model" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UoQ-aL-fOr">
                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                             <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
                             <color key="textColor" red="0.42352941179999998" green="0.3294117647" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -96,13 +96,13 @@
                             <exclude reference="QaC-5g-PWd"/>
                         </mask>
                         <mask key="constraints">
-                            <exclude reference="1AI-VJ-tMW"/>
-                            <exclude reference="C1k-Ri-mu0"/>
                             <exclude reference="GGu-xI-c6L"/>
                             <exclude reference="LhT-CP-lj5"/>
                             <exclude reference="BYh-P8-Wez"/>
                             <exclude reference="IDI-bw-zCU"/>
                             <exclude reference="oPd-9K-qNS"/>
+                            <exclude reference="1AI-VJ-tMW"/>
+                            <exclude reference="C1k-Ri-mu0"/>
                             <exclude reference="9Xy-vz-dgc"/>
                             <exclude reference="JKm-fU-YL9"/>
                             <exclude reference="Olg-b5-az5"/>
@@ -120,13 +120,13 @@
                             <include reference="QaC-5g-PWd"/>
                         </mask>
                         <mask key="constraints">
-                            <include reference="1AI-VJ-tMW"/>
-                            <include reference="C1k-Ri-mu0"/>
                             <include reference="GGu-xI-c6L"/>
                             <include reference="LhT-CP-lj5"/>
                             <include reference="BYh-P8-Wez"/>
                             <include reference="IDI-bw-zCU"/>
                             <include reference="oPd-9K-qNS"/>
+                            <include reference="1AI-VJ-tMW"/>
+                            <include reference="C1k-Ri-mu0"/>
                             <include reference="9Xy-vz-dgc"/>
                             <include reference="JKm-fU-YL9"/>
                             <include reference="Olg-b5-az5"/>

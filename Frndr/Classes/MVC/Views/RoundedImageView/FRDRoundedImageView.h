@@ -8,4 +8,6 @@
 
 @interface FRDRoundedImageView : UIImageView
 
+- (void)addBorder;
+
 @end

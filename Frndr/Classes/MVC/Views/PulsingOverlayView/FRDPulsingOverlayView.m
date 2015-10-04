@@ -54,14 +54,32 @@ static CGFloat const kDuration = .2f;
 {
     FRDCurrentUserProfile *profile = [FRDStorageManager sharedStorage].currentUserProfile;
     [self.avatarImageView sd_setImageWithURL:profile.avatarURL];
+    [self.avatarImageView addBorder];
 }
 
 - (IBAction)avatarClick:(id)sender
 {
-    [self.avatarImageView pulsingWithWavesInView:self.superview repeating:NO];
+    [self.avatarImageView pulsingWithWavesInView:self repeating:NO];
+}
+
+- (void)applicationDidBecomeActiveNotification:(NSNotification *)notification
+{
+    if (self) {
+        [self addPulsingAnimations];
+    }
 }
 
 #pragma mark - Public Methods
+
+- (void)subscribeForNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
+- (void)unsibscribeFromNotifications
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 /**
  *  Show or hide pulsing modal overlap view
@@ -82,17 +100,13 @@ static CGFloat const kDuration = .2f;
         [UIView animateWithDuration:kDuration animations:^{
             [weakSelf setAlpha:1.f];
         } completion:^(BOOL finished) {
-            if (finished) {
-                [weakSelf.avatarImageView pulsingWithWavesInView:self.superview repeating:YES];
-            }
+            [weakSelf.avatarImageView pulsingWithWavesInView:self.superview repeating:YES];
         }];
     } else {
         [UIView animateWithDuration:kDuration animations:^{
             weakSelf.alpha = 0.f;
         }completion:^(BOOL finished) {
-            if (finished) {
-                [weakSelf removeFromSuperview];
-            }
+            [weakSelf removeFromSuperview];
         }];
     }
 }
@@ -145,7 +159,7 @@ static CGFloat const kDuration = .2f;
 - (void)addPulsingAnimations
 {
     [self cleanFromAnimations];
-    [self.avatarImageView pulsingWithWavesInView:self.superview repeating:YES];
+    [self.avatarImageView pulsingWithWavesInView:self repeating:YES];
 }
 
 /**
