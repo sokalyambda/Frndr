@@ -15,6 +15,8 @@
 
 #import "FRDBaseUserModel.h"
 
+#import "UIView+MakeFromXib.h"
+
 @interface FRDBaseChatCell ()
 
 @end
@@ -29,16 +31,16 @@
     
     switch (cellType) {
         case FRDChatCellTypeUser: {
-            currentChatCell = [[FRDUserChatCell alloc] init];
+            currentChatCell = [FRDUserChatCell makeFromXib];
             break;
         }
         case FRDChatCellTypeFriend: {
-            currentChatCell = [[FRDFriendChatCell alloc] init];
+            currentChatCell = [FRDFriendChatCell makeFromXib];
             break;
         }
             
         case FRDChatCellTypeSystem: {
-            currentChatCell = [[FRDSystemChatCell alloc] init];
+            currentChatCell = [FRDSystemChatCell makeFromXib];
             break;
         }
     }

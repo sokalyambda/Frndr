@@ -23,6 +23,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.tableView.estimatedRowHeight = 50.f;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 #pragma mark - Actions
@@ -37,7 +40,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 //    return self.messageHistory.count;
-    return 5;
+    return 10;
 }
 
 #pragma mark - UITableViewDelegate
@@ -48,13 +51,18 @@
     
     NSInteger i = indexPath.row % 3;
     
-//    if (i == 0) {
-//        cell = [FRDBaseChatCell chatCellWithType:(FRDChatCellType)i];
-//        [cell c]
-//    }
-//    
-//    =
-    return nil;
+    if (i == 0) {
+        cell = [FRDBaseChatCell chatCellWithType:(FRDChatCellType)i];
+        [cell configureWithMessage:@"Message from User: Hi from user!" timeStamp:[NSDate date] positionInSet:FRDChatCellPositionInSetFirst];
+    } else if (i == 1) {
+        cell = [FRDBaseChatCell chatCellWithType:(FRDChatCellType)i];
+        [cell configureWithMessage:@"Message from Friend: Hi from friend!" timeStamp:[NSDate date] positionInSet:FRDChatCellPositionInSetFirst];
+    } else if (i == 2) {
+        cell = [FRDBaseChatCell chatCellWithType:(FRDChatCellType)i];
+        [cell configureWithMessage:@"Message from System: Hi from system!" timeStamp:[NSDate date] positionInSet:FRDChatCellPositionInSetFirst];
+    }
+    
+    return cell;
 }
 
 @end

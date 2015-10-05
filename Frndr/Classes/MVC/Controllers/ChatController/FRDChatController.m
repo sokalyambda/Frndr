@@ -21,7 +21,7 @@
 
 - (NSString *)rightImageName
 {
-    return @"ChatOptions";
+    return @"ChatOptionsUnactive";
 }
 
 #pragma mark - Lifecycle
