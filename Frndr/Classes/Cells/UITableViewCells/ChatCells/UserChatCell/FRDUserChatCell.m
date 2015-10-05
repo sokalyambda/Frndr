@@ -7,23 +7,15 @@
 //
 
 #import "FRDUserChatCell.h"
+#import "FRDBaseChatCell_Private.h"
 
 #import "FRDRoundedImageView.h"
 
 @interface FRDUserChatCell ()
 
-@property (weak, nonatomic) IBOutlet FRDRoundedImageView *avatarImageView;
-@property (weak, nonatomic) IBOutlet UITextView *messageTextView;
-
-@property (nonatomic) FRDChatCellPositionInSet positionInSet;
-
 @end
 
 @implementation FRDUserChatCell
-
-#pragma mark - Accessors
-
-
 
 #pragma mark - Lifecycle
 
@@ -31,29 +23,6 @@
 {
     FRDCurrentUserProfile *profile = [FRDStorageManager sharedStorage].currentUserProfile;
     [self.avatarImageView sd_setImageWithURL:profile.avatarURL];
-}
-
-#pragma mark - Actions
-
-- (void)updateWithPositionInSet:(FRDChatCellPositionInSet)position
-{
-    switch (position) {
-        case FRDChatCellPositionInSetFirst: {
-            
-            break;
-        }
-           
-        case FRDChatCellPositionInSetIntermediary: {
-            break;
-        }
-            
-        case FRDChatCellPositionInSetLast: {
-            break;
-        }
-            
-        default:
-            break;
-    }
 }
 
 @end

@@ -7,19 +7,15 @@
 //
 
 #import "FRDBaseChatCell.h"
+#import "FRDBaseChatCell_Private.h"
+
 #import "FRDUserChatCell.h"
 #import "FRDFriendChatCell.h"
 #import "FRDSystemChatCell.h"
 
-#import "FRDRoundedImageView.h"
-
 #import "FRDBaseUserModel.h"
 
 @interface FRDBaseChatCell ()
-
-@property (weak, nonatomic) IBOutlet FRDRoundedImageView *avatarImageView;
-@property (weak, nonatomic) IBOutlet UITextView *messageTextView;
-@property (weak, nonatomic) IBOutlet UILabel *dateAndTimeLabel;
 
 @end
 
@@ -53,6 +49,52 @@
 + (instancetype)chatCellWithType:(FRDChatCellType)cellType
 {
     return [[self alloc] initWithChatCellType:cellType];
+}
+
+#pragma mark - Actions
+
+- (void)configureWithMessage:(NSString *)message
+                   timeStamp:(NSDate *)timeStamp
+               positionInSet:(FRDChatCellPositionInSet)positionInSet
+{
+    self.messageTextView.text = message;
+    
+    switch (positionInSet) {
+        case FRDChatCellPositionInSetFirst: {
+            self.dateAndTimeLabel.text = @"";
+            self.avatarImageView.hidden = NO;
+            break;
+        }
+            
+        case FRDChatCellPositionInSetIntermediary: {
+            self.dateAndTimeLabel.text = @"";
+            self.avatarImageView.hidden = YES;
+            break;
+        }
+            
+        case FRDChatCellPositionInSetLast: {
+            self.avatarImageView.hidden = YES;
+            
+            NSString *dateAndTime = @"";
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            
+            if ([[NSCalendar currentCalendar] isDateInToday:timeStamp]) {
+                dateAndTime = [dateAndTime stringByAppendingString:@"Today "];
+            } else if ([[NSCalendar currentCalendar] isDateInYesterday:timeStamp]) {
+                dateAndTime = [dateAndTime stringByAppendingString:@"Yesterday "];
+            } else {
+                formatter.dateFormat = @"dd";
+                dateAndTime = [dateAndTime stringByAppendingString:[formatter stringFromDate:timeStamp]];
+            }
+            
+            formatter.dateFormat = @"HH:mm";
+            dateAndTime = [dateAndTime stringByAppendingString:[formatter stringFromDate:timeStamp]];
+            
+            self.dateAndTimeLabel.text = dateAndTime;
+            
+            break;
+        }
+    }
 }
 
 @end

@@ -22,8 +22,9 @@ typedef NS_ENUM(NSInteger, FRDChatCellPositionInSet)
 
 @interface FRDBaseChatCell : UITableViewCell
 
-@property (nonatomic) NSString *message;
-@property (nonatomic) NSDate *timeStamp;
+@property (copy, nonatomic) NSString *message;
+@property (strong, nonatomic) NSDate *timeStamp;
+@property (assign, nonatomic) FRDChatCellPositionInSet positionInSet;
 
 + (instancetype)chatCellWithType:(FRDChatCellType)cellType;
 

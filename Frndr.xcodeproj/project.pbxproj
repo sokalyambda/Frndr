@@ -223,6 +223,7 @@
 		3E945CCE1BBE734200BD5820 /* FRDSystemChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSystemChatCell.m; path = Classes/Cells/UITableViewCells/ChatCells/SystemChatCell/FRDSystemChatCell.m; sourceTree = "<group>"; };
 		3E945CD21BBE7EA300BD5820 /* FRDBaseChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDBaseChatCell.h; path = Classes/Cells/UITableViewCells/ChatCells/FRDBaseChatCell.h; sourceTree = "<group>"; };
 		3E945CD31BBE7EA300BD5820 /* FRDBaseChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDBaseChatCell.m; path = Classes/Cells/UITableViewCells/ChatCells/FRDBaseChatCell.m; sourceTree = "<group>"; };
+		3EB1A02E1BC261F30032CB5A /* FRDBaseChatCell_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDBaseChatCell_Private.h; path = Classes/Cells/UITableViewCells/ChatCells/FRDBaseChatCell_Private.h; sourceTree = "<group>"; };
 		3ED072301BA0370C0091B7E4 /* FRDPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPreferencesController.h; path = Classes/MVC/Controllers/PreferencesController/FRDPreferencesController.h; sourceTree = "<group>"; };
 		3ED072311BA0370C0091B7E4 /* FRDPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPreferencesController.m; path = Classes/MVC/Controllers/PreferencesController/FRDPreferencesController.m; sourceTree = "<group>"; };
 		3ED072341BA048460091B7E4 /* FRDPreferencesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPreferencesTableViewController.h; path = Classes/MVC/Controllers/PreferencesTableViewController/FRDPreferencesTableViewController.h; sourceTree = "<group>"; };
@@ -702,6 +703,7 @@
 				3E945CB31BBE70DE00BD5820 /* SystemChatCell */,
 				3E945CD21BBE7EA300BD5820 /* FRDBaseChatCell.h */,
 				3E945CD31BBE7EA300BD5820 /* FRDBaseChatCell.m */,
+				3EB1A02E1BC261F30032CB5A /* FRDBaseChatCell_Private.h */,
 			);
 			name = ChatCells;
 			sourceTree = "<group>";
