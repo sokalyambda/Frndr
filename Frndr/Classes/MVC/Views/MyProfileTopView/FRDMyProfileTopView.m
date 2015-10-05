@@ -8,6 +8,8 @@
 
 #import "FRDMyProfileTopView.h"
 
+#import "FRDAvatar.h"
+
 @interface FRDMyProfileTopView ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
@@ -49,12 +51,13 @@
 
 - (void)commonInit
 {
-    FRDFacebookProfile *currentFacebookProfile = [FRDStorageManager sharedStorage].currentFacebookProfile;
-    self.nameLabel.text = currentFacebookProfile.fullName;
-    self.ageLabel.text = [NSString localizedStringWithFormat:@"%d %@", currentFacebookProfile.age, LOCALIZED(@"years")];
-    self.genderLabel.text = currentFacebookProfile.genderString;
+    FRDCurrentUserProfile *currentUserProfile = [FRDStorageManager sharedStorage].currentUserProfile;
     
-    [self.avatarImageView sd_setImageWithURL:currentFacebookProfile.avararURL];
+    self.nameLabel.text = currentUserProfile.fullName;
+    self.ageLabel.text = [NSString localizedStringWithFormat:@"%d %@", currentUserProfile.age, LOCALIZED(@"years")];
+    self.genderLabel.text = currentUserProfile.genderString;
+    
+    [self.avatarImageView sd_setImageWithURL:currentUserProfile.currentAvatar.photoURL];
 }
 
 @end

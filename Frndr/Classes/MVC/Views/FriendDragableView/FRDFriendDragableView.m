@@ -36,6 +36,32 @@
     self.overlayImageView.image = [UIImage imageNamed:overlayImageName];
 }
 
+#pragma mark - Lifecycle
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self commonInit];
+}
+
 #pragma mark - Actions
 
 - (void)configureWithNearestUser:(FRDNearestUser *)nearestUser
@@ -60,6 +86,17 @@
     self.jobTitleLabel.text = @"";
     
     self.friendProfileImageView.image = nil;
+}
+
+- (void)commonInit
+{
+//    self.layer.shadowColor = [UIColor blackColor].CGColor;
+//    self.layer.shadowOpacity = 0.25f;
+//    self.layer.shadowOffset = CGSizeMake(0, 2.5);
+//    self.layer.shadowRadius = 10.0;
+//    self.layer.shouldRasterize = YES;
+//    self.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+    self.layer.cornerRadius = 10.0;
 }
 
 @end

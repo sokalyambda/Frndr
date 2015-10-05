@@ -29,6 +29,8 @@
 #import "FRDAnimator.h"
 #import "FRDRedirectionHelper.h"
 
+#import "FRDAvatar.h"
+
 @interface FRDTutorialController ()<TTTAttributedLabelDelegate, UIScrollViewDelegate, ContainerViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *tutorialScrollView;
@@ -158,14 +160,58 @@
             //Init current user profile
             [FRDStorageManager sharedStorage].currentUserProfile = [FRDCurrentUserProfile userProfileWithFacebookProfile:facebookProfile];
             
-            [FRDProjectFacade signInWithFacebookOnSuccess:^(BOOL isSuccess) {
-                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            
+            [FRDProjectFacade signInWithFacebookOnSuccess:^(NSString *userId, BOOL avatarExists) {
                 
-                //set successfull login
-                [FRDFacebookService setLoginSuccess:isSuccess];
-
-                //redirect to search friends
-                [FRDRedirectionHelper redirectToMainContainerControllerWithNavigationController:(FRDBaseNavigationController *)weakSelf.navigationController andDelegate:weakSelf];
+#warning get the user id and open the socket
+                
+                if (!avatarExists) {
+                    
+                    //download the avatar image
+                    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[FRDStorageManager sharedStorage].currentUserProfile.avatarURL options:SDWebImageDownloaderHighPriority progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+                        
+                        [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar.avatarImage = image;
+                        
+                        [FRDProjectFacade uploadUserAvatarOnSuccess:^(BOOL isSuccess) {
+                            
+                            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                            
+                            //set successfull login
+                            [FRDFacebookService setLoginSuccess:isSuccess];
+                            
+                            //redirect to search friends
+                            [FRDRedirectionHelper redirectToMainContainerControllerWithNavigationController:(FRDBaseNavigationController *)weakSelf.navigationController andDelegate:weakSelf];
+                            
+                        } onFailure:^(NSError *error, BOOL isCanceled) {
+                            
+                            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                            [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+                            
+                        }];
+                        
+                    }];
+                    
+                } else {
+                    
+                    [FRDProjectFacade getAvatarWithSmallValue:NO onSuccess:^(FRDAvatar *avatar) {
+                        
+                        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                        
+                        //set avatar, it has been existed already
+                        [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar = avatar;
+                        
+                        //set successfull login
+                        [FRDFacebookService setLoginSuccess:isSuccess];
+                        
+                        //redirect to search friends
+                        [FRDRedirectionHelper redirectToMainContainerControllerWithNavigationController:(FRDBaseNavigationController *)weakSelf.navigationController andDelegate:weakSelf];
+                        
+                    } onFailure:^(NSError *error, BOOL isCanceled) {
+                        
+                        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+                    }];
+                }
                 
             } onFailure:^(NSError *error, BOOL isCanceled) {
                 [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
@@ -182,7 +228,6 @@
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
      }];
-//    [FRDRedirectionHelper redirectToMainContainerControllerWithNavigationController:(FRDBaseNavigationController *)self.navigationController andDelegate:self];
 }
 
 /**

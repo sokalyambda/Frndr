@@ -1,45 +1,45 @@
 //
-//  FRDLikeUserByIdRequest.m
+//  FRDGetAvatarRequest.m
 //  Frndr
 //
-//  Created by Eugenity on 29.09.15.
+//  Created by Eugenity on 05.10.15.
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "FRDLikeUserByIdRequest.h"
+#import "FRDGetAvatarRequest.h"
 
-static NSString *const kRequestAction = @"users/like";
+#import "FRDAvatar.h"
 
-@interface FRDLikeUserByIdRequest ()
+static NSString *const kRequestAction = @"image/avatar";
+
+@interface FRDGetAvatarRequest ()
 
 @property (strong, nonatomic) NSString *requestAction;
+@property (assign, nonatomic) BOOL small;
 
 @end
 
-@implementation FRDLikeUserByIdRequest
+@implementation FRDGetAvatarRequest
 
 #pragma mark - Accessors
 
 - (NSString *)requestAction
 {
-    return [NSString stringWithFormat:@"%@/%@", kRequestAction, self.currentUserId];
+    return self.small ? [NSString stringWithFormat:@"%@/small", kRequestAction] : kRequestAction;
 }
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithUserId:(NSString *)userId
+- (instancetype)initWithSmall:(BOOL)small
 {
     self = [super init];
     if (self) {
-        _currentUserId = userId;
-        
+        _small = small;
         self.action = self.requestAction;
         _method = @"GET";
         
         NSMutableDictionary *parameters = [@{
                                              } mutableCopy];
-        
-        _retryIfConnectionFailed = NO;
         
         self.serializationType = FRDRequestSerializationTypeJSON;
         
@@ -50,7 +50,9 @@ static NSString *const kRequestAction = @"users/like";
 
 - (BOOL)parseJSONDataSucessfully:(id)responseObject error:(NSError *__autoreleasing *)error
 {
-    return !!responseObject;
+    self.currentAvatar = [[FRDAvatar alloc] initWithServerResponse:responseObject];
+    
+    return !!(self.currentAvatar);
 }
 
 @end

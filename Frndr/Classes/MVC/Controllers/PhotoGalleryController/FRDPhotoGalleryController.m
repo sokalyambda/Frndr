@@ -12,19 +12,57 @@
 
 #import "FRDPhotoGalleryCollectionViewCell.h"
 
+#import "FRDProjectFacade.h"
+
+#import "FRDAvatar.h"
+
 @interface FRDPhotoGalleryController () <UICollectionViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
+@property (strong, nonatomic) NSArray *photosGallery;
+@property (strong, nonatomic) FRDAvatar *currentAvatar;
+
 @end
 
 @implementation FRDPhotoGalleryController
+
+#pragma mark - Accessors
+
+- (FRDAvatar *)currentAvatar
+{
+    if (!_currentAvatar) {
+        _currentAvatar = [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar;
+    }
+    return _currentAvatar;
+}
+
+- (void)setPhotosGallery:(NSArray *)photosGallery
+{
+    _photosGallery = photosGallery;
+    [self.collectionView reloadData];
+}
 
 #pragma mark - View's Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [FRDProjectFacade getAvatarAndGalleryOnSuccess:^(FRDAvatar *avatar, NSArray *gallery) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        weakSelf.photosGallery = gallery;
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+    }];
 }
 
 #pragma mark - Actions
@@ -46,13 +84,27 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 30;
+    return self.photosGallery.count + 2; //first image is avatar and last image is 'plus'
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     FRDPhotoGalleryCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([FRDPhotoGalleryCollectionViewCell class]) forIndexPath:indexPath];
-    cell.imageView.image = [UIImage imageNamed:@"Tutorial01"];
+    
+    FRDGalleryPhoto *galleryPhoto = self.photosGallery[indexPath.row];
+    
+    if (indexPath.row != self.photosGallery.count + 1) {
+        
+        if (indexPath.row == 0) {
+            [cell configureWithGalleryPhoto:self.currentAvatar];
+        } else {
+            [cell configureWithGalleryPhoto:galleryPhoto];
+        }
+        
+    } else {
+        [cell configureWithGalleryPhoto:nil];
+    }
+    
     return cell;
 }
 

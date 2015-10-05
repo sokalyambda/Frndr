@@ -26,6 +26,8 @@ static NSString *const kAppleOSVersion = @"APPLE";
         self.action = [self requestAction];
         _method = @"POST";
         
+        _retryIfConnectionFailed = NO;
+        
         NSString *pushToken = [FRDStorageManager sharedStorage].deviceToken;
         
         NSMutableDictionary *parameters;

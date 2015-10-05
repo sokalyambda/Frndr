@@ -40,6 +40,8 @@ static NSString *const kRequestAction = @"users/find";
         self.action = self.requestAction;
         _method = @"GET";
         
+        _retryIfConnectionFailed = NO;
+        
         NSMutableDictionary *parameters = [@{} mutableCopy];
         
         self.serializationType = FRDRequestSerializationTypeJSON;

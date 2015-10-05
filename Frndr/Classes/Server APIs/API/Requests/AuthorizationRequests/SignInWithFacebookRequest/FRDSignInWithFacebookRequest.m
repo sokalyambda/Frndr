@@ -15,6 +15,9 @@ static NSString *const requestAction = @"signIn";
 static NSString *const kFacebookAccessToken = @"fbId";
 static NSString *const kGeolocationCoordinates = @"coordinates";
 
+static NSString *const kAvatarExists = @"haveAvatar";
+static NSString *const kUserId = @"userId";
+
 @implementation FRDSignInWithFacebookRequest
 
 #pragma mark - Lifecycle
@@ -44,7 +47,9 @@ static NSString *const kGeolocationCoordinates = @"coordinates";
 
 - (BOOL)parseJSONDataSucessfully:(id)responseObject error:(NSError *__autoreleasing *)error
 {
-    return !!responseObject;
+    self.avatarExists = [responseObject[kAvatarExists] boolValue];
+    self.userId = responseObject[kUserId];
+    return !!self.userId;
 }
 
 - (NSString *)requestAction

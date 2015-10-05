@@ -32,8 +32,14 @@ static NSString *const kMainStoryboardName = @"Main";
     UIStoryboard *mainBoard = [UIStoryboard storyboardWithName:kMainStoryboardName bundle:nil];
     
     FRDPreferencesController *preferencesController = [mainBoard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPreferencesController class])];
+    preferencesController.transitionWithDamping = YES;
+    
     FRDFriendsListController *friendsListController = [mainBoard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDFriendsListController class])];
+    friendsListController.transitionWithDamping = YES;
+    
     FRDSearchFriendsController *searchFriendsController = [mainBoard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDSearchFriendsController class])];
+    searchFriendsController.transitionWithDamping = NO;
+    
     FRDContainerViewController *container = [mainBoard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDContainerViewController class])];
     
     searchFriendsController.updateNeeded = YES;

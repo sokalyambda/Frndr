@@ -15,6 +15,8 @@
 #import "FRDAnimator.h"
 #import "FRDRedirectionHelper.h"
 
+#import "FRDAvatar.h"
+
 static NSString *const kTutorialSegueIdentifier = @"tutorialSegueIdentifier";
 
 @interface FRDAutologinViewController ()<ContainerViewControllerDelegate>
@@ -61,16 +63,59 @@ static NSString *const kTutorialSegueIdentifier = @"tutorialSegueIdentifier";
 {
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-    [FRDProjectFacade signInWithFacebookOnSuccess:^(BOOL isSuccess) {
+    [FRDProjectFacade signInWithFacebookOnSuccess:^(NSString *userId, BOOL avatarExists) {
         
         //Init Current Profile
         FRDFacebookProfile *currentFacebookProfile = [FRDStorageManager sharedStorage].currentFacebookProfile;
         FRDCurrentUserProfile *currentProfile = [FRDCurrentUserProfile userProfileWithFacebookProfile:currentFacebookProfile];
         [FRDStorageManager sharedStorage].currentUserProfile = currentProfile;
         
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        [weakSelf moveToSearchFriendsController];
         
+        if (!avatarExists) {
+            
+            //download the avatar image
+            [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[FRDStorageManager sharedStorage].currentUserProfile.avatarURL options:SDWebImageDownloaderHighPriority progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+                
+                [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar.avatarImage = image;
+                
+                [FRDProjectFacade uploadUserAvatarOnSuccess:^(BOOL isSuccess) {
+                    
+                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                    
+                    [weakSelf moveToSearchFriendsController];
+                    
+                } onFailure:^(NSError *error, BOOL isCanceled) {
+                    
+                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                    [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+                    
+                }];
+                
+            }];
+            
+        } else {
+            
+            //get avatar
+            [FRDProjectFacade getAvatarWithSmallValue:NO onSuccess:^(FRDAvatar *avatar) {
+                
+                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                
+                //set avatar, it has been existed already
+                [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar = avatar;
+                
+                [weakSelf moveToSearchFriendsController];
+                
+            } onFailure:^(NSError *error, BOOL isCanceled) {
+               
+                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
+                    [weakSelf moveToTutorialAfterDelay:0.f];
+                }];
+                
+            }];
+            
+        }
+  
     } onFailure:^(NSError *error, BOOL isCanceled) {
         
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];

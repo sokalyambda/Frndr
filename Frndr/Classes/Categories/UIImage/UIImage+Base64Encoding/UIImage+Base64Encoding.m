@@ -12,7 +12,7 @@
 
 - (NSString *)encodeToBase64String
 {
-    return [UIImagePNGRepresentation(self) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    return [UIImagePNGRepresentation(self) base64EncodedStringWithOptions:0];
 }
 
 @end
