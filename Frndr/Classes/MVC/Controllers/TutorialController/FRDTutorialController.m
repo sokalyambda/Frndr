@@ -193,21 +193,30 @@
                     
                 } else {
                     
-                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                    
-                    //set successfull login
-                    [FRDFacebookService setLoginSuccess:isSuccess];
-                    
-                    //redirect to search friends
-                    [FRDRedirectionHelper redirectToMainContainerControllerWithNavigationController:(FRDBaseNavigationController *)weakSelf.navigationController andDelegate:weakSelf];
+                    [FRDProjectFacade getAvatarWithSmallValue:NO onSuccess:^(FRDAvatar *avatar) {
+                        
+                        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                        
+                        //set avatar, it has been existed already
+                        [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar = avatar;
+                        
+                        //set successfull login
+                        [FRDFacebookService setLoginSuccess:isSuccess];
+                        
+                        //redirect to search friends
+                        [FRDRedirectionHelper redirectToMainContainerControllerWithNavigationController:(FRDBaseNavigationController *)weakSelf.navigationController andDelegate:weakSelf];
+                        
+                    } onFailure:^(NSError *error, BOOL isCanceled) {
+                        
+                        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+                    }];
                 }
                 
             } onFailure:^(NSError *error, BOOL isCanceled) {
                 [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                 [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
             }];
-            
-            
 
         } onFailure:^(NSError *error) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];

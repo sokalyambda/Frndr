@@ -94,8 +94,26 @@ static NSString *const kTutorialSegueIdentifier = @"tutorialSegueIdentifier";
             }];
             
         } else {
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            [weakSelf moveToSearchFriendsController];
+            
+            //get avatar
+            [FRDProjectFacade getAvatarWithSmallValue:NO onSuccess:^(FRDAvatar *avatar) {
+                
+                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                
+                //set avatar, it has been existed already
+                [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar = avatar;
+                
+                [weakSelf moveToSearchFriendsController];
+                
+            } onFailure:^(NSError *error, BOOL isCanceled) {
+               
+                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
+                    [weakSelf moveToTutorialAfterDelay:0.f];
+                }];
+                
+            }];
+            
         }
   
     } onFailure:^(NSError *error, BOOL isCanceled) {

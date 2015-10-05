@@ -12,9 +12,6 @@
 
 static NSString *const kRequestAction = @"image/avatar";
 
-static NSString *const kAvatar = @"avatar";
-static NSString *const kPhotosGallery = @"gallery";
-
 @interface FRDGetAvatarRequest ()
 
 @property (strong, nonatomic) NSString *requestAction;
@@ -53,7 +50,7 @@ static NSString *const kPhotosGallery = @"gallery";
 
 - (BOOL)parseJSONDataSucessfully:(id)responseObject error:(NSError *__autoreleasing *)error
 {
-    self.currentAvatar = [[FRDAvatar alloc] initWithServerResponse:responseObject[kAvatar]];
+    self.currentAvatar = [[FRDAvatar alloc] initWithServerResponse:responseObject];
     
     return !!(self.currentAvatar);
 }
