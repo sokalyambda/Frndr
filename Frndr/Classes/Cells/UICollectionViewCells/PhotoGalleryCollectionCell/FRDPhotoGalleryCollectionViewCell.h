@@ -6,8 +6,10 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
+@class FRDGalleryPhoto;
+
 @interface FRDPhotoGalleryCollectionViewCell : UICollectionViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+- (void)configureWithGalleryPhoto:(FRDGalleryPhoto *)photo;
 
 @end

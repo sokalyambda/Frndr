@@ -10,7 +10,7 @@
 
 #import "FRDAvatar.h"
 
-static NSString *const requestAction = @"image/managePhotoes";
+static NSString *const requestAction = @"image/managePhotos";
 
 static NSString *const kAvatar = @"avatar";
 static NSString *const kPhotosGallery = @"gallery";
