@@ -28,8 +28,4 @@ typedef NS_ENUM(NSInteger, FRDChatCellPositionInSet)
 
 + (instancetype)chatCellWithType:(FRDChatCellType)cellType;
 
-- (void)configureWithMessage:(NSString *)message
-                   timeStamp:(NSDate *)timeStamp
-               positionInSet:(FRDChatCellPositionInSet)positionInSet;
-
 @end

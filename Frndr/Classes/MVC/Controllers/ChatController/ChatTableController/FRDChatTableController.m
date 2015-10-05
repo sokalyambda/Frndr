@@ -24,7 +24,7 @@
 {
     [super viewDidLoad];
     
-    self.tableView.estimatedRowHeight = 50.f;
+    self.tableView.estimatedRowHeight = 10.f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
@@ -52,14 +52,20 @@
     NSInteger i = indexPath.row % 3;
     
     if (i == 0) {
-        cell = [FRDBaseChatCell chatCellWithType:(FRDChatCellType)i];
-        [cell configureWithMessage:@"Message from User: Hi from user!" timeStamp:[NSDate date] positionInSet:FRDChatCellPositionInSetFirst];
+        cell = [FRDBaseChatCell chatCellWithType:(FRDChatCellType)0];
+        cell.message = @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+        cell.timeStamp = [NSDate date];
+        cell.positionInSet = FRDChatCellPositionInSetFirst;
     } else if (i == 1) {
-        cell = [FRDBaseChatCell chatCellWithType:(FRDChatCellType)i];
-        [cell configureWithMessage:@"Message from Friend: Hi from friend!" timeStamp:[NSDate date] positionInSet:FRDChatCellPositionInSetFirst];
+        cell = [FRDBaseChatCell chatCellWithType:(FRDChatCellType)0];
+        cell.message = @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+        cell.timeStamp = [NSDate date];
+        cell.positionInSet = FRDChatCellPositionInSetIntermediary;
     } else if (i == 2) {
-        cell = [FRDBaseChatCell chatCellWithType:(FRDChatCellType)i];
-        [cell configureWithMessage:@"Message from System: Hi from system!" timeStamp:[NSDate date] positionInSet:FRDChatCellPositionInSetFirst];
+        cell = [FRDBaseChatCell chatCellWithType:(FRDChatCellType)0];
+        cell.message = @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+        cell.timeStamp = [NSDate date];
+        cell.positionInSet = FRDChatCellPositionInSetLast;
     }
     
     return cell;
