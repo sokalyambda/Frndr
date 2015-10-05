@@ -34,6 +34,15 @@
 
 #pragma mark - Actions
 
+- (void)addTapGestures
+{
+    UITapGestureRecognizer *crossTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleCrossClick:)];
+    [self.crossImageView addGestureRecognizer:crossTap];
+    
+    UITapGestureRecognizer *plusTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handlePlusClick:)];
+    [self.plusImageView addGestureRecognizer:plusTap];
+}
+
 - (void)configureWithGalleryPhoto:(FRDGalleryPhoto *)photo
 {
     self.transparencyView.hidden = self.profilePictureLabel.hidden = ![photo isKindOfClass:[FRDAvatar class]];
@@ -42,6 +51,22 @@
     
     if (photo) {
         [self.imageView sd_setImageWithURL:photo.photoURL];
+    }
+    
+    [self addTapGestures];
+}
+
+- (void)handlePlusClick:(UITapGestureRecognizer *)tap
+{
+    if ([self.delegate respondsToSelector:@selector(galleryCell:didTapPlusImageView:)]) {
+        [self.delegate galleryCell:self didTapPlusImageView:self.plusImageView];
+    }
+}
+
+- (void)handleCrossClick:(UITapGestureRecognizer *)tap
+{
+    if ([self.delegate respondsToSelector:@selector(galleryCell:didTapCrossImageView:)]) {
+        [self.delegate galleryCell:self didTapCrossImageView:self.crossImageView];
     }
 }
 

@@ -7,9 +7,20 @@
 //
 
 @class FRDGalleryPhoto;
+@protocol FRDGalleryCellDelegate;
 
 @interface FRDPhotoGalleryCollectionViewCell : UICollectionViewCell
 
+@property (weak, nonatomic) id<FRDGalleryCellDelegate> delegate;
+
 - (void)configureWithGalleryPhoto:(FRDGalleryPhoto *)photo;
+
+@end
+
+@protocol FRDGalleryCellDelegate <NSObject>
+
+@optional
+- (void)galleryCell:(FRDPhotoGalleryCollectionViewCell *)cell didTapCrossImageView:(UIImageView *)crossImageView;
+- (void)galleryCell:(FRDPhotoGalleryCollectionViewCell *)cell didTapPlusImageView:(UIImageView *)plusImageView;
 
 @end

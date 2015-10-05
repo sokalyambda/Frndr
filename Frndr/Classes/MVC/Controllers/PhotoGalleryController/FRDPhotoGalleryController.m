@@ -16,7 +16,7 @@
 
 #import "FRDAvatar.h"
 
-@interface FRDPhotoGalleryController () <UICollectionViewDataSource>
+@interface FRDPhotoGalleryController () <UICollectionViewDataSource, FRDGalleryCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
@@ -95,6 +95,8 @@
 {
     FRDPhotoGalleryCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([FRDPhotoGalleryCollectionViewCell class]) forIndexPath:indexPath];
 
+    cell.delegate = self;
+    
     if (indexPath.row != self.photosGallery.count + 1) {
         
         if (indexPath.row == 0) {
@@ -109,6 +111,18 @@
     }
     
     return cell;
+}
+
+#pragma mark - FRDGalleryCellDelegate
+
+- (void)galleryCell:(FRDPhotoGalleryCollectionViewCell *)cell didTapPlusImageView:(UIImageView *)plusImageView
+{
+    NSLog(@"plus tapped");
+}
+
+- (void)galleryCell:(FRDPhotoGalleryCollectionViewCell *)cell didTapCrossImageView:(UIImageView *)crossImageView
+{
+    NSLog(@"cross tapped");
 }
 
 @end

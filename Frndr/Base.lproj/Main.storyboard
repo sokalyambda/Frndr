@@ -3255,7 +3255,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZZ3-aI-rs8">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plusSymbol" translatesAutoresizingMaskIntoConstraints="NO" id="kQv-j9-jA4" userLabel="Plus Icon">
+                                                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plusSymbol" translatesAutoresizingMaskIntoConstraints="NO" id="kQv-j9-jA4" userLabel="Plus Icon">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="Cv5-qu-wFC"/>
@@ -3274,7 +3274,7 @@
                                                         </mask>
                                                     </variation>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crossSymbol" translatesAutoresizingMaskIntoConstraints="NO" id="PXN-9E-WkH" userLabel="Cross Icon">
+                                                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crossSymbol" translatesAutoresizingMaskIntoConstraints="NO" id="PXN-9E-WkH" userLabel="Cross Icon">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="XF8-Dn-9qf"/>
@@ -3346,21 +3346,21 @@
                                                 <exclude reference="cyl-yj-P9q"/>
                                             </mask>
                                             <mask key="constraints">
+                                                <exclude reference="QXI-ai-gPM"/>
+                                                <exclude reference="SFl-qA-kPZ"/>
+                                                <exclude reference="dWe-Pt-0L5"/>
+                                                <exclude reference="jsa-op-G2A"/>
+                                                <exclude reference="dJk-Ca-33q"/>
+                                                <exclude reference="l8Q-Yu-lNV"/>
+                                                <exclude reference="lZX-Od-5eL"/>
+                                                <exclude reference="Yae-Kn-bSc"/>
+                                                <exclude reference="i5w-rP-e2Y"/>
                                                 <exclude reference="b5V-ed-pWo"/>
                                                 <exclude reference="kQT-Yg-E9N"/>
                                                 <exclude reference="rST-zJ-1Wz"/>
                                                 <exclude reference="uay-98-ua3"/>
                                                 <exclude reference="9iz-mA-t4E"/>
                                                 <exclude reference="V1j-BZ-3Ir"/>
-                                                <exclude reference="dJk-Ca-33q"/>
-                                                <exclude reference="l8Q-Yu-lNV"/>
-                                                <exclude reference="lZX-Od-5eL"/>
-                                                <exclude reference="Yae-Kn-bSc"/>
-                                                <exclude reference="i5w-rP-e2Y"/>
-                                                <exclude reference="QXI-ai-gPM"/>
-                                                <exclude reference="SFl-qA-kPZ"/>
-                                                <exclude reference="dWe-Pt-0L5"/>
-                                                <exclude reference="jsa-op-G2A"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
@@ -3372,21 +3372,21 @@
                                                 <include reference="cyl-yj-P9q"/>
                                             </mask>
                                             <mask key="constraints">
+                                                <include reference="QXI-ai-gPM"/>
+                                                <include reference="SFl-qA-kPZ"/>
+                                                <include reference="dWe-Pt-0L5"/>
+                                                <include reference="jsa-op-G2A"/>
+                                                <include reference="dJk-Ca-33q"/>
+                                                <include reference="l8Q-Yu-lNV"/>
+                                                <include reference="lZX-Od-5eL"/>
+                                                <include reference="Yae-Kn-bSc"/>
+                                                <include reference="i5w-rP-e2Y"/>
                                                 <include reference="b5V-ed-pWo"/>
                                                 <include reference="kQT-Yg-E9N"/>
                                                 <include reference="rST-zJ-1Wz"/>
                                                 <include reference="uay-98-ua3"/>
                                                 <include reference="9iz-mA-t4E"/>
                                                 <include reference="V1j-BZ-3Ir"/>
-                                                <include reference="dJk-Ca-33q"/>
-                                                <include reference="l8Q-Yu-lNV"/>
-                                                <include reference="lZX-Od-5eL"/>
-                                                <include reference="Yae-Kn-bSc"/>
-                                                <include reference="i5w-rP-e2Y"/>
-                                                <include reference="QXI-ai-gPM"/>
-                                                <include reference="SFl-qA-kPZ"/>
-                                                <include reference="dWe-Pt-0L5"/>
-                                                <include reference="jsa-op-G2A"/>
                                             </mask>
                                         </variation>
                                         <connections>
