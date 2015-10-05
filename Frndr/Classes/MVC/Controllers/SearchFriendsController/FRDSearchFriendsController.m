@@ -183,14 +183,16 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 #pragma mark - Updating Actions
 - (void)getCurrentUserProfileOnSuccess:(void(^)(void))success onFailure:(void(^)(NSError *error))failure
 {
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [FRDProjectFacade getCurrentUserProfileOnSuccess:^(BOOL isSuccess) {
-        
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         if (success) {
             success();
         }
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
-        
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         if (failure) {
             failure(error);
         }
@@ -200,14 +202,16 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 
 - (void)getCurrentSearchSettingsOnSuccess:(void(^)(void))success onFailure:(void(^)(NSError *error))failure
 {
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [FRDProjectFacade getCurrentSearchSettingsOnSuccess:^(FRDSearchSettings *currentSearchSettings) {
-        
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         if (success) {
             success();
         }
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
-        
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         if (failure) {
             failure(error);
         }
@@ -224,9 +228,10 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     BOOL isSearchSettingsUpdateNeeded = [FRDStorageManager sharedStorage].isSearchSettingsUpdateNeeded;
     
     WEAK_SELF;
-    if (!self.isOverlayPresented) {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    } else if (self.isOverlayPresented) {
+//    if (!self.isOverlayPresented) {
+//        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    } else
+    if (self.isOverlayPresented) {
         [self.pulsingOverlay addPulsingAnimations];
     }
     
@@ -333,7 +338,6 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     }];
     } else {
         [self updateNearestUserInformation];
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
     }
 }
 
@@ -378,6 +382,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     self.interestsLabel.text = interests;
     
     self.swipableViewsCounter = 0;
+    
     [self.dragableViewsHolder discardAllSwipeableViews];
     [self.dragableViewsHolder loadNextSwipeableViewsIfNeeded];
     
@@ -416,17 +421,13 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
  */
 - (void)likeCurrentFriendOnSuccess:(void(^)(void))success onFalilure:(void(^)(NSError *error))failure
 {
-    WEAK_SELF;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [FRDProjectFacade likeUserById:self.currentNearestUser.userId onSuccess:^(BOOL isSuccess) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
         if (success) {
             success();
         }
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
         if (failure) {
             failure(error);
@@ -440,17 +441,13 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
  */
 - (void)dislikeCurrentFriendOnSuccess:(void(^)(void))success onFalilure:(void(^)(NSError *error))failure
 {
-    WEAK_SELF;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [FRDProjectFacade dislikeUserById:self.currentNearestUser.userId onSuccess:^(BOOL isSuccess) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
         if (success) {
             success();
         }
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
         if (failure) {
             failure(error);

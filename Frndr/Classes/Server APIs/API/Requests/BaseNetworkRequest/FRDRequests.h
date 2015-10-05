@@ -27,4 +27,7 @@
 
 #import "FRDClearAllMessagesRequest.h"
 
+#import "FRDUploadAvatarRequest.h"
+#import "FRDGetGalleryPhotosRequest.h"
+
 #endif
