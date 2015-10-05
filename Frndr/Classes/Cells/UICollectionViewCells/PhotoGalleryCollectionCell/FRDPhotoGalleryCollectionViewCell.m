@@ -8,11 +8,15 @@
 
 #import "FRDPhotoGalleryCollectionViewCell.h"
 
-#import "FRDGalleryPhoto.h"
+#import "FRDAvatar.h"
 
 @interface FRDPhotoGalleryCollectionViewCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIImageView *crossImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *plusImageView;
+@property (weak, nonatomic) IBOutlet UIView *transparencyView;
+@property (weak, nonatomic) IBOutlet UILabel *profilePictureLabel;
 
 @end
 
@@ -32,9 +36,11 @@
 
 - (void)configureWithGalleryPhoto:(FRDGalleryPhoto *)photo
 {
-    if (!photo) {
-        [self.imageView setImage:[UIImage imageNamed:@"plusSymbol"]];
-    } else {
+    self.transparencyView.hidden = self.profilePictureLabel.hidden = ![photo isKindOfClass:[FRDAvatar class]];
+    self.plusImageView.hidden = !!photo;
+    self.crossImageView.hidden = !photo;
+    
+    if (photo) {
         [self.imageView sd_setImageWithURL:photo.photoURL];
     }
 }

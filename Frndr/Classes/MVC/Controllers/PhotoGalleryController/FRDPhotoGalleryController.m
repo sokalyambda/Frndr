@@ -52,12 +52,16 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [FRDProjectFacade getAvatarAndGalleryOnSuccess:^(FRDAvatar *avatar, NSArray *gallery) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
         weakSelf.photosGallery = gallery;
+        if (!weakSelf.currentAvatar) {
+            weakSelf.currentAvatar = avatar;
+        }
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
@@ -90,14 +94,13 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     FRDPhotoGalleryCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([FRDPhotoGalleryCollectionViewCell class]) forIndexPath:indexPath];
-    
-    FRDGalleryPhoto *galleryPhoto = self.photosGallery[indexPath.row];
-    
+
     if (indexPath.row != self.photosGallery.count + 1) {
         
         if (indexPath.row == 0) {
             [cell configureWithGalleryPhoto:self.currentAvatar];
         } else {
+            FRDGalleryPhoto *galleryPhoto = self.photosGallery[indexPath.row];
             [cell configureWithGalleryPhoto:galleryPhoto];
         }
         
