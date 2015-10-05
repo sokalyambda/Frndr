@@ -10,4 +10,7 @@
 
 @interface FRDSignInWithFacebookRequest : FRDNetworkRequest
 
+@property (strong, nonatomic) NSString *userId;
+@property (assign, nonatomic) BOOL avatarExists;
+
 @end

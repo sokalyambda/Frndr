@@ -8,7 +8,21 @@
 
 #import "FRDPhotoGalleryCollectionViewCell.h"
 
+#import "FRDAvatar.h"
+
+@interface FRDPhotoGalleryCollectionViewCell ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIImageView *crossImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *plusImageView;
+@property (weak, nonatomic) IBOutlet UIView *transparencyView;
+@property (weak, nonatomic) IBOutlet UILabel *profilePictureLabel;
+
+@end
+
 @implementation FRDPhotoGalleryCollectionViewCell
+
+#pragma mark - Lifecycle
 
 - (void)awakeFromNib
 {
@@ -16,6 +30,44 @@
     
     self.contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.contentView.translatesAutoresizingMaskIntoConstraints = YES;
+}
+
+#pragma mark - Actions
+
+- (void)addTapGestures
+{
+    UITapGestureRecognizer *crossTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleCrossClick:)];
+    [self.crossImageView addGestureRecognizer:crossTap];
+    
+    UITapGestureRecognizer *plusTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handlePlusClick:)];
+    [self.plusImageView addGestureRecognizer:plusTap];
+}
+
+- (void)configureWithGalleryPhoto:(FRDGalleryPhoto *)photo
+{
+    self.transparencyView.hidden = self.profilePictureLabel.hidden = ![photo isKindOfClass:[FRDAvatar class]];
+    self.plusImageView.hidden = !!photo;
+    self.crossImageView.hidden = !photo;
+    
+    if (photo) {
+        [self.imageView sd_setImageWithURL:photo.photoURL];
+    }
+    
+    [self addTapGestures];
+}
+
+- (void)handlePlusClick:(UITapGestureRecognizer *)tap
+{
+    if ([self.delegate respondsToSelector:@selector(galleryCell:didTapPlusImageView:)]) {
+        [self.delegate galleryCell:self didTapPlusImageView:self.plusImageView];
+    }
+}
+
+- (void)handleCrossClick:(UITapGestureRecognizer *)tap
+{
+    if ([self.delegate respondsToSelector:@selector(galleryCell:didTapCrossImageView:)]) {
+        [self.delegate galleryCell:self didTapCrossImageView:self.crossImageView];
+    }
 }
 
 @end

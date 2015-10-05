@@ -14,4 +14,6 @@
 
 - (void)customizeTopView:(FRDTopContentView *)topContentView;
 
+@property (assign, nonatomic) BOOL transitionWithDamping;
+
 @end

@@ -39,6 +39,8 @@ static NSString *const kRequestAction = @"users/like";
         NSMutableDictionary *parameters = [@{
                                              } mutableCopy];
         
+        _retryIfConnectionFailed = NO;
+        
         self.serializationType = FRDRequestSerializationTypeJSON;
         
         [self setParametersWithParamsData:parameters];

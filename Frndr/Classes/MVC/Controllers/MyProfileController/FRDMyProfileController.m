@@ -184,7 +184,7 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
 - (IBAction)managePhotosPress:(id)sender
 {
     FRDPhotoGalleryController *photoGalleryController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPhotoGalleryController class])];
-    [self.navigationController showViewController:photoGalleryController sender:self];
+    [self.navigationController pushViewController:photoGalleryController animated:YES];
 }
 
 - (void)customizeNavigationItem

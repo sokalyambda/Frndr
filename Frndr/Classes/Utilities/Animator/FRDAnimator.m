@@ -14,12 +14,12 @@
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext
 {
-    return 1;
+    return .5f;
 }
 
-static CGFloat const kChildViewPadding = 16;
-static CGFloat const kDamping = 0.75;
-static CGFloat const kInitialSpringVelocity = 0.5;
+static CGFloat const kChildViewPadding = 16.f;
+static CGFloat const kDamping = 0.7f;
+static CGFloat const kInitialSpringVelocity = 0.5f;
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
 {
     /*
@@ -50,7 +50,7 @@ static CGFloat const kInitialSpringVelocity = 0.5;
     toViewController.view.alpha = 0;
     toViewController.view.transform = CGAffineTransformInvert (travel);
     
-    [UIView animateWithDuration:[self transitionDuration:transitionContext] delay:0 usingSpringWithDamping:kDamping initialSpringVelocity:kInitialSpringVelocity options:0x00 animations:^{
+    [UIView animateWithDuration:[self transitionDuration:transitionContext] delay:0 usingSpringWithDamping:!toViewController.transitionWithDamping ? 1.f : kDamping initialSpringVelocity:kInitialSpringVelocity options:0x00 animations:^{
         fromViewController.view.transform = travel;
         fromViewController.view.alpha = 0;
         toViewController.view.transform = CGAffineTransformIdentity;

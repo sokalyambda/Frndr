@@ -8,7 +8,7 @@
 
 #import "FRDBaseUserModel.h"
 
-@class FRDSearchSettings;
+@class FRDSearchSettings, FRDAvatar;
 
 @interface FRDCurrentUserProfile : FRDBaseUserModel
 
@@ -18,6 +18,8 @@
 @property (assign, nonatomic, getter=isMessagesNotificationsEnabled) BOOL messagesNotificationsEnabled;
 
 @property (strong, nonatomic) FRDSearchSettings *currentSearchSettings;
+
+@property (strong, nonatomic) FRDAvatar *currentAvatar;
 
 + (instancetype)userProfileWithFacebookProfile:(FRDFacebookProfile *)facebookProfile;
 - (instancetype)updateWithUserProfile:(FRDCurrentUserProfile *)profile;

@@ -19,6 +19,7 @@
 #import "FRDNearestUsersService.h"
 
 #import "FRDSearchSettings.h"
+#import "FRDAvatar.h"
 
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 
@@ -319,15 +320,17 @@ NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
 
 /******* FaceBook *******/
 
-+ (FRDNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(BOOL isSuccess))success
++ (FRDNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(NSString *userId, BOOL avatarExists))success
                                            onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
     FRDSignInWithFacebookRequest *request = [[FRDSignInWithFacebookRequest alloc] init];
     
     FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
         
+        FRDSignInWithFacebookRequest *request = (FRDSignInWithFacebookRequest *)operation.networkRequest;
+        
         if (success) {
-            success(YES);
+            success(request.userId, request.avatarExists);
         }
         
     } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
@@ -443,6 +446,147 @@ NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
         
         if (success) {
             success(YES);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
+#pragma mark - Images Module
+
++ (FRDNetworkOperation *)uploadUserAvatarOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+{
+    FRDUploadAvatarRequest *request = [[FRDUploadAvatarRequest alloc] init];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+//new
++ (FRDNetworkOperation *)uploadPhotoToGalleryOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+{
+    FRDUploadPhotoToGalleryRequest *request = [[FRDUploadPhotoToGalleryRequest alloc] init];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
++ (FRDNetworkOperation *)removeAvatarOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+{
+    FRDRemoveAvatarRequest *request = [[FRDRemoveAvatarRequest alloc] init];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
++ (FRDNetworkOperation *)removePhotoFromGalleryOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+{
+    FRDRemoveImageFromGalleryRequest *request = [[FRDRemoveImageFromGalleryRequest alloc] init];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
++ (FRDNetworkOperation *)getAvatarAndGalleryOnSuccess:(void(^)(FRDAvatar *avatar, NSArray *gallery))success onFailure:(FailureBlock)failure
+{
+    FRDGetAvatarAndGalleryPhotosRequest *request = [[FRDGetAvatarAndGalleryPhotosRequest alloc] init];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        FRDGetAvatarAndGalleryPhotosRequest *request = (FRDGetAvatarAndGalleryPhotosRequest *)operation.networkRequest;
+        
+        if (success) {
+            success(request.currentAvatar, request.galleryPhotos);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
++ (FRDNetworkOperation *)getAvatarWithSmallValue:(BOOL)small onSuccess:(void(^)(FRDAvatar *avatar))success onFailure:(FailureBlock)failure
+{
+    FRDGetAvatarRequest *request = [[FRDGetAvatarRequest alloc] initWithSmall:small];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        FRDGetAvatarRequest *request = (FRDGetAvatarRequest *)operation.networkRequest;
+        
+        if (success) {
+            success(request.currentAvatar);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
++ (FRDNetworkOperation *)getGalleryOnSuccess:(void(^)(NSArray *gallery))success onFailure:(FailureBlock)failure
+{
+    FRDGetGalleryPhotosRequest *request = [[FRDGetGalleryPhotosRequest alloc] init];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        FRDGetGalleryPhotosRequest *request = (FRDGetGalleryPhotosRequest *)operation.networkRequest;
+        
+        if (success) {
+            success(request.galleryPhotos);
         }
         
     } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {

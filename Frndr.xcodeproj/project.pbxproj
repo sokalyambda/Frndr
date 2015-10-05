@@ -71,6 +71,15 @@
 		587B3A951BA815850098154F /* FRDRelationshipCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587B3A931BA815850098154F /* FRDRelationshipCollectionCell.xib */; };
 		5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */; };
 		58A1A12E1BB926AD00E29789 /* FRDOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A1A12D1BB926AD00E29789 /* FRDOverlayView.m */; settings = {ASSET_TAGS = (); }; };
+		58B27CF11BC193520035712C /* FRDUploadAvatarRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B27CF01BC193520035712C /* FRDUploadAvatarRequest.m */; settings = {ASSET_TAGS = (); }; };
+		58B27CF51BC194290035712C /* FRDGetGalleryPhotosRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B27CF41BC194290035712C /* FRDGetGalleryPhotosRequest.m */; settings = {ASSET_TAGS = (); }; };
+		58B9701E1BC2486A0017785E /* FRDGetAvatarAndGalleryPhotosRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B9701D1BC2486A0017785E /* FRDGetAvatarAndGalleryPhotosRequest.m */; settings = {ASSET_TAGS = (); }; };
+		58B970221BC2493B0017785E /* FRDGalleryPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B970211BC2493B0017785E /* FRDGalleryPhoto.m */; settings = {ASSET_TAGS = (); }; };
+		58B970261BC249CF0017785E /* FRDAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B970251BC249CF0017785E /* FRDAvatar.m */; settings = {ASSET_TAGS = (); }; };
+		58B9702A1BC24C7A0017785E /* FRDRemoveImageFromGalleryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B970291BC24C7A0017785E /* FRDRemoveImageFromGalleryRequest.m */; settings = {ASSET_TAGS = (); }; };
+		58B9702E1BC24F1F0017785E /* FRDRemoveAvatarRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B9702D1BC24F1F0017785E /* FRDRemoveAvatarRequest.m */; settings = {ASSET_TAGS = (); }; };
+		58B970321BC2501B0017785E /* FRDGetAvatarRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B970311BC2501B0017785E /* FRDGetAvatarRequest.m */; settings = {ASSET_TAGS = (); }; };
+		58B970361BC251E40017785E /* FRDUploadPhotoToGalleryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B970351BC251E40017785E /* FRDUploadPhotoToGalleryRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58B99E991BBA5A0A0057DB54 /* FRDGetSearchSettingsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B99E981BBA5A0A0057DB54 /* FRDGetSearchSettingsRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58B99E9D1BBA5A9E0057DB54 /* FRDSearchSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B99E9C1BBA5A9E0057DB54 /* FRDSearchSettings.m */; settings = {ASSET_TAGS = (); }; };
 		58B99EA21BBA5ECE0057DB54 /* FRDUpdateSearchSettingsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B99EA11BBA5ECE0057DB54 /* FRDUpdateSearchSettingsRequest.m */; settings = {ASSET_TAGS = (); }; };
@@ -293,6 +302,24 @@
 		5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDCustomPageControl.m; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.m; sourceTree = "<group>"; };
 		58A1A12C1BB926AD00E29789 /* FRDOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDOverlayView.h; path = Classes/MVC/Views/FriendDragableView/FriendOverlayView/FRDOverlayView.h; sourceTree = "<group>"; };
 		58A1A12D1BB926AD00E29789 /* FRDOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDOverlayView.m; path = Classes/MVC/Views/FriendDragableView/FriendOverlayView/FRDOverlayView.m; sourceTree = "<group>"; };
+		58B27CEF1BC193520035712C /* FRDUploadAvatarRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDUploadAvatarRequest.h; path = "Classes/Server APIs/API/Requests/ImagesModule/UploadAvatarRequest/FRDUploadAvatarRequest.h"; sourceTree = "<group>"; };
+		58B27CF01BC193520035712C /* FRDUploadAvatarRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDUploadAvatarRequest.m; path = "Classes/Server APIs/API/Requests/ImagesModule/UploadAvatarRequest/FRDUploadAvatarRequest.m"; sourceTree = "<group>"; };
+		58B27CF31BC194290035712C /* FRDGetGalleryPhotosRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDGetGalleryPhotosRequest.h; path = "Classes/Server APIs/API/Requests/ImagesModule/GetGalleryPhotosRequest/FRDGetGalleryPhotosRequest.h"; sourceTree = "<group>"; };
+		58B27CF41BC194290035712C /* FRDGetGalleryPhotosRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDGetGalleryPhotosRequest.m; path = "Classes/Server APIs/API/Requests/ImagesModule/GetGalleryPhotosRequest/FRDGetGalleryPhotosRequest.m"; sourceTree = "<group>"; };
+		58B9701C1BC2486A0017785E /* FRDGetAvatarAndGalleryPhotosRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDGetAvatarAndGalleryPhotosRequest.h; path = "Classes/Server APIs/API/Requests/ImagesModule/GetAvatarAndGalleryPhotosRequest/FRDGetAvatarAndGalleryPhotosRequest.h"; sourceTree = "<group>"; };
+		58B9701D1BC2486A0017785E /* FRDGetAvatarAndGalleryPhotosRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDGetAvatarAndGalleryPhotosRequest.m; path = "Classes/Server APIs/API/Requests/ImagesModule/GetAvatarAndGalleryPhotosRequest/FRDGetAvatarAndGalleryPhotosRequest.m"; sourceTree = "<group>"; };
+		58B970201BC2493B0017785E /* FRDGalleryPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDGalleryPhoto.h; path = Classes/MVC/Models/GalleryPhoto/FRDGalleryPhoto.h; sourceTree = "<group>"; };
+		58B970211BC2493B0017785E /* FRDGalleryPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDGalleryPhoto.m; path = Classes/MVC/Models/GalleryPhoto/FRDGalleryPhoto.m; sourceTree = "<group>"; };
+		58B970241BC249CF0017785E /* FRDAvatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDAvatar.h; path = Classes/MVC/Models/GalleryPhoto/Avatar/FRDAvatar.h; sourceTree = "<group>"; };
+		58B970251BC249CF0017785E /* FRDAvatar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDAvatar.m; path = Classes/MVC/Models/GalleryPhoto/Avatar/FRDAvatar.m; sourceTree = "<group>"; };
+		58B970281BC24C7A0017785E /* FRDRemoveImageFromGalleryRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRemoveImageFromGalleryRequest.h; path = "Classes/Server APIs/API/Requests/ImagesModule/RemoveImageFromGalleryRequest/FRDRemoveImageFromGalleryRequest.h"; sourceTree = "<group>"; };
+		58B970291BC24C7A0017785E /* FRDRemoveImageFromGalleryRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRemoveImageFromGalleryRequest.m; path = "Classes/Server APIs/API/Requests/ImagesModule/RemoveImageFromGalleryRequest/FRDRemoveImageFromGalleryRequest.m"; sourceTree = "<group>"; };
+		58B9702C1BC24F1F0017785E /* FRDRemoveAvatarRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRemoveAvatarRequest.h; path = "Classes/Server APIs/API/Requests/ImagesModule/RemoveAvatarRequest/FRDRemoveAvatarRequest.h"; sourceTree = "<group>"; };
+		58B9702D1BC24F1F0017785E /* FRDRemoveAvatarRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRemoveAvatarRequest.m; path = "Classes/Server APIs/API/Requests/ImagesModule/RemoveAvatarRequest/FRDRemoveAvatarRequest.m"; sourceTree = "<group>"; };
+		58B970301BC2501B0017785E /* FRDGetAvatarRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDGetAvatarRequest.h; path = "Classes/Server APIs/API/Requests/ImagesModule/GetAvatarRequest/FRDGetAvatarRequest.h"; sourceTree = "<group>"; };
+		58B970311BC2501B0017785E /* FRDGetAvatarRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDGetAvatarRequest.m; path = "Classes/Server APIs/API/Requests/ImagesModule/GetAvatarRequest/FRDGetAvatarRequest.m"; sourceTree = "<group>"; };
+		58B970341BC251E40017785E /* FRDUploadPhotoToGalleryRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDUploadPhotoToGalleryRequest.h; path = "Classes/Server APIs/API/Requests/ImagesModule/UploadPhotoToGalleryRequest/FRDUploadPhotoToGalleryRequest.h"; sourceTree = "<group>"; };
+		58B970351BC251E40017785E /* FRDUploadPhotoToGalleryRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDUploadPhotoToGalleryRequest.m; path = "Classes/Server APIs/API/Requests/ImagesModule/UploadPhotoToGalleryRequest/FRDUploadPhotoToGalleryRequest.m"; sourceTree = "<group>"; };
 		58B99E971BBA5A0A0057DB54 /* FRDGetSearchSettingsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDGetSearchSettingsRequest.h; path = "Classes/Server APIs/API/Requests/SearchSettingsModule/GetSearchSettingsRequest/FRDGetSearchSettingsRequest.h"; sourceTree = "<group>"; };
 		58B99E981BBA5A0A0057DB54 /* FRDGetSearchSettingsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDGetSearchSettingsRequest.m; path = "Classes/Server APIs/API/Requests/SearchSettingsModule/GetSearchSettingsRequest/FRDGetSearchSettingsRequest.m"; sourceTree = "<group>"; };
 		58B99E9B1BBA5A9E0057DB54 /* FRDSearchSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSearchSettings.h; path = Classes/MVC/Models/SearchSettings/FRDSearchSettings.h; sourceTree = "<group>"; };
@@ -996,6 +1023,102 @@
 			name = StyledPageControl;
 			sourceTree = "<group>";
 		};
+		58B27CED1BC193110035712C /* ImagesModule */ = {
+			isa = PBXGroup;
+			children = (
+				58B27CEE1BC193180035712C /* UploadAvatarRequest */,
+				58B970331BC251C80017785E /* UploadPhotoToGalleryRequest */,
+				58B9701B1BC248470017785E /* GetAvatarAndGalleryPhotosRequest */,
+				58B9702F1BC24FFA0017785E /* GetAvatarRequest */,
+				58B27CF21BC193FF0035712C /* GetGalleryPhotosRequest */,
+				58B9702B1BC24F050017785E /* RemoveAvatarRequest */,
+				58B970271BC24C570017785E /* RemoveImageFromGalleryRequest */,
+			);
+			name = ImagesModule;
+			sourceTree = "<group>";
+		};
+		58B27CEE1BC193180035712C /* UploadAvatarRequest */ = {
+			isa = PBXGroup;
+			children = (
+				58B27CEF1BC193520035712C /* FRDUploadAvatarRequest.h */,
+				58B27CF01BC193520035712C /* FRDUploadAvatarRequest.m */,
+			);
+			name = UploadAvatarRequest;
+			sourceTree = "<group>";
+		};
+		58B27CF21BC193FF0035712C /* GetGalleryPhotosRequest */ = {
+			isa = PBXGroup;
+			children = (
+				58B27CF31BC194290035712C /* FRDGetGalleryPhotosRequest.h */,
+				58B27CF41BC194290035712C /* FRDGetGalleryPhotosRequest.m */,
+			);
+			name = GetGalleryPhotosRequest;
+			sourceTree = "<group>";
+		};
+		58B9701B1BC248470017785E /* GetAvatarAndGalleryPhotosRequest */ = {
+			isa = PBXGroup;
+			children = (
+				58B9701C1BC2486A0017785E /* FRDGetAvatarAndGalleryPhotosRequest.h */,
+				58B9701D1BC2486A0017785E /* FRDGetAvatarAndGalleryPhotosRequest.m */,
+			);
+			name = GetAvatarAndGalleryPhotosRequest;
+			sourceTree = "<group>";
+		};
+		58B9701F1BC2491F0017785E /* GalleryPhoto */ = {
+			isa = PBXGroup;
+			children = (
+				58B970231BC249B60017785E /* Avatar */,
+				58B970201BC2493B0017785E /* FRDGalleryPhoto.h */,
+				58B970211BC2493B0017785E /* FRDGalleryPhoto.m */,
+			);
+			name = GalleryPhoto;
+			sourceTree = "<group>";
+		};
+		58B970231BC249B60017785E /* Avatar */ = {
+			isa = PBXGroup;
+			children = (
+				58B970241BC249CF0017785E /* FRDAvatar.h */,
+				58B970251BC249CF0017785E /* FRDAvatar.m */,
+			);
+			name = Avatar;
+			sourceTree = "<group>";
+		};
+		58B970271BC24C570017785E /* RemoveImageFromGalleryRequest */ = {
+			isa = PBXGroup;
+			children = (
+				58B970281BC24C7A0017785E /* FRDRemoveImageFromGalleryRequest.h */,
+				58B970291BC24C7A0017785E /* FRDRemoveImageFromGalleryRequest.m */,
+			);
+			name = RemoveImageFromGalleryRequest;
+			sourceTree = "<group>";
+		};
+		58B9702B1BC24F050017785E /* RemoveAvatarRequest */ = {
+			isa = PBXGroup;
+			children = (
+				58B9702C1BC24F1F0017785E /* FRDRemoveAvatarRequest.h */,
+				58B9702D1BC24F1F0017785E /* FRDRemoveAvatarRequest.m */,
+			);
+			name = RemoveAvatarRequest;
+			sourceTree = "<group>";
+		};
+		58B9702F1BC24FFA0017785E /* GetAvatarRequest */ = {
+			isa = PBXGroup;
+			children = (
+				58B970301BC2501B0017785E /* FRDGetAvatarRequest.h */,
+				58B970311BC2501B0017785E /* FRDGetAvatarRequest.m */,
+			);
+			name = GetAvatarRequest;
+			sourceTree = "<group>";
+		};
+		58B970331BC251C80017785E /* UploadPhotoToGalleryRequest */ = {
+			isa = PBXGroup;
+			children = (
+				58B970341BC251E40017785E /* FRDUploadPhotoToGalleryRequest.h */,
+				58B970351BC251E40017785E /* FRDUploadPhotoToGalleryRequest.m */,
+			);
+			name = UploadPhotoToGalleryRequest;
+			sourceTree = "<group>";
+		};
 		58B99E951BBA59A60057DB54 /* UserProfileModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -1266,6 +1389,7 @@
 		58BC76D01B9EB94C00BB8B5A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				58B9701F1BC2491F0017785E /* GalleryPhoto */,
 				583A48051BBD59500015436D /* ModelsServices */,
 				58B99E9A1BBA5A7B0057DB54 /* SearchSettings */,
 				587B3A961BA817260098154F /* RelationshipItem */,
@@ -1399,6 +1523,7 @@
 		58BC76DC1B9EB9FD00BB8B5A /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				58B27CED1BC193110035712C /* ImagesModule */,
 				58B99EAC1BBA86CD0057DB54 /* MessagesModule */,
 				58B99EA31BBA83520057DB54 /* LikesModule */,
 				58B99E961BBA59D50057DB54 /* SearchSettingsModule */,
@@ -2302,6 +2427,7 @@
 				3E021DCC1BAFE1D300BDA411 /* FRDMyProfileTopView.m in Sources */,
 				58C28FF91BAAC6800099ABE4 /* ZLSwipeableView.m in Sources */,
 				58BC771A1B9ECA8100BB8B5A /* UIView+Flashable.m in Sources */,
+				58B970361BC251E40017785E /* FRDUploadPhotoToGalleryRequest.m in Sources */,
 				58DE5B351BB541020020A34C /* FRDBaseUserModel.m in Sources */,
 				58ED54F41BB1648B00F9B378 /* FRDUpdateProfileRequest.m in Sources */,
 				58BC77051B9ECA2200BB8B5A /* NSString+JSONRepresentation.m in Sources */,
@@ -2322,6 +2448,7 @@
 				58C28FFC1BAAC69B0099ABE4 /* CAAnimation+CompetionBlock.m in Sources */,
 				581B9D3B1B9ED6090080393B /* FRDStorageManager.m in Sources */,
 				3E945CC61BBE732E00BD5820 /* FRDFriendChatCell.m in Sources */,
+				58B27CF11BC193520035712C /* FRDUploadAvatarRequest.m in Sources */,
 				58CD9AC41BAFF29F00A7CADB /* FRDBaseContentController.m in Sources */,
 				58BC77081B9ECA3700BB8B5A /* NSString+Base64Decoding.m in Sources */,
 				581B9D3E1B9ED67B0080393B /* FRDPushNotifiactionService.m in Sources */,
@@ -2332,6 +2459,7 @@
 				3EB1A0331BC269310032CB5A /* FRDChatController.m in Sources */,
 				58DE5B411BB5415A0020A34C /* FRDFacebookProfile.m in Sources */,
 				3E021DC81BAFD97500BDA411 /* FRDMyProfileController.m in Sources */,
+				58B9702A1BC24C7A0017785E /* FRDRemoveImageFromGalleryRequest.m in Sources */,
 				58BC773D1B9ECDD100BB8B5A /* FRDValidator.m in Sources */,
 				58DE5B3E1BB541480020A34C /* FRDCurrentUserProfile.m in Sources */,
 				58CD9ABE1BAFF1B500A7CADB /* FRDTopContentView.m in Sources */,
@@ -2355,6 +2483,7 @@
 				58ED54E01BB163BE00F9B378 /* FRDFindNearestUsersRequest.m in Sources */,
 				58BC77111B9ECA5B00BB8B5A /* UIView+Shaking.m in Sources */,
 				587B3A7A1BA7F7B00098154F /* FRDSmokerDataSource.m in Sources */,
+				58B970261BC249CF0017785E /* FRDAvatar.m in Sources */,
 				3E945CD41BBE7EA300BD5820 /* FRDBaseChatCell.m in Sources */,
 				581B9D441B9ED7FE0080393B /* FRDFacebookService.m in Sources */,
 				58BC77291B9ECB0300BB8B5A /* FRDKeychainHandler.m in Sources */,
@@ -2379,13 +2508,17 @@
 				58BC77141B9ECA6700BB8B5A /* UIView+ConfigureAnchorPoint.m in Sources */,
 				58CD17F21BA19BF40021D948 /* TTTAttributedLabel.m in Sources */,
 				3E941A4F1BB18E2000F034E6 /* UIImage+ColoredImage.m in Sources */,
+				58B9701E1BC2486A0017785E /* FRDGetAvatarAndGalleryPhotosRequest.m in Sources */,
 				58ED54E81BB1641100F9B378 /* FRDGetUserByIdRequest.m in Sources */,
 				58FFDBBB1B9ED17B00B0490A /* FRDAlertFacade.m in Sources */,
+				58B9702E1BC24F1F0017785E /* FRDRemoveAvatarRequest.m in Sources */,
 				3E941A341BB1809700F034E6 /* FRDPersonalBioTableController.m in Sources */,
 				58BC76A11B9EB6B500BB8B5A /* main.m in Sources */,
 				3E0EEC581BABE89300AB51B0 /* FRDRoundedImageView.m in Sources */,
 				58C28C391BA95207009D1AC4 /* FRDFriendsListController.m in Sources */,
 				3E10E3151BA16E780075C72D /* FRDPhotoGalleryLayout.m in Sources */,
+				58B27CF51BC194290035712C /* FRDGetGalleryPhotosRequest.m in Sources */,
+				58B970321BC2501B0017785E /* FRDGetAvatarRequest.m in Sources */,
 				3E10E3101BA16E080075C72D /* FRDPhotoGalleryCollectionViewCell.m in Sources */,
 				3E3D41591BA6A5A90021026A /* FRDAutologinViewController.m in Sources */,
 				3EB1A0361BC2695C0032CB5A /* FRDChatTableController.m in Sources */,
@@ -2404,6 +2537,7 @@
 				58ED54D21BB14C5E00F9B378 /* FRDLocationObserver.m in Sources */,
 				58BC771D1B9ECA9000BB8B5A /* UIViewController+fixOrientation.m in Sources */,
 				581B9D411B9ED71A0080393B /* FRDReachabilityHelper.m in Sources */,
+				58B970221BC2493B0017785E /* FRDGalleryPhoto.m in Sources */,
 				58BB5D431BB70AB900FD1A56 /* FRDGetCurrentUserProfileRequest.m in Sources */,
 				58ED54F01BB1646800F9B378 /* FRDUpdateNotificationsSettingsRequest.m in Sources */,
 				58D5A16A1BA329C800D552CF /* FRDNavigationTitleView.m in Sources */,
