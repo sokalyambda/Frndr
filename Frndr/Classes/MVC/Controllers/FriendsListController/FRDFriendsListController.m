@@ -7,6 +7,7 @@
 //
 
 #import "FRDFriendsListController.h"
+#import "FRDChatController.h"
 
 #import "FRDSerialViewConstructor.h"
 
@@ -73,6 +74,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    FRDChatController *chat = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDChatController class])];
+    [self.navigationController showViewController:chat sender:self];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

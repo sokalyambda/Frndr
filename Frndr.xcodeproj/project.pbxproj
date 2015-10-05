@@ -36,6 +36,8 @@
 		3E945CCC1BBE733700BD5820 /* FRDUserChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E945CCA1BBE733700BD5820 /* FRDUserChatCell.xib */; settings = {ASSET_TAGS = (); }; };
 		3E945CD01BBE734200BD5820 /* FRDSystemChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E945CCE1BBE734200BD5820 /* FRDSystemChatCell.m */; settings = {ASSET_TAGS = (); }; };
 		3E945CD41BBE7EA300BD5820 /* FRDBaseChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E945CD31BBE7EA300BD5820 /* FRDBaseChatCell.m */; settings = {ASSET_TAGS = (); }; };
+		3EB1A0331BC269310032CB5A /* FRDChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1A0321BC269310032CB5A /* FRDChatController.m */; settings = {ASSET_TAGS = (); }; };
+		3EB1A0361BC2695C0032CB5A /* FRDChatTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1A0351BC2695C0032CB5A /* FRDChatTableController.m */; settings = {ASSET_TAGS = (); }; };
 		3ED072321BA0370C0091B7E4 /* FRDPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED072311BA0370C0091B7E4 /* FRDPreferencesController.m */; };
 		3ED072361BA048460091B7E4 /* FRDPreferencesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED072351BA048460091B7E4 /* FRDPreferencesTableViewController.m */; };
 		3EF22FB41BBE851100E23F72 /* FRDFriendChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EF22FB31BBE851100E23F72 /* FRDFriendChatCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -224,6 +226,10 @@
 		3E945CD21BBE7EA300BD5820 /* FRDBaseChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDBaseChatCell.h; path = Classes/Cells/UITableViewCells/ChatCells/FRDBaseChatCell.h; sourceTree = "<group>"; };
 		3E945CD31BBE7EA300BD5820 /* FRDBaseChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDBaseChatCell.m; path = Classes/Cells/UITableViewCells/ChatCells/FRDBaseChatCell.m; sourceTree = "<group>"; };
 		3EB1A02E1BC261F30032CB5A /* FRDBaseChatCell_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDBaseChatCell_Private.h; path = Classes/Cells/UITableViewCells/ChatCells/FRDBaseChatCell_Private.h; sourceTree = "<group>"; };
+		3EB1A0311BC269310032CB5A /* FRDChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDChatController.h; path = Classes/MVC/Controllers/ChatController/FRDChatController.h; sourceTree = "<group>"; };
+		3EB1A0321BC269310032CB5A /* FRDChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDChatController.m; path = Classes/MVC/Controllers/ChatController/FRDChatController.m; sourceTree = "<group>"; };
+		3EB1A0341BC2695C0032CB5A /* FRDChatTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDChatTableController.h; path = Classes/MVC/Controllers/ChatController/ChatTableController/FRDChatTableController.h; sourceTree = "<group>"; };
+		3EB1A0351BC2695C0032CB5A /* FRDChatTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDChatTableController.m; path = Classes/MVC/Controllers/ChatController/ChatTableController/FRDChatTableController.m; sourceTree = "<group>"; };
 		3ED072301BA0370C0091B7E4 /* FRDPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPreferencesController.h; path = Classes/MVC/Controllers/PreferencesController/FRDPreferencesController.h; sourceTree = "<group>"; };
 		3ED072311BA0370C0091B7E4 /* FRDPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPreferencesController.m; path = Classes/MVC/Controllers/PreferencesController/FRDPreferencesController.m; sourceTree = "<group>"; };
 		3ED072341BA048460091B7E4 /* FRDPreferencesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPreferencesTableViewController.h; path = Classes/MVC/Controllers/PreferencesTableViewController/FRDPreferencesTableViewController.h; sourceTree = "<group>"; };
@@ -736,6 +742,25 @@
 				3EF22FB51BBE87E700E23F72 /* FRDSystemChatCell.xib */,
 			);
 			name = SystemChatCell;
+			sourceTree = "<group>";
+		};
+		3EB1A02F1BC268F10032CB5A /* ChatController */ = {
+			isa = PBXGroup;
+			children = (
+				3EB1A0301BC269020032CB5A /* ChatTableController */,
+				3EB1A0311BC269310032CB5A /* FRDChatController.h */,
+				3EB1A0321BC269310032CB5A /* FRDChatController.m */,
+			);
+			name = ChatController;
+			sourceTree = "<group>";
+		};
+		3EB1A0301BC269020032CB5A /* ChatTableController */ = {
+			isa = PBXGroup;
+			children = (
+				3EB1A0341BC2695C0032CB5A /* FRDChatTableController.h */,
+				3EB1A0351BC2695C0032CB5A /* FRDChatTableController.m */,
+			);
+			name = ChatTableController;
 			sourceTree = "<group>";
 		};
 		3ED0722F1BA0364E0091B7E4 /* PreferencesController */ = {
@@ -1270,6 +1295,7 @@
 		58BC76D21B9EB95600BB8B5A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3EB1A02F1BC268F10032CB5A /* ChatController */,
 				3E84DE971BB2ECBA00FFCB7C /* PhotoGalleryController */,
 				58ED54F51BB189C800F9B378 /* GeolocationDeniedController */,
 				58CD9AB71BAFED7700A7CADB /* ContainerController */,
@@ -2303,6 +2329,7 @@
 				58C28C3D1BA9527A009D1AC4 /* FRDSearchFriendsController.m in Sources */,
 				3ED072321BA0370C0091B7E4 /* FRDPreferencesController.m in Sources */,
 				58FFDBAB1B9ECF3B00B0490A /* FRDSerialViewConstructor.m in Sources */,
+				3EB1A0331BC269310032CB5A /* FRDChatController.m in Sources */,
 				58DE5B411BB5415A0020A34C /* FRDFacebookProfile.m in Sources */,
 				3E021DC81BAFD97500BDA411 /* FRDMyProfileController.m in Sources */,
 				58BC773D1B9ECDD100BB8B5A /* FRDValidator.m in Sources */,
@@ -2361,6 +2388,7 @@
 				3E10E3151BA16E780075C72D /* FRDPhotoGalleryLayout.m in Sources */,
 				3E10E3101BA16E080075C72D /* FRDPhotoGalleryCollectionViewCell.m in Sources */,
 				3E3D41591BA6A5A90021026A /* FRDAutologinViewController.m in Sources */,
+				3EB1A0361BC2695C0032CB5A /* FRDChatTableController.m in Sources */,
 				58CD9AB51BAFE7C200A7CADB /* FRDAnimator.m in Sources */,
 				58BC772A1B9ECB0300BB8B5A /* KeychainItemWrapper.m in Sources */,
 				581B9D591B9EDCBB0080393B /* FRDProjectFacade.m in Sources */,

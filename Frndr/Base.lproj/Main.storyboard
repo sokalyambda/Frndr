@@ -636,7 +636,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xFM-Qw-aIC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1983" y="1037.25"/>
+            <point key="canvasLocation" x="1896" y="1077"/>
         </scene>
         <!--Application Settings Table Container-->
         <scene sceneID="fW7-5A-6vs">
@@ -2143,7 +2143,85 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ct2-Lh-wk8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1971" y="-200.25"/>
+            <point key="canvasLocation" x="1593" y="-197.25"/>
+        </scene>
+        <!--Chat Controller-->
+        <scene sceneID="zyp-yw-Jye">
+            <objects>
+                <viewController storyboardIdentifier="FRDChatController" id="BmN-jO-RHX" customClass="FRDChatController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qnJ-T8-55K"/>
+                        <viewControllerLayoutGuide type="bottom" id="A7w-2X-iq9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="n8V-jV-fiO">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TRS-SN-IEJ">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <connections>
+                                    <segue destination="NcB-CQ-10X" kind="embed" id="z5Q-r7-4Bb"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="A7w-2X-iq9" firstAttribute="top" secondItem="TRS-SN-IEJ" secondAttribute="bottom" id="3Zj-c6-YKq"/>
+                            <constraint firstItem="TRS-SN-IEJ" firstAttribute="leading" secondItem="n8V-jV-fiO" secondAttribute="leading" id="6sG-mD-7n1"/>
+                            <constraint firstItem="TRS-SN-IEJ" firstAttribute="top" secondItem="qnJ-T8-55K" secondAttribute="bottom" id="7Tz-gH-xrp"/>
+                            <constraint firstAttribute="trailing" secondItem="TRS-SN-IEJ" secondAttribute="trailing" id="h58-Vh-KDU"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="TRS-SN-IEJ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="6sG-mD-7n1"/>
+                                <exclude reference="7Tz-gH-xrp"/>
+                                <exclude reference="h58-Vh-KDU"/>
+                                <exclude reference="3Zj-c6-YKq"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="TRS-SN-IEJ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="6sG-mD-7n1"/>
+                                <include reference="7Tz-gH-xrp"/>
+                                <include reference="h58-Vh-KDU"/>
+                                <include reference="3Zj-c6-YKq"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="giC-yp-Jm3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2329.5" y="-197.25"/>
+        </scene>
+        <!--Chat Table Controller-->
+        <scene sceneID="Tn0-LM-Sea">
+            <objects>
+                <tableViewController storyboardIdentifier="FRDChatTableController" id="NcB-CQ-10X" customClass="FRDChatTableController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="dTR-jb-jj7">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="FGl-4J-RcR">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FGl-4J-RcR" id="KQS-dl-IHD">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="NcB-CQ-10X" id="GF8-NA-Adt"/>
+                            <outlet property="delegate" destination="NcB-CQ-10X" id="LKS-e0-DWT"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UJn-9r-QVs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3061.5" y="-197.25"/>
         </scene>
         <!--Application Settings Controller-->
         <scene sceneID="DxY-eQ-jBO">
