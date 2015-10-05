@@ -28,20 +28,26 @@ static CGFloat const kToPulsingValue = 1.f;
 
 - (void)pulsingWithWavesInView:(UIView *)viewForWaves repeating:(BOOL)repeating
 {
-    UIColor *stroke = UIColorFromRGB(0x35B8B4);
+    UIColor *stroke = UIColorFromRGB(0x535487);//UIColorFromRGB(0x35B8B4);
+    UIColor *fill = UIColorFromRGB(0xEAFEFF);//UIColorFromRGB(0xE8D3F8);
+
+    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointZero radius:CGRectGetWidth(self.frame)/2 startAngle:0 endAngle:2 * M_PI clockwise:YES];
     
-    CGRect pathFrame = CGRectMake(-CGRectGetMidX(self.bounds), -CGRectGetMidY(self.bounds), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:pathFrame cornerRadius:self.layer.cornerRadius];
-    
-    CGPoint shapePosition = [viewForWaves convertPoint:self.center fromView:viewForWaves];
-    
+    CGPoint convertedCenter = [viewForWaves convertPoint:self.center fromView:viewForWaves];
+
     CAShapeLayer *circleShape = [CAShapeLayer layer];
     circleShape.path = path.CGPath;
-    circleShape.position = shapePosition;
-    circleShape.fillColor = [UIColor clearColor].CGColor;
+    circleShape.position = convertedCenter;
+    circleShape.fillColor = fill.CGColor;
     circleShape.opacity = 0.f;
-    circleShape.strokeColor = stroke.CGColor;
-    circleShape.lineWidth = 2.f;
+    
+    CAShapeLayer *strokeLayer = [CAShapeLayer layer];
+    strokeLayer.path = path.CGPath;
+    strokeLayer.position = convertedCenter;
+    strokeLayer.fillColor = [UIColor clearColor].CGColor;
+    strokeLayer.opacity = 0;
+    strokeLayer.strokeColor = stroke.CGColor;
+    strokeLayer.lineWidth = 2.f;
 
     @autoreleasepool {
         for (CALayer *layer in viewForWaves.layer.sublayers) {
@@ -50,8 +56,9 @@ static CGFloat const kToPulsingValue = 1.f;
             }
         }
     }
-
-    [viewForWaves.layer addSublayer:circleShape];
+    
+    [viewForWaves.layer insertSublayer:circleShape below:self.layer];
+    [viewForWaves.layer insertSublayer:strokeLayer below:circleShape];
     
     [CATransaction begin];
     
@@ -59,6 +66,7 @@ static CGFloat const kToPulsingValue = 1.f;
     [CATransaction setCompletionBlock:^{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [circleShape removeFromSuperlayer];
+            [strokeLayer removeFromSuperlayer];
         });
     }];
     
@@ -66,14 +74,18 @@ static CGFloat const kToPulsingValue = 1.f;
     scaleWavesAnimation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
     scaleWavesAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(4.f, 4.f, 1.f)];
     
-    CABasicAnimation *alphaAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    alphaAnimation.fromValue = @1.f;
-    alphaAnimation.toValue = @.01f;
+    CAKeyframeAnimation *alphaFillAnimation = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
+    
+    alphaFillAnimation.values = @[@0.1f, @0];
+    
+    CABasicAnimation *alphaStrokeAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    alphaStrokeAnimation.fromValue = @1.f;
+    alphaStrokeAnimation.toValue = @.01f;
     
     CABasicAnimation *pulsingAnimation = [self pulsingAnimation];
     
     CAAnimationGroup *animation = [CAAnimationGroup animation];
-    animation.animations = @[scaleWavesAnimation, alphaAnimation];
+    animation.animations = @[scaleWavesAnimation, alphaFillAnimation, alphaStrokeAnimation];
     animation.duration = kDuration * 2.f;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     
@@ -83,9 +95,9 @@ static CGFloat const kToPulsingValue = 1.f;
         animation.repeatCount = HUGE_VAL;
     }
     
-    [circleShape addAnimation:animation forKey:@"waves"];
-    
     [self.layer addAnimation:pulsingAnimation forKey: repeating ? @"repeatingPulsing" : @"notRepeatingPulsing"];
+    [circleShape addAnimation:animation forKey:@"waves"];
+    [strokeLayer addAnimation:animation forKey:@"waves"];
     
     [CATransaction commit];
 }

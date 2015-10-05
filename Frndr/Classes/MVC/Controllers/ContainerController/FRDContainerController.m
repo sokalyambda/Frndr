@@ -199,8 +199,10 @@ typedef NS_ENUM(NSUInteger, FRDPresentedControllerType) {
     
     // If this is the initial presentation, add the new child with no animation.
     if (!fromViewController) {
+        [toViewController viewWillAppear:YES];
         [self.privateContainerView addSubview:toViewController.view];
         [toViewController didMoveToParentViewController:self];
+        
         return;
     }
     

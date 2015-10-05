@@ -16,6 +16,7 @@
 #import "FRDErrorHandler.h"
 
 #import "FRDKeychainHandler.h"
+#import "FRDNearestUsersService.h"
 
 #import "FRDSearchSettings.h"
 
@@ -23,9 +24,9 @@
 
 static FRDSessionManager *sharedHTTPClient = nil;
 
-//NSString *baseURLString = @"http://192.168.88.99:8859/"; //Misha
-//NSString *baseURLString = @"http://192.168.88.55:8859/"; //Vanya
-NSString *baseURLString = @"http://134.249.164.53:8859/"; //Live
+//NSString *baseURLString = @"http://192.168.88.161:8859/"; //Misha
+//NSString *baseURLString = @"http://192.168.88.47:8859/"; //Vanya
+NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
 
 @implementation FRDProjectFacade
 
@@ -91,6 +92,12 @@ NSString *baseURLString = @"http://134.249.164.53:8859/"; //Live
 + (void)clearUserData
 {
     [self cancelAllOperations];
+    
+    if ([FRDNearestUsersService isSearchInProcess]) {
+        [[FRDNearestUsersService searchTimer] invalidate];
+        [FRDNearestUsersService setSearchTimer:nil];
+        [FRDNearestUsersService setSearchInProcess:NO];
+    }
     
     [FRDStorageManager sharedStorage].currentFacebookProfile = nil;
     

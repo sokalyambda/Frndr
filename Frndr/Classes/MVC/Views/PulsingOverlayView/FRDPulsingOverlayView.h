@@ -15,4 +15,7 @@
 
 - (void)addPulsingAnimations;
 
+- (void)subscribeForNotifications;
+- (void)unsibscribeFromNotifications;
+
 @end

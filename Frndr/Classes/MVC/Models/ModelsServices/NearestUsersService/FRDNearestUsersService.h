@@ -12,6 +12,10 @@ typedef void(^FailureNearestUsersBlock)(NSError *error);
 @interface FRDNearestUsersService : NSObject
 
 + (BOOL)isSearchInProcess;
++ (NSTimer *)searchTimer;
+
++ (void)setSearchInProcess:(BOOL)searchInProcess;
++ (void)setSearchTimer:(NSTimer *)searchTimer;
 
 + (void)getNearestUsersWithPage:(NSInteger)page
                       onSuccess:(SuccessNearestUsersBlock)success

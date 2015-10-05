@@ -13,8 +13,16 @@
 - (void)blurView
 {
     if (!UIAccessibilityIsReduceTransparencyEnabled()) {
-        self.backgroundColor = [UIColor clearColor];
         
+        @autoreleasepool {
+            for (UIView *view in self.subviews) {
+                if ([view isKindOfClass:[UIVisualEffectView class]]) {
+                    return;
+                }
+            }
+        }
+        
+        self.backgroundColor = [UIColor clearColor];
         UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
         UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
         blurEffectView.frame = self.bounds;
