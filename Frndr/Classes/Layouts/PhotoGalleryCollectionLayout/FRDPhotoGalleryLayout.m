@@ -55,6 +55,8 @@ static CGFloat const kQuarterSpace = kHalfSpace / 2;
 - (void)prepareLayout
 {
     [super prepareLayout];
+
+    self.row = 0;
     
     NSInteger numberOfElements = [self.collectionView numberOfItemsInSection:0];
     self.attributes = [NSMutableArray arrayWithCapacity:numberOfElements];
@@ -95,7 +97,7 @@ static CGFloat const kQuarterSpace = kHalfSpace / 2;
     if (column == 0) {
         self.row++;
     }
-    
+
     // Offsets for items that are not Main or Side
     CGFloat xOffset;
     CGFloat widthOffset;
