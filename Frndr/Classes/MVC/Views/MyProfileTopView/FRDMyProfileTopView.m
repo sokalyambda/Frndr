@@ -57,7 +57,12 @@
     self.ageLabel.text = [NSString localizedStringWithFormat:@"%d %@", currentUserProfile.age, LOCALIZED(@"years")];
     self.genderLabel.text = currentUserProfile.genderString;
     
-    [self.avatarImageView sd_setImageWithURL:currentUserProfile.currentAvatar.photoURL];
+    if (currentUserProfile.currentAvatar.photoURL) {
+        [self.avatarImageView sd_setImageWithURL:currentUserProfile.currentAvatar.photoURL]; //avatar from server
+    } else {
+        [self.avatarImageView sd_setImageWithURL:currentUserProfile.avatarURL]; //avatar from facebook
+    }
+    
 }
 
 @end

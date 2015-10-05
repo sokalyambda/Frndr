@@ -50,7 +50,19 @@
     self.crossImageView.hidden = self.imageView.hidden = !photo;
     
     if (photo) {
-        [self.imageView sd_setImageWithURL:photo.photoURL];
+        WEAK_SELF;
+        for (UIView *subview in self.subviews) {
+            if ([subview isKindOfClass:[MBProgressHUD class]]) {
+                [subview removeFromSuperview];
+            }
+        }
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
+        hud.color = [[UIColor clearColor] copy];
+        hud.activityIndicatorColor = [UIColor blackColor];
+        
+        [self.imageView sd_setImageWithURL:photo.photoURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+        }];
     }
     
     [self addTapGestures];
