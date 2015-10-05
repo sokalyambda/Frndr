@@ -11,6 +11,8 @@
 
 @interface FRDPhotoGalleryCollectionViewCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
 @property (weak, nonatomic) id<FRDGalleryCellDelegate> delegate;
 
 - (void)configureWithGalleryPhoto:(FRDGalleryPhoto *)photo;

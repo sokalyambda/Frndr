@@ -10,4 +10,6 @@
 
 @interface FRDUploadPhotoToGalleryRequest : FRDNetworkRequest
 
+- (instancetype)initWithPhoto:(UIImage *)photo;
+
 @end
