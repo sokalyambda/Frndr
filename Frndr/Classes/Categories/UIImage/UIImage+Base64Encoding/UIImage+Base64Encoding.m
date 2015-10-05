@@ -12,7 +12,8 @@
 
 - (NSString *)encodeToBase64String
 {
-    return [UIImagePNGRepresentation(self) base64EncodedStringWithOptions:0];
+    NSLog(@"length %u KB", [UIImageJPEGRepresentation(self, 0.6f) length] * 1024);
+    return [UIImageJPEGRepresentation(self, 0.6f) base64EncodedStringWithOptions:kNilOptions];
 }
 
 @end

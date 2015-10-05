@@ -199,7 +199,10 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
             break;
             
         case FRDRequestSerializationTypeJSON:
+            //Delete to body
+            self.JSONRequestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];
             [(AFHTTPSessionManager *)manager setRequestSerializer:self.JSONRequestSerializer];
+            
             break;
             
         default:

@@ -10,7 +10,7 @@
 
 extern NSString *defaultBaseURLString;
 
-@class FRDSearchSettings, FRDAvatar;
+@class FRDSearchSettings, FRDAvatar, FRDGalleryPhoto;
 
 @interface FRDProjectFacade : NSObject
 
@@ -89,12 +89,13 @@ extern NSString *defaultBaseURLString;
 
 + (FRDNetworkOperation *)uploadUserAvatarOnSuccess:(SuccessBlock)success
                                          onFailure:(FailureBlock)failure;
-+ (FRDNetworkOperation *)uploadPhotoToGalleryOnSuccess:(SuccessBlock)success
-                                             onFailure:(FailureBlock)failure;
++ (FRDNetworkOperation *)uploadPhotoToGallery:(UIImage *)photo onSuccess:(SuccessBlock)success
+                                    onFailure:(FailureBlock)failure;
 + (FRDNetworkOperation *)removeAvatarOnSuccess:(SuccessBlock)success
                                      onFailure:(FailureBlock)failure;
-+ (FRDNetworkOperation *)removePhotoFromGalleryOnSuccess:(SuccessBlock)success
-                                               onFailure:(FailureBlock)failure;
++ (FRDNetworkOperation *)removePhotoFromGallery:(FRDGalleryPhoto *)photo
+                                      onSuccess:(SuccessBlock)success
+                                      onFailure:(FailureBlock)failure;
 + (FRDNetworkOperation *)getAvatarAndGalleryOnSuccess:(void(^)(FRDAvatar *avatar, NSArray *gallery))success
                                             onFailure:(FailureBlock)failure;
 + (FRDNetworkOperation *)getAvatarWithSmallValue:(BOOL)small onSuccess:(void(^)(FRDAvatar *avatar))success
