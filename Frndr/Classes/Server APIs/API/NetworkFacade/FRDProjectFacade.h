@@ -10,7 +10,7 @@
 
 extern NSString *defaultBaseURLString;
 
-@class FRDSearchSettings;
+@class FRDSearchSettings, FRDAvatar;
 
 @interface FRDProjectFacade : NSObject
 
@@ -63,7 +63,7 @@ extern NSString *defaultBaseURLString;
                                         onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
 //Facebook
-+ (FRDNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(BOOL isSuccess))success
++ (FRDNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(NSString *userId, BOOL avatarExists))success
                                            onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
 #pragma mark - Search Settings Module
@@ -87,6 +87,19 @@ extern NSString *defaultBaseURLString;
 
 #pragma mark - Images Module
 
-+ (FRDNetworkOperation *)uploadUserAvatarOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
++ (FRDNetworkOperation *)uploadUserAvatarOnSuccess:(SuccessBlock)success
+                                         onFailure:(FailureBlock)failure;
++ (FRDNetworkOperation *)uploadPhotoToGalleryOnSuccess:(SuccessBlock)success
+                                             onFailure:(FailureBlock)failure;
++ (FRDNetworkOperation *)removeAvatarOnSuccess:(SuccessBlock)success
+                                     onFailure:(FailureBlock)failure;
++ (FRDNetworkOperation *)removePhotoFromGalleryOnSuccess:(SuccessBlock)success
+                                               onFailure:(FailureBlock)failure;
++ (FRDNetworkOperation *)getAvatarAndGalleryOnSuccess:(void(^)(FRDAvatar *avatar, NSArray *gallery))success
+                                            onFailure:(FailureBlock)failure;
++ (FRDNetworkOperation *)getAvatarWithSmallValue:(BOOL)small onSuccess:(void(^)(FRDAvatar *avatar))success
+                                       onFailure:(FailureBlock)failure;
++ (FRDNetworkOperation *)getGalleryOnSuccess:(void(^)(NSArray *gallery))success
+                                   onFailure:(FailureBlock)failure;
 
 @end

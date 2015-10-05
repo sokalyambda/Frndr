@@ -12,6 +12,8 @@
 #import "FRDRelationshipItem.h"
 #import "FRDSearchSettings.h"
 
+#import "FRDAvatar.h"
+
 //beckend keys
 static NSString *const kId = @"_id";
 
@@ -32,6 +34,14 @@ static NSString *const kNewFriends = @"newFriends";
 @implementation FRDCurrentUserProfile
 
 #pragma mark - Accessors
+
+- (FRDAvatar *)currentAvatar
+{
+    if (!_currentAvatar) {
+        _currentAvatar = [[FRDAvatar alloc] init];
+    }
+    return _currentAvatar;
+}
 
 - (FRDRelationshipItem *)relationshipStatus
 {

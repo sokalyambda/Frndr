@@ -8,9 +8,15 @@
 
 #import "FRDUploadAvatarRequest.h"
 
-static NSString *const requestAction = @"users/avatar";
+#import "FRDAvatar.h"
 
-static NSString *const kUserAvatar = @"avatar";
+#import "UIImage+Base64Encoding.h"
+
+static NSString *const requestAction = @"image/avatar";
+
+static NSString *const kUserAvatar = @"image";
+
+static NSString *const kUploadingPatternString = @"data:image/png;base64,";
 
 @implementation FRDUploadAvatarRequest
 
@@ -20,16 +26,14 @@ static NSString *const kUserAvatar = @"avatar";
 {
     self = [super init];
     if (self) {
-        
         self.action = [self requestAction];
         _method = @"POST";
         
-        NSURL *avatarURL = [FRDStorageManager sharedStorage].currentUserProfile.avatarURL;
-//        UIImage *image
+        UIImage *avatarImage = [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar.avatarImage;
+
+        NSString *base64Avatar = [avatarImage encodeToBase64String];
         
-        
-        
-        NSMutableDictionary *parameters = [@{
+        NSMutableDictionary *parameters = [@{kUserAvatar: [NSString stringWithFormat:@"%@ %@", kUploadingPatternString, base64Avatar]
                                              } mutableCopy];
         
         self.serializationType = FRDRequestSerializationTypeJSON;
