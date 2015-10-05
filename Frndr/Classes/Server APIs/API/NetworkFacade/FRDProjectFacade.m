@@ -26,8 +26,8 @@
 static FRDSessionManager *sharedHTTPClient = nil;
 
 //NSString *baseURLString = @"http://192.168.88.161:8859/"; //Misha
-//NSString *baseURLString = @"http://192.168.88.47:8859/"; //Vanya
-NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
+NSString *baseURLString = @"http://192.168.88.47:8859/"; //Vanya
+//NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
 
 @implementation FRDProjectFacade
 
@@ -477,10 +477,11 @@ NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
     
     return operation;
 }
+
 //new
-+ (FRDNetworkOperation *)uploadPhotoToGalleryOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
++ (FRDNetworkOperation *)uploadPhotoToGallery:(UIImage *)photo onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
-    FRDUploadPhotoToGalleryRequest *request = [[FRDUploadPhotoToGalleryRequest alloc] init];
+    FRDUploadPhotoToGalleryRequest *request = [[FRDUploadPhotoToGalleryRequest alloc] initWithPhoto:photo];
     
     FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
         
@@ -516,9 +517,9 @@ NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
     return operation;
 }
 
-+ (FRDNetworkOperation *)removePhotoFromGalleryOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
++ (FRDNetworkOperation *)removePhotoFromGallery:(FRDGalleryPhoto *)photo onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
-    FRDRemoveImageFromGalleryRequest *request = [[FRDRemoveImageFromGalleryRequest alloc] init];
+    FRDRemoveImageFromGalleryRequest *request = [[FRDRemoveImageFromGalleryRequest alloc] initWithGalleryPhoto:photo];
     
     FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
         

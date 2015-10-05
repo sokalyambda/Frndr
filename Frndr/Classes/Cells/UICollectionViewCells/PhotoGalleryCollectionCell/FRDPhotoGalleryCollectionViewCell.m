@@ -12,7 +12,7 @@
 
 @interface FRDPhotoGalleryCollectionViewCell ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+//@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIImageView *crossImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *plusImageView;
 @property (weak, nonatomic) IBOutlet UIView *transparencyView;
@@ -47,7 +47,7 @@
 {
     self.transparencyView.hidden = self.profilePictureLabel.hidden = ![photo isKindOfClass:[FRDAvatar class]];
     self.plusImageView.hidden = !!photo;
-    self.crossImageView.hidden = !photo;
+    self.crossImageView.hidden = self.imageView.hidden = !photo;
     
     if (photo) {
         [self.imageView sd_setImageWithURL:photo.photoURL];
