@@ -18,9 +18,30 @@
 @property (weak, nonatomic) IBOutlet UIView *transparencyView;
 @property (weak, nonatomic) IBOutlet UILabel *profilePictureLabel;
 
+@property (strong, nonatomic) UITapGestureRecognizer *crossTap;
+@property (strong, nonatomic) UITapGestureRecognizer *plusTap;
+
 @end
 
 @implementation FRDPhotoGalleryCollectionViewCell
+
+#pragma mark - Accessors
+
+- (UITapGestureRecognizer *)crossTap
+{
+    if (!_crossTap) {
+        _crossTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleCrossClick:)];
+    }
+    return _crossTap;
+}
+
+- (UITapGestureRecognizer *)plusTap
+{
+    if (!_plusTap) {
+        _plusTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handlePlusClick:)];
+    }
+    return _plusTap;
+}
 
 #pragma mark - Lifecycle
 
@@ -36,26 +57,24 @@
 
 - (void)addTapGestures
 {
-    UITapGestureRecognizer *crossTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleCrossClick:)];
-    [self.crossImageView addGestureRecognizer:crossTap];
-    
-    UITapGestureRecognizer *plusTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handlePlusClick:)];
-    [self.plusImageView addGestureRecognizer:plusTap];
+    if (![self.gestureRecognizers containsObject:self.crossTap]) {
+        [self.crossImageView addGestureRecognizer:self.crossTap];
+    }
+    if (![self.gestureRecognizers containsObject:self.plusTap]) {
+        [self.plusImageView addGestureRecognizer:self.plusTap];
+    }
 }
 
 - (void)configureWithGalleryPhoto:(FRDGalleryPhoto *)photo
 {
-    self.transparencyView.hidden = self.profilePictureLabel.hidden = ![photo isKindOfClass:[FRDAvatar class]];
-    self.plusImageView.hidden = !!photo;
-    self.crossImageView.hidden = self.imageView.hidden = !photo;
+    self.transparencyView.hidden = self.profilePictureLabel.hidden = ![photo isKindOfClass:[FRDAvatar class]];//+
+    self.plusImageView.hidden = !!photo.photoURL;
+    self.crossImageView.hidden = self.imageView.hidden = !photo.photoURL;
     
-    if (photo) {
+    if (photo.photoURL) {
         WEAK_SELF;
-        for (UIView *subview in self.subviews) {
-            if ([subview isKindOfClass:[MBProgressHUD class]]) {
-                [subview removeFromSuperview];
-            }
-        }
+        [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+        
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
         hud.color = [[UIColor clearColor] copy];
         hud.activityIndicatorColor = [UIColor blackColor];

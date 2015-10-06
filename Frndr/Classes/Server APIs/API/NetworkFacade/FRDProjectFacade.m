@@ -26,8 +26,8 @@
 static FRDSessionManager *sharedHTTPClient = nil;
 
 //NSString *baseURLString = @"http://192.168.88.161:8859/"; //Misha
-NSString *baseURLString = @"http://192.168.88.47:8859/"; //Vanya
-//NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
+//NSString *baseURLString = @"http://192.168.88.47:8859/"; //Vanya
+NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
 
 @implementation FRDProjectFacade
 
@@ -320,7 +320,7 @@ NSString *baseURLString = @"http://192.168.88.47:8859/"; //Vanya
 
 /******* FaceBook *******/
 
-+ (FRDNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(NSString *userId, BOOL avatarExists))success
++ (FRDNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(NSString *userId, BOOL avatarExists, BOOL isFirstLogin))success
                                            onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
     FRDSignInWithFacebookRequest *request = [[FRDSignInWithFacebookRequest alloc] init];
@@ -330,7 +330,7 @@ NSString *baseURLString = @"http://192.168.88.47:8859/"; //Vanya
         FRDSignInWithFacebookRequest *request = (FRDSignInWithFacebookRequest *)operation.networkRequest;
         
         if (success) {
-            success(request.userId, request.avatarExists);
+            success(request.userId, request.avatarExists, request.isFirstLogin);
         }
         
     } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {

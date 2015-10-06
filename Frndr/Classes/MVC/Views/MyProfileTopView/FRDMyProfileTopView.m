@@ -62,7 +62,6 @@
     } else {
         [self.avatarImageView sd_setImageWithURL:currentUserProfile.avatarURL]; //avatar from facebook
     }
-    
 }
 
 @end

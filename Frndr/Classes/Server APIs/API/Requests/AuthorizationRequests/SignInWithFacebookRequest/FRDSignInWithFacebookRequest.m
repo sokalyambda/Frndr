@@ -17,6 +17,7 @@ static NSString *const kGeolocationCoordinates = @"coordinates";
 
 static NSString *const kAvatarExists = @"haveAvatar";
 static NSString *const kUserId = @"userId";
+static NSString *const kFirstLogin = @"firstLogin";
 
 @implementation FRDSignInWithFacebookRequest
 
@@ -49,6 +50,7 @@ static NSString *const kUserId = @"userId";
 {
     self.avatarExists = [responseObject[kAvatarExists] boolValue];
     self.userId = responseObject[kUserId];
+    self.firstLogin = [responseObject[kFirstLogin] boolValue];
     return !!self.userId;
 }
 

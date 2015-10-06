@@ -12,5 +12,6 @@
 
 @property (strong, nonatomic) NSString *userId;
 @property (assign, nonatomic) BOOL avatarExists;
+@property (assign, nonatomic, getter=isFirstLogin) BOOL firstLogin;
 
 @end
