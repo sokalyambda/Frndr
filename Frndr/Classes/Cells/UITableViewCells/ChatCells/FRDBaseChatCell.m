@@ -104,7 +104,7 @@ static CGFloat const kTimeStampLabelPreferredHeight = 20.f;
             break;
         }
     }
-        
+    
     return currentChatCell;
 }
 

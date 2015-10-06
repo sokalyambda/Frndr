@@ -25,11 +25,18 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yWM-S4-t7w" userLabel="Message Container">
                         <rect key="frame" x="90" y="5" width="379" height="93"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" image="facebookButtonBackground" translatesAutoresizingMaskIntoConstraints="NO" id="yFA-yw-4K1" userLabel="Background Image View">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" image="UserMessageBackground" translatesAutoresizingMaskIntoConstraints="NO" id="yFA-yw-4K1" userLabel="Background Image View">
                                 <rect key="frame" x="0.0" y="0.0" width="379" height="93"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ChatMessageBackgroundTriangle" translatesAutoresizingMaskIntoConstraints="NO" id="mLe-Qb-6iy">
+                                <rect key="frame" x="-1" y="37" width="6" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="RNb-cu-Dfu"/>
+                                    <constraint firstAttribute="width" constant="6" id="vys-pc-nKW"/>
+                                </constraints>
+                            </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGg-P4-8Qv" userLabel="Message Text View">
-                                <rect key="frame" x="0.0" y="0.0" width="379" height="93"/>
+                                <rect key="frame" x="8" y="5" width="371" height="83"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </string>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="15"/>
@@ -38,14 +45,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="mLe-Qb-6iy" firstAttribute="centerY" secondItem="yWM-S4-t7w" secondAttribute="centerY" id="8rF-1l-RUu"/>
                             <constraint firstItem="yFA-yw-4K1" firstAttribute="leading" secondItem="yWM-S4-t7w" secondAttribute="leading" id="9jk-Ly-YnD"/>
-                            <constraint firstAttribute="bottom" secondItem="fGg-P4-8Qv" secondAttribute="bottom" id="BhI-PF-Z7w"/>
+                            <constraint firstAttribute="bottom" secondItem="fGg-P4-8Qv" secondAttribute="bottom" constant="5" id="BhI-PF-Z7w"/>
                             <constraint firstItem="yFA-yw-4K1" firstAttribute="top" secondItem="yWM-S4-t7w" secondAttribute="top" id="DV6-jD-iNG"/>
-                            <constraint firstItem="fGg-P4-8Qv" firstAttribute="top" secondItem="yWM-S4-t7w" secondAttribute="top" id="Ftj-wf-zJT"/>
+                            <constraint firstItem="fGg-P4-8Qv" firstAttribute="top" secondItem="yWM-S4-t7w" secondAttribute="top" constant="5" id="Ftj-wf-zJT"/>
                             <constraint firstItem="yFA-yw-4K1" firstAttribute="bottom" secondItem="yWM-S4-t7w" secondAttribute="bottom" id="IrD-4q-jZy"/>
                             <constraint firstAttribute="trailing" secondItem="fGg-P4-8Qv" secondAttribute="trailing" id="QWE-sr-sqg"/>
                             <constraint firstItem="yFA-yw-4K1" firstAttribute="trailing" secondItem="yWM-S4-t7w" secondAttribute="trailing" id="ebt-nf-6YA"/>
-                            <constraint firstItem="fGg-P4-8Qv" firstAttribute="leading" secondItem="yWM-S4-t7w" secondAttribute="leading" id="hRs-IG-T14"/>
+                            <constraint firstItem="fGg-P4-8Qv" firstAttribute="leading" secondItem="yWM-S4-t7w" secondAttribute="leading" constant="8" id="hRs-IG-T14"/>
+                            <constraint firstItem="mLe-Qb-6iy" firstAttribute="leading" secondItem="yWM-S4-t7w" secondAttribute="leading" constant="-1" id="jwK-0I-7oJ"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today 9.20 am" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXF-Nf-KeE">
@@ -79,6 +88,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="facebookButtonBackground" width="389" height="44"/>
+        <image name="ChatMessageBackgroundTriangle" width="10" height="29"/>
+        <image name="UserMessageBackground" width="342" height="40"/>
     </resources>
 </document>

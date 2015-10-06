@@ -12,11 +12,19 @@
 
 @interface FRDChatTableController ()
 
-@property (strong, nonatomic) NSArray *messageHistory;
+@property (strong, nonatomic) NSMutableArray *messageHistory;
 
 @end
 
 @implementation FRDChatTableController
+
+#pragma mark - Accessors 
+
+- (void)setMessageHistory:(NSMutableArray *)messageHistory
+{
+    _messageHistory = [messageHistory mutableCopy];
+    [self.tableView reloadData];
+}
 
 #pragma mark - Lifecycle
 
@@ -30,6 +38,13 @@
 
 #pragma mark - Actions
 
+- (IBAction)loadMoreMessages:(id)sender
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.refreshControl endRefreshing];
+    });
+}
+
 - (void)addCellWithMessage:(NSString *)message andType:(FRDChatCellType)type
 {
     
@@ -40,7 +55,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 //    return self.messageHistory.count;
-    return 10;
+    return 15;
 }
 
 #pragma mark - UITableViewDelegate
@@ -49,23 +64,27 @@
 {
     FRDBaseChatCell *cell;
     
-    NSInteger i = indexPath.row % 3;
+    NSInteger i = indexPath.row % 4;
     
     if (i == 0) {
         cell = [FRDBaseChatCell chatCellWithType:(FRDChatCellType)0];
-        cell.message = @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+        cell.message = @"I'm trying to create a UIPickerView with some";
         cell.timeStamp = [NSDate date];
         cell.positionInSet = FRDChatCellPositionInSetFirst;
     } else if (i == 1) {
-        cell = [FRDBaseChatCell chatCellWithType:(FRDChatCellType)0];
-        cell.message = @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+        cell = [FRDBaseChatCell chatCellWithType:(FRDChatCellType)1];
+        cell.message = @"i tried to use the above 2 modes";
         cell.timeStamp = [NSDate date];
         cell.positionInSet = FRDChatCellPositionInSetIntermediary;
     } else if (i == 2) {
         cell = [FRDBaseChatCell chatCellWithType:(FRDChatCellType)0];
-        cell.message = @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+        cell.message = @"ScaleToFill This will";
         cell.timeStamp = [NSDate date];
         cell.positionInSet = FRDChatCellPositionInSetLast;
+    } else {
+        cell = [FRDBaseChatCell chatCellWithType:(FRDChatCellType)2];
+        cell.message = @"ScaleToFill This will";
+        cell.timeStamp = [NSDate date];
     }
     
     return cell;
