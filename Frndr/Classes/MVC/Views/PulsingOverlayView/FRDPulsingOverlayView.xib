@@ -22,7 +22,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="discardIcon" translatesAutoresizingMaskIntoConstraints="NO" id="gk9-st-wea" customClass="FRDRoundedImageView">
+                <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gk9-st-wea" customClass="FRDRoundedImageView">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="100" id="8ha-YP-sQW"/>
@@ -110,6 +110,5 @@
     </objects>
     <resources>
         <image name="TutorialBackground" width="495" height="775"/>
-        <image name="discardIcon" width="194" height="192"/>
     </resources>
 </document>

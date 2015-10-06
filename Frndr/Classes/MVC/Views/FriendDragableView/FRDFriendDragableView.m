@@ -76,26 +76,8 @@
     [self.friendProfileImageView sd_setImageWithURL:nearestUser.avatarURL];
 }
 
-- (void)clearNearestUsersFields
-{
-    self.friendNameLabel.text = @"";
-    self.friendAgeLabel.text = @"";
-    self.friendDistanceLabel.text = @"";
-    self.friendSmokerLabel.text = @"";
-    self.sexualOrientationLabel.text = @"";
-    self.jobTitleLabel.text = @"";
-    
-    self.friendProfileImageView.image = nil;
-}
-
 - (void)commonInit
 {
-//    self.layer.shadowColor = [UIColor blackColor].CGColor;
-//    self.layer.shadowOpacity = 0.25f;
-//    self.layer.shadowOffset = CGSizeMake(0, 2.5);
-//    self.layer.shadowRadius = 10.0;
-//    self.layer.shouldRasterize = YES;
-//    self.layer.rasterizationScale = [[UIScreen mainScreen] scale];
     self.layer.cornerRadius = 10.0;
 }
 

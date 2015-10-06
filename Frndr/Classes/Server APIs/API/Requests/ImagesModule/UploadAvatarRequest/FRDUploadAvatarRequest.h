@@ -10,4 +10,6 @@
 
 @interface FRDUploadAvatarRequest : FRDNetworkRequest
 
+- (instancetype)initWithImage:(UIImage *)newAvatar;
+
 @end

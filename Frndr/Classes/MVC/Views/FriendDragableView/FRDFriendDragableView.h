@@ -17,6 +17,5 @@
 @property (strong, nonatomic) NSString *overlayImageName;
 
 - (void)configureWithNearestUser:(FRDNearestUser *)nearestUser;
-- (void)clearNearestUsersFields;
 
 @end

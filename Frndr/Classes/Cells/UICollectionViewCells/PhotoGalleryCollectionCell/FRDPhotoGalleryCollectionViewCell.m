@@ -72,19 +72,17 @@
     self.crossImageView.hidden = self.imageView.hidden = !photo.photoURL;
     
     if (photo.photoURL) {
+        [self configureHud];
         WEAK_SELF;
-        [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
-        
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
-        hud.color = [[UIColor clearColor] copy];
-        hud.activityIndicatorColor = [UIColor blackColor];
-        
         [self.imageView sd_setImageWithURL:photo.photoURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
         }];
     }
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self addTapGestures];
+    });
     
-    [self addTapGestures];
 }
 
 - (void)handlePlusClick:(UITapGestureRecognizer *)tap
@@ -99,6 +97,15 @@
     if ([self.delegate respondsToSelector:@selector(galleryCell:didTapCrossImageView:)]) {
         [self.delegate galleryCell:self didTapCrossImageView:self.crossImageView];
     }
+}
+
+- (void)configureHud
+{
+    [MBProgressHUD hideAllHUDsForView:self animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
+    hud.color = [[UIColor clearColor] copy];
+    hud.activityIndicatorColor = [UIColor blackColor];
+    hud.alpha = .5f;
 }
 
 @end

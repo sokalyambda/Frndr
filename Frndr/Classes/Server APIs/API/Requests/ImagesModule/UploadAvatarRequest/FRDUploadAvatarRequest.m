@@ -22,16 +22,14 @@ static NSString *const kUploadingPatternString = @"data:image/png;base64,";
 
 #pragma mark - Lifecycle
 
-- (instancetype)init
+- (instancetype)initWithImage:(UIImage *)newAvatar
 {
     self = [super init];
     if (self) {
         self.action = [self requestAction];
         _method = @"POST";
         
-        UIImage *avatarImage = [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar.avatarImage;
-
-        NSString *base64Avatar = [avatarImage encodeToBase64String];
+        NSString *base64Avatar = [newAvatar encodeToBase64String];
         
         NSMutableDictionary *parameters = [@{kUserAvatar: [NSString stringWithFormat:@"%@ %@", kUploadingPatternString, base64Avatar]
                                              } mutableCopy];

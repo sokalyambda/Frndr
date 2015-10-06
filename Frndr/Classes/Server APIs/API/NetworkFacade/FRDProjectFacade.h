@@ -87,8 +87,9 @@ extern NSString *defaultBaseURLString;
 
 #pragma mark - Images Module
 
-+ (FRDNetworkOperation *)uploadUserAvatarOnSuccess:(SuccessBlock)success
-                                         onFailure:(FailureBlock)failure;
++ (FRDNetworkOperation *)uploadUserAvatar:(UIImage *)newAvatar
+                                onSuccess:(SuccessBlock)success
+                                onFailure:(FailureBlock)failure;
 + (FRDNetworkOperation *)uploadPhotoToGallery:(UIImage *)photo onSuccess:(SuccessBlock)success
                                     onFailure:(FailureBlock)failure;
 + (FRDNetworkOperation *)removeAvatarOnSuccess:(SuccessBlock)success

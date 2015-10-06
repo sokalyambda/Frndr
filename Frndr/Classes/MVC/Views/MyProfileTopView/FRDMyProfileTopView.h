@@ -8,4 +8,6 @@
 
 @interface FRDMyProfileTopView : UIView
 
+- (void)updateProfileTopView;
+
 @end

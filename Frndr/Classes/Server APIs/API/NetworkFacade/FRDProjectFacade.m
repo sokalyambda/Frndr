@@ -459,9 +459,11 @@ NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
 
 #pragma mark - Images Module
 
-+ (FRDNetworkOperation *)uploadUserAvatarOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
++ (FRDNetworkOperation *)uploadUserAvatar:(UIImage *)newAvatar
+                                onSuccess:(SuccessBlock)success
+                                onFailure:(FailureBlock)failure
 {
-    FRDUploadAvatarRequest *request = [[FRDUploadAvatarRequest alloc] init];
+    FRDUploadAvatarRequest *request = [[FRDUploadAvatarRequest alloc] initWithImage:newAvatar];
     
     FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
         

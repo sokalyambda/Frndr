@@ -173,12 +173,12 @@
                     //download the avatar image
                     [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[FRDStorageManager sharedStorage].currentUserProfile.avatarURL options:SDWebImageDownloaderHighPriority progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
                         
-                        //assign avatar to UIImage property in current profile
-                        [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar.avatarImage = image;
-                        
-                        [FRDProjectFacade uploadUserAvatarOnSuccess:^(BOOL isSuccess) {
+                        [FRDProjectFacade uploadUserAvatar:image onSuccess:^(BOOL isSuccess) {
                             
                             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                            
+                            //assign avatar facebook URL to current avatar
+                            [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar.photoURL = [FRDStorageManager sharedStorage].currentUserProfile.avatarURL;
                             
                             //set successfull login
                             [FRDFacebookService setLoginSuccess:isSuccess];

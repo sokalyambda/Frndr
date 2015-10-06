@@ -12,6 +12,8 @@
 #import "UIView+Pulsing.h"
 #import "UIView+Bluring.h"
 
+#import "FRDAvatar.h"
+
 static CGFloat const kDuration = .2f;
 
 @interface FRDPulsingOverlayView ()
@@ -23,37 +25,18 @@ static CGFloat const kDuration = .2f;
 
 @implementation FRDPulsingOverlayView
 
-#pragma mark - Lifecycle
-
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
-    self = [super initWithCoder:coder];
-    if (self) {
-        [self commonInit];
-    }
-    return self;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self commonInit];
-    }
-    return self;
-}
-
-- (void)awakeFromNib
-{
-    [self commonInit];
-}
-
 #pragma mark - Actions
 
-- (void)commonInit
+- (void)updatePulsingViewAvatar
 {
     FRDCurrentUserProfile *profile = [FRDStorageManager sharedStorage].currentUserProfile;
-    [self.avatarImageView sd_setImageWithURL:profile.avatarURL];
+    
+    if (profile.currentAvatar.photoURL) {
+        [self.avatarImageView sd_setImageWithURL:profile.currentAvatar.photoURL]; //avatar from server
+    } else {
+        [self.avatarImageView sd_setImageWithURL:profile.avatarURL]; //avatar from facebook
+    }
+    
     [self.avatarImageView addBorder];
 }
 
@@ -128,6 +111,8 @@ static CGFloat const kDuration = .2f;
         
         [UIView animateWithDuration:kDuration animations:^{
             [weakSelf setAlpha:1.f];
+            //update avatar
+            [weakSelf updatePulsingViewAvatar];
         } completion:^(BOOL finished) {
             [weakSelf addPulsingAnimations];
         }];
@@ -160,6 +145,8 @@ static CGFloat const kDuration = .2f;
 {
     [self cleanFromAnimations];
     [self.avatarImageView pulsingWithWavesInView:self repeating:YES];
+    //update avatar
+    [self updatePulsingViewAvatar];
 }
 
 /**

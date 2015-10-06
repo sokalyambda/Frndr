@@ -117,8 +117,6 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
         [cell configureWithGalleryPhoto:nil];
     }
     
-    NSLog(@"self.photosGallery.count + 1 = %d", self.photosGallery.count + 1);
-    
     return cell;
 }
 
@@ -167,6 +165,33 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
 }
 
 /**
+ *  Choose new photo and set it as user avatar image. (To make it work we have to change parent class of BZRRoundedImageView from FBSDKProfilePictureView to UIImageView).
+ */
+- (void)setupChangePhotoActionSheetWithCompletion:(PhotoSelectionCompletion)completion
+{
+    self.photoCompletion = completion;
+    
+    WEAK_SELF;
+    UIAlertController *changePhotoActionSheet = [UIAlertController alertControllerWithTitle:@"" message:LOCALIZED(@"Select photo") preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Take photo") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        [weakSelf takeNewPhotoFromCamera];
+    }];
+    
+    UIAlertAction *galleryAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Select from gallery") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        [weakSelf choosePhotoFromExistingImages];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleCancel handler:nil];
+    
+    [changePhotoActionSheet addAction:cameraAction];
+    [changePhotoActionSheet addAction:galleryAction];
+    [changePhotoActionSheet addAction:cancelAction];
+    
+    [self presentViewController:changePhotoActionSheet animated:YES completion:nil];
+}
+
+/**
  *  Remove current photo
  *
  *  @param photo Photo for removing
@@ -202,6 +227,7 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
     [FRDProjectFacade removeAvatarOnSuccess:^(BOOL isSuccess) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
+        //avatar has been removed
         [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar = nil;
         
         [weakSelf.collectionView reloadData];
@@ -240,17 +266,19 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
 /**
  *  Upload avatar
  */
-- (void)uploadAvatar
+- (void)uploadAvatar:(UIImage *)newAvatar
 {
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [FRDProjectFacade uploadUserAvatarOnSuccess:^(BOOL isSuccess) {
+    [FRDProjectFacade uploadUserAvatar:newAvatar onSuccess:^(BOOL isSuccess) {
         
         [FRDProjectFacade getAvatarWithSmallValue:NO onSuccess:^(FRDAvatar *avatar) {
             
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            weakSelf.currentAvatar = avatar;
-            [weakSelf.collectionView reloadData];
+            
+            [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar = avatar;
+            
+            [weakSelf.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
             
         } onFailure:^(NSError *error, BOOL isCanceled) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
@@ -261,33 +289,6 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
     }];
-}
-
-/**
- *  Choose new photo and set it as user avatar image. (To make it work we have to change parent class of BZRRoundedImageView from FBSDKProfilePictureView to UIImageView).
- */
-- (void)setupChangePhotoActionSheetWithCompletion:(PhotoSelectionCompletion)completion
-{
-    self.photoCompletion = completion;
-    
-    WEAK_SELF;
-    UIAlertController *changePhotoActionSheet = [UIAlertController alertControllerWithTitle:@"" message:LOCALIZED(@"Select photo") preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Take photo") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        [weakSelf takeNewPhotoFromCamera];
-    }];
-    
-    UIAlertAction *galleryAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Select from gallery") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        [weakSelf choosePhotoFromExistingImages];
-    }];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleCancel handler:nil];
-    
-    [changePhotoActionSheet addAction:cameraAction];
-    [changePhotoActionSheet addAction:galleryAction];
-    [changePhotoActionSheet addAction:cancelAction];
-    
-    [self presentViewController:changePhotoActionSheet animated:YES completion:nil];
 }
 
 /**
@@ -361,29 +362,10 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
     [self setupChangePhotoActionSheetWithCompletion:^(UIImage *chosenImage) {
         
         if (isAvatar) {
-            [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar.avatarImage = chosenImage;
-            [weakSelf uploadAvatar];
+            [weakSelf uploadAvatar:chosenImage];
         } else {
             [weakSelf uploadPhotoToGallery:chosenImage];
         }
-//        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-//        [FRDProjectFacade uploadPhotoToGallery:chosenImage onSuccess:^(BOOL isSuccess) {
-//            
-//            [FRDProjectFacade getGalleryOnSuccess:^(NSArray *gallery) {
-//                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-//                
-//                weakSelf.photosGallery = gallery;
-//                
-//            } onFailure:^(NSError *error, BOOL isCanceled) {
-//                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-//                [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-//            }];
-//            
-//        } onFailure:^(NSError *error, BOOL isCanceled) {
-//            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-//            [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-//        }];
-        
     }];
 }
 
