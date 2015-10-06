@@ -63,7 +63,7 @@ extern NSString *defaultBaseURLString;
                                         onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
 //Facebook
-+ (FRDNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(NSString *userId, BOOL avatarExists))success
++ (FRDNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(NSString *userId, BOOL avatarExists, BOOL isFirstLogin))success
                                            onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
 #pragma mark - Search Settings Module

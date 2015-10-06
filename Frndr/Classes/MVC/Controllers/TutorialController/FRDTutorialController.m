@@ -31,6 +31,8 @@
 
 #import "FRDAvatar.h"
 
+#import "FRDChatManager.h"
+
 @interface FRDTutorialController ()<TTTAttributedLabelDelegate, UIScrollViewDelegate, ContainerViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *tutorialScrollView;
@@ -161,15 +163,17 @@
             [FRDStorageManager sharedStorage].currentUserProfile = [FRDCurrentUserProfile userProfileWithFacebookProfile:facebookProfile];
             
             
-            [FRDProjectFacade signInWithFacebookOnSuccess:^(NSString *userId, BOOL avatarExists) {
+            [FRDProjectFacade signInWithFacebookOnSuccess:^(NSString *userId, BOOL avatarExists, BOOL firstLogin) {
                 
-#warning get the user id and open the socket
+                [FRDStorageManager sharedStorage].currentUserProfile.userId = userId;
+                //Open socket channel
+                [FRDChatManager sharedChatManager];
                 
                 if (!avatarExists) {
-                    
                     //download the avatar image
                     [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[FRDStorageManager sharedStorage].currentUserProfile.avatarURL options:SDWebImageDownloaderHighPriority progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
                         
+                        //assign avatar to UIImage property in current profile
                         [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar.avatarImage = image;
                         
                         [FRDProjectFacade uploadUserAvatarOnSuccess:^(BOOL isSuccess) {

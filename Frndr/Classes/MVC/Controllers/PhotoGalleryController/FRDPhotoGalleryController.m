@@ -6,7 +6,7 @@
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-typedef void(^PhotoSelectionCompletion)(NSString *base64ImageString, UIImage *chosenImage);
+typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
 
 #import "FRDPhotoGalleryController.h"
 
@@ -38,9 +38,7 @@ typedef void(^PhotoSelectionCompletion)(NSString *base64ImageString, UIImage *ch
 
 - (FRDAvatar *)currentAvatar
 {
-    if (!_currentAvatar) {
-        _currentAvatar = [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar;
-    }
+    _currentAvatar = [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar;
     return _currentAvatar;
 }
 
@@ -106,7 +104,7 @@ typedef void(^PhotoSelectionCompletion)(NSString *base64ImageString, UIImage *ch
 
     cell.delegate = self;
     
-    if (indexPath.row != self.photosGallery.count + 1) {
+    if (indexPath.row < self.photosGallery.count + 1) {
         
         if (indexPath.row == 0) {
             [cell configureWithGalleryPhoto:self.currentAvatar];
@@ -119,6 +117,8 @@ typedef void(^PhotoSelectionCompletion)(NSString *base64ImageString, UIImage *ch
         [cell configureWithGalleryPhoto:nil];
     }
     
+    NSLog(@"self.photosGallery.count + 1 = %d", self.photosGallery.count + 1);
+    
     return cell;
 }
 
@@ -127,24 +127,43 @@ typedef void(^PhotoSelectionCompletion)(NSString *base64ImageString, UIImage *ch
 /**
  *  Show remove photo action sheet
  */
-- (void)showRemovePhotoActionSheetWithPhoto:(FRDGalleryPhoto *)photo atIndexPath:(NSIndexPath *)indexPath
+- (void)showRemovePhotoActionSheetWithPhoto:(FRDGalleryPhoto *)photo
 {
     UIAlertController *removePhotoController = [UIAlertController alertControllerWithTitle:@"" message:LOCALIZED(@"Do you want to remove this photo?") preferredStyle:UIAlertControllerStyleActionSheet];
     
     WEAK_SELF;
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Remove") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        if (indexPath.row == 0) {
-            [weakSelf removeAvatar];
-        } else {
-            [weakSelf removePhoto:photo];
-        }
+
+        [weakSelf removePhoto:photo];
+        
     }];
     
     [removePhotoController addAction:cancelAction];
     [removePhotoController addAction:confirmAction];
     
     [self presentViewController:removePhotoController animated:YES completion:nil];
+}
+
+/**
+ *  Show remove avatar action sheet
+ */
+- (void)showRemoveAvatarActionSheet
+{
+    UIAlertController *removeAvatarController = [UIAlertController alertControllerWithTitle:@"" message:LOCALIZED(@"Do you want to remove your avatar?") preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    WEAK_SELF;
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Remove") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+        [weakSelf removeAvatar];
+        
+    }];
+    
+    [removeAvatarController addAction:cancelAction];
+    [removeAvatarController addAction:confirmAction];
+    
+    [self presentViewController:removeAvatarController animated:YES completion:nil];
 }
 
 /**
@@ -183,9 +202,64 @@ typedef void(^PhotoSelectionCompletion)(NSString *base64ImageString, UIImage *ch
     [FRDProjectFacade removeAvatarOnSuccess:^(BOOL isSuccess) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
+        [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar = nil;
+        
+        [weakSelf.collectionView reloadData];
+        
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+    }];
+}
+
+/**
+ *  Upload photo to gallery
+ */
+- (void)uploadPhotoToGallery:(UIImage *)chosenImage
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+    [FRDProjectFacade uploadPhotoToGallery:chosenImage onSuccess:^(BOOL isSuccess) {
         
+        [FRDProjectFacade getGalleryOnSuccess:^(NSArray *gallery) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            
+            weakSelf.photosGallery = gallery;
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+        }];
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+    }];
+}
+
+/**
+ *  Upload avatar
+ */
+- (void)uploadAvatar
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [FRDProjectFacade uploadUserAvatarOnSuccess:^(BOOL isSuccess) {
+        
+        [FRDProjectFacade getAvatarWithSmallValue:NO onSuccess:^(FRDAvatar *avatar) {
+            
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            weakSelf.currentAvatar = avatar;
+            [weakSelf.collectionView reloadData];
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+        }];
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
     }];
 }
 
@@ -265,10 +339,9 @@ typedef void(^PhotoSelectionCompletion)(NSString *base64ImageString, UIImage *ch
 
         UIImage *resizedImage = [image imageByScalingAndCroppingForSize:CGSizeMake(600.f, 600.f)];
         
-        NSString *base64String = @"";//[image encodeToBase64String];
         if (self.photoCompletion) {
             [picker dismissViewControllerAnimated:YES completion:nil];
-            self.photoCompletion(base64String, resizedImage);
+            self.photoCompletion(resizedImage);
             self.photoCompletion = nil;
         }
     }
@@ -283,26 +356,33 @@ typedef void(^PhotoSelectionCompletion)(NSString *base64ImageString, UIImage *ch
 
 - (void)galleryCell:(FRDPhotoGalleryCollectionViewCell *)cell didTapPlusImageView:(UIImageView *)plusImageView
 {
+    BOOL isAvatar = [self.collectionView indexPathForCell:cell].row == 0 ? YES : NO;
     WEAK_SELF;
-    [self setupChangePhotoActionSheetWithCompletion:^(NSString *base64ImageString, UIImage *chosenImage) {
+    [self setupChangePhotoActionSheetWithCompletion:^(UIImage *chosenImage) {
         
-        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-        [FRDProjectFacade uploadPhotoToGallery:chosenImage onSuccess:^(BOOL isSuccess) {
-            
-            [FRDProjectFacade getGalleryOnSuccess:^(NSArray *gallery) {
-                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                
-                weakSelf.photosGallery = gallery;
-                
-            } onFailure:^(NSError *error, BOOL isCanceled) {
-                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-            }];
-            
-        } onFailure:^(NSError *error, BOOL isCanceled) {
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-        }];
+        if (isAvatar) {
+            [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar.avatarImage = chosenImage;
+            [weakSelf uploadAvatar];
+        } else {
+            [weakSelf uploadPhotoToGallery:chosenImage];
+        }
+//        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+//        [FRDProjectFacade uploadPhotoToGallery:chosenImage onSuccess:^(BOOL isSuccess) {
+//            
+//            [FRDProjectFacade getGalleryOnSuccess:^(NSArray *gallery) {
+//                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//                
+//                weakSelf.photosGallery = gallery;
+//                
+//            } onFailure:^(NSError *error, BOOL isCanceled) {
+//                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//                [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+//            }];
+//            
+//        } onFailure:^(NSError *error, BOOL isCanceled) {
+//            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//            [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+//        }];
         
     }];
 }
@@ -310,9 +390,14 @@ typedef void(^PhotoSelectionCompletion)(NSString *base64ImageString, UIImage *ch
 - (void)galleryCell:(FRDPhotoGalleryCollectionViewCell *)cell didTapCrossImageView:(UIImageView *)crossImageView
 {
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
-    FRDGalleryPhoto *currentPhoto = self.photosGallery[indexPath.row - 1];
     
-    [self showRemovePhotoActionSheetWithPhoto:currentPhoto atIndexPath:indexPath];
+    if (indexPath.row == 0) {
+        [self showRemoveAvatarActionSheet];
+    } else {
+        FRDGalleryPhoto *currentPhoto = self.photosGallery[indexPath.row - 1];
+        [self showRemovePhotoActionSheetWithPhoto:currentPhoto];
+    }
+    
 }
 
 @end
