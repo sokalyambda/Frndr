@@ -184,7 +184,9 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
                                                   failure:(FailureOperationBlock)failure
 {
     //set success&failure blocks to failed operation manager. This step adds a possibility to restart operation if connection failed
-    [self.failedOperationManager setFailedOperationSuccessBlock:success andFailureBlock:failure];
+    if (networkRequest.retryIfConnectionFailed) {
+        [self.failedOperationManager setFailedOperationSuccessBlock:success andFailureBlock:failure];
+    }
     
     NSError *error = nil;
     id manager = nil;
