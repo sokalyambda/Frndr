@@ -2162,43 +2162,76 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TRS-SN-IEJ">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TRS-SN-IEJ" userLabel="Chat Table Container View">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <connections>
                                     <segue destination="NcB-CQ-10X" kind="embed" identifier="chatTableControllerSegue" id="z5Q-r7-4Bb"/>
                                 </connections>
                             </containerView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Send a reply..." translatesAutoresizingMaskIntoConstraints="NO" id="C6u-qb-uO4" userLabel="Reply Text View">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="750" constant="62" id="83n-tw-H4P"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GillSans-LightItalic" family="Gill Sans" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="83n-tw-H4P"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="83n-tw-H4P"/>
+                                    </mask>
+                                </variation>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="A7w-2X-iq9" firstAttribute="top" secondItem="TRS-SN-IEJ" secondAttribute="bottom" id="3Zj-c6-YKq"/>
-                            <constraint firstItem="TRS-SN-IEJ" firstAttribute="leading" secondItem="n8V-jV-fiO" secondAttribute="leading" id="6sG-mD-7n1"/>
-                            <constraint firstItem="TRS-SN-IEJ" firstAttribute="top" secondItem="qnJ-T8-55K" secondAttribute="bottom" id="7Tz-gH-xrp"/>
-                            <constraint firstAttribute="trailing" secondItem="TRS-SN-IEJ" secondAttribute="trailing" id="h58-Vh-KDU"/>
+                            <constraint firstItem="A7w-2X-iq9" firstAttribute="top" secondItem="C6u-qb-uO4" secondAttribute="bottom" id="1Oq-ib-Jq4"/>
+                            <constraint firstAttribute="trailing" secondItem="C6u-qb-uO4" secondAttribute="trailing" id="Auy-Us-O5U"/>
+                            <constraint firstItem="C6u-qb-uO4" firstAttribute="leading" secondItem="n8V-jV-fiO" secondAttribute="leading" id="JEy-oA-P7y"/>
+                            <constraint firstItem="TRS-SN-IEJ" firstAttribute="top" secondItem="qnJ-T8-55K" secondAttribute="bottom" id="l3t-du-6YW"/>
+                            <constraint firstItem="TRS-SN-IEJ" firstAttribute="leading" secondItem="n8V-jV-fiO" secondAttribute="leading" id="m6R-f1-6yd"/>
+                            <constraint firstAttribute="trailing" secondItem="TRS-SN-IEJ" secondAttribute="trailing" id="qUp-Ac-sYf"/>
+                            <constraint firstItem="C6u-qb-uO4" firstAttribute="top" secondItem="TRS-SN-IEJ" secondAttribute="bottom" id="xmI-Dd-3KG"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="TRS-SN-IEJ"/>
+                                <exclude reference="C6u-qb-uO4"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="3Zj-c6-YKq"/>
-                                <exclude reference="6sG-mD-7n1"/>
-                                <exclude reference="7Tz-gH-xrp"/>
-                                <exclude reference="h58-Vh-KDU"/>
+                                <exclude reference="l3t-du-6YW"/>
+                                <exclude reference="m6R-f1-6yd"/>
+                                <exclude reference="qUp-Ac-sYf"/>
+                                <exclude reference="Auy-Us-O5U"/>
+                                <exclude reference="JEy-oA-P7y"/>
+                                <exclude reference="xmI-Dd-3KG"/>
+                                <exclude reference="1Oq-ib-Jq4"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="TRS-SN-IEJ"/>
+                                <include reference="C6u-qb-uO4"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="3Zj-c6-YKq"/>
-                                <include reference="6sG-mD-7n1"/>
-                                <include reference="7Tz-gH-xrp"/>
-                                <include reference="h58-Vh-KDU"/>
+                                <include reference="l3t-du-6YW"/>
+                                <include reference="m6R-f1-6yd"/>
+                                <include reference="qUp-Ac-sYf"/>
+                                <include reference="Auy-Us-O5U"/>
+                                <include reference="JEy-oA-P7y"/>
+                                <include reference="xmI-Dd-3KG"/>
+                                <include reference="1Oq-ib-Jq4"/>
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="replyTextView" destination="C6u-qb-uO4" id="SqD-cZ-uCC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="giC-yp-Jm3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3225,7 +3258,7 @@
                         <outlet property="dropDownHolderContainer" destination="Oge-ME-dce" id="MTa-zS-d24"/>
                         <outlet property="jobTitleField" destination="82V-fg-PeQ" id="B7k-vn-eM9"/>
                         <outlet property="relationshipsContainer" destination="UFH-Hh-wOr" id="lwX-uA-lSh"/>
-                        <outlet property="scrollView" destination="RgJ-fn-XSa" id="PeE-p2-48S"/>
+                        <outlet property="scrollView" destination="RgJ-fn-XSa" id="45O-7P-I2V"/>
                         <outlet property="topViewContainer" destination="B1X-MD-Spt" id="6LZ-17-zUT"/>
                         <outlet property="visibleOnFrndrSwitch" destination="a4R-Zv-FQL" id="2Yq-VL-FP2"/>
                     </connections>

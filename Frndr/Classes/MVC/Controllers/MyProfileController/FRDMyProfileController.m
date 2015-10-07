@@ -30,8 +30,9 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
 
 @interface FRDMyProfileController () <UITextFieldDelegate, UIGestureRecognizerDelegate>
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) FRDPersonalBioTableController *personalBioTableController;
+
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (weak, nonatomic) IBOutlet FRDSwitch *visibleOnFrndrSwitch;
 
@@ -40,11 +41,11 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
 @property (weak, nonatomic) IBOutlet UIView *dropDownHolderContainer;
 @property (weak, nonatomic) IBOutlet UITextField *jobTitleField;
 
-@property (assign, nonatomic) CGFloat previousVerticalOffset;
-
 @property (strong, nonatomic) FRDMyProfileTopView *topView;
 @property (strong, nonatomic) FRDRelationshipStatusController *relationshipController;
 @property (strong, nonatomic) FRDDropDownHolderController *dropDownHolderController;
+
+@property (assign, nonatomic) CGFloat previousVerticalOffset;
 
 @end
 
@@ -61,19 +62,6 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self performUpdatingActions];
     });
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.topView updateProfileTopView];
-    [self subscribeForNotifications];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [self unsubscribeFromNotifications];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -226,21 +214,7 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
     [self.dropDownHolderController didMoveToParentViewController:self];
 }
 
-- (void)subscribeForNotifications
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification object:nil];
-}
-
-- (void)unsubscribeFromNotifications
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-#pragma mark - Notificaion handlers
+#pragma mark - Keyboard notification handlers
 
 - (void)keyboardWillShow:(NSNotification*)notification
 {
@@ -257,7 +231,7 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
     CGRect responderFrame;
     
     // Convert responder's frame to top view coordinate system
-    if (currentResponder == self.jobTitleField) {
+    if ([currentResponder isEqual:self.jobTitleField]) {
         responderFrame = self.jobTitleField.frame;
         responderFrame = [self.jobTitleField.superview convertRect:responderFrame toView:self.view];
     } else {
@@ -286,8 +260,7 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
     self.scrollView.contentInset = contentInsets;
     self.scrollView.scrollIndicatorInsets = contentInsets;
-    self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x,
-                                                self.previousVerticalOffset);
+    self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x, self.previousVerticalOffset);
 }
 
 #pragma mark - Navigation

@@ -6,8 +6,8 @@
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "FRDBaseViewController.h"
+#import "FRDKeyboardResponderController.h"
 
-@interface FRDMyProfileController : FRDBaseViewController
+@interface FRDMyProfileController : FRDKeyboardResponderController
 
 @end
