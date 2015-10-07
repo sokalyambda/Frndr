@@ -6,13 +6,6 @@
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-typedef NS_ENUM(NSInteger, FRDChatCellType)
-{
-    FRDChatCellTypeUser,
-    FRDChatCellTypeFriend,
-    FRDChatCellTypeSystem
-};
-
 typedef NS_ENUM(NSInteger, FRDChatCellPositionInSet)
 {
     FRDChatCellPositionInSetFirst,
@@ -20,12 +13,14 @@ typedef NS_ENUM(NSInteger, FRDChatCellPositionInSet)
     FRDChatCellPositionInSetLast
 };
 
+@class FRDChatMessage, FRDFriend;
+
 @interface FRDBaseChatCell : UITableViewCell
 
-@property (copy, nonatomic) NSString *message;
-@property (strong, nonatomic) NSDate *timeStamp;
 @property (assign, nonatomic) FRDChatCellPositionInSet positionInSet;
 
-+ (instancetype)chatCellWithType:(FRDChatCellType)cellType;
++ (instancetype)chatCellWithMessage:(FRDChatMessage *)message;
+
+- (void)configureForFriend:(FRDFriend *)currentFriend withMessage:(FRDChatMessage *)message;
 
 @end

@@ -27,6 +27,8 @@
 #import "FRDDislikeUserByIdRequest.h"
 
 #import "FRDClearAllMessagesRequest.h"
+#import "FRDGetChatHistoryRequest.h"
+#import "FRDSendMessageRequest.h"
 
 #import "FRDUploadAvatarRequest.h"
 #import "FRDUploadPhotoToGalleryRequest.h"

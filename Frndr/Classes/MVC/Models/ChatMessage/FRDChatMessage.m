@@ -11,6 +11,8 @@
 #import "FRDCommonDateFormatter.h"
 #import "ISO8601DateFormatter.h"
 
+#import "FRDChatMessagesService.h"
+
 //from response
 static NSString *const kMessageId       = @"_id";
 static NSString *const kOwner           = @"owner";
@@ -34,6 +36,8 @@ static NSString *const kMessageText     = @"message";
         _ownerId = response[kOwner];
         _messageBody = response[kMessageBody];
         _creationDate = [[FRDCommonDateFormatter commonISO8601DateFormatter] dateFromString:response[kCreationDate]];
+        
+        _ownerType = [FRDChatMessagesService ownerTypeForMessage:self];
     }
     return self;
 }
@@ -47,6 +51,8 @@ static NSString *const kMessageText     = @"message";
         _ownerId = socketResponse[kOwnerId];
         _companionId = socketResponse[kCompanionId];
         _messageBody = socketResponse[kMessageText];
+        
+        _ownerType = [FRDChatMessagesService ownerTypeForMessage:self];
     }
     return self;
 }
