@@ -10,6 +10,7 @@
 
 #import "FRDSmokerDataSource.h"
 #import "FRDSexualOrientationDataSource.h"
+#import "FRDChatOptionsDataSource.h"
 
 #import "FRDDropDownCell.h"
 
@@ -34,6 +35,10 @@
         }
         case FRDDataSourceTypeSmoker: {
             currentDataSource = [[FRDSmokerDataSource alloc] init];
+            break;
+        }
+        case FRDDataSourceTypeChatOptions: {
+            currentDataSource = [[FRDChatOptionsDataSource alloc] init];
             break;
         }
         default:

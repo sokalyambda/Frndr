@@ -16,17 +16,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appIcon" translatesAutoresizingMaskIntoConstraints="NO" id="E1M-kB-HKi" userLabel="Avatar Image View" customClass="FRDRoundedImageView">
-                        <rect key="frame" x="10" y="39" width="70" height="70"/>
+                        <rect key="frame" x="10" y="54" width="40" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="70" id="74D-xa-70R"/>
+                            <constraint firstAttribute="width" constant="40" id="74D-xa-70R"/>
                             <constraint firstAttribute="width" secondItem="E1M-kB-HKi" secondAttribute="height" multiplier="1:1" id="KIN-3c-oJb"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="azo-S9-Sqj" userLabel="Message Container">
-                        <rect key="frame" x="90" y="5" width="379" height="137"/>
+                        <rect key="frame" x="60" y="5" width="409" height="137"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" image="SystemMessageBackground" translatesAutoresizingMaskIntoConstraints="NO" id="8vt-1Q-DPz" userLabel="Background Image View">
-                                <rect key="frame" x="0.0" y="0.0" width="379" height="137"/>
+                                <rect key="frame" x="0.0" y="0.0" width="409" height="137"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ChatMessageBackgroundTriangle" translatesAutoresizingMaskIntoConstraints="NO" id="k6g-F1-95S">
                                 <rect key="frame" x="-1" y="59" width="6" height="20"/>
@@ -36,7 +36,7 @@
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JTu-f0-w7O" userLabel="Message Text View">
-                                <rect key="frame" x="8" y="5" width="371" height="127"/>
+                                <rect key="frame" x="8" y="5" width="401" height="127"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </string>
                                 <color key="textColor" red="0.088561395202020221" green="0.088561395202020221" blue="0.088561395202020221" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="15"/>

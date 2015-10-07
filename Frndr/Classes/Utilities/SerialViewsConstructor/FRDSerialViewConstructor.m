@@ -36,7 +36,21 @@ static NSString *const kBackArrowImageName = @"backArrow";
  */
 + (UIBarButtonItem *)customRightBarButtonForController:(UIViewController *)controller withAction:(SEL)action
 {
-    UIImage *backgroundImage = [[UIImage imageNamed:kTopIconImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    return [self customRightBarButtonForController:controller withAction:action andImageName:kTopIconImageName];
+}
+
+/**
+ *  Create custom right icon button with custom background image
+ *
+ *  @param controller    Receiver of custom right icon button
+ *  @param action        Selector that will be passed to right icon button
+ *  @param imageName     Name of the image that will be assigned to item
+ *
+ *  @return Custom Right Icon
+ */
++ (UIBarButtonItem *)customRightBarButtonForController:(UIViewController *)controller withAction:(SEL)action andImageName:(NSString *)imageName
+{
+    UIImage *backgroundImage = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     UIButton *topRightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [topRightButton setFrame:CGRectMake(0.0f, 0.0f, backgroundImage.size.width, backgroundImage.size.height)];
@@ -44,7 +58,7 @@ static NSString *const kBackArrowImageName = @"backArrow";
     [topRightButton setBackgroundImage:backgroundImage forState:UIControlStateNormal];
     
     [topRightButton addTarget:controller action:action forControlEvents:UIControlEventTouchUpInside];
-
+    
     UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:topRightButton];
     
     return doneBarButton;

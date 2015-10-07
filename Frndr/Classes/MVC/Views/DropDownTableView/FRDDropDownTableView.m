@@ -12,9 +12,6 @@
 
 #import "CAAnimation+CompetionBlock.h"
 
-static CGFloat const kDropDownDefaultHeight = 200.f;
-static CGFloat const kAdditionalOffset = 5.f;
-
 @interface FRDDropDownTableView ()
 @property (weak, nonatomic) IBOutlet UITableView *dropDownList;
 
@@ -33,6 +30,71 @@ static CGFloat const kAdditionalOffset = 5.f;
 
 @implementation FRDDropDownTableView {
     CGRect savedDropDownTableFrame;
+}
+
+#pragma mark - Accessors
+
+- (void)setIsScrollEnabled:(BOOL)isScrollEnabled
+{
+    _isScrollEnabled = isScrollEnabled;
+    self.dropDownList.scrollEnabled = isScrollEnabled;
+}
+
+- (void)setCornerRadius:(CGFloat)cornerRadius
+{
+    _cornerRadius = cornerRadius;
+    self.layer.cornerRadius = cornerRadius;
+}
+
+- (void)setAreSeparatorsVisible:(BOOL)areSeparatorsVisible
+{
+    _areSeparatorsVisible = areSeparatorsVisible;
+    self.dropDownList.separatorStyle = areSeparatorsVisible ? UITableViewCellSeparatorStyleSingleLine : UITableViewCellSeparatorStyleNone;
+}
+
+// Value indicates the number of rows to which the height is adjusted dynamically
+static NSInteger const kRowsNumberThreshold = 4;
+
+- (CGFloat)calculatedDropDownHeight
+{
+    CGFloat calculatedHeight = 0;
+    NSInteger numberOfRows = [self.dropDownList numberOfRowsInSection:0];
+    UITableViewCell *firstCell = [self.dropDownList cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    CGFloat rowHeight = CGRectGetHeight(firstCell.frame);
+    
+    if (numberOfRows <= kRowsNumberThreshold) {
+        calculatedHeight = rowHeight * numberOfRows;
+    } else {
+        calculatedHeight = self.defaultHeight;
+    }
+    
+    // If this view will exceed screen bounds then adjust its height to fit them
+    CGRect expectedFrame = CGRectMake(CGRectGetMinX(self.frame),
+                                      CGRectGetMinY(self.frame) + self.additionalOffset,
+                                      CGRectGetWidth(self.frame),
+                                      calculatedHeight);
+    
+    CGFloat verticalIntersection = 0;
+    if ([self.presentedView isKindOfClass:[UIScrollView class]]) {
+        verticalIntersection = CGRectGetMaxY(expectedFrame) - ((UIScrollView *)self.presentedView).contentSize.height;
+    } else {
+        verticalIntersection = CGRectGetMaxY(expectedFrame) - CGRectGetMaxY(self.presentedView.frame);
+    }
+    verticalIntersection = (verticalIntersection <= 0) ? 0 : verticalIntersection + self.additionalOffset;
+    calculatedHeight -= verticalIntersection;
+    
+    return calculatedHeight;
+}
+
+- (void)setAnchorView:(UIView *)anchorView
+{
+    _anchorView = anchorView;
+    
+    if (_anchorView) {
+        CGPoint relatedPoint = [_anchorView convertPoint:_anchorView.bounds.origin toView:self.presentedView];
+        savedDropDownTableFrame = CGRectMake(relatedPoint.x, CGRectGetMaxY(_anchorView.bounds) + relatedPoint.y, CGRectGetWidth(_anchorView.frame), 0);
+        self.frame = savedDropDownTableFrame;
+    }
 }
 
 #pragma mark - Lifecycle
@@ -62,56 +124,13 @@ static CGFloat const kAdditionalOffset = 5.f;
 
 - (void)commonInit
 {
-    self.layer.cornerRadius = 5.0;
+    self.defaultHeight = 200.f;
+    self.cornerRadius = 5.f;
+    self.additionalOffset = 5.f;
+    self.slideAnimationDuration = 0.5f;
+    
     self.dropDownList.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.dropDownList.clipsToBounds = YES;
-}
-
-#pragma mark - Accessors
-
-// Value indicates the number of rows to which the height is adjusted dynamically
-static NSInteger const kRowsNumberThreshold = 4;
-
-- (CGFloat)calculatedDropDownHeight
-{
-    CGFloat calculatedHeight = 0;
-    NSInteger numberOfRows = [self.dropDownList numberOfRowsInSection:0];
-    UITableViewCell *firstCell = [self.dropDownList cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    CGFloat rowHeight = CGRectGetHeight(firstCell.frame);
-    
-    if (numberOfRows <= kRowsNumberThreshold) {
-        calculatedHeight = rowHeight * numberOfRows;
-    } else {
-        calculatedHeight = kDropDownDefaultHeight;
-    }
-    
-    // If this view will exceed screen bounds then adjust its height to fit them
-    CGRect expectedFrame = CGRectMake(CGRectGetMinX(self.frame),
-                                      CGRectGetMinY(self.frame) + kAdditionalOffset,
-                                      CGRectGetWidth(self.frame),
-                                      calculatedHeight);
-    
-    CGFloat verticalIntersection = 0;
-    if ([self.presentedView isKindOfClass:[UIScrollView class]]) {
-        verticalIntersection = CGRectGetMaxY(expectedFrame) - ((UIScrollView *)self.presentedView).contentSize.height;
-    } else {
-        verticalIntersection = CGRectGetMaxY(expectedFrame) - CGRectGetMaxY(self.presentedView.frame);
-    }
-    verticalIntersection = (verticalIntersection <= 0) ? 0 : verticalIntersection + kAdditionalOffset; 
-    calculatedHeight -= verticalIntersection;
-    
-    return calculatedHeight;
-}
-
-- (void)setAnchorView:(UIView *)anchorView
-{
-    _anchorView = anchorView;
-    
-    if (_anchorView) {
-        CGPoint relatedPoint = [_anchorView convertPoint:_anchorView.bounds.origin toView:self.presentedView];
-        savedDropDownTableFrame = CGRectMake(relatedPoint.x, CGRectGetMaxY(_anchorView.bounds) + relatedPoint.y, CGRectGetWidth(_anchorView.frame), 0);
-        self.frame = savedDropDownTableFrame;
-    }
 }
 
 #pragma mark - Actions
@@ -158,18 +177,19 @@ static NSInteger const kRowsNumberThreshold = 4;
     self.expandingNeeded = !self.expandingNeeded;
 }
 
-static CGFloat const kSlidingTime = .5f;
 - (void)showDropDownList
 {
     [self.presentedView addSubview:self];
+    [self layoutIfNeeded];
+    
     WEAK_SELF;
-    [UIView animateWithDuration:kSlidingTime
+    [UIView animateWithDuration:self.slideAnimationDuration
                           delay:0.1f
          usingSpringWithDamping:.5f
           initialSpringVelocity:.5f
                         options:UIViewAnimationOptionCurveEaseOut animations:^{
                             CGRect newFrame = weakSelf.frame;
-                            newFrame.origin.y += kAdditionalOffset;
+                            newFrame.origin.y += self.additionalOffset;
                             newFrame.size.height = weakSelf.calculatedDropDownHeight;
                             weakSelf.frame = newFrame;
                             weakSelf.dropDownList.frame = newFrame;
@@ -187,12 +207,14 @@ static CGFloat const kSlidingTime = .5f;
 - (void)hideDropDownList
 {
     WEAK_SELF;
-    [UIView animateWithDuration:kSlidingTime
+    [weakSelf layoutIfNeeded];
+    [UIView animateWithDuration:self.slideAnimationDuration
                           delay:0.1f
          usingSpringWithDamping:1.f
           initialSpringVelocity:1.f
                         options:UIViewAnimationOptionCurveEaseIn animations:^{
                             weakSelf.frame = savedDropDownTableFrame;
+                            [weakSelf layoutIfNeeded];
                         }
                      completion:^(BOOL finished) {
                          weakSelf.anchorView = nil;

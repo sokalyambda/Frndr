@@ -12,6 +12,8 @@
 
 + (UIBarButtonItem *)customRightBarButtonForController:(UIViewController *)controller withAction:(SEL)action;
 
++ (UIBarButtonItem *)customRightBarButtonForController:(UIViewController *)controller withAction:(SEL)action andImageName:(NSString *)imageName;
+
 + (UIBarButtonItem *)customBarButtonWithImage:(UIImage *)image forController:(UIViewController *)controller withAction:(SEL)action;
 
 @end

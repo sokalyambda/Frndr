@@ -76,7 +76,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     FRDChatController *chat = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDChatController class])];
-    [self.navigationController showViewController:chat sender:self];
+    [self.navigationController pushViewController:chat animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

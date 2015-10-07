@@ -21,7 +21,9 @@
 		3E1D9BEE1BB3CE46003A1E5C /* FRDPreviewGalleryController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E1D9BEC1BB3CE46003A1E5C /* FRDPreviewGalleryController.xib */; settings = {ASSET_TAGS = (); }; };
 		3E3D41591BA6A5A90021026A /* FRDAutologinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D41581BA6A5A90021026A /* FRDAutologinViewController.m */; };
 		3E3D415D1BA6B1530021026A /* FRDSearchSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D415C1BA6B1530021026A /* FRDSearchSettingsController.m */; };
+		3E5409D31BC3D4B5001D7CAE /* FRDChatOptionsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5409D21BC3D4B5001D7CAE /* FRDChatOptionsDataSource.m */; settings = {ASSET_TAGS = (); }; };
 		3E5DEE701BAEB59800832CD6 /* FRDRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DEE6F1BAEB59800832CD6 /* FRDRangeSlider.m */; settings = {ASSET_TAGS = (); }; };
+		3E8770BD1BC510480002E540 /* FRDChatOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8770BC1BC510480002E540 /* FRDChatOption.m */; settings = {ASSET_TAGS = (); }; };
 		3E941A341BB1809700F034E6 /* FRDPersonalBioTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E941A331BB1809700F034E6 /* FRDPersonalBioTableController.m */; settings = {ASSET_TAGS = (); }; };
 		3E941A371BB180B400F034E6 /* FRDSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E941A361BB180B400F034E6 /* FRDSwitch.m */; settings = {ASSET_TAGS = (); }; };
 		3E941A3C1BB180E200F034E6 /* UIResponder+FirstResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E941A3B1BB180E200F034E6 /* UIResponder+FirstResponder.m */; settings = {ASSET_TAGS = (); }; };
@@ -209,8 +211,12 @@
 		3E3D41581BA6A5A90021026A /* FRDAutologinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDAutologinViewController.m; path = Classes/MVC/Controllers/SplashScreenController/FRDAutologinViewController.m; sourceTree = "<group>"; };
 		3E3D415B1BA6B1530021026A /* FRDSearchSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSearchSettingsController.h; path = Classes/MVC/Controllers/SearchSettingsController/FRDSearchSettingsController.h; sourceTree = "<group>"; };
 		3E3D415C1BA6B1530021026A /* FRDSearchSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSearchSettingsController.m; path = Classes/MVC/Controllers/SearchSettingsController/FRDSearchSettingsController.m; sourceTree = "<group>"; };
+		3E5409D11BC3D4B5001D7CAE /* FRDChatOptionsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDChatOptionsDataSource.h; path = Classes/DropDownDataSources/ChatOptionsDataSource/FRDChatOptionsDataSource.h; sourceTree = "<group>"; };
+		3E5409D21BC3D4B5001D7CAE /* FRDChatOptionsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDChatOptionsDataSource.m; path = Classes/DropDownDataSources/ChatOptionsDataSource/FRDChatOptionsDataSource.m; sourceTree = "<group>"; };
 		3E5DEE6E1BAEB59800832CD6 /* FRDRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRangeSlider.h; path = Classes/Controls/Sliders/RangeSlider/FRDRangeSlider.h; sourceTree = "<group>"; };
 		3E5DEE6F1BAEB59800832CD6 /* FRDRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRangeSlider.m; path = Classes/Controls/Sliders/RangeSlider/FRDRangeSlider.m; sourceTree = "<group>"; };
+		3E8770BB1BC510480002E540 /* FRDChatOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDChatOption.h; path = Classes/MVC/Models/ChatOption/FRDChatOption.h; sourceTree = "<group>"; };
+		3E8770BC1BC510480002E540 /* FRDChatOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDChatOption.m; path = Classes/MVC/Models/ChatOption/FRDChatOption.m; sourceTree = "<group>"; };
 		3E941A321BB1809700F034E6 /* FRDPersonalBioTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPersonalBioTableController.h; path = Classes/MVC/Controllers/MyProfileController/PersonalBioTableController/FRDPersonalBioTableController.h; sourceTree = "<group>"; };
 		3E941A331BB1809700F034E6 /* FRDPersonalBioTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPersonalBioTableController.m; path = Classes/MVC/Controllers/MyProfileController/PersonalBioTableController/FRDPersonalBioTableController.m; sourceTree = "<group>"; };
 		3E941A351BB180B400F034E6 /* FRDSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSwitch.h; path = Classes/Controls/Switches/FRDSwitch.h; sourceTree = "<group>"; };
@@ -622,6 +628,15 @@
 			name = SearchSettingsController;
 			sourceTree = "<group>";
 		};
+		3E5409D01BC3D3C2001D7CAE /* ChatOptionsDataSource */ = {
+			isa = PBXGroup;
+			children = (
+				3E5409D11BC3D4B5001D7CAE /* FRDChatOptionsDataSource.h */,
+				3E5409D21BC3D4B5001D7CAE /* FRDChatOptionsDataSource.m */,
+			);
+			name = ChatOptionsDataSource;
+			sourceTree = "<group>";
+		};
 		3E5DEE6A1BAEB57400832CD6 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
@@ -665,6 +680,15 @@
 				58EBC6AD1BAC1638003CD598 /* PreviewGalleryController */,
 			);
 			name = PhotoGalleryController;
+			sourceTree = "<group>";
+		};
+		3E8770BA1BC5100D0002E540 /* ChatOption */ = {
+			isa = PBXGroup;
+			children = (
+				3E8770BB1BC510480002E540 /* FRDChatOption.h */,
+				3E8770BC1BC510480002E540 /* FRDChatOption.m */,
+			);
+			name = ChatOption;
 			sourceTree = "<group>";
 		};
 		3E941A311BB1808100F034E6 /* PersonalBioTableController */ = {
@@ -915,6 +939,7 @@
 		587B3A6E1BA7F3D00098154F /* DropDownDataSources */ = {
 			isa = PBXGroup;
 			children = (
+				3E5409D01BC3D3C2001D7CAE /* ChatOptionsDataSource */,
 				587B3A771BA7F78E0098154F /* SexualOrientationDataSource */,
 				587B3A761BA7F7820098154F /* SmokerDataSource */,
 				587B3A6F1BA7F3DF0098154F /* BaseDropDownDataSource */,
@@ -1401,6 +1426,7 @@
 		58BC76D01B9EB94C00BB8B5A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3E8770BA1BC5100D0002E540 /* ChatOption */,
 				58B9701F1BC2491F0017785E /* GalleryPhoto */,
 				583A48051BBD59500015436D /* ModelsServices */,
 				58B99E9A1BBA5A7B0057DB54 /* SearchSettings */,
@@ -2467,6 +2493,7 @@
 				581B9D3E1B9ED67B0080393B /* FRDPushNotifiactionService.m in Sources */,
 				58C28FF81BAAC6800099ABE4 /* ZLPanGestureRecognizer.m in Sources */,
 				58C28C3D1BA9527A009D1AC4 /* FRDSearchFriendsController.m in Sources */,
+				3E5409D31BC3D4B5001D7CAE /* FRDChatOptionsDataSource.m in Sources */,
 				3ED072321BA0370C0091B7E4 /* FRDPreferencesController.m in Sources */,
 				58FFDBAB1B9ECF3B00B0490A /* FRDSerialViewConstructor.m in Sources */,
 				3EB1A0331BC269310032CB5A /* FRDChatController.m in Sources */,
@@ -2537,6 +2564,7 @@
 				3EB1A0361BC2695C0032CB5A /* FRDChatTableController.m in Sources */,
 				58CD9AB51BAFE7C200A7CADB /* FRDAnimator.m in Sources */,
 				58BC772A1B9ECB0300BB8B5A /* KeychainItemWrapper.m in Sources */,
+				3E8770BD1BC510480002E540 /* FRDChatOption.m in Sources */,
 				581B9D591B9EDCBB0080393B /* FRDProjectFacade.m in Sources */,
 				3E0EEC551BABE85500AB51B0 /* FRDRoundedView.m in Sources */,
 				58B99E9D1BBA5A9E0057DB54 /* FRDSearchSettings.m in Sources */,

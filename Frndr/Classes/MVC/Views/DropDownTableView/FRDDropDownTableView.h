@@ -15,7 +15,15 @@ typedef void(^PresentingCompletion)(FRDDropDownTableView *table);
 
 
 @property (strong, nonatomic) UIImageView *arrowImageView;
+
 @property (nonatomic) BOOL isExpanded;
+@property (nonatomic) BOOL isScrollEnabled;
+@property (nonatomic) BOOL areSeparatorsVisible;
+
+@property (nonatomic) CGFloat defaultHeight;
+@property (nonatomic) CGFloat additionalOffset;
+@property (nonatomic) CGFloat cornerRadius;
+@property (nonatomic) CGFloat slideAnimationDuration;
 
 - (void)dropDownTableBecomeActiveInView:(UIView *)presentedView
                          fromAnchorView:(UIView *)anchorView

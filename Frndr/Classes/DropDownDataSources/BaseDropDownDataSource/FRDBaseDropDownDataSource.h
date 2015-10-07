@@ -9,6 +9,7 @@
 typedef enum : NSUInteger {
     FRDDataSourceTypeSmoker,
     FRDDataSourceTypeSexualOrientation,
+    FRDDataSourceTypeChatOptions
 } FRDDataSourceType;
 
 #import "FRDDropDownTableView.h"
