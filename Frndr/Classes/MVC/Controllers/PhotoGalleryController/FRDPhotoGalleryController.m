@@ -6,7 +6,7 @@
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-typedef void(^PhotoSelectionCompletion)(NSString *base64ImageString, UIImage *chosenImage);
+typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
 
 #import "FRDPhotoGalleryController.h"
 
@@ -38,9 +38,7 @@ typedef void(^PhotoSelectionCompletion)(NSString *base64ImageString, UIImage *ch
 
 - (FRDAvatar *)currentAvatar
 {
-    if (!_currentAvatar) {
-        _currentAvatar = [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar;
-    }
+    _currentAvatar = [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar;
     return _currentAvatar;
 }
 
@@ -106,7 +104,7 @@ typedef void(^PhotoSelectionCompletion)(NSString *base64ImageString, UIImage *ch
 
     cell.delegate = self;
     
-    if (indexPath.row != self.photosGallery.count + 1) {
+    if (indexPath.row < self.photosGallery.count + 1) {
         
         if (indexPath.row == 0) {
             [cell configureWithGalleryPhoto:self.currentAvatar];
@@ -127,24 +125,70 @@ typedef void(^PhotoSelectionCompletion)(NSString *base64ImageString, UIImage *ch
 /**
  *  Show remove photo action sheet
  */
-- (void)showRemovePhotoActionSheetWithPhoto:(FRDGalleryPhoto *)photo atIndexPath:(NSIndexPath *)indexPath
+- (void)showRemovePhotoActionSheetWithPhoto:(FRDGalleryPhoto *)photo
 {
     UIAlertController *removePhotoController = [UIAlertController alertControllerWithTitle:@"" message:LOCALIZED(@"Do you want to remove this photo?") preferredStyle:UIAlertControllerStyleActionSheet];
     
     WEAK_SELF;
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Remove") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        if (indexPath.row == 0) {
-            [weakSelf removeAvatar];
-        } else {
-            [weakSelf removePhoto:photo];
-        }
+
+        [weakSelf removePhoto:photo];
+        
     }];
     
     [removePhotoController addAction:cancelAction];
     [removePhotoController addAction:confirmAction];
     
     [self presentViewController:removePhotoController animated:YES completion:nil];
+}
+
+/**
+ *  Show remove avatar action sheet
+ */
+- (void)showRemoveAvatarActionSheet
+{
+    UIAlertController *removeAvatarController = [UIAlertController alertControllerWithTitle:@"" message:LOCALIZED(@"Do you want to remove your avatar?") preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    WEAK_SELF;
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Remove") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+        [weakSelf removeAvatar];
+        
+    }];
+    
+    [removeAvatarController addAction:cancelAction];
+    [removeAvatarController addAction:confirmAction];
+    
+    [self presentViewController:removeAvatarController animated:YES completion:nil];
+}
+
+/**
+ *  Choose new photo and set it as user avatar image. (To make it work we have to change parent class of BZRRoundedImageView from FBSDKProfilePictureView to UIImageView).
+ */
+- (void)setupChangePhotoActionSheetWithCompletion:(PhotoSelectionCompletion)completion
+{
+    self.photoCompletion = completion;
+    
+    WEAK_SELF;
+    UIAlertController *changePhotoActionSheet = [UIAlertController alertControllerWithTitle:@"" message:LOCALIZED(@"Select photo") preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Take photo") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        [weakSelf takeNewPhotoFromCamera];
+    }];
+    
+    UIAlertAction *galleryAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Select from gallery") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        [weakSelf choosePhotoFromExistingImages];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleCancel handler:nil];
+    
+    [changePhotoActionSheet addAction:cameraAction];
+    [changePhotoActionSheet addAction:galleryAction];
+    [changePhotoActionSheet addAction:cancelAction];
+    
+    [self presentViewController:changePhotoActionSheet animated:YES completion:nil];
 }
 
 /**
@@ -183,37 +227,68 @@ typedef void(^PhotoSelectionCompletion)(NSString *base64ImageString, UIImage *ch
     [FRDProjectFacade removeAvatarOnSuccess:^(BOOL isSuccess) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
+        //avatar has been removed
+        [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar = nil;
+        
+        [weakSelf.collectionView reloadData];
+        
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
     }];
 }
 
 /**
- *  Choose new photo and set it as user avatar image. (To make it work we have to change parent class of BZRRoundedImageView from FBSDKProfilePictureView to UIImageView).
+ *  Upload photo to gallery
  */
-- (void)setupChangePhotoActionSheetWithCompletion:(PhotoSelectionCompletion)completion
+- (void)uploadPhotoToGallery:(UIImage *)chosenImage
 {
-    self.photoCompletion = completion;
-    
     WEAK_SELF;
-    UIAlertController *changePhotoActionSheet = [UIAlertController alertControllerWithTitle:@"" message:LOCALIZED(@"Select photo") preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Take photo") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        [weakSelf takeNewPhotoFromCamera];
+    [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+    [FRDProjectFacade uploadPhotoToGallery:chosenImage onSuccess:^(BOOL isSuccess) {
+        
+        [FRDProjectFacade getGalleryOnSuccess:^(NSArray *gallery) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            
+            weakSelf.photosGallery = gallery;
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+        }];
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
     }];
-    
-    UIAlertAction *galleryAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Select from gallery") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        [weakSelf choosePhotoFromExistingImages];
+}
+
+/**
+ *  Upload avatar
+ */
+- (void)uploadAvatar:(UIImage *)newAvatar
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [FRDProjectFacade uploadUserAvatar:newAvatar onSuccess:^(BOOL isSuccess) {
+        
+        [FRDProjectFacade getAvatarWithSmallValue:NO onSuccess:^(FRDAvatar *avatar) {
+            
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            
+            [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar = avatar;
+            
+            [weakSelf.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+        }];
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
     }];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleCancel handler:nil];
-    
-    [changePhotoActionSheet addAction:cameraAction];
-    [changePhotoActionSheet addAction:galleryAction];
-    [changePhotoActionSheet addAction:cancelAction];
-    
-    [self presentViewController:changePhotoActionSheet animated:YES completion:nil];
 }
 
 /**
@@ -265,10 +340,9 @@ typedef void(^PhotoSelectionCompletion)(NSString *base64ImageString, UIImage *ch
 
         UIImage *resizedImage = [image imageByScalingAndCroppingForSize:CGSizeMake(600.f, 600.f)];
         
-        NSString *base64String = @"";//[image encodeToBase64String];
         if (self.photoCompletion) {
             [picker dismissViewControllerAnimated:YES completion:nil];
-            self.photoCompletion(base64String, resizedImage);
+            self.photoCompletion(resizedImage);
             self.photoCompletion = nil;
         }
     }
@@ -283,36 +357,29 @@ typedef void(^PhotoSelectionCompletion)(NSString *base64ImageString, UIImage *ch
 
 - (void)galleryCell:(FRDPhotoGalleryCollectionViewCell *)cell didTapPlusImageView:(UIImageView *)plusImageView
 {
+    BOOL isAvatar = [self.collectionView indexPathForCell:cell].row == 0 ? YES : NO;
     WEAK_SELF;
-    [self setupChangePhotoActionSheetWithCompletion:^(NSString *base64ImageString, UIImage *chosenImage) {
+    [self setupChangePhotoActionSheetWithCompletion:^(UIImage *chosenImage) {
         
-        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-        [FRDProjectFacade uploadPhotoToGallery:chosenImage onSuccess:^(BOOL isSuccess) {
-            
-            [FRDProjectFacade getGalleryOnSuccess:^(NSArray *gallery) {
-                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                
-                weakSelf.photosGallery = gallery;
-                
-            } onFailure:^(NSError *error, BOOL isCanceled) {
-                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-            }];
-            
-        } onFailure:^(NSError *error, BOOL isCanceled) {
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-        }];
-        
+        if (isAvatar) {
+            [weakSelf uploadAvatar:chosenImage];
+        } else {
+            [weakSelf uploadPhotoToGallery:chosenImage];
+        }
     }];
 }
 
 - (void)galleryCell:(FRDPhotoGalleryCollectionViewCell *)cell didTapCrossImageView:(UIImageView *)crossImageView
 {
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
-    FRDGalleryPhoto *currentPhoto = self.photosGallery[indexPath.row - 1];
     
-    [self showRemovePhotoActionSheetWithPhoto:currentPhoto atIndexPath:indexPath];
+    if (indexPath.row == 0) {
+        [self showRemoveAvatarActionSheet];
+    } else {
+        FRDGalleryPhoto *currentPhoto = self.photosGallery[indexPath.row - 1];
+        [self showRemovePhotoActionSheetWithPhoto:currentPhoto];
+    }
+    
 }
 
 @end

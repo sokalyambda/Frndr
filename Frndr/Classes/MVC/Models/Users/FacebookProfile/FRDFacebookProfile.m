@@ -59,7 +59,7 @@ static NSString *const kGender = @"gender";
         _genderString = [response[kGender] capitalizedString];
         _birthDate = [[FRDCommonDateFormatter commonDateFormatter] dateFromString:response[kBirthDate]];
         
-        _avararURL = [NSURL URLWithString:response[kPicture][kData][kURL]];
+        _avatarURL = [NSURL URLWithString:response[kPicture][kData][kURL]];
     }
     return self;
 }
@@ -73,7 +73,7 @@ static NSString *const kGender = @"gender";
     [encoder encodeObject:self.lastName forKey:kLastName];
     [encoder encodeObject:self.email forKey:kEmail];
     [encoder encodeObject:@(self.facebookUserId) forKey:kUserId];
-    [encoder encodeObject:self.avararURL forKey:kAvatarURL];
+    [encoder encodeObject:self.avatarURL forKey:kAvatarURL];
     [encoder encodeObject:self.genderString forKey:kGender];
     [encoder encodeObject:self.birthDate forKey:kBirthDate];
 }
@@ -86,7 +86,7 @@ static NSString *const kGender = @"gender";
         _lastName       = [decoder decodeObjectForKey:kLastName];
         _email          = [decoder decodeObjectForKey:kEmail];
         _facebookUserId = [[decoder decodeObjectForKey:kUserId] longLongValue];
-        _avararURL      = [decoder decodeObjectForKey:kAvatarURL];
+        _avatarURL      = [decoder decodeObjectForKey:kAvatarURL];
         _genderString   = [decoder decodeObjectForKey:kGender];
         _birthDate      = [decoder decodeObjectForKey:kBirthDate];
     }

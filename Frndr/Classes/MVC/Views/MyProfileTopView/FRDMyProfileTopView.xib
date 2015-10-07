@@ -12,25 +12,6 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MP5-s1-ynW" userLabel="Avatar Image View" customClass="FRDRoundedImageView">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="MP5-s1-ynW" secondAttribute="height" multiplier="1:1" id="3NT-R1-6IP"/>
-                        <constraint firstAttribute="width" constant="190" id="bIW-an-0Hp"/>
-                    </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="3NT-R1-6IP"/>
-                            <exclude reference="bIW-an-0Hp"/>
-                        </mask>
-                    </variation>
-                    <variation key="heightClass=regular-widthClass=compact">
-                        <mask key="constraints">
-                            <include reference="3NT-R1-6IP"/>
-                            <include reference="bIW-an-0Hp"/>
-                        </mask>
-                    </variation>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mEd-pH-Sci" userLabel="Container View">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <subviews>
@@ -56,6 +37,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="72K-Ry-iEO"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MZc-3a-wa8" secondAttribute="trailing" constant="15" id="BYo-D9-ewv"/>
                         <constraint firstItem="yGE-ju-WKW" firstAttribute="top" secondItem="mEd-pH-Sci" secondAttribute="top" constant="-2" id="EYX-fX-5VH"/>
                         <constraint firstItem="zTe-69-HRo" firstAttribute="top" secondItem="yGE-ju-WKW" secondAttribute="top" id="JN2-mF-q4m"/>
                         <constraint firstAttribute="bottom" secondItem="yGE-ju-WKW" secondAttribute="bottom" constant="-1" id="KAv-Cq-lSb"/>
@@ -64,8 +46,7 @@
                         <constraint firstItem="MZc-3a-wa8" firstAttribute="leading" secondItem="yGE-ju-WKW" secondAttribute="trailing" constant="10" id="f6A-D4-vnW"/>
                         <constraint firstItem="MZc-3a-wa8" firstAttribute="bottom" secondItem="yGE-ju-WKW" secondAttribute="bottom" id="fMy-de-1cy"/>
                         <constraint firstItem="yGE-ju-WKW" firstAttribute="leading" secondItem="zTe-69-HRo" secondAttribute="trailing" constant="10" id="pm5-0e-T2r"/>
-                        <constraint firstItem="zTe-69-HRo" firstAttribute="leading" secondItem="mEd-pH-Sci" secondAttribute="leading" constant="30" id="qh2-Qh-VR0"/>
-                        <constraint firstAttribute="trailing" secondItem="MZc-3a-wa8" secondAttribute="trailing" constant="30" id="zPA-DU-tXy"/>
+                        <constraint firstItem="zTe-69-HRo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mEd-pH-Sci" secondAttribute="leading" constant="15" id="wQE-T3-7h6"/>
                     </constraints>
                     <variation key="default">
                         <mask key="subviews">
@@ -75,16 +56,16 @@
                         </mask>
                         <mask key="constraints">
                             <exclude reference="72K-Ry-iEO"/>
+                            <exclude reference="BYo-D9-ewv"/>
                             <exclude reference="ejE-bQ-rib"/>
                             <exclude reference="f6A-D4-vnW"/>
                             <exclude reference="fMy-de-1cy"/>
-                            <exclude reference="zPA-DU-tXy"/>
                             <exclude reference="EYX-fX-5VH"/>
                             <exclude reference="KAv-Cq-lSb"/>
                             <exclude reference="pm5-0e-T2r"/>
                             <exclude reference="JN2-mF-q4m"/>
                             <exclude reference="NEy-g9-bfM"/>
-                            <exclude reference="qh2-Qh-VR0"/>
+                            <exclude reference="wQE-T3-7h6"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
@@ -95,19 +76,38 @@
                         </mask>
                         <mask key="constraints">
                             <include reference="72K-Ry-iEO"/>
+                            <include reference="BYo-D9-ewv"/>
                             <include reference="ejE-bQ-rib"/>
                             <include reference="f6A-D4-vnW"/>
                             <include reference="fMy-de-1cy"/>
-                            <include reference="zPA-DU-tXy"/>
                             <include reference="EYX-fX-5VH"/>
                             <include reference="KAv-Cq-lSb"/>
                             <include reference="pm5-0e-T2r"/>
                             <include reference="JN2-mF-q4m"/>
                             <include reference="NEy-g9-bfM"/>
-                            <include reference="qh2-Qh-VR0"/>
+                            <include reference="wQE-T3-7h6"/>
                         </mask>
                     </variation>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MP5-s1-ynW" userLabel="Avatar Image View" customClass="FRDRoundedImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="MP5-s1-ynW" secondAttribute="height" multiplier="1:1" id="3NT-R1-6IP"/>
+                        <constraint firstAttribute="width" constant="190" id="bIW-an-0Hp"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="3NT-R1-6IP"/>
+                            <exclude reference="bIW-an-0Hp"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="3NT-R1-6IP"/>
+                            <include reference="bIW-an-0Hp"/>
+                        </mask>
+                    </variation>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -121,8 +121,8 @@
             </constraints>
             <variation key="default">
                 <mask key="subviews">
-                    <exclude reference="MP5-s1-ynW"/>
                     <exclude reference="mEd-pH-Sci"/>
+                    <exclude reference="MP5-s1-ynW"/>
                 </mask>
                 <mask key="constraints">
                     <exclude reference="BQe-XQ-pEm"/>
@@ -136,8 +136,8 @@
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
                 <mask key="subviews">
-                    <include reference="MP5-s1-ynW"/>
                     <include reference="mEd-pH-Sci"/>
+                    <include reference="MP5-s1-ynW"/>
                 </mask>
                 <mask key="constraints">
                     <include reference="BQe-XQ-pEm"/>

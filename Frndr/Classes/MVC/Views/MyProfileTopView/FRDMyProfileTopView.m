@@ -21,35 +21,9 @@
 
 @implementation FRDMyProfileTopView
 
-#pragma mark - Lifecycle
-
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
-    self = [super initWithCoder:coder];
-    if (self) {
-        [self commonInit];
-    }
-    return self;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self commonInit];
-    }
-    return self;
-}
-
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    [self commonInit];
-}
-
 #pragma mark - Actions
 
-- (void)commonInit
+- (void)updateProfileTopView
 {
     FRDCurrentUserProfile *currentUserProfile = [FRDStorageManager sharedStorage].currentUserProfile;
     
@@ -57,7 +31,11 @@
     self.ageLabel.text = [NSString localizedStringWithFormat:@"%d %@", currentUserProfile.age, LOCALIZED(@"years")];
     self.genderLabel.text = currentUserProfile.genderString;
     
-    [self.avatarImageView sd_setImageWithURL:currentUserProfile.currentAvatar.photoURL];
+    if (currentUserProfile.currentAvatar.photoURL) {
+        [self.avatarImageView sd_setImageWithURL:currentUserProfile.currentAvatar.photoURL]; //avatar from server
+    } else {
+        [self.avatarImageView sd_setImageWithURL:currentUserProfile.avatarURL]; //avatar from facebook
+    }
 }
 
 @end

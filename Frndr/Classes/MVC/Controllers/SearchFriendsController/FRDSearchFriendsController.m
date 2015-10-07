@@ -118,8 +118,10 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self.dragableViewsHolder discardAllSwipeableViews];
     //Show/hide like buttons container
-    [self changeButtonsContainerAlpha];
+    [self showHideButtonsContainer];
     [self.pulsingOverlay subscribeForNotifications];
 }
 
@@ -181,10 +183,13 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 }
 
 #pragma mark - Updating Actions
+
 - (void)getCurrentUserProfileOnSuccess:(void(^)(void))success onFailure:(void(^)(NSError *error))failure
 {
     WEAK_SELF;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if (!self.isOverlayPresented) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    }
     [FRDProjectFacade getCurrentUserProfileOnSuccess:^(BOOL isSuccess) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         if (success) {
@@ -203,7 +208,9 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)getCurrentSearchSettingsOnSuccess:(void(^)(void))success onFailure:(void(^)(NSError *error))failure
 {
     WEAK_SELF;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if (!self.isOverlayPresented) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    }
     [FRDProjectFacade getCurrentSearchSettingsOnSuccess:^(FRDSearchSettings *currentSearchSettings) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         if (success) {
@@ -328,7 +335,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
         
         [FRDStorageManager sharedStorage].nearestUsersUpdateNeeded = NO;
         
-        [weakSelf changeButtonsContainerAlpha];
+        [weakSelf showHideButtonsContainer];
         
     } onFailure:^(NSError *error) {
         
@@ -383,7 +390,6 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     
     self.swipableViewsCounter = 0;
     
-    [self.dragableViewsHolder discardAllSwipeableViews];
     [self.dragableViewsHolder loadNextSwipeableViewsIfNeeded];
     
     self.previewGalleryController.photos = self.currentNearestUser.galleryPhotos;
@@ -459,19 +465,13 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 /**
  *  Show/hide buttons container relative to nearest users array
  */
-- (void)changeButtonsContainerAlpha
+- (void)showHideButtonsContainer
 {
     WEAK_SELF;
-    if (!self.nearestUsers.count && self.likeButtonsContainer.alpha > 0.f) {
-        [self.likeButtonsContainer setAlpha:1.f];
-        [UIView animateWithDuration:0.f animations:^{
-            [weakSelf.likeButtonsContainer setAlpha:0.f];
-        } completion:nil];
-    } else if (self.likeButtonsContainer.alpha < 1.f) {
-        [self.likeButtonsContainer setAlpha:0.f];
-        [UIView animateWithDuration:.2f animations:^{
-            [weakSelf.likeButtonsContainer setAlpha:1.f];
-        } completion:nil];
+    if (!self.nearestUsers.count) {
+        [weakSelf.likeButtonsContainer setHidden:YES];
+    } else {
+        [weakSelf.likeButtonsContainer setHidden:NO];
     }
 }
 
@@ -512,33 +512,6 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     return YES;
 }
 
-- (void)swipeableView:(ZLSwipeableView *)swipeableView
-         didSwipeView:(UIView *)view
-          inDirection:(ZLSwipeableViewDirection)direction
-{
-    
-}
-
-- (void)swipeableView:(ZLSwipeableView *)swipeableView didCancelSwipe:(UIView *)view
-{
-
-}
-
-- (void)swipeableView:(ZLSwipeableView *)swipeableView didStartSwipingView:(UIView *)view atLocation:(CGPoint)location
-{
-
-}
-
-- (void)swipeableView:(ZLSwipeableView *)swipeableView swipingView:(UIView *)view atLocation:(CGPoint)location translation:(CGPoint)translation
-{
-
-}
-
-- (void)swipeableView:(ZLSwipeableView *)swipeableView didEndSwipingView:(UIView *)view atLocation:(CGPoint)location
-{
-    
-}
-
 - (void)swipeableView:(ZLSwipeableView *)swipeableView didThrowSwipingView:(UIView *)swipingView inDirection:(ZLSwipeableViewDirection)direction
 {
     /*****Like&dislike nearest users*****/
@@ -575,8 +548,6 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
         default:
             break;
     }
-    
-//    [self checkNearestUsersInformationOrLoadMore];
 }
 
 - (void)checkNearestUsersInformationOrLoadMore
@@ -587,10 +558,10 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     
     if (self.nearestUsers.count) {
         self.currentNearestUser = self.nearestUsers.firstObject;
-        [self updateNearestUserInformation];
     }
     
     if (!self.nearestUsers.count) {
+        self.currentNearestUser = nil;
         self.swipableViewsCounter = 0;
         self.currentPage++;
         [self findNearestUsers];

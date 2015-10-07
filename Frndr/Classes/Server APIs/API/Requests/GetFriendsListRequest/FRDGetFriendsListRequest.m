@@ -10,16 +10,33 @@
 
 #import "FRDFriend.h"
 
-static NSString *const requestAction = @"users/friendList";
+static NSString *const kRequestAction = @"users/friendList";
+
+@interface FRDGetFriendsListRequest ()
+
+@property (strong, nonatomic) NSString *requestAction;
+@property (assign, nonatomic) NSInteger currentPage;
+
+@end
 
 @implementation FRDGetFriendsListRequest
 
+#pragma mark - Accessors
+
+- (NSString *)requestAction
+{
+    return [NSString stringWithFormat:@"%@/%d", kRequestAction, self.currentPage];
+}
+
 #pragma mark - Lifecycle
 
-- (instancetype)init
+- (instancetype)initWithPage:(NSInteger)page
 {
     self = [super init];
     if (self) {
+        
+        _currentPage = page;
+        
         self.action = [self requestAction];
         _method = @"GET";
         
@@ -34,18 +51,13 @@ static NSString *const requestAction = @"users/friendList";
 
 - (BOOL)parseJSONDataSucessfully:(id)responseObject error:(NSError *__autoreleasing *)error
 {
-    NSMutableArray *friends = [@{} mutableCopy];
+    NSMutableArray *friends = [@[] mutableCopy];
     for (NSDictionary *response in responseObject) {
         FRDFriend *currentFriend = [[FRDFriend alloc] initWithServerResponse:response];
         [friends addObject:currentFriend];
     }
     self.friendsList = [NSMutableArray arrayWithArray:friends];
     return !!self.friendsList;
-}
-
-- (NSString *)requestAction
-{
-    return requestAction;
 }
 
 @end

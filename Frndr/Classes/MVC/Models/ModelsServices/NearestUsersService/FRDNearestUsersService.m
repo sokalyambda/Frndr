@@ -94,7 +94,7 @@ static NSTimer *_searchTimer;
 + (void)scheduleTimerForFriendsSearchOnSuccess:(SuccessNearestUsersBlock)success onFailure:(FailureNearestUsersBlock)failure
 {
     [self setSearchInProcess:YES];
-    [self setSearchTimer:[NSTimer scheduledTimerWithTimeInterval:10.f
+    [self setSearchTimer:[NSTimer scheduledTimerWithTimeInterval:30.f
                                                           target:self
                                                         selector:@selector(findNearestFriendsWithTimer:)
                                                         userInfo:@{kSuccessKey: success,

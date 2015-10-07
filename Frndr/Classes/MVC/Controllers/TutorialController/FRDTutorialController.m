@@ -31,6 +31,8 @@
 
 #import "FRDAvatar.h"
 
+#import "FRDChatManager.h"
+
 @interface FRDTutorialController ()<TTTAttributedLabelDelegate, UIScrollViewDelegate, ContainerViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *tutorialScrollView;
@@ -161,20 +163,22 @@
             [FRDStorageManager sharedStorage].currentUserProfile = [FRDCurrentUserProfile userProfileWithFacebookProfile:facebookProfile];
             
             
-            [FRDProjectFacade signInWithFacebookOnSuccess:^(NSString *userId, BOOL avatarExists) {
+            [FRDProjectFacade signInWithFacebookOnSuccess:^(NSString *userId, BOOL avatarExists, BOOL firstLogin) {
                 
-#warning get the user id and open the socket
+                [FRDStorageManager sharedStorage].currentUserProfile.userId = userId;
+                //Open socket channel
+                [FRDChatManager sharedChatManager];
                 
                 if (!avatarExists) {
-                    
                     //download the avatar image
                     [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[FRDStorageManager sharedStorage].currentUserProfile.avatarURL options:SDWebImageDownloaderHighPriority progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
                         
-                        [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar.avatarImage = image;
-                        
-                        [FRDProjectFacade uploadUserAvatarOnSuccess:^(BOOL isSuccess) {
+                        [FRDProjectFacade uploadUserAvatar:image onSuccess:^(BOOL isSuccess) {
                             
                             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                            
+                            //assign avatar facebook URL to current avatar
+                            [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar.photoURL = [FRDStorageManager sharedStorage].currentUserProfile.avatarURL;
                             
                             //set successfull login
                             [FRDFacebookService setLoginSuccess:isSuccess];

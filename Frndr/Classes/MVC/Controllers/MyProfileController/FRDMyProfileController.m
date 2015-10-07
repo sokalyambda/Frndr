@@ -66,6 +66,7 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.topView updateProfileTopView];
     [self subscribeForNotifications];
 }
 

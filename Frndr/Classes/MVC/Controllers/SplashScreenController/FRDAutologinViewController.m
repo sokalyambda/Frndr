@@ -17,6 +17,8 @@
 
 #import "FRDAvatar.h"
 
+#import "FRDChatManager.h"
+
 static NSString *const kTutorialSegueIdentifier = @"tutorialSegueIdentifier";
 
 @interface FRDAutologinViewController ()<ContainerViewControllerDelegate>
@@ -63,24 +65,27 @@ static NSString *const kTutorialSegueIdentifier = @"tutorialSegueIdentifier";
 {
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-    [FRDProjectFacade signInWithFacebookOnSuccess:^(NSString *userId, BOOL avatarExists) {
+    [FRDProjectFacade signInWithFacebookOnSuccess:^(NSString *userId, BOOL avatarExists, BOOL firstLogin) {
         
         //Init Current Profile
         FRDFacebookProfile *currentFacebookProfile = [FRDStorageManager sharedStorage].currentFacebookProfile;
         FRDCurrentUserProfile *currentProfile = [FRDCurrentUserProfile userProfileWithFacebookProfile:currentFacebookProfile];
+        currentProfile.userId = userId;
         [FRDStorageManager sharedStorage].currentUserProfile = currentProfile;
         
+        //Open socket channel
+        [FRDChatManager sharedChatManager];
         
         if (!avatarExists) {
-            
             //download the avatar image
             [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[FRDStorageManager sharedStorage].currentUserProfile.avatarURL options:SDWebImageDownloaderHighPriority progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
                 
-                [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar.avatarImage = image;
-                
-                [FRDProjectFacade uploadUserAvatarOnSuccess:^(BOOL isSuccess) {
+                [FRDProjectFacade uploadUserAvatar:image onSuccess:^(BOOL isSuccess) {
                     
                     [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                    
+                    //assign avatar facebook URL to current avatar
+                    [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar.photoURL = [FRDStorageManager sharedStorage].currentUserProfile.avatarURL;
                     
                     [weakSelf moveToSearchFriendsController];
                     
@@ -90,9 +95,7 @@ static NSString *const kTutorialSegueIdentifier = @"tutorialSegueIdentifier";
                     [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
                     
                 }];
-                
             }];
-            
         } else {
             
             //get avatar

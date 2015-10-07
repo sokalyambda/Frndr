@@ -10,6 +10,4 @@
 
 @interface FRDAvatar : FRDGalleryPhoto
 
-@property (strong, nonatomic)  UIImage * _Nullable avatarImage;
-
 @end

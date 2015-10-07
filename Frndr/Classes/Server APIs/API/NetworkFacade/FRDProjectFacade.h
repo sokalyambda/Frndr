@@ -62,8 +62,12 @@ extern NSString *defaultBaseURLString;
 + (FRDNetworkOperation *)findNearestUsersWithPage:(NSInteger)page onSuccess:(void (^)(NSArray *nearestUsers))success
                                         onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
+//Friends List
++ (FRDNetworkOperation *)getFriendsListWithPage:(NSInteger)page onSuccess:(void (^)(NSArray *friendsList))success
+                                      onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
+
 //Facebook
-+ (FRDNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(NSString *userId, BOOL avatarExists))success
++ (FRDNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(NSString *userId, BOOL avatarExists, BOOL isFirstLogin))success
                                            onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
 #pragma mark - Search Settings Module
@@ -87,8 +91,9 @@ extern NSString *defaultBaseURLString;
 
 #pragma mark - Images Module
 
-+ (FRDNetworkOperation *)uploadUserAvatarOnSuccess:(SuccessBlock)success
-                                         onFailure:(FailureBlock)failure;
++ (FRDNetworkOperation *)uploadUserAvatar:(UIImage *)newAvatar
+                                onSuccess:(SuccessBlock)success
+                                onFailure:(FailureBlock)failure;
 + (FRDNetworkOperation *)uploadPhotoToGallery:(UIImage *)photo onSuccess:(SuccessBlock)success
                                     onFailure:(FailureBlock)failure;
 + (FRDNetworkOperation *)removeAvatarOnSuccess:(SuccessBlock)success

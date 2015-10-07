@@ -12,6 +12,7 @@ static NSString *const requestAction = @"users/pushToken";
 
 static NSString *const kPushToken = @"pushToken";
 static NSString *const kOSVersion = @"os";
+static NSString *const kDeviceID = @"deviceId";
 
 static NSString *const kAppleOSVersion = @"APPLE";
 
@@ -29,11 +30,13 @@ static NSString *const kAppleOSVersion = @"APPLE";
         _retryIfConnectionFailed = NO;
         
         NSString *pushToken = [FRDStorageManager sharedStorage].deviceToken;
+        NSString *deviceID = [FRDStorageManager sharedStorage].deviceUDID;
         
         NSMutableDictionary *parameters;
         if (pushToken.length) {
             parameters = [@{kPushToken: pushToken,
-                            kOSVersion: kAppleOSVersion
+                            kOSVersion: kAppleOSVersion,
+                            kDeviceID: deviceID
                             } mutableCopy];
         }
         
