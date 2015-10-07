@@ -155,6 +155,7 @@
 		58CF2C6C1BC4FBC80025AD2C /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CF2C5C1BC4FBC80025AD2C /* WebSocket.swift */; settings = {ASSET_TAGS = (); }; };
 		58CF2C731BC516A20025AD2C /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CF2C711BC516A20025AD2C /* NSDate+TimeAgo.m */; settings = {ASSET_TAGS = (); }; };
 		58CF2C751BC52CDC0025AD2C /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 58CF2C741BC52CDC0025AD2C /* NSDateTimeAgo.bundle */; settings = {ASSET_TAGS = (); }; };
+		58CF2C791BC532900025AD2C /* FRDChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CF2C781BC532900025AD2C /* FRDChatMessage.m */; settings = {ASSET_TAGS = (); }; };
 		58D5A16A1BA329C800D552CF /* FRDNavigationTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D5A1691BA329C800D552CF /* FRDNavigationTitleView.m */; };
 		58D5A16C1BA329E500D552CF /* FRDNavigationTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58D5A16B1BA329E500D552CF /* FRDNavigationTitleView.xib */; };
 		58DD73161BB832D9009D5536 /* RelationshipStatuses.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58DD73151BB832D9009D5536 /* RelationshipStatuses.plist */; settings = {ASSET_TAGS = (); }; };
@@ -467,6 +468,8 @@
 		58CF2C701BC516A20025AD2C /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+TimeAgo.h"; path = "Classes/Categories/NSDate/NSDate+TimeAgo/NSDate+TimeAgo.h"; sourceTree = "<group>"; };
 		58CF2C711BC516A20025AD2C /* NSDate+TimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+TimeAgo.m"; path = "Classes/Categories/NSDate/NSDate+TimeAgo/NSDate+TimeAgo.m"; sourceTree = "<group>"; };
 		58CF2C741BC52CDC0025AD2C /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
+		58CF2C771BC532900025AD2C /* FRDChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDChatMessage.h; path = Classes/MVC/Models/ChatMessage/FRDChatMessage.h; sourceTree = "<group>"; };
+		58CF2C781BC532900025AD2C /* FRDChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDChatMessage.m; path = Classes/MVC/Models/ChatMessage/FRDChatMessage.m; sourceTree = "<group>"; };
 		58D5A1681BA329C800D552CF /* FRDNavigationTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDNavigationTitleView.h; path = Classes/MVC/Views/NavigationTitleView/FRDNavigationTitleView.h; sourceTree = "<group>"; };
 		58D5A1691BA329C800D552CF /* FRDNavigationTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDNavigationTitleView.m; path = Classes/MVC/Views/NavigationTitleView/FRDNavigationTitleView.m; sourceTree = "<group>"; };
 		58D5A16B1BA329E500D552CF /* FRDNavigationTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDNavigationTitleView.xib; path = Classes/MVC/Views/NavigationTitleView/FRDNavigationTitleView.xib; sourceTree = "<group>"; };
@@ -1516,6 +1519,7 @@
 			isa = PBXGroup;
 			children = (
 				3E8770BA1BC5100D0002E540 /* ChatOption */,
+				58CF2C761BC532650025AD2C /* ChatMessage */,
 				58B9701F1BC2491F0017785E /* GalleryPhoto */,
 				583A48051BBD59500015436D /* ModelsServices */,
 				58B99E9A1BBA5A7B0057DB54 /* SearchSettings */,
@@ -2137,6 +2141,15 @@
 			name = "NSDate+TimeAgo";
 			sourceTree = "<group>";
 		};
+		58CF2C761BC532650025AD2C /* ChatMessage */ = {
+			isa = PBXGroup;
+			children = (
+				58CF2C771BC532900025AD2C /* FRDChatMessage.h */,
+				58CF2C781BC532900025AD2C /* FRDChatMessage.m */,
+			);
+			name = ChatMessage;
+			sourceTree = "<group>";
+		};
 		58CFA9081BB00593008B3E12 /* ContentControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -2643,6 +2656,7 @@
 				58FFDBB21B9ED00100B0490A /* ISO8601DateFormatter.m in Sources */,
 				58ED54E01BB163BE00F9B378 /* FRDFindNearestUsersRequest.m in Sources */,
 				58BC77111B9ECA5B00BB8B5A /* UIView+Shaking.m in Sources */,
+				58CF2C791BC532900025AD2C /* FRDChatMessage.m in Sources */,
 				587B3A7A1BA7F7B00098154F /* FRDSmokerDataSource.m in Sources */,
 				58B970261BC249CF0017785E /* FRDAvatar.m in Sources */,
 				3E945CD41BBE7EA300BD5820 /* FRDBaseChatCell.m in Sources */,

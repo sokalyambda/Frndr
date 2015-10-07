@@ -9,6 +9,7 @@
 #import "FRDProjectFacade.h"
 
 #import "FRDSessionManager.h"
+#import "FRDChatManager.h"
 
 #import "FRDRequests.h"
 
@@ -93,6 +94,9 @@ NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
 + (void)clearUserData
 {
     [self cancelAllOperations];
+    
+    //Close the channel
+    [[FRDChatManager sharedChatManager] closeChannel];
     
     if ([FRDNearestUsersService isSearchInProcess]) {
         [[FRDNearestUsersService searchTimer] invalidate];
