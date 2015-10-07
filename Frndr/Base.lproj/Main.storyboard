@@ -2160,11 +2160,11 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TRS-SN-IEJ">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <connections>
-                                    <segue destination="NcB-CQ-10X" kind="embed" id="z5Q-r7-4Bb"/>
+                                    <segue destination="NcB-CQ-10X" kind="embed" identifier="chatTableControllerSegue" id="z5Q-r7-4Bb"/>
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="A7w-2X-iq9" firstAttribute="top" secondItem="TRS-SN-IEJ" secondAttribute="bottom" id="3Zj-c6-YKq"/>
                             <constraint firstItem="TRS-SN-IEJ" firstAttribute="leading" secondItem="n8V-jV-fiO" secondAttribute="leading" id="6sG-mD-7n1"/>
@@ -2212,7 +2212,7 @@
                                 <rect key="frame" x="0.0" y="28" width="240" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FGl-4J-RcR" id="KQS-dl-IHD">
-                                    <rect key="frame" x="0.0" y="0.0" width="240" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
