@@ -318,6 +318,29 @@ NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
     return operation;
 }
 
+//Friends list
++ (FRDNetworkOperation *)getFriendsListWithPage:(NSInteger)page onSuccess:(void (^)(NSArray *friendsList))success
+                                        onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
+{
+    FRDGetFriendsListRequest *request = [[FRDGetFriendsListRequest alloc] initWithPage:page];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        FRDGetFriendsListRequest *request = (FRDGetFriendsListRequest*)operation.networkRequest;
+        
+        if (success) {
+            success(request.friendsList);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];;
+    
+    return operation;
+}
+
 /******* FaceBook *******/
 
 + (FRDNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(NSString *userId, BOOL avatarExists, BOOL isFirstLogin))success

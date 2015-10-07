@@ -10,4 +10,6 @@
 
 + (FRDChatManager *)sharedChatManager;
 
+- (void)closeChannel;
+
 @end

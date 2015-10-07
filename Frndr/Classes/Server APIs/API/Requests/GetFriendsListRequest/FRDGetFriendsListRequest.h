@@ -12,4 +12,6 @@
 
 @property (nonatomic) NSArray *friendsList;
 
+- (instancetype)initWithPage:(NSInteger)page;
+
 @end

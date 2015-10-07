@@ -62,6 +62,10 @@ extern NSString *defaultBaseURLString;
 + (FRDNetworkOperation *)findNearestUsersWithPage:(NSInteger)page onSuccess:(void (^)(NSArray *nearestUsers))success
                                         onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
+//Friends List
++ (FRDNetworkOperation *)getFriendsListWithPage:(NSInteger)page onSuccess:(void (^)(NSArray *friendsList))success
+                                      onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
+
 //Facebook
 + (FRDNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(NSString *userId, BOOL avatarExists, BOOL isFirstLogin))success
                                            onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;

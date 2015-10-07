@@ -8,13 +8,16 @@
 
 #import "FRDFriendCell.h"
 
+#import "FRDFriend.h"
+
+#import "NSDate+TimeAgo.h"
+
 @interface FRDFriendCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeAndDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *rightArrowImageView;
 
 @end
 
@@ -24,9 +27,14 @@
 
 - (void)configureWithFriend:(FRDFriend *)currentFriend
 {
-    self.messageLabel.text = @"This text is hardcoded This text is hardcoded This text is hardcoded This text is hardcoded v This text is hardcoded This text is hardcoded This text is hardcoded This text is hardcodedThis text is hardcoded This text is hardcoded This text is hardcoded This text is hardcoded v This text is hardcoded This text is hardcoded This text is hardcoded This text is hardcodedThis text is hardcoded This text is hardcoded This text is hardcoded This text is hardcoded v This text is hardcoded This text is hardcoded This text is hardcoded This text is hardcoded";
+    self.messageLabel.text = currentFriend.lastMessage;
+    [self.avatarImageView sd_setImageWithURL:currentFriend.avatarURL];
+    self.nameLabel.text = currentFriend.fullName;
+    self.timeAndDateLabel.text = [currentFriend.lastMessagePostedDate dateTimeAgo];
     
-    self.avatarImageView.image = [UIImage imageNamed:@"CoupleActiveIcon"];
+    if (currentFriend.isNewFriend) {
+        self.messageLabel.textColor = UIColorFromRGB(0x35B8B4);
+    }
 }
 
 @end

@@ -85,4 +85,12 @@ static NSString *const kSuccess = @"success";
      */
 }
 
+/**
+ *  Close the channel
+ */
+- (void)closeChannel
+{
+    [self.socketIOClient disconnect];
+}
+
 @end
