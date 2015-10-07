@@ -484,6 +484,52 @@ NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
     return operation;
 }
 
++ (FRDNetworkOperation *)getChatHistoryWithFriendId:(NSString *)friendId
+                                            andPage:(NSInteger)page
+                                          onSuccess:(void(^)(NSArray *chatHistory))success
+                                          onFailure:(FailureBlock)failure
+{
+    FRDGetChatHistoryRequest *request = [[FRDGetChatHistoryRequest alloc] initWithFriendId:friendId andPage:page];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        FRDGetChatHistoryRequest *request = (FRDGetChatHistoryRequest *)operation.networkRequest;
+        
+        if (success) {
+            success(request.chatHistory);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
++ (FRDNetworkOperation *)sendMessage:(NSString *)messageBody
+                      toFriendWithId:(NSString *)friendId
+                           onSuccess:(SuccessBlock)success
+                           onFailure:(FailureBlock)failure
+{
+    FRDSendMessageRequest *request = [[FRDSendMessageRequest alloc] initWithFriendId:friendId andMessageBody:messageBody];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
 #pragma mark - Images Module
 
 + (FRDNetworkOperation *)uploadUserAvatar:(UIImage *)newAvatar

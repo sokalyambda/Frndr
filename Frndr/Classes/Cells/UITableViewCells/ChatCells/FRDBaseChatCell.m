@@ -13,9 +13,11 @@
 #import "FRDFriendChatCell.h"
 #import "FRDSystemChatCell.h"
 
-#import "FRDBaseUserModel.h"
+#import "FRDChatMessage.h"
+#import "FRDFriend.h"
 
 #import "UIView+MakeFromXib.h"
+#import "NSDate+TimeAgo.h"
 
 static CGFloat const kTimeStampLabelPreferredHeight = 20.f;
 
@@ -28,34 +30,6 @@ static CGFloat const kTimeStampLabelPreferredHeight = 20.f;
 @implementation FRDBaseChatCell
 
 #pragma mark - Accessors
-
-- (void)setMessage:(NSString *)message
-{
-    _message = message;
-    self.messageTextView.text = message;
-}
-
-- (void)setTimeStamp:(NSDate *)timeStamp
-{
-    _timeStamp = timeStamp;
-    
-    NSString *dateAndTime = @"";
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    
-    if ([[NSCalendar currentCalendar] isDateInToday:timeStamp]) {
-        dateAndTime = [dateAndTime stringByAppendingString:@"Today "];
-    } else if ([[NSCalendar currentCalendar] isDateInYesterday:timeStamp]) {
-        dateAndTime = [dateAndTime stringByAppendingString:@"Yesterday "];
-    } else {
-        formatter.dateFormat = @"dd";
-        dateAndTime = [dateAndTime stringByAppendingString:[formatter stringFromDate:timeStamp]];
-    }
-    
-    formatter.dateFormat = @"hh:mm a";
-    dateAndTime = [dateAndTime stringByAppendingString:[formatter stringFromDate:timeStamp]];
-    
-    self.dateAndTimeLabel.text = dateAndTime;
-}
 
 - (void)setPositionInSet:(FRDChatCellPositionInSet)positionInSet
 {
@@ -84,22 +58,22 @@ static CGFloat const kTimeStampLabelPreferredHeight = 20.f;
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithChatCellType:(FRDChatCellType)cellType
+- (instancetype)initWithMessage:(FRDChatMessage *)message
 {
     FRDBaseChatCell *currentChatCell = nil;
     
-    switch (cellType) {
-        case FRDChatCellTypeUser: {
+    switch (message.ownerType) {
+        case FRDMessageOwnerTypeUser: {
             currentChatCell = [FRDUserChatCell makeFromXib];
             break;
         }
             
-        case FRDChatCellTypeFriend: {
+        case FRDMessageOwnerTypeFriend: {
             currentChatCell = [FRDFriendChatCell makeFromXib];
             break;
         }
             
-        case FRDChatCellTypeSystem: {
+        case FRDMessageOwnerTypeSystem: {
             currentChatCell = [FRDSystemChatCell makeFromXib];
             break;
         }
@@ -108,16 +82,23 @@ static CGFloat const kTimeStampLabelPreferredHeight = 20.f;
     return currentChatCell;
 }
 
-+ (instancetype)chatCellWithType:(FRDChatCellType)cellType
++ (instancetype)chatCellWithMessage:(FRDChatMessage *)message
 {
-    return [[self alloc] initWithChatCellType:cellType];
+    return [[self alloc] initWithMessage:message];
 }
 
 #pragma mark - Actions
 
-- (void)configureTextView
+- (void)configureForFriend:(FRDFriend *)currentFriend withMessage:(FRDChatMessage *)message
 {
+    if (!currentFriend) {
+        [self.avatarImageView sd_setImageWithURL:[FRDStorageManager sharedStorage].currentUserProfile.avatarURL];
+    } else {
+        [self.avatarImageView sd_setImageWithURL:currentFriend.avatarURL];
+    }
     
+    self.messageTextView.text = message.messageBody;
+    self.dateAndTimeLabel.text = [message.creationDate dateTimeAgo];
 }
 
 @end

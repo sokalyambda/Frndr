@@ -8,6 +8,10 @@
 
 #import "FRDBaseViewController.h"
 
+@class FRDFriend;
+
 @interface FRDChatController : FRDBaseViewController
+
+@property (strong, nonatomic) FRDFriend *currentFriend;
 
 @end

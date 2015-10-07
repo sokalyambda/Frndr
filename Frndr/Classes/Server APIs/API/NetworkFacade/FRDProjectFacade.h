@@ -88,6 +88,14 @@ extern NSString *defaultBaseURLString;
 
 + (FRDNetworkOperation *)clearAllMessagesOnSuccess:(SuccessBlock)success
                                          onFailure:(FailureBlock)failure;
++ (FRDNetworkOperation *)getChatHistoryWithFriendId:(NSString *)friendId
+                                            andPage:(NSInteger)page
+                                          onSuccess:(void(^)(NSArray *chatHistory))success
+                                          onFailure:(FailureBlock)failure;
++ (FRDNetworkOperation *)sendMessage:(NSString *)messageBody
+                      toFriendWithId:(NSString *)friendId
+                           onSuccess:(SuccessBlock)success
+                           onFailure:(FailureBlock)failure;
 
 #pragma mark - Images Module
 

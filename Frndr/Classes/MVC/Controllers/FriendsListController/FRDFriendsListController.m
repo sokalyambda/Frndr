@@ -15,6 +15,8 @@
 
 #import "FRDProjectFacade.h"
 
+#import "FRDChatMessagesService.h"
+
 @interface FRDFriendsListController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic) NSMutableArray *friends;
@@ -96,8 +98,11 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-//    FRDChatController *chat = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDChatController class])];
-//    [self.navigationController showViewController:chat sender:self];
+    FRDFriend *currentFriend = self.friends[indexPath.row];
+    
+    FRDChatController *chatController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDChatController class])];
+    chatController.currentFriend = currentFriend;
+    [self.navigationController pushViewController:chatController animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -111,6 +116,12 @@
 }
 
 #pragma mark - Actions
+
+- (void)customizeNavigationItem
+{
+    [super customizeNavigationItem];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
 
 - (void)updateLocalFriendsArrayWithArray:(NSArray *)newArray
 {
@@ -131,6 +142,16 @@
         if (friendsList.count) {
             [weakSelf updateLocalFriendsArrayWithArray:friendsList];
             weakSelf.currentPage++;
+            
+            
+            
+            //temp test
+//            [FRDChatMessagesService sendMessage:@"Hi again, I want to write you a long long long long long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long long message " toFriendWithId:@"560e7804b03a75135dc091e7" onSuccess:^(BOOL isSuccess) {
+//                NSLog(@"message has been sent");
+//            } onFailure:^(NSError *error, BOOL isCanceled) {
+//                NSLog(@"!!!!!message hasn't been sent!!!!!");
+//            }];
+            
         }
         
     } onFailure:^(NSError *error, BOOL isCanceled) {

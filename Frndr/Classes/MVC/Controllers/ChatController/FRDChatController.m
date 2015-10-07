@@ -16,8 +16,13 @@
 #import "FRDBaseDropDownDataSource.h"
 
 #import "FRDChatOption.h"
+#import "FRDFriend.h"
 
 #import "UIView+MakeFromXib.h"
+
+#import "FRDProjectFacade.h"
+
+#import "FRDChatMessagesService.h"
 
 static NSString * const kChatTableControllerSegueIdentifier = @"chatTableControllerSegue";
 
@@ -31,7 +36,9 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 
 @property (strong, nonatomic) FRDDropDownTableView *dropDownOptionsList;
 
-@property (strong, nonatomic) FRDChatTableController *chatTableController;
+@property (weak, nonatomic) FRDChatTableController *chatTableController;
+
+//@property (assign, nonatomic) NSInteger currenPage;
 
 @end
 
@@ -59,21 +66,41 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
     return _hideOptionsBarButton;
 }
 
-#pragma mark - Lifecycle
+#pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self initDropDownTable];
+    
+//    [self loadChatHistory];
 }
 
 #pragma mark - Actions
+
+///**
+// *  Load chat history with current friend
+// */
+//- (void)loadChatHistory
+//{
+//    WEAK_SELF;
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [FRDChatMessagesService getChatHistoryWithFriend:self.currentFriend.userId andPage:1 onSuccess:^(NSArray *chatHistory) {
+//        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//        
+//        //set messages array to child table view controller
+//        weakSelf.chatTableController.messageHistory = [NSMutableArray arrayWithArray:chatHistory];
+//    } onFailure:^(NSError *error) {
+//        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+//    }];
+//}
 
 - (void)initDropDownTable
 {
     self.dropDownOptionsList = [FRDDropDownTableView makeFromXib];
     
-    self.dropDownOptionsList.alpha = 1.0;
+    self.dropDownOptionsList.alpha = 1.f;
     self.dropDownOptionsList.backgroundColor = [UIColor clearColor];
     self.dropDownOptionsList.cornerRadius = 0.f;
     self.dropDownOptionsList.additionalOffset = 0.f;
@@ -89,17 +116,10 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
     self.navigationItem.rightBarButtonItem = self.showOptionsBarButton;
 }
 
-- (void)fadeChatTableIn
+- (void)fadeChatTableInOut
 {
     [UIView animateWithDuration:self.dropDownOptionsList.slideAnimationDuration animations:^{
-        self.chatTableController.tableView.alpha = 0.45;
-    }];
-}
-
-- (void)fadeChatTableOut
-{
-    [UIView animateWithDuration:self.dropDownOptionsList.slideAnimationDuration animations:^{
-        self.chatTableController.tableView.alpha = 1.0;
+        self.chatTableController.tableView.alpha = self.dropDownOptionsList.isExpanded ? 1.f : .45f;
     }];
 }
 
@@ -107,24 +127,20 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 {
     FRDBaseDropDownDataSource *dataSource = [FRDBaseDropDownDataSource dataSourceWithType:FRDDataSourceTypeChatOptions];
     
-    if (self.dropDownOptionsList.isExpanded) {
-        [self fadeChatTableOut];
-    } else {
-        [self fadeChatTableIn];
-    }
+    [self fadeChatTableInOut];
     
     [self.dropDownOptionsList dropDownTableBecomeActiveInView:self.view
                                                fromAnchorView:self.navigationController.navigationBar
                                                withDataSource:dataSource
                                         withShowingCompletion:^(FRDDropDownTableView *table) {
-                                            if (table.isExpanded) {
-                                                self.navigationItem.rightBarButtonItem = self.hideOptionsBarButton;
-                                            } else {
-                                                self.navigationItem.rightBarButtonItem = self.showOptionsBarButton;
-                                            }
+
+                                            self.navigationItem.rightBarButtonItem = table.isExpanded ? self.hideOptionsBarButton : self.showOptionsBarButton;
+                                            
                                         } withCompletion:^(FRDDropDownTableView *table, id chosenValue) {
                                             if ([chosenValue isKindOfClass:[FRDChatOption class]]) {
+                                                
                                                 FRDChatOption *chosenOption = (FRDChatOption *)chosenValue;
+                                                
                                                 NSLog(@"Choosen option: %@", chosenOption.optionString);
                                                 NSLog(@"Option selector: %@", NSStringFromSelector(chosenOption.optionSelector));
                                                 
@@ -132,7 +148,7 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
                                                     [self performSelector:chosenOption.optionSelector withObject:nil withObject:nil];
                                                 }
                                             }
-                                            [self fadeChatTableOut];
+                                            [self fadeChatTableInOut];
                                         }];
 }
 
@@ -164,6 +180,7 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 {
     if ([segue.identifier isEqualToString:kChatTableControllerSegueIdentifier]) {
         self.chatTableController = segue.destinationViewController;
+        self.chatTableController.currentFriend = self.currentFriend;
     }
 }
 
