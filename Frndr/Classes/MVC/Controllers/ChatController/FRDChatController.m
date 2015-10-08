@@ -123,9 +123,6 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
                                         withShowingCompletion:^(FRDDropDownTableView *table) {
                                             
                                             weakSelf.navigationItem.rightBarButtonItem = table.isExpanded ? weakSelf.hideOptionsBarButton : weakSelf.showOptionsBarButton;
-                                            weakSelf.view.userInteractionEnabled = !table.isExpanded;
-                                            
-                                            [weakSelf fadeChatTableInOut];
                                             
                                         } withCompletion:^(FRDDropDownTableView *table, id chosenValue) {
                                             if ([chosenValue isKindOfClass:[FRDChatOption class]]) {
@@ -150,6 +147,9 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
                                                         break;
                                                 }
                                             }
+                                            
+                                            [weakSelf fadeChatTableInOut];
+                                            
                                         }];
 }
 
