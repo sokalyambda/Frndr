@@ -79,6 +79,7 @@
 		58B47C891BC3A7F800BA502E /* FRDChatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B47C881BC3A7F800BA502E /* FRDChatManager.m */; settings = {ASSET_TAGS = (); }; };
 		58B47C901BC3AE2000BA502E /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B47C8F1BC3AE2000BA502E /* libicucore.tbd */; };
 		58B47C921BC3AE2C00BA502E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B47C911BC3AE2C00BA502E /* CFNetwork.framework */; };
+		58B7B6831BC660F100E56067 /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 58B7B6821BC660F100E56067 /* NSDateTimeAgo.bundle */; settings = {ASSET_TAGS = (); }; };
 		58B9701E1BC2486A0017785E /* FRDGetAvatarAndGalleryPhotosRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B9701D1BC2486A0017785E /* FRDGetAvatarAndGalleryPhotosRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58B970221BC2493B0017785E /* FRDGalleryPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B970211BC2493B0017785E /* FRDGalleryPhoto.m */; settings = {ASSET_TAGS = (); }; };
 		58B970261BC249CF0017785E /* FRDAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B970251BC249CF0017785E /* FRDAvatar.m */; settings = {ASSET_TAGS = (); }; };
@@ -155,7 +156,6 @@
 		58CF2C6B1BC4FBC80025AD2C /* SwiftRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CF2C5B1BC4FBC80025AD2C /* SwiftRegex.swift */; settings = {ASSET_TAGS = (); }; };
 		58CF2C6C1BC4FBC80025AD2C /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CF2C5C1BC4FBC80025AD2C /* WebSocket.swift */; settings = {ASSET_TAGS = (); }; };
 		58CF2C731BC516A20025AD2C /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CF2C711BC516A20025AD2C /* NSDate+TimeAgo.m */; settings = {ASSET_TAGS = (); }; };
-		58CF2C751BC52CDC0025AD2C /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 58CF2C741BC52CDC0025AD2C /* NSDateTimeAgo.bundle */; settings = {ASSET_TAGS = (); }; };
 		58CF2C791BC532900025AD2C /* FRDChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CF2C781BC532900025AD2C /* FRDChatMessage.m */; settings = {ASSET_TAGS = (); }; };
 		58CF2C7D1BC54F9A0025AD2C /* FRDChatMessagesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CF2C7C1BC54F9A0025AD2C /* FRDChatMessagesService.m */; settings = {ASSET_TAGS = (); }; };
 		58CF2C811BC550EB0025AD2C /* FRDGetChatHistoryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CF2C801BC550EB0025AD2C /* FRDGetChatHistoryRequest.m */; settings = {ASSET_TAGS = (); }; };
@@ -269,7 +269,6 @@
 		3E945CD31BBE7EA300BD5820 /* FRDBaseChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDBaseChatCell.m; path = Classes/Cells/UITableViewCells/ChatCells/FRDBaseChatCell.m; sourceTree = "<group>"; };
 		3EA0782E1BC5625C00A7B468 /* FRDKeyboardResponderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDKeyboardResponderController.h; path = Classes/MVC/Controllers/KeyboardResponderController/FRDKeyboardResponderController.h; sourceTree = "<group>"; };
 		3EA0782F1BC5625C00A7B468 /* FRDKeyboardResponderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDKeyboardResponderController.m; path = Classes/MVC/Controllers/KeyboardResponderController/FRDKeyboardResponderController.m; sourceTree = "<group>"; };
-		3EB1A02E1BC261F30032CB5A /* FRDBaseChatCell_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDBaseChatCell_Private.h; path = Classes/Cells/UITableViewCells/ChatCells/FRDBaseChatCell_Private.h; sourceTree = "<group>"; };
 		3EB1A0311BC269310032CB5A /* FRDChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDChatController.h; path = Classes/MVC/Controllers/ChatController/FRDChatController.h; sourceTree = "<group>"; };
 		3EB1A0321BC269310032CB5A /* FRDChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDChatController.m; path = Classes/MVC/Controllers/ChatController/FRDChatController.m; sourceTree = "<group>"; };
 		3EB1A0341BC2695C0032CB5A /* FRDChatTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDChatTableController.h; path = Classes/MVC/Controllers/ChatController/ChatTableController/FRDChatTableController.h; sourceTree = "<group>"; };
@@ -345,6 +344,8 @@
 		58B47C881BC3A7F800BA502E /* FRDChatManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDChatManager.m; path = Classes/Managers/ChatManager/FRDChatManager.m; sourceTree = "<group>"; };
 		58B47C8F1BC3AE2000BA502E /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		58B47C911BC3AE2C00BA502E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		58B7B6811BC660D800E56067 /* FRDChatCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDChatCells.h; path = Classes/Cells/UITableViewCells/ChatCells/FRDChatCells.h; sourceTree = "<group>"; };
+		58B7B6821BC660F100E56067 /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = NSDateTimeAgo.bundle; path = "Classes/Categories/NSDate/NSDate+TimeAgo/NSDateTimeAgo.bundle"; sourceTree = "<group>"; };
 		58B9701C1BC2486A0017785E /* FRDGetAvatarAndGalleryPhotosRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDGetAvatarAndGalleryPhotosRequest.h; path = "Classes/Server APIs/API/Requests/ImagesModule/GetAvatarAndGalleryPhotosRequest/FRDGetAvatarAndGalleryPhotosRequest.h"; sourceTree = "<group>"; };
 		58B9701D1BC2486A0017785E /* FRDGetAvatarAndGalleryPhotosRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDGetAvatarAndGalleryPhotosRequest.m; path = "Classes/Server APIs/API/Requests/ImagesModule/GetAvatarAndGalleryPhotosRequest/FRDGetAvatarAndGalleryPhotosRequest.m"; sourceTree = "<group>"; };
 		58B970201BC2493B0017785E /* FRDGalleryPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDGalleryPhoto.h; path = Classes/MVC/Models/GalleryPhoto/FRDGalleryPhoto.h; sourceTree = "<group>"; };
@@ -473,7 +474,6 @@
 		58CF2C5C1BC4FBC80025AD2C /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebSocket.swift; path = Classes/Libraries/Sockets/Socket.io/WebSocket.swift; sourceTree = "<group>"; };
 		58CF2C701BC516A20025AD2C /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+TimeAgo.h"; path = "Classes/Categories/NSDate/NSDate+TimeAgo/NSDate+TimeAgo.h"; sourceTree = "<group>"; };
 		58CF2C711BC516A20025AD2C /* NSDate+TimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+TimeAgo.m"; path = "Classes/Categories/NSDate/NSDate+TimeAgo/NSDate+TimeAgo.m"; sourceTree = "<group>"; };
-		58CF2C741BC52CDC0025AD2C /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
 		58CF2C771BC532900025AD2C /* FRDChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDChatMessage.h; path = Classes/MVC/Models/ChatMessage/FRDChatMessage.h; sourceTree = "<group>"; };
 		58CF2C781BC532900025AD2C /* FRDChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDChatMessage.m; path = Classes/MVC/Models/ChatMessage/FRDChatMessage.m; sourceTree = "<group>"; };
 		58CF2C7B1BC54F9A0025AD2C /* FRDChatMessagesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDChatMessagesService.h; path = Classes/MVC/Models/ModelsServices/ChatMessagesService/FRDChatMessagesService.h; sourceTree = "<group>"; };
@@ -819,12 +819,12 @@
 		3E945CB01BBE707C00BD5820 /* ChatCells */ = {
 			isa = PBXGroup;
 			children = (
+				58B7B6811BC660D800E56067 /* FRDChatCells.h */,
 				3E945CB11BBE70C300BD5820 /* UserChatCell */,
 				3E945CB21BBE70D400BD5820 /* FriendChatCell */,
 				3E945CB31BBE70DE00BD5820 /* SystemChatCell */,
 				3E945CD21BBE7EA300BD5820 /* FRDBaseChatCell.h */,
 				3E945CD31BBE7EA300BD5820 /* FRDBaseChatCell.m */,
-				3EB1A02E1BC261F30032CB5A /* FRDBaseChatCell_Private.h */,
 			);
 			name = ChatCells;
 			sourceTree = "<group>";
@@ -2159,7 +2159,7 @@
 		58CF2C6E1BC5168B0025AD2C /* NSDate+TimeAgo */ = {
 			isa = PBXGroup;
 			children = (
-				58CF2C741BC52CDC0025AD2C /* NSDateTimeAgo.bundle */,
+				58B7B6821BC660F100E56067 /* NSDateTimeAgo.bundle */,
 				58CF2C701BC516A20025AD2C /* NSDate+TimeAgo.h */,
 				58CF2C711BC516A20025AD2C /* NSDate+TimeAgo.m */,
 			);
@@ -2570,7 +2570,7 @@
 				3E941A491BB1815D00F034E6 /* FRDPersonalBioTableHeader.xib in Resources */,
 				3EF22FB41BBE851100E23F72 /* FRDFriendChatCell.xib in Resources */,
 				58D5A16C1BA329E500D552CF /* FRDNavigationTitleView.xib in Resources */,
-				58CF2C751BC52CDC0025AD2C /* NSDateTimeAgo.bundle in Resources */,
+				58B7B6831BC660F100E56067 /* NSDateTimeAgo.bundle in Resources */,
 				58C28C501BA99A6E009D1AC4 /* FRDFriendDragableView.xib in Resources */,
 				3E1D9BEE1BB3CE46003A1E5C /* FRDPreviewGalleryController.xib in Resources */,
 				58DD73161BB832D9009D5536 /* RelationshipStatuses.plist in Resources */,

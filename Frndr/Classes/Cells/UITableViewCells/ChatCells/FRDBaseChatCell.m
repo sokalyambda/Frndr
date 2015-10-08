@@ -7,23 +7,25 @@
 //
 
 #import "FRDBaseChatCell.h"
-#import "FRDBaseChatCell_Private.h"
 
-#import "FRDUserChatCell.h"
-#import "FRDFriendChatCell.h"
-#import "FRDSystemChatCell.h"
-
-#import "FRDChatMessage.h"
 #import "FRDFriend.h"
 
 #import "UIView+MakeFromXib.h"
 #import "NSDate+TimeAgo.h"
 
+#import "FRDUserChatCell.h"
+#import "FRDFriendChatCell.h"
+#import "FRDSystemChatCell.h"
+
+#import "FRDRoundedImageView.h"
+
 static CGFloat const kTimeStampLabelPreferredHeight = 20.f;
+static CGFloat const kAvatarPreferredHeight = 70.f;
 
 @interface FRDBaseChatCell ()
 
-@property (nonatomic) IBOutlet NSLayoutConstraint *timeStampLabelHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeStampLabelHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarHeightConstraint;
 
 @end
 
@@ -38,19 +40,25 @@ static CGFloat const kTimeStampLabelPreferredHeight = 20.f;
     switch (positionInSet) {
         case FRDChatCellPositionInSetFirst: {
             self.timeStampLabelHeight.constant = 0;
-            self.avatarImageView.hidden = NO;
+            self.avatarHeightConstraint.constant = kAvatarPreferredHeight;
             break;
         }
             
         case FRDChatCellPositionInSetIntermediary: {
             self.timeStampLabelHeight.constant = 0;
-            self.avatarImageView.hidden = YES;
+            self.avatarHeightConstraint.constant = 0;
             break;
         }
             
         case FRDChatCellPositionInSetLast: {
             self.timeStampLabelHeight.constant = kTimeStampLabelPreferredHeight;
-            self.avatarImageView.hidden = YES;
+            self.avatarHeightConstraint.constant = 0;
+            break;
+        }
+            
+        case FRDChatCellPositionInSetOnly: {
+            self.timeStampLabelHeight.constant = kTimeStampLabelPreferredHeight;
+            self.avatarHeightConstraint.constant = kAvatarPreferredHeight;
             break;
         }
     }
@@ -58,47 +66,69 @@ static CGFloat const kTimeStampLabelPreferredHeight = 20.f;
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithMessage:(FRDChatMessage *)message
+- (instancetype)initWithOwnerType:(FRDMessageOwnerType)ownerType
+                   forTableView:(UITableView *)tableView
+                    atIndexPath:(NSIndexPath *)indexPath
 {
-    FRDBaseChatCell *currentChatCell = nil;
+    NSString *cellIdentifier = nil;
     
-    switch (message.ownerType) {
+    switch (ownerType) {
         case FRDMessageOwnerTypeUser: {
-            currentChatCell = [FRDUserChatCell makeFromXib];
+            cellIdentifier = NSStringFromClass([FRDUserChatCell class]);
             break;
         }
             
         case FRDMessageOwnerTypeFriend: {
-            currentChatCell = [FRDFriendChatCell makeFromXib];
+            cellIdentifier = NSStringFromClass([FRDFriendChatCell class]);
             break;
         }
             
         case FRDMessageOwnerTypeSystem: {
-            currentChatCell = [FRDSystemChatCell makeFromXib];
+            cellIdentifier = NSStringFromClass([FRDSystemChatCell class]);
             break;
         }
+    }
+    
+    FRDBaseChatCell *currentChatCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    if (!currentChatCell) {
+        currentChatCell = [NSClassFromString(cellIdentifier) makeFromXib];
     }
     
     return currentChatCell;
 }
 
-+ (instancetype)chatCellWithMessage:(FRDChatMessage *)message
++ (instancetype)chatCellWithOwnerType:(FRDMessageOwnerType)ownerType
+                       forTableView:(UITableView *)tableView
+                        atIndexPath:(NSIndexPath *)indexPath
 {
-    return [[self alloc] initWithMessage:message];
+    return [[self alloc] initWithOwnerType:ownerType forTableView:tableView atIndexPath:indexPath];
 }
 
 #pragma mark - Actions
 
-- (void)configureForFriend:(FRDFriend *)currentFriend withMessage:(FRDChatMessage *)message
+- (void)configureForFriend:(FRDFriend *)currentFriend
+               withMessage:(FRDChatMessage *)message
 {
-    if (!currentFriend) {
-        [self.avatarImageView sd_setImageWithURL:[FRDStorageManager sharedStorage].currentUserProfile.avatarURL];
-    } else {
-        [self.avatarImageView sd_setImageWithURL:currentFriend.avatarURL];
+    FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
+
+    switch (message.ownerType) {
+        case FRDMessageOwnerTypeFriend: {
+            [self->avatarImageView sd_setImageWithURL:currentFriend.avatarURL];
+            break;
+        }
+        case FRDMessageOwnerTypeUser: {
+            [self->avatarImageView sd_setImageWithURL:currentProfile.avatarURL];
+            break;
+        }
+        case FRDMessageOwnerTypeSystem: {
+            break;
+        }
+            
+        default:
+            break;
     }
-    
-    self.messageTextView.text = message.messageBody;
-    self.dateAndTimeLabel.text = [message.creationDate dateTimeAgo];
+    self->messageTextView.text = message.messageBody;
+    self->dateAndTimeLabel.text = [message.creationDate dateTimeAgo];
 }
 
 @end
