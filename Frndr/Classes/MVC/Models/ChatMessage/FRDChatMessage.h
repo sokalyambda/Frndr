@@ -24,4 +24,6 @@ typedef NS_ENUM(NSUInteger, FRDMessageOwnerType) {
 
 @property (assign, nonatomic) FRDMessageOwnerType ownerType;
 
+- (instancetype)initWithSocketRespose:(NSDictionary *)socketResponse;
+
 @end

@@ -12,7 +12,13 @@
 
 #import "CAAnimation+CompetionBlock.h"
 
+static CGFloat kDefaultHeight = 200.f;
+static CGFloat kDefaultConrerRadius = 5.f;
+static CGFloat kDefaultAdditionalOffset = 5.f;
+static CGFloat kDefaultSlideAnimationDuration = .5f;
+
 @interface FRDDropDownTableView ()
+
 @property (weak, nonatomic) IBOutlet UITableView *dropDownList;
 
 @property (nonatomic) FRDBaseDropDownDataSource *dropDownDataSource;
@@ -124,10 +130,10 @@ static NSInteger const kRowsNumberThreshold = 4;
 
 - (void)commonInit
 {
-    self.defaultHeight = 200.f;
-    self.cornerRadius = 5.f;
-    self.additionalOffset = 5.f;
-    self.slideAnimationDuration = 0.5f;
+    self.defaultHeight = kDefaultHeight;
+    self.cornerRadius = kDefaultConrerRadius;
+    self.additionalOffset = kDefaultAdditionalOffset;
+    self.slideAnimationDuration = kDefaultSlideAnimationDuration;
     
     self.dropDownList.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.dropDownList.clipsToBounds = YES;
@@ -144,7 +150,6 @@ static NSInteger const kRowsNumberThreshold = 4;
  * @param dataSource This is the current data source for drop down table view, it will be changed relative the needed filters (..or something else). It will be written to private property to avoid it's deallocation before we done with it.
  * @param completion The block which will be called when the user taps the action button.
  */
-
 - (void)dropDownTableBecomeActiveInView:(UIView *)presentedView
                          fromAnchorView:(UIView *)anchorView
                          withDataSource:(FRDBaseDropDownDataSource *)dataSource
@@ -189,13 +194,13 @@ static NSInteger const kRowsNumberThreshold = 4;
           initialSpringVelocity:.5f
                         options:UIViewAnimationOptionCurveEaseOut animations:^{
                             CGRect newFrame = weakSelf.frame;
-                            newFrame.origin.y += self.additionalOffset;
+                            newFrame.origin.y += weakSelf.additionalOffset;
                             newFrame.size.height = weakSelf.calculatedDropDownHeight;
                             weakSelf.frame = newFrame;
                             weakSelf.dropDownList.frame = newFrame;
                         }
                      completion:^(BOOL finished) {
-                         if (finished && weakSelf.presentingCompletion) {
+                         if (weakSelf.presentingCompletion) {
                              [weakSelf rotateArrow];
                              weakSelf.isExpanded = YES;
                              weakSelf.presentingCompletion(weakSelf);
@@ -221,7 +226,7 @@ static NSInteger const kRowsNumberThreshold = 4;
                          weakSelf.dropDownDataSource = nil;
                          [weakSelf removeFromSuperview];
                          
-                         if (finished && weakSelf.presentingCompletion) {
+                         if (weakSelf.presentingCompletion) {
                              [weakSelf rotateArrow];
                              weakSelf.isExpanded = NO;
                              weakSelf.presentingCompletion(weakSelf);
@@ -235,6 +240,9 @@ static NSInteger const kRowsNumberThreshold = 4;
  */
 - (void)rotateArrow
 {
+    if (!self.arrowImageView) {
+        return;
+    }
     [UIView animateWithDuration:0.2 animations:^{
         self.arrowImageView.transform = self.isExpanded ? CGAffineTransformRotate(self.arrowImageView.transform, M_PI) : CGAffineTransformMakeRotation(0);
     }];

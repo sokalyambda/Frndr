@@ -39,20 +39,20 @@ static CGFloat const kAvatarPreferredHeight = 70.f;
     
     switch (positionInSet) {
         case FRDChatCellPositionInSetFirst: {
-            self.timeStampLabelHeight.constant = 0;
+            self.timeStampLabelHeight.constant = 0.f;
             self.avatarHeightConstraint.constant = kAvatarPreferredHeight;
             break;
         }
             
         case FRDChatCellPositionInSetIntermediary: {
-            self.timeStampLabelHeight.constant = 0;
-            self.avatarHeightConstraint.constant = 0;
+            self.timeStampLabelHeight.constant = 0.f;
+            self.avatarHeightConstraint.constant = 0.f;
             break;
         }
             
         case FRDChatCellPositionInSetLast: {
             self.timeStampLabelHeight.constant = kTimeStampLabelPreferredHeight;
-            self.avatarHeightConstraint.constant = 0;
+            self.avatarHeightConstraint.constant = 0.f;
             break;
         }
             
