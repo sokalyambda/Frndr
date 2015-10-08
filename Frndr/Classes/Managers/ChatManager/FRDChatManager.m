@@ -9,6 +9,8 @@
 #import "FRDChatManager.h"
 #import "Frndr-Swift.h"
 
+#import "FRDChatMessage.h"
+
 //static NSString *const kBaseHostURL = @"http://192.168.88.161:8859";//Misha
 //static NSString *const kBaseHostURL = @"http://192.168.88.47:8859";//Vanya
 static NSString *const kBaseHostURL = @"http://projects.thinkmobiles.com:8859";//Live
@@ -71,7 +73,9 @@ static NSString *const kSuccess = @"success";
         }
     }];
     
+    //Listen to new message event
     [self.socketIOClient on:kChatMessageEvent callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nullable emitter) {
+//        FRDChatMessage *message = [[FRDChatMessage alloc] initWithSocketRespose:data];
         NSLog(@"data %@", data);
     }];
     
