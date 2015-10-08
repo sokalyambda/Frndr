@@ -179,25 +179,31 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-    NSLog(@"Keyboard appearance");
     NSDictionary* info = [notification userInfo];
     CGRect keyBoardFrame = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
     CGSize kbSize = keyBoardFrame.size;
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
     
     self.bottomSpaceToContainer.constant = kbSize.height;
-    self.chatTableController.tableView.contentInset = contentInsets;
+    [UIView animateWithDuration:.5f
+                     animations:^{
+                         [self.view layoutIfNeeded]; // Called on parent view
+                     }];
     
     // Scroll table view to bottom
-    CGFloat offsetY = self.chatTableController.tableView.contentSize.height - CGRectGetHeight(self.chatTableController.tableView.frame);
-    self.chatTableController.tableView.contentOffset = CGPointMake(0, offsetY);
+//    CGFloat offsetY = self.chatTableController.tableView.contentSize.height - CGRectGetHeight(self.chatTableController.tableView.frame);
+//    self.chatTableController.tableView.contentOffset = CGPointMake(0, offsetY);
+    
+    [self.chatTableController.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.chatTableController.tableView numberOfRowsInSection:0] - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
     self.bottomSpaceToContainer.constant = 0;
-    self.chatTableController.tableView.contentInset = UIEdgeInsetsZero;
+    [UIView animateWithDuration:.5f
+                     animations:^{
+//                         self.chatTableController.tableView.contentInset = UIEdgeInsetsZero;
+                         [self.view layoutIfNeeded]; // Called on parent view
+                     }];
 }
 
 #pragma mark - UITextViewDelegate
