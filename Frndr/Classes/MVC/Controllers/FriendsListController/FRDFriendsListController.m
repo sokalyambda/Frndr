@@ -118,6 +118,10 @@
     
     FRDFriend *currentFriend = self.friends[indexPath.row];
     
+    //there are no new messages now
+    currentFriend.hasNewMessages = NO;
+    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
     FRDChatController *chatController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDChatController class])];
     chatController.currentFriend = currentFriend;
 
@@ -204,6 +208,10 @@
         
         if (messageOwner) {
             messageOwner.lastMessage = message.messageBody;
+            
+            //new message received from this friend
+            messageOwner.hasNewMessages = YES;
+            
             [self.friendsTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.friends indexOfObject:messageOwner] inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
     }

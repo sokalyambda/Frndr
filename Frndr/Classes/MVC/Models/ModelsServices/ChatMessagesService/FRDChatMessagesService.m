@@ -130,11 +130,6 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userId == %@", friendId];
     FRDFriend *messageOwner = [[friends filteredArrayUsingPredicate:predicate] firstObject];
     return messageOwner;
-//    if (messageOwner) {
-//        messageOwner.lastMessage = message.messageBody;
-//        NSLog(@"friend is message owner");
-//        [self.friendsTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.friends indexOfObject:messageOwner] inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-//    }
 }
 
 @end
