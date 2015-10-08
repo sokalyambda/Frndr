@@ -2164,6 +2164,9 @@
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TRS-SN-IEJ" userLabel="Chat Table Container View">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="20" width="400" height="718"/>
+                                </variation>
                                 <connections>
                                     <segue destination="NcB-CQ-10X" kind="embed" identifier="chatTableControllerSegue" id="z5Q-r7-4Bb"/>
                                 </connections>
@@ -2171,20 +2174,10 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Send a reply...Send a reply...Send a reply...Send a reply...Send a reply...Send a reply..." translatesAutoresizingMaskIntoConstraints="NO" id="C6u-qb-uO4" userLabel="Reply Text View" customClass="FRDVerticallyCenteredTextView">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" red="0.47128630830000001" green="0.71389504349999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="750" constant="62" id="83n-tw-H4P"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="GillSans-LightItalic" family="Gill Sans" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="83n-tw-H4P"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="83n-tw-H4P"/>
-                                    </mask>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="738" width="400" height="62"/>
                                 </variation>
                             </textView>
                         </subviews>
@@ -2230,6 +2223,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="bottomSpaceToContainer" destination="1Oq-ib-Jq4" id="K6z-mH-1IJ"/>
                         <outlet property="replyTextView" destination="C6u-qb-uO4" id="H2Q-cF-rov"/>
                     </connections>
                 </viewController>
