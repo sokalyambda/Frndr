@@ -224,6 +224,7 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
 - (void)removeAvatar
 {
     WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [FRDProjectFacade removeAvatarOnSuccess:^(BOOL isSuccess) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         

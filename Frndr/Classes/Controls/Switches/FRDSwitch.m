@@ -62,8 +62,8 @@
     _offLabel = [[UILabel alloc] initWithFrame:self.bounds];
     _offLabel.textAlignment = NSTextAlignmentCenter;
 
-    [self setOnText:@"YES" withFont:[UIFont fontWithName:@"Gill Sans" size:16] andColor:labelsColor];
-    [self setOffText:@"NO" withFont:[UIFont fontWithName:@"Gill Sans" size:16] andColor:labelsColor];
+    [self setOnText:LOCALIZED(@"YES") withFont:[UIFont fontWithName:@"Gill Sans" size:16] andColor:labelsColor];
+    [self setOffText:LOCALIZED(@"NO") withFont:[UIFont fontWithName:@"Gill Sans" size:16] andColor:labelsColor];
     
     [self addSubview:_onImageView];
     [self addSubview:_onLabel];
@@ -84,19 +84,19 @@
     _on = on;
     
     if (on) {
-        self.offLabel.layer.opacity = 0.0;
-        self.offImageView.layer.opacity = 0.0;
+        self.offLabel.layer.opacity = 0.f;
+        self.offImageView.layer.opacity = 0.f;
         
-        self.onLabel.layer.opacity = 1.0;
-        self.onImageView.layer.opacity = 1.0;
+        self.onLabel.layer.opacity = 1.f;
+        self.onImageView.layer.opacity = 1.f;
         
         [self moveSwitchToOnPosition:animated];
     } else {
-        self.onLabel.layer.opacity = 0.0;
-        self.onImageView.layer.opacity = 0.0;
+        self.onLabel.layer.opacity = 0.f;
+        self.onImageView.layer.opacity = 0.f;
         
-        self.offLabel.layer.opacity = 1.0;
-        self.offImageView.layer.opacity = 1.0;
+        self.offLabel.layer.opacity = 1.f;
+        self.offImageView.layer.opacity = 1.f;
         
         [self moveSwitchToOffPosition:animated];
     }
@@ -106,7 +106,7 @@
 {
     self.switchImageView.image = image;
     self.switchImageView.frame = CGRectMake(0,
-                                            CGRectGetMidY(self.bounds) - image.size.height / 2.0,
+                                            CGRectGetMidY(self.bounds) - image.size.height / 2.f,
                                             image.size.width,
                                             image.size.height);
 }
@@ -114,7 +114,7 @@
 - (void)setOnImage:(UIImage *)image
 {
     CGRect frame = CGRectMake(0,
-                              CGRectGetMidY(self.bounds) - image.size.height / 2.0,
+                              CGRectGetMidY(self.bounds) - image.size.height / 2.f,
                               image.size.width,
                               image.size.height);
     self.onImageView.image = image;
@@ -125,7 +125,7 @@
 - (void)setOffImage:(UIImage *)image
 {
     CGRect frame = CGRectMake(0,
-                              CGRectGetMidY(self.bounds) - image.size.height / 2.0,
+                              CGRectGetMidY(self.bounds) - image.size.height / 2.f,
                               image.size.width,
                               image.size.height);
     self.offImageView.image = image;
@@ -173,11 +173,6 @@
     [self sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)updateLabels
-{
-    
-}
-
 - (void)moveSwitchToOnPosition:(BOOL)animated
 {
     CGPoint destination = self.switchImageView.layer.position;
@@ -187,11 +182,10 @@
         CABasicAnimation *switching = [CABasicAnimation animationWithKeyPath:@"position.x"];
         switching.fromValue = @(self.switchImageView.layer.position.x);
         switching.toValue = @(destination.x);
-        switching.duration = 0.25;
+        switching.duration = .25f;
         
         [self.switchImageView.layer addAnimation:switching forKey:@"position.x"];
     }
-    
     self.switchImageView.layer.position = destination;
 }
 
@@ -204,14 +198,12 @@
         CABasicAnimation *switching = [CABasicAnimation animationWithKeyPath:@"position.x"];
         switching.fromValue = @(self.switchImageView.layer.position.x);
         switching.toValue = @(destination.x);
-        switching.duration = 0.25;
+        switching.duration = 0.25f;
         
         [self.switchImageView.layer addAnimation:switching forKey:@"position.x"];
     }
     
     self.switchImageView.layer.position = destination;
 }
-
-#pragma mark - Touch handling
 
 @end

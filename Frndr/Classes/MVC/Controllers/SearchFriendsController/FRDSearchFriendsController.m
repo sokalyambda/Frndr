@@ -102,7 +102,6 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     return self;
 }
 
-
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad
@@ -118,6 +117,8 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    [self refreshNearestUsers];
     
     [self.dragableViewsHolder discardAllSwipeableViews];
     //Show/hide like buttons container
@@ -183,6 +184,13 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 }
 
 #pragma mark - Updating Actions
+
+- (void)refreshNearestUsers
+{
+    if ([FRDStorageManager sharedStorage].isSearchSettingsUpdateNeeded) {
+        self.nearestUsers = [@[] mutableCopy];
+    }
+}
 
 - (void)getCurrentUserProfileOnSuccess:(void(^)(void))success onFailure:(void(^)(NSError *error))failure
 {
@@ -316,7 +324,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)findNearestUsers
 {
     WEAK_SELF;
-    if ((!self.nearestUsers.count && ![FRDNearestUsersService isSearchInProcess]) || [FRDStorageManager sharedStorage].isNearestUsersUpdateNeeded) {
+    if ((!self.nearestUsers.count && ![FRDNearestUsersService isSearchInProcess])) {
         if (!self.isOverlayPresented) {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         }
@@ -332,8 +340,6 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
         } else {
             [weakSelf dismissPulsingView];
         }
-        
-        [FRDStorageManager sharedStorage].nearestUsersUpdateNeeded = NO;
         
         [weakSelf showHideButtonsContainer];
         
