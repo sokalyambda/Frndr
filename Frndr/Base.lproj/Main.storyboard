@@ -2168,9 +2168,9 @@
                                     <segue destination="NcB-CQ-10X" kind="embed" identifier="chatTableControllerSegue" id="z5Q-r7-4Bb"/>
                                 </connections>
                             </containerView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Send a reply..." translatesAutoresizingMaskIntoConstraints="NO" id="C6u-qb-uO4" userLabel="Reply Text View">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Send a reply...Send a reply...Send a reply...Send a reply...Send a reply...Send a reply..." translatesAutoresizingMaskIntoConstraints="NO" id="C6u-qb-uO4" userLabel="Reply Text View" customClass="FRDVerticallyCenteredTextView">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.47128630830000001" green="0.71389504349999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="750" constant="62" id="83n-tw-H4P"/>
                                 </constraints>
@@ -2204,13 +2204,13 @@
                                 <exclude reference="C6u-qb-uO4"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="l3t-du-6YW"/>
-                                <exclude reference="m6R-f1-6yd"/>
-                                <exclude reference="qUp-Ac-sYf"/>
+                                <exclude reference="1Oq-ib-Jq4"/>
                                 <exclude reference="Auy-Us-O5U"/>
                                 <exclude reference="JEy-oA-P7y"/>
                                 <exclude reference="xmI-Dd-3KG"/>
-                                <exclude reference="1Oq-ib-Jq4"/>
+                                <exclude reference="l3t-du-6YW"/>
+                                <exclude reference="m6R-f1-6yd"/>
+                                <exclude reference="qUp-Ac-sYf"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2219,19 +2219,16 @@
                                 <include reference="C6u-qb-uO4"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="l3t-du-6YW"/>
-                                <include reference="m6R-f1-6yd"/>
-                                <include reference="qUp-Ac-sYf"/>
+                                <include reference="1Oq-ib-Jq4"/>
                                 <include reference="Auy-Us-O5U"/>
                                 <include reference="JEy-oA-P7y"/>
                                 <include reference="xmI-Dd-3KG"/>
-                                <include reference="1Oq-ib-Jq4"/>
+                                <include reference="l3t-du-6YW"/>
+                                <include reference="m6R-f1-6yd"/>
+                                <include reference="qUp-Ac-sYf"/>
                             </mask>
                         </variation>
                     </view>
-                    <connections>
-                        <outlet property="replyTextView" destination="C6u-qb-uO4" id="SqD-cZ-uCC"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="giC-yp-Jm3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

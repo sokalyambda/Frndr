@@ -6,13 +6,19 @@
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+typedef NS_ENUM(NSInteger, FRDChatOptionType)
+{
+    FRDChatOptionTypeViewProfile,
+    FRDChatOptionTypeClearChat,
+    FRDChatOptionTypeBlockUser,
+    FRDChatOptionTypeCancel
+};
 
 @interface FRDChatOption : NSObject
 
-@property (nonatomic) NSString *optionString;
-@property (nonatomic) SEL optionSelector;
+@property (readonly, nonatomic) FRDChatOptionType type;
+@property (readonly, nonatomic) NSString *titleString;
 
-+ (instancetype)optionWithOptionString:(NSString *)string;
++ (instancetype)optionWithOptionType:(FRDChatOptionType)type;
 
 @end

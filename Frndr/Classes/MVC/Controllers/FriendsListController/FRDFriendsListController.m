@@ -102,6 +102,7 @@
     
     FRDChatController *chatController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDChatController class])];
     chatController.currentFriend = currentFriend;
+    NSLog(@"%@", self.navigationController);
     [self.navigationController pushViewController:chatController animated:YES];
 }
 

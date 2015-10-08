@@ -39,6 +39,7 @@
 		3E945CD01BBE734200BD5820 /* FRDSystemChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E945CCE1BBE734200BD5820 /* FRDSystemChatCell.m */; settings = {ASSET_TAGS = (); }; };
 		3E945CD41BBE7EA300BD5820 /* FRDBaseChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E945CD31BBE7EA300BD5820 /* FRDBaseChatCell.m */; settings = {ASSET_TAGS = (); }; };
 		3EA078301BC5625C00A7B468 /* FRDKeyboardResponderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0782F1BC5625C00A7B468 /* FRDKeyboardResponderController.m */; settings = {ASSET_TAGS = (); }; };
+		3EA078381BC6551800A7B468 /* FRDVerticallyCenteredTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA078371BC6551800A7B468 /* FRDVerticallyCenteredTextView.m */; settings = {ASSET_TAGS = (); }; };
 		3EB1A0331BC269310032CB5A /* FRDChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1A0321BC269310032CB5A /* FRDChatController.m */; settings = {ASSET_TAGS = (); }; };
 		3EB1A0361BC2695C0032CB5A /* FRDChatTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1A0351BC2695C0032CB5A /* FRDChatTableController.m */; settings = {ASSET_TAGS = (); }; };
 		3ED072321BA0370C0091B7E4 /* FRDPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED072311BA0370C0091B7E4 /* FRDPreferencesController.m */; };
@@ -269,6 +270,8 @@
 		3E945CD31BBE7EA300BD5820 /* FRDBaseChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDBaseChatCell.m; path = Classes/Cells/UITableViewCells/ChatCells/FRDBaseChatCell.m; sourceTree = "<group>"; };
 		3EA0782E1BC5625C00A7B468 /* FRDKeyboardResponderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDKeyboardResponderController.h; path = Classes/MVC/Controllers/KeyboardResponderController/FRDKeyboardResponderController.h; sourceTree = "<group>"; };
 		3EA0782F1BC5625C00A7B468 /* FRDKeyboardResponderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDKeyboardResponderController.m; path = Classes/MVC/Controllers/KeyboardResponderController/FRDKeyboardResponderController.m; sourceTree = "<group>"; };
+		3EA078361BC6551800A7B468 /* FRDVerticallyCenteredTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDVerticallyCenteredTextView.h; path = Classes/MVC/Views/VerticallyCenteredTextView/FRDVerticallyCenteredTextView.h; sourceTree = "<group>"; };
+		3EA078371BC6551800A7B468 /* FRDVerticallyCenteredTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDVerticallyCenteredTextView.m; path = Classes/MVC/Views/VerticallyCenteredTextView/FRDVerticallyCenteredTextView.m; sourceTree = "<group>"; };
 		3EB1A02E1BC261F30032CB5A /* FRDBaseChatCell_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDBaseChatCell_Private.h; path = Classes/Cells/UITableViewCells/ChatCells/FRDBaseChatCell_Private.h; sourceTree = "<group>"; };
 		3EB1A0311BC269310032CB5A /* FRDChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDChatController.h; path = Classes/MVC/Controllers/ChatController/FRDChatController.h; sourceTree = "<group>"; };
 		3EB1A0321BC269310032CB5A /* FRDChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDChatController.m; path = Classes/MVC/Controllers/ChatController/FRDChatController.m; sourceTree = "<group>"; };
@@ -866,6 +869,15 @@
 				3EA0782F1BC5625C00A7B468 /* FRDKeyboardResponderController.m */,
 			);
 			name = KeyboardResponderController;
+			sourceTree = "<group>";
+		};
+		3EA078321BC6547300A7B468 /* VerticallyCenteredTextView */ = {
+			isa = PBXGroup;
+			children = (
+				3EA078361BC6551800A7B468 /* FRDVerticallyCenteredTextView.h */,
+				3EA078371BC6551800A7B468 /* FRDVerticallyCenteredTextView.m */,
+			);
+			name = VerticallyCenteredTextView;
 			sourceTree = "<group>";
 		};
 		3EB1A02F1BC268F10032CB5A /* ChatController */ = {
@@ -1557,6 +1569,7 @@
 		58BC76D11B9EB95100BB8B5A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3EA078321BC6547300A7B468 /* VerticallyCenteredTextView */,
 				586264C31BBD064800824BA3 /* PulsingOverlayView */,
 				3E1D29FA1BB58D650051C52F /* MyProfile */,
 				3E941A3D1BB1811D00F034E6 /* TableHeaders */,
@@ -2684,6 +2697,7 @@
 				3E021DC81BAFD97500BDA411 /* FRDMyProfileController.m in Sources */,
 				58B9702A1BC24C7A0017785E /* FRDRemoveImageFromGalleryRequest.m in Sources */,
 				58BC773D1B9ECDD100BB8B5A /* FRDValidator.m in Sources */,
+				3EA078381BC6551800A7B468 /* FRDVerticallyCenteredTextView.m in Sources */,
 				58DE5B3E1BB541480020A34C /* FRDCurrentUserProfile.m in Sources */,
 				58CF2C621BC4FBC80025AD2C /* SocketEventHandler.swift in Sources */,
 				58CD9ABE1BAFF1B500A7CADB /* FRDTopContentView.m in Sources */,
