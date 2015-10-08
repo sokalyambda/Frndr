@@ -17,6 +17,8 @@
     self = [super init];
     if (self) {
         
+        _currentType = type;
+        
         switch (type) {
             case FRDChatOptionsTypeBlockUser: {
                 _optionString = LOCALIZED(@"Block User");
