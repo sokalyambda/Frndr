@@ -45,32 +45,19 @@
     return self.options.count;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == self.options.count - 1) {
-        cell.backgroundColor = [UIColor clearColor];
-    } else {
-        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 0,
-                                                                     CGRectGetWidth(cell.contentView.frame),
-                                                                     1.0 / [UIScreen mainScreen].scale)];
-        separator.backgroundColor = (indexPath.row == 0) ? UIColorFromRGBWithAlpha(0x0, 0.3) : UIColorFromRGBWithAlpha(0x0, 0.15);
-        [cell.contentView addSubview:separator];
-        
-        cell.backgroundColor = [UIColor whiteColor];
-    }
-}
-
 - (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath
 {
     FRDChatOption *option = self.options[indexPath.row];
-    //cell.textLabel.text = option.optionString;
+    
+    cell.textLabel.text = option.optionString;
+    
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     
-    if (indexPath.row != self.options.count - 1) {
-        cell.textLabel.textColor = UIColorFromRGB(0x58406C);
-    } else {
-        cell.textLabel.textColor = UIColorFromRGB(0xFFFFFF);
-    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    NSInteger lastCellIndex = self.options.count - 1;
+    cell.textLabel.textColor = indexPath.row == lastCellIndex ? UIColorFromRGB(0xFFFFFF) : UIColorFromRGB(0x58406C);
+    cell.backgroundColor = indexPath.row == lastCellIndex ? [UIColor clearColor] : [UIColor whiteColor];
 }
 
 @end
