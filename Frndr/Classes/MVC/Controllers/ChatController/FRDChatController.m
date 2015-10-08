@@ -29,7 +29,7 @@ static NSString * const kChatTableControllerSegueIdentifier = @"chatTableControl
 static NSString * const kOptionsHiddenButtonImage = @"ChatOptionsUnactive";
 static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 
-@interface FRDChatController ()
+@interface FRDChatController () <UITextViewDelegate>
 
 @property (strong, nonatomic) UIBarButtonItem *showOptionsBarButton;
 @property (strong, nonatomic) UIBarButtonItem *hideOptionsBarButton;
@@ -76,6 +76,12 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 }
 
 #pragma mark - Actions
+
+- (IBAction)sendReplyClick:(id)sender
+{
+    [[UIResponder currentFirstResponder] resignFirstResponder];
+    self.replyTextView.text = @"";
+}
 
 - (void)initDropDownTable
 {
@@ -190,17 +196,12 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    NSDictionary* info = [notification userInfo];
-    CGRect keyBoardFrame = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGSize kbSize = keyBoardFrame.size;
-    
-    
-    //
-    //    // Scroll table view to bottom
-    //    CGFloat offsetY = self.chatTableController.tableView.contentSize.height - CGRectGetHeight(self.chatTableController.tableView.frame);
-    //    self.chatTableController.tableView.contentOffset = CGPointMake(0, offsetY);
-
+    self.bottomSpaceToContainer.constant = 0;
+    self.chatTableController.tableView.contentInset = UIEdgeInsetsZero;
 }
+
+#pragma mark - UITextViewDelegate
+
 
 #pragma mark - Navigation
 
