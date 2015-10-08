@@ -39,6 +39,7 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 @property (weak, nonatomic) FRDChatTableController *chatTableController;
 
 @property (weak, nonatomic) IBOutlet FRDVerticallyCenteredTextView *replyTextView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomSpaceToContainer;
 
 @end
 
@@ -172,17 +173,15 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
+    NSLog(@"Keyboard appearance");
     NSDictionary* info = [notification userInfo];
     CGRect keyBoardFrame = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     
     CGSize kbSize = keyBoardFrame.size;
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
     
-    self.replyTextView.center = CGPointMake(self.replyTextView.center.x, self.replyTextView.center.y - kbSize.height);
-    self.chatTableController.tableView.frame = CGRectMake(CGRectGetMinX(self.chatTableController.tableView.frame),
-                                                          CGRectGetMinY(self.chatTableController.tableView.frame),
-                                                          CGRectGetWidth(self.chatTableController.tableView.frame),
-                                                          CGRectGetHeight(self.chatTableController.tableView.frame) - kbSize.height);
+    self.bottomSpaceToContainer.constant = kbSize.height;
+    self.chatTableController.tableView.contentInset = contentInsets;
     
     // Scroll table view to bottom
     CGFloat offsetY = self.chatTableController.tableView.contentSize.height - CGRectGetHeight(self.chatTableController.tableView.frame);
@@ -195,15 +194,12 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
     CGRect keyBoardFrame = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGSize kbSize = keyBoardFrame.size;
     
-    self.replyTextView.center = CGPointMake(self.replyTextView.center.x, self.replyTextView.center.y + kbSize.height);
-    self.chatTableController.tableView.frame = CGRectMake(CGRectGetMinX(self.chatTableController.tableView.frame),
-                                                          CGRectGetMinY(self.chatTableController.tableView.frame),
-                                                          CGRectGetWidth(self.chatTableController.tableView.frame),
-                                                          CGRectGetHeight(self.chatTableController.tableView.frame) + kbSize.height);
+    
     //
     //    // Scroll table view to bottom
     //    CGFloat offsetY = self.chatTableController.tableView.contentSize.height - CGRectGetHeight(self.chatTableController.tableView.frame);
     //    self.chatTableController.tableView.contentOffset = CGPointMake(0, offsetY);
+
 }
 
 #pragma mark - Navigation
