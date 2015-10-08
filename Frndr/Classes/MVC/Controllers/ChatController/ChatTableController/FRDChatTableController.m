@@ -62,6 +62,18 @@
     [self loadChatHistory];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self subscribeForMessagesNotification];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self unsibscribeFromMessagesNotification];
+    [super viewWillDisappear:animated];
+}
+
 #pragma mark - Actions
 
 - (void)registerCells
@@ -132,6 +144,16 @@
     return cell;
 }
 
+- (void)subscribeForMessagesNotification
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNewMessageNotification:) name:DidReceiveNewMessageNotification object:nil];
+}
+
+- (void)unsibscribeFromMessagesNotification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -142,6 +164,35 @@
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewAutomaticDimension;
+}
+
+#pragma mark - New Messages Handling
+
+- (void)didReceiveNewMessageNotification:(NSNotification *)notification
+{
+    //Message from socket has ownerId, friendId, messageBody;
+    FRDChatMessage *message = (FRDChatMessage *)notification.object;
+    
+    FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
+    
+    if ([currentProfile.userId isEqualToString:message.ownerId]) {
+
+        message.ownerType = FRDMessageOwnerTypeUser;
+        
+    } else if ([self.currentFriend.userId isEqualToString:message.ownerId]) {
+        
+        message.ownerType = FRDMessageOwnerTypeFriend;
+        
+    }
+    
+    message.creationDate = [NSDate date];
+    [self.messageHistory addObject:message];
+//    [NSIndexPath]
+     NSArray *indexPaths = [self.tableView indexPathsForVisibleRows];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.messageHistory.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+//    [self.tableView reloadData];
+    [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+    
 }
 
 @end

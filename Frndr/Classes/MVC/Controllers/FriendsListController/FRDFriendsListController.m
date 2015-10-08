@@ -175,14 +175,6 @@
         if (friendsList.count) {
             [weakSelf updateLocalFriendsArrayWithArray:friendsList];
             weakSelf.currentPage++;
-            
-            //temp test
-//            [FRDChatMessagesService sendMessage:@"Hi again, I want to write you a long long long long long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long long message " toFriendWithId:@"560e7804b03a75135dc091e7" onSuccess:^(BOOL isSuccess) {
-//                NSLog(@"message has been sent");
-//            } onFailure:^(NSError *error, BOOL isCanceled) {
-//                NSLog(@"!!!!!message hasn't been sent!!!!!");
-//            }];
-            
         }
         
     } onFailure:^(NSError *error, BOOL isCanceled) {

@@ -22,7 +22,7 @@
 #import "UIView+MakeFromXib.h"
 #import "UIResponder+FirstResponder.h"
 
-#import "FRDProjectFacade.h"
+#import "FRDChatMessagesService.h"
 
 static NSString * const kChatTableControllerSegueIdentifier = @"chatTableControllerSegue";
 
@@ -84,10 +84,14 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 - (IBAction)sendReplyClick:(id)sender
 {
     [[UIResponder currentFirstResponder] resignFirstResponder];
-    self.replyTextView.text = @"";
-    
-#warning Temporary!
-    self.replyTexViewHeight.constant = 20.f;
+    WEAK_SELF;
+    [FRDChatMessagesService sendMessage:self.replyTextView.text toFriendWithId:self.currentFriend.userId onSuccess:^(BOOL isSuccess) {
+        NSLog(@"message has been sent");
+        weakSelf.replyTextView.text = @"";
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+        NSLog(@"!!!!!message hasn't been sent!!!!!");
+    }];
 }
 
 - (void)initDropDownTable
@@ -213,20 +217,19 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
     self.bottomSpaceToContainer.constant = 0;
     [UIView animateWithDuration:.5f
                      animations:^{
-                         [self.view layoutIfNeeded]; // Called on parent view
+                         [self.view layoutIfNeeded];
                      }];
 }
-
-#pragma mark - UITextViewDelegate
-
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:kChatTableControllerSegueIdentifier]) {
-        self.chatTableController = segue.destinationViewController;
+        self.chatTableController = (FRDChatTableController *)segue.destinationViewController;
+        
         self.chatTableController.currentFriend = self.currentFriend;
+        [self.chatTableController viewWillAppear:YES];
     }
 }
 
