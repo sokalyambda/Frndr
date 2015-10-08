@@ -6,19 +6,18 @@
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-typedef NS_ENUM(NSInteger, FRDChatOptionType)
-{
-    FRDChatOptionTypeViewProfile,
-    FRDChatOptionTypeClearChat,
-    FRDChatOptionTypeBlockUser,
-    FRDChatOptionTypeCancel
+typedef NS_ENUM(NSUInteger, FRDChatOptionsType) {
+    FRDChatOptionsTypeViewProfile,
+    FRDChatOptionsTypeClearChat,
+    FRDChatOptionsTypeBlockUser,
+    FRDChatOptionsTypeCancel
 };
 
 @interface FRDChatOption : NSObject
 
-@property (readonly, nonatomic) FRDChatOptionType type;
-@property (readonly, nonatomic) NSString *titleString;
+@property (nonatomic, readonly) NSString *optionString;
+@property (nonatomic, readonly) FRDChatOptionsType currentType;
 
-+ (instancetype)optionWithOptionType:(FRDChatOptionType)type;
++ (instancetype)chatOptionWithOptionType:(FRDChatOptionsType)type;
 
 @end
