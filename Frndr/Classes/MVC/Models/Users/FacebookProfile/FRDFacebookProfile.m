@@ -45,6 +45,46 @@ static NSString *const kGender = @"gender";
     return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
 }
 
+- (NSString *)firstName
+{
+    if (!_firstName) {
+        _firstName = @"";
+    }
+    return _firstName;
+}
+
+- (NSString *)lastName
+{
+    if (!_lastName) {
+        _lastName = @"";
+    }
+    return _lastName;
+}
+
+- (NSString *)email
+{
+    if (!_email) {
+        _email = @"";
+    }
+    return _email;
+}
+
+- (NSString *)genderString
+{
+    if (!_genderString) {
+        _genderString = @"Male";
+    }
+    return _genderString;
+}
+
+- (NSDate *)birthDate
+{
+    if (!_birthDate) {
+        _birthDate = [NSDate date];
+    }
+    return _birthDate;
+}
+
 #pragma mark - FRDMappingProtocol
 
 - (instancetype)initWithServerResponse:(NSDictionary *)response
