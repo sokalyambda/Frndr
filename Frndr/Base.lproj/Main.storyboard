@@ -2171,11 +2171,24 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYp-Ir-omP" userLabel="Reply Container">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Send a reply...Send a reply...Send a reply...Send a reply...Send a reply...Send a reply..." translatesAutoresizingMaskIntoConstraints="NO" id="C6u-qb-uO4" userLabel="Reply Text View" customClass="FRDVerticallyCenteredTextView">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Send a reply..." translatesAutoresizingMaskIntoConstraints="NO" id="C6u-qb-uO4" userLabel="Reply Text View" customClass="FRDExpandableToThresholdTextView">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <color key="backgroundColor" red="0.79367897727272718" green="0.79367897727272718" blue="0.79367897727272718" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="62" id="qt8-uY-VGb"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="GillSans-LightItalic" family="Gill Sans" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="qt8-uY-VGb"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="qt8-uY-VGb"/>
+                                            </mask>
+                                        </variation>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Odq-15-fm9" userLabel="Send Message Button">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -2215,13 +2228,13 @@
                                         <exclude reference="Odq-15-fm9"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <exclude reference="Ahl-sG-aYP"/>
-                                        <exclude reference="GV4-3o-0pi"/>
-                                        <exclude reference="XLs-kL-kWd"/>
                                         <exclude reference="kFy-As-JsK"/>
                                         <exclude reference="q9u-bl-b6f"/>
                                         <exclude reference="vLW-aS-wff"/>
                                         <exclude reference="zIh-sQ-Dbj"/>
+                                        <exclude reference="Ahl-sG-aYP"/>
+                                        <exclude reference="GV4-3o-0pi"/>
+                                        <exclude reference="XLs-kL-kWd"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -2230,13 +2243,13 @@
                                         <include reference="Odq-15-fm9"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <include reference="Ahl-sG-aYP"/>
-                                        <include reference="GV4-3o-0pi"/>
-                                        <include reference="XLs-kL-kWd"/>
                                         <include reference="kFy-As-JsK"/>
                                         <include reference="q9u-bl-b6f"/>
                                         <include reference="vLW-aS-wff"/>
                                         <include reference="zIh-sQ-Dbj"/>
+                                        <include reference="Ahl-sG-aYP"/>
+                                        <include reference="GV4-3o-0pi"/>
+                                        <include reference="XLs-kL-kWd"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -2257,13 +2270,13 @@
                                 <exclude reference="dYp-Ir-omP"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="J5R-fa-Miq"/>
                                 <exclude reference="l3t-du-6YW"/>
                                 <exclude reference="m6R-f1-6yd"/>
                                 <exclude reference="qUp-Ac-sYf"/>
                                 <exclude reference="Qbt-rF-JUd"/>
                                 <exclude reference="ayB-Rk-mHT"/>
                                 <exclude reference="yjT-8g-9hZ"/>
-                                <exclude reference="J5R-fa-Miq"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2272,18 +2285,19 @@
                                 <include reference="dYp-Ir-omP"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="J5R-fa-Miq"/>
                                 <include reference="l3t-du-6YW"/>
                                 <include reference="m6R-f1-6yd"/>
                                 <include reference="qUp-Ac-sYf"/>
                                 <include reference="Qbt-rF-JUd"/>
                                 <include reference="ayB-Rk-mHT"/>
                                 <include reference="yjT-8g-9hZ"/>
-                                <include reference="J5R-fa-Miq"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="bottomSpaceToContainer" destination="J5R-fa-Miq" id="Wgn-Y9-tgj"/>
+                        <outlet property="replyTexViewHeight" destination="qt8-uY-VGb" id="YlF-Tg-mp6"/>
                         <outlet property="replyTextView" destination="C6u-qb-uO4" id="H2Q-cF-rov"/>
                     </connections>
                 </viewController>

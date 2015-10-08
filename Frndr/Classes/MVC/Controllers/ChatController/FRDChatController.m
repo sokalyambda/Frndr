@@ -12,7 +12,7 @@
 #import "FRDSerialViewConstructor.h"
 
 #import "FRDDropDownTableView.h"
-#import "FRDVerticallyCenteredTextView.h"
+#import "FRDExpandableToThresholdTextView.h"
 
 #import "FRDBaseDropDownDataSource.h"
 
@@ -38,8 +38,11 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 
 @property (weak, nonatomic) FRDChatTableController *chatTableController;
 
-@property (weak, nonatomic) IBOutlet FRDVerticallyCenteredTextView *replyTextView;
+@property (weak, nonatomic) IBOutlet FRDExpandableToThresholdTextView *replyTextView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomSpaceToContainer;
+
+#warning Temporary outlet!
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *replyTexViewHeight;
 
 @end
 
@@ -73,6 +76,7 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 {
     [super viewDidLoad];
     [self initDropDownTable];
+    [self configureReplyTextView];
 }
 
 #pragma mark - Actions
@@ -81,6 +85,9 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 {
     [[UIResponder currentFirstResponder] resignFirstResponder];
     self.replyTextView.text = @"";
+    
+#warning Temporary!
+    self.replyTexViewHeight.constant = 20.f;
 }
 
 - (void)initDropDownTable
@@ -101,6 +108,11 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     self.navigationItem.rightBarButtonItem = self.showOptionsBarButton;
+}
+
+- (void)configureReplyTextView
+{
+    self.replyTextView.linesThreshold = 5;
 }
 
 - (void)fadeChatTableInOut
@@ -189,11 +201,11 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
                          [self.view layoutIfNeeded]; // Called on parent view
                      }];
     
-    // Scroll table view to bottom
-//    CGFloat offsetY = self.chatTableController.tableView.contentSize.height - CGRectGetHeight(self.chatTableController.tableView.frame);
-//    self.chatTableController.tableView.contentOffset = CGPointMake(0, offsetY);
-    
-    [self.chatTableController.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.chatTableController.tableView numberOfRowsInSection:0] - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    NSInteger numberOfRows = [self.chatTableController.tableView numberOfRowsInSection:0];
+    if (numberOfRows) {
+        NSIndexPath *lastRowIndexPath = [NSIndexPath indexPathForRow:numberOfRows - 1 inSection:0];
+        [self.chatTableController.tableView scrollToRowAtIndexPath:lastRowIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
@@ -201,7 +213,6 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
     self.bottomSpaceToContainer.constant = 0;
     [UIView animateWithDuration:.5f
                      animations:^{
-//                         self.chatTableController.tableView.contentInset = UIEdgeInsetsZero;
                          [self.view layoutIfNeeded]; // Called on parent view
                      }];
 }

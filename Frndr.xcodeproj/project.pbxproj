@@ -42,6 +42,7 @@
 		3EA078301BC5625C00A7B468 /* FRDKeyboardResponderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0782F1BC5625C00A7B468 /* FRDKeyboardResponderController.m */; settings = {ASSET_TAGS = (); }; };
 		3EB1A0331BC269310032CB5A /* FRDChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1A0321BC269310032CB5A /* FRDChatController.m */; settings = {ASSET_TAGS = (); }; };
 		3EB1A0361BC2695C0032CB5A /* FRDChatTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1A0351BC2695C0032CB5A /* FRDChatTableController.m */; settings = {ASSET_TAGS = (); }; };
+		3EB7292B1BC69BC3001BEF4B /* FRDExpandableToThresholdTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB7292A1BC69BC3001BEF4B /* FRDExpandableToThresholdTextView.m */; settings = {ASSET_TAGS = (); }; };
 		3ED072321BA0370C0091B7E4 /* FRDPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED072311BA0370C0091B7E4 /* FRDPreferencesController.m */; };
 		3ED072361BA048460091B7E4 /* FRDPreferencesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED072351BA048460091B7E4 /* FRDPreferencesTableViewController.m */; };
 		3EF22FB41BBE851100E23F72 /* FRDFriendChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EF22FB31BBE851100E23F72 /* FRDFriendChatCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -276,6 +277,8 @@
 		3EB1A0321BC269310032CB5A /* FRDChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDChatController.m; path = Classes/MVC/Controllers/ChatController/FRDChatController.m; sourceTree = "<group>"; };
 		3EB1A0341BC2695C0032CB5A /* FRDChatTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDChatTableController.h; path = Classes/MVC/Controllers/ChatController/ChatTableController/FRDChatTableController.h; sourceTree = "<group>"; };
 		3EB1A0351BC2695C0032CB5A /* FRDChatTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDChatTableController.m; path = Classes/MVC/Controllers/ChatController/ChatTableController/FRDChatTableController.m; sourceTree = "<group>"; };
+		3EB729291BC69BC3001BEF4B /* FRDExpandableToThresholdTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDExpandableToThresholdTextView.h; path = Classes/MVC/Views/ExpandableToThresholdTextView/FRDExpandableToThresholdTextView.h; sourceTree = "<group>"; };
+		3EB7292A1BC69BC3001BEF4B /* FRDExpandableToThresholdTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDExpandableToThresholdTextView.m; path = Classes/MVC/Views/ExpandableToThresholdTextView/FRDExpandableToThresholdTextView.m; sourceTree = "<group>"; };
 		3ED072301BA0370C0091B7E4 /* FRDPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPreferencesController.h; path = Classes/MVC/Controllers/PreferencesController/FRDPreferencesController.h; sourceTree = "<group>"; };
 		3ED072311BA0370C0091B7E4 /* FRDPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPreferencesController.m; path = Classes/MVC/Controllers/PreferencesController/FRDPreferencesController.m; sourceTree = "<group>"; };
 		3ED072341BA048460091B7E4 /* FRDPreferencesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPreferencesTableViewController.h; path = Classes/MVC/Controllers/PreferencesTableViewController/FRDPreferencesTableViewController.h; sourceTree = "<group>"; };
@@ -897,6 +900,15 @@
 				3EB1A0351BC2695C0032CB5A /* FRDChatTableController.m */,
 			);
 			name = ChatTableController;
+			sourceTree = "<group>";
+		};
+		3EB729281BC69AF1001BEF4B /* ExpandableToThresholdTextView */ = {
+			isa = PBXGroup;
+			children = (
+				3EB729291BC69BC3001BEF4B /* FRDExpandableToThresholdTextView.h */,
+				3EB7292A1BC69BC3001BEF4B /* FRDExpandableToThresholdTextView.m */,
+			);
+			name = ExpandableToThresholdTextView;
 			sourceTree = "<group>";
 		};
 		3ED0722F1BA0364E0091B7E4 /* PreferencesController */ = {
@@ -1569,6 +1581,7 @@
 		58BC76D11B9EB95100BB8B5A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3EB729281BC69AF1001BEF4B /* ExpandableToThresholdTextView */,
 				3E0B60971BC671FC001B5167 /* VerticallyCenteredTextView */,
 				586264C31BBD064800824BA3 /* PulsingOverlayView */,
 				3E1D29FA1BB58D650051C52F /* MyProfile */,
@@ -2683,6 +2696,7 @@
 				3E945CC61BBE732E00BD5820 /* FRDFriendChatCell.m in Sources */,
 				58CF2C671BC4FBC80025AD2C /* SocketPacket.swift in Sources */,
 				58B27CF11BC193520035712C /* FRDUploadAvatarRequest.m in Sources */,
+				3EB7292B1BC69BC3001BEF4B /* FRDExpandableToThresholdTextView.m in Sources */,
 				58CD9AC41BAFF29F00A7CADB /* FRDBaseContentController.m in Sources */,
 				58BC77081B9ECA3700BB8B5A /* NSString+Base64Decoding.m in Sources */,
 				581B9D3E1B9ED67B0080393B /* FRDPushNotifiactionService.m in Sources */,
