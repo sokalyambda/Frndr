@@ -65,4 +65,61 @@
     }];
 }
 
++ (FRDChatCellPositionInSet)positionOfCellInSetByIndexPath:(NSIndexPath *)indexPath
+                                            inMessagesHistory:(NSArray *)messagesHistory
+{
+    NSIndexPath *previousIndexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:0];
+    NSIndexPath *nextIndexPath = [NSIndexPath indexPathForRow:indexPath.row + 1 inSection:0];
+    
+    FRDChatMessage *previousMessage;
+    FRDChatMessage *nextMessage;
+    FRDChatMessage *currentMessage = messagesHistory[indexPath.row];
+    
+    if (nextIndexPath.row < messagesHistory.count) {
+        nextMessage = messagesHistory[nextIndexPath.row];
+    }
+    if (previousIndexPath.row >= 0) {
+        previousMessage = messagesHistory[previousIndexPath.row];
+    }
+    
+    if (!previousMessage && !nextMessage) { //it is the first cell at all
+        
+        return FRDChatCellPositionInSetOnly;
+        
+    } else if (!previousMessage && nextMessage) {
+        
+        if (nextMessage.ownerType == currentMessage.ownerType) {
+            return FRDChatCellPositionInSetFirst;
+        } else {
+            return FRDChatCellPositionInSetOnly;
+        }
+        
+    } else if (previousMessage && !nextMessage) {
+        
+        if (previousMessage.ownerType == currentMessage.ownerType) {
+            return FRDChatCellPositionInSetLast;
+        } else {
+            return FRDChatCellPositionInSetOnly;
+        }
+        
+    } else {
+
+        if (previousMessage.ownerType == currentMessage.ownerType && nextMessage.ownerType == currentMessage.ownerType) {
+            
+            return FRDChatCellPositionInSetIntermediary;
+            
+        } else if (previousMessage.ownerType == currentMessage.ownerType) {
+            
+            return FRDChatCellPositionInSetLast;
+            
+        } else if (nextMessage.ownerType == currentMessage.ownerType) {
+            
+            return FRDChatCellPositionInSetFirst;
+            
+        } else {
+            return FRDChatCellPositionInSetOnly;
+        }
+    }
+}
+
 @end

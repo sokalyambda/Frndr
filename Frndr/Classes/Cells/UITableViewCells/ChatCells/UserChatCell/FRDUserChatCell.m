@@ -7,7 +7,6 @@
 //
 
 #import "FRDUserChatCell.h"
-#import "FRDBaseChatCell_Private.h"
 
 #import "FRDRoundedImageView.h"
 
@@ -22,7 +21,7 @@
 - (void)awakeFromNib
 {
     FRDCurrentUserProfile *profile = [FRDStorageManager sharedStorage].currentUserProfile;
-    [self.avatarImageView sd_setImageWithURL:profile.avatarURL];
+    [self->avatarImageView sd_setImageWithURL:profile.avatarURL];
 }
 
 @end

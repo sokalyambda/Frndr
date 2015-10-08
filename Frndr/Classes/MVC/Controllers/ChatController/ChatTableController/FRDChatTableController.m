@@ -15,6 +15,8 @@
 
 #import "FRDChatMessagesService.h"
 
+#import "FRDChatCells.h"
+
 @interface FRDChatTableController ()
 
 @end
@@ -56,10 +58,26 @@
 {
     [super viewDidLoad];
     
+    [self registerCells];
     [self loadChatHistory];
 }
 
 #pragma mark - Actions
+
+- (void)registerCells
+{
+    NSString *userChatCellNibName = NSStringFromClass([FRDUserChatCell class]);
+    UINib *userChatCellNib = [UINib nibWithNibName:userChatCellNibName bundle:nil];
+    [self.tableView registerNib:userChatCellNib forCellReuseIdentifier:userChatCellNibName];
+    
+    NSString *friendChatCellNibName = NSStringFromClass([FRDFriendChatCell class]);
+    UINib *friendChatCellNib = [UINib nibWithNibName:friendChatCellNibName bundle:nil];
+    [self.tableView registerNib:friendChatCellNib forCellReuseIdentifier:friendChatCellNibName];
+    
+    NSString *systemChatCellNibName = NSStringFromClass([FRDSystemChatCell class]);
+    UINib *systemChatCellNib = [UINib nibWithNibName:systemChatCellNibName bundle:nil];
+    [self.tableView registerNib:systemChatCellNib forCellReuseIdentifier:systemChatCellNibName];
+}
 
 /**
  *  Load chat history with current friend
@@ -101,78 +119,20 @@
     return self.messageHistory.count;
 }
 
-#pragma mark - UITableViewDelegate
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    FRDBaseChatCell *cell;
-    
     FRDChatMessage *currentMessage = self.messageHistory[indexPath.row];
     
-    cell = [FRDBaseChatCell chatCellWithMessage:currentMessage];
+    FRDBaseChatCell *cell = [FRDBaseChatCell chatCellWithOwnerType:currentMessage.ownerType forTableView:tableView atIndexPath:indexPath];
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        cell.positionInSet = [self getPositionOfCellInSetByIndexPath:indexPath inTableView:tableView];
-        
-        
-    });
-    if (currentMessage.ownerType == FRDMessageOwnerTypeFriend) {
-        [cell configureForFriend:self.currentFriend withMessage:currentMessage];
-    } else {
-        [cell configureForFriend:nil withMessage:currentMessage];
-    }
+    cell.positionInSet = [FRDChatMessagesService positionOfCellInSetByIndexPath:indexPath inMessagesHistory:self.messageHistory];
+    
+    [cell configureForFriend:self.currentFriend withMessage:currentMessage];
+    
     return cell;
 }
 
-- (FRDChatCellPositionInSet)getPositionOfCellInSetByIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView
-{
-    NSIndexPath *previousIndexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:0];
-    NSIndexPath *nextIndexPath = [NSIndexPath indexPathForRow:indexPath.row + 1 inSection:0];
-    
-    FRDChatMessage *previousMessage;
-    FRDChatMessage *nextMessage;
-    
-    if (nextIndexPath.row < self.messageHistory.count) {
-        nextMessage = self.messageHistory[nextIndexPath.row];
-    }
-    if (previousIndexPath.row >= 0) {
-        previousMessage = self.messageHistory[previousIndexPath.row];
-    }
-
-    if (!previousMessage && !nextMessage) { //it is the first cell at all
-        
-        return FRDChatCellPositionInSetFirst;
-        
-    } else if (!previousMessage && nextMessage) {
-        
-        return FRDChatCellPositionInSetFirst;
-        
-    } else if (previousMessage && !nextMessage) {
-        
-        return FRDChatCellPositionInSetLast;
-        
-    } else {
-        
-        FRDChatMessage *currentMessage = self.messageHistory[indexPath.row];
-        
-        if (previousMessage.ownerType == currentMessage.ownerType && nextMessage.ownerType == currentMessage.ownerType) {
-            
-            return FRDChatCellPositionInSetIntermediary;
-            
-        } else if (previousMessage.ownerType == currentMessage.ownerType) {
-            
-            return FRDChatCellPositionInSetLast;
-            
-        } else if (nextMessage.ownerType == currentMessage.ownerType) {
-            
-            return FRDChatCellPositionInSetFirst;
-            
-        } else {
-            return FRDChatCellPositionInSetFirst;
-        }
-    }
-    
-}
+#pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

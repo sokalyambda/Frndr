@@ -10,16 +10,26 @@ typedef NS_ENUM(NSInteger, FRDChatCellPositionInSet)
 {
     FRDChatCellPositionInSetFirst,
     FRDChatCellPositionInSetIntermediary,
-    FRDChatCellPositionInSetLast
+    FRDChatCellPositionInSetLast,
+    FRDChatCellPositionInSetOnly
 };
 
-@class FRDChatMessage, FRDFriend;
+#import "FRDChatMessage.h"
 
-@interface FRDBaseChatCell : UITableViewCell
+@class FRDFriend, FRDRoundedImageView;
+
+@interface FRDBaseChatCell : UITableViewCell {
+    @protected
+    __weak IBOutlet FRDRoundedImageView *avatarImageView;
+    __weak IBOutlet UITextView *messageTextView;
+    __weak IBOutlet UILabel *dateAndTimeLabel;
+}
 
 @property (assign, nonatomic) FRDChatCellPositionInSet positionInSet;
 
-+ (instancetype)chatCellWithMessage:(FRDChatMessage *)message;
++ (instancetype)chatCellWithOwnerType:(FRDMessageOwnerType)ownerType
+                         forTableView:(UITableView *)tableView
+                          atIndexPath:(NSIndexPath *)indexPath;
 
 - (void)configureForFriend:(FRDFriend *)currentFriend withMessage:(FRDChatMessage *)message;
 
