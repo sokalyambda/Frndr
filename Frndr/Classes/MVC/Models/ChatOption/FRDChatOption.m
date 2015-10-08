@@ -12,27 +12,40 @@
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithOptionString:(NSString *)string
+- (instancetype)initWithOptionType:(FRDChatOptionsType)type
 {
     self = [super init];
     if (self) {
-        _optionString = string;
         
-        NSMutableArray *selectorStringComponents = [[string componentsSeparatedByString:@" "] mutableCopy];
-        NSString *firstWord = selectorStringComponents.firstObject;
-        firstWord = [firstWord lowercaseString];
-        selectorStringComponents[0] = firstWord;
+        switch (type) {
+            case FRDChatOptionsTypeBlockUser: {
+                _optionString = LOCALIZED(@"Block User");
+                break;
+            }
+            case FRDChatOptionsTypeClearChat: {
+                _optionString = LOCALIZED(@"Clear Chat");
+                break;
+            }
+            case FRDChatOptionsTypeViewProfile: {
+                _optionString = LOCALIZED(@"View Profile");
+                break;
+            }
+            case FRDChatOptionsTypeCancel: {
+                _optionString = LOCALIZED(@"Cancel");
+                break;
+            }
+    
+            default:
+                break;
+        }
         
-        NSString *finalSelectorString = [[selectorStringComponents componentsJoinedByString:@""] stringByAppendingString:@"OptionClick"];
-        
-        _optionSelector = NSSelectorFromString(finalSelectorString);
     }
     return self;
 }
 
-+ (instancetype)optionWithOptionString:(NSString *)string
++ (instancetype)chatOptionWithOptionType:(FRDChatOptionsType)type
 {
-    return [[self alloc] initWithOptionString:string];
+    return [[self alloc] initWithOptionType:type];
 }
 
 @end
