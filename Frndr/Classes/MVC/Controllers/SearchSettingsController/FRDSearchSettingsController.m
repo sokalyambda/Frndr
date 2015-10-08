@@ -117,7 +117,6 @@ static CGFloat const kMaxDistanceValue = 10000.f;
         
         [FRDStorageManager sharedStorage].searchSettingsUpdateNeeded = NO;
         
-        
         [weakSelf updateSearchSettingsFields];
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
@@ -183,7 +182,6 @@ static CGFloat const kMaxDistanceValue = 10000.f;
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
         [FRDStorageManager sharedStorage].searchSettingsUpdateNeeded = YES;
-        [FRDStorageManager sharedStorage].nearestUsersUpdateNeeded = YES;
         
         [weakSelf.navigationController popViewControllerAnimated:YES];
         

@@ -72,7 +72,12 @@
     [super viewDidLoad];
 
     [self.friendsTableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
-    
+
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     [self loadFriendsList];
 }
 
@@ -102,7 +107,7 @@
     
     FRDChatController *chatController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDChatController class])];
     chatController.currentFriend = currentFriend;
-    NSLog(@"%@", self.navigationController);
+
     [self.navigationController pushViewController:chatController animated:YES];
 }
 
@@ -143,7 +148,6 @@
         if (friendsList.count) {
             [weakSelf updateLocalFriendsArrayWithArray:friendsList];
             weakSelf.currentPage++;
-            
             
             //temp test
 //            [FRDChatMessagesService sendMessage:@"Hi again, I want to write you a long long long long long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long longlong long long message " toFriendWithId:@"560e7804b03a75135dc091e7" onSuccess:^(BOOL isSuccess) {

@@ -42,13 +42,21 @@ static NSString *const kBaseNavigationTitle = @"frndr";
 - (void)setLeftIconName:(NSString *)leftIconName
 {
     _leftIconName = leftIconName;
-    _leftIcon.image = [UIImage imageNamed:_leftIconName];
+    if (_leftIconName.length) {
+        _leftIcon.image = [UIImage imageNamed:_leftIconName];
+    } else {
+        _leftIcon.image = [[UIImage alloc] init];
+    }
 }
 
 - (void)setRightIconName:(NSString *)rightIconName
 {
     _rightIconName = rightIconName;
-    _rightIcon.image = [UIImage imageNamed:_rightIconName];
+    if (_rightIconName.length) {
+        _rightIcon.image = [UIImage imageNamed:_rightIconName];
+    } else {
+        _rightIcon.image = [[UIImage alloc] init];
+    }
 }
 
 #pragma mark - Actions
