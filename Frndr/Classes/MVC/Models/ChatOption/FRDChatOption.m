@@ -12,38 +12,37 @@
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithOptionType:(FRDChatOptionType)type
+- (instancetype)initWithOptionType:(FRDChatOptionsType)type
 {
     self = [super init];
     if (self) {
-        _type = type;
         
         switch (type) {
-            case FRDChatOptionTypeViewProfile: {
-                _titleString = @"View Profile";
+            case FRDChatOptionsTypeBlockUser: {
+                _optionString = LOCALIZED(@"Block User");
                 break;
             }
-                
-            case FRDChatOptionTypeClearChat: {
-                _titleString = @"Clear Chat";
+            case FRDChatOptionsTypeClearChat: {
+                _optionString = LOCALIZED(@"Clear Chat");
                 break;
             }
-                
-            case FRDChatOptionTypeBlockUser: {
-                _titleString = @"Block User";
+            case FRDChatOptionsTypeViewProfile: {
+                _optionString = LOCALIZED(@"View Profile");
                 break;
             }
-                
-            case FRDChatOptionTypeCancel: {
-                _titleString = @"Cancel";
+            case FRDChatOptionsTypeCancel: {
+                _optionString = LOCALIZED(@"Cancel");
                 break;
             }
+    
+            default:
+                break;
         }
     }
     return self;
 }
 
-+ (instancetype)optionWithOptionType:(FRDChatOptionType)type
++ (instancetype)chatOptionWithOptionType:(FRDChatOptionsType)type
 {
     return [[self alloc] initWithOptionType:type];
 }

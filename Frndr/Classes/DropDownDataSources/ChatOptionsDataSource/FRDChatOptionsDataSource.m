@@ -25,10 +25,10 @@
 - (NSArray *)options
 {
     if (!_options) {
-//        _options = @[[FRDChatOption optionWithOptionString:@"View Profile"],
-//                     [FRDChatOption optionWithOptionString:@"Clear Chat"],
-//                     [FRDChatOption optionWithOptionString:@"Block User"],
-//                     [FRDChatOption optionWithOptionString:@"Cancel"]];
+        _options = @[[FRDChatOption chatOptionWithOptionType:FRDChatOptionsTypeViewProfile],
+                     [FRDChatOption chatOptionWithOptionType:FRDChatOptionsTypeClearChat],
+                     [FRDChatOption chatOptionWithOptionType:FRDChatOptionsTypeBlockUser],
+                     [FRDChatOption chatOptionWithOptionType:FRDChatOptionsTypeCancel]];
     }
     return _options;
 }
