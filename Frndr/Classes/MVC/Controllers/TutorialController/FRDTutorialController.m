@@ -162,7 +162,6 @@
             //Init current user profile
             [FRDStorageManager sharedStorage].currentUserProfile = [FRDCurrentUserProfile userProfileWithFacebookProfile:facebookProfile];
             
-            
             [FRDProjectFacade signInWithFacebookOnSuccess:^(NSString *userId, BOOL avatarExists, BOOL firstLogin) {
                 
                 [FRDStorageManager sharedStorage].currentUserProfile.userId = userId;
@@ -170,50 +169,45 @@
                 [FRDChatManager sharedChatManager];
                 
                 if (!avatarExists) {
-                    //download the avatar image
-                    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[FRDStorageManager sharedStorage].currentUserProfile.avatarURL options:SDWebImageDownloaderHighPriority progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+                    
+                    [weakSelf uploadAvatarOnSuccess:^(BOOL isSuccess) {
                         
-                        [FRDProjectFacade uploadUserAvatar:image onSuccess:^(BOOL isSuccess) {
-                            
+                        if (firstLogin) {
+                            [weakSelf updateCurrentProfileOnSuccess:^(BOOL isSuccess) {
+                                
+                                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                [weakSelf completeSuccessfullLogin];
+                                
+                            } onFailure:^(NSError *error, BOOL isCanceled) {
+                                
+                                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+                                
+                            }];
+                        } else {
                             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                            
-                            //assign avatar facebook URL to current avatar
-                            [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar.photoURL = [FRDStorageManager sharedStorage].currentUserProfile.avatarURL;
-                            
-                            //set successfull login
-                            [FRDFacebookService setLoginSuccess:isSuccess];
-                            
-                            //redirect to search friends
-                            [FRDRedirectionHelper redirectToMainContainerControllerWithNavigationController:(FRDBaseNavigationController *)weakSelf.navigationController andDelegate:weakSelf];
-                            
-                        } onFailure:^(NSError *error, BOOL isCanceled) {
-                            
-                            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                            [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-                            
-                        }];
+                            [weakSelf completeSuccessfullLogin];
+                        }
+
+                    } onFailure:^(NSError *error, BOOL isCanceled) {
+                        
+                        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
                         
                     }];
                     
                 } else {
                     
-                    [FRDProjectFacade getAvatarWithSmallValue:NO onSuccess:^(FRDAvatar *avatar) {
+                    [weakSelf getAvatarOnSuccess:^(BOOL isSuccess) {
                         
                         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                        
-                        //set avatar, it has been existed already
-                        [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar = avatar;
-                        
-                        //set successfull login
-                        [FRDFacebookService setLoginSuccess:isSuccess];
-                        
-                        //redirect to search friends
-                        [FRDRedirectionHelper redirectToMainContainerControllerWithNavigationController:(FRDBaseNavigationController *)weakSelf.navigationController andDelegate:weakSelf];
+                        [weakSelf completeSuccessfullLogin];
                         
                     } onFailure:^(NSError *error, BOOL isCanceled) {
                         
                         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+                        
                     }];
                 }
                 
@@ -227,11 +221,110 @@
             [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
         }];
         
-        
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
      }];
+}
+
+/**
+ *  Get avatar request
+ *
+ *  @param success Success Block
+ *  @param failure Failure Block
+ */
+- (void)getAvatarOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+{
+    [FRDProjectFacade getAvatarWithSmallValue:NO onSuccess:^(FRDAvatar *avatar) {
+        
+        //set avatar, it has been existed already
+        [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar = avatar;
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+
+        if (failure) {
+            failure(error, isCanceled);
+        }
+        
+    }];
+}
+
+/**
+ *  Upload avatar if it doesn't exist
+ *
+ *  @param success Success Block
+ *  @param failure Failure Block
+ */
+- (void)uploadAvatarOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+{
+    //download the avatar image
+    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[FRDStorageManager sharedStorage].currentUserProfile.avatarURL options:SDWebImageDownloaderHighPriority progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+        
+        if (image) {
+            
+            [FRDProjectFacade uploadUserAvatar:image onSuccess:^(BOOL isSuccess) {
+                
+                //assign avatar facebook URL to current avatar
+                [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar.photoURL = [FRDStorageManager sharedStorage].currentUserProfile.avatarURL;
+                
+                if (success) {
+                    success(YES);
+                }
+
+            } onFailure:^(NSError *error, BOOL isCanceled) {
+
+                if (failure) {
+                    failure(error, isCanceled);
+                }
+                
+            }];
+            
+        } else {
+            if (failure) {
+                failure(error, NO);
+            }
+        }
+ 
+    }];
+}
+
+/**
+ *  Update profile if first login
+ *
+ *  @param success Success Block
+ *  @param failure Failure Block
+ */
+- (void)updateCurrentProfileOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+{
+    FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
+    [FRDProjectFacade updatedProfile:currentProfile onSuccess:^(FRDCurrentUserProfile *confirmedProfile) {
+        
+        [currentProfile updateWithUserProfile:confirmedProfile];
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        
+        if (failure) {
+            failure(error, isCanceled);
+        }
+        
+    }];
+}
+
+/**
+ *  Complete successfull login
+ */
+- (void)completeSuccessfullLogin
+{
+    [FRDFacebookService setLoginSuccess:YES];
+    [FRDRedirectionHelper redirectToMainContainerControllerWithNavigationController:(FRDBaseNavigationController *)self.navigationController andDelegate:self];
 }
 
 /**
@@ -244,10 +337,18 @@ static CGFloat const kTermsLabelAnimDuration = .7f;
 static CGFloat const kPageControlAnimDuration = .6f;
 - (void)animateTutorialViews
 {
-    NSArray *tutorialViewValues = @[@(-CGRectGetHeight(self.tutorialScrollView.frame)), @(CGRectGetMidY(self.tutorialScrollView.frame) + kTempOffset), @(CGRectGetMidY(self.tutorialScrollView.frame))];
-    NSArray *facebookButtonValues = @[@(-CGRectGetHeight(self.facebookButton.frame)), @(CGRectGetMidY(self.facebookButton.frame) + kTempOffset), @(CGRectGetMidY(self.facebookButton.frame))];
-    NSArray *termsLabelValues = @[@(-CGRectGetHeight(self.termsLabel.frame)), @(CGRectGetMidY(self.termsLabel.frame) + kTempOffset), @(CGRectGetMidY(self.termsLabel.frame))];
-    NSArray *pageControlValues = @[@(-CGRectGetHeight(self.tutorialPageControl.frame)), @(CGRectGetMidY(self.tutorialPageControl.frame) + kTempOffset), @(CGRectGetMidY(self.tutorialPageControl.frame))];
+    NSArray *tutorialViewValues = @[@(-CGRectGetHeight(self.tutorialScrollView.frame)),
+                                    @(CGRectGetMidY(self.tutorialScrollView.frame) + kTempOffset),
+                                    @(CGRectGetMidY(self.tutorialScrollView.frame))];
+    NSArray *facebookButtonValues = @[@(-CGRectGetHeight(self.facebookButton.frame)),
+                                      @(CGRectGetMidY(self.facebookButton.frame) + kTempOffset),
+                                      @(CGRectGetMidY(self.facebookButton.frame))];
+    NSArray *termsLabelValues = @[@(-CGRectGetHeight(self.termsLabel.frame)),
+                                  @(CGRectGetMidY(self.termsLabel.frame) + kTempOffset),
+                                  @(CGRectGetMidY(self.termsLabel.frame))];
+    NSArray *pageControlValues = @[@(-CGRectGetHeight(self.tutorialPageControl.frame)),
+                                   @(CGRectGetMidY(self.tutorialPageControl.frame) + kTempOffset),
+                                   @(CGRectGetMidY(self.tutorialPageControl.frame))];
     
     CAKeyframeAnimation *tutorialViewFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
     CAKeyframeAnimation *facebookButtonFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];

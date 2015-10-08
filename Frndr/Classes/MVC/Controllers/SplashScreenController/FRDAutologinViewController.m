@@ -77,46 +77,35 @@ static NSString *const kTutorialSegueIdentifier = @"tutorialSegueIdentifier";
         [FRDChatManager sharedChatManager];
         
         if (!avatarExists) {
-            //download the avatar image
-            [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[FRDStorageManager sharedStorage].currentUserProfile.avatarURL options:SDWebImageDownloaderHighPriority progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-                
-                [FRDProjectFacade uploadUserAvatar:image onSuccess:^(BOOL isSuccess) {
-                    
-                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                    
-                    //assign avatar facebook URL to current avatar
-                    [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar.photoURL = [FRDStorageManager sharedStorage].currentUserProfile.avatarURL;
-                    
-                    [weakSelf moveToSearchFriendsController];
-                    
-                } onFailure:^(NSError *error, BOOL isCanceled) {
-                    
-                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                    [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-                    
-                }];
-            }];
-        } else {
             
-            //get avatar
-            [FRDProjectFacade getAvatarWithSmallValue:NO onSuccess:^(FRDAvatar *avatar) {
+            [weakSelf uploadAvatarOnSuccess:^(BOOL isSuccess) {
                 
                 [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                
-                //set avatar, it has been existed already
-                [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar = avatar;
-                
                 [weakSelf moveToSearchFriendsController];
                 
             } onFailure:^(NSError *error, BOOL isCanceled) {
-               
+                
                 [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                 [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
                     [weakSelf moveToTutorialAfterDelay:0.f];
                 }];
                 
             }];
-            
+
+        } else {
+            //get avatar
+            [weakSelf getAvatarOnSuccess:^(BOOL isSuccess) {
+                
+                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                [weakSelf moveToSearchFriendsController];
+                
+            } onFailure:^(NSError *error, BOOL isCanceled) {
+                
+                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
+                    [weakSelf moveToTutorialAfterDelay:0.f];
+                }];
+            }];
         }
   
     } onFailure:^(NSError *error, BOOL isCanceled) {
@@ -125,6 +114,71 @@ static NSString *const kTutorialSegueIdentifier = @"tutorialSegueIdentifier";
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
             [weakSelf moveToTutorialAfterDelay:0.f];
         }];
+    }];
+}
+
+/**
+ *  Get avatar request
+ *
+ *  @param success Success Block
+ *  @param failure Failure Block
+ */
+- (void)getAvatarOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+{
+    [FRDProjectFacade getAvatarWithSmallValue:NO onSuccess:^(FRDAvatar *avatar) {
+        
+        //set avatar, it has been existed already
+        [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar = avatar;
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        
+        if (failure) {
+            failure(error, isCanceled);
+        }
+        
+    }];
+}
+
+/**
+ *  Upload avatar if it doesn't exist
+ *
+ *  @param success Success Block
+ *  @param failure Failure Block
+ */
+- (void)uploadAvatarOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+{
+    //download the avatar image
+    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[FRDStorageManager sharedStorage].currentUserProfile.avatarURL options:SDWebImageDownloaderHighPriority progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+        
+        if (image) {
+            
+            [FRDProjectFacade uploadUserAvatar:image onSuccess:^(BOOL isSuccess) {
+                
+                //assign avatar facebook URL to current avatar
+                [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar.photoURL = [FRDStorageManager sharedStorage].currentUserProfile.avatarURL;
+                
+                if (success) {
+                    success(YES);
+                }
+                
+            } onFailure:^(NSError *error, BOOL isCanceled) {
+                
+                if (failure) {
+                    failure(error, isCanceled);
+                }
+                
+            }];
+            
+        } else {
+            if (failure) {
+                failure(error, NO);
+            }
+        }
+        
     }];
 }
 
