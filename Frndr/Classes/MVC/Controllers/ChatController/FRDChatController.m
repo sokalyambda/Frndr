@@ -24,8 +24,6 @@
 
 #import "FRDProjectFacade.h"
 
-#import "FRDChatMessagesService.h"
-
 static NSString * const kChatTableControllerSegueIdentifier = @"chatTableControllerSegue";
 
 static NSString * const kOptionsHiddenButtonImage = @"ChatOptionsUnactive";
@@ -41,8 +39,6 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 @property (weak, nonatomic) FRDChatTableController *chatTableController;
 
 @property (weak, nonatomic) IBOutlet FRDVerticallyCenteredTextView *replyTextView;
-
-//@property (assign, nonatomic) NSInteger currenPage;
 
 @end
 
@@ -76,29 +72,9 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 {
     [super viewDidLoad];
     [self initDropDownTable];
-    
-//    [self loadChatHistory];
 }
 
 #pragma mark - Actions
-
-///**
-// *  Load chat history with current friend
-// */
-//- (void)loadChatHistory
-//{
-//    WEAK_SELF;
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    [FRDChatMessagesService getChatHistoryWithFriend:self.currentFriend.userId andPage:1 onSuccess:^(NSArray *chatHistory) {
-//        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-//        
-//        //set messages array to child table view controller
-//        weakSelf.chatTableController.messageHistory = [NSMutableArray arrayWithArray:chatHistory];
-//    } onFailure:^(NSError *error) {
-//        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-//        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-//    }];
-//}
 
 - (void)initDropDownTable
 {
@@ -133,21 +109,40 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
     
     [self fadeChatTableInOut];
     
+    WEAK_SELF;
     [self.dropDownOptionsList dropDownTableBecomeActiveInView:self.view
                                                fromAnchorView:self.navigationController.navigationBar
                                                withDataSource:dataSource
                                         withShowingCompletion:^(FRDDropDownTableView *table) {
-
-                                            self.navigationItem.rightBarButtonItem = table.isExpanded ? self.hideOptionsBarButton : self.showOptionsBarButton;
+                                            
+                                            weakSelf.navigationItem.rightBarButtonItem = table.isExpanded ? weakSelf.hideOptionsBarButton : weakSelf.showOptionsBarButton;
+                                            weakSelf.view.userInteractionEnabled = !table.isExpanded;
+                                            
+                                            [weakSelf fadeChatTableInOut];
                                             
                                         } withCompletion:^(FRDDropDownTableView *table, id chosenValue) {
                                             if ([chosenValue isKindOfClass:[FRDChatOption class]]) {
                                                 
                                                 FRDChatOption *chosenOption = (FRDChatOption *)chosenValue;
                                                 
-                                               
+                                                switch (chosenOption.currentType) {
+                                                    case FRDChatOptionsTypeBlockUser: {
+                                                        [weakSelf blockUserOptionClick];
+                                                        break;
+                                                    }
+                                                    case FRDChatOptionsTypeClearChat: {
+                                                        [weakSelf clearChatOptionClick];
+                                                        break;
+                                                    }
+                                                    case FRDChatOptionsTypeViewProfile: {
+                                                        [weakSelf viewProfileOptionClick];
+                                                        break;
+                                                    }
+                                                        
+                                                    default:
+                                                        break;
+                                                }
                                             }
-                                            [self fadeChatTableInOut];
                                         }];
 }
 
@@ -155,17 +150,17 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 
 - (void)viewProfileOptionClick
 {
-    
+    NSLog(@"Show profile of %@", self.currentFriend.fullName);
 }
 
 - (void)clearChatOptionClick
 {
-    
+    NSLog(@"Clear chat with %@", self.currentFriend.fullName);
 }
 
 - (void)blockUserOptionClick
 {
-    
+    NSLog(@"BLOCK %@", self.currentFriend.fullName);
 }
 
 - (void)cancelOptionClick
