@@ -8,22 +8,11 @@
 
 #import "FRDChatMessagesService.h"
 
+#import "FRDFriend.h"
+
 @implementation FRDChatMessagesService
 
 #pragma mark - Actions
-
-+ (FRDMessageOwnerType)ownerTypeForMessage:(FRDChatMessage *)message
-{
-    FRDMessageOwnerType currentType;
-    
-    FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
-    if ([message.ownerId isEqualToString:currentProfile.userId]) {
-        currentType = FRDMessageOwnerTypeUser;
-    } else {
-        currentType = FRDMessageOwnerTypeFriend;
-    }
-    return currentType;
-}
 
 + (void)getChatHistoryWithFriend:(NSString *)friendId
                          andPage:(NSInteger)page
@@ -120,6 +109,27 @@
             return FRDChatCellPositionInSetOnly;
         }
     }
+}
+
++ (FRDMessageOwnerType)ownerTypeForMessage:(FRDChatMessage *)message
+{
+    FRDMessageOwnerType currentType;
+    
+    FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
+    if ([message.ownerId isEqualToString:currentProfile.userId]) {
+        currentType = FRDMessageOwnerTypeUser;
+    } else {
+        currentType = FRDMessageOwnerTypeFriend;
+    }
+    return currentType;
+}
+
++ (FRDFriend *)findFriendWithId:(NSString *)friendId
+                        inArray:(NSArray *)friends
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userId == %@", friendId];
+    FRDFriend *messageOwner = [[friends filteredArrayUsingPredicate:predicate] firstObject];
+    return messageOwner;
 }
 
 @end

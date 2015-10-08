@@ -17,6 +17,8 @@
 
 #import "FRDChatMessagesService.h"
 
+#import "FRDFriend.h"
+
 @interface FRDFriendsListController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic) NSMutableArray *friends;
@@ -72,13 +74,24 @@
     [super viewDidLoad];
 
     [self.friendsTableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+}
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self subscribeForMessagesNotification];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [self loadFriendsList];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self unsibscribeFromMessagesNotification];
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - UITableViewDataSource
@@ -105,6 +118,10 @@
     
     FRDFriend *currentFriend = self.friends[indexPath.row];
     
+    //there are no new messages now
+    currentFriend.hasNewMessages = NO;
+    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
     FRDChatController *chatController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDChatController class])];
     chatController.currentFriend = currentFriend;
 
@@ -122,6 +139,16 @@
 }
 
 #pragma mark - Actions
+
+- (void)subscribeForMessagesNotification
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNewMessageNotification:) name:DidReceiveNewMessageNotification object:nil];
+}
+
+- (void)unsibscribeFromMessagesNotification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)customizeNavigationItem
 {
@@ -162,6 +189,32 @@
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
     }];
+}
+
+#pragma mark - New Messages Handling
+
+- (void)didReceiveNewMessageNotification:(NSNotification *)notification
+{
+    //Message from socket has ownerId, friendId, messageBody;
+    FRDChatMessage *message = (FRDChatMessage *)notification.object;
+    
+    FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
+    if ([currentProfile.userId isEqualToString:message.ownerId]) {
+        //The message was sent by me
+        //It doesn't matter in this screen
+    } else {
+        //Attempt to find the friend whos ID will be equal to owner ID of new message
+        FRDFriend *messageOwner = [FRDChatMessagesService findFriendWithId:message.ownerId inArray:self.friends];
+        
+        if (messageOwner) {
+            messageOwner.lastMessage = message.messageBody;
+            
+            //new message received from this friend
+            messageOwner.hasNewMessages = YES;
+            
+            [self.friendsTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.friends indexOfObject:messageOwner] inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+    }
 }
 
 @end

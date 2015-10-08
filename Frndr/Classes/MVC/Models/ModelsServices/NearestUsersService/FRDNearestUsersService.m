@@ -48,23 +48,6 @@ static NSTimer *_searchTimer;
     }
 }
 
-//+ (NSInteger)currentPage
-//{
-//    @synchronized(self) {
-//        if (!_errorDict) {
-//            _errorDict = [NSMutableDictionary dictionary];
-//        }
-//        return _errorDict;
-//    }
-//}
-//
-//+ (void)setValidationErrorDict:(NSMutableDictionary *)validationErrorDict
-//{
-//    @synchronized(self) {
-//        _errorDict = validationErrorDict;
-//    }
-//}
-
 #pragma mark - Actions
 
 + (void)getNearestUsersWithPage:(NSInteger)page

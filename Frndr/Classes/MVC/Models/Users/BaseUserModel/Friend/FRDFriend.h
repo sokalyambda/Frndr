@@ -13,5 +13,6 @@
 @property (assign, nonatomic, getter=isNewFriend) BOOL newFriend;
 @property (strong, nonatomic) NSString *lastMessage;
 @property (strong, nonatomic) NSDate *lastMessagePostedDate;
+@property (assign, nonatomic) BOOL hasNewMessages;
 
 @end

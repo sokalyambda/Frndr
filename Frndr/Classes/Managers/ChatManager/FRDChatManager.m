@@ -75,7 +75,13 @@ static NSString *const kSuccess = @"success";
     
     //Listen to new message event
     [self.socketIOClient on:kChatMessageEvent callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nullable emitter) {
-//        FRDChatMessage *message = [[FRDChatMessage alloc] initWithSocketRespose:data];
+        
+        NSDictionary *messageDict = data.firstObject;
+        FRDChatMessage *message = [[FRDChatMessage alloc] initWithSocketRespose:messageDict];
+        
+        //post notification with new message
+        [[NSNotificationCenter defaultCenter] postNotificationName:DidReceiveNewMessageNotification object:message];
+        
         NSLog(@"data %@", data);
     }];
     
