@@ -6,11 +6,11 @@
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "FRDBaseViewController.h"
+#import "FRDKeyboardResponderController.h"
 
 @class FRDFriend;
 
-@interface FRDChatController : FRDBaseViewController
+@interface FRDChatController : FRDKeyboardResponderController
 
 @property (strong, nonatomic) FRDFriend *currentFriend;
 

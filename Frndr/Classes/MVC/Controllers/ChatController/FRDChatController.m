@@ -12,6 +12,7 @@
 #import "FRDSerialViewConstructor.h"
 
 #import "FRDDropDownTableView.h"
+#import "FRDVerticallyCenteredTextView.h"
 
 #import "FRDBaseDropDownDataSource.h"
 
@@ -19,6 +20,7 @@
 #import "FRDFriend.h"
 
 #import "UIView+MakeFromXib.h"
+#import "UIResponder+FirstResponder.h"
 
 #import "FRDProjectFacade.h"
 
@@ -37,6 +39,8 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 @property (strong, nonatomic) FRDDropDownTableView *dropDownOptionsList;
 
 @property (weak, nonatomic) FRDChatTableController *chatTableController;
+
+@property (weak, nonatomic) IBOutlet FRDVerticallyCenteredTextView *replyTextView;
 
 //@property (assign, nonatomic) NSInteger currenPage;
 
@@ -141,12 +145,7 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
                                                 
                                                 FRDChatOption *chosenOption = (FRDChatOption *)chosenValue;
                                                 
-                                                NSLog(@"Choosen option: %@", chosenOption.optionString);
-                                                NSLog(@"Option selector: %@", NSStringFromSelector(chosenOption.optionSelector));
-                                                
-                                                if ([self respondsToSelector:chosenOption.optionSelector]) {
-                                                    [self performSelector:chosenOption.optionSelector withObject:nil withObject:nil];
-                                                }
+                                               
                                             }
                                             [self fadeChatTableInOut];
                                         }];
@@ -172,6 +171,44 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 - (void)cancelOptionClick
 {
     
+}
+
+#pragma mark - Keyboard notification handlers
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    NSDictionary* info = [notification userInfo];
+    CGRect keyBoardFrame = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    CGSize kbSize = keyBoardFrame.size;
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    
+    self.replyTextView.center = CGPointMake(self.replyTextView.center.x, self.replyTextView.center.y - kbSize.height);
+    self.chatTableController.tableView.frame = CGRectMake(CGRectGetMinX(self.chatTableController.tableView.frame),
+                                                          CGRectGetMinY(self.chatTableController.tableView.frame),
+                                                          CGRectGetWidth(self.chatTableController.tableView.frame),
+                                                          CGRectGetHeight(self.chatTableController.tableView.frame) - kbSize.height);
+    
+    // Scroll table view to bottom
+    CGFloat offsetY = self.chatTableController.tableView.contentSize.height - CGRectGetHeight(self.chatTableController.tableView.frame);
+    self.chatTableController.tableView.contentOffset = CGPointMake(0, offsetY);
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    NSDictionary* info = [notification userInfo];
+    CGRect keyBoardFrame = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGSize kbSize = keyBoardFrame.size;
+    
+    self.replyTextView.center = CGPointMake(self.replyTextView.center.x, self.replyTextView.center.y + kbSize.height);
+    self.chatTableController.tableView.frame = CGRectMake(CGRectGetMinX(self.chatTableController.tableView.frame),
+                                                          CGRectGetMinY(self.chatTableController.tableView.frame),
+                                                          CGRectGetWidth(self.chatTableController.tableView.frame),
+                                                          CGRectGetHeight(self.chatTableController.tableView.frame) + kbSize.height);
+    //
+    //    // Scroll table view to bottom
+    //    CGFloat offsetY = self.chatTableController.tableView.contentSize.height - CGRectGetHeight(self.chatTableController.tableView.frame);
+    //    self.chatTableController.tableView.contentOffset = CGPointMake(0, offsetY);
 }
 
 #pragma mark - Navigation

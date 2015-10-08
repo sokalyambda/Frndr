@@ -10,6 +10,7 @@
 		3E00C40E1BAAB91F00AD2D97 /* FRDFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E00C40D1BAAB91F00AD2D97 /* FRDFriendCell.m */; };
 		3E021DC81BAFD97500BDA411 /* FRDMyProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E021DC71BAFD97500BDA411 /* FRDMyProfileController.m */; settings = {ASSET_TAGS = (); }; };
 		3E021DCC1BAFE1D300BDA411 /* FRDMyProfileTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E021DCB1BAFE1D300BDA411 /* FRDMyProfileTopView.m */; settings = {ASSET_TAGS = (); }; };
+		3E0B609A1BC6723D001B5167 /* FRDVerticallyCenteredTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0B60991BC6723D001B5167 /* FRDVerticallyCenteredTextView.m */; settings = {ASSET_TAGS = (); }; };
 		3E0EEC551BABE85500AB51B0 /* FRDRoundedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEC541BABE85500AB51B0 /* FRDRoundedView.m */; };
 		3E0EEC581BABE89300AB51B0 /* FRDRoundedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEC571BABE89300AB51B0 /* FRDRoundedImageView.m */; };
 		3E0EEC5C1BABEF2300AB51B0 /* FRDApplicationSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEC5B1BABEF2300AB51B0 /* FRDApplicationSettingsController.m */; };
@@ -216,6 +217,8 @@
 		3E021DC71BAFD97500BDA411 /* FRDMyProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDMyProfileController.m; path = Classes/MVC/Controllers/MyProfileController/FRDMyProfileController.m; sourceTree = "<group>"; };
 		3E021DCA1BAFE1D300BDA411 /* FRDMyProfileTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDMyProfileTopView.h; path = Classes/MVC/Views/MyProfileTopView/FRDMyProfileTopView.h; sourceTree = "<group>"; };
 		3E021DCB1BAFE1D300BDA411 /* FRDMyProfileTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDMyProfileTopView.m; path = Classes/MVC/Views/MyProfileTopView/FRDMyProfileTopView.m; sourceTree = "<group>"; };
+		3E0B60981BC6723D001B5167 /* FRDVerticallyCenteredTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDVerticallyCenteredTextView.h; path = Classes/MVC/Views/VerticallyCenteredTextView/FRDVerticallyCenteredTextView.h; sourceTree = "<group>"; };
+		3E0B60991BC6723D001B5167 /* FRDVerticallyCenteredTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDVerticallyCenteredTextView.m; path = Classes/MVC/Views/VerticallyCenteredTextView/FRDVerticallyCenteredTextView.m; sourceTree = "<group>"; };
 		3E0EEC531BABE85500AB51B0 /* FRDRoundedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRoundedView.h; path = Classes/MVC/Views/RoundedView/FRDRoundedView.h; sourceTree = "<group>"; };
 		3E0EEC541BABE85500AB51B0 /* FRDRoundedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRoundedView.m; path = Classes/MVC/Views/RoundedView/FRDRoundedView.m; sourceTree = "<group>"; };
 		3E0EEC561BABE89300AB51B0 /* FRDRoundedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRoundedImageView.h; path = Classes/MVC/Views/RoundedImageView/FRDRoundedImageView.h; sourceTree = "<group>"; };
@@ -608,6 +611,15 @@
 				3E941A4A1BB1818F00F034E6 /* FRDMyProfileTopView.xib */,
 			);
 			name = MyProfileTopView;
+			sourceTree = "<group>";
+		};
+		3E0B60971BC671FC001B5167 /* VerticallyCenteredTextView */ = {
+			isa = PBXGroup;
+			children = (
+				3E0B60981BC6723D001B5167 /* FRDVerticallyCenteredTextView.h */,
+				3E0B60991BC6723D001B5167 /* FRDVerticallyCenteredTextView.m */,
+			);
+			name = VerticallyCenteredTextView;
 			sourceTree = "<group>";
 		};
 		3E0EEC521BABE81C00AB51B0 /* RoundedImageView */ = {
@@ -1557,6 +1569,7 @@
 		58BC76D11B9EB95100BB8B5A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3E0B60971BC671FC001B5167 /* VerticallyCenteredTextView */,
 				586264C31BBD064800824BA3 /* PulsingOverlayView */,
 				3E1D29FA1BB58D650051C52F /* MyProfile */,
 				3E941A3D1BB1811D00F034E6 /* TableHeaders */,
@@ -2684,6 +2697,7 @@
 				3E021DC81BAFD97500BDA411 /* FRDMyProfileController.m in Sources */,
 				58B9702A1BC24C7A0017785E /* FRDRemoveImageFromGalleryRequest.m in Sources */,
 				58BC773D1B9ECDD100BB8B5A /* FRDValidator.m in Sources */,
+				3E0B609A1BC6723D001B5167 /* FRDVerticallyCenteredTextView.m in Sources */,
 				58DE5B3E1BB541480020A34C /* FRDCurrentUserProfile.m in Sources */,
 				58CF2C621BC4FBC80025AD2C /* SocketEventHandler.swift in Sources */,
 				58CD9ABE1BAFF1B500A7CADB /* FRDTopContentView.m in Sources */,

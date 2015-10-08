@@ -2229,6 +2229,9 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="replyTextView" destination="C6u-qb-uO4" id="H2Q-cF-rov"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="giC-yp-Jm3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
