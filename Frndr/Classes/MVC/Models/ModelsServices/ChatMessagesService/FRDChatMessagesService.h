@@ -15,9 +15,9 @@ typedef void(^ChatHistoryFailure)(NSError *error);
 
 #import "FRDProjectFacade.h"
 
-@interface FRDChatMessagesService : NSObject
+@class FRDFriend;
 
-+ (FRDMessageOwnerType)ownerTypeForMessage:(FRDChatMessage *)message;
+@interface FRDChatMessagesService : NSObject
 
 + (void)getChatHistoryWithFriend:(NSString *)friendId
                          andPage:(NSInteger)page
@@ -31,5 +31,10 @@ typedef void(^ChatHistoryFailure)(NSError *error);
 
 + (FRDChatCellPositionInSet)positionOfCellInSetByIndexPath:(NSIndexPath *)indexPath
                                             inMessagesHistory:(NSArray *)messagesHistory;
+
++ (FRDMessageOwnerType)ownerTypeForMessage:(FRDChatMessage *)message;
+
++ (FRDFriend *)findFriendWithId:(NSString *)friendId
+                        inArray:(NSArray *)friends;
 
 @end
