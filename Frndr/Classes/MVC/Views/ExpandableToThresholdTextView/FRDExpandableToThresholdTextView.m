@@ -10,19 +10,26 @@
 
 @implementation FRDExpandableToThresholdTextView
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [super touchesBegan:touches withEvent:event];
+    self.text = @"";
+}
+
 - (void)setContentSize:(CGSize)contentSize
 {
     [super setContentSize:contentSize];
-    
+    [self checkForThresholdOvercoming];
+}
+
+- (void)checkForThresholdOvercoming
+{
     // Enable/Disable scroll depending on number of text lines
-    CGFloat textHeight = [self sizeThatFits:contentSize].height;
+    CGFloat textHeight = [self sizeThatFits:self.contentSize].height;
     NSInteger numberOfLines = (textHeight - self.textContainerInset.top - self.textContainerInset.bottom) / self.font.lineHeight;
-    self.scrollEnabled = (numberOfLines > self.linesThreshold) ? YES : NO;
     
-    NSLog(@"Integer lines: %ld, float lines: %f", numberOfLines, (textHeight - self.textContainerInset.top -
-                                                                  self.textContainerInset.bottom) / self.font.lineHeight);
-    
-    
+    // - 1 because changes will take effect only on next call, so we need to turn on scroll 1 call early
+    self.scrollEnabled = (numberOfLines > self.linesThreshold - 1) ? YES : NO;
 }
 
 @end
