@@ -81,23 +81,33 @@ static NSString * const kReplyTextViewPlaceholder = @"Send a reply...";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     self.replyTextView.placeholder = LOCALIZED(@"Send a reply...");
 }
 
 #pragma mark - Actions
 
+- (void)sendReply
+{
+    if (self.replyTextView.text.length) {
+        WEAK_SELF;
+        [FRDChatMessagesService sendMessage:self.replyTextView.text toFriendWithId:self.currentFriend.userId onSuccess:^(BOOL isSuccess) {
+
+            weakSelf.replyTextView.text = @"";
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            
+            [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+
+        }];
+    }
+}
+
 - (IBAction)sendReplyClick:(id)sender
 {
     [[UIResponder currentFirstResponder] resignFirstResponder];
     
-    WEAK_SELF;
-    [FRDChatMessagesService sendMessage:self.replyTextView.text toFriendWithId:self.currentFriend.userId onSuccess:^(BOOL isSuccess) {
-        NSLog(@"message has been sent");
-        weakSelf.replyTextView.text = @"";
-    } onFailure:^(NSError *error, BOOL isCanceled) {
-        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-        NSLog(@"!!!!!message hasn't been sent!!!!!");
-    }];
+    [self sendReply];
 }
 
 - (void)initDropDownTable
@@ -209,14 +219,10 @@ static NSString * const kReplyTextViewPlaceholder = @"Send a reply...";
     self.bottomSpaceToContainer.constant = kbSize.height;
     [UIView animateWithDuration:.5f
                      animations:^{
-                         [self.view layoutIfNeeded]; // Called on parent view
+                         [self.view layoutIfNeeded];
                      }];
     
-    NSInteger numberOfRows = [self.chatTableController.tableView numberOfRowsInSection:0];
-    if (numberOfRows) {
-        NSIndexPath *lastRowIndexPath = [NSIndexPath indexPathForRow:numberOfRows - 1 inSection:0];
-        [self.chatTableController.tableView scrollToRowAtIndexPath:lastRowIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-    }
+    [self.chatTableController scrollTableViewToBottom];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification

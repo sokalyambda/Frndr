@@ -59,7 +59,7 @@
     [super viewDidLoad];
     
     [self registerCells];
-    [self loadChatHistory];
+    [self loadChatHistoryAndScrollToBottom:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -75,6 +75,18 @@
 }
 
 #pragma mark - Actions
+
+/**
+ *  Scroll to bottom
+ */
+- (void)scrollTableViewToBottom
+{
+    NSInteger numberOfRows = [self.tableView numberOfRowsInSection:0];
+    if (numberOfRows) {
+        NSIndexPath *lastRowIndexPath = [NSIndexPath indexPathForRow:numberOfRows - 1 inSection:0];
+        [self.tableView scrollToRowAtIndexPath:lastRowIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+}
 
 - (void)registerCells
 {
@@ -94,7 +106,7 @@
 /**
  *  Load chat history with current friend
  */
-- (void)loadChatHistory
+- (void)loadChatHistoryAndScrollToBottom:(BOOL)toBottom
 {
     WEAK_SELF;
     if (!self.refreshControl.isRefreshing) {
@@ -113,6 +125,11 @@
         [updatedMessages addObjectsFromArray:weakSelf.messageHistory];
         weakSelf.messageHistory = updatedMessages;
         
+        if (toBottom) {
+            //to bottom
+            [weakSelf scrollTableViewToBottom];
+        }
+        
     } onFailure:^(NSError *error) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf.parentViewController andCompletion:nil];
@@ -121,7 +138,7 @@
 
 - (IBAction)loadMoreMessages:(id)sender
 {
-    [self loadChatHistory];
+    [self loadChatHistoryAndScrollToBottom:NO];
 }
 
 #pragma mark - UITableViewDataSource

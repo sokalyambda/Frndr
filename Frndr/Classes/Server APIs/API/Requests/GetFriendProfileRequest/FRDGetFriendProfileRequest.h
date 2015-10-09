@@ -14,4 +14,6 @@
 
 @property (strong, nonatomic) FRDFriend *currentFriend;
 
+- (instancetype)initWithFriendId:(NSString *)friendId;
+
 @end

@@ -10,7 +10,7 @@
 
 extern NSString *defaultBaseURLString;
 
-@class FRDSearchSettings, FRDAvatar, FRDGalleryPhoto;
+@class FRDSearchSettings, FRDAvatar, FRDGalleryPhoto, FRDFriend;
 
 @interface FRDProjectFacade : NSObject
 
@@ -65,6 +65,10 @@ extern NSString *defaultBaseURLString;
 //Friends List
 + (FRDNetworkOperation *)getFriendsListWithPage:(NSInteger)page onSuccess:(void (^)(NSArray *friendsList))success
                                       onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
+
+//Friend Profile
++ (FRDNetworkOperation *)getFriendProfileWithFriendId:(NSString *)friendId onSuccess:(void (^)(FRDFriend *cirrentFriend))success
+                                            onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
 //Facebook
 + (FRDNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(NSString *userId, BOOL avatarExists, BOOL isFirstLogin))success

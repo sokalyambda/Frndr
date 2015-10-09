@@ -8,7 +8,7 @@
 
 #import "FRDPlaceholderTextView.h"
 
-static CGFloat const kAnimationDuration = .25f;
+static CGFloat const kAnimationDuration = .15f;
 
 @interface FRDPlaceholderTextView ()
 

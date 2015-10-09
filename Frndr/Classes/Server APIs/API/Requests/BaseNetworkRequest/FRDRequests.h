@@ -19,6 +19,7 @@
 #import "FRDGetCurrentUserProfileRequest.h"
 #import "FRDSendDeviceDataRequest.h"
 #import "FRDGetFriendsListRequest.h"
+#import "FRDGetFriendProfileRequest.h"
 
 #import "FRDGetSearchSettingsRequest.h"
 #import "FRDUpdateSearchSettingsRequest.h"
