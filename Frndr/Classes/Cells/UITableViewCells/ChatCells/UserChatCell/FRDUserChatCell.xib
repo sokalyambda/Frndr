@@ -68,15 +68,15 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="tXF-Nf-KeE" firstAttribute="top" secondItem="yWM-S4-t7w" secondAttribute="bottom" id="1it-lf-vaL"/>
+                    <constraint firstItem="tXF-Nf-KeE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="yWM-S4-t7w" secondAttribute="bottom" id="1it-lf-vaL"/>
                     <constraint firstItem="E1M-kB-HKi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" priority="999" constant="10" id="Epp-rC-iF7"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="E1M-kB-HKi" secondAttribute="bottom" constant="10" id="QCJ-EN-cjb"/>
-                    <constraint firstItem="yWM-S4-t7w" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="WoL-MK-jDM"/>
+                    <constraint firstItem="yWM-S4-t7w" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="WoL-MK-jDM"/>
                     <constraint firstItem="E1M-kB-HKi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="bV0-hZ-VeT"/>
                     <constraint firstAttribute="trailing" secondItem="yWM-S4-t7w" secondAttribute="trailing" constant="10" id="hNH-yE-07T"/>
                     <constraint firstItem="yWM-S4-t7w" firstAttribute="leading" secondItem="E1M-kB-HKi" secondAttribute="trailing" constant="10" id="jpe-TX-ol3"/>
                     <constraint firstItem="tXF-Nf-KeE" firstAttribute="trailing" secondItem="yWM-S4-t7w" secondAttribute="trailing" constant="-10" id="nC4-SD-AZ1"/>
-                    <constraint firstAttribute="bottom" secondItem="tXF-Nf-KeE" secondAttribute="bottom" constant="5" id="rt6-J5-8bc"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tXF-Nf-KeE" secondAttribute="bottom" constant="5" id="rt6-J5-8bc"/>
                     <constraint firstItem="E1M-kB-HKi" firstAttribute="centerY" secondItem="yWM-S4-t7w" secondAttribute="centerY" id="vju-7i-Rff"/>
                 </constraints>
             </tableViewCellContentView>

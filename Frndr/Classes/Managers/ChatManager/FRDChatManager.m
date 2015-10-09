@@ -18,6 +18,7 @@ static NSString *const kBaseHostURL = @"http://projects.thinkmobiles.com:8859";/
 static NSString *const kConnectedToServerEvent = @"connectedToServer";
 static NSString *const kAuthorizeEvent = @"authorize";
 static NSString *const kChatMessageEvent = @"chat message";
+static NSString *const kLogoutEvent = @"logout";
 
 static NSString *const kSuccess = @"success";
 
@@ -31,16 +32,23 @@ static NSString *const kSuccess = @"success";
 
 #pragma mark - Lifecycle
 
+static FRDChatManager *_chatManager = nil;
+
 + (FRDChatManager *)sharedChatManager
 {
-    static FRDChatManager *chatManager = nil;
+    @synchronized (_chatManager) {
+        if (!_chatManager)
+            _chatManager = [[self alloc] init];
+    }
+    return _chatManager;
+}
 
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        chatManager = [[self alloc] init];
-    });
-    
-    return chatManager;
++ (void)releaseChatManager
+{
+    @synchronized (_chatManager) {
+        if (_chatManager)
+            _chatManager = nil;
+    }
 }
 
 - (instancetype)init
@@ -100,7 +108,10 @@ static NSString *const kSuccess = @"success";
  */
 - (void)closeChannel
 {
+    [self.socketIOClient emit:kLogoutEvent withItems:@[]];
     [self.socketIOClient disconnect];
+    
+    [[self class] releaseChatManager];
 }
 
 @end

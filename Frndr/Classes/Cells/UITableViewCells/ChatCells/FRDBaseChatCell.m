@@ -9,6 +9,7 @@
 #import "FRDBaseChatCell.h"
 
 #import "FRDFriend.h"
+#import "FRDAvatar.h"
 
 #import "UIView+MakeFromXib.h"
 #import "NSDate+TimeAgo.h"
@@ -117,7 +118,7 @@ static CGFloat const kAvatarPreferredHeight = 70.f;
             break;
         }
         case FRDMessageOwnerTypeUser: {
-            [self->avatarImageView sd_setImageWithURL:currentProfile.avatarURL];
+            [self->avatarImageView sd_setImageWithURL:currentProfile.currentAvatar.photoURL ?: currentProfile.avatarURL];
             break;
         }
         case FRDMessageOwnerTypeSystem: {

@@ -118,12 +118,13 @@
         
         [weakSelf.refreshControl endRefreshing];
         
-        weakSelf.currentPage++;
-        
-        //set messages array
-        NSMutableArray *updatedMessages = [NSMutableArray arrayWithArray:chatHistory];
-        [updatedMessages addObjectsFromArray:weakSelf.messageHistory];
-        weakSelf.messageHistory = updatedMessages;
+        if (chatHistory.count) {
+            weakSelf.currentPage++;
+            //set messages array
+            NSMutableArray *updatedMessages = [NSMutableArray arrayWithArray:chatHistory];
+            [updatedMessages addObjectsFromArray:weakSelf.messageHistory];
+            weakSelf.messageHistory = updatedMessages;
+        }
         
         if (toBottom) {
             //to bottom
@@ -207,8 +208,10 @@
     [self.messageHistory addObject:message];
 
     NSArray *indexPaths = [self.tableView indexPathsForVisibleRows];
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.messageHistory.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.messageHistory.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationMiddle];
+    
+    [self scrollTableViewToBottom];
     
 }
 
