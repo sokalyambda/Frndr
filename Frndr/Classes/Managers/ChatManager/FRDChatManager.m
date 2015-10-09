@@ -108,7 +108,6 @@ static FRDChatManager *_chatManager = nil;
  */
 - (void)closeChannel
 {
-    [self.socketIOClient emit:kLogoutEvent withItems:@[]];
     [self.socketIOClient disconnect];
     
     [[self class] releaseChatManager];
