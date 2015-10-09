@@ -15,4 +15,6 @@
  */
 @property (nonatomic) NSInteger linesThreshold;
 
+@property (strong, nonatomic) NSString *placeholder;
+
 @end

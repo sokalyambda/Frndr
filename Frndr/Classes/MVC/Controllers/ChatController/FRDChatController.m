@@ -21,6 +21,7 @@
 
 #import "UIView+MakeFromXib.h"
 #import "UIResponder+FirstResponder.h"
+#import "UITextView+Placeholder.h"
 
 #import "FRDChatMessagesService.h"
 
@@ -28,6 +29,8 @@ static NSString * const kChatTableControllerSegueIdentifier = @"chatTableControl
 
 static NSString * const kOptionsHiddenButtonImage = @"ChatOptionsUnactive";
 static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
+
+static NSString * const kReplyTextViewPlaceholder = @"Send a reply...";
 
 @interface FRDChatController () <UITextViewDelegate>
 
@@ -40,9 +43,6 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 
 @property (weak, nonatomic) IBOutlet FRDExpandableToThresholdTextView *replyTextView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomSpaceToContainer;
-
-#warning Temporary outlet!
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *replyTexViewHeight;
 
 @end
 
@@ -84,6 +84,7 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 - (IBAction)sendReplyClick:(id)sender
 {
     [[UIResponder currentFirstResponder] resignFirstResponder];
+    
     WEAK_SELF;
     [FRDChatMessagesService sendMessage:self.replyTextView.text toFriendWithId:self.currentFriend.userId onSuccess:^(BOOL isSuccess) {
         NSLog(@"message has been sent");
@@ -92,6 +93,8 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
         NSLog(@"!!!!!message hasn't been sent!!!!!");
     }];
+    
+    [self.replyTextView clearTextWithPlaceholder:kReplyTextViewPlaceholder];
 }
 
 - (void)initDropDownTable
@@ -117,6 +120,7 @@ static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 - (void)configureReplyTextView
 {
     self.replyTextView.linesThreshold = 5;
+    self.replyTextView.placeholder = kReplyTextViewPlaceholder;
 }
 
 - (void)fadeChatTableInOut

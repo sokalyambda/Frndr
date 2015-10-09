@@ -2078,19 +2078,19 @@
                                                     <exclude reference="JPK-w5-iQ3"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="PHF-tW-4rd"/>
-                                                    <exclude reference="eu9-Cx-SPe"/>
-                                                    <exclude reference="VBF-tX-zMc"/>
-                                                    <exclude reference="fvn-M3-03g"/>
-                                                    <exclude reference="xfc-rr-HOA"/>
+                                                    <exclude reference="1Kz-d3-d68"/>
+                                                    <exclude reference="3gc-th-P4j"/>
+                                                    <exclude reference="JOr-e6-7cU"/>
                                                     <exclude reference="FoU-IW-zgQ"/>
                                                     <exclude reference="jkI-WO-Jug"/>
                                                     <exclude reference="4oO-gi-RYB"/>
                                                     <exclude reference="CXb-43-c7e"/>
                                                     <exclude reference="cJz-kl-0a6"/>
-                                                    <exclude reference="1Kz-d3-d68"/>
-                                                    <exclude reference="3gc-th-P4j"/>
-                                                    <exclude reference="JOr-e6-7cU"/>
+                                                    <exclude reference="PHF-tW-4rd"/>
+                                                    <exclude reference="eu9-Cx-SPe"/>
+                                                    <exclude reference="VBF-tX-zMc"/>
+                                                    <exclude reference="fvn-M3-03g"/>
+                                                    <exclude reference="xfc-rr-HOA"/>
                                                     <exclude reference="EpP-j6-nSu"/>
                                                     <exclude reference="Va9-dP-PO8"/>
                                                     <exclude reference="mPW-1x-pmC"/>
@@ -2106,19 +2106,19 @@
                                                     <include reference="JPK-w5-iQ3"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="PHF-tW-4rd"/>
-                                                    <include reference="eu9-Cx-SPe"/>
-                                                    <include reference="VBF-tX-zMc"/>
-                                                    <include reference="fvn-M3-03g"/>
-                                                    <include reference="xfc-rr-HOA"/>
+                                                    <include reference="1Kz-d3-d68"/>
+                                                    <include reference="3gc-th-P4j"/>
+                                                    <include reference="JOr-e6-7cU"/>
                                                     <include reference="FoU-IW-zgQ"/>
                                                     <include reference="jkI-WO-Jug"/>
                                                     <include reference="4oO-gi-RYB"/>
                                                     <include reference="CXb-43-c7e"/>
                                                     <include reference="cJz-kl-0a6"/>
-                                                    <include reference="1Kz-d3-d68"/>
-                                                    <include reference="3gc-th-P4j"/>
-                                                    <include reference="JOr-e6-7cU"/>
+                                                    <include reference="PHF-tW-4rd"/>
+                                                    <include reference="eu9-Cx-SPe"/>
+                                                    <include reference="VBF-tX-zMc"/>
+                                                    <include reference="fvn-M3-03g"/>
+                                                    <include reference="xfc-rr-HOA"/>
                                                     <include reference="EpP-j6-nSu"/>
                                                     <include reference="Va9-dP-PO8"/>
                                                     <include reference="mPW-1x-pmC"/>
@@ -2325,7 +2325,6 @@
                     </view>
                     <connections>
                         <outlet property="bottomSpaceToContainer" destination="J5R-fa-Miq" id="Wgn-Y9-tgj"/>
-                        <outlet property="replyTexViewHeight" destination="qt8-uY-VGb" id="YlF-Tg-mp6"/>
                         <outlet property="replyTextView" destination="C6u-qb-uO4" id="H2Q-cF-rov"/>
                     </connections>
                 </viewController>
