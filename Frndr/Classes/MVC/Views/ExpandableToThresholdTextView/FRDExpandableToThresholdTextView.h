@@ -15,6 +15,9 @@
  */
 @property (nonatomic) NSInteger linesThreshold;
 
-@property (strong, nonatomic) NSString *placeholder;
+/**
+ *  Minimum height that this TextView can have
+ */
+@property (nonatomic) CGFloat minimumHeight;
 
 @end

@@ -29,7 +29,10 @@ static NSString * const kChatTableControllerSegueIdentifier = @"chatTableControl
 static NSString * const kOptionsHiddenButtonImage = @"ChatOptionsUnactive";
 static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 
+// Reply text view constants
 static NSString * const kReplyTextViewPlaceholder = @"Send a reply...";
+static NSInteger const kReplyTextViewLinesThreshold = 4;
+static CGFloat const kReplyTextViewMinimumHeight = 62.f;
 
 @interface FRDChatController () <UITextViewDelegate>
 
@@ -132,8 +135,9 @@ static NSString * const kReplyTextViewPlaceholder = @"Send a reply...";
 
 - (void)configureReplyTextView
 {
-    self.replyTextView.linesThreshold = 5;
+    self.replyTextView.linesThreshold = kReplyTextViewLinesThreshold;
     self.replyTextView.placeholder = kReplyTextViewPlaceholder;
+    self.replyTextView.minimumHeight = kReplyTextViewMinimumHeight;
 }
 
 - (void)fadeChatTableInOut

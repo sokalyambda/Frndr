@@ -206,8 +206,8 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
 - (void)updateNotificationsSettingsSwitches
 {
     FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
-    [self.friendSwitch setOn:currentProfile.friendsNotificationsEnabled animated:YES];
-    [self.messageSwitch setOn:currentProfile.messagesNotificationsEnabled animated:YES];
+    [self.friendSwitch setOn:currentProfile.friendsNotificationsEnabled animated:NO];
+    [self.messageSwitch setOn:currentProfile.messagesNotificationsEnabled animated:NO];
 }
 
 /**

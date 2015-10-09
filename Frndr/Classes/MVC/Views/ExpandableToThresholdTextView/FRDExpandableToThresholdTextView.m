@@ -8,13 +8,52 @@
 
 #import "FRDExpandableToThresholdTextView.h"
 
+@interface FRDExpandableToThresholdTextView ()
+
+@property (strong, nonatomic) NSLayoutConstraint *heightConstraint;
+
+@end
+
 @implementation FRDExpandableToThresholdTextView
 
-- (void)setContentSize:(CGSize)contentSize
+#pragma mark - Accessors
+
+- (void)setMinimumHeight:(CGFloat)minimumHeight
 {
-    [super setContentSize:contentSize];
-    [self checkForThresholdOvercoming];
+    _minimumHeight = minimumHeight;
+    self.heightConstraint.constant = minimumHeight;
 }
+
+- (NSLayoutConstraint *)heightConstraint
+{
+    if (!_heightConstraint) {
+        _heightConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                         attribute:NSLayoutAttributeHeight
+                                                         relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                            toItem:nil
+                                                         attribute:0.f
+                                                        multiplier:1.f
+                                                          constant:0.f];
+    }
+    return _heightConstraint;
+}
+
+#pragma mark - Lifecycle
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkForThresholdOvercoming) name:UITextViewTextDidChangeNotification object:nil];
+
+    [self addConstraint:self.heightConstraint];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Actions
 
 - (void)checkForThresholdOvercoming
 {
@@ -22,8 +61,15 @@
     CGFloat textHeight = [self sizeThatFits:self.contentSize].height;
     NSInteger numberOfLines = (textHeight - self.textContainerInset.top - self.textContainerInset.bottom) / self.font.lineHeight;
     
-    // - 1 because changes will take effect only on next call, so we need to turn on scroll 1 call early
-    self.scrollEnabled = (numberOfLines > self.linesThreshold - 1) ? YES : NO;
+    if (numberOfLines > self.linesThreshold && !self.scrollEnabled) {
+        self.scrollEnabled = YES;
+        self.heightConstraint.constant = self.contentSize.height;
+    } else if (numberOfLines <= self.linesThreshold && self.scrollEnabled) {
+        self.scrollEnabled = NO;
+        self.heightConstraint.constant = MAX(textHeight, self.minimumHeight);
+    } else if (!self.scrollEnabled) {
+        self.heightConstraint.constant = self.minimumHeight;
+    }
 }
 
 @end

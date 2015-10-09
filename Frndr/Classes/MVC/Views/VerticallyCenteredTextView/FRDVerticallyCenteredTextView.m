@@ -10,23 +10,30 @@
 
 @implementation FRDVerticallyCenteredTextView
 
+#pragma mark - Accessors
+
 - (void)setContentSize:(CGSize)contentSize
 {
     [super setContentSize:contentSize];
     [self centerVertically];
 }
 
-- (void)insertText:(NSString *)text
+#pragma mark - Lifecycle
+
+- (void)awakeFromNib
 {
-    [super insertText:text];
-    [self centerVertically];
+    [super awakeFromNib];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(centerVertically)
+                                                 name:UITextViewTextDidChangeNotification object:nil];
 }
 
-- (void)deleteBackward
+- (void)dealloc
 {
-    [super deleteBackward];
-    [self centerVertically];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+#pragma mark - Actions
 
 - (void)centerVertically
 {
