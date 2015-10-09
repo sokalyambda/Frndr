@@ -21,8 +21,10 @@
     NSString *_fullName;
     NSString *_genderString;
     BOOL _smoker;
+    BOOL _visible;
     NSString *_userId;
     NSURL *_avatarURL;
+    NSArray *_galleryPhotos;
 }
 
 @property (strong, nonatomic) NSString *fullName;
@@ -42,5 +44,6 @@
 @property (assign, nonatomic) CGFloat distanceFromMe;
 @property (assign, nonatomic, getter=isSmoker) BOOL smoker;
 @property (assign, nonatomic, getter=isMale, readonly) BOOL male;
+@property (assign, nonatomic, getter=isVisible) BOOL visible;
 
 @end

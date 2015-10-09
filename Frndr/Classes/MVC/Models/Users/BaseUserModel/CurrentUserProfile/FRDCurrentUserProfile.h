@@ -12,8 +12,6 @@
 
 @interface FRDCurrentUserProfile : FRDBaseUserModel
 
-@property (assign, nonatomic, getter=isVisible) BOOL visible;
-
 @property (assign, nonatomic, getter=isFriendsNotificationsEnabled) BOOL friendsNotificationsEnabled;
 @property (assign, nonatomic, getter=isMessagesNotificationsEnabled) BOOL messagesNotificationsEnabled;
 

@@ -19,8 +19,7 @@
     NSInteger numberOfLines = (textHeight - self.textContainerInset.top - self.textContainerInset.bottom) / self.font.lineHeight;
     self.scrollEnabled = (numberOfLines > self.linesThreshold) ? YES : NO;
     
-    NSLog(@"Integer lines: %ld, float lines: %f", numberOfLines, (textHeight - self.textContainerInset.top -
-                                                                  self.textContainerInset.bottom) / self.font.lineHeight);
+    NSLog(@"Integer lines: %ld, float lines: %f", (long)numberOfLines, (textHeight - self.textContainerInset.top - self.textContainerInset.bottom) / self.font.lineHeight);
     
     
 }

@@ -15,4 +15,6 @@
 @property (strong, nonatomic) NSDate *lastMessagePostedDate;
 @property (assign, nonatomic) BOOL hasNewMessages;
 
+- (instancetype)initFullFriendProfileWithServerResponse:(NSDictionary *)response;
+
 @end

@@ -76,6 +76,8 @@
 		587B3A951BA815850098154F /* FRDRelationshipCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587B3A931BA815850098154F /* FRDRelationshipCollectionCell.xib */; };
 		5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */; };
 		58A1A12E1BB926AD00E29789 /* FRDOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A1A12D1BB926AD00E29789 /* FRDOverlayView.m */; settings = {ASSET_TAGS = (); }; };
+		58AC69401BC7938300A1C7D5 /* FRDPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AC693F1BC7938300A1C7D5 /* FRDPlaceholderTextView.m */; settings = {ASSET_TAGS = (); }; };
+		58AC69441BC79B3100A1C7D5 /* FRDGetFriendProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AC69431BC79B3100A1C7D5 /* FRDGetFriendProfileRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58B27CF11BC193520035712C /* FRDUploadAvatarRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B27CF01BC193520035712C /* FRDUploadAvatarRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58B27CF51BC194290035712C /* FRDGetGalleryPhotosRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B27CF41BC194290035712C /* FRDGetGalleryPhotosRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58B47C891BC3A7F800BA502E /* FRDChatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B47C881BC3A7F800BA502E /* FRDChatManager.m */; settings = {ASSET_TAGS = (); }; };
@@ -342,6 +344,10 @@
 		5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDCustomPageControl.m; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.m; sourceTree = "<group>"; };
 		58A1A12C1BB926AD00E29789 /* FRDOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDOverlayView.h; path = Classes/MVC/Views/FriendDragableView/FriendOverlayView/FRDOverlayView.h; sourceTree = "<group>"; };
 		58A1A12D1BB926AD00E29789 /* FRDOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDOverlayView.m; path = Classes/MVC/Views/FriendDragableView/FriendOverlayView/FRDOverlayView.m; sourceTree = "<group>"; };
+		58AC693E1BC7938300A1C7D5 /* FRDPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPlaceholderTextView.h; path = Classes/MVC/Views/TextViews/PlaceholderTextView/FRDPlaceholderTextView.h; sourceTree = "<group>"; };
+		58AC693F1BC7938300A1C7D5 /* FRDPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPlaceholderTextView.m; path = Classes/MVC/Views/TextViews/PlaceholderTextView/FRDPlaceholderTextView.m; sourceTree = "<group>"; };
+		58AC69421BC79B3100A1C7D5 /* FRDGetFriendProfileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDGetFriendProfileRequest.h; path = "Classes/Server APIs/API/Requests/GetFriendProfileRequest/FRDGetFriendProfileRequest.h"; sourceTree = "<group>"; };
+		58AC69431BC79B3100A1C7D5 /* FRDGetFriendProfileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDGetFriendProfileRequest.m; path = "Classes/Server APIs/API/Requests/GetFriendProfileRequest/FRDGetFriendProfileRequest.m"; sourceTree = "<group>"; };
 		58B27CEF1BC193520035712C /* FRDUploadAvatarRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDUploadAvatarRequest.h; path = "Classes/Server APIs/API/Requests/ImagesModule/UploadAvatarRequest/FRDUploadAvatarRequest.h"; sourceTree = "<group>"; };
 		58B27CF01BC193520035712C /* FRDUploadAvatarRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDUploadAvatarRequest.m; path = "Classes/Server APIs/API/Requests/ImagesModule/UploadAvatarRequest/FRDUploadAvatarRequest.m"; sourceTree = "<group>"; };
 		58B27CF31BC194290035712C /* FRDGetGalleryPhotosRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDGetGalleryPhotosRequest.h; path = "Classes/Server APIs/API/Requests/ImagesModule/GetGalleryPhotosRequest/FRDGetGalleryPhotosRequest.h"; sourceTree = "<group>"; };
@@ -1146,6 +1152,34 @@
 			name = StyledPageControl;
 			sourceTree = "<group>";
 		};
+		58AC693C1BC7934100A1C7D5 /* TextViews */ = {
+			isa = PBXGroup;
+			children = (
+				58AC693D1BC7934E00A1C7D5 /* PlaceholderTextView */,
+				3EB729281BC69AF1001BEF4B /* ExpandableToThresholdTextView */,
+				3E0B60971BC671FC001B5167 /* VerticallyCenteredTextView */,
+			);
+			name = TextViews;
+			sourceTree = "<group>";
+		};
+		58AC693D1BC7934E00A1C7D5 /* PlaceholderTextView */ = {
+			isa = PBXGroup;
+			children = (
+				58AC693E1BC7938300A1C7D5 /* FRDPlaceholderTextView.h */,
+				58AC693F1BC7938300A1C7D5 /* FRDPlaceholderTextView.m */,
+			);
+			name = PlaceholderTextView;
+			sourceTree = "<group>";
+		};
+		58AC69411BC79AF400A1C7D5 /* GetFriendProfileRequest */ = {
+			isa = PBXGroup;
+			children = (
+				58AC69421BC79B3100A1C7D5 /* FRDGetFriendProfileRequest.h */,
+				58AC69431BC79B3100A1C7D5 /* FRDGetFriendProfileRequest.m */,
+			);
+			name = GetFriendProfileRequest;
+			sourceTree = "<group>";
+		};
 		58B27CED1BC193110035712C /* ImagesModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -1294,6 +1328,7 @@
 		58B99E951BBA59A60057DB54 /* UserProfileModule */ = {
 			isa = PBXGroup;
 			children = (
+				58AC69411BC79AF400A1C7D5 /* GetFriendProfileRequest */,
 				58ED54FF1BB1B3BE00F9B378 /* SendDeviceDataRequest */,
 				58ED54F11BB1647300F9B378 /* UpdateProfileRequest */,
 				58ED54ED1BB1644C00F9B378 /* UpdateNotificationsSettingsRequest */,
@@ -1581,8 +1616,7 @@
 		58BC76D11B9EB95100BB8B5A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3EB729281BC69AF1001BEF4B /* ExpandableToThresholdTextView */,
-				3E0B60971BC671FC001B5167 /* VerticallyCenteredTextView */,
+				58AC693C1BC7934100A1C7D5 /* TextViews */,
 				586264C31BBD064800824BA3 /* PulsingOverlayView */,
 				3E1D29FA1BB58D650051C52F /* MyProfile */,
 				3E941A3D1BB1811D00F034E6 /* TableHeaders */,
@@ -2699,6 +2733,7 @@
 				3EB7292B1BC69BC3001BEF4B /* FRDExpandableToThresholdTextView.m in Sources */,
 				58CD9AC41BAFF29F00A7CADB /* FRDBaseContentController.m in Sources */,
 				58BC77081B9ECA3700BB8B5A /* NSString+Base64Decoding.m in Sources */,
+				58AC69441BC79B3100A1C7D5 /* FRDGetFriendProfileRequest.m in Sources */,
 				581B9D3E1B9ED67B0080393B /* FRDPushNotifiactionService.m in Sources */,
 				3EA078301BC5625C00A7B468 /* FRDKeyboardResponderController.m in Sources */,
 				58C28FF81BAAC6800099ABE4 /* ZLPanGestureRecognizer.m in Sources */,
@@ -2795,6 +2830,7 @@
 				58CF2C631BC4FBC80025AD2C /* SocketFixUTF8.swift in Sources */,
 				58B9703B1BC2A0770017785E /* UIImage+Scale.m in Sources */,
 				581B9D4F1B9EDC350080393B /* FRDSessionManager.m in Sources */,
+				58AC69401BC7938300A1C7D5 /* FRDPlaceholderTextView.m in Sources */,
 				58B99EA71BBA83980057DB54 /* FRDLikeUserByIdRequest.m in Sources */,
 				3E1D9BE61BB3CE34003A1E5C /* FRDPhotoGalleryController.m in Sources */,
 				58B47C891BC3A7F800BA502E /* FRDChatManager.m in Sources */,

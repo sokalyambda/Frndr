@@ -31,6 +31,8 @@
 
 @implementation FRDFriendsListController
 
+@synthesize friends = _friends;
+
 #pragma mark - Accessors
 
 - (NSString *)titleString
@@ -54,6 +56,12 @@
         _friends = [NSMutableArray array];
     }
     return _friends;
+}
+
+- (void)setFriends:(NSMutableArray *)friends
+{
+    _friends = friends;
+    [self.friendsTableView reloadData];
 }
 
 #pragma mark - Lifecycle
@@ -85,7 +93,15 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self loadFriendsList];
+    
+    WEAK_SELF;
+    [self loadFriendsListOnSuccess:^(NSArray *friendsList) {
+        
+        if (friendsList.count) {
+            weakSelf.friends = [NSMutableArray arrayWithArray:friendsList];
+        }
+        
+    } onFailure:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -165,21 +181,30 @@
 /**
  *  Load more friends relative to current page
  */
-- (void)loadFriendsList
+- (void)loadFriendsListOnSuccess:(void(^)(NSArray *friendsList))success
+                       onFailure:(FailureBlock)failure
 {
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [FRDProjectFacade getFriendsListWithPage:self.currentPage onSuccess:^(NSArray *friendsList) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
-        if (friendsList.count) {
-            [weakSelf updateLocalFriendsArrayWithArray:friendsList];
-            weakSelf.currentPage++;
+//        if (friendsList.count) {
+//            [weakSelf updateLocalFriendsArrayWithArray:friendsList];
+//        }
+        
+        if (success) {
+            success(friendsList);
         }
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+        
+        if (failure) {
+            failure(error, isCanceled);
+        }
+        
     }];
 }
 

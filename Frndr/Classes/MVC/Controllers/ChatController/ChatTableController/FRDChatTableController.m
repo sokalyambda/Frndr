@@ -186,11 +186,11 @@
     }
     
     message.creationDate = [NSDate date];
+    
     [self.messageHistory addObject:message];
-//    [NSIndexPath]
-     NSArray *indexPaths = [self.tableView indexPathsForVisibleRows];
+
+    NSArray *indexPaths = [self.tableView indexPathsForVisibleRows];
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.messageHistory.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-//    [self.tableView reloadData];
     [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
     
 }
