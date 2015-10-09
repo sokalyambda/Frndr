@@ -10,12 +10,6 @@
 
 @implementation FRDExpandableToThresholdTextView
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [super touchesBegan:touches withEvent:event];
-    self.text = @"";
-}
-
 - (void)setContentSize:(CGSize)contentSize
 {
     [super setContentSize:contentSize];

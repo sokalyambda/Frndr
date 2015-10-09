@@ -32,7 +32,7 @@
 {
     CGFloat textHeight = [self sizeThatFits:self.contentSize].height;
     CGFloat topInset = self.contentSize.height - textHeight;
-    self.contentInset = UIEdgeInsetsMake(topInset / 2.0, 0, -topInset / 2.0, 0);
+    self.contentInset = UIEdgeInsetsMake(topInset / 2.f, 0, -topInset / 2.f, 0);
 }
 
 @end

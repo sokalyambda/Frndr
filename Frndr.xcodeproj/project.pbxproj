@@ -24,7 +24,6 @@
 		3E3D415D1BA6B1530021026A /* FRDSearchSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D415C1BA6B1530021026A /* FRDSearchSettingsController.m */; };
 		3E5409D31BC3D4B5001D7CAE /* FRDChatOptionsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5409D21BC3D4B5001D7CAE /* FRDChatOptionsDataSource.m */; settings = {ASSET_TAGS = (); }; };
 		3E5DEE701BAEB59800832CD6 /* FRDRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DEE6F1BAEB59800832CD6 /* FRDRangeSlider.m */; settings = {ASSET_TAGS = (); }; };
-		3E812A321BC79B9600C85C88 /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E812A311BC79B9600C85C88 /* UITextView+Placeholder.m */; settings = {ASSET_TAGS = (); }; };
 		3E8770BD1BC510480002E540 /* FRDChatOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8770BC1BC510480002E540 /* FRDChatOption.m */; settings = {ASSET_TAGS = (); }; };
 		3E941A341BB1809700F034E6 /* FRDPersonalBioTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E941A331BB1809700F034E6 /* FRDPersonalBioTableController.m */; settings = {ASSET_TAGS = (); }; };
 		3E941A371BB180B400F034E6 /* FRDSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E941A361BB180B400F034E6 /* FRDSwitch.m */; settings = {ASSET_TAGS = (); }; };
@@ -248,8 +247,6 @@
 		3E5409D21BC3D4B5001D7CAE /* FRDChatOptionsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDChatOptionsDataSource.m; path = Classes/DropDownDataSources/ChatOptionsDataSource/FRDChatOptionsDataSource.m; sourceTree = "<group>"; };
 		3E5DEE6E1BAEB59800832CD6 /* FRDRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRangeSlider.h; path = Classes/Controls/Sliders/RangeSlider/FRDRangeSlider.h; sourceTree = "<group>"; };
 		3E5DEE6F1BAEB59800832CD6 /* FRDRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRangeSlider.m; path = Classes/Controls/Sliders/RangeSlider/FRDRangeSlider.m; sourceTree = "<group>"; };
-		3E812A301BC79B9600C85C88 /* UITextView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextView+Placeholder.h"; path = "Classes/Categories/UITextView/UITextView+Placeholder/UITextView+Placeholder.h"; sourceTree = "<group>"; };
-		3E812A311BC79B9600C85C88 /* UITextView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextView+Placeholder.m"; path = "Classes/Categories/UITextView/UITextView+Placeholder/UITextView+Placeholder.m"; sourceTree = "<group>"; };
 		3E8770BB1BC510480002E540 /* FRDChatOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDChatOption.h; path = Classes/MVC/Models/ChatOption/FRDChatOption.h; sourceTree = "<group>"; };
 		3E8770BC1BC510480002E540 /* FRDChatOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDChatOption.m; path = Classes/MVC/Models/ChatOption/FRDChatOption.m; sourceTree = "<group>"; };
 		3E941A321BB1809700F034E6 /* FRDPersonalBioTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPersonalBioTableController.h; path = Classes/MVC/Controllers/MyProfileController/PersonalBioTableController/FRDPersonalBioTableController.h; sourceTree = "<group>"; };
@@ -755,23 +752,6 @@
 				3E5DEE6F1BAEB59800832CD6 /* FRDRangeSlider.m */,
 			);
 			name = RangeSlider;
-			sourceTree = "<group>";
-		};
-		3E812A2E1BC79B4400C85C88 /* UITextView */ = {
-			isa = PBXGroup;
-			children = (
-				3E812A2F1BC79B5800C85C88 /* UITextView+Placeholder */,
-			);
-			name = UITextView;
-			sourceTree = "<group>";
-		};
-		3E812A2F1BC79B5800C85C88 /* UITextView+Placeholder */ = {
-			isa = PBXGroup;
-			children = (
-				3E812A301BC79B9600C85C88 /* UITextView+Placeholder.h */,
-				3E812A311BC79B9600C85C88 /* UITextView+Placeholder.m */,
-			);
-			name = "UITextView+Placeholder";
 			sourceTree = "<group>";
 		};
 		3E84DE971BB2ECBA00FFCB7C /* PhotoGalleryController */ = {
@@ -1584,7 +1564,6 @@
 		58BC76CD1B9EB93B00BB8B5A /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				3E812A2E1BC79B4400C85C88 /* UITextView */,
 				58CF2C6D1BC516860025AD2C /* NSDate */,
 				3E941A381BB180CA00F034E6 /* UIResponder */,
 				58CD17E61BA18A880021D948 /* CAAnimation */,
@@ -2772,7 +2751,6 @@
 				58CF2C621BC4FBC80025AD2C /* SocketEventHandler.swift in Sources */,
 				58CD9ABE1BAFF1B500A7CADB /* FRDTopContentView.m in Sources */,
 				58CF2C661BC4FBC80025AD2C /* SocketLogger.swift in Sources */,
-				3E812A321BC79B9600C85C88 /* UITextView+Placeholder.m in Sources */,
 				3E945CD01BBE734200BD5820 /* FRDSystemChatCell.m in Sources */,
 				58DE5B3B1BB541280020A34C /* FRDNearestUser.m in Sources */,
 				58CF2C811BC550EB0025AD2C /* FRDGetChatHistoryRequest.m in Sources */,

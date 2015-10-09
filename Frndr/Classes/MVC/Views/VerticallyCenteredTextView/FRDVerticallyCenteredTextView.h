@@ -6,6 +6,8 @@
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-@interface FRDVerticallyCenteredTextView : UITextView
+#import "FRDPlaceholderTextView.h"
+
+@interface FRDVerticallyCenteredTextView : FRDPlaceholderTextView
 
 @end

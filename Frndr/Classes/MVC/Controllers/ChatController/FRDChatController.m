@@ -21,7 +21,6 @@
 
 #import "UIView+MakeFromXib.h"
 #import "UIResponder+FirstResponder.h"
-#import "UITextView+Placeholder.h"
 
 #import "FRDChatMessagesService.h"
 
@@ -79,6 +78,12 @@ static NSString * const kReplyTextViewPlaceholder = @"Send a reply...";
     [self configureReplyTextView];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.replyTextView.placeholder = LOCALIZED(@"Send a reply...");
+}
+
 #pragma mark - Actions
 
 - (IBAction)sendReplyClick:(id)sender
@@ -93,8 +98,6 @@ static NSString * const kReplyTextViewPlaceholder = @"Send a reply...";
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
         NSLog(@"!!!!!message hasn't been sent!!!!!");
     }];
-    
-    [self.replyTextView clearTextWithPlaceholder:kReplyTextViewPlaceholder];
 }
 
 - (void)initDropDownTable
