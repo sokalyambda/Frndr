@@ -10,6 +10,8 @@
 
 #import "FRDPushNotifiactionService.h"
 
+#import "FRDChatManager.h"
+
 @interface AppDelegate ()
 
 @end
@@ -28,6 +30,14 @@
                                     didFinishLaunchingWithOptions:launchOptions];
 }
 
+/**
+ *  Handle Socket channel
+ */
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    [[FRDChatManager sharedChatManager] closeChannel];
+}
+
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [FRDPushNotifiactionService cleanPushNotificationsBadges];
@@ -36,6 +46,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
+    [FRDChatManager sharedChatManager];
     [FRDPushNotifiactionService cleanPushNotificationsBadges];
 }
 

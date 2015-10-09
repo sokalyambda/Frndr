@@ -62,7 +62,7 @@ static NSString *const kNewFriends = @"newFriends";
 - (FRDSexualOrientation *)sexualOrientation
 {
     if (!_sexualOrientation) {
-        _sexualOrientation = [FRDSexualOrientation orientationWithOrientationString:@"straight"];
+        _sexualOrientation = [FRDSexualOrientation orientationWithOrientationString:@"Straight"];
     }
     return _sexualOrientation;
 }

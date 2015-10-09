@@ -149,7 +149,7 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
             @autoreleasepool {
                 NSString *relStatus = currentProfile.relationshipStatus.relationshipTitle;
                 for (FRDRelationshipItem *item in self.relationshipStatuses) {
-                    if ([item.relationshipTitle isEqualToString:relStatus] || [item.relationshipTitle.lowercaseString containsString:relStatus] || [item.relationshipTitle containsString:relStatus]) {
+                    if ([item.relationshipTitle isEqualToString:relStatus]) {
                         self.currentRelationshipStatus = item;
                         self.currentRelationshipStatus.isSelected = YES;
                         break;
@@ -174,7 +174,7 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
                 for (FRDRelationshipItem *localRelItem in self.relationshipStatuses) {
                     for (FRDRelationshipItem *relItemFromSettings in currentSearchSettings.relationshipStatuses) {
                         
-                        if ([localRelItem.relationshipTitle isEqualToString:relItemFromSettings.relationshipTitle] || [localRelItem.relationshipTitle.lowercaseString containsString:relItemFromSettings.relationshipTitle]) {
+                        if ([localRelItem.relationshipTitle isEqualToString:relItemFromSettings.relationshipTitle]) {
                             
                             localRelItem.isSelected = YES;
                             [self.relationshipStatusesForSearch addObject:localRelItem];
