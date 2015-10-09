@@ -165,9 +165,7 @@
             [FRDProjectFacade signInWithFacebookOnSuccess:^(NSString *userId, BOOL avatarExists, BOOL firstLogin) {
                 
                 [FRDStorageManager sharedStorage].currentUserProfile.userId = userId;
-                //Open socket channel
-                [FRDChatManager sharedChatManager];
-                
+  
                 if (!avatarExists) {
                     
                     [weakSelf uploadAvatarOnSuccess:^(BOOL isSuccess) {
@@ -324,6 +322,10 @@
 - (void)completeSuccessfullLogin
 {
     [FRDFacebookService setLoginSuccess:YES];
+
+    //Open socket channel
+    [[FRDChatManager sharedChatManager] connectToHostAndListenEvents];
+    
     [FRDRedirectionHelper redirectToMainContainerControllerWithNavigationController:(FRDBaseNavigationController *)self.navigationController andDelegate:self];
 }
 

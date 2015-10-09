@@ -189,6 +189,8 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 {
     if ([FRDStorageManager sharedStorage].isSearchSettingsUpdateNeeded) {
         self.nearestUsers = [@[] mutableCopy];
+        [[FRDNearestUsersService searchTimer] invalidate];
+        [FRDNearestUsersService setSearchInProcess:NO];
     }
 }
 

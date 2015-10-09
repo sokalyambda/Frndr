@@ -10,6 +10,7 @@
 
 + (FRDChatManager *)sharedChatManager;
 
+- (void)connectToHostAndListenEvents;
 - (void)closeChannel;
 
 @end

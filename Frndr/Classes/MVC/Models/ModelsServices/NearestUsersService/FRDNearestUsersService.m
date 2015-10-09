@@ -10,15 +10,33 @@
 
 #import "FRDProjectFacade.h"
 
+static CGFloat const kIntervalBetweenAttempts = 30.f;
+static NSInteger const kMaxSearchAttempts = 3;
+
 static NSString *const kSuccessKey = @"success";
 static NSString *const kFailureKey = @"failure";
 
 @implementation FRDNearestUsersService
 
+static NSInteger _searchAttempts = 0;
 static BOOL _isSearchInProcess = NO;
 static NSTimer *_searchTimer;
 
 #pragma mark - Accessors
+
++ (NSInteger)searchAttempts
+{
+    @synchronized(self) {
+        return _searchAttempts;
+    }
+}
+
++ (void)setSearchAttempts:(NSInteger)searchAttempts
+{
+    @synchronized(self) {
+        _searchAttempts = searchAttempts;
+    }
+}
 
 + (BOOL)isSearchInProcess
 {
@@ -57,14 +75,18 @@ static NSTimer *_searchTimer;
     WEAK_SELF;
     [FRDProjectFacade findNearestUsersWithPage:page onSuccess:^(NSArray *nearestUsers) {
         
-        if (success) {
-            success(nearestUsers);
-        }
-        
-        if (!nearestUsers.count && ![weakSelf isSearchInProcess]) {
+        if (!nearestUsers.count && ![weakSelf isSearchInProcess] && [weakSelf searchAttempts] < kMaxSearchAttempts) {
             [weakSelf scheduleTimerForFriendsSearchOnSuccess:success onFailure:failure];
         }
         
+        if (nearestUsers.count && [weakSelf searchAttempts] > 0) {
+            [weakSelf setSearchAttempts:0];
+        }
+        
+        if (success) {
+            success(nearestUsers);
+        }
+
     } onFailure:^(NSError *error, BOOL isCanceled) {
         
         if (failure) {
@@ -77,7 +99,7 @@ static NSTimer *_searchTimer;
 + (void)scheduleTimerForFriendsSearchOnSuccess:(SuccessNearestUsersBlock)success onFailure:(FailureNearestUsersBlock)failure
 {
     [self setSearchInProcess:YES];
-    [self setSearchTimer:[NSTimer scheduledTimerWithTimeInterval:30.f
+    [self setSearchTimer:[NSTimer scheduledTimerWithTimeInterval:kIntervalBetweenAttempts
                                                           target:self
                                                         selector:@selector(findNearestFriendsWithTimer:)
                                                         userInfo:@{kSuccessKey: success,
@@ -90,14 +112,19 @@ static NSTimer *_searchTimer;
     SuccessNearestUsersBlock success = timer.userInfo[kSuccessKey];
     FailureNearestUsersBlock failure = timer.userInfo[kFailureKey];
     
+    //increase current atempts to find nearest users
+    if ([self searchAttempts] < kMaxSearchAttempts) {
+        [self setSearchAttempts:[self searchAttempts] + 1];
+    }
+    
     WEAK_SELF;
     [self getNearestUsersWithPage:1 onSuccess:^(NSArray *nearestUsers) {
         
-        if (nearestUsers.count) {
+        if (nearestUsers.count || ([self searchAttempts] == kMaxSearchAttempts)) {
             [timer invalidate];
             [weakSelf setSearchInProcess:NO];
         }
-        
+
         if (success) {
             success(nearestUsers);
         }

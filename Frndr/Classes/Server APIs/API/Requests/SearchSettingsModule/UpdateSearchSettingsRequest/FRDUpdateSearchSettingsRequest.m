@@ -12,6 +12,8 @@
 #import "FRDSexualOrientation.h"
 #import "FRDRelationshipItem.h"
 
+#import "FRDNearestUsersService.h"
+
 static NSString *const kAgeRange                = @"ageRange";
 static NSString *const kMaxAge                  = @"max";
 static NSString *const kMinAge                  = @"min";
@@ -48,6 +50,8 @@ static NSString *const kDistance                = @"distance";
 
 - (BOOL)parseJSONDataSucessfully:(id)responseObject error:(NSError *__autoreleasing *)error
 {
+    //search settings have been updated, so we can reset the search attempts in nearest users services
+    [FRDNearestUsersService setSearchAttempts:0];
     return !!responseObject;
 }
 

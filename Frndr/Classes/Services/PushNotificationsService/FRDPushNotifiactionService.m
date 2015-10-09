@@ -83,12 +83,15 @@
     
     //save the apns token
     [FRDStorageManager sharedStorage].deviceToken = deviceToken;
-    [FRDProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
-        
-    } onFailure:^(NSError *error, BOOL isCanceled) {
-        [FRDAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:nil];
-
-    }];
+    
+    if ([FRDStorageManager sharedStorage].deviceToken) {
+        [FRDProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            [FRDAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:nil];
+            
+        }];
+    }
 }
 
 /**

@@ -10,6 +10,4 @@
 
 @interface FRDSearchFriendsController : FRDBaseContentController
 
-@property (assign, nonatomic, getter=isUpdateNeeded) BOOL updateNeeded;
-
 @end

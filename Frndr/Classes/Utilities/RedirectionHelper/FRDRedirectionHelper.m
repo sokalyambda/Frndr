@@ -42,8 +42,6 @@ static NSString *const kMainStoryboardName = @"Main";
     
     FRDContainerViewController *container = [mainBoard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDContainerViewController class])];
     
-    searchFriendsController.updateNeeded = YES;
-    
     container.delegate = delegate;
     container.viewControllers = @[preferencesController, searchFriendsController, friendsListController];
     

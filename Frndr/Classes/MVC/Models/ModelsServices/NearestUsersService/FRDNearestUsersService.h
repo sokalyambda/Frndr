@@ -16,6 +16,7 @@ typedef void(^FailureNearestUsersBlock)(NSError *error);
 
 + (void)setSearchInProcess:(BOOL)searchInProcess;
 + (void)setSearchTimer:(NSTimer *)searchTimer;
++ (void)setSearchAttempts:(NSInteger)searchAttempts;
 
 + (void)getNearestUsersWithPage:(NSInteger)page
                       onSuccess:(SuccessNearestUsersBlock)success

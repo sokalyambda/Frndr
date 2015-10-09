@@ -74,7 +74,7 @@ static NSString *const kTutorialSegueIdentifier = @"tutorialSegueIdentifier";
         [FRDStorageManager sharedStorage].currentUserProfile = currentProfile;
         
         //Open socket channel
-        [FRDChatManager sharedChatManager];
+        [[FRDChatManager sharedChatManager] connectToHostAndListenEvents];
         
         if (!avatarExists) {
             

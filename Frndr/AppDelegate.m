@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import "FRDPushNotifiactionService.h"
+#import "FRDFacebookService.h"
 
 #import "FRDChatManager.h"
 
@@ -35,19 +36,22 @@
  */
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    //Close channel
     [[FRDChatManager sharedChatManager] closeChannel];
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    //Open channel
+    [[FRDChatManager sharedChatManager] connectToHostAndListenEvents];
+    
+    [FRDPushNotifiactionService cleanPushNotificationsBadges];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [FRDPushNotifiactionService cleanPushNotificationsBadges];
     [FBSDKAppEvents activateApp];
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    [FRDChatManager sharedChatManager];
-    [FRDPushNotifiactionService cleanPushNotificationsBadges];
 }
 
 - (BOOL)application:(UIApplication *)application

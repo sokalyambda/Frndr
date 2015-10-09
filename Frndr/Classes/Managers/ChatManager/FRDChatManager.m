@@ -11,9 +11,11 @@
 
 #import "FRDChatMessage.h"
 
+#import "FRDFacebookService.h"
+
 //static NSString *const kBaseHostURL = @"http://192.168.88.161:8859";//Misha
-static NSString *const kBaseHostURL = @"http://192.168.88.47:8859";//Vanya
-//static NSString *const kBaseHostURL = @"http://projects.thinkmobiles.com:8859";//Live
+//static NSString *const kBaseHostURL = @"http://192.168.88.47:8859";//Vanya
+static NSString *const kBaseHostURL = @"http://projects.thinkmobiles.com:8859";//Live
 
 static NSString *const kConnectedToServerEvent = @"connectedToServer";
 static NSString *const kAuthorizeEvent = @"authorize";
@@ -32,39 +34,59 @@ static NSString *const kSuccess = @"success";
 
 #pragma mark - Lifecycle
 
-static FRDChatManager *_chatManager = nil;
-
 + (FRDChatManager *)sharedChatManager
 {
-    @synchronized (_chatManager) {
-        if (!_chatManager)
-            _chatManager = [[self alloc] init];
-    }
-    return _chatManager;
+    static FRDChatManager *chatManager = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        chatManager = [[self alloc] init];
+    });
+    
+    return chatManager;
 }
 
-+ (void)releaseChatManager
-{
-    @synchronized (_chatManager) {
-        if (_chatManager)
-            _chatManager = nil;
-    }
-}
+//+ (FRDChatManager *)sharedChatManager
+//{
+//    @synchronized (_chatManager) {
+//        if (!_chatManager)
+//            _chatManager = [[self alloc] init];
+//    }
+//    return _chatManager;
+//}
+//
+//+ (void)releaseChatManager
+//{
+//    @synchronized (_chatManager) {
+//        if (_chatManager)
+//            _chatManager = nil;
+//    }
+//}
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        //Has to be performed once
-        [self connectToHostAndListenEvents];
-    }
-    return self;
-}
+//- (instancetype)init
+//{
+//    self = [super init];
+//    if (self) {
+//        if ([FRDFacebookService isFacebookSessionValid]) {
+//            //Has to be performed once
+//            [self connectToHostAndListenEvents];
+//        }
+//    }
+//    return self;
+//}
 
 #pragma mark - Actions
 
 - (void)connectToHostAndListenEvents
 {
+    if (![FRDFacebookService isFacebookSessionValid]) {
+        return;
+    }
+    
+    self.socketIOClient = nil;
+    
+    NSLog(@"self.socketIOClient %@", self.socketIOClient);
+    
     NSString *userId = [FRDStorageManager sharedStorage].currentUserProfile.userId;
     //Init socket client
     self.socketIOClient = [[SocketIOClient alloc] initWithSocketURL:kBaseHostURL opts:nil];
@@ -108,9 +130,15 @@ static FRDChatManager *_chatManager = nil;
  */
 - (void)closeChannel
 {
+    
+    if (![FRDFacebookService isFacebookSessionValid]) {
+        return;
+    }
+    
     [self.socketIOClient disconnect];
     
-    [[self class] releaseChatManager];
+    self.socketIOClient = nil;
+//    [[self class] releaseChatManager];
 }
 
 @end
