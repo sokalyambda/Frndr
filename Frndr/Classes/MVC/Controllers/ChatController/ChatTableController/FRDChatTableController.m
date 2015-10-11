@@ -59,7 +59,7 @@
     [super viewDidLoad];
     
     [self registerCells];
-    [self loadChatHistoryAndScrollToBottom:YES];
+    [self loadChatHistoryAndScrollToBottom:YES animated:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -79,12 +79,12 @@
 /**
  *  Scroll to bottom
  */
-- (void)scrollTableViewToBottom
+- (void)scrollTableViewToBottomAnimated:(BOOL)animated
 {
     NSInteger numberOfRows = [self.tableView numberOfRowsInSection:0];
-    if (numberOfRows) {
+    if (numberOfRows > 0) {
         NSIndexPath *lastRowIndexPath = [NSIndexPath indexPathForRow:numberOfRows - 1 inSection:0];
-        [self.tableView scrollToRowAtIndexPath:lastRowIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [self.tableView scrollToRowAtIndexPath:lastRowIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:animated];
     }
 }
 
@@ -106,7 +106,7 @@
 /**
  *  Load chat history with current friend
  */
-- (void)loadChatHistoryAndScrollToBottom:(BOOL)toBottom
+- (void)loadChatHistoryAndScrollToBottom:(BOOL)toBottom animated:(BOOL)animated
 {
     WEAK_SELF;
     if (!self.refreshControl.isRefreshing) {
@@ -128,7 +128,7 @@
         
         if (toBottom) {
             //to bottom
-            [weakSelf scrollTableViewToBottom];
+            [weakSelf scrollTableViewToBottomAnimated:NO];
         }
         
     } onFailure:^(NSError *error) {
@@ -139,7 +139,7 @@
 
 - (IBAction)loadMoreMessages:(id)sender
 {
-    [self loadChatHistoryAndScrollToBottom:NO];
+    [self loadChatHistoryAndScrollToBottom:NO animated:NO];
 }
 
 #pragma mark - UITableViewDataSource
@@ -208,10 +208,10 @@
     [self.messageHistory addObject:message];
 
     NSArray *indexPaths = [self.tableView indexPathsForVisibleRows];
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.messageHistory.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-    [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationMiddle];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.messageHistory.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPaths[indexPaths.count - 1], indexPaths[indexPaths.count - 2]] withRowAnimation:UITableViewRowAnimationNone];
     
-    [self scrollTableViewToBottom];
+    [self scrollTableViewToBottomAnimated:NO];
     
 }
 

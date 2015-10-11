@@ -13,6 +13,7 @@
 @interface FRDFriendDragableView : UIView
 
 @property (weak, nonatomic) IBOutlet UIView *overlayView;
+@property (weak, nonatomic) IBOutlet UIImageView *overlayImageView;
 
 @property (strong, nonatomic) NSString *overlayImageName;
 

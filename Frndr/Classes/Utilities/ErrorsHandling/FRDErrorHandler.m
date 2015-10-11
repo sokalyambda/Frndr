@@ -67,7 +67,7 @@ static NSString *_errorAlertTitle = nil;
  */
 + (BOOL)errorIsNetworkError:(NSError *)error
 {
-    if (error == nil) {
+    if (!error) {
         return NO;
     }
     
@@ -75,6 +75,8 @@ static NSString *_errorAlertTitle = nil;
     if ([self errorIsNetworkError:innerError]) {
         return YES;
     }
+    
+    NSLog(@"error code %i", error.code);
     
     switch (error.code) {
         case NSURLErrorTimedOut:

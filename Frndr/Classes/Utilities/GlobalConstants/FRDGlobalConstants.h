@@ -24,6 +24,8 @@ static NSString *const FBAccessTokenExpirationDate = @"FBAccessTokenExpirationDa
 static NSString *const FBAccessToken = @"FBAccessToken";
 static NSString *const FBCurrentProfile = @"FBCurrentProfile";
 
+static NSString *const IsLogined = @"IsLogined";
+
 //Notifications
 static NSString *const DidReceiveNewMessageNotification = @"DidReceiveNewMessageNotification";
 

@@ -56,9 +56,20 @@ static NSString *const kApplyIconName = @"applyIcon";
 // Animations
 @property (strong, nonatomic) CAAnimationGroup *dragAnimationGroup;
 
+@property (weak, nonatomic) UIView *overlayMask;
+@property (weak, nonatomic) UIImageView *overlayImageView;
+
 @end
 
 @implementation ZLSwipeableView
+
+#pragma mark - Accessors
+
+- (void)setDataSource:(id <ZLSwipeableViewDataSource>)dataSource
+{
+    _dataSource = dataSource;
+    [self loadNextSwipeableViewsIfNeeded:NO];
+}
 
 #pragma mark - Lifecycle
 
@@ -131,14 +142,6 @@ static NSString *const kApplyIconName = @"applyIcon";
 {
     _swipeableViewsCenter = swipeableViewsCenter;
     [self animateSwipeableViewsIfNeeded];
-}
-
-#pragma mark - Accessors
-
-- (void)setDataSource:(id <ZLSwipeableViewDataSource>)dataSource
-{
-    _dataSource = dataSource;
-    [self loadNextSwipeableViewsIfNeeded:NO];
 }
 
 #pragma mark - DataSource
@@ -251,6 +254,7 @@ static NSString *const kApplyIconName = @"applyIcon";
 
 static NSString * const kTransformBackViewAnimationKey = @"TransformBackViewAnimation";
 static NSString * const kTransformMiddleViewAnimationKey = @"TransformMiddleViewAnimation";
+static NSString * const kOverlayAppearanceAnimationKey = @"OverlayAppearanceAnimationKey";
 static CGFloat const kRadiusFactor = 0.75;
 
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer
@@ -271,10 +275,12 @@ static CGFloat const kRadiusFactor = 0.75;
                                             );
     //Get the current overlay view
     FRDFriendDragableView *currentDragableView;
-    UIView *currentOverlay;
+    UIView *currentOverlayMask;
+    UIImageView *currentOverlayImageView;
     if ([swipeableView isKindOfClass:[FRDFriendDragableParentView class]]) {
         currentDragableView = ((FRDFriendDragableParentView *)swipeableView).friendDragableView;
-        currentOverlay = currentDragableView.overlayView;
+        currentOverlayMask = currentDragableView.overlayView;
+        currentOverlayImageView = currentDragableView.overlayImageView;
     }
     
     // Setup animations which will accompany swipeable view's movement
@@ -307,6 +313,7 @@ static CGFloat const kRadiusFactor = 0.75;
             [backView.layer addAnimation:transformBackView forKey:kTransformBackViewAnimationKey];
             [middleView.layer addAnimation:transformMiddleView forKey:kTransformMiddleViewAnimationKey];
         }
+ 
     }
     
     if (recognizer.state == UIGestureRecognizerStateChanged) {
@@ -318,8 +325,10 @@ static CGFloat const kRadiusFactor = 0.75;
         /*****Add overlay view if needed when swiping*****/
         ZLSwipeableViewDirection directionType = ZLDirectionVectorToSwipeableViewDirection(directionVector);
         
-        if (currentOverlay.isHidden && (directionType == ZLSwipeableViewDirectionLeft || directionType == ZLSwipeableViewDirectionRight)) {
-            currentOverlay.hidden = NO;
+        if (currentOverlayImageView.isHidden && currentOverlayMask.isHidden && (directionType == ZLSwipeableViewDirectionLeft || directionType == ZLSwipeableViewDirectionRight)) {
+            currentOverlayMask.hidden = NO;
+            currentOverlayImageView.hidden = NO;
+//            [currentOverlayImageView.layer addAnimation:[self appearAnimation] forKey:kOverlayAppearanceAnimationKey];
         }
         [self configureDragableFriendViewForOverlaying:currentDragableView withDirection:directionType];
         
@@ -349,22 +358,17 @@ static CGFloat const kRadiusFactor = 0.75;
     if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
         
         /*****Remove overlay*****/
-        if (!currentOverlay.isHidden) {
-            currentOverlay.hidden = YES;
+        if (!currentOverlayMask.isHidden && !currentOverlayImageView.isHidden) {
+            currentOverlayMask.hidden = YES;
+            currentOverlayImageView.hidden = YES;
         }
-        
-        /*****New delegate method*****/
-        BOOL shouldRemoveView = NO;
-        if ([self.delegate respondsToSelector:@selector(swipeableView:shouldRemoveView:withDirection:)]) {
-            shouldRemoveView = [self.delegate swipeableView:self shouldRemoveView:swipeableView withDirection:self.direction];
-        }
-        
+
         if ((ZLDirectionVectorToSwipeableViewDirection(directionVector) & self.direction) > 0 &&
             (ABS(translation.x) > self.relativeDisplacementThreshold * self.bounds.size.width || // displacement
              velocityMagnitude > self.escapeVelocityThreshold) && // velocity
             (signum(translation.x) == signum(normalizedVelocity.x)) && // sign X
-            (signum(translation.y) == signum(normalizedVelocity.y)) && // sign Y
-            shouldRemoveView) {
+            (signum(translation.y) == signum(normalizedVelocity.y))) // sign Y
+        {
             
             // Update model layer with destination values
             backView.layer.transform = ((NSValue *)transformBackView.toValue).CATransform3DValue;
@@ -374,13 +378,21 @@ static CGFloat const kRadiusFactor = 0.75;
             [backView.layer removeAnimationForKey:kTransformBackViewAnimationKey];
             [middleView.layer removeAnimationForKey:kTransformMiddleViewAnimationKey];
             
-            [self pushAnchorViewForCover:swipeableView inDirection:directionVector andCollideInRect:self.collisionRect];
-            
-            /*****One more delegate method which needed for determine whether view was threw*****/
-            ZLSwipeableViewDirection direction = ZLDirectionVectorToSwipeableViewDirection(directionVector);
-            if ([self.delegate respondsToSelector:@selector(swipeableView:didThrowSwipingView:inDirection:)]) {
-                [self.delegate swipeableView:self didThrowSwipingView:swipeableView inDirection:direction];
+            /*****New delegate method*****/
+            BOOL shouldRemoveView = NO;
+            if ([self.delegate respondsToSelector:@selector(swipeableView:shouldRemoveView:withDirection:)]) {
+                shouldRemoveView = [self.delegate swipeableView:self shouldRemoveView:swipeableView withDirection:self.direction];
             }
+            
+            if (shouldRemoveView) {
+                [self pushAnchorViewForCover:swipeableView inDirection:directionVector andCollideInRect:self.collisionRect];
+                /*****One more delegate method which needed for determine whether view was threw*****/
+                ZLSwipeableViewDirection direction = ZLDirectionVectorToSwipeableViewDirection(directionVector);
+                if ([self.delegate respondsToSelector:@selector(swipeableView:didThrowSwipingView:inDirection:)]) {
+                    [self.delegate swipeableView:self didThrowSwipingView:swipeableView inDirection:direction];
+                }
+            }
+
         } else {
             [self.animator removeBehavior:self.swipeableViewAttachmentBehavior];
             [self.animator removeBehavior:self.anchorViewAttachmentBehavior];
@@ -439,10 +451,12 @@ static CGFloat const kRadiusFactor = 0.75;
     
     //Get the current overlay view
     FRDFriendDragableView *currentDragableView;
-    UIView *currentOverlay;
+    UIView *currentOverlayMask;
+    UIImageView *currentOverlayImageView;
     if ([topSwipeableView isKindOfClass:[FRDFriendDragableParentView class]]) {
         currentDragableView = ((FRDFriendDragableParentView *)topSwipeableView).friendDragableView;
-        currentOverlay = currentDragableView.overlayView;
+        currentOverlayImageView = currentDragableView.overlayImageView;
+        currentOverlayMask = currentDragableView.overlayView;
     }
     
     CGPoint location = CGPointMake(
@@ -458,8 +472,9 @@ static CGFloat const kRadiusFactor = 0.75;
     
     /***** Add overlay view if needed when press button *****/
     ZLSwipeableViewDirection directionType = ZLDirectionVectorToSwipeableViewDirection(direction);
-    if (currentOverlay.isHidden) {
-        currentOverlay.hidden = NO;
+    if (currentOverlayMask.isHidden && currentOverlayImageView.isHidden) {
+        currentOverlayMask.hidden = NO;
+        currentOverlayImageView.hidden = NO;
     }
     [self configureDragableFriendViewForOverlaying:currentDragableView withDirection:directionType];
     
@@ -512,7 +527,7 @@ static CGFloat const kRadiusFactor = 0.75;
     transformAnimation.fromValue = [NSValue valueWithCATransform3D:startingTransform3D];
     transformAnimation.toValue = [NSValue valueWithCATransform3D:destinationTransform3D];
     transformAnimation.speed = 0.f;
-    transformAnimation.duration = 1.01;
+    transformAnimation.duration = 1.01f;
     transformAnimation.timeOffset = 0.f;
     
     return transformAnimation;
@@ -520,11 +535,13 @@ static CGFloat const kRadiusFactor = 0.75;
 
 - (CABasicAnimation *)appearAnimation
 {
+    UIView *topMostView = [self topSwipeableView];
+    
     CABasicAnimation *fadeAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    fadeAnimation.fromValue = @0.f;
-    fadeAnimation.toValue = @1.f;
+    fadeAnimation.fromValue = @1.f;
+    fadeAnimation.toValue = @0.f;
     fadeAnimation.speed = 0.f;
-    fadeAnimation.duration = 1.01;
+    fadeAnimation.duration = 1.01f;
     fadeAnimation.timeOffset= 0.f;
     
     return fadeAnimation;
@@ -765,7 +782,7 @@ int signum(CGFloat n)
 atOffsetFromCenter:(CGPoint)offset
           animated:(BOOL)animated
 {
-    float duration = animated ? 0.4 : 0;
+    float duration = animated ? .4f : 0;
     float rotationRadian = [self degreesToRadians:degree];
     [UIView animateWithDuration:duration animations:^{
         view.center = self.swipeableViewsCenter;

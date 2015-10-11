@@ -20,7 +20,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *friendAgeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *friendDistanceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *friendSmokerLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *overlayImageView;
 @property (weak, nonatomic) IBOutlet UILabel *sexualOrientationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *jobTitleLabel;
 
@@ -78,7 +77,7 @@
 
 - (void)commonInit
 {
-    self.layer.cornerRadius = 10.0;
+    self.layer.cornerRadius = 10.f;
 }
 
 @end

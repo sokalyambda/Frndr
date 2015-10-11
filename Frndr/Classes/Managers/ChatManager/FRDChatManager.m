@@ -46,44 +46,15 @@ static NSString *const kSuccess = @"success";
     return chatManager;
 }
 
-//+ (FRDChatManager *)sharedChatManager
-//{
-//    @synchronized (_chatManager) {
-//        if (!_chatManager)
-//            _chatManager = [[self alloc] init];
-//    }
-//    return _chatManager;
-//}
-//
-//+ (void)releaseChatManager
-//{
-//    @synchronized (_chatManager) {
-//        if (_chatManager)
-//            _chatManager = nil;
-//    }
-//}
-
-//- (instancetype)init
-//{
-//    self = [super init];
-//    if (self) {
-//        if ([FRDFacebookService isFacebookSessionValid]) {
-//            //Has to be performed once
-//            [self connectToHostAndListenEvents];
-//        }
-//    }
-//    return self;
-//}
-
 #pragma mark - Actions
 
 - (void)connectToHostAndListenEvents
 {
-    if (![FRDFacebookService isFacebookSessionValid]) {
+    if (![FRDStorageManager sharedStorage].isLogined) {
         return;
     }
     
-    self.socketIOClient = nil;
+//    self.socketIOClient = nil;
     
     NSLog(@"self.socketIOClient %@", self.socketIOClient);
     
@@ -130,15 +101,13 @@ static NSString *const kSuccess = @"success";
  */
 - (void)closeChannel
 {
-    
-    if (![FRDFacebookService isFacebookSessionValid]) {
+    if (![FRDStorageManager sharedStorage].isLogined || !self.socketIOClient) {
         return;
     }
     
     [self.socketIOClient disconnect];
     
     self.socketIOClient = nil;
-//    [[self class] releaseChatManager];
 }
 
 @end

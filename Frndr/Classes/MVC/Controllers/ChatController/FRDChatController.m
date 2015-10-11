@@ -24,13 +24,12 @@
 
 #import "FRDChatMessagesService.h"
 
-static NSString * const kChatTableControllerSegueIdentifier = @"chatTableControllerSegue";
+static NSString *const kChatTableControllerSegueIdentifier = @"chatTableControllerSegue";
 
-static NSString * const kOptionsHiddenButtonImage = @"ChatOptionsUnactive";
-static NSString * const kOptionsVisibleButtonImage = @"ChatOptionsActive";
+static NSString *const kOptionsHiddenButtonImage = @"ChatOptionsUnactive";
+static NSString *const kOptionsVisibleButtonImage = @"ChatOptionsActive";
 
 // Reply text view constants
-static NSString * const kReplyTextViewPlaceholder = @"Send a reply...";
 static NSInteger const kReplyTextViewLinesThreshold = 4;
 static CGFloat const kReplyTextViewMinimumHeight = 62.f;
 
@@ -81,28 +80,25 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
     [self configureReplyTextView];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    self.replyTextView.placeholder = LOCALIZED(@"Send a reply...");
-}
-
 #pragma mark - Actions
 
 - (void)sendReply
 {
-    if (self.replyTextView.text.length) {
-        WEAK_SELF;
-        [FRDChatMessagesService sendMessage:self.replyTextView.text toFriendWithId:self.currentFriend.userId onSuccess:^(BOOL isSuccess) {
+    NSString *replyText = self.replyTextView.text;
 
-            weakSelf.replyTextView.text = @"";
+    replyText = [replyText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    if (replyText.length) {
+        
+        WEAK_SELF;
+        [FRDChatMessagesService sendMessage:replyText toFriendWithId:self.currentFriend.userId onSuccess:^(BOOL isSuccess) {
+
             
         } onFailure:^(NSError *error, BOOL isCanceled) {
             
             [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-
         }];
+        self.replyTextView.text = @"";
     }
 }
 
@@ -136,7 +132,7 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
 - (void)configureReplyTextView
 {
     self.replyTextView.linesThreshold = kReplyTextViewLinesThreshold;
-    self.replyTextView.placeholder = kReplyTextViewPlaceholder;
+    self.replyTextView.placeholder = LOCALIZED(@"Send a reply...");
     self.replyTextView.minimumHeight = kReplyTextViewMinimumHeight;
 }
 
@@ -226,7 +222,7 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
                          [self.view layoutIfNeeded];
                      }];
     
-    [self.chatTableController scrollTableViewToBottom];
+    [self.chatTableController scrollTableViewToBottomAnimated:YES];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification

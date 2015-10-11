@@ -14,6 +14,6 @@
 @property (strong, nonatomic) FRDFriend *currentFriend;
 @property (assign, nonatomic) NSInteger currentPage;
 
-- (void)scrollTableViewToBottom;
+- (void)scrollTableViewToBottomAnimated:(BOOL)animated;
 
 @end

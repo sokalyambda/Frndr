@@ -104,6 +104,9 @@ NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
         [FRDNearestUsersService setSearchInProcess:NO];
     }
     
+    //temp
+    [FRDStorageManager sharedStorage].logined = NO;
+    
     [FRDStorageManager sharedStorage].currentFacebookProfile = nil;
     [FRDStorageManager sharedStorage].currentUserProfile = nil;
     

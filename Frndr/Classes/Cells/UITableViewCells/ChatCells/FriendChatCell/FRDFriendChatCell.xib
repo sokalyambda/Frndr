@@ -70,12 +70,12 @@
                 <constraints>
                     <constraint firstItem="E1M-kB-HKi" firstAttribute="centerY" secondItem="n4o-N5-mM8" secondAttribute="centerY" id="4YC-b8-5An"/>
                     <constraint firstAttribute="trailing" secondItem="E1M-kB-HKi" secondAttribute="trailing" constant="10" id="9bW-F3-biC"/>
-                    <constraint firstAttribute="bottom" secondItem="tXF-Nf-KeE" secondAttribute="bottom" constant="5" id="B6R-0t-FBq"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tXF-Nf-KeE" secondAttribute="bottom" constant="5" id="B6R-0t-FBq"/>
                     <constraint firstItem="n4o-N5-mM8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Laa-aF-e6G"/>
                     <constraint firstItem="E1M-kB-HKi" firstAttribute="leading" secondItem="n4o-N5-mM8" secondAttribute="trailing" constant="10" id="Rba-l5-rig"/>
                     <constraint firstItem="tXF-Nf-KeE" firstAttribute="leading" secondItem="n4o-N5-mM8" secondAttribute="leading" constant="10" id="Ter-uc-euq"/>
-                    <constraint firstItem="n4o-N5-mM8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Vst-0h-ZGu"/>
-                    <constraint firstItem="tXF-Nf-KeE" firstAttribute="top" secondItem="n4o-N5-mM8" secondAttribute="bottom" id="WPg-iB-WpF"/>
+                    <constraint firstItem="n4o-N5-mM8" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Vst-0h-ZGu"/>
+                    <constraint firstItem="tXF-Nf-KeE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="n4o-N5-mM8" secondAttribute="bottom" id="WPg-iB-WpF"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="E1M-kB-HKi" secondAttribute="bottom" constant="10" id="qer-sa-i9X"/>
                     <constraint firstItem="E1M-kB-HKi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" priority="999" constant="10" id="sRZ-aQ-InU"/>
                 </constraints>
@@ -87,7 +87,7 @@
                 <outlet property="messageTextView" destination="raa-lX-mS1" id="iyU-p0-Xa0"/>
                 <outlet property="timeStampLabelHeight" destination="Qsx-jg-Ihs" id="1zw-OS-ROQ"/>
             </connections>
-            <point key="canvasLocation" x="626.5" y="424.5"/>
+            <point key="canvasLocation" x="660.5" y="386.5"/>
         </tableViewCell>
     </objects>
     <resources>

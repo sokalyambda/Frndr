@@ -31,26 +31,26 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 @interface FRDSearchFriendsController ()<ZLSwipeableViewDataSource, ZLSwipeableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet ZLSwipeableView *dragableViewsHolder;
-@property (strong, nonatomic) IBOutlet FRDPulsingOverlayView *pulsingOverlay;
-
 @property (weak, nonatomic) IBOutlet UILabel *interestsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *biographyLabel;
 @property (weak, nonatomic) IBOutlet UIView *photosCollectionContainer;
 @property (weak, nonatomic) IBOutlet UIView *likeButtonsContainer;
 
+@property (strong, nonatomic) IBOutlet FRDPulsingOverlayView *pulsingOverlay;
 @property (nonatomic) FRDPreviewGalleryController *previewGalleryController;
 
 @property (nonatomic) NSMutableArray *nearestUsers;
 @property (nonatomic) FRDNearestUser *currentNearestUser;
 
 @property (nonatomic) NSInteger currentPage;
-@property (nonatomic) NSInteger swipableViewsCounter;
 
 @property (nonatomic, readonly) BOOL isOverlayPresented;
 
 @end
 
-@implementation FRDSearchFriendsController
+@implementation FRDSearchFriendsController {
+    NSInteger _nearestUserIndex;
+}
 
 #pragma mark - Accessors
 
@@ -93,8 +93,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     self = [super initWithCoder:coder];
     if (self) {
         _currentPage = 1;
-        _swipableViewsCounter = 0;
-        
+
         [FRDPushNotifiactionService registerApplicationForPushNotifications:[UIApplication sharedApplication]];
         
         [self setupPulsingOverlayView];
@@ -187,6 +186,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 
 - (void)refreshNearestUsers
 {
+    _nearestUserIndex = 0;
     if ([FRDStorageManager sharedStorage].isSearchSettingsUpdateNeeded) {
         self.nearestUsers = [@[] mutableCopy];
         [[FRDNearestUsersService searchTimer] invalidate];
@@ -396,7 +396,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     
     self.interestsLabel.text = interests;
     
-    self.swipableViewsCounter = 0;
+//    self.swipableViewsCounter = 0;
     
     [self.dragableViewsHolder loadNextSwipeableViewsIfNeeded];
     
@@ -475,12 +475,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
  */
 - (void)showHideButtonsContainer
 {
-    WEAK_SELF;
-    if (!self.nearestUsers.count) {
-        [weakSelf.likeButtonsContainer setHidden:YES];
-    } else {
-        [weakSelf.likeButtonsContainer setHidden:NO];
-    }
+    [self.likeButtonsContainer setHidden:!self.nearestUsers.count];
 }
 
 #pragma mark - ZLSwipeableViewDataSource
@@ -489,9 +484,9 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 {
     FRDFriendDragableParentView *parentView;
     
-    if (self.nearestUsers.count && self.swipableViewsCounter < self.nearestUsers.count) {
+    if (self.nearestUsers.count && _nearestUserIndex < self.nearestUsers.count) {
     
-        FRDNearestUser *currentNearesUser = self.nearestUsers[self.swipableViewsCounter];
+        FRDNearestUser *currentNearesUser = self.nearestUsers[_nearestUserIndex];
     
         parentView = [[FRDFriendDragableParentView alloc] initWithFrame:swipeableView.bounds];
         FRDFriendDragableView *friendView = [FRDFriendDragableView makeFromXib];
@@ -505,7 +500,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
         
         [friendView configureWithNearestUser:currentNearesUser];
     
-        self.swipableViewsCounter++;
+        _nearestUserIndex++;
     }
     
     return parentView;
@@ -517,6 +512,19 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
      shouldRemoveView:(UIView *)view
         withDirection:(ZLSwipeableViewDirection)direction
 {
+    if (self.nearestUsers.count) {
+        [self.nearestUsers removeObject:self.nearestUsers.firstObject];
+    }
+    
+    //Adjust nearestUsersIndex
+    if (self.nearestUsers.count >= _nearestUserIndex) {
+        _nearestUserIndex--;
+    }
+    
+    if (self.nearestUsers.count) {
+        self.currentNearestUser = self.nearestUsers.firstObject;
+    }
+    
     return YES;
 }
 
@@ -529,7 +537,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
             
             [self dislikeCurrentFriendOnSuccess:^{
 
-                [weakSelf checkNearestUsersInformationOrLoadMore];
+                [weakSelf loadMoreUsersIfNeeded];
                 
             } onFalilure:^(NSError *error) {
                 
@@ -543,7 +551,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
             
             [self likeCurrentFriendOnSuccess:^{
 
-                [weakSelf checkNearestUsersInformationOrLoadMore];
+                [weakSelf loadMoreUsersIfNeeded];
                 
             } onFalilure:^(NSError *error) {
                 
@@ -558,19 +566,12 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     }
 }
 
-- (void)checkNearestUsersInformationOrLoadMore
+//Adjust nearestUsers array and load more users if needed
+- (void)loadMoreUsersIfNeeded
 {
-    if (self.nearestUsers.count) {
-        [self.nearestUsers removeObject:self.nearestUsers.firstObject];
-    }
-    
-    if (self.nearestUsers.count) {
-        self.currentNearestUser = self.nearestUsers.firstObject;
-    }
-    
     if (!self.nearestUsers.count) {
         self.currentNearestUser = nil;
-        self.swipableViewsCounter = 0;
+        _nearestUserIndex = 0;
         self.currentPage++;
         [self findNearestUsers];
     }

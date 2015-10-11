@@ -34,11 +34,11 @@
 {
     self.layer.shadowColor = [UIColor blackColor].CGColor;
     self.layer.shadowOpacity = 0.25f;
-    self.layer.shadowOffset = CGSizeMake(0, 2.5);
-    self.layer.shadowRadius = 10.0;
+    self.layer.shadowOffset = CGSizeMake(0, 2.5f);
+    self.layer.shadowRadius = 10.f;
     self.layer.shouldRasterize = YES;
     self.layer.rasterizationScale = [[UIScreen mainScreen] scale];
-    self.layer.cornerRadius = 10.0;
+    self.layer.cornerRadius = 10.f;
 }
 
 @end

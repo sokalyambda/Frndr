@@ -166,6 +166,9 @@
                 
                 [FRDStorageManager sharedStorage].currentUserProfile.userId = userId;
   
+                //temp
+                [FRDStorageManager sharedStorage].logined = YES;
+                
                 if (!avatarExists) {
                     
                     [weakSelf uploadAvatarOnSuccess:^(BOOL isSuccess) {

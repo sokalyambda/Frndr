@@ -34,8 +34,7 @@ static NSString *const kFirstLogin = @"firstLogin";
         CLLocation *currentLocaion = [FRDLocationObserver sharedObserver].currentLocation;
         NSArray *coords = @[@(currentLocaion.coordinate.longitude), @(currentLocaion.coordinate.latitude)];
         
-        NSMutableDictionary *parameters;
-        parameters = [NSMutableDictionary dictionaryWithDictionary:@{kFacebookAccessToken: @(facebookId),
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{kFacebookAccessToken: @(facebookId),
                                                                      kGeolocationCoordinates: coords
                                                                      }];
         

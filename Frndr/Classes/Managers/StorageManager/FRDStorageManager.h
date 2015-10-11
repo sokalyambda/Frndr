@@ -23,4 +23,6 @@
 @property (assign, nonatomic, getter=isSearchSettingsUpdateNeeded) BOOL searchSettingsUpdateNeeded;
 @property (assign, nonatomic, getter=isUserProfileUpdateNeeded) BOOL userProfileUpdateNeeded;
 
+@property (assign, nonatomic, getter=isLogined) BOOL logined;
+
 @end
