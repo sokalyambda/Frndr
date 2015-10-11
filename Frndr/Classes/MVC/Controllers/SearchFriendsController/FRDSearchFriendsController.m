@@ -396,7 +396,8 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     
     self.interestsLabel.text = interests;
     
-//    self.swipableViewsCounter = 0;
+//    self.biographyLabel.text = @"qweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/n";
+//    self.interestsLabel.text = @"qweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/n";
     
     [self.dragableViewsHolder loadNextSwipeableViewsIfNeeded];
     
