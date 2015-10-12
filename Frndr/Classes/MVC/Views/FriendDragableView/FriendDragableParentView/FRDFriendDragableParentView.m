@@ -47,6 +47,11 @@
     return self;
 }
 
+- (void)awakeFromNib
+{
+    [self commonInit];
+}
+
 - (void)commonInit
 {
     self.layer.shadowColor = [UIColor blackColor].CGColor;

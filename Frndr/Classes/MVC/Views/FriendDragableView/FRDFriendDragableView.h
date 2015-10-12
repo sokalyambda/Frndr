@@ -12,8 +12,9 @@
 
 @interface FRDFriendDragableView : UIView
 
-@property (weak, nonatomic) IBOutlet UIView *overlayView;
-@property (weak, nonatomic) IBOutlet UIImageView *overlayImageView;
+@property (weak, nonatomic) IBOutlet UIView *overlayView; //dark overlay while swiping
+@property (weak, nonatomic) IBOutlet UIImageView *overlayImageView; // center image view (accept or decline)
+@property (weak, nonatomic) IBOutlet UIView *stackViewsBackgroundOverlay; // background color overlay view for views in stack
 
 @property (strong, nonatomic) NSString *overlayImageName;
 

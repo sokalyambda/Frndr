@@ -24,8 +24,6 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
 
 @property (nonatomic) NSArray *relationshipStatuses;
 
-@property (nonatomic) NSInteger selectionCounter;
-
 @end
 
 @implementation FRDRelationshipStatusController
@@ -46,17 +44,6 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
         _relationshipStatuses = [self setupRelationshipsArray];
     }
     return _relationshipStatuses;
-}
-
-- (NSInteger)selectionCounter
-{
-    _selectionCounter = 0;
-    for (FRDRelationshipItem *item in self.relationshipStatuses) {
-        if (item.isSelected) {
-            _selectionCounter++;
-        }
-    }
-    return _selectionCounter;
 }
 
 - (NSMutableSet *)relationshipStatusesForSearch

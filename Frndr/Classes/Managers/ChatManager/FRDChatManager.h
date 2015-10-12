@@ -13,4 +13,6 @@
 - (void)connectToHostAndListenEvents;
 - (void)closeChannel;
 
+- (void)emitEvent:(NSString *)eventName withItems:(NSArray *)items;
+
 @end

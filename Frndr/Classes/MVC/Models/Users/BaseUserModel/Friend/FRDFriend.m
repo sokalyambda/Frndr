@@ -29,6 +29,8 @@ static NSString *const kRelationshipStatus = @"relStatus";
 static NSString *const kGenderString = @"sex";
 static NSString *const kAvatarURL = @"url";
 
+static NSString *const kHasNewMessages = @"haveNewMsg";
+
 @implementation FRDFriend
 
 #pragma mark - FRDMappingProtocol
@@ -41,6 +43,9 @@ static NSString *const kAvatarURL = @"url";
         _newFriend = [response[kNewFriend] boolValue];
         _lastMessage = response[kLastMessage];
         _lastMessagePostedDate = [[FRDCommonDateFormatter commonISO8601DateFormatter] dateFromString:response[kLastMessagePostedDate]];
+        
+        //messages
+        _hasNewMessages = [response[kHasNewMessages] boolValue];
     }
     return self;
 }
@@ -54,6 +59,9 @@ static NSString *const kAvatarURL = @"url";
         _genderString = response[kProfileDict][kGenderString];
         _visible = [response[kProfileDict][kVisible] boolValue];
         _relationshipStatus = [FRDRelationshipItem relationshipItemWithTitle:response[kProfileDict][kRelationshipStatus] andActiveImage:@"" andNotActiveImage:@""];
+        
+        //messages
+        _hasNewMessages = [response[kHasNewMessages] boolValue];
         
         //images
         _avatarURL = response[kImages][kAvatar][kAvatarURL];

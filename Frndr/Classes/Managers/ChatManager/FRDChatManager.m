@@ -110,4 +110,15 @@ static NSString *const kSuccess = @"success";
     self.socketIOClient = nil;
 }
 
+/**
+ *  Emit event
+ *
+ *  @param eventName event name
+ *  @param items     items
+ */
+- (void)emitEvent:(NSString *)eventName withItems:(NSArray *)items
+{
+    [self.socketIOClient emit:eventName withItems:items];
+}
+
 @end

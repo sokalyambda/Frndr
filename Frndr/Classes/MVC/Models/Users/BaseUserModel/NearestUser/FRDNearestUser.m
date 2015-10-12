@@ -8,6 +8,24 @@
 
 #import "FRDNearestUser.h"
 
+#import "FRDRelationshipItem.h"
+
+static NSString *const kRelStatus = @"relStatus";
+
 @implementation FRDNearestUser
+
+#pragma mark - FRDMappingProtocol
+
+- (instancetype)initWithServerResponse:(NSDictionary *)response
+{
+    self = [super initWithServerResponse:response];
+    
+    if (self) {
+        
+        _relationshipStatus = [FRDRelationshipItem relationshipItemWithTitle:response[kRelStatus] andActiveImage:@"" andNotActiveImage:@""] ;
+        
+    }
+    return self;
+}
 
 @end

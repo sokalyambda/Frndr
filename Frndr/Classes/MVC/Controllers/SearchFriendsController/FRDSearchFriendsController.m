@@ -15,6 +15,7 @@
 #import "FRDFriendDragableView.h"
 #import "FRDFriendDragableParentView.h"
 #import "FRDPulsingOverlayView.h"
+#import "TTTAttributedLabel.h"
 
 #import "UIView+MakeFromXib.h"
 
@@ -31,8 +32,8 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 @interface FRDSearchFriendsController ()<ZLSwipeableViewDataSource, ZLSwipeableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet ZLSwipeableView *dragableViewsHolder;
-@property (weak, nonatomic) IBOutlet UILabel *interestsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *biographyLabel;
+@property (weak, nonatomic) IBOutlet TTTAttributedLabel *interestsLabel;
+@property (weak, nonatomic) IBOutlet TTTAttributedLabel *biographyLabel;
 @property (weak, nonatomic) IBOutlet UIView *photosCollectionContainer;
 @property (weak, nonatomic) IBOutlet UIView *likeButtonsContainer;
 
@@ -382,22 +383,63 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 }
 
 /**
+ *  Configure attributes for first label's word
+ *
+ */
+- (NSDictionary *)firstWorkAttributes
+{
+    CGColorRef firstWordColor = UIColorFromRGB(0x35B8B4).CGColor;
+    NSDictionary *firstWordAttributes = [NSDictionary dictionaryWithObject:(__bridge id)firstWordColor forKey:(id)kCTForegroundColorAttributeName];
+    return firstWordAttributes;
+}
+
+/**
  *  Update information relative to current nearest user
  */
 - (void)updateNearestUserInformation
 {
-    self.biographyLabel.text = self.currentNearestUser.biography;
+    if (!self.currentNearestUser) {
+        self.biographyLabel.text = @"";
+        self.interestsLabel.text = @"";
+        self.previewGalleryController.photos = @[];
+        return;
+    }
+    
+    [self.biographyLabel setText:[NSString localizedStringWithFormat:@"%@ %@", LOCALIZED(@"Bio:"), self.currentNearestUser.biography] afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+        
+        NSRange firstWordRange = [mutableAttributedString.string rangeOfString:LOCALIZED(@"Bio:")];
+
+        [mutableAttributedString addAttributes:[self firstWorkAttributes] range:firstWordRange];
+        
+        return mutableAttributedString;
+    }];
     
     NSMutableString *interests = [NSMutableString string];
     
-    for (NSString *interest in self.currentNearestUser.thingsLovedMost) {
-        [interests appendFormat:@"%@\n", interest];
+    @autoreleasepool {
+        for (NSString *interest in self.currentNearestUser.thingsLovedMost) {
+            
+            if (!interest.length) {
+                continue;
+            }
+            
+            NSInteger idx = [self.currentNearestUser.thingsLovedMost indexOfObject:interest];
+            
+            if (idx != self.currentNearestUser.thingsLovedMost.count - 1) {
+                [interests appendFormat:@"%@, ", interest];
+            } else {
+                [interests appendFormat:@"%@", interest];
+            }
+        }
     }
     
-    self.interestsLabel.text = interests;
-    
-//    self.biographyLabel.text = @"qweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/n";
-//    self.interestsLabel.text = @"qweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/nqweqweqweqwe/n";
+    [self.interestsLabel setText:[NSString localizedStringWithFormat:@"%@ %@", LOCALIZED(@"Likes:"), interests] afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+        NSRange firstWordRange = [mutableAttributedString.string rangeOfString:LOCALIZED(@"Likes:")];
+        
+        [mutableAttributedString addAttributes:[self firstWorkAttributes] range:firstWordRange];
+        
+        return mutableAttributedString;
+    }];
     
     [self.dragableViewsHolder loadNextSwipeableViewsIfNeeded];
     
@@ -491,6 +533,9 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     
         parentView = [[FRDFriendDragableParentView alloc] initWithFrame:swipeableView.bounds];
         FRDFriendDragableView *friendView = [FRDFriendDragableView makeFromXib];
+        
+        [friendView setFrame:parentView.frame];
+        
         friendView.translatesAutoresizingMaskIntoConstraints = NO;
         [parentView addSubview:friendView];
         
