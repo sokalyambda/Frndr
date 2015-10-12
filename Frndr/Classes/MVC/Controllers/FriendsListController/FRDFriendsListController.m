@@ -214,7 +214,7 @@
 {
     //Message from socket has ownerId, friendId, messageBody;
     FRDChatMessage *message = (FRDChatMessage *)notification.object;
-    
+
     FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
     if ([currentProfile.userId isEqualToString:message.ownerId]) {
         //The message was sent by me

@@ -17,6 +17,12 @@
 
 #import "FRDChatCells.h"
 
+#import "FRDChatManager.h"
+
+static NSString *const kReadEventName = @"read";
+static NSString *const kUserId = @"userId";
+static NSString *const kFriendId = @"friendId";
+
 @interface FRDChatTableController ()
 
 @end
@@ -192,6 +198,12 @@
     FRDChatMessage *message = (FRDChatMessage *)notification.object;
     
     FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
+    
+    //For messages unreading
+    NSString *currentUserId = currentProfile.userId;
+    NSString *friendId = self.currentFriend.userId;
+    [[FRDChatManager sharedChatManager] emitEvent:kReadEventName withItems:@[@{kUserId: currentUserId,
+                                                                        kFriendId: friendId}]];
     
     if ([currentProfile.userId isEqualToString:message.ownerId]) {
 

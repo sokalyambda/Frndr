@@ -56,9 +56,6 @@ static NSString *const kApplyIconName = @"applyIcon";
 // Animations
 @property (strong, nonatomic) CAAnimationGroup *dragAnimationGroup;
 
-@property (weak, nonatomic) UIView *overlayMask;
-@property (weak, nonatomic) UIImageView *overlayImageView;
-
 @end
 
 @implementation ZLSwipeableView
@@ -117,7 +114,7 @@ static NSString *const kApplyIconName = @"applyIcon";
     self.escapeVelocityThreshold = 750;
     self.relativeDisplacementThreshold = 0.25f;
     
-    self.programaticSwipeRotationRelativeYOffsetFromCenter = -0.2;
+    self.programaticSwipeRotationRelativeYOffsetFromCenter = -0.2f;
     self.swipeableViewsCenter = CGPointMake(CGRectGetWidth(self.bounds) / 2, CGRectGetHeight(self.bounds) / 2);
     self.swipeableViewsCenterInitial = CGPointMake(CGRectGetWidth(self.bounds) / 2, CGRectGetHeight(self.bounds) / 2);
     self.collisionRect = [self defaultCollisionRect];
@@ -216,6 +213,7 @@ static NSString *const kApplyIconName = @"applyIcon";
         }
     }
     
+    //custom position of back views
     if (self.isBehindViewsCustomizationEnabled) {
         
         NSUInteger numSwipeableViews = self.containerView.subviews.count;
@@ -226,12 +224,21 @@ static NSString *const kApplyIconName = @"applyIcon";
                                               .subviews[numSwipeableViews - 1]
                                               toPoint:self.swipeableViewsCenter];
             [self.animator addBehavior:self.swipeableViewSnapBehavior];
+            
+            //Adjust background color of views in stack
+            if (self.isStackEnabled) {
+                [self setBackgroundColorForBackgroundOverlayView:self.containerView.subviews[numSwipeableViews - 1] atIndex:0];
+            }
         }
         
         CGPoint rotationCenterOffset = {0, CGRectGetHeight(topSwipeableView.frame) * self.rotationRelativeYOffsetFromCenter};
         
         if (self.isStackEnabled && numSwipeableViews >= 2) {
+            
             [self transformView:self.containerView.subviews[numSwipeableViews - 2] atIndex:1];
+            //Adjust background color of views in stack
+            [self setBackgroundColorForBackgroundOverlayView:self.containerView.subviews[numSwipeableViews - 2] atIndex:1];
+            
         } else if (self.isRotationEnabled && numSwipeableViews >= 2) {
             [self rotateView:self.containerView.subviews[numSwipeableViews - 2]
                    forDegree:self.rotationDegree
@@ -240,7 +247,11 @@ static NSString *const kApplyIconName = @"applyIcon";
         }
         
         if (self.isStackEnabled && numSwipeableViews >= 3) {
+            
             [self transformView:self.containerView.subviews[numSwipeableViews - 3] atIndex:2];
+            //Adjust background color of views in stack
+            [self setBackgroundColorForBackgroundOverlayView:self.containerView.subviews[numSwipeableViews - 3] atIndex:2];
+            
         } else if (self.isRotationEnabled && numSwipeableViews >= 3) {
             [self rotateView:self.containerView.subviews[numSwipeableViews - 3]
                    forDegree:-self.rotationDegree
@@ -255,7 +266,8 @@ static NSString *const kApplyIconName = @"applyIcon";
 static NSString * const kTransformBackViewAnimationKey = @"TransformBackViewAnimation";
 static NSString * const kTransformMiddleViewAnimationKey = @"TransformMiddleViewAnimation";
 static NSString * const kOverlayAppearanceAnimationKey = @"OverlayAppearanceAnimationKey";
-static CGFloat const kRadiusFactor = 0.75;
+static NSString * const kBackgroundColorOverlayAppearanceAnimationKey = @"BackgroundColorOverlayAppearanceAnimationKey";
+static CGFloat const kRadiusFactor = 0.75f;
 
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer
 {
@@ -288,17 +300,30 @@ static CGFloat const kRadiusFactor = 0.75;
     
     UIView *backView = nil;
     UIView *middleView = nil;
+    
+    UIView *stackViewsBackgroundView = nil;
+    
     CABasicAnimation *transformBackView = nil;
     CABasicAnimation *transformMiddleView = nil;
+    
+    CABasicAnimation *alphaOverlayAnimation = [self appearanceAnimationWithViceVersa:NO]; //animation for center image view
+    CABasicAnimation *stackViewsOverlayAnimation = [self appearanceAnimationWithViceVersa:YES]; //animation for views in stack
     
     if (numSwipeableViews >= 3) {
         backView = self.containerView.subviews[0];
         middleView = self.containerView.subviews[1];
+        
         transformBackView = [self transformAnimationForView:backView atIndex:2];
         transformMiddleView = [self transformAnimationForView:middleView atIndex:1];
+        
     } else if (numSwipeableViews == 2) {
         middleView = self.containerView.subviews[0];
+        
         transformMiddleView = [self transformAnimationForView:middleView atIndex:1];
+    }
+    
+    if (middleView && [middleView isKindOfClass:[FRDFriendDragableParentView class]]) {
+        stackViewsBackgroundView = ((FRDFriendDragableParentView *)middleView).friendDragableView.stackViewsBackgroundOverlay;
     }
 
     if (recognizer.state == UIGestureRecognizerStateBegan) {
@@ -312,6 +337,8 @@ static CGFloat const kRadiusFactor = 0.75;
         if (middleView) {
             [backView.layer addAnimation:transformBackView forKey:kTransformBackViewAnimationKey];
             [middleView.layer addAnimation:transformMiddleView forKey:kTransformMiddleViewAnimationKey];
+            
+            [stackViewsBackgroundView.layer addAnimation:stackViewsOverlayAnimation forKey:kBackgroundColorOverlayAppearanceAnimationKey];
         }
  
     }
@@ -328,7 +355,9 @@ static CGFloat const kRadiusFactor = 0.75;
         if (currentOverlayImageView.isHidden && currentOverlayMask.isHidden && (directionType == ZLSwipeableViewDirectionLeft || directionType == ZLSwipeableViewDirectionRight)) {
             currentOverlayMask.hidden = NO;
             currentOverlayImageView.hidden = NO;
-//            [currentOverlayImageView.layer addAnimation:[self appearAnimation] forKey:kOverlayAppearanceAnimationKey];
+            
+            //Add alpha animation
+            [currentOverlayImageView.layer addAnimation:alphaOverlayAnimation forKey:kOverlayAppearanceAnimationKey];
         }
         [self configureDragableFriendViewForOverlaying:currentDragableView withDirection:directionType];
         
@@ -350,9 +379,17 @@ static CGFloat const kRadiusFactor = 0.75;
         transformBackView.timeOffset = normalizedDistance;
         transformMiddleView.timeOffset = normalizedDistance;
 
+        // Manually controll alpha animations
+        alphaOverlayAnimation.timeOffset = normalizedDistance;
+        stackViewsOverlayAnimation.timeOffset = normalizedDistance;
+        
         // Update layer's animations
         [backView.layer addAnimation:transformBackView forKey:kTransformBackViewAnimationKey];
         [middleView.layer addAnimation:transformMiddleView forKey:kTransformMiddleViewAnimationKey];
+        
+        //Update alpha animation
+        [currentOverlayImageView.layer addAnimation:alphaOverlayAnimation forKey:kOverlayAppearanceAnimationKey];
+        [stackViewsBackgroundView.layer addAnimation:stackViewsOverlayAnimation forKey:kBackgroundColorOverlayAppearanceAnimationKey];
     }
     
     if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
@@ -361,14 +398,16 @@ static CGFloat const kRadiusFactor = 0.75;
         if (!currentOverlayMask.isHidden && !currentOverlayImageView.isHidden) {
             currentOverlayMask.hidden = YES;
             currentOverlayImageView.hidden = YES;
+            
+            //Remove alpha animation
+            [currentOverlayImageView.layer removeAnimationForKey:kOverlayAppearanceAnimationKey];
         }
 
         if ((ZLDirectionVectorToSwipeableViewDirection(directionVector) & self.direction) > 0 &&
             (ABS(translation.x) > self.relativeDisplacementThreshold * self.bounds.size.width || // displacement
              velocityMagnitude > self.escapeVelocityThreshold) && // velocity
             (signum(translation.x) == signum(normalizedVelocity.x)) && // sign X
-            (signum(translation.y) == signum(normalizedVelocity.y))) // sign Y
-        {
+            (signum(translation.y) == signum(normalizedVelocity.y))) { // sign Y
             
             // Update model layer with destination values
             backView.layer.transform = ((NSValue *)transformBackView.toValue).CATransform3DValue;
@@ -377,6 +416,8 @@ static CGFloat const kRadiusFactor = 0.75;
             // Remove drag animations (transform in our case)
             [backView.layer removeAnimationForKey:kTransformBackViewAnimationKey];
             [middleView.layer removeAnimationForKey:kTransformMiddleViewAnimationKey];
+            
+            [stackViewsBackgroundView.layer removeAnimationForKey:kBackgroundColorOverlayAppearanceAnimationKey];
             
             /*****New delegate method*****/
             BOOL shouldRemoveView = NO;
@@ -408,12 +449,17 @@ static CGFloat const kRadiusFactor = 0.75;
             
             // Transform views back to starting values with animation
             transformBackView.speed = -1;
-            transformBackView.duration = 0.2;
+            transformBackView.duration = 0.2f;
             [backView.layer addAnimation:transformBackView forKey:kTransformBackViewAnimationKey];
             
             transformMiddleView.speed = -1;
-            transformMiddleView.duration = 0.2;
+            transformMiddleView.duration = 0.2f;
             [middleView.layer addAnimation:transformMiddleView forKey:kTransformMiddleViewAnimationKey];
+            
+            // Set alpha back to starting values with animation
+            stackViewsOverlayAnimation.speed = -1;
+            stackViewsOverlayAnimation.duration = .2f;
+            [stackViewsBackgroundView.layer addAnimation:stackViewsOverlayAnimation forKey:kBackgroundColorOverlayAppearanceAnimationKey];
         }
         
         if ([self.delegate respondsToSelector:@selector(swipeableView:didEndSwipingView:atLocation:)]) {
@@ -478,9 +524,17 @@ static CGFloat const kRadiusFactor = 0.75;
     }
     [self configureDragableFriendViewForOverlaying:currentDragableView withDirection:directionType];
     
+    /*****New delegate method, shouldRemoveView*****/
+    BOOL shouldRemoveView = NO;
+    if ([self.delegate respondsToSelector:@selector(swipeableView:shouldRemoveView:withDirection:)]) {
+        shouldRemoveView = [self.delegate swipeableView:self shouldRemoveView:topSwipeableView withDirection:self.direction];
+    }
+    
+    if (shouldRemoveView) {
     [self pushAnchorViewForCover:topSwipeableView
                      inDirection:direction
                 andCollideInRect:self.collisionRect];
+    }
     /*****One more delegate method which needed for determine whether view was threw*****/
     if ([self.delegate respondsToSelector:@selector(swipeableView:didThrowSwipingView:inDirection:)]) {
         [self.delegate swipeableView:self didThrowSwipingView:topSwipeableView inDirection:directionType];
@@ -533,13 +587,14 @@ static CGFloat const kRadiusFactor = 0.75;
     return transformAnimation;
 }
 
-- (CABasicAnimation *)appearAnimation
+/**
+ *  Alpha animation for overlay image view
+ */
+- (CABasicAnimation *)appearanceAnimationWithViceVersa:(BOOL)inverted
 {
-    UIView *topMostView = [self topSwipeableView];
-    
     CABasicAnimation *fadeAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    fadeAnimation.fromValue = @1.f;
-    fadeAnimation.toValue = @0.f;
+    fadeAnimation.fromValue = inverted ? @1 : @0.f;
+    fadeAnimation.toValue = inverted ? @0 : @1.f;
     fadeAnimation.speed = 0.f;
     fadeAnimation.duration = 1.01f;
     fadeAnimation.timeOffset= 0.f;
@@ -794,6 +849,38 @@ atOffsetFromCenter:(CGPoint)offset
 }
 
 //Views stack
+//Set overlay background color for views in stack
+- (void)setBackgroundColorForBackgroundOverlayView:(UIView *)view atIndex:(NSInteger)index
+{
+    if ([view isKindOfClass:[FRDFriendDragableParentView class]]) {
+        
+        FRDFriendDragableView *friendDragableView = ((FRDFriendDragableParentView *)view).friendDragableView;
+        
+        UIColor *backgroundOverlayColor;
+        switch (index) {
+            case 0: {
+                backgroundOverlayColor = [UIColor clearColor];
+                break;
+            }
+            case 1: {
+                backgroundOverlayColor = UIColorFromRGB(0x7FD9D6); //lighter
+                break;
+            }
+            case 2: {
+                backgroundOverlayColor = UIColorFromRGB(0x47BEBB); //darker
+                break;
+            }
+                
+            default:
+                break;
+        }
+        
+        friendDragableView.stackViewsBackgroundOverlay.backgroundColor = backgroundOverlayColor;
+
+    }
+}
+
+//transform views to stack
 static CGFloat const kYOffset = 20.f;
 - (void)transformView:(UIView *)view atIndex:(NSInteger)index
 {
@@ -811,8 +898,6 @@ static CGFloat const kYOffset = 20.f;
     transform = CGAffineTransformTranslate(transform, 0, -kYOffset*index);
     return transform;
 }
-
-#pragma warning Temporary!
 
 - (UIView *)topSwipeableView
 {
