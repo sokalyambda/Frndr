@@ -64,11 +64,9 @@
     if (numberOfLines > self.linesThreshold && !self.scrollEnabled) {
         self.scrollEnabled = YES;
         self.heightConstraint.constant = self.contentSize.height;
-    } else if (numberOfLines <= self.linesThreshold && self.scrollEnabled) {
+    } else if (numberOfLines <= self.linesThreshold) {
         self.scrollEnabled = NO;
         self.heightConstraint.constant = MAX(textHeight, self.minimumHeight);
-    } else if (!self.scrollEnabled) {
-        self.heightConstraint.constant = self.minimumHeight;
     }
 }
 
