@@ -68,11 +68,9 @@ static CGFloat const kAnimationDuration = .15f;
     }
     
     [UIView animateWithDuration:kAnimationDuration animations:^{
-        if(!self.text.length) {
-            [self.placeHolderLabel setAlpha:1];
-        } else {
-            [self.placeHolderLabel setAlpha:0];
-        }
+        
+        self.placeHolderLabel.alpha = !self.text.length ? 1 : 0;
+        
     }];
 }
 

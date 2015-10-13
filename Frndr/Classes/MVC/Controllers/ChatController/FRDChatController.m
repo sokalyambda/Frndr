@@ -210,17 +210,18 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
     CGSize kbSize = keyBoardFrame.size;
     
     self.bottomSpaceToContainer.constant = kbSize.height;
+
     [UIView animateWithDuration:.5f
                      animations:^{
                          [self.view layoutIfNeeded];
                      }];
-    
     [self.chatTableController scrollTableViewToBottomAnimated:NO];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
     self.bottomSpaceToContainer.constant = 0;
+
     [UIView animateWithDuration:.5f
                      animations:^{
                          [self.view layoutIfNeeded];
