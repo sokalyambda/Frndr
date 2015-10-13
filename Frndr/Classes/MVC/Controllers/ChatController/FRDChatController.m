@@ -98,8 +98,9 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
             
             [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
         }];
-        self.replyTextView.text = @"";
     }
+    
+    self.replyTextView.text = @"";
 }
 
 - (IBAction)sendReplyClick:(id)sender

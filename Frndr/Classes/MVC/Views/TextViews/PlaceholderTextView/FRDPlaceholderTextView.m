@@ -23,7 +23,8 @@ static CGFloat const kAnimationDuration = .15f;
 - (void)setText:(NSString *)text
 {
     [super setText:text];
-    [self textChanged:nil];
+    //[self textChanged:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:nil];
 }
 
 #pragma mark - Lifecycle
