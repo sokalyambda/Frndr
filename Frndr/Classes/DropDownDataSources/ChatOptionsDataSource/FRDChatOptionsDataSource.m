@@ -56,7 +56,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     NSInteger lastCellIndex = self.options.count - 1;
-    cell.textLabel.textColor = indexPath.row == lastCellIndex ? UIColorFromRGB(0xFFFFFF) : UIColorFromRGB(0x58406C);
+    cell.textLabel.textColor = indexPath.row == lastCellIndex ? [UIColor whiteColor] : UIColorFromRGB(0x58406C);
     cell.backgroundColor = indexPath.row == lastCellIndex ? [UIColor clearColor] : [UIColor whiteColor];
 }
 

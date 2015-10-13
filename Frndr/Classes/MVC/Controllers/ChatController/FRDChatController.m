@@ -11,7 +11,7 @@
 
 #import "FRDSerialViewConstructor.h"
 
-#import "FRDDropDownTableView.h"
+#import "FRDChatOptionsDropDownTableView.h"
 #import "FRDExpandableToThresholdTextView.h"
 
 #import "FRDBaseDropDownDataSource.h"
@@ -38,7 +38,7 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
 @property (strong, nonatomic) UIBarButtonItem *showOptionsBarButton;
 @property (strong, nonatomic) UIBarButtonItem *hideOptionsBarButton;
 
-@property (strong, nonatomic) FRDDropDownTableView *dropDownOptionsList;
+@property (strong, nonatomic) FRDChatOptionsDropDownTableView *dropDownOptionsList;
 
 @property (weak, nonatomic) FRDChatTableController *chatTableController;
 
@@ -111,7 +111,7 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
 
 - (void)initDropDownTable
 {
-    self.dropDownOptionsList = [FRDDropDownTableView makeFromXib];
+    self.dropDownOptionsList = [FRDChatOptionsDropDownTableView makeFromXib];
     
     self.dropDownOptionsList.alpha = 1.f;
     self.dropDownOptionsList.backgroundColor = [UIColor clearColor];
@@ -136,18 +136,13 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
     self.replyTextView.minimumHeight = kReplyTextViewMinimumHeight;
 }
 
-- (void)fadeChatTableInOut
-{
-    [UIView animateWithDuration:self.dropDownOptionsList.slideAnimationDuration animations:^{
-        self.chatTableController.tableView.alpha = self.dropDownOptionsList.isExpanded ? 1.f : .45f;
-    }];
-}
-
 - (void)switchOptionsState
 {
-    FRDBaseDropDownDataSource *dataSource = [FRDBaseDropDownDataSource dataSourceWithType:FRDDataSourceTypeChatOptions];
+    if (self.dropDownOptionsList.isMoving) {
+        return;
+    }
     
-    [self fadeChatTableInOut];
+    FRDBaseDropDownDataSource *dataSource = [FRDBaseDropDownDataSource dataSourceWithType:FRDDataSourceTypeChatOptions];
     
     WEAK_SELF;
     [self.dropDownOptionsList dropDownTableBecomeActiveInView:self.view
@@ -180,9 +175,6 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
                                                         break;
                                                 }
                                             }
-                                            
-                                            [weakSelf fadeChatTableInOut];
-                                            
                                         }];
 }
 
@@ -222,7 +214,7 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
                          [self.view layoutIfNeeded];
                      }];
     
-    [self.chatTableController scrollTableViewToBottomAnimated:YES];
+    [self.chatTableController scrollTableViewToBottomAnimated:NO];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification

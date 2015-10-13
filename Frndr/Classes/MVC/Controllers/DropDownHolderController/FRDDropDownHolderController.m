@@ -59,6 +59,20 @@ static NSString *const kNotSmokerString = @"Non-Smoker";
 
 #pragma mark - Actions
 
+/**
+ *  Rotate current arrow
+ */
+- (void)rotateArrow:(UIImageView *)arrow
+{
+    if (self.dropDownList.isMoving) {
+        return;
+    }
+    
+    [UIView animateWithDuration:.2f animations:^{
+        arrow.transform = self.dropDownList.isExpanded ? CGAffineTransformRotate(arrow.transform, M_PI) : CGAffineTransformMakeRotation(0);
+    }];
+}
+
 - (void)initDropDownTable
 {
     self.dropDownList = [FRDDropDownTableView makeFromXib];
@@ -71,7 +85,7 @@ static NSString *const kNotSmokerString = @"Non-Smoker";
     WEAK_SELF;
     [self.dropDownList dropDownTableBecomeActiveInView:self.viewForDisplaying fromAnchorView:tapView withDataSource:smokerDataSource withShowingCompletion:^(FRDDropDownTableView *table) {
         
-        table.arrowImageView = self.smokerPointingArrow;
+        [weakSelf rotateArrow:weakSelf.smokerPointingArrow];
         
     } withCompletion:^(FRDDropDownTableView *table, id chosenValue) {
         
@@ -93,7 +107,7 @@ static NSString *const kNotSmokerString = @"Non-Smoker";
 
     [self.dropDownList dropDownTableBecomeActiveInView:self.viewForDisplaying fromAnchorView:tapView withDataSource:sexualDataSource withShowingCompletion:^(FRDDropDownTableView *table) {
         
-        table.arrowImageView = self.sexualOrientationPointingArrow;
+        [weakSelf rotateArrow:weakSelf.sexualOrientationPointingArrow];
         
     } withCompletion:^(FRDDropDownTableView *table, id chosenValue) {
         

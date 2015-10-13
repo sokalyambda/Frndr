@@ -64,7 +64,6 @@
 		586264C81BBD069B00824BA3 /* FRDPulsingOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586264C71BBD069B00824BA3 /* FRDPulsingOverlayView.xib */; settings = {ASSET_TAGS = (); }; };
 		586264CC1BBD0ADD00824BA3 /* UIView+Bluring.m in Sources */ = {isa = PBXBuildFile; fileRef = 586264CB1BBD0ADD00824BA3 /* UIView+Bluring.m */; settings = {ASSET_TAGS = (); }; };
 		587727F81BA2D8150032D746 /* FRDTermsAndServicesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 587727F71BA2D8150032D746 /* FRDTermsAndServicesController.m */; };
-		587B3A6D1BA7F2A20098154F /* FRDDropDownTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A6C1BA7F2A20098154F /* FRDDropDownTableView.m */; };
 		587B3A751BA7F4450098154F /* FRDBaseDropDownDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A741BA7F4450098154F /* FRDBaseDropDownDataSource.m */; };
 		587B3A7A1BA7F7B00098154F /* FRDSmokerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A791BA7F7B00098154F /* FRDSmokerDataSource.m */; };
 		587B3A7D1BA7F7C30098154F /* FRDSexualOrientationDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A7C1BA7F7C30098154F /* FRDSexualOrientationDataSource.m */; };
@@ -75,8 +74,13 @@
 		587B3A8F1BA814C40098154F /* FRDRelationshipStatusController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587B3A8D1BA814C40098154F /* FRDRelationshipStatusController.xib */; };
 		587B3A941BA815850098154F /* FRDRelationshipCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A921BA815850098154F /* FRDRelationshipCollectionCell.m */; };
 		587B3A951BA815850098154F /* FRDRelationshipCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587B3A931BA815850098154F /* FRDRelationshipCollectionCell.xib */; };
+		5886DA261BCD01A50004F929 /* UIViewController+LastPresentingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5886DA251BCD01A50004F929 /* UIViewController+LastPresentingController.m */; settings = {ASSET_TAGS = (); }; };
 		58916D501BCB977000E261E5 /* UIView+RoundSpecificCorners.m in Sources */ = {isa = PBXBuildFile; fileRef = 58916D4F1BCB977000E261E5 /* UIView+RoundSpecificCorners.m */; settings = {ASSET_TAGS = (); }; };
 		5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */; };
+		589664F51BCC151A007022C6 /* FRDChatOptionsDropDownTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 589664F41BCC151A007022C6 /* FRDChatOptionsDropDownTableView.m */; settings = {ASSET_TAGS = (); }; };
+		589664FB1BCC15B5007022C6 /* FRDDropDownTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 589664F91BCC15B5007022C6 /* FRDDropDownTableView.m */; settings = {ASSET_TAGS = (); }; };
+		589664FC1BCC15B5007022C6 /* FRDDropDownTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 589664FA1BCC15B5007022C6 /* FRDDropDownTableView.xib */; settings = {ASSET_TAGS = (); }; };
+		589664FE1BCC15CE007022C6 /* FRDChatOptionsDropDownTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 589664FD1BCC15CE007022C6 /* FRDChatOptionsDropDownTableView.xib */; settings = {ASSET_TAGS = (); }; };
 		58A1A12E1BB926AD00E29789 /* FRDOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A1A12D1BB926AD00E29789 /* FRDOverlayView.m */; settings = {ASSET_TAGS = (); }; };
 		58AC69401BC7938300A1C7D5 /* FRDPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AC693F1BC7938300A1C7D5 /* FRDPlaceholderTextView.m */; settings = {ASSET_TAGS = (); }; };
 		58AC69441BC79B3100A1C7D5 /* FRDGetFriendProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AC69431BC79B3100A1C7D5 /* FRDGetFriendProfileRequest.m */; settings = {ASSET_TAGS = (); }; };
@@ -137,7 +141,6 @@
 		58C28FF81BAAC6800099ABE4 /* ZLPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C28FF51BAAC6800099ABE4 /* ZLPanGestureRecognizer.m */; };
 		58C28FF91BAAC6800099ABE4 /* ZLSwipeableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C28FF71BAAC6800099ABE4 /* ZLSwipeableView.m */; };
 		58C28FFC1BAAC69B0099ABE4 /* CAAnimation+CompetionBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C28FFB1BAAC69B0099ABE4 /* CAAnimation+CompetionBlock.m */; };
-		58C28FFE1BAAC6C50099ABE4 /* FRDDropDownTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58C28FFD1BAAC6C40099ABE4 /* FRDDropDownTableView.xib */; };
 		58CB4E7D1BC960EF00517287 /* SocketAckEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CB4E6D1BC960EF00517287 /* SocketAckEmitter.swift */; settings = {ASSET_TAGS = (); }; };
 		58CB4E7E1BC960EF00517287 /* SocketAckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CB4E6E1BC960EF00517287 /* SocketAckManager.swift */; settings = {ASSET_TAGS = (); }; };
 		58CB4E7F1BC960EF00517287 /* SocketAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CB4E6F1BC960EF00517287 /* SocketAnyEvent.swift */; settings = {ASSET_TAGS = (); }; };
@@ -325,8 +328,6 @@
 		586264CB1BBD0ADD00824BA3 /* UIView+Bluring.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Bluring.m"; path = "Classes/Categories/UIView/UIView+Bluring/UIView+Bluring.m"; sourceTree = "<group>"; };
 		587727F61BA2D8150032D746 /* FRDTermsAndServicesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDTermsAndServicesController.h; path = Classes/MVC/Controllers/TermsAndServicesController/FRDTermsAndServicesController.h; sourceTree = "<group>"; };
 		587727F71BA2D8150032D746 /* FRDTermsAndServicesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDTermsAndServicesController.m; path = Classes/MVC/Controllers/TermsAndServicesController/FRDTermsAndServicesController.m; sourceTree = "<group>"; };
-		587B3A6B1BA7F2A20098154F /* FRDDropDownTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDDropDownTableView.h; path = Classes/MVC/Views/DropDownTableView/FRDDropDownTableView.h; sourceTree = "<group>"; };
-		587B3A6C1BA7F2A20098154F /* FRDDropDownTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDDropDownTableView.m; path = Classes/MVC/Views/DropDownTableView/FRDDropDownTableView.m; sourceTree = "<group>"; };
 		587B3A731BA7F4450098154F /* FRDBaseDropDownDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDBaseDropDownDataSource.h; path = Classes/DropDownDataSources/BaseDropDownDataSource/FRDBaseDropDownDataSource.h; sourceTree = "<group>"; };
 		587B3A741BA7F4450098154F /* FRDBaseDropDownDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDBaseDropDownDataSource.m; path = Classes/DropDownDataSources/BaseDropDownDataSource/FRDBaseDropDownDataSource.m; sourceTree = "<group>"; };
 		587B3A781BA7F7B00098154F /* FRDSmokerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSmokerDataSource.h; path = Classes/DropDownDataSources/SmokerDataSource/FRDSmokerDataSource.h; sourceTree = "<group>"; };
@@ -344,10 +345,18 @@
 		587B3A911BA815850098154F /* FRDRelationshipCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRelationshipCollectionCell.h; path = Classes/Cells/UICollectionViewCells/RelationshipCollectionCell/FRDRelationshipCollectionCell.h; sourceTree = "<group>"; };
 		587B3A921BA815850098154F /* FRDRelationshipCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRelationshipCollectionCell.m; path = Classes/Cells/UICollectionViewCells/RelationshipCollectionCell/FRDRelationshipCollectionCell.m; sourceTree = "<group>"; };
 		587B3A931BA815850098154F /* FRDRelationshipCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDRelationshipCollectionCell.xib; path = Classes/Cells/UICollectionViewCells/RelationshipCollectionCell/FRDRelationshipCollectionCell.xib; sourceTree = "<group>"; };
+		5886DA241BCD01A50004F929 /* UIViewController+LastPresentingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+LastPresentingController.h"; path = "Classes/Categories/UIViewController/UIViewController+LastPresentingController/UIViewController+LastPresentingController.h"; sourceTree = "<group>"; };
+		5886DA251BCD01A50004F929 /* UIViewController+LastPresentingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+LastPresentingController.m"; path = "Classes/Categories/UIViewController/UIViewController+LastPresentingController/UIViewController+LastPresentingController.m"; sourceTree = "<group>"; };
 		58916D4E1BCB977000E261E5 /* UIView+RoundSpecificCorners.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+RoundSpecificCorners.h"; path = "Classes/Categories/UIView/UIView+RoundSpecificCorners/UIView+RoundSpecificCorners.h"; sourceTree = "<group>"; };
 		58916D4F1BCB977000E261E5 /* UIView+RoundSpecificCorners.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+RoundSpecificCorners.m"; path = "Classes/Categories/UIView/UIView+RoundSpecificCorners/UIView+RoundSpecificCorners.m"; sourceTree = "<group>"; };
 		5895FD931BA2D55C00079F9D /* FRDCustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDCustomPageControl.h; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.h; sourceTree = "<group>"; };
 		5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDCustomPageControl.m; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.m; sourceTree = "<group>"; };
+		589664F31BCC151A007022C6 /* FRDChatOptionsDropDownTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDChatOptionsDropDownTableView.h; path = Classes/MVC/Views/DropDownTableView/ChatOptionsDropDownTableView/FRDChatOptionsDropDownTableView.h; sourceTree = "<group>"; };
+		589664F41BCC151A007022C6 /* FRDChatOptionsDropDownTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDChatOptionsDropDownTableView.m; path = Classes/MVC/Views/DropDownTableView/ChatOptionsDropDownTableView/FRDChatOptionsDropDownTableView.m; sourceTree = "<group>"; };
+		589664F81BCC15B5007022C6 /* FRDDropDownTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDDropDownTableView.h; path = Classes/MVC/Views/DropDownTableView/BaseDropDownTableView/FRDDropDownTableView.h; sourceTree = "<group>"; };
+		589664F91BCC15B5007022C6 /* FRDDropDownTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDDropDownTableView.m; path = Classes/MVC/Views/DropDownTableView/BaseDropDownTableView/FRDDropDownTableView.m; sourceTree = "<group>"; };
+		589664FA1BCC15B5007022C6 /* FRDDropDownTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDDropDownTableView.xib; path = Classes/MVC/Views/DropDownTableView/BaseDropDownTableView/FRDDropDownTableView.xib; sourceTree = "<group>"; };
+		589664FD1BCC15CE007022C6 /* FRDChatOptionsDropDownTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDChatOptionsDropDownTableView.xib; path = Classes/MVC/Views/DropDownTableView/ChatOptionsDropDownTableView/FRDChatOptionsDropDownTableView.xib; sourceTree = "<group>"; };
 		58A1A12C1BB926AD00E29789 /* FRDOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDOverlayView.h; path = Classes/MVC/Views/FriendDragableView/FriendOverlayView/FRDOverlayView.h; sourceTree = "<group>"; };
 		58A1A12D1BB926AD00E29789 /* FRDOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDOverlayView.m; path = Classes/MVC/Views/FriendDragableView/FriendOverlayView/FRDOverlayView.m; sourceTree = "<group>"; };
 		58AC693E1BC7938300A1C7D5 /* FRDPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPlaceholderTextView.h; path = Classes/MVC/Views/TextViews/PlaceholderTextView/FRDPlaceholderTextView.h; sourceTree = "<group>"; };
@@ -460,7 +469,6 @@
 		58C28FF71BAAC6800099ABE4 /* ZLSwipeableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZLSwipeableView.m; path = Frndr/Classes/Libraries/ZLSwipeableView/ZLSwipeableView.m; sourceTree = SOURCE_ROOT; };
 		58C28FFA1BAAC69B0099ABE4 /* CAAnimation+CompetionBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CAAnimation+CompetionBlock.h"; path = "Classes/Categories/CAAnimation/CAAnimation+CompletionBlock/CAAnimation+CompetionBlock.h"; sourceTree = "<group>"; };
 		58C28FFB1BAAC69B0099ABE4 /* CAAnimation+CompetionBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CAAnimation+CompetionBlock.m"; path = "Classes/Categories/CAAnimation/CAAnimation+CompletionBlock/CAAnimation+CompetionBlock.m"; sourceTree = "<group>"; };
-		58C28FFD1BAAC6C40099ABE4 /* FRDDropDownTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDDropDownTableView.xib; path = Classes/MVC/Views/DropDownTableView/FRDDropDownTableView.xib; sourceTree = "<group>"; };
 		58CB4E6D1BC960EF00517287 /* SocketAckEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketAckEmitter.swift; path = Classes/Libraries/Sockets/Socket.io/SocketAckEmitter.swift; sourceTree = "<group>"; };
 		58CB4E6E1BC960EF00517287 /* SocketAckManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketAckManager.swift; path = Classes/Libraries/Sockets/Socket.io/SocketAckManager.swift; sourceTree = "<group>"; };
 		58CB4E6F1BC960EF00517287 /* SocketAnyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketAnyEvent.swift; path = Classes/Libraries/Sockets/Socket.io/SocketAnyEvent.swift; sourceTree = "<group>"; };
@@ -1046,9 +1054,8 @@
 		587B3A6A1BA7F25B0098154F /* DropDownTableView */ = {
 			isa = PBXGroup;
 			children = (
-				58C28FFD1BAAC6C40099ABE4 /* FRDDropDownTableView.xib */,
-				587B3A6B1BA7F2A20098154F /* FRDDropDownTableView.h */,
-				587B3A6C1BA7F2A20098154F /* FRDDropDownTableView.m */,
+				589664F21BCC14E6007022C6 /* ChatOptionsDropDownTableView */,
+				589664F11BCC14D7007022C6 /* BaseDropDownTableView */,
 			);
 			name = DropDownTableView;
 			sourceTree = "<group>";
@@ -1150,6 +1157,15 @@
 			name = RoundedView;
 			sourceTree = "<group>";
 		};
+		5886DA231BCD015D0004F929 /* UIViewController+LastPresentingController */ = {
+			isa = PBXGroup;
+			children = (
+				5886DA241BCD01A50004F929 /* UIViewController+LastPresentingController.h */,
+				5886DA251BCD01A50004F929 /* UIViewController+LastPresentingController.m */,
+			);
+			name = "UIViewController+LastPresentingController";
+			sourceTree = "<group>";
+		};
 		58916D4D1BCB972000E261E5 /* UIView+RoundSpecificCorners */ = {
 			isa = PBXGroup;
 			children = (
@@ -1157,6 +1173,26 @@
 				58916D4F1BCB977000E261E5 /* UIView+RoundSpecificCorners.m */,
 			);
 			name = "UIView+RoundSpecificCorners";
+			sourceTree = "<group>";
+		};
+		589664F11BCC14D7007022C6 /* BaseDropDownTableView */ = {
+			isa = PBXGroup;
+			children = (
+				589664F81BCC15B5007022C6 /* FRDDropDownTableView.h */,
+				589664F91BCC15B5007022C6 /* FRDDropDownTableView.m */,
+				589664FA1BCC15B5007022C6 /* FRDDropDownTableView.xib */,
+			);
+			name = BaseDropDownTableView;
+			sourceTree = "<group>";
+		};
+		589664F21BCC14E6007022C6 /* ChatOptionsDropDownTableView */ = {
+			isa = PBXGroup;
+			children = (
+				589664FD1BCC15CE007022C6 /* FRDChatOptionsDropDownTableView.xib */,
+				589664F31BCC151A007022C6 /* FRDChatOptionsDropDownTableView.h */,
+				589664F41BCC151A007022C6 /* FRDChatOptionsDropDownTableView.m */,
+			);
+			name = ChatOptionsDropDownTableView;
 			sourceTree = "<group>";
 		};
 		58A1A12B1BB9269100E29789 /* OverlayVIew */ = {
@@ -1877,6 +1913,7 @@
 		58BC76E81B9EBABF00BB8B5A /* UIViewController */ = {
 			isa = PBXGroup;
 			children = (
+				5886DA231BCD015D0004F929 /* UIViewController+LastPresentingController */,
 				58BC76F61B9EBB6100BB8B5A /* UIViewController+FixOrientation */,
 			);
 			name = UIViewController;
@@ -2665,12 +2702,13 @@
 				587B3A891BA80F3D0098154F /* FRDDropDownHolderController.xib in Resources */,
 				587B3A951BA815850098154F /* FRDRelationshipCollectionCell.xib in Resources */,
 				58ED54FA1BB189EA00F9B378 /* FRDGeolocationDeniedController.xib in Resources */,
-				58C28FFE1BAAC6C50099ABE4 /* FRDDropDownTableView.xib in Resources */,
 				586264C81BBD069B00824BA3 /* FRDPulsingOverlayView.xib in Resources */,
 				58CD9AC01BAFF1C800A7CADB /* FRDTopContentView.xib in Resources */,
+				589664FC1BCC15B5007022C6 /* FRDDropDownTableView.xib in Resources */,
 				3E941A441BB1815400F034E6 /* FRDApplicationSettingsTableHeader.xib in Resources */,
 				3E941A4B1BB1818F00F034E6 /* FRDMyProfileTopView.xib in Resources */,
 				58BC76AA1B9EB6B500BB8B5A /* Main.storyboard in Resources */,
+				589664FE1BCC15CE007022C6 /* FRDChatOptionsDropDownTableView.xib in Resources */,
 				58F05AD01BAC3F730092D767 /* FRDPreviewPhotoCell.xib in Resources */,
 				58BC76AF1B9EB6B500BB8B5A /* LaunchScreen.xib in Resources */,
 				58BC76AC1B9EB6B500BB8B5A /* Images.xcassets in Resources */,
@@ -2784,6 +2822,7 @@
 				58F2F30F1B9EF93F000DC739 /* FRDTutorialController.m in Sources */,
 				58CB4E7F1BC960EF00517287 /* SocketAnyEvent.swift in Sources */,
 				58BC770E1B9ECA5000BB8B5A /* UIView+MakeFromXib.m in Sources */,
+				589664F51BCC151A007022C6 /* FRDChatOptionsDropDownTableView.m in Sources */,
 				58ED55021BB1B3E000F9B378 /* FRDSendDeviceDataRequest.m in Sources */,
 				58CB4E861BC960EF00517287 /* SocketLogger.swift in Sources */,
 				58C28C4E1BA999F2009D1AC4 /* FRDFriendDragableView.m in Sources */,
@@ -2806,9 +2845,11 @@
 				3E945CD41BBE7EA300BD5820 /* FRDBaseChatCell.m in Sources */,
 				58CF2C851BC56C4F0025AD2C /* FRDSendMessageRequest.m in Sources */,
 				581B9D441B9ED7FE0080393B /* FRDFacebookService.m in Sources */,
+				589664FB1BCC15B5007022C6 /* FRDDropDownTableView.m in Sources */,
 				58BC77291B9ECB0300BB8B5A /* FRDKeychainHandler.m in Sources */,
 				3E0EEC601BABF2CE00AB51B0 /* FRDApplicationSettingsTableContainer.m in Sources */,
 				3E945CCB1BBE733700BD5820 /* FRDUserChatCell.m in Sources */,
+				5886DA261BCD01A50004F929 /* UIViewController+LastPresentingController.m in Sources */,
 				58CB4E851BC960EF00517287 /* SocketIOClientStatus.swift in Sources */,
 				3E941A3C1BB180E200F034E6 /* UIResponder+FirstResponder.m in Sources */,
 				5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */,
@@ -2882,7 +2923,6 @@
 				587B3A941BA815850098154F /* FRDRelationshipCollectionCell.m in Sources */,
 				58BC77021B9ECA1700BB8B5A /* NSDictionary+JSONRepresentation.m in Sources */,
 				3E5DEE701BAEB59800832CD6 /* FRDRangeSlider.m in Sources */,
-				587B3A6D1BA7F2A20098154F /* FRDDropDownTableView.m in Sources */,
 				58ED54EC1BB1643F00F9B378 /* FRDSignOutRequest.m in Sources */,
 				587727F81BA2D8150032D746 /* FRDTermsAndServicesController.m in Sources */,
 			);

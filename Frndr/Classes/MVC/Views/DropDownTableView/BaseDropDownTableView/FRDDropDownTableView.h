@@ -11,12 +11,21 @@
 typedef void(^DropDownResult)(FRDDropDownTableView *table, id chosenValue);
 typedef void(^PresentingCompletion)(FRDDropDownTableView *table);
 
-@interface FRDDropDownTableView : UIView
+@interface FRDDropDownTableView : UIView {
+    @protected
+    __weak UIView *_presentedView;
+    __weak UIView *_anchorView;
+    __weak UITableView *_dropDownList;
+    PresentingCompletion _presentingCompletion;
+    CGRect savedDropDownTableFrame;
+    FRDBaseDropDownDataSource *_dropDownDataSource;
+}
 
-
-@property (strong, nonatomic) UIImageView *arrowImageView;
-
+//Moving&Expanding
+@property (nonatomic) BOOL isMoving;
 @property (nonatomic) BOOL isExpanded;
+
+//Additional settings
 @property (nonatomic) BOOL isScrollEnabled;
 @property (nonatomic) BOOL areSeparatorsVisible;
 
@@ -24,6 +33,8 @@ typedef void(^PresentingCompletion)(FRDDropDownTableView *table);
 @property (nonatomic) CGFloat additionalOffset;
 @property (nonatomic) CGFloat cornerRadius;
 @property (nonatomic) CGFloat slideAnimationDuration;
+
+- (CGFloat)calculatedDropDownHeight;
 
 - (void)dropDownTableBecomeActiveInView:(UIView *)presentedView
                          fromAnchorView:(UIView *)anchorView
