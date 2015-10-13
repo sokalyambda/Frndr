@@ -59,20 +59,6 @@ static NSString *const kNotSmokerString = @"Non-Smoker";
 
 #pragma mark - Actions
 
-/**
- *  Rotate current arrow
- */
-- (void)rotateArrow:(UIImageView *)arrow
-{
-    if (self.dropDownList.isMoving) {
-        return;
-    }
-    
-    [UIView animateWithDuration:.2f animations:^{
-        arrow.transform = self.dropDownList.isExpanded ? CGAffineTransformRotate(arrow.transform, M_PI) : CGAffineTransformMakeRotation(0);
-    }];
-}
-
 - (void)initDropDownTable
 {
     self.dropDownList = [FRDDropDownTableView makeFromXib];
@@ -82,10 +68,15 @@ static NSString *const kNotSmokerString = @"Non-Smoker";
 {
     UIView *tapView = tap.view;
     FRDBaseDropDownDataSource *smokerDataSource = [FRDBaseDropDownDataSource dataSourceWithType:FRDDataSourceTypeSmoker];
+    
+    if (self.dropDownList.isMoving) {
+        return;
+    }
+    
     WEAK_SELF;
     [self.dropDownList dropDownTableBecomeActiveInView:self.viewForDisplaying fromAnchorView:tapView withDataSource:smokerDataSource withShowingCompletion:^(FRDDropDownTableView *table) {
         
-        [weakSelf rotateArrow:weakSelf.smokerPointingArrow];
+        weakSelf.dropDownList.rotatingArrow = weakSelf.smokerPointingArrow;
         
     } withCompletion:^(FRDDropDownTableView *table, id chosenValue) {
         
@@ -103,11 +94,15 @@ static NSString *const kNotSmokerString = @"Non-Smoker";
 {
     UIView *tapView = tap.view;
     FRDBaseDropDownDataSource *sexualDataSource = [FRDBaseDropDownDataSource dataSourceWithType:FRDDataSourceTypeSexualOrientation];
+    
+    if (self.dropDownList.isMoving) {
+        return;
+    }
+    
     WEAK_SELF;
-
     [self.dropDownList dropDownTableBecomeActiveInView:self.viewForDisplaying fromAnchorView:tapView withDataSource:sexualDataSource withShowingCompletion:^(FRDDropDownTableView *table) {
         
-        [weakSelf rotateArrow:weakSelf.sexualOrientationPointingArrow];
+        weakSelf.dropDownList.rotatingArrow = weakSelf.sexualOrientationPointingArrow;
         
     } withCompletion:^(FRDDropDownTableView *table, id chosenValue) {
         
