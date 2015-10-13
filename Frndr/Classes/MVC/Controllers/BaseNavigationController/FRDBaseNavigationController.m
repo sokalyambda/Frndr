@@ -54,9 +54,9 @@
     [self.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     [self.navigationBar setShadowImage:[[UIImage alloc] init]];
     
+    [self.navigationBar setTintColor:UIColorFromRGB(0x7FD9D6)];
     /*
-    [self.navigationBar setBarTintColor:UIColorFromRGB(0x12a9d6)];
-    [self.navigationBar setTintColor:[UIColor whiteColor]];
+    [self.navigationBar setBarTintColor:UIColorFromRGB(0x7FD9D6)];
     [self.navigationBar setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans" size:20.f], NSForegroundColorAttributeName : [UIColor whiteColor]}];
      */
 }

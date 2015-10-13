@@ -19,6 +19,8 @@
 
 #import "FRDChatManager.h"
 
+extern uint64_t dispatch_benchmark(size_t count, void (^block)(void));
+
 static NSString *const kReadEventName = @"read";
 static NSString *const kUserId = @"userId";
 static NSString *const kFriendId = @"friendId";
@@ -30,6 +32,18 @@ static NSString *const kFriendId = @"friendId";
 @implementation FRDChatTableController
 
 @synthesize messageHistory = _messageHistory;
+
+dispatch_queue_t messages_unpacking_queue() {
+    
+    static dispatch_queue_t matrix_calculations_queue;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        matrix_calculations_queue = dispatch_queue_create("messages_unpacking_queue", DISPATCH_QUEUE_CONCURRENT);
+    });
+    
+    return matrix_calculations_queue;
+}
 
 #pragma mark - Accessors 
 
@@ -194,39 +208,44 @@ static NSString *const kFriendId = @"friendId";
 
 - (void)didReceiveNewMessageNotification:(NSNotification *)notification
 {
-    //Message from socket has ownerId, friendId, messageBody;
-    FRDChatMessage *message = (FRDChatMessage *)notification.object;
-    
-    FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
-    
-    //For messages unreading
-    NSString *currentUserId = currentProfile.userId;
-    NSString *friendId = self.currentFriend.userId;
-    if (![currentUserId isEqualToString:message.ownerId]) {
-        [[FRDChatManager sharedChatManager] emitEvent:kReadEventName withItems:@[@{kUserId: currentUserId,
-                                                                                   kFriendId: friendId}]];
-    }
-    
-    if ([currentProfile.userId isEqualToString:message.ownerId]) {
-
-        message.ownerType = FRDMessageOwnerTypeUser;
+    dispatch_async(messages_unpacking_queue(), ^{
         
-    } else if ([self.currentFriend.userId isEqualToString:message.ownerId]) {
+        FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
         
-        message.ownerType = FRDMessageOwnerTypeFriend;
+        @synchronized(self) {
+            //Message from socket has ownerId, friendId, messageBody;
+            FRDChatMessage *message = (FRDChatMessage *)notification.object;
+            
+            //For messages unreading
+            NSString *currentUserId = currentProfile.userId;
+            NSString *friendId = self.currentFriend.userId;
+            if (![currentUserId isEqualToString:message.ownerId]) {
+                [[FRDChatManager sharedChatManager] emitEvent:kReadEventName withItems:@[@{kUserId: currentUserId,
+                                                                                           kFriendId: friendId}]];
+            }
+            
+            if ([currentProfile.userId isEqualToString:message.ownerId]) {
+                
+                message.ownerType = FRDMessageOwnerTypeUser;
+                
+            } else if ([self.currentFriend.userId isEqualToString:message.ownerId]) {
+                
+                message.ownerType = FRDMessageOwnerTypeFriend;
+                
+            }
+            
+            message.creationDate = [NSDate date];
+            
+            
+            [self.messageHistory addObject:message];
+        }
         
-    }
-    
-    message.creationDate = [NSDate date];
-    
-    [self.messageHistory addObject:message];
-
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.messageHistory.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-
-    [self.tableView reloadData];
-    
-    [self scrollTableViewToBottomAnimated:NO];
-    
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            [self scrollTableViewToBottomAnimated:NO];
+        });
+        
+    });
 }
 
 @end

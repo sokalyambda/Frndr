@@ -10,7 +10,7 @@
 
 @interface FRDExpandableToThresholdTextView ()
 
-@property (strong, nonatomic) NSLayoutConstraint *heightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
 
 @end
 
@@ -24,33 +24,12 @@
     self.heightConstraint.constant = minimumHeight;
 }
 
-- (NSLayoutConstraint *)heightConstraint
-{
-    if (!_heightConstraint) {
-        _heightConstraint = [NSLayoutConstraint constraintWithItem:self
-                                                         attribute:NSLayoutAttributeHeight
-                                                         relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                            toItem:nil
-                                                         attribute:0.f
-                                                        multiplier:1.f
-                                                          constant:0.f];
-    }
-    return _heightConstraint;
-}
-
 #pragma mark - Lifecycle
 
 - (void)awakeFromNib
 {
     [super awakeFromNib];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkForThresholdOvercoming) name:UITextViewTextDidChangeNotification object:nil];
-
-    [self addConstraint:self.heightConstraint];
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Actions
