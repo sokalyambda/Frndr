@@ -74,7 +74,6 @@
 		587B3A8F1BA814C40098154F /* FRDRelationshipStatusController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587B3A8D1BA814C40098154F /* FRDRelationshipStatusController.xib */; };
 		587B3A941BA815850098154F /* FRDRelationshipCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A921BA815850098154F /* FRDRelationshipCollectionCell.m */; };
 		587B3A951BA815850098154F /* FRDRelationshipCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587B3A931BA815850098154F /* FRDRelationshipCollectionCell.xib */; };
-		5886DA261BCD01A50004F929 /* UIViewController+LastPresentingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5886DA251BCD01A50004F929 /* UIViewController+LastPresentingController.m */; settings = {ASSET_TAGS = (); }; };
 		58916D501BCB977000E261E5 /* UIView+RoundSpecificCorners.m in Sources */ = {isa = PBXBuildFile; fileRef = 58916D4F1BCB977000E261E5 /* UIView+RoundSpecificCorners.m */; settings = {ASSET_TAGS = (); }; };
 		5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */; };
 		589664F51BCC151A007022C6 /* FRDChatOptionsDropDownTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 589664F41BCC151A007022C6 /* FRDChatOptionsDropDownTableView.m */; settings = {ASSET_TAGS = (); }; };
@@ -345,8 +344,6 @@
 		587B3A911BA815850098154F /* FRDRelationshipCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRelationshipCollectionCell.h; path = Classes/Cells/UICollectionViewCells/RelationshipCollectionCell/FRDRelationshipCollectionCell.h; sourceTree = "<group>"; };
 		587B3A921BA815850098154F /* FRDRelationshipCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRelationshipCollectionCell.m; path = Classes/Cells/UICollectionViewCells/RelationshipCollectionCell/FRDRelationshipCollectionCell.m; sourceTree = "<group>"; };
 		587B3A931BA815850098154F /* FRDRelationshipCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDRelationshipCollectionCell.xib; path = Classes/Cells/UICollectionViewCells/RelationshipCollectionCell/FRDRelationshipCollectionCell.xib; sourceTree = "<group>"; };
-		5886DA241BCD01A50004F929 /* UIViewController+LastPresentingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+LastPresentingController.h"; path = "Classes/Categories/UIViewController/UIViewController+LastPresentingController/UIViewController+LastPresentingController.h"; sourceTree = "<group>"; };
-		5886DA251BCD01A50004F929 /* UIViewController+LastPresentingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+LastPresentingController.m"; path = "Classes/Categories/UIViewController/UIViewController+LastPresentingController/UIViewController+LastPresentingController.m"; sourceTree = "<group>"; };
 		58916D4E1BCB977000E261E5 /* UIView+RoundSpecificCorners.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+RoundSpecificCorners.h"; path = "Classes/Categories/UIView/UIView+RoundSpecificCorners/UIView+RoundSpecificCorners.h"; sourceTree = "<group>"; };
 		58916D4F1BCB977000E261E5 /* UIView+RoundSpecificCorners.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+RoundSpecificCorners.m"; path = "Classes/Categories/UIView/UIView+RoundSpecificCorners/UIView+RoundSpecificCorners.m"; sourceTree = "<group>"; };
 		5895FD931BA2D55C00079F9D /* FRDCustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDCustomPageControl.h; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.h; sourceTree = "<group>"; };
@@ -1157,15 +1154,6 @@
 			name = RoundedView;
 			sourceTree = "<group>";
 		};
-		5886DA231BCD015D0004F929 /* UIViewController+LastPresentingController */ = {
-			isa = PBXGroup;
-			children = (
-				5886DA241BCD01A50004F929 /* UIViewController+LastPresentingController.h */,
-				5886DA251BCD01A50004F929 /* UIViewController+LastPresentingController.m */,
-			);
-			name = "UIViewController+LastPresentingController";
-			sourceTree = "<group>";
-		};
 		58916D4D1BCB972000E261E5 /* UIView+RoundSpecificCorners */ = {
 			isa = PBXGroup;
 			children = (
@@ -1913,7 +1901,6 @@
 		58BC76E81B9EBABF00BB8B5A /* UIViewController */ = {
 			isa = PBXGroup;
 			children = (
-				5886DA231BCD015D0004F929 /* UIViewController+LastPresentingController */,
 				58BC76F61B9EBB6100BB8B5A /* UIViewController+FixOrientation */,
 			);
 			name = UIViewController;
@@ -2849,7 +2836,6 @@
 				58BC77291B9ECB0300BB8B5A /* FRDKeychainHandler.m in Sources */,
 				3E0EEC601BABF2CE00AB51B0 /* FRDApplicationSettingsTableContainer.m in Sources */,
 				3E945CCB1BBE733700BD5820 /* FRDUserChatCell.m in Sources */,
-				5886DA261BCD01A50004F929 /* UIViewController+LastPresentingController.m in Sources */,
 				58CB4E851BC960EF00517287 /* SocketIOClientStatus.swift in Sources */,
 				3E941A3C1BB180E200F034E6 /* UIResponder+FirstResponder.m in Sources */,
 				5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */,

@@ -103,12 +103,19 @@
     } else if (status == kCLAuthorizationStatusNotDetermined) {
         isGeolocationStatusDetermine = NO;
     }
-    
+
     UIViewController *root = [UIApplication sharedApplication].keyWindow.rootViewController;
     
-    if (isGeolocationEnable && root.presentedViewController) {
+    UIViewController *presentedController = root.presentedViewController;
+    
+    if (isGeolocationEnable && presentedController) {
         [self.geolocationDeniedController dismissViewControllerAnimated:YES completion:nil];
     } else if (!isGeolocationEnable && isGeolocationStatusDetermine) {
+        
+        if (presentedController) {
+            [presentedController dismissViewControllerAnimated:YES completion:nil];
+        }
+        
         [root presentViewController:self.geolocationDeniedController animated:YES completion:nil];
     }
 }
