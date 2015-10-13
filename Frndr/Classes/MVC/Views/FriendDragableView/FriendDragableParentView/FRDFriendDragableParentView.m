@@ -26,7 +26,6 @@
     return friendDragableView;
 }
 
-
 #pragma mark - Lifecycle
 
 - (instancetype)initWithFrame:(CGRect)frame

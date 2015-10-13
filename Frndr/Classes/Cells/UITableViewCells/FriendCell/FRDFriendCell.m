@@ -33,9 +33,7 @@
     self.nameLabel.text = currentFriend.fullName;
     self.timeAndDateLabel.text = [currentFriend.lastMessagePostedDate dateTimeAgo];
     
-    if (currentFriend.isNewFriend) {
-        self.messageLabel.textColor = UIColorFromRGB(0x35B8B4);
-    }
+    self.messageLabel.textColor = currentFriend.isNewFriend ? UIColorFromRGB(0x35B8B4) : [UIColor purpleColor]; //shoud be changed
     
     [UIView animateWithDuration:.4f animations:^{
         self.incomingMessageIcon.alpha = currentFriend.hasNewMessages ? 1.f : 0.f;

@@ -202,8 +202,10 @@ static NSString *const kFriendId = @"friendId";
     //For messages unreading
     NSString *currentUserId = currentProfile.userId;
     NSString *friendId = self.currentFriend.userId;
-    [[FRDChatManager sharedChatManager] emitEvent:kReadEventName withItems:@[@{kUserId: currentUserId,
-                                                                        kFriendId: friendId}]];
+    if (![currentUserId isEqualToString:message.ownerId]) {
+        [[FRDChatManager sharedChatManager] emitEvent:kReadEventName withItems:@[@{kUserId: currentUserId,
+                                                                                   kFriendId: friendId}]];
+    }
     
     if ([currentProfile.userId isEqualToString:message.ownerId]) {
 
@@ -221,7 +223,13 @@ static NSString *const kFriendId = @"friendId";
 
     NSArray *indexPaths = [self.tableView indexPathsForVisibleRows];
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.messageHistory.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-    [self.tableView reloadRowsAtIndexPaths:@[indexPaths[indexPaths.count - 1], indexPaths[indexPaths.count - 2]] withRowAnimation:UITableViewRowAnimationNone];
+    
+//    if (indexPaths.count >= 2) {
+//        [self.tableView reloadRowsAtIndexPaths:@[indexPaths[indexPaths.count - 1], indexPaths[indexPaths.count - 2]] withRowAnimation:UITableViewRowAnimationNone];
+//    } else {
+//        [self.tableView reloadRowsAtIndexPaths:@[indexPaths[indexPaths.count - 1]] withRowAnimation:UITableViewRowAnimationNone];
+//    }
+    [self.tableView reloadData];
     
     [self scrollTableViewToBottomAnimated:NO];
     

@@ -29,14 +29,11 @@ static CGFloat kDefaultSlideAnimationDuration = .5f;
 @property (weak, nonatomic) UIView *presentedView;
 
 @property (nonatomic) CGFloat calculatedDropDownHeight;
-
 @property (nonatomic) BOOL expandingNeeded;
 
 @end
 
-@implementation FRDDropDownTableView {
-    CGRect savedDropDownTableFrame;
-}
+@implementation FRDDropDownTableView
 
 #pragma mark - Accessors
 
@@ -60,7 +57,6 @@ static CGFloat kDefaultSlideAnimationDuration = .5f;
 
 // Value indicates the number of rows to which the height is adjusted dynamically
 static NSInteger const kRowsNumberThreshold = 4;
-
 - (CGFloat)calculatedDropDownHeight
 {
     CGFloat calculatedHeight = 0;
@@ -187,6 +183,13 @@ static NSInteger const kRowsNumberThreshold = 4;
     [self.presentedView addSubview:self];
     [self layoutIfNeeded];
     
+    self.isMoving = YES;
+    
+    if (self.presentingCompletion) {
+        self.isExpanded = YES;
+        self.presentingCompletion(self);
+    }
+
     WEAK_SELF;
     [UIView animateWithDuration:self.slideAnimationDuration
                           delay:0.1f
@@ -200,19 +203,24 @@ static NSInteger const kRowsNumberThreshold = 4;
                             weakSelf.dropDownList.frame = newFrame;
                         }
                      completion:^(BOOL finished) {
-                         if (weakSelf.presentingCompletion) {
-                             [weakSelf rotateArrow];
-                             weakSelf.isExpanded = YES;
-                             weakSelf.presentingCompletion(weakSelf);
-                             [weakSelf rotateArrow];
-                         }
+                         
+                         weakSelf.isMoving = NO;
+                         
                      }];
 }
 
 - (void)hideDropDownList
 {
+    [self layoutIfNeeded];
+    
+    self.isMoving = YES;
+    
+    if (self.presentingCompletion) {
+        self.isExpanded = NO;
+        self.presentingCompletion(self);
+    }
+    
     WEAK_SELF;
-    [weakSelf layoutIfNeeded];
     [UIView animateWithDuration:self.slideAnimationDuration
                           delay:0.1f
          usingSpringWithDamping:1.f
@@ -226,26 +234,9 @@ static NSInteger const kRowsNumberThreshold = 4;
                          weakSelf.dropDownDataSource = nil;
                          [weakSelf removeFromSuperview];
                          
-                         if (weakSelf.presentingCompletion) {
-                             [weakSelf rotateArrow];
-                             weakSelf.isExpanded = NO;
-                             weakSelf.presentingCompletion(weakSelf);
-                             [weakSelf rotateArrow];
-                         }
-                     }];
-}
+                         weakSelf.isMoving = NO;
 
-/**
- *  Rotate current arrow
- */
-- (void)rotateArrow
-{
-    if (!self.arrowImageView) {
-        return;
-    }
-    [UIView animateWithDuration:0.2 animations:^{
-        self.arrowImageView.transform = self.isExpanded ? CGAffineTransformRotate(self.arrowImageView.transform, M_PI) : CGAffineTransformMakeRotation(0);
-    }];
+                     }];
 }
 
 @end
