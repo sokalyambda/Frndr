@@ -54,6 +54,20 @@
     }];
 }
 
++ (void)blockFriendWithId:(NSString *)friendId
+                onSuccess:(SuccessBlock)success
+                onFailure:(FailureBlock)failure
+{
+    
+}
+
++ (void)clearMessagesHistoryWithFriendWithId:(NSString *)friendId
+                                   onSuccess:(SuccessBlock)success
+                                   onFailure:(FailureBlock)failure
+{
+    
+}
+
 + (FRDChatCellPositionInSet)positionOfCellInSetByIndexPath:(NSIndexPath *)indexPath
                                             inMessagesHistory:(NSArray *)messagesHistory
 {

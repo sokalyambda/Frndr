@@ -371,6 +371,27 @@ NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
     return operation;
 }
 
++ (FRDNetworkOperation *)blockFriendWithId:(NSString *)friendId
+                                 onSuccess:(SuccessBlock)success
+                                 onFailure:(FailureBlock)failure
+{
+    FRDBlockFriendRequest *request = [[FRDBlockFriendRequest alloc] initWithFriendId:friendId];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
 /******* FaceBook *******/
 
 + (FRDNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(NSString *userId, BOOL avatarExists, BOOL isFirstLogin))success
@@ -540,6 +561,27 @@ NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
                            onFailure:(FailureBlock)failure
 {
     FRDSendMessageRequest *request = [[FRDSendMessageRequest alloc] initWithFriendId:friendId andMessageBody:messageBody];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
++ (FRDNetworkOperation *)clearMessagesWithFriendWithId:(NSString *)friendId
+                           onSuccess:(SuccessBlock)success
+                           onFailure:(FailureBlock)failure
+{
+    FRDClearMessagesWithFriendRequest *request = [[FRDClearMessagesWithFriendRequest alloc] initWithFriendId:friendId];
     
     FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
         

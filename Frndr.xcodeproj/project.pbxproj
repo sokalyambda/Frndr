@@ -74,6 +74,7 @@
 		587B3A8F1BA814C40098154F /* FRDRelationshipStatusController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587B3A8D1BA814C40098154F /* FRDRelationshipStatusController.xib */; };
 		587B3A941BA815850098154F /* FRDRelationshipCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B3A921BA815850098154F /* FRDRelationshipCollectionCell.m */; };
 		587B3A951BA815850098154F /* FRDRelationshipCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587B3A931BA815850098154F /* FRDRelationshipCollectionCell.xib */; };
+		5886DA2A1BCD4CF50004F929 /* FRDClearMessagesWithFriendRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5886DA291BCD4CF50004F929 /* FRDClearMessagesWithFriendRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58916D501BCB977000E261E5 /* UIView+RoundSpecificCorners.m in Sources */ = {isa = PBXBuildFile; fileRef = 58916D4F1BCB977000E261E5 /* UIView+RoundSpecificCorners.m */; settings = {ASSET_TAGS = (); }; };
 		5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */; };
 		589664F51BCC151A007022C6 /* FRDChatOptionsDropDownTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 589664F41BCC151A007022C6 /* FRDChatOptionsDropDownTableView.m */; settings = {ASSET_TAGS = (); }; };
@@ -344,6 +345,8 @@
 		587B3A911BA815850098154F /* FRDRelationshipCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRelationshipCollectionCell.h; path = Classes/Cells/UICollectionViewCells/RelationshipCollectionCell/FRDRelationshipCollectionCell.h; sourceTree = "<group>"; };
 		587B3A921BA815850098154F /* FRDRelationshipCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRelationshipCollectionCell.m; path = Classes/Cells/UICollectionViewCells/RelationshipCollectionCell/FRDRelationshipCollectionCell.m; sourceTree = "<group>"; };
 		587B3A931BA815850098154F /* FRDRelationshipCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDRelationshipCollectionCell.xib; path = Classes/Cells/UICollectionViewCells/RelationshipCollectionCell/FRDRelationshipCollectionCell.xib; sourceTree = "<group>"; };
+		5886DA281BCD4CF50004F929 /* FRDClearMessagesWithFriendRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDClearMessagesWithFriendRequest.h; path = "Classes/Server APIs/API/Requests/MessagesModule/ClearMessagesWithFriendRequest/FRDClearMessagesWithFriendRequest.h"; sourceTree = "<group>"; };
+		5886DA291BCD4CF50004F929 /* FRDClearMessagesWithFriendRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDClearMessagesWithFriendRequest.m; path = "Classes/Server APIs/API/Requests/MessagesModule/ClearMessagesWithFriendRequest/FRDClearMessagesWithFriendRequest.m"; sourceTree = "<group>"; };
 		58916D4E1BCB977000E261E5 /* UIView+RoundSpecificCorners.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+RoundSpecificCorners.h"; path = "Classes/Categories/UIView/UIView+RoundSpecificCorners/UIView+RoundSpecificCorners.h"; sourceTree = "<group>"; };
 		58916D4F1BCB977000E261E5 /* UIView+RoundSpecificCorners.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+RoundSpecificCorners.m"; path = "Classes/Categories/UIView/UIView+RoundSpecificCorners/UIView+RoundSpecificCorners.m"; sourceTree = "<group>"; };
 		5895FD931BA2D55C00079F9D /* FRDCustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDCustomPageControl.h; path = Classes/Libraries/StyledPageControl/FRDCustomPageControl.h; sourceTree = "<group>"; };
@@ -1154,6 +1157,15 @@
 			name = RoundedView;
 			sourceTree = "<group>";
 		};
+		5886DA271BCD4CC70004F929 /* ClearMessagesWithFriendRequest */ = {
+			isa = PBXGroup;
+			children = (
+				5886DA281BCD4CF50004F929 /* FRDClearMessagesWithFriendRequest.h */,
+				5886DA291BCD4CF50004F929 /* FRDClearMessagesWithFriendRequest.m */,
+			);
+			name = ClearMessagesWithFriendRequest;
+			sourceTree = "<group>";
+		};
 		58916D4D1BCB972000E261E5 /* UIView+RoundSpecificCorners */ = {
 			isa = PBXGroup;
 			children = (
@@ -1457,6 +1469,7 @@
 		58B99EAC1BBA86CD0057DB54 /* MessagesModule */ = {
 			isa = PBXGroup;
 			children = (
+				5886DA271BCD4CC70004F929 /* ClearMessagesWithFriendRequest */,
 				58CF2C821BC56C1D0025AD2C /* SendMessageRequest */,
 				58CF2C7E1BC550CB0025AD2C /* GetChatHistoryRequest */,
 				58B99EAD1BBA87C00057DB54 /* ClearAllMessagesRequest */,
@@ -2867,6 +2880,7 @@
 				58CB4E8C1BC960EF00517287 /* WebSocket.swift in Sources */,
 				3E0EEC581BABE89300AB51B0 /* FRDRoundedImageView.m in Sources */,
 				58C28C391BA95207009D1AC4 /* FRDFriendsListController.m in Sources */,
+				5886DA2A1BCD4CF50004F929 /* FRDClearMessagesWithFriendRequest.m in Sources */,
 				3E10E3151BA16E780075C72D /* FRDPhotoGalleryLayout.m in Sources */,
 				58B27CF51BC194290035712C /* FRDGetGalleryPhotosRequest.m in Sources */,
 				58B970321BC2501B0017785E /* FRDGetAvatarRequest.m in Sources */,

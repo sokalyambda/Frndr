@@ -2317,7 +2317,7 @@
                                 </variation>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="A7w-2X-iq9" firstAttribute="top" secondItem="dYp-Ir-omP" secondAttribute="bottom" id="J5R-fa-Miq"/>
                             <constraint firstItem="dYp-Ir-omP" firstAttribute="leading" secondItem="n8V-jV-fiO" secondAttribute="leading" id="Qbt-rF-JUd"/>

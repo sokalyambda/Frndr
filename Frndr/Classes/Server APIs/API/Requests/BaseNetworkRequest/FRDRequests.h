@@ -30,6 +30,8 @@
 #import "FRDClearAllMessagesRequest.h"
 #import "FRDGetChatHistoryRequest.h"
 #import "FRDSendMessageRequest.h"
+#import "FRDBlockFriendRequest.h"
+#import "FRDClearMessagesWithFriendRequest.h"
 
 #import "FRDUploadAvatarRequest.h"
 #import "FRDUploadPhotoToGalleryRequest.h"

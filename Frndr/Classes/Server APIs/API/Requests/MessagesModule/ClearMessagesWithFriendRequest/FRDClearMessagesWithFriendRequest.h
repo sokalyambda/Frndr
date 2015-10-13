@@ -1,16 +1,14 @@
 //
-//  FRDBlockFriendRequest.h
+//  FRDClearMessagesWithFriendRequest.h
 //  Frndr
 //
-//  Created by Eugenity on 22.09.15.
+//  Created by Eugenity on 13.10.15.
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
 #import "FRDNetworkRequest.h"
 
-@class FRDFriend;
-
-@interface FRDBlockFriendRequest : FRDNetworkRequest
+@interface FRDClearMessagesWithFriendRequest : FRDNetworkRequest
 
 - (instancetype)initWithFriendId:(NSString *)friendId;
 

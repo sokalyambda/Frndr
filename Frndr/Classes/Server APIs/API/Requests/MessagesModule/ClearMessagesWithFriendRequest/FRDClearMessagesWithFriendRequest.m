@@ -1,31 +1,30 @@
 //
-//  FRDBlockFriendRequest.m
+//  FRDClearMessagesWithFriendRequest.m
 //  Frndr
 //
-//  Created by Eugenity on 22.09.15.
+//  Created by Eugenity on 13.10.15.
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "FRDBlockFriendRequest.h"
+#import "FRDClearMessagesWithFriendRequest.h"
 
-#import "FRDFriend.h"
+static NSString *const kRequestAction = @"messages";
 
-static NSString *const kRequestAction = @"users/blockFriend";
+static NSString *const kFriendId = @"friendId";
 
-@interface FRDBlockFriendRequest ()
+@interface FRDClearMessagesWithFriendRequest ()
 
-@property (strong, nonatomic) NSString *friendId;
 @property (strong, nonatomic) NSString *requestAction;
 
 @end
 
-@implementation FRDBlockFriendRequest
+@implementation FRDClearMessagesWithFriendRequest
 
 #pragma mark - Accessors
 
 - (NSString *)requestAction
 {
-    return [NSString stringWithFormat:@"%@/%@", kRequestAction, self.friendId];
+    return kRequestAction;
 }
 
 #pragma mark - Lifecycle
@@ -34,12 +33,10 @@ static NSString *const kRequestAction = @"users/blockFriend";
 {
     self = [super init];
     if (self) {
-        
-        _friendId = friendId;
         self.action = [self requestAction];
-        _method = @"GET";
+        _method = @"DELETE";
         
-        NSMutableDictionary *parameters = [@{} mutableCopy];
+        NSMutableDictionary *parameters = [@{kFriendId: friendId} mutableCopy];
         
         self.serializationType = FRDRequestSerializationTypeJSON;
         

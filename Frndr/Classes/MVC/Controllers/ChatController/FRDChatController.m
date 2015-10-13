@@ -143,6 +143,8 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
         return;
     }
     
+    [[UIResponder currentFirstResponder] resignFirstResponder];
+    
     FRDBaseDropDownDataSource *dataSource = [FRDBaseDropDownDataSource dataSourceWithType:FRDDataSourceTypeChatOptions];
     
     WEAK_SELF;
@@ -179,6 +181,43 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
                                         }];
 }
 
+- (void)clearMessagesHistoryWithCurrentFriend
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [FRDProjectFacade clearMessagesWithFriendWithId:self.currentFriend.userId onSuccess:^(BOOL isSuccess) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        weakSelf.chatTableController.messageHistory = [@[] mutableCopy];
+        [weakSelf.chatTableController.tableView reloadData];
+        
+        [FRDAlertFacade showAlertWithMessage:LOCALIZED(@"Messages have been removed.") forController:weakSelf withCompletion:^{
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }];
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+    }];
+}
+
+- (void)blockCurrentFriend
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [FRDProjectFacade blockFriendWithId:self.currentFriend.userId onSuccess:^(BOOL isSuccess) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        [FRDAlertFacade showAlertWithMessage:LOCALIZED(@"User has been blocked.") forController:weakSelf withCompletion:^{
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }];
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+    }];
+}
+
 #pragma mark - Options actions
 
 - (void)viewProfileOptionClick
@@ -188,17 +227,17 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
 
 - (void)clearChatOptionClick
 {
-    NSLog(@"Clear chat with %@", self.currentFriend.fullName);
+    [self showClearChatActionSheet];
 }
 
 - (void)blockUserOptionClick
 {
-    NSLog(@"BLOCK %@", self.currentFriend.fullName);
+    [self showBlockFriendActionSheet];
 }
 
 - (void)cancelOptionClick
 {
-    
+    //just cancel..
 }
 
 #pragma mark - Keyboard notification handlers
@@ -214,8 +253,9 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
     [UIView animateWithDuration:.5f
                      animations:^{
                          [self.view layoutIfNeeded];
+                     } completion:^(BOOL finished) {
+                         [self.chatTableController scrollTableViewToBottomAnimated:YES];
                      }];
-    [self.chatTableController scrollTableViewToBottomAnimated:NO];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
@@ -238,6 +278,44 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
         self.chatTableController.currentFriend = self.currentFriend;
         [self.chatTableController viewWillAppear:YES];
     }
+}
+
+#pragma mark - Alert Controllers
+
+- (void)showClearChatActionSheet
+{
+    NSString *currentFriendName = self.currentFriend.fullName;
+    
+    UIAlertController *clearChatAlertController = [UIAlertController alertControllerWithTitle:@"" message:[NSString localizedStringWithFormat:@"%@ %@?", LOCALIZED(@"Do you want remove chat history with"), currentFriendName] preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Clean") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self clearMessagesHistoryWithCurrentFriend];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleDefault handler:nil];
+    
+    [clearChatAlertController addAction:confirmAction];
+    [clearChatAlertController addAction:cancelAction];
+    
+    [self presentViewController:clearChatAlertController animated:YES completion:nil];
+}
+
+- (void)showBlockFriendActionSheet
+{
+    NSString *currentFriendName = self.currentFriend.fullName;
+    
+    UIAlertController *blockFriendAlertController = [UIAlertController alertControllerWithTitle:@"" message:[NSString localizedStringWithFormat:@"%@ %@?", LOCALIZED(@"Do you want block"), currentFriendName] preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Block") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self blockCurrentFriend];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleDefault handler:nil];
+    
+    [blockFriendAlertController addAction:confirmAction];
+    [blockFriendAlertController addAction:cancelAction];
+    
+    [self presentViewController:blockFriendAlertController animated:YES completion:nil];
 }
 
 @end

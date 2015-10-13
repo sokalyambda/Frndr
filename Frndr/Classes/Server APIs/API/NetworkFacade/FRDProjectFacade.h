@@ -65,6 +65,9 @@ extern NSString *defaultBaseURLString;
 //Friends List
 + (FRDNetworkOperation *)getFriendsListWithPage:(NSInteger)page onSuccess:(void (^)(NSArray *friendsList))success
                                       onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
++ (FRDNetworkOperation *)blockFriendWithId:(NSString *)friendId
+                                 onSuccess:(SuccessBlock)success
+                                 onFailure:(FailureBlock)failure;
 
 //Friend Profile
 + (FRDNetworkOperation *)getFriendProfileWithFriendId:(NSString *)friendId onSuccess:(void (^)(FRDFriend *cirrentFriend))success
@@ -100,6 +103,9 @@ extern NSString *defaultBaseURLString;
                       toFriendWithId:(NSString *)friendId
                            onSuccess:(SuccessBlock)success
                            onFailure:(FailureBlock)failure;
++ (FRDNetworkOperation *)clearMessagesWithFriendWithId:(NSString *)friendId
+                                             onSuccess:(SuccessBlock)success
+                                             onFailure:(FailureBlock)failure;
 
 #pragma mark - Images Module
 
