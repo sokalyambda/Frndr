@@ -70,7 +70,7 @@ extern NSString *defaultBaseURLString;
                                  onFailure:(FailureBlock)failure;
 
 //Friend Profile
-+ (FRDNetworkOperation *)getFriendProfileWithFriendId:(NSString *)friendId onSuccess:(void (^)(FRDFriend *cirrentFriend))success
++ (FRDNetworkOperation *)getFriendProfileWithFriendId:(NSString *)friendId onSuccess:(void (^)(FRDFriend *currentFriend))success
                                             onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
 //Facebook

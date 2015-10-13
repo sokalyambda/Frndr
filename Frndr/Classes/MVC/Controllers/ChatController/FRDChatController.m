@@ -181,11 +181,15 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
                                         }];
 }
 
+/**
+ *  Clear messages history with current friend
+ */
 - (void)clearMessagesHistoryWithCurrentFriend
 {
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [FRDProjectFacade clearMessagesWithFriendWithId:self.currentFriend.userId onSuccess:^(BOOL isSuccess) {
+    [FRDChatMessagesService clearMessagesHistoryWithFriendWithId:self.currentFriend.userId onSuccess:^(BOOL isSuccess) {
+        
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
         weakSelf.chatTableController.messageHistory = [@[] mutableCopy];
@@ -196,11 +200,16 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
         }];
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
+        
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+
     }];
 }
 
+/**
+ *  Block current friend by id
+ */
 - (void)blockCurrentFriend
 {
     WEAK_SELF;
@@ -218,11 +227,29 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
     }];
 }
 
+/**
+ *  Get full friend profile by id
+ */
+- (void)getFriendProfile
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [FRDProjectFacade getFriendProfileWithFriendId:self.currentFriend.userId onSuccess:^(FRDFriend *currentFriend) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        NSLog(@"current friend %@", currentFriend);
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+    }];
+}
+
 #pragma mark - Options actions
 
 - (void)viewProfileOptionClick
 {
-    NSLog(@"Show profile of %@", self.currentFriend.fullName);
+    [self getFriendProfile];
 }
 
 - (void)clearChatOptionClick
@@ -250,11 +277,12 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
     
     self.bottomSpaceToContainer.constant = kbSize.height;
 
+    WEAK_SELF;
     [UIView animateWithDuration:.5f
                      animations:^{
-                         [self.view layoutIfNeeded];
+                         [weakSelf.view layoutIfNeeded];
                      } completion:^(BOOL finished) {
-                         [self.chatTableController scrollTableViewToBottomAnimated:YES];
+                         [weakSelf.chatTableController scrollTableViewToBottomAnimated:YES];
                      }];
 }
 
@@ -262,9 +290,10 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
 {
     self.bottomSpaceToContainer.constant = 0;
 
+    WEAK_SELF;
     [UIView animateWithDuration:.5f
                      animations:^{
-                         [self.view layoutIfNeeded];
+                         [weakSelf.view layoutIfNeeded];
                      }];
 }
 

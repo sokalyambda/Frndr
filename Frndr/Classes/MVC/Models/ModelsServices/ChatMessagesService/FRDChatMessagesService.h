@@ -29,10 +29,6 @@ typedef void(^ChatHistoryFailure)(NSError *error);
           onSuccess:(SuccessBlock)success
           onFailure:(FailureBlock)failure;
 
-+ (void)blockFriendWithId:(NSString *)friendId
-                onSuccess:(SuccessBlock)success
-                onFailure:(FailureBlock)failure;
-
 + (void)clearMessagesHistoryWithFriendWithId:(NSString *)friendId
                                    onSuccess:(SuccessBlock)success
                                    onFailure:(FailureBlock)failure;

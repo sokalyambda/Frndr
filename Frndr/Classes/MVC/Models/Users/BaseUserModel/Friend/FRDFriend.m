@@ -18,6 +18,7 @@ static NSString *const kNewFriend = @"newFriend";
 static NSString *const kLastMessage = @"message";
 static NSString *const kFriendId = @"friendId";
 static NSString *const kLastMessagePostedDate = @"date";
+static NSString *const kMostLovedThings = @"things";
 
 static NSString *const kProfileDict = @"profile";
 static NSString *const kFriendIdKey = @"_id";
@@ -69,6 +70,9 @@ static NSString *const kHasNewMessages = @"haveNewMsg";
         
         //there is difference in keys
         _userId = response[kFriendIdKey];
+        
+        //things that he loves most
+        _thingsLovedMost = response[kProfileDict][kMostLovedThings];
     }
     
     return self;

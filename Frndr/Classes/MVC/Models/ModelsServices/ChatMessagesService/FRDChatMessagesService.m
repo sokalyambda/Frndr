@@ -54,18 +54,23 @@
     }];
 }
 
-+ (void)blockFriendWithId:(NSString *)friendId
-                onSuccess:(SuccessBlock)success
-                onFailure:(FailureBlock)failure
-{
-    
-}
-
 + (void)clearMessagesHistoryWithFriendWithId:(NSString *)friendId
                                    onSuccess:(SuccessBlock)success
                                    onFailure:(FailureBlock)failure
 {
-    
+    [FRDProjectFacade clearMessagesWithFriendWithId:friendId onSuccess:^(BOOL isSuccess) {
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        
+        if (failure) {
+            failure(error, isCanceled);
+        }
+        
+    }];
 }
 
 + (FRDChatCellPositionInSet)positionOfCellInSetByIndexPath:(NSIndexPath *)indexPath

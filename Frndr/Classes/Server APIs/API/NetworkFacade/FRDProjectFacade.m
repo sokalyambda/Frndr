@@ -349,7 +349,7 @@ NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
     return operation;
 }
 
-+ (FRDNetworkOperation *)getFriendProfileWithFriendId:(NSString *)friendId onSuccess:(void (^)(FRDFriend *cirrentFriend))success
++ (FRDNetworkOperation *)getFriendProfileWithFriendId:(NSString *)friendId onSuccess:(void (^)(FRDFriend *currentFriend))success
                                       onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
     FRDGetFriendProfileRequest *request = [[FRDGetFriendProfileRequest alloc] initWithFriendId:friendId];
