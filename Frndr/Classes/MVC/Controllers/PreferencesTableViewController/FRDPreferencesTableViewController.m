@@ -14,6 +14,8 @@
 static CGFloat const kDefaultRowHeight = 70.f;
 static NSInteger const kNumberOfPreferences = 4;
 
+static NSString * kShareMessage = @"Sharing from Frndr!";
+
 @implementation FRDPreferencesTableViewController
 
 #pragma mark - View Lifecycle
@@ -72,8 +74,9 @@ static NSInteger const kNumberOfPreferences = 4;
 
 - (void)showActivityViewController
 {
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[@"String to share"]applicationActivities:nil];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[kShareMessage]applicationActivities:nil];
 
+    //activityViewController.excludedActivityTypes = @[UIActivityTypeAirDrop];
     activityViewController.completionWithItemsHandler = ^void(NSString * __nullable activityType,
                                                               BOOL completed,
                                                               NSArray * __nullable returnedItems,
@@ -83,9 +86,7 @@ static NSInteger const kNumberOfPreferences = 4;
         NSLog(@"Returned items: %@", returnedItems);
     };
     
-    [self.navigationController presentViewController:activityViewController animated:YES completion:^{
-        
-    }];
+    [self.navigationController presentViewController:activityViewController animated:YES completion:nil];
 }
 
 @end
