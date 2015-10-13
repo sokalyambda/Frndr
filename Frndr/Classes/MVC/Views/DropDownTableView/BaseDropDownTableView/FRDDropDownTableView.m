@@ -185,11 +185,14 @@ static NSInteger const kRowsNumberThreshold = 4;
     
     self.isMoving = YES;
     
+    [self rotateArrow];
+    
     if (self.presentingCompletion) {
         self.isExpanded = YES;
         self.presentingCompletion(self);
     }
-
+    [self rotateArrow];
+    
     WEAK_SELF;
     [UIView animateWithDuration:self.slideAnimationDuration
                           delay:0.1f
@@ -219,6 +222,8 @@ static NSInteger const kRowsNumberThreshold = 4;
         self.isExpanded = NO;
         self.presentingCompletion(self);
     }
+
+    [self rotateArrow];
     
     WEAK_SELF;
     [UIView animateWithDuration:self.slideAnimationDuration
@@ -237,6 +242,20 @@ static NSInteger const kRowsNumberThreshold = 4;
                          weakSelf.isMoving = NO;
 
                      }];
+}
+
+/**
+ *  Rotate current arrow
+ */
+- (void)rotateArrow
+{
+    if (!self.rotatingArrow) {
+        return;
+    }
+    
+    [UIView animateWithDuration:.2f animations:^{
+        self.rotatingArrow.transform = self.isExpanded ? CGAffineTransformRotate(self.rotatingArrow.transform, M_PI) : CGAffineTransformMakeRotation(0);
+    }];
 }
 
 @end

@@ -221,9 +221,9 @@ static NSString *const kFriendId = @"friendId";
     
     [self.messageHistory addObject:message];
 
-    NSArray *indexPaths = [self.tableView indexPathsForVisibleRows];
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.messageHistory.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     
+//    NSArray *indexPaths = [self.tableView indexPathsForVisibleRows];
 //    if (indexPaths.count >= 2) {
 //        [self.tableView reloadRowsAtIndexPaths:@[indexPaths[indexPaths.count - 1], indexPaths[indexPaths.count - 2]] withRowAnimation:UITableViewRowAnimationNone];
 //    } else {

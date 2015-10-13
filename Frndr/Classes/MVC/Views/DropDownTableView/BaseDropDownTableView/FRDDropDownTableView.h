@@ -34,6 +34,8 @@ typedef void(^PresentingCompletion)(FRDDropDownTableView *table);
 @property (nonatomic) CGFloat cornerRadius;
 @property (nonatomic) CGFloat slideAnimationDuration;
 
+@property (strong, nonatomic) UIImageView *rotatingArrow;
+
 - (CGFloat)calculatedDropDownHeight;
 
 - (void)dropDownTableBecomeActiveInView:(UIView *)presentedView
