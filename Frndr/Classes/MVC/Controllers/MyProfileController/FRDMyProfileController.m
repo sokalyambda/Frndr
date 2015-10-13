@@ -226,6 +226,7 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
 {
     NSDictionary* info = [notification userInfo];
     CGRect keyBoardFrame = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    keyBoardFrame = [self.view.window convertRect:keyBoardFrame toView:self.scrollView];
     
     CGSize kbSize = keyBoardFrame.size;
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
@@ -236,20 +237,10 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
     
     CGRect responderFrame;
     
-    // Convert responder's frame to top view coordinate system
     if ([currentResponder isEqual:self.jobTitleField]) {
         responderFrame = self.jobTitleField.frame;
-        responderFrame = [self.jobTitleField.superview convertRect:responderFrame toView:self.view];
     } else {
-        // Get cell that contains current responder (a text field or a text view)
-        UITableViewCell *responderContainingCell = (UITableViewCell *)currentResponder.superview.superview;
-        
-        responderFrame = [self.personalBioTableController.tableView
-                          convertRect:responderContainingCell.frame
-                          toView:self.personalBioTableController.tableView.superview];
-        responderFrame = [self.personalBioTableController.tableView.superview
-                          convertRect:responderFrame
-                          toView:self.view];
+        responderFrame = [currentResponder convertRect:currentResponder.frame toView:self.scrollView];
     }
     
     self.previousVerticalOffset = self.scrollView.contentOffset.y;

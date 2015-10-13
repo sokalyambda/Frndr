@@ -112,11 +112,13 @@
 
 - (void)setDefaultInsetsAnimated
 {
+    
+    WEAK_SELF;
     [UIView animateWithDuration:0.2f
                           delay:0.f
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
-                         self.tableView.contentInset = UIEdgeInsetsZero;
+                         weakSelf.tableView.contentInset = UIEdgeInsetsZero;
                      } completion:nil];
 }
 
