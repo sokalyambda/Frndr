@@ -50,6 +50,7 @@ static NSInteger const kNumberOfPreferences = 4;
             break;
         }
         case FRDPreferenceTypeShareFrndr: {
+            [self showActivityViewController];
             break;
         }
             
@@ -65,6 +66,26 @@ static NSInteger const kNumberOfPreferences = 4;
     } else {
         return kDefaultRowHeight;
     }
+}
+
+#pragma mark - Actions
+
+- (void)showActivityViewController
+{
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[@"String to share"]applicationActivities:nil];
+
+    activityViewController.completionWithItemsHandler = ^void(NSString * __nullable activityType,
+                                                              BOOL completed,
+                                                              NSArray * __nullable returnedItems,
+                                                              NSError * __nullable activityError) {
+        NSLog(@"Activity type: %@", activityType);
+        NSLog(@"Activity controller completed? - %d", completed);
+        NSLog(@"Returned items: %@", returnedItems);
+    };
+    
+    [self.navigationController presentViewController:activityViewController animated:YES completion:^{
+        
+    }];
 }
 
 @end
