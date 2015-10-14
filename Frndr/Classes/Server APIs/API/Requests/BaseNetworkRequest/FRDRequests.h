@@ -27,6 +27,7 @@
 #import "FRDLikeUserByIdRequest.h"
 #import "FRDDislikeUserByIdRequest.h"
 
+#import "FRDClearMessageRequest.h"
 #import "FRDClearAllMessagesRequest.h"
 #import "FRDGetChatHistoryRequest.h"
 #import "FRDSendMessageRequest.h"

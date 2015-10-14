@@ -15,15 +15,14 @@ static NSString * kRequestParameterMessageId = @"id";
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithFriendId:(NSString *)friendId andMessageBody:(NSString *)messageBody
+- (instancetype)initWithMessageId:(NSString *)messageId
 {
     self = [super init];
     if (self) {
-        self.action = kRequestAction;
+        self.action = [NSString stringWithFormat:@"%@/%@/", kRequestAction, messageId];
         _method = @"DELETE";
         
-        NSMutableDictionary *parameters = [@{
-                                             } mutableCopy];
+        NSMutableDictionary *parameters = [@{ } mutableCopy];
         
         self.serializationType = FRDRequestSerializationTypeJSON;
         

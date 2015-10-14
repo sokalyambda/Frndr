@@ -10,6 +10,6 @@
 
 @interface FRDClearMessageRequest : FRDNetworkRequest
 
-- (void)initWithMessageId:(NSString *)messageId;
+- (instancetype)initWithMessageId:(NSString *)messageId;
 
 @end

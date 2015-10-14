@@ -20,6 +20,7 @@ static NSString *const kMessageBody     = @"text";
 static NSString *const kCreationDate    = @"date";
 
 //from socket
+static NSString *const kMessageIdSocket = @"messageId";
 static NSString *const kOwnerId         = @"ownerId";
 static NSString *const kCompanionId     = @"friendId";
 static NSString *const kMessageText     = @"message";
@@ -51,6 +52,7 @@ static NSString *const kMessageText     = @"message";
         _ownerId = socketResponse[kOwnerId];
         _companionId = socketResponse[kCompanionId];
         _messageBody = socketResponse[kMessageText];
+        _messageId = socketResponse[kMessageIdSocket];
         
         _ownerType = [FRDChatMessagesService ownerTypeForMessage:self];
     }

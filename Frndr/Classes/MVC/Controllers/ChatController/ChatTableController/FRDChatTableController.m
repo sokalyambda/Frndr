@@ -27,6 +27,8 @@ static NSString *const kFriendId = @"friendId";
 
 @interface FRDChatTableController ()
 
+@property (strong, nonatomic) UILongPressGestureRecognizer *longPressRecognizer;
+
 @end
 
 @implementation FRDChatTableController
@@ -79,6 +81,7 @@ dispatch_queue_t messages_unpacking_queue() {
     [super viewDidLoad];
     
     [self registerCells];
+    [self addGestureRecognizers];
     [self loadChatHistoryAndScrollToBottom:YES animated:NO];
 }
 
@@ -123,6 +126,12 @@ dispatch_queue_t messages_unpacking_queue() {
     [self.tableView registerNib:systemChatCellNib forCellReuseIdentifier:systemChatCellNibName];
 }
 
+- (void)addGestureRecognizers
+{
+    self.longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showClearMessageActionSheet:)];
+    [self.tableView addGestureRecognizer:self.longPressRecognizer];
+}
+
 /**
  *  Load chat history with current friend
  */
@@ -160,6 +169,48 @@ dispatch_queue_t messages_unpacking_queue() {
 - (IBAction)loadMoreMessages:(id)sender
 {
     [self loadChatHistoryAndScrollToBottom:NO animated:NO];
+}
+
+- (void)clearMessageWithIndexPath:(NSIndexPath *)indexPath
+{
+    FRDChatMessage *message = self.messageHistory[indexPath.row];
+    
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [FRDProjectFacade clearMessageWithId:message.messageId OnSuccess:^(BOOL isSuccess) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        [self.messageHistory removeObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView reloadData];
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf.parentViewController andCompletion:nil];
+    }];
+}
+
+- (void)showClearMessageActionSheet:(UILongPressGestureRecognizer *)longPressRecognizer
+{
+    if (longPressRecognizer.state == UIGestureRecognizerStateBegan) {
+        CGPoint pressLocation = [longPressRecognizer locationInView:self.tableView];
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:pressLocation];
+        
+        UIAlertController *clearMessageController = [UIAlertController alertControllerWithTitle:@"" message:LOCALIZED(@"Do you want to delete this message?") preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        WEAK_SELF;
+        UIAlertAction *deleteAccountAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Delete message") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+            [weakSelf clearMessageWithIndexPath:indexPath];
+        }];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleCancel handler:nil];
+        
+        [clearMessageController addAction:deleteAccountAction];
+        [clearMessageController addAction:cancelAction];
+        
+        [self presentViewController:clearMessageController animated:YES completion:nil];
+    }
 }
 
 #pragma mark - UITableViewDataSource

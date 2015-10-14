@@ -73,8 +73,25 @@
     }];
 }
 
++ (void)clearMessageWithId:(NSString *)messageId onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+{
+    [FRDProjectFacade clearMessageWithId:messageId OnSuccess:^(BOOL isSuccess) {
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        
+        if (failure) {
+            failure(error, isCanceled);
+        }
+        
+    }];
+}
+
 + (FRDChatCellPositionInSet)positionOfCellInSetByIndexPath:(NSIndexPath *)indexPath
-                                            inMessagesHistory:(NSArray *)messagesHistory
+                                         inMessagesHistory:(NSArray *)messagesHistory
 {
     NSIndexPath *previousIndexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:0];
     NSIndexPath *nextIndexPath = [NSIndexPath indexPathForRow:indexPath.row + 1 inSection:0];

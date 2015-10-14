@@ -92,7 +92,9 @@ extern NSString *defaultBaseURLString;
                             onFailure:(FailureBlock)failure;
 
 #pragma mark - Messages Module
-
++ (FRDNetworkOperation *)clearMessageWithId:(NSString *)messageId
+                                  OnSuccess:(SuccessBlock)success
+                                  onFailure:(FailureBlock)failure;
 + (FRDNetworkOperation *)clearAllMessagesOnSuccess:(SuccessBlock)success
                                          onFailure:(FailureBlock)failure;
 + (FRDNetworkOperation *)getChatHistoryWithFriendId:(NSString *)friendId

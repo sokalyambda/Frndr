@@ -27,8 +27,8 @@
 static FRDSessionManager *sharedHTTPClient = nil;
 
 //NSString *baseURLString = @"http://192.168.88.161:8859/"; //Misha
-//NSString *baseURLString = @"http://192.168.88.47:8859/"; //Vanya
-NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
+NSString *baseURLString = @"http://192.168.89.191:8859/"; //Vanya
+//NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
 
 @implementation FRDProjectFacade
 
@@ -511,6 +511,27 @@ NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
 }
 
 #pragma mark - Messages Module
+
++ (FRDNetworkOperation *)clearMessageWithId:(NSString *)messageId OnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+{
+    FRDClearMessageRequest *request = [[FRDClearMessageRequest alloc] initWithMessageId:messageId];
+    
+    FRDNetworkOperation *operation = [[self HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        
+        if (failure) {
+            failure(error, isCanceled);
+        }
+        
+    }];
+    
+    return operation;
+}
 
 + (FRDNetworkOperation *)clearAllMessagesOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {

@@ -33,8 +33,12 @@ typedef void(^ChatHistoryFailure)(NSError *error);
                                    onSuccess:(SuccessBlock)success
                                    onFailure:(FailureBlock)failure;
 
++ (void)clearMessageWithId:(NSString *)messageId
+                 onSuccess:(SuccessBlock)success
+                 onFailure:(FailureBlock)failure;
+
 + (FRDChatCellPositionInSet)positionOfCellInSetByIndexPath:(NSIndexPath *)indexPath
-                                            inMessagesHistory:(NSArray *)messagesHistory;
+                                         inMessagesHistory:(NSArray *)messagesHistory;
 
 + (FRDMessageOwnerType)ownerTypeForMessage:(FRDChatMessage *)message;
 
