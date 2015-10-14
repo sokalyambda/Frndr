@@ -9,6 +9,13 @@
 #import "FRDPushNotifiactionService.h"
 #import "FRDProjectFacade.h"
 
+static NSString *const kNewMessageCategory = @"newMessageCategory";
+static NSString *const kNewFriendCategory = @"newFriendCategory";
+
+static NSString *const kReadMessageActionIdentifier = @"readMessageActionIdentifier";
+
+static NSString *const kShowChatWithNewFriendActionIdentifier = @"showChatWithNewFriendActionIdentifier";
+
 @implementation FRDPushNotifiactionService
 
 /**
@@ -44,7 +51,7 @@
 {
     UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge
                                                                                          |UIUserNotificationTypeSound
-                                                                                         |UIUserNotificationTypeAlert) categories:nil];
+                                                                                         |UIUserNotificationTypeAlert) categories:[self notificationCategories]];
     [application registerUserNotificationSettings:settings];
 }
 
@@ -67,11 +74,12 @@
  */
 + (void)recivedPushNotification:(NSDictionary*)userInfo
 {
+    //UIUserNotificationActionContextDefault
     NSLog(@"user info %@", userInfo);
 }
 
 /**
- *  Save devicet token and send device data to server
+ *  Save device token and send device data to server
  */
 + (void)saveAndSendDeviceData:(NSString *)deviceToken
 {
@@ -94,12 +102,58 @@
     }
 }
 
++ (void)handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler
+{
+    if ([identifier isEqualToString:kReadMessageActionIdentifier]) {
+        NSLog(@"read message");
+    } else if ([identifier isEqualToString:kShowChatWithNewFriendActionIdentifier]) {
+        NSLog(@"show chat with new friend");
+    }
+    if (completionHandler) {
+        completionHandler();
+    }
+}
+
 /**
  *  Clean notifications badges
  */
 + (void)cleanPushNotificationsBadges
 {
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+}
+
+/**
+ *  Configure notification categories
+ *
+ *  @return NSSet with current categories
+ */
++ (NSSet *)notificationCategories
+{
+    UIMutableUserNotificationAction *readMessageAction = [[UIMutableUserNotificationAction alloc] init];
+    [readMessageAction setActivationMode:UIUserNotificationActivationModeBackground];
+    [readMessageAction setTitle:LOCALIZED(@"Read")];
+    [readMessageAction setIdentifier:kReadMessageActionIdentifier];
+    [readMessageAction setDestructive:NO];
+    [readMessageAction setAuthenticationRequired:NO];
+    
+    UIMutableUserNotificationAction *showChatWithNewFriendAction = [[UIMutableUserNotificationAction alloc] init];
+    [showChatWithNewFriendAction setActivationMode:UIUserNotificationActivationModeBackground];
+    [showChatWithNewFriendAction setTitle:@"Open Chat"];
+    [showChatWithNewFriendAction setIdentifier:kShowChatWithNewFriendActionIdentifier];
+    [showChatWithNewFriendAction setDestructive:NO];
+    [showChatWithNewFriendAction setAuthenticationRequired:NO];
+    
+    UIMutableUserNotificationCategory *newMessageCategory = [[UIMutableUserNotificationCategory alloc] init];
+    [newMessageCategory setIdentifier:kNewMessageCategory];
+    [newMessageCategory setActions:@[readMessageAction]
+                        forContext:UIUserNotificationActionContextDefault];
+    
+    UIMutableUserNotificationCategory *newFriendCategory = [[UIMutableUserNotificationCategory alloc] init];
+    [newFriendCategory setIdentifier:kNewFriendCategory];
+    [newFriendCategory setActions:@[showChatWithNewFriendAction]
+                       forContext:UIUserNotificationActionContextDefault];
+    
+    return [NSSet setWithObjects:newMessageCategory, newFriendCategory, nil];
 }
 
 @end
