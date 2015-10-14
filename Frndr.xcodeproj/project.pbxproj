@@ -181,6 +181,8 @@
 		58DE5B441BB541E10020A34C /* FRDRelationshipItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE5B431BB541E10020A34C /* FRDRelationshipItem.m */; settings = {ASSET_TAGS = (); }; };
 		58DE5B471BB541EC0020A34C /* FRDSexualOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE5B461BB541EC0020A34C /* FRDSexualOrientation.m */; settings = {ASSET_TAGS = (); }; };
 		58DE5B4A1BB5956D0020A34C /* SexualOrientations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58DE5B491BB5956D0020A34C /* SexualOrientations.plist */; settings = {ASSET_TAGS = (); }; };
+		58ECA1EB1BCE32F000C2B5D9 /* FRDNoMatchesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ECA1EA1BCE32F000C2B5D9 /* FRDNoMatchesView.m */; settings = {ASSET_TAGS = (); }; };
+		58ECA1ED1BCE339600C2B5D9 /* FRDNoMatchesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58ECA1EC1BCE339600C2B5D9 /* FRDNoMatchesView.xib */; settings = {ASSET_TAGS = (); }; };
 		58ED54CE1BB1472100F9B378 /* FRDSignInWithFacebookRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ED54CD1BB1472100F9B378 /* FRDSignInWithFacebookRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58ED54D21BB14C5E00F9B378 /* FRDLocationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ED54D11BB14C5E00F9B378 /* FRDLocationObserver.m */; settings = {ASSET_TAGS = (); }; };
 		58ED54D41BB14FD500F9B378 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58ED54D31BB14FD400F9B378 /* CoreLocation.framework */; };
@@ -530,6 +532,9 @@
 		58DE5B451BB541EC0020A34C /* FRDSexualOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSexualOrientation.h; path = Classes/MVC/Models/SexualOrientation/FRDSexualOrientation.h; sourceTree = "<group>"; };
 		58DE5B461BB541EC0020A34C /* FRDSexualOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSexualOrientation.m; path = Classes/MVC/Models/SexualOrientation/FRDSexualOrientation.m; sourceTree = "<group>"; };
 		58DE5B491BB5956D0020A34C /* SexualOrientations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SexualOrientations.plist; path = Classes/MVC/Models/SexualOrientation/SexualOrientations.plist; sourceTree = "<group>"; };
+		58ECA1E91BCE32F000C2B5D9 /* FRDNoMatchesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDNoMatchesView.h; path = Classes/MVC/Views/NoMatchesView/FRDNoMatchesView.h; sourceTree = "<group>"; };
+		58ECA1EA1BCE32F000C2B5D9 /* FRDNoMatchesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDNoMatchesView.m; path = Classes/MVC/Views/NoMatchesView/FRDNoMatchesView.m; sourceTree = "<group>"; };
+		58ECA1EC1BCE339600C2B5D9 /* FRDNoMatchesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDNoMatchesView.xib; path = Classes/MVC/Views/NoMatchesView/FRDNoMatchesView.xib; sourceTree = "<group>"; };
 		58ED54CC1BB1472100F9B378 /* FRDSignInWithFacebookRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSignInWithFacebookRequest.h; path = "Classes/Server APIs/API/Requests/AuthorizationRequests/SignInWithFacebookRequest/FRDSignInWithFacebookRequest.h"; sourceTree = "<group>"; };
 		58ED54CD1BB1472100F9B378 /* FRDSignInWithFacebookRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDSignInWithFacebookRequest.m; path = "Classes/Server APIs/API/Requests/AuthorizationRequests/SignInWithFacebookRequest/FRDSignInWithFacebookRequest.m"; sourceTree = "<group>"; };
 		58ED54D01BB14C5E00F9B378 /* FRDLocationObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDLocationObserver.h; path = Classes/Managers/LocationObserver/FRDLocationObserver.h; sourceTree = "<group>"; };
@@ -1691,6 +1696,7 @@
 		58BC76D11B9EB95100BB8B5A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				58ECA1E81BCE31CD00C2B5D9 /* NoMatchesView */,
 				58AC693C1BC7934100A1C7D5 /* TextViews */,
 				586264C31BBD064800824BA3 /* PulsingOverlayView */,
 				3E1D29FA1BB58D650051C52F /* MyProfile */,
@@ -2406,6 +2412,16 @@
 			name = PreviewGalleryController;
 			sourceTree = "<group>";
 		};
+		58ECA1E81BCE31CD00C2B5D9 /* NoMatchesView */ = {
+			isa = PBXGroup;
+			children = (
+				58ECA1E91BCE32F000C2B5D9 /* FRDNoMatchesView.h */,
+				58ECA1EA1BCE32F000C2B5D9 /* FRDNoMatchesView.m */,
+				58ECA1EC1BCE339600C2B5D9 /* FRDNoMatchesView.xib */,
+			);
+			name = NoMatchesView;
+			sourceTree = "<group>";
+		};
 		58ED54CA1BB1465F00F9B378 /* AuthorizationRequests */ = {
 			isa = PBXGroup;
 			children = (
@@ -2713,6 +2729,7 @@
 				58DD73161BB832D9009D5536 /* RelationshipStatuses.plist in Resources */,
 				3EF22FB61BBE87E700E23F72 /* FRDSystemChatCell.xib in Resources */,
 				587B3A891BA80F3D0098154F /* FRDDropDownHolderController.xib in Resources */,
+				58ECA1ED1BCE339600C2B5D9 /* FRDNoMatchesView.xib in Resources */,
 				587B3A951BA815850098154F /* FRDRelationshipCollectionCell.xib in Resources */,
 				58ED54FA1BB189EA00F9B378 /* FRDGeolocationDeniedController.xib in Resources */,
 				586264C81BBD069B00824BA3 /* FRDPulsingOverlayView.xib in Resources */,
@@ -2934,6 +2951,7 @@
 				58ED54D81BB1636F00F9B378 /* FRDBlockFriendRequest.m in Sources */,
 				58B99EA21BBA5ECE0057DB54 /* FRDUpdateSearchSettingsRequest.m in Sources */,
 				58ED54DC1BB1639B00F9B378 /* FRDDeleteCurrentUserRequest.m in Sources */,
+				58ECA1EB1BCE32F000C2B5D9 /* FRDNoMatchesView.m in Sources */,
 				587B3A941BA815850098154F /* FRDRelationshipCollectionCell.m in Sources */,
 				58BC77021B9ECA1700BB8B5A /* NSDictionary+JSONRepresentation.m in Sources */,
 				3E5DEE701BAEB59800832CD6 /* FRDRangeSlider.m in Sources */,
@@ -3075,7 +3093,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "79d96d78-2218-4e2f-b345-f54bfe554146";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3088,8 +3106,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mairead Cremins (6T72C88SAS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mairead Cremins (6T72C88SAS)";
 				DEFINES_MODULE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Frndr/Frndr-Prefix.pch";
@@ -3097,7 +3115,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "79d96d78-2218-4e2f-b345-f54bfe554146";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -20,4 +20,8 @@
 
 + (void)cleanPushNotificationsBadges;
 
++ (void)handleActionWithIdentifier:(NSString *)identifier
+             forRemoteNotification:(NSDictionary *)userInfo
+                 completionHandler:(void(^)())completionHandler;
+
 @end

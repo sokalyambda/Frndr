@@ -8,6 +8,7 @@
 
 #import "FRDApplicationSettingsTableContainer.h"
 #import "FRDBaseViewController.h"
+#import "FRDTutorialController.h"
 
 #import "FRDApplicationSettingsTableHeader.h"
 #import "FRDSwitch.h"
@@ -136,6 +137,9 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
             }
                 
             case FRDApplicationOtherSettingHelp: {
+                FRDTutorialController *tutorialController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDTutorialController class])];
+                tutorialController.redirectedFromHelp = YES;
+                [self.parentViewController presentViewController:tutorialController animated:YES completion:nil];
                 break;
             }
                 

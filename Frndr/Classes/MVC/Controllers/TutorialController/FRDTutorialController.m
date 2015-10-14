@@ -378,7 +378,11 @@ static CGFloat const kPageControlAnimDuration = .6f;
 
 - (IBAction)facebookLoginClick:(id)sender
 {
-    [self authorizeWithFacebookAction];
+    if (!self.redirectedFromHelp) {
+        [self authorizeWithFacebookAction];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark - TTTAttributedLabelDelegate

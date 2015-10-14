@@ -6,6 +6,11 @@
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
+typedef NS_ENUM(NSUInteger, FRDPresentedControllerType) {
+    FRDPresentedControllerTypeNext,
+    FRDPresentedControllerTypePrevious
+};
+
 @protocol ContainerViewControllerDelegate;
 @class FRDBaseContentController;
 
@@ -28,6 +33,13 @@
  @note The view controllers array cannot be changed after initialization.
  */
 - (instancetype)initWithViewControllers:(NSArray *)viewControllers;
+
+/**
+ *  Manipulate with child controllers
+ *
+ *  @param presentedType show next or previous controller
+ */
+- (void)showNextPreviousController:(FRDPresentedControllerType)presentedType;
 
 @end
 
