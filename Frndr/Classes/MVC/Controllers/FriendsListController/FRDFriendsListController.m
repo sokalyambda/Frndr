@@ -110,6 +110,8 @@
             weakSelf.friends = [NSMutableArray arrayWithArray:friendsList];
         }
         
+        [weakSelf showHideNoMatchesView];
+        
     } onFailure:nil];
 }
 
@@ -234,7 +236,6 @@
 //        if (friendsList.count) {
 //            [weakSelf updateLocalFriendsArrayWithArray:friendsList];
 //        }
-        [weakSelf showHideNoMatchesView];
         
         if (success) {
             success(friendsList);
