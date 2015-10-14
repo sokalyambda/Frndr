@@ -8,6 +8,10 @@
 
 #import "FRDKeyboardResponderController.h"
 
+@class FRDFriend;
+
 @interface FRDMyProfileController : FRDKeyboardResponderController
+
+@property (strong, nonatomic) FRDFriend *currentFriend;
 
 @end

@@ -10,6 +10,7 @@
 
 #import "FRDSexualOrientation.h"
 #import "FRDRelationshipItem.h"
+#import "FRDAvatar.h"
 
 static NSString *const kAge                 = @"age";
 static NSString *const kAvatarURL           = @"avatar";
@@ -26,6 +27,14 @@ static NSString *const kUserId              = @"userId";
 @implementation FRDBaseUserModel
 
 #pragma mark - Accessors
+
+- (FRDAvatar *)currentAvatar
+{
+    if (!_currentAvatar) {
+        _currentAvatar = [[FRDAvatar alloc] init];
+    }
+    return _currentAvatar;
+}
 
 - (BOOL)isMale
 {

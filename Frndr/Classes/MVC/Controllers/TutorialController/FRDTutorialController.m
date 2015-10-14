@@ -420,7 +420,8 @@ static CGFloat const kPageControlAnimDuration = .6f;
 
 #pragma mark - ContainerViewControllerDelegate Protocol
 
-- (id<UIViewControllerAnimatedTransitioning>)containerViewController:(FRDContainerViewController *)containerViewController animationControllerForTransitionFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController {
+- (id<UIViewControllerAnimatedTransitioning>)containerViewController:(FRDContainerViewController *)containerViewController animationControllerForTransitionFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController
+{
     return [[FRDAnimator alloc] init];
 }
 

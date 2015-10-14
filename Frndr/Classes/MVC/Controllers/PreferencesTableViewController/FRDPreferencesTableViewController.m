@@ -43,6 +43,7 @@ static NSString * kShareMessage = @"Sharing from Frndr!";
         }
         case FRDPreferenceTypeMyProfile: {
             FRDMyProfileController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDMyProfileController class])];
+            controller.currentFriend = nil;
             [self.parentViewController.navigationController pushViewController:controller animated:YES];
             break;
         }

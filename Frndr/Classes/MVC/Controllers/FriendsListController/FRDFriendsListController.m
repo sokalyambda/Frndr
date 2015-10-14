@@ -89,6 +89,9 @@
 
     [self.friendsTableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     
+    //for ios 8
+    self.friendsTableView.estimatedRowHeight = UITableViewAutomaticDimension;
+    self.friendsTableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 - (void)viewWillAppear:(BOOL)animated

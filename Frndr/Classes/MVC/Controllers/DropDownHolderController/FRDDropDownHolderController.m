@@ -16,6 +16,7 @@
 
 #import "FRDSexualOrientation.h"
 #import "FRDSearchSettings.h"
+#import "FRDFriend.h"
 
 #import "UIResponder+FirstResponder.h"
 
@@ -138,6 +139,17 @@ static NSString *const kNotSmokerString = @"Non-Smoker";
         default:
             break;
     }
+}
+
+/**
+ *  Update For Friend
+ *
+ *  @param currentFriend Current Friend for updating
+ */
+- (void)updateWithFriend:(FRDFriend *)currentFriend
+{
+    self.sexualOrientationLabel.text = currentFriend.sexualOrientation.orientationString;
+    self.smokerLabel.text = currentFriend.isSmoker ? kSmokerString : kNotSmokerString;
 }
 
 @end

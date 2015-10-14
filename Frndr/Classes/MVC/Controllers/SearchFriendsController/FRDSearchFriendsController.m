@@ -36,6 +36,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 @property (weak, nonatomic) IBOutlet TTTAttributedLabel *biographyLabel;
 @property (weak, nonatomic) IBOutlet UIView *photosCollectionContainer;
 @property (weak, nonatomic) IBOutlet UIView *likeButtonsContainer;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *galleryHeightConstraint;
 
 @property (strong, nonatomic) IBOutlet FRDPulsingOverlayView *pulsingOverlay;
 @property (nonatomic) FRDPreviewGalleryController *previewGalleryController;
@@ -444,6 +445,10 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     [self.dragableViewsHolder loadNextSwipeableViewsIfNeeded];
     
     self.previewGalleryController.photos = self.currentNearestUser.galleryPhotos;
+    
+    if (!self.currentNearestUser.galleryPhotos.count) {
+        self.galleryHeightConstraint.constant = 0.f;
+    }
 }
 
 /**
@@ -566,11 +571,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     if (self.nearestUsers.count >= _nearestUserIndex) {
         _nearestUserIndex--;
     }
-    
-    if (self.nearestUsers.count) {
-        self.currentNearestUser = self.nearestUsers.firstObject;
-    }
-    
+
     return YES;
 }
 
@@ -615,6 +616,10 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 //Adjust nearestUsers array and load more users if needed
 - (void)loadMoreUsersIfNeeded
 {
+    if (self.nearestUsers.count) {
+        self.currentNearestUser = self.nearestUsers.firstObject;
+    }
+    
     if (!self.nearestUsers.count) {
         self.currentNearestUser = nil;
         _nearestUserIndex = 0;

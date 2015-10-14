@@ -6,8 +6,10 @@
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
+@class FRDFriend;
+
 @interface FRDMyProfileTopView : UIView
 
-- (void)updateProfileTopView;
+- (void)updateProfileTopViewForFriend:(FRDFriend *)currentFriend;
 
 @end

@@ -15,6 +15,8 @@
 
 #import "UIView+MakeFromXib.h"
 
+#import "FRDFriend.h"
+
 static NSString *const kActiveImageName = @"ActiveImageName";
 static NSString *const kNotActiveImageName = @"NotActiveImageName";
 
@@ -127,29 +129,18 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
 
 #pragma mark - Actions
 
+/**
+ *  Update relationship statuses for current user profile
+ *
+ *  @param sourceType Source type for updating (can be profile or search settings)
+ */
 - (void)updateWithSourceType:(FRDSourceType)sourceType
 {
     FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
     switch (sourceType) {
         case FRDSourceTypeMyProfile: {
             
-            @autoreleasepool {
-                NSString *relStatus = currentProfile.relationshipStatus.relationshipTitle;
-                for (FRDRelationshipItem *item in self.relationshipStatuses) {
-                    if ([item.relationshipTitle isEqualToString:relStatus]) {
-                        self.currentRelationshipStatus = item;
-                        self.currentRelationshipStatus.isSelected = YES;
-                        break;
-                    }
-                }
-            }
-            if (self.currentRelationshipStatus) {
-                [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:[self.relationshipStatuses indexOfObject:self.currentRelationshipStatus] inSection:0]]];
-                NSInteger idx = [self.relationshipStatuses indexOfObject:self.currentRelationshipStatus];
-                if (idx != NSNotFound) {
-                    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:idx inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-                }
-            }
+            [self updateStatusesForCurrentUserModel:currentProfile];
             
             break;
         }
@@ -183,6 +174,42 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
             break;
     }
 
+}
+
+/**
+ *  Update for current friend
+ *
+ *  @param currentFriend Friend for updating
+ */
+- (void)updateForCurrentFriend:(FRDFriend *)currentFriend
+{
+    [self updateStatusesForCurrentUserModel:currentFriend];
+}
+
+/**
+ *  Update relationship statuses for current user model for UserProfile source type (or for friend if exists)
+ *
+ *  @param userModel User for updating
+ */
+- (void)updateStatusesForCurrentUserModel:(FRDBaseUserModel *)userModel
+{
+    @autoreleasepool {
+        NSString *relStatus = userModel.relationshipStatus.relationshipTitle;
+        for (FRDRelationshipItem *item in self.relationshipStatuses) {
+            if ([item.relationshipTitle isEqualToString:relStatus]) {
+                self.currentRelationshipStatus = item;
+                self.currentRelationshipStatus.isSelected = YES;
+                break;
+            }
+        }
+    }
+    if (self.currentRelationshipStatus) {
+        [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:[self.relationshipStatuses indexOfObject:self.currentRelationshipStatus] inSection:0]]];
+        NSInteger idx = [self.relationshipStatuses indexOfObject:self.currentRelationshipStatus];
+        if (idx != NSNotFound) {
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:idx inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+        }
+    }
 }
 
 /**

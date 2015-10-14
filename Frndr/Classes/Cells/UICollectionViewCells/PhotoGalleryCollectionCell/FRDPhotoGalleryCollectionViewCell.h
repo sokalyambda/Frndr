@@ -6,6 +6,11 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
+typedef NS_ENUM(NSUInteger, FRDGallegyType) {
+    FRDGallegyTypeUser,
+    FRDGallegyTypeFriend,
+};
+
 @class FRDGalleryPhoto;
 @protocol FRDGalleryCellDelegate;
 
@@ -15,7 +20,8 @@
 
 @property (weak, nonatomic) id<FRDGalleryCellDelegate> delegate;
 
-- (void)configureWithGalleryPhoto:(FRDGalleryPhoto *)photo;
+- (void)configureWithGalleryPhoto:(FRDGalleryPhoto *)photo
+                   andGalleryType:(FRDGallegyType)galleryType;
 
 @end
 

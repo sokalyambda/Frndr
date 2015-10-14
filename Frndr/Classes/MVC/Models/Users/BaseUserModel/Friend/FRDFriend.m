@@ -7,12 +7,12 @@
 //
 
 #import "FRDFriend.h"
+#import "FRDRelationshipItem.h"
+#import "FRDGalleryPhoto.h"
+#import "FRDAvatar.h"
 
 #import "FRDCommonDateFormatter.h"
 #import "ISO8601DateFormatter.h"
-
-#import "FRDRelationshipItem.h"
-#import "FRDGalleryPhoto.h"
 
 static NSString *const kNewFriend = @"newFriend";
 static NSString *const kLastMessage = @"message";
@@ -65,7 +65,7 @@ static NSString *const kHasNewMessages = @"haveNewMsg";
         _hasNewMessages = [response[kHasNewMessages] boolValue];
         
         //images
-        _avatarURL = response[kImages][kAvatar][kAvatarURL];
+        _currentAvatar = [[FRDAvatar alloc] initWithServerResponse:response[kImages][kAvatar]];
         _galleryPhotos = [self photosFromArray:response[kImages][kGallery]];
         
         //there is difference in keys

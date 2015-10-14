@@ -6,6 +6,8 @@
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
+@class FRDFriend;
+
 @interface FRDPersonalBioTableController : UITableViewController
 
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *mostLovedThingsFields;
@@ -13,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UITextView *personalBioThingILoveTextView;
 
 - (void)update;
+- (void)updateForFriend:(FRDFriend *)currentFriend;
 
 @end
