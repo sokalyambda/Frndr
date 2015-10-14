@@ -25,6 +25,7 @@
 		3E4CA3871BCBFEEA00E721DB /* FRDDSeparatedBottomRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4CA3861BCBFEEA00E721DB /* FRDDSeparatedBottomRefreshControl.m */; settings = {ASSET_TAGS = (); }; };
 		3E5409D31BC3D4B5001D7CAE /* FRDChatOptionsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5409D21BC3D4B5001D7CAE /* FRDChatOptionsDataSource.m */; settings = {ASSET_TAGS = (); }; };
 		3E5DEE701BAEB59800832CD6 /* FRDRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DEE6F1BAEB59800832CD6 /* FRDRangeSlider.m */; settings = {ASSET_TAGS = (); }; };
+		3E786A601BCE77C2006AD2E1 /* FRDClearMessageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E786A5F1BCE77C2006AD2E1 /* FRDClearMessageRequest.m */; settings = {ASSET_TAGS = (); }; };
 		3E8770BD1BC510480002E540 /* FRDChatOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8770BC1BC510480002E540 /* FRDChatOption.m */; settings = {ASSET_TAGS = (); }; };
 		3E941A341BB1809700F034E6 /* FRDPersonalBioTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E941A331BB1809700F034E6 /* FRDPersonalBioTableController.m */; settings = {ASSET_TAGS = (); }; };
 		3E941A371BB180B400F034E6 /* FRDSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E941A361BB180B400F034E6 /* FRDSwitch.m */; settings = {ASSET_TAGS = (); }; };
@@ -254,6 +255,8 @@
 		3E5409D21BC3D4B5001D7CAE /* FRDChatOptionsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDChatOptionsDataSource.m; path = Classes/DropDownDataSources/ChatOptionsDataSource/FRDChatOptionsDataSource.m; sourceTree = "<group>"; };
 		3E5DEE6E1BAEB59800832CD6 /* FRDRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRangeSlider.h; path = Classes/Controls/Sliders/RangeSlider/FRDRangeSlider.h; sourceTree = "<group>"; };
 		3E5DEE6F1BAEB59800832CD6 /* FRDRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRangeSlider.m; path = Classes/Controls/Sliders/RangeSlider/FRDRangeSlider.m; sourceTree = "<group>"; };
+		3E786A5E1BCE77C2006AD2E1 /* FRDClearMessageRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDClearMessageRequest.h; path = "Classes/Server APIs/API/Requests/MessagesModule/ClearMessageRequest/FRDClearMessageRequest.h"; sourceTree = "<group>"; };
+		3E786A5F1BCE77C2006AD2E1 /* FRDClearMessageRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDClearMessageRequest.m; path = "Classes/Server APIs/API/Requests/MessagesModule/ClearMessageRequest/FRDClearMessageRequest.m"; sourceTree = "<group>"; };
 		3E8770BB1BC510480002E540 /* FRDChatOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDChatOption.h; path = Classes/MVC/Models/ChatOption/FRDChatOption.h; sourceTree = "<group>"; };
 		3E8770BC1BC510480002E540 /* FRDChatOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDChatOption.m; path = Classes/MVC/Models/ChatOption/FRDChatOption.m; sourceTree = "<group>"; };
 		3E941A321BB1809700F034E6 /* FRDPersonalBioTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPersonalBioTableController.h; path = Classes/MVC/Controllers/MyProfileController/PersonalBioTableController/FRDPersonalBioTableController.h; sourceTree = "<group>"; };
@@ -776,6 +779,15 @@
 				3E5DEE6F1BAEB59800832CD6 /* FRDRangeSlider.m */,
 			);
 			name = RangeSlider;
+			sourceTree = "<group>";
+		};
+		3E786A5D1BCE76C9006AD2E1 /* ClearMessageRequest */ = {
+			isa = PBXGroup;
+			children = (
+				3E786A5E1BCE77C2006AD2E1 /* FRDClearMessageRequest.h */,
+				3E786A5F1BCE77C2006AD2E1 /* FRDClearMessageRequest.m */,
+			);
+			name = ClearMessageRequest;
 			sourceTree = "<group>";
 		};
 		3E84DE971BB2ECBA00FFCB7C /* PhotoGalleryController */ = {
@@ -1469,6 +1481,7 @@
 		58B99EAC1BBA86CD0057DB54 /* MessagesModule */ = {
 			isa = PBXGroup;
 			children = (
+				3E786A5D1BCE76C9006AD2E1 /* ClearMessageRequest */,
 				5886DA271BCD4CC70004F929 /* ClearMessagesWithFriendRequest */,
 				58CF2C821BC56C1D0025AD2C /* SendMessageRequest */,
 				58CF2C7E1BC550CB0025AD2C /* GetChatHistoryRequest */,
@@ -2854,6 +2867,7 @@
 				5895FD951BA2D55C00079F9D /* FRDCustomPageControl.m in Sources */,
 				581B9D561B9EDCA00080393B /* FRDNetworkOperation.m in Sources */,
 				58BC77201B9ECA9C00BB8B5A /* UIFont+Styles.m in Sources */,
+				3E786A601BCE77C2006AD2E1 /* FRDClearMessageRequest.m in Sources */,
 				58B99E991BBA5A0A0057DB54 /* FRDGetSearchSettingsRequest.m in Sources */,
 				58CB4E891BC960EF00517287 /* SocketStringReader.swift in Sources */,
 				587B3A811BA7F8510098154F /* FRDDropDownCell.m in Sources */,
