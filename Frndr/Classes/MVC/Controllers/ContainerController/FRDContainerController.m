@@ -6,11 +6,6 @@
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-typedef NS_ENUM(NSUInteger, FRDPresentedControllerType) {
-    FRDPresentedControllerTypeNext,
-    FRDPresentedControllerTypePrevious
-};
-
 #import "FRDContainerController.h"
 #import "FRDBaseContentController.h"
 

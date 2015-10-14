@@ -8,10 +8,12 @@
 
 #import "FRDFriendsListController.h"
 #import "FRDChatController.h"
+#import "FRDContainerController.h"
 
 #import "FRDSerialViewConstructor.h"
 
 #import "FRDFriendCell.h"
+#import "FRDNoMatchesView.h"
 
 #import "FRDProjectFacade.h"
 
@@ -19,11 +21,15 @@
 
 #import "FRDFriend.h"
 
-@interface FRDFriendsListController ()<UITableViewDataSource, UITableViewDelegate>
+#import "UIView+MakeFromXib.h"
+
+@interface FRDFriendsListController ()<UITableViewDataSource, UITableViewDelegate, FRDNoMatchesViewDelegate>
 
 @property (nonatomic) NSMutableArray *friends;
 
 @property (weak, nonatomic) IBOutlet UITableView *friendsTableView;
+@property (strong, nonatomic) FRDNoMatchesView *noMatchesView;
+@property (weak, nonatomic) IBOutlet UIView *noMatchesViewContainer;
 
 @property (assign, nonatomic) NSInteger currentPage;
 
@@ -82,6 +88,7 @@
     [super viewDidLoad];
 
     [self.friendsTableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -93,6 +100,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    [self initNoMatchesView];
     
     WEAK_SELF;
     [self loadFriendsListOnSuccess:^(NSArray *friendsList) {
@@ -154,7 +163,40 @@
     return UITableViewAutomaticDimension;
 }
 
+#pragma mark - FRDNoMatchesViewDelegate
+
+- (void)noMatchesViewShouldShowSearchNearestUsersController:(FRDNoMatchesView *)view
+{
+    if ([self.parentViewController isKindOfClass:[FRDContainerViewController class]]) {
+        [((FRDContainerViewController *)self.parentViewController) showNextPreviousController:FRDPresentedControllerTypePrevious];
+    }
+}
+
 #pragma mark - Actions
+
+/**
+ *  Show or hide no matches view
+ */
+- (void)showHideNoMatchesView
+{
+    if (!self.friends.count && ![self.noMatchesViewContainer.subviews containsObject:self.noMatchesView]) {
+        [self.noMatchesViewContainer addSubview:self.noMatchesView];
+    } else if (self.friends.count && [self.noMatchesViewContainer.subviews containsObject:self.noMatchesView]) {
+        [self.noMatchesView removeFromSuperview];
+    }
+}
+
+/**
+ *  Configure no matches view and set the delegate
+ */
+- (void)initNoMatchesView
+{
+    if (!self.noMatchesView) {
+        self.noMatchesView = [FRDNoMatchesView makeFromXib];
+        self.noMatchesView.delegate = self;
+        self.noMatchesView.frame = self.noMatchesViewContainer.bounds;
+    }
+}
 
 - (void)subscribeForMessagesNotification
 {
@@ -192,6 +234,7 @@
 //        if (friendsList.count) {
 //            [weakSelf updateLocalFriendsArrayWithArray:friendsList];
 //        }
+        [weakSelf showHideNoMatchesView];
         
         if (success) {
             success(friendsList);

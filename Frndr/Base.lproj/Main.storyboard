@@ -2042,6 +2042,9 @@
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosureIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="WmO-RL-RQM" userLabel="Disclosure Indicator">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="297" y="49" width="8" height="23"/>
+                                                    </variation>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vz5-sP-XPD">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -2049,6 +2052,9 @@
                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="13"/>
                                                     <color key="textColor" red="0.41965564189144555" green="0.43344948952056039" blue="0.44616013071895422" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="122" y="48" width="155" height="62"/>
+                                                    </variation>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cornerNewImage" translatesAutoresizingMaskIntoConstraints="NO" id="JPK-w5-iQ3">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -2161,39 +2167,75 @@
                                     <outlet property="delegate" destination="RoC-rl-LAq" id="IzV-E3-aaG"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8UX-sz-AfY" userLabel="No matches view Container">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="173" id="bQN-DD-0PM"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="bQN-DD-0PM"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="bQN-DD-0PM"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="8UX-sz-AfY" firstAttribute="centerY" secondItem="Na0-JB-PdW" secondAttribute="centerY" id="4QF-9y-q7Z"/>
                             <constraint firstItem="nNs-2K-mE8" firstAttribute="top" secondItem="TS0-JZ-L6e" secondAttribute="bottom" id="5mW-qQ-qDX"/>
                             <constraint firstItem="TS0-JZ-L6e" firstAttribute="top" secondItem="8j3-xd-6nA" secondAttribute="bottom" id="Sv9-tV-fJG"/>
+                            <constraint firstItem="8UX-sz-AfY" firstAttribute="centerX" secondItem="Na0-JB-PdW" secondAttribute="centerX" id="Z5V-xC-xpB"/>
                             <constraint firstItem="TS0-JZ-L6e" firstAttribute="leading" secondItem="Na0-JB-PdW" secondAttribute="leading" id="aVU-oL-ugA"/>
                             <constraint firstAttribute="trailing" secondItem="TS0-JZ-L6e" secondAttribute="trailing" id="ez6-4O-F33"/>
+                            <constraint firstAttribute="trailing" secondItem="8UX-sz-AfY" secondAttribute="trailing" constant="5" id="nId-2I-l3a">
+                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                            </constraint>
+                            <constraint firstItem="8UX-sz-AfY" firstAttribute="leading" secondItem="Na0-JB-PdW" secondAttribute="leading" constant="5" id="x82-ZJ-4m0">
+                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="TS0-JZ-L6e"/>
+                                <exclude reference="8UX-sz-AfY"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="5mW-qQ-qDX"/>
                                 <exclude reference="Sv9-tV-fJG"/>
                                 <exclude reference="aVU-oL-ugA"/>
                                 <exclude reference="ez6-4O-F33"/>
+                                <exclude reference="4QF-9y-q7Z"/>
+                                <exclude reference="Z5V-xC-xpB"/>
+                                <exclude reference="nId-2I-l3a"/>
+                                <exclude reference="x82-ZJ-4m0"/>
+                                <exclude reference="5mW-qQ-qDX"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="TS0-JZ-L6e"/>
+                                <include reference="8UX-sz-AfY"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="5mW-qQ-qDX"/>
                                 <include reference="Sv9-tV-fJG"/>
                                 <include reference="aVU-oL-ugA"/>
                                 <include reference="ez6-4O-F33"/>
+                                <include reference="4QF-9y-q7Z"/>
+                                <include reference="Z5V-xC-xpB"/>
+                                <include reference="nId-2I-l3a"/>
+                                <include reference="x82-ZJ-4m0"/>
+                                <include reference="5mW-qQ-qDX"/>
                             </mask>
                         </variation>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="friendsTableView" destination="TS0-JZ-L6e" id="82j-0i-6GO"/>
+                        <outlet property="noMatchesViewContainer" destination="8UX-sz-AfY" id="Lux-li-21X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ct2-Lh-wk8" userLabel="First Responder" sceneMemberID="firstResponder"/>

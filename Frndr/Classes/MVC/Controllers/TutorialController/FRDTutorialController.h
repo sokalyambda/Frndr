@@ -10,4 +10,6 @@
 
 @interface FRDTutorialController : FRDBaseViewController
 
+@property (assign, nonatomic) BOOL redirectedFromHelp;
+
 @end
