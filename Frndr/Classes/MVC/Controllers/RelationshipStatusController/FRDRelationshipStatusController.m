@@ -174,11 +174,6 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
             
             if (self.relationshipStatusesForSearch.count) {
                 [self.collectionView reloadData];
-                
-                NSInteger idx = [self.relationshipStatuses indexOfObject:self.relationshipStatusesForSearch.anyObject];
-                if (idx != NSNotFound) {
-                    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:idx inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-                }
             }
             
             break;

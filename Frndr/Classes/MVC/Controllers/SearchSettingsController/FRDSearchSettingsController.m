@@ -28,7 +28,7 @@
 static CGFloat const kMinValidAge = 18.f;
 static CGFloat const kMaxValidAge = 50.f;
 static CGFloat const kYearsSpace = 2.f;
-static CGFloat const kMaxDistanceValue = 10000.f;
+static CGFloat const kMaxDistanceValue = 500.f;
 
 @interface FRDSearchSettingsController ()
 

@@ -53,12 +53,21 @@
     [super viewDidLoad];
     [self initContentImagesArray];
 
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self setupTutorialScrollView];
         [self animateTutorialViews];
     });
     
     [FRDLocationObserver sharedObserver];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if (self.redirectedFromHelp) {
+        [self.facebookButton setTitle:LOCALIZED(@"Close") forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark - Actions
@@ -99,16 +108,18 @@
         firstImage.frame = frame;
         [self.tutorialScrollView addSubview:firstImage];
         
-        for (NSInteger i = 1; i < self.contentImages.count; i++) {
-            
-            UIImageView *imageView = [[UIImageView alloc] initWithImage:self.contentImages[i]];
-            
-            idx += distanceToBorder * 2 + imageWidth;
-            
-            CGRect frame = CGRectMake(idx, 0.f, imageWidth, scrollHeight);
-            imageView.frame = frame;
-            
-            [self.tutorialScrollView addSubview:imageView];
+        @autoreleasepool {
+            for (NSInteger i = 1; i < self.contentImages.count; i++) {
+                
+                UIImageView *imageView = [[UIImageView alloc] initWithImage:self.contentImages[i]];
+                
+                idx += distanceToBorder * 2 + imageWidth;
+                
+                CGRect frame = CGRectMake(idx, 0.f, imageWidth, scrollHeight);
+                imageView.frame = frame;
+                
+                [self.tutorialScrollView addSubview:imageView];
+            }
         }
         
         CGSize contentSize = self.tutorialScrollView.frame.size;
