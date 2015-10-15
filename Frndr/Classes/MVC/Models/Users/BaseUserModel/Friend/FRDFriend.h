@@ -12,7 +12,7 @@
 
 @property (assign, nonatomic, getter=isNewFriend) BOOL newFriend;
 @property (strong, nonatomic) NSString *lastMessage;
-@property (strong, nonatomic) NSDate *lastMessagePostedDate;
+@property (strong, nonatomic) NSDate *lastMessagePostedDate; //or date of friend creation
 @property (assign, nonatomic) BOOL hasNewMessages;
 
 - (instancetype)initFullFriendProfileWithServerResponse:(NSDictionary *)response;
