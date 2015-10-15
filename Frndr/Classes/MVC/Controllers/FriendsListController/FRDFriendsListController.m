@@ -109,6 +109,7 @@
     WEAK_SELF;
     [self loadFriendsFirstPageOnSuccess:^(NSArray *friends) {
         [weakSelf updateLastFriendsPageWithFriends:friends];
+        weakSelf.currentPage++;
     }];
 }
 
