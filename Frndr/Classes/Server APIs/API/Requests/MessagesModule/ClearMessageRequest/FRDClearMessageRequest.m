@@ -8,10 +8,24 @@
 
 #import "FRDClearMessageRequest.h"
 
-static NSString * kRequestAction = @"messages";
-static NSString * kRequestParameterMessageId = @"id";
+static NSString *kRequestAction = @"messages";
+static NSString *kRequestParameterMessageId = @"id";
+
+@interface FRDClearMessageRequest ()
+
+@property (strong, nonatomic) NSString *requestAction;
+@property (strong, nonatomic) NSString *messageId;
+
+@end
 
 @implementation FRDClearMessageRequest
+
+#pragma mark - Accessors
+
+- (NSString *)requestAction
+{
+    return [NSString stringWithFormat:@"%@/%@", kRequestAction, self.messageId];
+}
 
 #pragma mark - Lifecycle
 
@@ -19,7 +33,9 @@ static NSString * kRequestParameterMessageId = @"id";
 {
     self = [super init];
     if (self) {
-        self.action = [NSString stringWithFormat:@"%@/%@/", kRequestAction, messageId];
+        
+        _messageId = messageId;
+        self.action = self.requestAction;
         _method = @"DELETE";
         
         NSMutableDictionary *parameters = [@{ } mutableCopy];

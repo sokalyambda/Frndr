@@ -93,7 +93,7 @@ extern NSString *defaultBaseURLString;
 
 #pragma mark - Messages Module
 + (FRDNetworkOperation *)clearMessageWithId:(NSString *)messageId
-                                  OnSuccess:(SuccessBlock)success
+                                  onSuccess:(SuccessBlock)success
                                   onFailure:(FailureBlock)failure;
 + (FRDNetworkOperation *)clearAllMessagesOnSuccess:(SuccessBlock)success
                                          onFailure:(FailureBlock)failure;

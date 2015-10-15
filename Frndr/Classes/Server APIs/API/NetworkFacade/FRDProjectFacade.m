@@ -512,7 +512,7 @@ NSString *baseURLString = @"http://192.168.89.191:8859/"; //Vanya
 
 #pragma mark - Messages Module
 
-+ (FRDNetworkOperation *)clearMessageWithId:(NSString *)messageId OnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
++ (FRDNetworkOperation *)clearMessageWithId:(NSString *)messageId onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     FRDClearMessageRequest *request = [[FRDClearMessageRequest alloc] initWithMessageId:messageId];
     

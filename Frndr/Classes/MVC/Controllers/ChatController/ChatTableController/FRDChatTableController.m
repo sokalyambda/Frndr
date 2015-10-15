@@ -188,12 +188,12 @@ dispatch_queue_t messages_unpacking_queue() {
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    [FRDProjectFacade clearMessageWithId:message.messageId OnSuccess:^(BOOL isSuccess) {
+    [FRDChatMessagesService clearMessageWithId:message.messageId onSuccess:^(BOOL isSuccess) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
-        [self.messageHistory removeObjectAtIndex:indexPath.row];
+        [weakSelf.messageHistory removeObjectAtIndex:indexPath.row];
         //[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        [self.tableView reloadData];
+        [weakSelf.tableView reloadData];
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];

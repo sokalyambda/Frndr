@@ -73,9 +73,11 @@
     }];
 }
 
-+ (void)clearMessageWithId:(NSString *)messageId onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
++ (void)clearMessageWithId:(NSString *)messageId
+                 onSuccess:(SuccessBlock)success
+                 onFailure:(FailureBlock)failure
 {
-    [FRDProjectFacade clearMessageWithId:messageId OnSuccess:^(BOOL isSuccess) {
+    [FRDProjectFacade clearMessageWithId:messageId onSuccess:^(BOOL isSuccess) {
         
         if (success) {
             success(YES);
