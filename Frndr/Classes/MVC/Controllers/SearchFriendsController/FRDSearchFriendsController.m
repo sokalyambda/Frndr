@@ -22,9 +22,12 @@
 #import "FRDProjectFacade.h"
 
 #import "FRDNearestUser.h"
+#import "FRDRemoteNotification.h"
 
 #import "FRDPushNotifiactionService.h"
 #import "FRDNearestUsersService.h"
+
+#import "FRDRedirectionHelper.h"
 
 static NSString *const kPreferencesImageName = @"PreferencesIcon";
 static NSString *const kMessagesImageName = @"MessagesIcon";
@@ -185,6 +188,26 @@ static CGFloat const kMaxGalleryCollectionHeight = 125.f;
         [self.photosCollectionContainer addSubview:self.previewGalleryController.view];
         [self addChildViewController:self.previewGalleryController];
         [self.previewGalleryController didMoveToParentViewController:self];
+    }
+}
+
+/**
+ *  Check for redirection from push
+ */
+- (void)checkForRedirectionFromRemoteNotification
+{
+    __block FRDRemoteNotification *savedNotification = [FRDStorageManager sharedStorage].remoteNoification;
+    
+    if (savedNotification) {
+        [FRDRedirectionHelper redirectToChatWithFriend:savedNotification.currentFriend onSuccess:^(BOOL isSuccess) {
+            
+            [FRDStorageManager sharedStorage].remoteNoification = nil;
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            
+            [FRDStorageManager sharedStorage].remoteNoification = nil;
+            
+        }];
     }
 }
 
@@ -350,6 +373,9 @@ static CGFloat const kMaxGalleryCollectionHeight = 125.f;
         }
         
         [weakSelf showHideButtonsContainer];
+        
+        //check for redirection
+        [weakSelf checkForRedirectionFromRemoteNotification];
         
     } onFailure:^(NSError *error) {
         

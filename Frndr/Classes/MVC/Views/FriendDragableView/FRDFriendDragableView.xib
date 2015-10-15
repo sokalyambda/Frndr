@@ -155,7 +155,8 @@
                                     <exclude reference="aTL-SN-GdR"/>
                                 </mask>
                             </variation>
-                            <variation key="heightClass=regular-widthClass=compact">
+                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                <rect key="frame" x="80" y="6" width="20" height="20"/>
                                 <mask key="constraints">
                                     <include reference="7ch-7l-25C"/>
                                     <include reference="aTL-SN-GdR"/>

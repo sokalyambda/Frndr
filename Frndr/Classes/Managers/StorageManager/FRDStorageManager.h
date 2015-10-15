@@ -9,6 +9,8 @@
 #import "FRDFacebookProfile.h"
 #import "FRDCurrentUserProfile.h"
 
+@class FRDRemoteNotification;
+
 @interface FRDStorageManager : NSObject
 
 + (instancetype)sharedStorage;
@@ -24,5 +26,7 @@
 @property (assign, nonatomic, getter=isUserProfileUpdateNeeded) BOOL userProfileUpdateNeeded;
 
 @property (assign, nonatomic, getter=isLogined) BOOL logined;
+
+@property (strong, nonatomic) FRDRemoteNotification *remoteNoification;
 
 @end

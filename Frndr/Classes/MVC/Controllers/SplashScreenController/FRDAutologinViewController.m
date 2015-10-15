@@ -73,7 +73,6 @@ static NSString *const kTutorialSegueIdentifier = @"tutorialSegueIdentifier";
         currentProfile.userId = userId;
         [FRDStorageManager sharedStorage].currentUserProfile = currentProfile;
         
-        //temp
         [FRDStorageManager sharedStorage].logined = YES;
         
         //Open socket channel

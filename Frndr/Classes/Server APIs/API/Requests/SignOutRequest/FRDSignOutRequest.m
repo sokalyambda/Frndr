@@ -10,6 +10,8 @@
 
 static NSString *const requestAction = @"signOut";
 
+static NSString *const kDeviceId = @"deviceId";
+
 @implementation FRDSignOutRequest
 
 #pragma mark - Lifecycle
@@ -19,9 +21,11 @@ static NSString *const requestAction = @"signOut";
     self = [super init];
     if (self) {
         self.action = [self requestAction];
-        _method = @"GET";
+        _method = @"POST";
         
-        NSMutableDictionary *parameters = [@{} mutableCopy];
+        NSString *deviceId = [FRDStorageManager sharedStorage].deviceUDID;
+        
+        NSMutableDictionary *parameters = [@{kDeviceId: deviceId} mutableCopy];
         
         self.serializationType = FRDRequestSerializationTypeJSON;
         

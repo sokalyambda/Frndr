@@ -30,6 +30,10 @@ static NSString *const kRelationshipStatus = @"relStatus";
 static NSString *const kGenderString = @"sex";
 static NSString *const kAvatarURL = @"url";
 
+//push notifications keys
+static NSString *const kFriendAvatarURL = @"avatarUrl";
+static NSString *const kFriendName = @"friendName";
+
 static NSString *const kHasNewMessages = @"haveNewMsg";
 
 @implementation FRDFriend
@@ -75,6 +79,18 @@ static NSString *const kHasNewMessages = @"haveNewMsg";
         _thingsLovedMost = response[kProfileDict][kMostLovedThings];
     }
     
+    return self;
+}
+
+- (instancetype)initWithPushNotificationUserInfo:(NSDictionary *)userInfo
+{
+    self = [super init];
+    
+    if (self) {
+        _userId = userInfo[kFriendId];
+        _avatarURL = userInfo[kFriendAvatarURL];
+        _fullName = userInfo[kFriendName];
+    }
     return self;
 }
 

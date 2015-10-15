@@ -7,13 +7,25 @@
 //
 
 #import "FRDPushNotifiactionService.h"
+
 #import "FRDProjectFacade.h"
+
+#import "FRDRedirectionHelper.h"
+
+#import "FRDFriend.h"
+#import "FRDRemoteNotification.h"
+
+#import "FRDBaseNavigationController.h"
+#import "FRDChatController.h"
 
 static NSString *const kNewMessageCategory = @"newMessageCategory";
 static NSString *const kNewFriendCategory = @"newFriendCategory";
 
 static NSString *const kReadMessageActionIdentifier = @"readMessageActionIdentifier";
 static NSString *const kShowChatWithNewFriendActionIdentifier = @"showChatWithNewFriendActionIdentifier";
+
+static NSString *const kAPS = @"aps";
+static NSString *const kCategory = @"category";
 
 @implementation FRDPushNotifiactionService
 
@@ -71,9 +83,64 @@ static NSString *const kShowChatWithNewFriendActionIdentifier = @"showChatWithNe
  *
  *  @param userInfo Push notification info dictionary
  */
-+ (void)recivedPushNotification:(NSDictionary*)userInfo
++ (void)receivedPushNotification:(NSDictionary*)userInfo withApplicationState:(UIApplicationState)state
 {
-    NSLog(@"user info %@", userInfo);
+    //do nothing if we are already in chat
+    FRDBaseNavigationController *baseNavigationController = (FRDBaseNavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    BOOL chatExists = NO;
+    for (FRDBaseViewController *controller in baseNavigationController.viewControllers) {
+        if ([controller isKindOfClass:[FRDChatController class]]) {
+            chatExists = YES;
+            break;
+        }
+    }
+    if ([baseNavigationController.topViewController isKindOfClass:[FRDChatController class]] || ![FRDProjectFacade isFacebookSessionValid] || chatExists) {
+        return;
+    }
+
+    //redirect to chat with friend with id userInfo[friendId]
+    NSDictionary *aps = userInfo[kAPS];
+    NSString *pushCategory = aps[kCategory];
+    
+    FRDRemoteNotificationType currentNotificationType = [pushCategory isEqualToString:kNewFriendCategory] ? FRDRemoteNotificationTypeNewFriend : FRDRemoteNotificationTypeNewMessage;
+    
+    FRDFriend *currentFriend = [[FRDFriend alloc] initWithPushNotificationUserInfo:userInfo];
+    
+    NSString *alertTitle = currentNotificationType == FRDRemoteNotificationTypeNewFriend ?
+    [NSString localizedStringWithFormat:@"%@ %@. %@", LOCALIZED(@"You have new friend -"), currentFriend.fullName, LOCALIZED(@"Do you want to open chat with him?")] :
+    [NSString localizedStringWithFormat:@"%@ %@. %@", LOCALIZED(@"You have new message from "), currentFriend.fullName, LOCALIZED(@"Do you want to open chat with him?")];
+    
+    if (state == UIApplicationStateActive) {
+        // app was already in the foreground
+        WEAK_SELF;
+        [FRDAlertFacade showDialogAlertWithMessage:alertTitle forController:nil withCompletion:^(BOOL cancel) {
+            if (!cancel) {
+                [weakSelf checkForRedirectionWithCurrentFriend:currentFriend];
+            }
+        }];
+    } else {
+        [self checkForRedirectionWithCurrentFriend:currentFriend];
+    }
+}
+
++ (void)checkForRedirectionWithCurrentFriend:(FRDFriend *)currentFriend
+{
+    if ([FRDStorageManager sharedStorage].logined) {
+
+        [FRDRedirectionHelper redirectToChatWithFriend:currentFriend onSuccess:^(BOOL isSuccess) {
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            
+        }];
+        
+    } else if ([FRDProjectFacade isFacebookSessionValid]) {
+
+        //save remote notification
+        FRDRemoteNotification *remoteNotification = [[FRDRemoteNotification alloc] init];
+        remoteNotification.currentFriend = currentFriend;
+        [FRDStorageManager sharedStorage].remoteNoification = remoteNotification;
+        
+    }
 }
 
 /**
@@ -102,10 +169,9 @@ static NSString *const kShowChatWithNewFriendActionIdentifier = @"showChatWithNe
 
 + (void)handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler
 {
-    if ([identifier isEqualToString:kReadMessageActionIdentifier]) {
-        NSLog(@"read message");
-    } else if ([identifier isEqualToString:kShowChatWithNewFriendActionIdentifier]) {
-        NSLog(@"show chat with new friend");
+    if ([FRDProjectFacade isFacebookSessionValid]) {
+        FRDFriend *currentFriend = [[FRDFriend alloc] initWithPushNotificationUserInfo:userInfo];
+        [self checkForRedirectionWithCurrentFriend:currentFriend];
     }
     
     if (completionHandler) {
@@ -129,14 +195,14 @@ static NSString *const kShowChatWithNewFriendActionIdentifier = @"showChatWithNe
 + (NSSet *)notificationCategories
 {
     UIMutableUserNotificationAction *readMessageAction = [[UIMutableUserNotificationAction alloc] init];
-    [readMessageAction setActivationMode:UIUserNotificationActivationModeBackground];
+    [readMessageAction setActivationMode:UIUserNotificationActivationModeForeground];
     [readMessageAction setTitle:LOCALIZED(@"Read")];
     [readMessageAction setIdentifier:kReadMessageActionIdentifier];
     [readMessageAction setDestructive:NO];
     [readMessageAction setAuthenticationRequired:NO];
     
     UIMutableUserNotificationAction *showChatWithNewFriendAction = [[UIMutableUserNotificationAction alloc] init];
-    [showChatWithNewFriendAction setActivationMode:UIUserNotificationActivationModeBackground];
+    [showChatWithNewFriendAction setActivationMode:UIUserNotificationActivationModeForeground];
     [showChatWithNewFriendAction setTitle:LOCALIZED(@"Open Chat")];
     [showChatWithNewFriendAction setIdentifier:kShowChatWithNewFriendActionIdentifier];
     [showChatWithNewFriendAction setDestructive:NO];

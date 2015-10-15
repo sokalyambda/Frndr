@@ -84,6 +84,7 @@
 		589664FE1BCC15CE007022C6 /* FRDChatOptionsDropDownTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 589664FD1BCC15CE007022C6 /* FRDChatOptionsDropDownTableView.xib */; settings = {ASSET_TAGS = (); }; };
 		58A1A12E1BB926AD00E29789 /* FRDOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A1A12D1BB926AD00E29789 /* FRDOverlayView.m */; settings = {ASSET_TAGS = (); }; };
 		58A552401BCF83CB00AD17CF /* FRDRelationshipStatusesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A5523F1BCF83CB00AD17CF /* FRDRelationshipStatusesService.m */; settings = {ASSET_TAGS = (); }; };
+		58A552441BCFFBBC00AD17CF /* FRDRemoteNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A552431BCFFBBC00AD17CF /* FRDRemoteNotification.m */; settings = {ASSET_TAGS = (); }; };
 		58AC69401BC7938300A1C7D5 /* FRDPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AC693F1BC7938300A1C7D5 /* FRDPlaceholderTextView.m */; settings = {ASSET_TAGS = (); }; };
 		58AC69441BC79B3100A1C7D5 /* FRDGetFriendProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AC69431BC79B3100A1C7D5 /* FRDGetFriendProfileRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58B27CF11BC193520035712C /* FRDUploadAvatarRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B27CF01BC193520035712C /* FRDUploadAvatarRequest.m */; settings = {ASSET_TAGS = (); }; };
@@ -367,6 +368,8 @@
 		58A1A12D1BB926AD00E29789 /* FRDOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDOverlayView.m; path = Classes/MVC/Views/FriendDragableView/FriendOverlayView/FRDOverlayView.m; sourceTree = "<group>"; };
 		58A5523E1BCF83CB00AD17CF /* FRDRelationshipStatusesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRelationshipStatusesService.h; path = Classes/MVC/Models/ModelsServices/RelationshipStatusesService/FRDRelationshipStatusesService.h; sourceTree = "<group>"; };
 		58A5523F1BCF83CB00AD17CF /* FRDRelationshipStatusesService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRelationshipStatusesService.m; path = Classes/MVC/Models/ModelsServices/RelationshipStatusesService/FRDRelationshipStatusesService.m; sourceTree = "<group>"; };
+		58A552421BCFFBBC00AD17CF /* FRDRemoteNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRemoteNotification.h; path = Classes/MVC/Models/RemoteNotification/FRDRemoteNotification.h; sourceTree = "<group>"; };
+		58A552431BCFFBBC00AD17CF /* FRDRemoteNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRemoteNotification.m; path = Classes/MVC/Models/RemoteNotification/FRDRemoteNotification.m; sourceTree = "<group>"; };
 		58AC693E1BC7938300A1C7D5 /* FRDPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPlaceholderTextView.h; path = Classes/MVC/Views/TextViews/PlaceholderTextView/FRDPlaceholderTextView.h; sourceTree = "<group>"; };
 		58AC693F1BC7938300A1C7D5 /* FRDPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPlaceholderTextView.m; path = Classes/MVC/Views/TextViews/PlaceholderTextView/FRDPlaceholderTextView.m; sourceTree = "<group>"; };
 		58AC69421BC79B3100A1C7D5 /* FRDGetFriendProfileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDGetFriendProfileRequest.h; path = "Classes/Server APIs/API/Requests/GetFriendProfileRequest/FRDGetFriendProfileRequest.h"; sourceTree = "<group>"; };
@@ -1243,6 +1246,15 @@
 			name = RelationshipStatusesService;
 			sourceTree = "<group>";
 		};
+		58A552411BCFFBA200AD17CF /* RemoteNotification */ = {
+			isa = PBXGroup;
+			children = (
+				58A552421BCFFBBC00AD17CF /* FRDRemoteNotification.h */,
+				58A552431BCFFBBC00AD17CF /* FRDRemoteNotification.m */,
+			);
+			name = RemoteNotification;
+			sourceTree = "<group>";
+		};
 		58AC693C1BC7934100A1C7D5 /* TextViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -1694,6 +1706,7 @@
 		58BC76D01B9EB94C00BB8B5A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				58A552411BCFFBA200AD17CF /* RemoteNotification */,
 				3E8770BA1BC5100D0002E540 /* ChatOption */,
 				58CF2C761BC532650025AD2C /* ChatMessage */,
 				58B9701F1BC2491F0017785E /* GalleryPhoto */,
@@ -2862,6 +2875,7 @@
 				58CB4E831BC960EF00517287 /* SocketFixUTF8.swift in Sources */,
 				58ED54F91BB189EA00F9B378 /* FRDGeolocationDeniedController.m in Sources */,
 				3E941A371BB180B400F034E6 /* FRDSwitch.m in Sources */,
+				58A552441BCFFBBC00AD17CF /* FRDRemoteNotification.m in Sources */,
 				58B99EAB1BBA83CA0057DB54 /* FRDDislikeUserByIdRequest.m in Sources */,
 				58F2F30F1B9EF93F000DC739 /* FRDTutorialController.m in Sources */,
 				58CB4E7F1BC960EF00517287 /* SocketAnyEvent.swift in Sources */,
@@ -3029,6 +3043,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3051,6 +3066,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3072,7 +3088,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -3087,6 +3104,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3098,8 +3116,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mairead Cremins (4VE67ZNZ6W)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mairead Cremins (4VE67ZNZ6W)";
 				DEFINES_MODULE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Frndr/Frndr-Prefix.pch";
@@ -3120,8 +3138,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mairead Cremins (4VE67ZNZ6W)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mairead Cremins (4VE67ZNZ6W)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mairead Cremins (6T72C88SAS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mairead Cremins (6T72C88SAS)";
 				DEFINES_MODULE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Frndr/Frndr-Prefix.pch";

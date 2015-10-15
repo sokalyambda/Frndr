@@ -27,6 +27,11 @@
     [FRDStorageManager sharedStorage].userProfileUpdateNeeded = YES;
     [FRDStorageManager sharedStorage].searchSettingsUpdateNeeded = YES;
     
+    NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (userInfo) {
+        [FRDPushNotifiactionService receivedPushNotification:userInfo withApplicationState:UIApplicationStateInactive];
+    }
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 }
@@ -91,7 +96,7 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [FRDPushNotifiactionService recivedPushNotification:userInfo];
+    [FRDPushNotifiactionService receivedPushNotification:userInfo withApplicationState:application.applicationState];
 }
 
 @end

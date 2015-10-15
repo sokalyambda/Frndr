@@ -14,8 +14,10 @@
 #import "FRDFriendsListController.h"
 #import "FRDBaseNavigationController.h"
 #import "FRDTermsAndServicesController.h"
+#import "FRDChatController.h"
 
 #import "FRDAnimator.h"
+#import "FRDFriend.h"
 
 static NSString *const kMainStoryboardName = @"Main";
 
@@ -63,6 +65,55 @@ static NSString *const kMainStoryboardName = @"Main";
     controller.currentURL = url;
     
     [presentingController presentViewController:navigationController animated:YES completion:nil];
+}
+
+/**
+ *  Redirect from push-notification
+ *
+ */
++ (void)redirectToChatWithFriend:(FRDFriend *)currentFriend
+                       onSuccess:(SuccessBlock)success
+                       onFailure:(FailureBlock)failure
+{
+    [FRDProjectFacade getFriendProfileWithFriendId:currentFriend.userId onSuccess:^(FRDFriend *currentFriend) {
+
+        FRDBaseNavigationController *navigationController = (FRDBaseNavigationController *)[[[UIApplication sharedApplication] keyWindow] rootViewController];
+        
+        for (FRDBaseViewController *controller in navigationController.viewControllers) {
+            if ([controller isKindOfClass:[FRDChatController class]]) {
+                if (success) {
+                    return success(YES);
+                } else {
+                    return;
+                }
+            }
+        }
+        
+        if (navigationController.presentedViewController) {
+            [navigationController.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+        }
+        
+        UIStoryboard *mainBoard = [UIStoryboard storyboardWithName:kMainStoryboardName bundle:nil];
+
+        FRDChatController *chatController = [mainBoard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDChatController class])];
+        
+        chatController.currentFriend = currentFriend;
+        
+        [navigationController pushViewController:chatController animated:YES];
+        
+        if (success) {
+            return success(YES);
+        } else {
+            return;
+        }
+
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        
+        if (failure) {
+            failure(error, isCanceled);
+        }
+        
+    }];
 }
 
 @end

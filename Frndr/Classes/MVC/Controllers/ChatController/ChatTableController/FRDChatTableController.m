@@ -90,18 +90,25 @@ dispatch_queue_t messages_unpacking_queue() {
     [self registerCells];
     [self addGestureRecognizers];
     
-    //load first page and update messages
-    WEAK_SELF;
-    [self loadMessagesFirstPageOnSuccess:^(NSArray *messages) {
-        [weakSelf updateLastMessagesPageWithMessages:messages];
-        [weakSelf scrollTableViewToBottomAnimated:NO];
-    }];
+//    //load first page and update messages
+//    WEAK_SELF;
+//    [self loadMessagesFirstPageOnSuccess:^(NSArray *messages) {
+//        [weakSelf updateLastMessagesPageWithMessages:messages];
+//        [weakSelf scrollTableViewToBottomAnimated:NO];
+//    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self subscribeForNotifications];
+    
+    //load first page and update messages
+    WEAK_SELF;
+    [self loadMessagesFirstPageOnSuccess:^(NSArray *messages) {
+        [weakSelf updateLastMessagesPageWithMessages:messages];
+        [weakSelf scrollTableViewToBottomAnimated:NO];
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -336,7 +343,7 @@ dispatch_queue_t messages_unpacking_queue() {
         @synchronized(self) {
             //Message from socket has ownerId, friendId, messageBody;
             FRDChatMessage *message = (FRDChatMessage *)notification.object;
-            
+ 
             //For messages unreading
             NSString *currentUserId = currentProfile.userId;
             NSString *friendId = self.currentFriend.userId;
@@ -353,6 +360,8 @@ dispatch_queue_t messages_unpacking_queue() {
                 
                 message.ownerType = FRDMessageOwnerTypeFriend;
                 
+            } else {
+                return;
             }
             
             message.creationDate = [NSDate date];

@@ -17,4 +17,6 @@
 
 - (instancetype)initFullFriendProfileWithServerResponse:(NSDictionary *)response;
 
+- (instancetype)initWithPushNotificationUserInfo:(NSDictionary *)userInfo;
+
 @end

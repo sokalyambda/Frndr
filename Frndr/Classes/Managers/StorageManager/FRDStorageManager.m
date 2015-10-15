@@ -8,6 +8,8 @@
 
 #import "FRDStorageManager.h"
 
+#import "FRDRemoteNotification.h"
+
 @interface FRDStorageManager ()
 
 @end
@@ -17,16 +19,6 @@
 @synthesize deviceName = _deviceName, deviceUDID = _deviceUDID;
 
 #pragma mark - Accessors
-//
-//- (void)setLogined:(BOOL)logined
-//{
-//    [[NSUserDefaults standardUserDefaults] setBool:logined forKey:IsLogined];
-//}
-//
-//- (BOOL)isLogined
-//{
-//    return [[NSUserDefaults standardUserDefaults] boolForKey:IsLogined];
-//}
 
 - (FRDFacebookProfile *)currentFacebookProfile
 {
