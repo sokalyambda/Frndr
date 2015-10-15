@@ -14,9 +14,13 @@
 
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicatorView;
 @property (readonly, nonatomic) UITableViewCell *lastVisibleCell;
+@property (strong, nonatomic) UIView *refreshBackgroundView;
 
 @property (nonatomic) CGFloat pullHeightTreshold;
 @property (nonatomic) CGFloat defaultIndicatorHeight;
+@property (nonatomic) CGFloat savedAnchorHeight;
+
+@property (nonatomic) BOOL isDragging;
 
 @end
 
@@ -46,11 +50,12 @@
         
         _tableView = tableView;
         [_tableView.tableFooterView addSubview:_activityIndicatorView];
+        _tableView.tableFooterView.clipsToBounds = YES;
         
         [_tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
         [_tableView addObserver:self forKeyPath:@"pan.state" options:NSKeyValueObservingOptionNew context:nil];
         
-        [self adjustFrames];
+        [self adjustFramesWithOffsetY:0.f];
     }
     return self;
 }
@@ -61,25 +66,15 @@
     [self.tableView removeObserver:self forKeyPath:@"pan.state"];
 }
 
--(void)layoutSubviews
-{
-    [super layoutSubviews];
-    [self adjustFrames];
-    NSLog(@"Layout subviews");
-}
-
 #pragma mark - Actions
 
 /**
  *  Redraw indicator and background depending on scroll offset
  */
-- (void)adjustFrames
+- (void)adjustFramesWithOffsetY:(CGFloat)offsetY
 {
-    CGFloat offsetY = self.tableView.contentOffset.y - self.tableView.contentSize.height + CGRectGetMaxY(self.lastVisibleCell.frame);
-    offsetY = MAX(0, offsetY);
-    
     self.tableView.tableFooterView.frame = CGRectMake(CGRectGetMinX(self.tableView.tableFooterView.frame),
-                                                      CGRectGetMaxY(self.lastVisibleCell.frame),
+                                                      self.savedAnchorHeight,
                                                       CGRectGetWidth(self.tableView.frame),
                                                       offsetY);
     
@@ -114,10 +109,13 @@
     WEAK_SELF;
     [UIView animateWithDuration:0.2f
                           delay:0.f
-                        options:UIViewAnimationOptionCurveEaseOut
+                        options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          weakSelf.tableView.contentInset = UIEdgeInsetsZero;
-                     } completion:nil];
+                         weakSelf.activityIndicatorView.transform = CGAffineTransformMakeScale(0.1f, 0.1f);
+                     } completion:^(BOOL finished) {
+                         [weakSelf adjustFramesWithOffsetY:0.f];
+                     }];
 }
 
 #pragma mark - Observers
@@ -127,26 +125,55 @@
  */
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
 {
+    CGPoint contentOffset = ((NSValue *)change[NSKeyValueChangeNewKey]).CGPointValue;
+    CGFloat offsetY;
+    
+    if (self.tableView.contentSize.height < [UIScreen mainScreen].bounds.size.height - self.additionalVerticalInset) {
+        offsetY = contentOffset.y;
+    } else {
+        offsetY = contentOffset.y - self.tableView.contentSize.height + [UIScreen mainScreen].bounds.size.height - self.additionalVerticalInset;
+    }
+    
+    offsetY = MAX(0, offsetY);
+        
     if ([keyPath isEqualToString:@"contentOffset"]) {
-        CGPoint contentOffset = ((NSValue *)change[NSKeyValueChangeNewKey]).CGPointValue;
-        CGFloat offsetY = contentOffset.y - self.tableView.contentSize.height + CGRectGetMaxY(self.lastVisibleCell.frame);
-        offsetY = MAX(0, offsetY);
-        
-        if (offsetY <= self.pullHeightTreshold && !self.refreshing) {
-            self.tableView.contentInset = UIEdgeInsetsMake(-offsetY, 0, offsetY, 0);
+        if (self.isDragging || self.refreshing) {
+            if (offsetY > self.pullHeightTreshold && !self.refreshing) {
+                [self beginRefreshing];
+                self.tableView.contentInset = UIEdgeInsetsMake(-self.pullHeightTreshold, 0, self.pullHeightTreshold, 0);
+            }
+            
+            if (offsetY < self.pullHeightTreshold && !self.refreshing) {
+                self.tableView.contentInset = UIEdgeInsetsMake(-offsetY, 0, offsetY, 0);
+            }
+            
+            [self adjustFramesWithOffsetY:offsetY];
         }
-        
-        if (offsetY > self.pullHeightTreshold && !self.refreshing) {
-            [self beginRefreshing];
-            self.tableView.contentInset = UIEdgeInsetsMake(-self.pullHeightTreshold, 0, self.pullHeightTreshold, 0);
-        }
-        
-        [self adjustFrames];
     } else if ([keyPath isEqualToString:@"pan.state"]) {
-        if ((self.tableView.panGestureRecognizer.state == UIGestureRecognizerStateEnded ||
-             self.tableView.panGestureRecognizer.state == UIGestureRecognizerStateCancelled) &&
-            self.tableView.contentInset.bottom < self.pullHeightTreshold) {
-            [self setDefaultInsetsAnimated];
+        switch (self.tableView.panGestureRecognizer.state) {
+            case UIGestureRecognizerStateBegan: {
+                self.isDragging = YES;
+                
+                if (self.tableView.contentSize.height < [UIScreen mainScreen].bounds.size.height - self.additionalVerticalInset) {
+                    self.savedAnchorHeight = CGRectGetMaxY(self.lastVisibleCell.frame);
+                } else {
+                    self.savedAnchorHeight = self.tableView.contentSize.height;
+                }
+                
+                break;
+            }
+ 
+            case UIGestureRecognizerStateEnded:
+            case UIGestureRecognizerStateCancelled:
+            case UIGestureRecognizerStateFailed: {
+                self.isDragging = NO;
+                if (offsetY < self.pullHeightTreshold && !self.refreshing) {
+                    [self setDefaultInsetsAnimated];
+                } 
+            }
+                
+            default:
+                break;
         }
     }
 }
