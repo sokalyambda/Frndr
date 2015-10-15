@@ -28,5 +28,6 @@ static NSString *const IsLogined = @"IsLogined";
 
 //Notifications
 static NSString *const DidReceiveNewMessageNotification = @"DidReceiveNewMessageNotification";
+static NSString *const NewFriendAddedNotification = @"NewFriendAddedNotification";
 
 #endif

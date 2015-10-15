@@ -95,12 +95,12 @@ dispatch_queue_t messages_unpacking_queue() {
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self subscribeForMessagesNotification];
+    [self subscribeForNotifications];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self unsibscribeFromMessagesNotification];
+    [self unsibscribeFromNotifications];
     [super viewWillDisappear:animated];
 }
 
@@ -167,7 +167,7 @@ dispatch_queue_t messages_unpacking_queue() {
         
         if (toBottom) {
             //to bottom
-            [weakSelf scrollTableViewToBottomAnimated:NO];
+            [weakSelf scrollTableViewToBottomAnimated:animated];
         }
         
     } onFailure:^(NSError *error) {
@@ -228,12 +228,13 @@ dispatch_queue_t messages_unpacking_queue() {
     [[UIResponder currentFirstResponder] resignFirstResponder];
 }
 
-- (void)subscribeForMessagesNotification
+- (void)subscribeForNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNewMessageNotification:) name:DidReceiveNewMessageNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
-- (void)unsibscribeFromMessagesNotification
+- (void)unsibscribeFromNotifications
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -312,6 +313,13 @@ dispatch_queue_t messages_unpacking_queue() {
         });
         
     });
+}
+
+#pragma mark - Notifications
+
+- (void)applicationDidBecomeActiveNotification:(NSNotification *)notification
+{
+    [self loadChatHistoryAndScrollToBottom:YES animated:NO];
 }
 
 @end

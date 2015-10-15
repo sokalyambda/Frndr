@@ -6,7 +6,7 @@
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-@interface FRDDSeparatedBottomRefreshControl : UIControl
+@interface FRDSeparatedBottomRefreshControl : UIControl
 
 @property (readonly, nonatomic) BOOL refreshing;
 

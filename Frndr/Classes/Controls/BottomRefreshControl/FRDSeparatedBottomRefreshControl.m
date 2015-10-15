@@ -6,9 +6,9 @@
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "FRDDSeparatedBottomRefreshControl.h"
+#import "FRDSeparatedBottomRefreshControl.h"
 
-@interface FRDDSeparatedBottomRefreshControl () <UITableViewDelegate>
+@interface FRDSeparatedBottomRefreshControl () <UITableViewDelegate>
 
 @property (weak, nonatomic) UITableView *tableView;
 
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation FRDDSeparatedBottomRefreshControl
+@implementation FRDSeparatedBottomRefreshControl
 
 #pragma mark - Accessors
 
@@ -100,7 +100,6 @@
     [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
-
 /**
  *  Call when refreshing actions are done
  */
@@ -112,7 +111,6 @@
 
 - (void)setDefaultInsetsAnimated
 {
-    
     WEAK_SELF;
     [UIView animateWithDuration:0.2f
                           delay:0.f

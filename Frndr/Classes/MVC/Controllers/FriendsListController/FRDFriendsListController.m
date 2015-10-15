@@ -10,16 +10,17 @@
 #import "FRDChatController.h"
 #import "FRDContainerController.h"
 
-#import "FRDSerialViewConstructor.h"
-
 #import "FRDFriendCell.h"
 #import "FRDNoMatchesView.h"
 
 #import "FRDProjectFacade.h"
 
+#import "FRDSerialViewConstructor.h"
 #import "FRDChatMessagesService.h"
 
 #import "FRDFriend.h"
+
+#import "FRDSeparatedBottomRefreshControl.h"
 
 #import "UIView+MakeFromXib.h"
 
@@ -31,6 +32,8 @@
 @property (strong, nonatomic) FRDNoMatchesView *noMatchesView;
 @property (weak, nonatomic) IBOutlet UIView *noMatchesViewContainer;
 
+@property (strong, nonatomic) FRDSeparatedBottomRefreshControl *bottomRefreshControl;
+
 @property (assign, nonatomic) NSInteger currentPage;
 
 @end
@@ -40,6 +43,14 @@
 @synthesize friends = _friends;
 
 #pragma mark - Accessors
+
+- (FRDSeparatedBottomRefreshControl *)bottomRefreshControl
+{
+    if (!_bottomRefreshControl) {
+        _bottomRefreshControl = [[FRDSeparatedBottomRefreshControl alloc] initWithTableView:self.friendsTableView];
+    }
+    return _bottomRefreshControl;
+}
 
 - (NSString *)titleString
 {
@@ -92,12 +103,14 @@
     //for ios 8
     self.friendsTableView.estimatedRowHeight = UITableViewAutomaticDimension;
     self.friendsTableView.rowHeight = UITableViewAutomaticDimension;
+    
+    [self configureBottomRefreshControl];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self subscribeForMessagesNotification];
+    [self subscribeForNotifications];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -107,7 +120,7 @@
     [self initNoMatchesView];
     
     WEAK_SELF;
-    [self loadFriendsListOnSuccess:^(NSArray *friendsList) {
+    [self loadFriendsListWithPage:1 onSuccess:^(NSArray *friendsList) {
         
         if (friendsList.count) {
             weakSelf.friends = [NSMutableArray arrayWithArray:friendsList];
@@ -120,7 +133,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self unsibscribeFromMessagesNotification];
+    [self unsibscribeFromNotifications];
     [super viewWillDisappear:animated];
 }
 
@@ -180,6 +193,14 @@
 #pragma mark - Actions
 
 /**
+ *  Configure bottom refresh control
+ */
+- (void)configureBottomRefreshControl
+{
+    [self.bottomRefreshControl addTarget:self action:@selector(loadMoreFriends) forControlEvents:UIControlEventValueChanged];
+}
+
+/**
  *  Show or hide no matches view
  */
 - (void)showHideNoMatchesView
@@ -205,12 +226,13 @@
     }
 }
 
-- (void)subscribeForMessagesNotification
+- (void)subscribeForNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNewMessageNotification:) name:DidReceiveNewMessageNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
-- (void)unsibscribeFromMessagesNotification
+- (void)unsibscribeFromNotifications
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -230,17 +252,14 @@
 /**
  *  Load more friends relative to current page
  */
-- (void)loadFriendsListOnSuccess:(void(^)(NSArray *friendsList))success
+- (void)loadFriendsListWithPage:(NSInteger)page
+                      onSuccess:(void(^)(NSArray *friendsList))success
                        onFailure:(FailureBlock)failure
 {
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [FRDProjectFacade getFriendsListWithPage:self.currentPage onSuccess:^(NSArray *friendsList) {
+    [FRDProjectFacade getFriendsListWithPage:page onSuccess:^(NSArray *friendsList) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        
-//        if (friendsList.count) {
-//            [weakSelf updateLocalFriendsArrayWithArray:friendsList];
-//        }
         
         if (success) {
             success(friendsList);
@@ -253,8 +272,22 @@
         if (failure) {
             failure(error, isCanceled);
         }
-        
     }];
+}
+
+/**
+ *  for bottom refresh control
+ */
+- (void)loadMoreFriends
+{
+    WEAK_SELF;
+    [self loadFriendsListWithPage:self.currentPage onSuccess:^(NSArray *friendsList) {
+        
+        if (friendsList.count) {
+            [weakSelf updateLocalFriendsArrayWithArray:friendsList];
+        }
+        
+    } onFailure:nil];
 }
 
 #pragma mark - New Messages Handling
@@ -281,6 +314,20 @@
             [self.friendsTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.friends indexOfObject:messageOwner] inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
     }
+}
+
+- (void)applicationDidBecomeActiveNotification:(NSNotification *)notification
+{
+    WEAK_SELF;
+    [self loadFriendsListWithPage:1 onSuccess:^(NSArray *friendsList) {
+        
+        if (friendsList.count) {
+            weakSelf.friends = [NSMutableArray arrayWithArray:friendsList];
+        }
+        
+        [weakSelf showHideNoMatchesView];
+        
+    } onFailure:nil];
 }
 
 @end

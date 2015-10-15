@@ -10,6 +10,7 @@
 #import "Frndr-Swift.h"
 
 #import "FRDChatMessage.h"
+#import "FRDFriend.h"
 
 #import "FRDFacebookService.h"
 
@@ -20,6 +21,7 @@ static NSString *const kBaseHostURL = @"http://192.168.89.191:8859";//Vanya
 static NSString *const kConnectedToServerEvent = @"connectedToServer";
 static NSString *const kAuthorizeEvent = @"authorize";
 static NSString *const kChatMessageEvent = @"chat message";
+static NSString *const kNewFriendAddedEvent = @"new friend";
 static NSString *const kLogoutEvent = @"logout";
 
 static NSString *const kSuccess = @"success";
@@ -54,10 +56,6 @@ static NSString *const kSuccess = @"success";
         return;
     }
     
-//    self.socketIOClient = nil;
-    
-    NSLog(@"self.socketIOClient %@", self.socketIOClient);
-    
     NSString *userId = [FRDStorageManager sharedStorage].currentUserProfile.userId;
     //Init socket client
     self.socketIOClient = [[SocketIOClient alloc] initWithSocketURL:kBaseHostURL opts:nil];
@@ -82,6 +80,18 @@ static NSString *const kSuccess = @"success";
         
         //post notification with new message
         [[NSNotificationCenter defaultCenter] postNotificationName:DidReceiveNewMessageNotification object:message];
+        
+        NSLog(@"data %@", data);
+    }];
+    
+    [self.socketIOClient on:kNewFriendAddedEvent callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nullable emitter) {
+        
+        NSDictionary *friendDict = data.firstObject;
+        
+        FRDFriend *currentFriend = [[FRDFriend alloc] initWithServerResponse:friendDict];
+        
+        //post new friend notification
+        [[NSNotificationCenter defaultCenter] postNotificationName:NewFriendAddedNotification object:currentFriend];
         
         NSLog(@"data %@", data);
     }];
