@@ -186,8 +186,10 @@
 {
     if (!self.friends.count && ![self.noMatchesViewContainer.subviews containsObject:self.noMatchesView]) {
         [self.noMatchesViewContainer addSubview:self.noMatchesView];
+        [self.view bringSubviewToFront:self.noMatchesViewContainer];
     } else if (self.friends.count && [self.noMatchesViewContainer.subviews containsObject:self.noMatchesView]) {
         [self.noMatchesView removeFromSuperview];
+        [self.view sendSubviewToBack:self.noMatchesViewContainer];
     }
 }
 

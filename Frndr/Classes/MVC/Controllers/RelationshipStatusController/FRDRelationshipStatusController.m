@@ -10,12 +10,13 @@
 
 #import "FRDRelationshipItem.h"
 #import "FRDSearchSettings.h"
+#import "FRDFriend.h"
 
 #import "FRDRelationshipCollectionCell.h"
 
 #import "UIView+MakeFromXib.h"
 
-#import "FRDFriend.h"
+#import "FRDRelationshipStatusesService.h"
 
 static NSString *const kActiveImageName = @"ActiveImageName";
 static NSString *const kNotActiveImageName = @"NotActiveImageName";
@@ -43,7 +44,7 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
 - (NSArray *)relationshipStatuses
 {
     if (!_relationshipStatuses) {
-        _relationshipStatuses = [self setupRelationshipsArray];
+        _relationshipStatuses = [FRDRelationshipStatusesService setupRelationshipsArrayWithCurrentSourceType:self.currentSourceType];
     }
     return _relationshipStatuses;
 }
@@ -220,62 +221,6 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
     NSString *nibName = NSStringFromClass([FRDRelationshipCollectionCell class]);
     UINib *cellNib = [UINib nibWithNibName:nibName bundle:nil];
     [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:nibName];
-}
-
-/**
- *  Create array of relationshipItems
- *
- *  @return relationshipItems
- */
-- (NSArray *)setupRelationshipsArray
-{
-    NSDictionary *relDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"RelationshipStatuses" ofType:@"plist"]];
-    NSDictionary *commonRelStatuses = relDict[@"Common"];
-    NSDictionary *femaleRelStatuses = relDict[@"Female"];
-    NSDictionary *maleRelStatuses = relDict[@"Male"];
-    
-    NSMutableArray *currentRelStatuses = [NSMutableArray array];
-    
-    FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
-    
-    switch (self.currentSourceType) {
-        case FRDSourceTypeMyProfile: {
-            
-            if (currentProfile.isMale) {
-                
-                [maleRelStatuses enumerateKeysAndObjectsUsingBlock:^(NSString  *_Nonnull key, NSDictionary  * _Nonnull obj, BOOL * _Nonnull stop) {
-                    
-                    FRDRelationshipItem *item = [FRDRelationshipItem relationshipItemWithTitle:key andActiveImage:obj[kActiveImageName] andNotActiveImage:obj[kNotActiveImageName]];
-                    [currentRelStatuses addObject:item];
-                }];
-                
-            } else {
-                
-                [femaleRelStatuses enumerateKeysAndObjectsUsingBlock:^(NSString  *_Nonnull key, NSDictionary  * _Nonnull obj, BOOL * _Nonnull stop) {
-                    
-                    FRDRelationshipItem *item = [FRDRelationshipItem relationshipItemWithTitle:key andActiveImage:obj[kActiveImageName] andNotActiveImage:obj[kNotActiveImageName]];
-                    [currentRelStatuses addObject:item];
-                }];
-            }
-            
-            break;
-        }
-        case FRDSourceTypeSearchSettings: {
-
-            [commonRelStatuses enumerateKeysAndObjectsUsingBlock:^(NSString  *_Nonnull key, NSDictionary  * _Nonnull obj, BOOL * _Nonnull stop) {
-                
-                FRDRelationshipItem *item = [FRDRelationshipItem relationshipItemWithTitle:key andActiveImage:obj[kActiveImageName] andNotActiveImage:obj[kNotActiveImageName]];
-                [currentRelStatuses addObject:item];
-            }];
-            
-            break;
-        }
-            
-        default:
-            break;
-    }
-    
-    return currentRelStatuses;
 }
 
 @end

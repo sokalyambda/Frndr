@@ -23,6 +23,7 @@ static NSString *const kName                = @"name";
 static NSString *const kSexualOrientation   = @"sexual";
 static NSString *const kSmoker              = @"smoker";
 static NSString *const kUserId              = @"userId";
+static NSString *const kSex                 = @"sex";
 
 @implementation FRDBaseUserModel
 
@@ -62,6 +63,7 @@ static NSString *const kUserId              = @"userId";
         /*
          _relationshipStatus = [[FRDRelationshipItem alloc] init];
          */
+        _genderString = response[kSex];
         _smoker = [response[kSmoker] boolValue];
         _userId = response[kUserId];
     }

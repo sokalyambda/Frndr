@@ -13,7 +13,6 @@ static NSString *const kNewMessageCategory = @"newMessageCategory";
 static NSString *const kNewFriendCategory = @"newFriendCategory";
 
 static NSString *const kReadMessageActionIdentifier = @"readMessageActionIdentifier";
-
 static NSString *const kShowChatWithNewFriendActionIdentifier = @"showChatWithNewFriendActionIdentifier";
 
 @implementation FRDPushNotifiactionService

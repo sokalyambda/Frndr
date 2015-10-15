@@ -29,6 +29,8 @@
 static NSString *const kPreferencesImageName = @"PreferencesIcon";
 static NSString *const kMessagesImageName = @"MessagesIcon";
 
+static CGFloat const kMaxGalleryCollectionHeight = 125.f;
+
 @interface FRDSearchFriendsController ()<ZLSwipeableViewDataSource, ZLSwipeableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet ZLSwipeableView *dragableViewsHolder;
@@ -138,6 +140,8 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self.pulsingOverlay unsibscribeFromNotifications];
+    
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - Actions
@@ -446,9 +450,7 @@ static NSString *const kMessagesImageName = @"MessagesIcon";
     
     self.previewGalleryController.photos = self.currentNearestUser.galleryPhotos;
     
-    if (!self.currentNearestUser.galleryPhotos.count) {
-        self.galleryHeightConstraint.constant = 0.f;
-    }
+    self.galleryHeightConstraint.constant = !self.currentNearestUser.galleryPhotos.count ? 0.f : kMaxGalleryCollectionHeight;
 }
 
 /**

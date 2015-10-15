@@ -96,13 +96,15 @@ typedef NS_ENUM(NSInteger, FRDPersonalBioSectionType)
  */
 - (void)fillFieldsWithUserModel:(FRDBaseUserModel *)userModel
 {
-    for (UITextField *field in self.mostLovedThingsFields) {
-        NSInteger idx = [self.mostLovedThingsFields indexOfObject:field];
-        if (idx < userModel.thingsLovedMost.count && idx != NSNotFound) {
-            NSString *currentThing = userModel.thingsLovedMost[idx];
-            field.text = currentThing;
-        } else {
-            break;
+    @autoreleasepool {
+        for (UITextField *field in self.mostLovedThingsFields) {
+            NSInteger idx = [self.mostLovedThingsFields indexOfObject:field];
+            if (idx < userModel.thingsLovedMost.count && idx != NSNotFound) {
+                NSString *currentThing = userModel.thingsLovedMost[idx];
+                field.text = currentThing;
+            } else {
+                break;
+            }
         }
     }
 }

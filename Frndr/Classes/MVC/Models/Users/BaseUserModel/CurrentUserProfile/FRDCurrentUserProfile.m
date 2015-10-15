@@ -20,7 +20,6 @@ static NSString *const kVisible = @"visible";
 static NSString *const kThingsLovedMost = @"things";
 static NSString *const kSexualOrientation = @"sexual";
 static NSString *const kRelationshipStatus = @"relStatus";
-static NSString *const kSex = @"sex";
 static NSString *const kJobTitle = @"jobTitle";
 static NSString *const kSmoker = @"smoker";
 static NSString *const kBiography = @"bio";
@@ -36,7 +35,7 @@ static NSString *const kNewFriends = @"newFriends";
 - (FRDRelationshipItem *)relationshipStatus
 {
     if (!_relationshipStatus) {
-        _relationshipStatus = [FRDRelationshipItem relationshipItemWithTitle:@"Single" andActiveImage:nil andNotActiveImage:nil];
+        _relationshipStatus = [FRDRelationshipItem relationshipItemWithTitle:LOCALIZED(@"Single") andActiveImage:nil andNotActiveImage:nil];
     }
     return _relationshipStatus;
 }
@@ -52,7 +51,7 @@ static NSString *const kNewFriends = @"newFriends";
 - (FRDSexualOrientation *)sexualOrientation
 {
     if (!_sexualOrientation) {
-        _sexualOrientation = [FRDSexualOrientation orientationWithOrientationString:@"Straight"];
+        _sexualOrientation = [FRDSexualOrientation orientationWithOrientationString:LOCALIZED(@"Straight")];
     }
     return _sexualOrientation;
 }
@@ -84,7 +83,7 @@ static NSString *const kNewFriends = @"newFriends";
         _visible = [profileDict[kVisible] boolValue];
         _thingsLovedMost = profileDict[kThingsLovedMost];
         _sexualOrientation = [FRDSexualOrientation orientationWithOrientationString:profileDict[kSexualOrientation]];
-        _relationshipStatus = [FRDRelationshipItem relationshipItemWithTitle:profileDict[kRelationshipStatus] andActiveImage:nil andNotActiveImage:nil];
+        _relationshipStatus = [FRDRelationshipItem relationshipItemWithTitle:profileDict[kRelationshipStatus] andActiveImage:@"" andNotActiveImage:@""];
         _jobTitle = profileDict[kJobTitle];
         _smoker = [profileDict[kSmoker] boolValue];
         _biography = profileDict[kBiography];
