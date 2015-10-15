@@ -198,6 +198,7 @@
 - (void)configureBottomRefreshControl
 {
     [self.bottomRefreshControl addTarget:self action:@selector(loadMoreFriends) forControlEvents:UIControlEventValueChanged];
+    self.bottomRefreshControl.additionalVerticalInset = CGRectGetHeight(self.navigationController.navigationBar.frame);
 }
 
 /**
@@ -273,6 +274,16 @@
             failure(error, isCanceled);
         }
     }];
+    
+//    For testing purposes
+    
+//    NSMutableArray *friends = [NSMutableArray array];
+//    for (int i = 0; i < 3; ++i) {
+//        FRDFriend *friend = [[FRDFriend alloc] init];
+//        friend.lastMessage = @"AAAKSJJSKLADAIWDIAWLLIAWDAWDILJAWDDWLKJWDIALWIDJW";
+//        [friends addObject:friend];
+//    }
+//    success(friends);
 }
 
 /**
