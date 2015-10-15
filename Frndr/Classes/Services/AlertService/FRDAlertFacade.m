@@ -167,8 +167,19 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
         UIViewController *lastPresentedViewController = ((UIViewController *)navigationController.viewControllers.lastObject).presentedViewController;
         
         if (lastPresentedViewController) {
+            
+            if ([lastPresentedViewController.presentedViewController isKindOfClass:[UIAlertController class]] || [lastPresentedViewController isKindOfClass:[UIAlertController class]]) {
+                return;
+            }
+            
             [lastPresentedViewController presentViewController:alertController animated:YES completion:nil];
+
         } else {
+            
+            if ([navigationController.visibleViewController isKindOfClass:[UIAlertController class]]) {
+                return;
+            }
+            
             [navigationController presentViewController:alertController animated:YES completion:nil];
         }
     } else {
