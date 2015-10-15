@@ -8,7 +8,7 @@
 
 #import "FRDBaseViewController.h"
 
-@class FRDSexualOrientation;
+@class FRDSexualOrientation, FRDFriend;
 
 @interface FRDDropDownHolderController : FRDBaseViewController
 
@@ -18,5 +18,7 @@
 @property (nonatomic) FRDSexualOrientation *chosenOrientation;
 
 - (void)updateWithSourceType:(FRDSourceType)sourceType;
+
+- (void)updateWithFriend:(FRDFriend *)currentFriend;
 
 @end

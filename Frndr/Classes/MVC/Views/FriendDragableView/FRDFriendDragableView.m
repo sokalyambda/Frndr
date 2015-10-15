@@ -12,6 +12,8 @@
 #import "FRDSexualOrientation.h"
 #import "FRDRelationshipItem.h"
 
+#import "FRDRelationshipStatusesService.h"
+
 #import "UIView+MakeFromXib.h"
 #import "UIView+RoundSpecificCorners.h"
 
@@ -30,8 +32,6 @@
 @end
 
 @implementation FRDFriendDragableView
-
-#pragma mark - Accessors
 
 - (void)setOverlayImageName:(NSString *)overlayImageName
 {
@@ -82,7 +82,7 @@
     self.sexualOrientationLabel.text = nearestUser.sexualOrientation.orientationString;
     self.jobTitleLabel.text = nearestUser.jobTitle;
     
-    [self.relationshipStatusIcon setImage:[self relationshipImageNameForNearestUser:nearestUser]];
+    [self.relationshipStatusIcon setImage:[FRDRelationshipStatusesService relationshipImageNameForNearestUser:nearestUser]];
     [self.friendProfileImageView sd_setImageWithURL:nearestUser.avatarURL];
 }
 
@@ -91,21 +91,6 @@
     self.layer.cornerRadius = 10.f;
     [self.infoContainer roundCorners:(UIRectCornerBottomLeft | UIRectCornerBottomRight)];
     [self.friendProfileImageView roundCorners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
-}
-
-- (UIImage *)relationshipImageNameForNearestUser:(FRDNearestUser *)nearestUser
-{
-    NSDictionary *relDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"RelationshipStatuses" ofType:@"plist"]];
-    NSDictionary *femaleRelStatuses = relDict[@"Female"];
-    NSDictionary *maleRelStatuses = relDict[@"Male"];
-
-    NSString *activeImageName;
-    if (nearestUser.isMale) {
-        activeImageName = maleRelStatuses[[nearestUser.relationshipStatus.relationshipTitle capitalizedString]][@"ActiveImageName"];
-    } else {
-        activeImageName = femaleRelStatuses[[nearestUser.relationshipStatus.relationshipTitle capitalizedString]][@"ActiveImageName"];
-    }
-    return [UIImage imageNamed:activeImageName];
 }
 
 @end

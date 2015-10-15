@@ -83,6 +83,7 @@
 		589664FC1BCC15B5007022C6 /* FRDDropDownTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 589664FA1BCC15B5007022C6 /* FRDDropDownTableView.xib */; settings = {ASSET_TAGS = (); }; };
 		589664FE1BCC15CE007022C6 /* FRDChatOptionsDropDownTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 589664FD1BCC15CE007022C6 /* FRDChatOptionsDropDownTableView.xib */; settings = {ASSET_TAGS = (); }; };
 		58A1A12E1BB926AD00E29789 /* FRDOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A1A12D1BB926AD00E29789 /* FRDOverlayView.m */; settings = {ASSET_TAGS = (); }; };
+		58A552401BCF83CB00AD17CF /* FRDRelationshipStatusesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A5523F1BCF83CB00AD17CF /* FRDRelationshipStatusesService.m */; settings = {ASSET_TAGS = (); }; };
 		58AC69401BC7938300A1C7D5 /* FRDPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AC693F1BC7938300A1C7D5 /* FRDPlaceholderTextView.m */; settings = {ASSET_TAGS = (); }; };
 		58AC69441BC79B3100A1C7D5 /* FRDGetFriendProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AC69431BC79B3100A1C7D5 /* FRDGetFriendProfileRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58B27CF11BC193520035712C /* FRDUploadAvatarRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B27CF01BC193520035712C /* FRDUploadAvatarRequest.m */; settings = {ASSET_TAGS = (); }; };
@@ -364,6 +365,8 @@
 		589664FD1BCC15CE007022C6 /* FRDChatOptionsDropDownTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDChatOptionsDropDownTableView.xib; path = Classes/MVC/Views/DropDownTableView/ChatOptionsDropDownTableView/FRDChatOptionsDropDownTableView.xib; sourceTree = "<group>"; };
 		58A1A12C1BB926AD00E29789 /* FRDOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDOverlayView.h; path = Classes/MVC/Views/FriendDragableView/FriendOverlayView/FRDOverlayView.h; sourceTree = "<group>"; };
 		58A1A12D1BB926AD00E29789 /* FRDOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDOverlayView.m; path = Classes/MVC/Views/FriendDragableView/FriendOverlayView/FRDOverlayView.m; sourceTree = "<group>"; };
+		58A5523E1BCF83CB00AD17CF /* FRDRelationshipStatusesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDRelationshipStatusesService.h; path = Classes/MVC/Models/ModelsServices/RelationshipStatusesService/FRDRelationshipStatusesService.h; sourceTree = "<group>"; };
+		58A5523F1BCF83CB00AD17CF /* FRDRelationshipStatusesService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDRelationshipStatusesService.m; path = Classes/MVC/Models/ModelsServices/RelationshipStatusesService/FRDRelationshipStatusesService.m; sourceTree = "<group>"; };
 		58AC693E1BC7938300A1C7D5 /* FRDPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPlaceholderTextView.h; path = Classes/MVC/Views/TextViews/PlaceholderTextView/FRDPlaceholderTextView.h; sourceTree = "<group>"; };
 		58AC693F1BC7938300A1C7D5 /* FRDPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPlaceholderTextView.m; path = Classes/MVC/Views/TextViews/PlaceholderTextView/FRDPlaceholderTextView.m; sourceTree = "<group>"; };
 		58AC69421BC79B3100A1C7D5 /* FRDGetFriendProfileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDGetFriendProfileRequest.h; path = "Classes/Server APIs/API/Requests/GetFriendProfileRequest/FRDGetFriendProfileRequest.h"; sourceTree = "<group>"; };
@@ -1016,6 +1019,7 @@
 		583A48051BBD59500015436D /* ModelsServices */ = {
 			isa = PBXGroup;
 			children = (
+				58A5523D1BCF83A200AD17CF /* RelationshipStatusesService */,
 				58CF2C7A1BC54F780025AD2C /* ChatMessagesService */,
 				583A48061BBD596D0015436D /* NearestUsersService */,
 			);
@@ -1228,6 +1232,15 @@
 				5895FD941BA2D55C00079F9D /* FRDCustomPageControl.m */,
 			);
 			name = StyledPageControl;
+			sourceTree = "<group>";
+		};
+		58A5523D1BCF83A200AD17CF /* RelationshipStatusesService */ = {
+			isa = PBXGroup;
+			children = (
+				58A5523E1BCF83CB00AD17CF /* FRDRelationshipStatusesService.h */,
+				58A5523F1BCF83CB00AD17CF /* FRDRelationshipStatusesService.m */,
+			);
+			name = RelationshipStatusesService;
 			sourceTree = "<group>";
 		};
 		58AC693C1BC7934100A1C7D5 /* TextViews */ = {
@@ -2819,6 +2832,7 @@
 				586264C21BBD04DE00824BA3 /* UIView+Pulsing.m in Sources */,
 				58C28FFC1BAAC69B0099ABE4 /* CAAnimation+CompetionBlock.m in Sources */,
 				581B9D3B1B9ED6090080393B /* FRDStorageManager.m in Sources */,
+				58A552401BCF83CB00AD17CF /* FRDRelationshipStatusesService.m in Sources */,
 				3E945CC61BBE732E00BD5820 /* FRDFriendChatCell.m in Sources */,
 				58B27CF11BC193520035712C /* FRDUploadAvatarRequest.m in Sources */,
 				3EB7292B1BC69BC3001BEF4B /* FRDExpandableToThresholdTextView.m in Sources */,
@@ -3106,8 +3120,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Mairead Cremins (6T72C88SAS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mairead Cremins (6T72C88SAS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mairead Cremins (4VE67ZNZ6W)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mairead Cremins (4VE67ZNZ6W)";
 				DEFINES_MODULE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Frndr/Frndr-Prefix.pch";

@@ -8,7 +8,7 @@
 
 #import "FRDMappingProtocol.h"
 
-@class FRDSexualOrientation, FRDRelationshipItem;
+@class FRDSexualOrientation, FRDRelationshipItem, FRDAvatar;
 
 @interface FRDBaseUserModel : NSObject<FRDMappingProtocol> {
     @protected
@@ -25,6 +25,7 @@
     NSString *_userId;
     NSURL *_avatarURL;
     NSArray *_galleryPhotos;
+    FRDAvatar *_currentAvatar;
 }
 
 @property (strong, nonatomic) NSString *fullName;
@@ -45,5 +46,7 @@
 @property (assign, nonatomic, getter=isSmoker) BOOL smoker;
 @property (assign, nonatomic, getter=isMale, readonly) BOOL male;
 @property (assign, nonatomic, getter=isVisible) BOOL visible;
+
+@property (strong, nonatomic) FRDAvatar *currentAvatar;
 
 @end

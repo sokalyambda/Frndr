@@ -10,6 +10,7 @@
 
 #import "FRDSexualOrientation.h"
 #import "FRDRelationshipItem.h"
+#import "FRDAvatar.h"
 
 static NSString *const kAge                 = @"age";
 static NSString *const kAvatarURL           = @"avatar";
@@ -22,10 +23,19 @@ static NSString *const kName                = @"name";
 static NSString *const kSexualOrientation   = @"sexual";
 static NSString *const kSmoker              = @"smoker";
 static NSString *const kUserId              = @"userId";
+static NSString *const kSex                 = @"sex";
 
 @implementation FRDBaseUserModel
 
 #pragma mark - Accessors
+
+- (FRDAvatar *)currentAvatar
+{
+    if (!_currentAvatar) {
+        _currentAvatar = [[FRDAvatar alloc] init];
+    }
+    return _currentAvatar;
+}
 
 - (BOOL)isMale
 {
@@ -53,6 +63,7 @@ static NSString *const kUserId              = @"userId";
         /*
          _relationshipStatus = [[FRDRelationshipItem alloc] init];
          */
+        _genderString = response[kSex];
         _smoker = [response[kSmoker] boolValue];
         _userId = response[kUserId];
     }

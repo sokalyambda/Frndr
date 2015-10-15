@@ -8,6 +8,7 @@
 
 #import "FRDChatController.h"
 #import "FRDChatTableController.h"
+#import "FRDMyProfileController.h"
 
 #import "FRDSerialViewConstructor.h"
 
@@ -236,6 +237,10 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [FRDProjectFacade getFriendProfileWithFriendId:self.currentFriend.userId onSuccess:^(FRDFriend *currentFriend) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        FRDMyProfileController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDMyProfileController class])];
+        controller.currentFriend = currentFriend;
+        [weakSelf.navigationController pushViewController:controller animated:YES];
         
         NSLog(@"current friend %@", currentFriend);
         

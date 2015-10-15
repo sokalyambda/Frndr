@@ -89,6 +89,9 @@
 
     [self.friendsTableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     
+    //for ios 8
+    self.friendsTableView.estimatedRowHeight = UITableViewAutomaticDimension;
+    self.friendsTableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -183,8 +186,10 @@
 {
     if (!self.friends.count && ![self.noMatchesViewContainer.subviews containsObject:self.noMatchesView]) {
         [self.noMatchesViewContainer addSubview:self.noMatchesView];
+        [self.view bringSubviewToFront:self.noMatchesViewContainer];
     } else if (self.friends.count && [self.noMatchesViewContainer.subviews containsObject:self.noMatchesView]) {
         [self.noMatchesView removeFromSuperview];
+        [self.view sendSubviewToBack:self.noMatchesViewContainer];
     }
 }
 

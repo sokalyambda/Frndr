@@ -13,7 +13,6 @@ static NSString *const kNewMessageCategory = @"newMessageCategory";
 static NSString *const kNewFriendCategory = @"newFriendCategory";
 
 static NSString *const kReadMessageActionIdentifier = @"readMessageActionIdentifier";
-
 static NSString *const kShowChatWithNewFriendActionIdentifier = @"showChatWithNewFriendActionIdentifier";
 
 @implementation FRDPushNotifiactionService
@@ -74,7 +73,6 @@ static NSString *const kShowChatWithNewFriendActionIdentifier = @"showChatWithNe
  */
 + (void)recivedPushNotification:(NSDictionary*)userInfo
 {
-    //UIUserNotificationActionContextDefault
     NSLog(@"user info %@", userInfo);
 }
 
@@ -94,10 +92,10 @@ static NSString *const kShowChatWithNewFriendActionIdentifier = @"showChatWithNe
     
     if ([FRDStorageManager sharedStorage].deviceToken) {
         [FRDProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
-            NSLog(@"push token sending success");
+
         } onFailure:^(NSError *error, BOOL isCanceled) {
             [FRDAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:nil];
-            NSLog(@"push token sending failure");
+
         }];
     }
 }
@@ -109,6 +107,7 @@ static NSString *const kShowChatWithNewFriendActionIdentifier = @"showChatWithNe
     } else if ([identifier isEqualToString:kShowChatWithNewFriendActionIdentifier]) {
         NSLog(@"show chat with new friend");
     }
+    
     if (completionHandler) {
         completionHandler();
     }
@@ -138,7 +137,7 @@ static NSString *const kShowChatWithNewFriendActionIdentifier = @"showChatWithNe
     
     UIMutableUserNotificationAction *showChatWithNewFriendAction = [[UIMutableUserNotificationAction alloc] init];
     [showChatWithNewFriendAction setActivationMode:UIUserNotificationActivationModeBackground];
-    [showChatWithNewFriendAction setTitle:@"Open Chat"];
+    [showChatWithNewFriendAction setTitle:LOCALIZED(@"Open Chat")];
     [showChatWithNewFriendAction setIdentifier:kShowChatWithNewFriendActionIdentifier];
     [showChatWithNewFriendAction setDestructive:NO];
     [showChatWithNewFriendAction setAuthenticationRequired:NO];

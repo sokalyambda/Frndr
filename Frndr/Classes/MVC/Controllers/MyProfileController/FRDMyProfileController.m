@@ -19,14 +19,17 @@
 #import "FRDSwitch.h"
 
 #import "UIResponder+FirstResponder.h"
-
 #import "UIView+MakeFromXib.h"
 
 #import "FRDSerialViewConstructor.h"
 
 #import "FRDProjectFacade.h"
 
+#import "FRDFriend.h"
+
 static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBioTableControllerSegue";
+
+static CGFloat const kMinimumBottomSpacing = 8.f;
 
 @interface FRDMyProfileController () <UITextFieldDelegate, UIGestureRecognizerDelegate>
 
@@ -40,6 +43,10 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
 @property (weak, nonatomic) IBOutlet UIView *relationshipsContainer;
 @property (weak, nonatomic) IBOutlet UIView *dropDownHolderContainer;
 @property (weak, nonatomic) IBOutlet UITextField *jobTitleField;
+@property (weak, nonatomic) IBOutlet UIButton *managePhotosButton;
+@property (weak, nonatomic) IBOutlet UIButton *saveChangesButton;
+@property (weak, nonatomic) IBOutlet UIView *visibleOnFrienderContainer;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomSpaceConstraint;
 
 @property (strong, nonatomic) FRDMyProfileTopView *topView;
 @property (strong, nonatomic) FRDRelationshipStatusController *relationshipController;
@@ -61,13 +68,17 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
     [self initDropDownHolderContainer];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self performUpdatingActions];
+        
+        [self updateAppearanceAndFillFieldsForCurrentFriend];
     });
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.topView updateProfileTopView];
+    
+    //will update for current user if !self.currentFriend
+    [self.topView updateProfileTopViewForFriend:self.currentFriend];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -123,9 +134,7 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
     [FRDProjectFacade updatedProfile:profileForUpdating onSuccess:^(FRDCurrentUserProfile *confirmedProfile) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [currentProfile updateWithUserProfile:confirmedProfile];
-        
-        
-        
+
         [weakSelf.navigationController popViewControllerAnimated:YES];
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
@@ -135,6 +144,10 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
 
 - (void)performUpdatingActions
 {
+    if (self.currentFriend) {
+        return;
+    }
+    
     BOOL isSearchSettingsUpdateNeeded = [FRDStorageManager sharedStorage].isUserProfileUpdateNeeded;
     
     if (isSearchSettingsUpdateNeeded) {
@@ -163,11 +176,12 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
 }
 
 /**
- *  Set profile information to fields
+ *  Set profile information to fields for currentProfile
  */
 - (void)setProfileInformationToFields
 {
     FRDCurrentUserProfile *profile = [FRDStorageManager sharedStorage].currentUserProfile;
+
     [self.dropDownHolderController updateWithSourceType:FRDSourceTypeMyProfile];
     [self.personalBioTableController update];
     self.jobTitleField.text = profile.jobTitle;
@@ -176,9 +190,44 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
     [self.relationshipController updateWithSourceType:FRDSourceTypeMyProfile];
 }
 
+/**
+ *  Set profile information to fields from FRIEND
+ */
+- (void)setProfileInformationForFriend:(FRDFriend *)currentFriend
+{
+    [self.dropDownHolderController updateWithFriend:currentFriend];
+    [self.personalBioTableController updateForFriend:currentFriend];
+    self.jobTitleField.text = currentFriend.jobTitle;
+    [self.visibleOnFrndrSwitch setOn:currentFriend.isVisible animated:NO];
+    
+    [self.relationshipController updateForCurrentFriend:currentFriend];
+}
+
+- (void)updateAppearanceAndFillFieldsForCurrentFriend
+{
+    if (!self.currentFriend) {
+        return;
+    }
+    
+    [self setProfileInformationForFriend:self.currentFriend];
+    
+    [self.managePhotosButton setTitle:LOCALIZED(@"Show Gallery") forState:UIControlStateNormal];
+    self.saveChangesButton.hidden = YES;
+    self.visibleOnFrienderContainer.hidden = YES;
+    self.bottomSpaceConstraint.constant = kMinimumBottomSpacing;
+    
+    [self.relationshipsContainer setUserInteractionEnabled:NO];
+    [self.jobTitleField setUserInteractionEnabled:NO];
+    [self.dropDownHolderContainer setUserInteractionEnabled:NO];
+    [self.personalBioTableController.view setUserInteractionEnabled:NO];
+    
+}
+
 - (IBAction)managePhotosPress:(id)sender
 {
     FRDPhotoGalleryController *photoGalleryController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDPhotoGalleryController class])];
+    //can be friend or nil
+    photoGalleryController.currentFriend = self.currentFriend;
     [self.navigationController pushViewController:photoGalleryController animated:YES];
 }
 
@@ -187,7 +236,8 @@ static NSString *const kPersonalBioTableControllerSegueIdentifier = @"personalBi
     [super customizeNavigationItem];
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    self.navigationTitleView.titleText = LOCALIZED(@"My Profile");
+    
+    self.navigationTitleView.titleText = self.currentFriend ? self.currentFriend.fullName : LOCALIZED(@"My Profile");
     
     UIBarButtonItem *rightItem = [FRDSerialViewConstructor customRightBarButtonForController:self withAction:nil];
     self.navigationItem.rightBarButtonItem = rightItem;

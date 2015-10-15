@@ -13,7 +13,7 @@
 
 #import "FRDBaseViewController.h"
 
-@class FRDRelationshipItem;
+@class FRDRelationshipItem, FRDFriend;
 
 @interface FRDRelationshipStatusController : FRDBaseViewController
 
@@ -21,5 +21,6 @@
 @property (strong, nonatomic) NSMutableSet *relationshipStatusesForSearch;
 
 - (void)updateWithSourceType:(FRDSourceType)sourceType;
+- (void)updateForCurrentFriend:(FRDFriend *)currentFriend;
 
 @end

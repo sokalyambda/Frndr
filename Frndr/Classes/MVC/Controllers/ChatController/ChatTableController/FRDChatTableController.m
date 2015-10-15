@@ -83,6 +83,10 @@ dispatch_queue_t messages_unpacking_queue() {
 {
     [super viewDidLoad];
     
+    //for ios 8
+    self.tableView.estimatedRowHeight = UITableViewAutomaticDimension;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
     [self registerCells];
     [self addGestureRecognizers];
     [self loadChatHistoryAndScrollToBottom:YES animated:NO];

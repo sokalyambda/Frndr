@@ -12,7 +12,6 @@
 
 @interface FRDPhotoGalleryCollectionViewCell ()
 
-//@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIImageView *crossImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *plusImageView;
 @property (weak, nonatomic) IBOutlet UIView *transparencyView;
@@ -65,11 +64,18 @@
     }
 }
 
+/**
+ *  Confidure cell with photo
+ *
+ *  @param photo current gallery photo
+ */
 - (void)configureWithGalleryPhoto:(FRDGalleryPhoto *)photo
+                   andGalleryType:(FRDGallegyType)galleryType
 {
     self.transparencyView.hidden = self.profilePictureLabel.hidden = ![photo isKindOfClass:[FRDAvatar class]];//+
-    self.plusImageView.hidden = !!photo.photoURL;
-    self.crossImageView.hidden = self.imageView.hidden = !photo.photoURL;
+    self.plusImageView.hidden = (!!photo.photoURL || galleryType == FRDGallegyTypeFriend);
+    self.crossImageView.hidden = (!photo.photoURL || galleryType == FRDGallegyTypeFriend);
+    self.imageView.hidden = !photo.photoURL;
     
     if (photo.photoURL) {
         [self configureHud];
@@ -82,7 +88,6 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self addTapGestures];
     });
-    
 }
 
 - (void)handlePlusClick:(UITapGestureRecognizer *)tap

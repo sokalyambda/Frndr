@@ -16,7 +16,6 @@
 @property (assign, nonatomic, getter=isMessagesNotificationsEnabled) BOOL messagesNotificationsEnabled;
 
 @property (strong, nonatomic) FRDSearchSettings *currentSearchSettings;
-@property (strong, nonatomic) FRDAvatar *currentAvatar;
 
 + (instancetype)userProfileWithFacebookProfile:(FRDFacebookProfile *)facebookProfile;
 - (instancetype)updateWithUserProfile:(FRDCurrentUserProfile *)profile;

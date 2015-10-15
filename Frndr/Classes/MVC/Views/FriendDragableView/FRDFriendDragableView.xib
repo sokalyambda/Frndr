@@ -142,8 +142,12 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UhZ-Yc-IRY">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="25" id="7ch-7l-25C"/>
-                                <constraint firstAttribute="height" constant="25" id="aTL-SN-GdR"/>
+                                <constraint firstAttribute="width" constant="25" id="7ch-7l-25C">
+                                    <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                </constraint>
+                                <constraint firstAttribute="height" constant="25" id="aTL-SN-GdR">
+                                    <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                </constraint>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
@@ -151,8 +155,7 @@
                                     <exclude reference="aTL-SN-GdR"/>
                                 </mask>
                             </variation>
-                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                <rect key="frame" x="70" y="3" width="25" height="25"/>
+                            <variation key="heightClass=regular-widthClass=compact">
                                 <mask key="constraints">
                                     <include reference="7ch-7l-25C"/>
                                     <include reference="aTL-SN-GdR"/>
@@ -168,13 +171,15 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="wK2-Wh-Iiy" firstAttribute="leading" secondItem="UhZ-Yc-IRY" secondAttribute="trailing" constant="8" id="LUi-fL-aoy"/>
+                        <constraint firstItem="wK2-Wh-Iiy" firstAttribute="leading" secondItem="UhZ-Yc-IRY" secondAttribute="trailing" constant="8" id="LUi-fL-aoy">
+                            <variation key="heightClass=regular-widthClass=compact" constant="3"/>
+                        </constraint>
                         <constraint firstAttribute="centerX" secondItem="wK2-Wh-Iiy" secondAttribute="centerX" constant="-0.5" id="QXT-67-dBn"/>
                         <constraint firstAttribute="bottom" secondItem="UhZ-Yc-IRY" secondAttribute="bottom" id="T2b-oe-Dha">
-                            <variation key="heightClass=regular-widthClass=compact" constant="2"/>
+                            <variation key="heightClass=regular-widthClass=compact" constant="4"/>
                         </constraint>
                         <constraint firstItem="UhZ-Yc-IRY" firstAttribute="top" secondItem="nag-M8-gEg" secondAttribute="top" constant="4" id="hKv-et-rYj">
-                            <variation key="heightClass=regular-widthClass=compact" constant="2"/>
+                            <variation key="heightClass=regular-widthClass=compact" constant="5"/>
                         </constraint>
                         <constraint firstAttribute="centerY" secondItem="wK2-Wh-Iiy" secondAttribute="centerY" constant="0.5" id="sop-ie-Cmz"/>
                     </constraints>
@@ -233,7 +238,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="hQs-eZ-yHo" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="0rI-Aq-qtk"/>
                 <constraint firstItem="ca0-aV-XXH" firstAttribute="bottom" secondItem="nag-M8-gEg" secondAttribute="bottom" id="4n8-bc-f46"/>

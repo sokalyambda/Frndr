@@ -17,6 +17,7 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
 #import "FRDProjectFacade.h"
 
 #import "FRDAvatar.h"
+#import "FRDFriend.h"
 
 #import "UIImage+Base64Encoding.h"
 #import "UIImage+Scale.h"
@@ -38,7 +39,9 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
 
 - (FRDAvatar *)currentAvatar
 {
-    _currentAvatar = [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar;
+    if (!self.currentFriend) {
+        _currentAvatar = [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar;
+    }
     return _currentAvatar;
 }
 
@@ -55,20 +58,10 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
 {
     [super viewDidLoad];
     
-    WEAK_SELF;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [FRDProjectFacade getAvatarAndGalleryOnSuccess:^(FRDAvatar *avatar, NSArray *gallery) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        
-        weakSelf.photosGallery = gallery;
-        if (!weakSelf.currentAvatar) {
-            weakSelf.currentAvatar = avatar;
-        }
-        
-    } onFailure:^(NSError *error, BOOL isCanceled) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        
-    }];
+    //for user
+    [self updateForCurrentUserProfile];
+    //for friend
+    [self updateForFriendProfile];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -77,6 +70,11 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
 }
 
 #pragma mark - Actions
+
+- (FRDGallegyType)currentGalleryType
+{
+    return self.currentFriend ? FRDGallegyTypeFriend : FRDGallegyTypeUser;
+}
 
 - (void)customizeNavigationItem
 {
@@ -95,7 +93,7 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.photosGallery.count + 2; //first image is avatar and last image is 'plus'
+    return self.currentFriend ? self.photosGallery.count + 1 : self.photosGallery.count + 2; //first image is avatar and last image is 'plus' (if friend exists - add only avatar)
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -107,20 +105,57 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
     if (indexPath.row < self.photosGallery.count + 1) {
         
         if (indexPath.row == 0) {
-            [cell configureWithGalleryPhoto:self.currentAvatar];
+            [cell configureWithGalleryPhoto:self.currentAvatar andGalleryType:[self currentGalleryType]];
         } else {
             FRDGalleryPhoto *galleryPhoto = self.photosGallery[indexPath.row - 1];
-            [cell configureWithGalleryPhoto:galleryPhoto];
+            [cell configureWithGalleryPhoto:galleryPhoto andGalleryType:[self currentGalleryType]];
         }
         
     } else {
-        [cell configureWithGalleryPhoto:nil];
+        [cell configureWithGalleryPhoto:nil andGalleryType:[self currentGalleryType]];
     }
     
     return cell;
 }
 
 #pragma mark - Change photo actions
+
+/**
+ *  Manage photos for current user profile
+ */
+- (void)updateForCurrentUserProfile
+{
+    if (self.currentFriend) {
+        return;
+    }
+    
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [FRDProjectFacade getAvatarAndGalleryOnSuccess:^(FRDAvatar *avatar, NSArray *gallery) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        weakSelf.photosGallery = gallery;
+        if (!weakSelf.currentAvatar) {
+            weakSelf.currentAvatar = avatar;
+        }
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+    }];
+}
+
+/**
+ *  Show photos for current friend
+ */
+- (void)updateForFriendProfile
+{
+    if (!self.currentFriend) {
+        return;
+    }
+    self.photosGallery = self.currentFriend.galleryPhotos;
+    self.currentAvatar = self.currentFriend.currentAvatar;
+}
 
 /**
  *  Show remove photo action sheet
@@ -358,6 +393,10 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
 
 - (void)galleryCell:(FRDPhotoGalleryCollectionViewCell *)cell didTapPlusImageView:(UIImageView *)plusImageView
 {
+    if (self.currentFriend) {
+        return;
+    }
+    
     BOOL isAvatar = [self.collectionView indexPathForCell:cell].row == 0 ? YES : NO;
     WEAK_SELF;
     [self setupChangePhotoActionSheetWithCompletion:^(UIImage *chosenImage) {
@@ -372,6 +411,10 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
 
 - (void)galleryCell:(FRDPhotoGalleryCollectionViewCell *)cell didTapCrossImageView:(UIImageView *)crossImageView
 {
+    if (self.currentFriend) {
+        return;
+    }
+    
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     
     if (indexPath.row == 0) {

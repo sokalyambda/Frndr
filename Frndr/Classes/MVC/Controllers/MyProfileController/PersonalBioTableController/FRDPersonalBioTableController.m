@@ -12,6 +12,8 @@
 
 #import "UIResponder+FirstResponder.h"
 
+#import "FRDFriend.h"
+
 static NSString * const kThingsILoveSectionName = @"The things I love most...";
 static NSString * const kPersonalBioSectionName = @"My Personal Bio";
 
@@ -64,15 +66,46 @@ typedef NS_ENUM(NSInteger, FRDPersonalBioSectionType)
 
 #pragma mark - Public Methods
 
+/**
+ *  Update for current USER profile
+ */
 - (void)update
 {
     FRDCurrentUserProfile *profile = [FRDStorageManager sharedStorage].currentUserProfile;
     self.personalBioThingILoveTextView.text = profile.biography;
     
-    for (NSString *lovedThing in profile.thingsLovedMost) {
-        int idx = [profile.thingsLovedMost indexOfObject:lovedThing];
-        UITextField *currentField = self.mostLovedThingsFields[idx];
-        currentField.text = lovedThing;
+    [self fillFieldsWithUserModel:profile];
+}
+
+/**
+ *  Update for current friend
+ *
+ *  @param currentFriend Friend for updating
+ */
+- (void)updateForFriend:(FRDFriend *)currentFriend
+{
+    self.personalBioThingILoveTextView.text = currentFriend.biography;
+    
+    [self fillFieldsWithUserModel:currentFriend];
+}
+
+/**
+ *  Fill interests fields for current user model
+ *
+ *  @param userModel User for updating
+ */
+- (void)fillFieldsWithUserModel:(FRDBaseUserModel *)userModel
+{
+    @autoreleasepool {
+        for (UITextField *field in self.mostLovedThingsFields) {
+            NSInteger idx = [self.mostLovedThingsFields indexOfObject:field];
+            if (idx < userModel.thingsLovedMost.count && idx != NSNotFound) {
+                NSString *currentThing = userModel.thingsLovedMost[idx];
+                field.text = currentThing;
+            } else {
+                break;
+            }
+        }
     }
 }
 
