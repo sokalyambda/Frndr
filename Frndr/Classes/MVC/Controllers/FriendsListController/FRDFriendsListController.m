@@ -104,7 +104,12 @@
     self.friendsTableView.estimatedRowHeight = UITableViewAutomaticDimension;
     self.friendsTableView.rowHeight = UITableViewAutomaticDimension;
     
-    [self configureBottomRefreshControl];
+//    [self configureBottomRefreshControl];
+    
+    WEAK_SELF;
+    [self loadFriendsFirstPageOnSuccess:^(NSArray *friends) {
+        [weakSelf updateLastFriendsPageWithFriends:friends];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -120,15 +125,9 @@
     [self initNoMatchesView];
     
     WEAK_SELF;
-    [self loadFriendsListWithPage:1 onSuccess:^(NSArray *friendsList) {
-        
-        if (friendsList.count) {
-            weakSelf.friends = [NSMutableArray arrayWithArray:friendsList];
-        }
-        
-        [weakSelf showHideNoMatchesView];
-        
-    } onFailure:nil];
+    [self loadFriendsFirstPageOnSuccess:^(NSArray *friends) {
+        [weakSelf updateFirstFriendsPageWithFriends:friends];
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -244,9 +243,38 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
-- (void)updateLocalFriendsArrayWithArray:(NSArray *)newArray
+/**
+ *  Update first friends page
+ *
+ *  @param friends New Friends array
+ */
+- (void)updateFirstFriendsPageWithFriends:(NSArray *)friends
 {
-    [self.friends addObjectsFromArray:newArray];
+    if (friends.count) {
+        @autoreleasepool {
+            
+            NSMutableArray *newFriends = [@[] mutableCopy];
+            
+            FRDFriend *currentFirstFriend = self.friends.firstObject;
+            
+            for (FRDFriend *friend in friends) {
+                
+                if (friend.isNewFriend && [currentFirstFriend.lastMessagePostedDate compare:friend.lastMessagePostedDate] == NSOrderedAscending) {
+                    [newFriends addObject:friend];
+                }
+                
+            }
+            
+            [newFriends addObjectsFromArray:self.friends];
+        
+            self.friends = newFriends;
+        }
+    }
+}
+
+- (void)updateLastFriendsPageWithFriends:(NSArray *)friends
+{
+    [self.friends addObjectsFromArray:friends];
     [self.friendsTableView reloadData];
 }
 
@@ -255,7 +283,6 @@
  */
 - (void)loadFriendsListWithPage:(NSInteger)page
                       onSuccess:(void(^)(NSArray *friendsList))success
-                       onFailure:(FailureBlock)failure
 {
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -269,10 +296,7 @@
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-        
-        if (failure) {
-            failure(error, isCanceled);
-        }
+
     }];
     
 //    For testing purposes
@@ -295,10 +319,16 @@
     [self loadFriendsListWithPage:self.currentPage onSuccess:^(NSArray *friendsList) {
         
         if (friendsList.count) {
-            [weakSelf updateLocalFriendsArrayWithArray:friendsList];
+            [weakSelf updateLastFriendsPageWithFriends:friendsList];
+            weakSelf.currentPage++;
         }
         
-    } onFailure:nil];
+    }];
+}
+
+- (void)loadFriendsFirstPageOnSuccess:(void(^)(NSArray *friends))success
+{
+    [self loadFriendsListWithPage:1 onSuccess:success];
 }
 
 #pragma mark - New Messages Handling
@@ -330,15 +360,9 @@
 - (void)applicationDidBecomeActiveNotification:(NSNotification *)notification
 {
     WEAK_SELF;
-    [self loadFriendsListWithPage:1 onSuccess:^(NSArray *friendsList) {
-        
-        if (friendsList.count) {
-            weakSelf.friends = [NSMutableArray arrayWithArray:friendsList];
-        }
-        
-        [weakSelf showHideNoMatchesView];
-        
-    } onFailure:nil];
+    [self loadFriendsFirstPageOnSuccess:^(NSArray *friends) {
+        [weakSelf updateFirstFriendsPageWithFriends:friends];
+    }];
 }
 
 @end

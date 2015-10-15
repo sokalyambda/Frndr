@@ -89,7 +89,13 @@ dispatch_queue_t messages_unpacking_queue() {
     
     [self registerCells];
     [self addGestureRecognizers];
-    [self loadChatHistoryAndScrollToBottom:YES animated:NO];
+    
+    //load first page and update messages
+    WEAK_SELF;
+    [self loadMessagesFirstPageOnSuccess:^(NSArray *messages) {
+        [weakSelf updateLastMessagesPageWithMessages:messages];
+        [weakSelf scrollTableViewToBottomAnimated:NO];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -145,29 +151,21 @@ dispatch_queue_t messages_unpacking_queue() {
 /**
  *  Load chat history with current friend
  */
-- (void)loadChatHistoryAndScrollToBottom:(BOOL)toBottom animated:(BOOL)animated
+- (void)loadChatHistoryWithPage:(NSInteger)page
+                      onSuccess:(void(^)(NSArray *messages))success
 {
     WEAK_SELF;
     if (!self.refreshControl.isRefreshing) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     }
     
-    [FRDChatMessagesService getChatHistoryWithFriend:self.currentFriend.userId andPage:self.currentPage onSuccess:^(NSArray *chatHistory) {
+    [FRDChatMessagesService getChatHistoryWithFriend:self.currentFriend.userId andPage:page onSuccess:^(NSArray *chatHistory) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
         [weakSelf.refreshControl endRefreshing];
-        
-        if (chatHistory.count) {
-            weakSelf.currentPage++;
-            //set messages array
-            NSMutableArray *updatedMessages = [NSMutableArray arrayWithArray:chatHistory];
-            [updatedMessages addObjectsFromArray:weakSelf.messageHistory];
-            weakSelf.messageHistory = updatedMessages;
-        }
-        
-        if (toBottom) {
-            //to bottom
-            [weakSelf scrollTableViewToBottomAnimated:animated];
+
+        if (success) {
+            success(chatHistory);
         }
         
     } onFailure:^(NSError *error) {
@@ -176,9 +174,65 @@ dispatch_queue_t messages_unpacking_queue() {
     }];
 }
 
+/**
+ *  Get next page of messages
+ */
+- (void)loadMoreMessages
+{
+    WEAK_SELF;
+    [self loadChatHistoryWithPage:self.currentPage onSuccess:^(NSArray *messages) {
+        [weakSelf updateLastMessagesPageWithMessages:messages];
+    }];
+}
+
+/**
+ *  Get first page of messages
+ */
+- (void)loadMessagesFirstPageOnSuccess:(void(^)(NSArray *messages))success
+{
+    [self loadChatHistoryWithPage:1 onSuccess:success];
+}
+
+/**
+ *  Update first page (at bottom)
+ */
+- (void)updateFirstMessagesPageWithMessages:(NSArray *)messages
+{
+    if (messages.count) {
+        @autoreleasepool {
+            NSMutableArray *newMessages = [@[] mutableCopy];
+            
+            FRDChatMessage *lastMessage = self.messageHistory.lastObject;
+            
+            for (FRDChatMessage *newMessage in messages) {
+                
+                if ([lastMessage.creationDate compare:newMessage.creationDate] == NSOrderedAscending) {
+                    [newMessages addObject:newMessage];
+                }
+            }
+
+            [self.messageHistory addObjectsFromArray:newMessages];
+        }
+    }
+}
+
+/**
+ *  Update last messages page (at top)
+ */
+- (void)updateLastMessagesPageWithMessages:(NSArray *)messages
+{
+    if (messages.count) {
+        self.currentPage++;
+        //set messages array
+        NSMutableArray *updatedMessages = [NSMutableArray arrayWithArray:messages];
+        [updatedMessages addObjectsFromArray:self.messageHistory];
+        self.messageHistory = updatedMessages;
+    }
+}
+
 - (IBAction)loadMoreMessages:(id)sender
 {
-    [self loadChatHistoryAndScrollToBottom:NO animated:NO];
+    [self loadMoreMessages];
 }
 
 - (void)clearMessageWithIndexPath:(NSIndexPath *)indexPath
@@ -319,7 +373,10 @@ dispatch_queue_t messages_unpacking_queue() {
 
 - (void)applicationDidBecomeActiveNotification:(NSNotification *)notification
 {
-    [self loadChatHistoryAndScrollToBottom:YES animated:NO];
+    WEAK_SELF;
+    [self loadMessagesFirstPageOnSuccess:^(NSArray *messages) {
+        [weakSelf updateFirstMessagesPageWithMessages:messages];
+    }];
 }
 
 @end
