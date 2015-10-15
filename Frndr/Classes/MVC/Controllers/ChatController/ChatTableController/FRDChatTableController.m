@@ -19,6 +19,8 @@
 
 #import "FRDChatManager.h"
 
+#import "UIResponder+FirstResponder.h"
+
 extern uint64_t dispatch_benchmark(size_t count, void (^block)(void));
 
 static NSString *const kReadEventName = @"read";
@@ -28,6 +30,7 @@ static NSString *const kFriendId = @"friendId";
 @interface FRDChatTableController ()
 
 @property (strong, nonatomic) UILongPressGestureRecognizer *longPressRecognizer;
+@property (strong, nonatomic) UITapGestureRecognizer *tapRecognizer;
 
 @end
 
@@ -130,6 +133,9 @@ dispatch_queue_t messages_unpacking_queue() {
 {
     self.longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showClearMessageActionSheet:)];
     [self.tableView addGestureRecognizer:self.longPressRecognizer];
+    
+    self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
+    [self.tableView addGestureRecognizer:self.tapRecognizer];
 }
 
 /**
@@ -182,7 +188,7 @@ dispatch_queue_t messages_unpacking_queue() {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
         [self.messageHistory removeObjectAtIndex:indexPath.row];
-        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        //[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [self.tableView reloadData];
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
@@ -200,17 +206,32 @@ dispatch_queue_t messages_unpacking_queue() {
         UIAlertController *clearMessageController = [UIAlertController alertControllerWithTitle:@"" message:LOCALIZED(@"Do you want to delete this message?") preferredStyle:UIAlertControllerStyleActionSheet];
         
         WEAK_SELF;
-        UIAlertAction *deleteAccountAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Delete message") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        UIAlertAction *deleteMessageAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Delete message") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
             [weakSelf clearMessageWithIndexPath:indexPath];
         }];
         
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleCancel handler:nil];
         
-        [clearMessageController addAction:deleteAccountAction];
+        [clearMessageController addAction:deleteMessageAction];
         [clearMessageController addAction:cancelAction];
         
         [self presentViewController:clearMessageController animated:YES completion:nil];
     }
+}
+
+- (void)dismissKeyboard:(UITapGestureRecognizer *)tapRecognizer
+{
+    [[UIResponder currentFirstResponder] resignFirstResponder];
+}
+
+- (void)subscribeForMessagesNotification
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNewMessageNotification:) name:DidReceiveNewMessageNotification object:nil];
+}
+
+- (void)unsibscribeFromMessagesNotification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - UITableViewDataSource
@@ -231,16 +252,6 @@ dispatch_queue_t messages_unpacking_queue() {
     [cell configureForFriend:self.currentFriend withMessage:currentMessage];
     
     return cell;
-}
-
-- (void)subscribeForMessagesNotification
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNewMessageNotification:) name:DidReceiveNewMessageNotification object:nil];
-}
-
-- (void)unsibscribeFromMessagesNotification
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - UITableViewDelegate

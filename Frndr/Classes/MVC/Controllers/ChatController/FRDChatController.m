@@ -315,7 +315,7 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
 {
     NSString *currentFriendName = self.currentFriend.fullName;
     
-    UIAlertController *clearChatAlertController = [UIAlertController alertControllerWithTitle:@"" message:[NSString localizedStringWithFormat:@"%@ %@?", LOCALIZED(@"Do you want remove chat history with"), currentFriendName] preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *clearChatAlertController = [UIAlertController alertControllerWithTitle:@"" message:[NSString localizedStringWithFormat:@"%@ %@?", LOCALIZED(@"Do you want to remove chat history with"), currentFriendName] preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Clean") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [self clearMessagesHistoryWithCurrentFriend];
@@ -333,7 +333,7 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
 {
     NSString *currentFriendName = self.currentFriend.fullName;
     
-    UIAlertController *blockFriendAlertController = [UIAlertController alertControllerWithTitle:@"" message:[NSString localizedStringWithFormat:@"%@ %@?", LOCALIZED(@"Do you want block"), currentFriendName] preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *blockFriendAlertController = [UIAlertController alertControllerWithTitle:@"" message:[NSString localizedStringWithFormat:@"%@ %@?", LOCALIZED(@"Do you want to block"), currentFriendName] preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Block") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [self blockCurrentFriend];
