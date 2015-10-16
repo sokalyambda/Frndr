@@ -24,6 +24,7 @@ static NSString *const kMessageIdSocket = @"messageId";
 static NSString *const kOwnerId         = @"ownerId";
 static NSString *const kCompanionId     = @"friendId";
 static NSString *const kMessageText     = @"message";
+static NSString *const kMessageCreationDate = @"creationDate";
 
 @implementation FRDChatMessage
 
@@ -53,6 +54,8 @@ static NSString *const kMessageText     = @"message";
         _companionId = socketResponse[kCompanionId];
         _messageBody = socketResponse[kMessageText];
         _messageId = socketResponse[kMessageIdSocket];
+        
+        _creationDate = [[FRDCommonDateFormatter commonISO8601DateFormatter] dateFromString:socketResponse[kMessageCreationDate]];
         
         _ownerType = [FRDChatMessagesService ownerTypeForMessage:self];
     }

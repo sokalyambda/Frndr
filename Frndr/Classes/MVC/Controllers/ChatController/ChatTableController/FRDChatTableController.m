@@ -369,9 +369,6 @@ dispatch_queue_t messages_unpacking_queue() {
                 return;
             }
             
-            message.creationDate = [NSDate date];
-            
-            
             [self.messageHistory addObject:message];
         }
         
