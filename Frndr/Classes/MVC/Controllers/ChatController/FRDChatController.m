@@ -307,8 +307,8 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:kChatTableControllerSegueIdentifier]) {
-        self.chatTableController = (FRDChatTableController *)segue.destinationViewController;
         
+        self.chatTableController = (FRDChatTableController *)segue.destinationViewController;
         self.chatTableController.currentFriend = self.currentFriend;
         [self.chatTableController viewWillAppear:YES];
     }

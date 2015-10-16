@@ -82,7 +82,6 @@ dispatch_queue_t messages_unpacking_queue() {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     //for ios 8
     self.tableView.estimatedRowHeight = UITableViewAutomaticDimension;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -90,24 +89,22 @@ dispatch_queue_t messages_unpacking_queue() {
     [self registerCells];
     [self addGestureRecognizers];
     
-//    //load first page and update messages
-//    WEAK_SELF;
-//    [self loadMessagesFirstPageOnSuccess:^(NSArray *messages) {
-//        [weakSelf updateLastMessagesPageWithMessages:messages];
-//        [weakSelf scrollTableViewToBottomAnimated:NO];
-//    }];
+    WEAK_SELF;
+    [self loadMessagesFirstPageOnSuccess:^(NSArray *messages) {
+        [weakSelf updateLastMessagesPageWithMessages:messages];
+        [weakSelf scrollTableViewToBottomAnimated:NO];
+        weakSelf.currentPage++;
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self subscribeForNotifications];
-    
     //load first page and update messages
     WEAK_SELF;
     [self loadMessagesFirstPageOnSuccess:^(NSArray *messages) {
-        [weakSelf updateLastMessagesPageWithMessages:messages];
-        [weakSelf scrollTableViewToBottomAnimated:NO];
+        [weakSelf updateFirstMessagesPageWithMessages:messages];
     }];
 }
 
@@ -163,11 +160,11 @@ dispatch_queue_t messages_unpacking_queue() {
 {
     WEAK_SELF;
     if (!self.refreshControl.isRefreshing) {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     }
     
     [FRDChatMessagesService getChatHistoryWithFriend:self.currentFriend.userId andPage:page onSuccess:^(NSArray *chatHistory) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
         
         [weakSelf.refreshControl endRefreshing];
 
@@ -176,7 +173,7 @@ dispatch_queue_t messages_unpacking_queue() {
         }
         
     } onFailure:^(NSError *error) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf.parentViewController andCompletion:nil];
     }];
 }
@@ -206,20 +203,27 @@ dispatch_queue_t messages_unpacking_queue() {
 - (void)updateFirstMessagesPageWithMessages:(NSArray *)messages
 {
     if (messages.count) {
-        @autoreleasepool {
-            NSMutableArray *newMessages = [@[] mutableCopy];
-            
-            FRDChatMessage *lastMessage = self.messageHistory.lastObject;
-            
-            for (FRDChatMessage *newMessage in messages) {
+        dispatch_async(messages_unpacking_queue(), ^{
+            @autoreleasepool {
+                NSMutableArray *newMessages = [@[] mutableCopy];
                 
-                if ([lastMessage.creationDate compare:newMessage.creationDate] == NSOrderedAscending) {
-                    [newMessages addObject:newMessage];
+                FRDChatMessage *lastMessage = self.messageHistory.lastObject;
+                
+                for (FRDChatMessage *newMessage in messages) {
+                    
+                    if ([lastMessage.creationDate compare:newMessage.creationDate] == NSOrderedAscending) {
+                        [newMessages addObject:newMessage];
+                    }
                 }
+                
+                [self.messageHistory addObjectsFromArray:newMessages];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });
             }
-
-            [self.messageHistory addObjectsFromArray:newMessages];
-        }
+        });
+        
     }
 }
 

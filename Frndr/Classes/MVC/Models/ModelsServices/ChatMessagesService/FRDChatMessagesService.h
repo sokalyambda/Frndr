@@ -45,4 +45,7 @@ typedef void(^ChatHistoryFailure)(NSError *error);
 + (FRDFriend *)findFriendWithId:(NSString *)friendId
                         inArray:(NSArray *)friends;
 
++ (void)updateCurrentFriendsLastMessages:(NSArray *)friendsArray
+         withNewFriendsArray:(NSArray *)newFriends;
+
 @end

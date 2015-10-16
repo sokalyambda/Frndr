@@ -170,4 +170,21 @@
     return messageOwner;
 }
 
++ (void)updateCurrentFriendsLastMessages:(NSArray *)friendsArray withNewFriendsArray:(NSArray *)newFriends
+{
+    @autoreleasepool {
+        for (FRDFriend *currentFriend in friendsArray) {
+            for (FRDFriend *newFriend in newFriends) {
+                if ([currentFriend.userId isEqualToString:newFriend.userId]) {
+                    currentFriend.lastMessage = newFriend.lastMessage;
+                    currentFriend.lastMessagePostedDate = newFriend.lastMessagePostedDate;
+                    currentFriend.hasNewMessages = newFriend.hasNewMessages;
+                    break;
+                }
+            }
+        }
+    }
+    
+}
+
 @end
