@@ -101,7 +101,7 @@ dispatch_queue_t friends_updating_queue() {
 {
     self = [super initWithCoder:coder];
     if (self) {
-        _currentPage = 1;
+        _currentPage = 2;
     }
     return self;
 }
@@ -121,7 +121,6 @@ dispatch_queue_t friends_updating_queue() {
     WEAK_SELF;
     [self loadFriendsFirstPageOnSuccess:^(NSArray *friends) {
         [weakSelf updateLastFriendsPageWithFriends:friends];
-        weakSelf.currentPage++;
     }];
 }
 
@@ -141,7 +140,6 @@ dispatch_queue_t friends_updating_queue() {
     WEAK_SELF;
     [self loadFriendsFirstPageOnSuccess:^(NSArray *friends) {
         [weakSelf updateFirstFriendsPageWithFriends:friends];
-        
     }];
 }
 
@@ -381,7 +379,7 @@ dispatch_queue_t friends_updating_queue() {
         
         if (messageOwner) {
             messageOwner.lastMessage = message.messageBody;
-            
+            messageOwner.lastMessagePostedDate = message.creationDate;
             //new message received from this friend
             messageOwner.hasNewMessages = YES;
             
@@ -389,6 +387,8 @@ dispatch_queue_t friends_updating_queue() {
         }
     }
 }
+
+#pragma mark - Notifications
 
 - (void)applicationDidBecomeActiveNotification:(NSNotification *)notification
 {
