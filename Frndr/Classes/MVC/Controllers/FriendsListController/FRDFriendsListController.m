@@ -40,6 +40,18 @@
 
 @implementation FRDFriendsListController
 
+dispatch_queue_t friends_updating_queue() {
+    
+    static dispatch_queue_t friends_updating_queue;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        friends_updating_queue = dispatch_queue_create("friends_updating_queue", DISPATCH_QUEUE_CONCURRENT);
+    });
+    
+    return friends_updating_queue;
+}
+
 @synthesize friends = _friends;
 
 #pragma mark - Accessors
@@ -67,6 +79,7 @@
     return @"";
 }
 
+/*****Friends array accessors*****/
 - (NSMutableArray *)friends
 {
     if (!_friends) {
@@ -80,6 +93,7 @@
     _friends = friends;
     [self.friendsTableView reloadData];
 }
+/*****Friends array accessors*****/
 
 #pragma mark - Lifecycle
 
@@ -127,6 +141,7 @@
     WEAK_SELF;
     [self loadFriendsFirstPageOnSuccess:^(NSArray *friends) {
         [weakSelf updateFirstFriendsPageWithFriends:friends];
+        
     }];
 }
 
@@ -253,21 +268,29 @@
     if (friends.count) {
         @autoreleasepool {
             
-            NSMutableArray *newFriends = [@[] mutableCopy];
-            
-            FRDFriend *currentFirstFriend = self.friends.firstObject;
-            
-            for (FRDFriend *friend in friends) {
+            dispatch_async(friends_updating_queue(), ^{
+                NSMutableArray *newFriends = [@[] mutableCopy];
                 
-                if (friend.isNewFriend && [currentFirstFriend.lastMessagePostedDate compare:friend.lastMessagePostedDate] == NSOrderedAscending) {
-                    [newFriends addObject:friend];
+                FRDFriend *currentFirstFriend = self.friends.firstObject;
+                
+                for (FRDFriend *friend in friends) {
+                    
+                    if (friend.isNewFriend && [currentFirstFriend.lastMessagePostedDate compare:friend.lastMessagePostedDate] == NSOrderedAscending) {
+                        [newFriends addObject:friend];
+                    }
+                    
                 }
                 
-            }
+                [newFriends addObjectsFromArray:self.friends];
+                
+                [FRDChatMessagesService updateCurrentFriendsLastMessages:self.friends withNewFriendsArray:friends];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.friends = newFriends;
+                });
+                
+            });
             
-            [newFriends addObjectsFromArray:self.friends];
-        
-            self.friends = newFriends;
         }
     }
 }
@@ -285,20 +308,23 @@
                       onSuccess:(void(^)(NSArray *friendsList))success
 {
     WEAK_SELF;
-    //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if (!self.bottomRefreshControl.isRefreshing) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    }
     [FRDProjectFacade getFriendsListWithPage:page onSuccess:^(NSArray *friendsList) {
-       // [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [weakSelf.bottomRefreshControl endRefreshing];
         
         if (success) {
             success(friendsList);
         }
-        [weakSelf.bottomRefreshControl endRefreshing];
-        
+  
     } onFailure:^(NSError *error, BOOL isCanceled) {
-        //[MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-        
         [weakSelf.bottomRefreshControl endRefreshing];
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+
     }];
     
 //    For testing purposes

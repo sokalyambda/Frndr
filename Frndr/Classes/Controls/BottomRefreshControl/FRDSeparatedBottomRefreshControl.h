@@ -8,7 +8,7 @@
 
 @interface FRDSeparatedBottomRefreshControl : UIControl
 
-@property (readonly, nonatomic) BOOL refreshing;
+@property (readonly, nonatomic, getter=isRefreshing) BOOL refreshing;
 @property (nonatomic) CGFloat additionalVerticalInset;
 
 - (instancetype)initWithTableView:(UITableView *)tableView;
