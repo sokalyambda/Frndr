@@ -29,7 +29,7 @@
 
 - (BOOL)isAuthorized
 {
-    return [CLLocationManager authorizationStatus] == (kCLAuthorizationStatusAuthorizedAlways);
+    return [CLLocationManager authorizationStatus] == (kCLAuthorizationStatusAuthorizedWhenInUse);
 }
 
 - (FRDGeolocationDeniedController *)geolocationDeniedController

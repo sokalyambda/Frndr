@@ -107,6 +107,9 @@
 		58B99EA71BBA83980057DB54 /* FRDLikeUserByIdRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B99EA61BBA83980057DB54 /* FRDLikeUserByIdRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58B99EAB1BBA83CA0057DB54 /* FRDDislikeUserByIdRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B99EAA1BBA83CA0057DB54 /* FRDDislikeUserByIdRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58B99EB01BBA87E60057DB54 /* FRDClearAllMessagesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B99EAF1BBA87E60057DB54 /* FRDClearAllMessagesRequest.m */; settings = {ASSET_TAGS = (); }; };
+		58B9BEAE1BD11DC200E5BD03 /* FRDNotificationInfoViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B9BEAD1BD11DC200E5BD03 /* FRDNotificationInfoViewManager.m */; settings = {ASSET_TAGS = (); }; };
+		58B9BEB21BD11E3400E5BD03 /* FRDNotificationInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B9BEB11BD11E3400E5BD03 /* FRDNotificationInfoView.m */; settings = {ASSET_TAGS = (); }; };
+		58B9BEB41BD1205100E5BD03 /* FRDNotificationInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58B9BEB31BD1205100E5BD03 /* FRDNotificationInfoView.xib */; settings = {ASSET_TAGS = (); }; };
 		58BB5D431BB70AB900FD1A56 /* FRDGetCurrentUserProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BB5D421BB70AB800FD1A56 /* FRDGetCurrentUserProfileRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58BC76A11B9EB6B500BB8B5A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A01B9EB6B500BB8B5A /* main.m */; };
 		58BC76A41B9EB6B500BB8B5A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BC76A31B9EB6B500BB8B5A /* AppDelegate.m */; };
@@ -412,6 +415,11 @@
 		58B99EAA1BBA83CA0057DB54 /* FRDDislikeUserByIdRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDDislikeUserByIdRequest.m; path = "Classes/Server APIs/API/Requests/LikesModule/DislikeUserByIdRequest/FRDDislikeUserByIdRequest.m"; sourceTree = "<group>"; };
 		58B99EAE1BBA87E60057DB54 /* FRDClearAllMessagesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDClearAllMessagesRequest.h; path = "Classes/Server APIs/API/Requests/MessagesModule/ClearAllMessagesRequest/FRDClearAllMessagesRequest.h"; sourceTree = "<group>"; };
 		58B99EAF1BBA87E60057DB54 /* FRDClearAllMessagesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDClearAllMessagesRequest.m; path = "Classes/Server APIs/API/Requests/MessagesModule/ClearAllMessagesRequest/FRDClearAllMessagesRequest.m"; sourceTree = "<group>"; };
+		58B9BEAC1BD11DC200E5BD03 /* FRDNotificationInfoViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDNotificationInfoViewManager.h; path = Classes/Managers/NotificationInfoViewManager/FRDNotificationInfoViewManager.h; sourceTree = "<group>"; };
+		58B9BEAD1BD11DC200E5BD03 /* FRDNotificationInfoViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDNotificationInfoViewManager.m; path = Classes/Managers/NotificationInfoViewManager/FRDNotificationInfoViewManager.m; sourceTree = "<group>"; };
+		58B9BEB01BD11E3400E5BD03 /* FRDNotificationInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDNotificationInfoView.h; path = Classes/MVC/Views/DropDownTableView/NotificationInfoView/FRDNotificationInfoView.h; sourceTree = "<group>"; };
+		58B9BEB11BD11E3400E5BD03 /* FRDNotificationInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDNotificationInfoView.m; path = Classes/MVC/Views/DropDownTableView/NotificationInfoView/FRDNotificationInfoView.m; sourceTree = "<group>"; };
+		58B9BEB31BD1205100E5BD03 /* FRDNotificationInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDNotificationInfoView.xib; path = Classes/MVC/Views/DropDownTableView/NotificationInfoView/FRDNotificationInfoView.xib; sourceTree = "<group>"; };
 		58BB5D411BB70AB800FD1A56 /* FRDGetCurrentUserProfileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDGetCurrentUserProfileRequest.h; path = "Classes/Server APIs/API/Requests/GetUserByIdRequest/GetCurrentUserProfileRequest/FRDGetCurrentUserProfileRequest.h"; sourceTree = "<group>"; };
 		58BB5D421BB70AB800FD1A56 /* FRDGetCurrentUserProfileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDGetCurrentUserProfileRequest.m; path = "Classes/Server APIs/API/Requests/GetUserByIdRequest/GetCurrentUserProfileRequest/FRDGetCurrentUserProfileRequest.m"; sourceTree = "<group>"; };
 		58BC769B1B9EB6B500BB8B5A /* Frndr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frndr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1078,6 +1086,7 @@
 		587B3A6A1BA7F25B0098154F /* DropDownTableView */ = {
 			isa = PBXGroup;
 			children = (
+				58B9BEAF1BD11E1400E5BD03 /* NotificationInfoView */,
 				589664F21BCC14E6007022C6 /* ChatOptionsDropDownTableView */,
 				589664F11BCC14D7007022C6 /* BaseDropDownTableView */,
 			);
@@ -1529,6 +1538,25 @@
 			name = ClearAllMessagesRequest;
 			sourceTree = "<group>";
 		};
+		58B9BEAB1BD11D9F00E5BD03 /* NotificationInfoViewManager */ = {
+			isa = PBXGroup;
+			children = (
+				58B9BEAC1BD11DC200E5BD03 /* FRDNotificationInfoViewManager.h */,
+				58B9BEAD1BD11DC200E5BD03 /* FRDNotificationInfoViewManager.m */,
+			);
+			name = NotificationInfoViewManager;
+			sourceTree = "<group>";
+		};
+		58B9BEAF1BD11E1400E5BD03 /* NotificationInfoView */ = {
+			isa = PBXGroup;
+			children = (
+				58B9BEB01BD11E3400E5BD03 /* FRDNotificationInfoView.h */,
+				58B9BEB11BD11E3400E5BD03 /* FRDNotificationInfoView.m */,
+				58B9BEB31BD1205100E5BD03 /* FRDNotificationInfoView.xib */,
+			);
+			name = NotificationInfoView;
+			sourceTree = "<group>";
+		};
 		58BB5D401BB70A4E00FD1A56 /* GetCurrentUserProfileRequest */ = {
 			isa = PBXGroup;
 			children = (
@@ -1627,6 +1655,7 @@
 		58BC76C91B9EB91E00BB8B5A /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				58B9BEAB1BD11D9F00E5BD03 /* NotificationInfoViewManager */,
 				58B47C861BC3A7DF00BA502E /* ChatManager */,
 				58ED54CF1BB14C4000F9B378 /* LocationObserver */,
 				58BC76D61B9EB9B500BB8B5A /* StorageManager */,
@@ -2755,6 +2784,7 @@
 				58DD73161BB832D9009D5536 /* RelationshipStatuses.plist in Resources */,
 				3EF22FB61BBE87E700E23F72 /* FRDSystemChatCell.xib in Resources */,
 				587B3A891BA80F3D0098154F /* FRDDropDownHolderController.xib in Resources */,
+				58B9BEB41BD1205100E5BD03 /* FRDNotificationInfoView.xib in Resources */,
 				58ECA1ED1BCE339600C2B5D9 /* FRDNoMatchesView.xib in Resources */,
 				587B3A951BA815850098154F /* FRDRelationshipCollectionCell.xib in Resources */,
 				58ED54FA1BB189EA00F9B378 /* FRDGeolocationDeniedController.xib in Resources */,
@@ -2894,6 +2924,7 @@
 				58916D501BCB977000E261E5 /* UIView+RoundSpecificCorners.m in Sources */,
 				58CD9ABA1BAFEDC700A7CADB /* FRDContainerController.m in Sources */,
 				58BC77231B9ECAA900BB8B5A /* UIImage+Base64Encoding.m in Sources */,
+				58B9BEB21BD11E3400E5BD03 /* FRDNotificationInfoView.m in Sources */,
 				58FFDBB21B9ED00100B0490A /* ISO8601DateFormatter.m in Sources */,
 				58ED54E01BB163BE00F9B378 /* FRDFindNearestUsersRequest.m in Sources */,
 				58BC77111B9ECA5B00BB8B5A /* UIView+Shaking.m in Sources */,
@@ -2930,6 +2961,7 @@
 				58CD17F21BA19BF40021D948 /* TTTAttributedLabel.m in Sources */,
 				3E941A4F1BB18E2000F034E6 /* UIImage+ColoredImage.m in Sources */,
 				58B9701E1BC2486A0017785E /* FRDGetAvatarAndGalleryPhotosRequest.m in Sources */,
+				58B9BEAE1BD11DC200E5BD03 /* FRDNotificationInfoViewManager.m in Sources */,
 				58ED54E81BB1641100F9B378 /* FRDGetUserByIdRequest.m in Sources */,
 				58FFDBBB1B9ED17B00B0490A /* FRDAlertFacade.m in Sources */,
 				58B9702E1BC24F1F0017785E /* FRDRemoveAvatarRequest.m in Sources */,

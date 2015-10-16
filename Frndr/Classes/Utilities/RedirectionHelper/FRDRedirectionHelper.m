@@ -15,6 +15,7 @@
 #import "FRDBaseNavigationController.h"
 #import "FRDTermsAndServicesController.h"
 #import "FRDChatController.h"
+#import "FRDGeolocationDeniedController.h"
 
 #import "FRDAnimator.h"
 #import "FRDFriend.h"
@@ -89,8 +90,10 @@ static NSString *const kMainStoryboardName = @"Main";
             }
         }
         
-        if (navigationController.presentedViewController) {
+        if (navigationController.presentedViewController && ![navigationController.presentedViewController isKindOfClass:[FRDGeolocationDeniedController class]]) {
             [navigationController.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+        } else if ([navigationController.presentedViewController isKindOfClass:[FRDGeolocationDeniedController class]]) {
+            return;
         }
         
         UIStoryboard *mainBoard = [UIStoryboard storyboardWithName:kMainStoryboardName bundle:nil];

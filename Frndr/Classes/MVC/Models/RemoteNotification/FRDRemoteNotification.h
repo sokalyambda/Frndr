@@ -16,6 +16,7 @@ typedef NS_ENUM(NSUInteger, FRDRemoteNotificationType) {
 @interface FRDRemoteNotification : NSObject
 
 @property (strong, nonatomic) FRDFriend *currentFriend;
+@property (strong, nonatomic) NSString *notificationTitle;
 @property (assign, nonatomic) FRDRemoteNotificationType notificationType;
 
 @end

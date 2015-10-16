@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Connexity. All rights reserved.
 //
 
+@class FRDFriend;
+
 @interface FRDPushNotifiactionService : NSObject
 
 + (void)registerApplicationForPushNotifications:(UIApplication *)application;
@@ -23,5 +25,6 @@
 + (void)handleActionWithIdentifier:(NSString *)identifier
              forRemoteNotification:(NSDictionary *)userInfo
                  completionHandler:(void(^)())completionHandler;
++ (void)checkForRedirectionWithCurrentFriend:(FRDFriend *)currentFriend;
 
 @end

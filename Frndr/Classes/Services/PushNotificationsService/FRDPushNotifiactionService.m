@@ -15,8 +15,14 @@
 #import "FRDFriend.h"
 #import "FRDRemoteNotification.h"
 
+#import "FRDNotificationInfoViewManager.h"
+#import "FRDLocationObserver.h"
+#import "FRDNotificationInfoView.h"
+
 #import "FRDBaseNavigationController.h"
 #import "FRDChatController.h"
+
+#import "UIView+MakeFromXib.h"
 
 static NSString *const kNewMessageCategory = @"newMessageCategory";
 static NSString *const kNewFriendCategory = @"newFriendCategory";
@@ -26,6 +32,7 @@ static NSString *const kShowChatWithNewFriendActionIdentifier = @"showChatWithNe
 
 static NSString *const kAPS = @"aps";
 static NSString *const kCategory = @"category";
+static NSString *const kPushTitle = @"alert";
 
 @implementation FRDPushNotifiactionService
 
@@ -85,6 +92,10 @@ static NSString *const kCategory = @"category";
  */
 + (void)receivedPushNotification:(NSDictionary*)userInfo withApplicationState:(UIApplicationState)state
 {
+    if (![FRDLocationObserver sharedObserver].managerAuthorized) {
+        return;
+    }
+    
     //do nothing if we are already in chat
     FRDBaseNavigationController *baseNavigationController = (FRDBaseNavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     BOOL chatExists = NO;
@@ -101,23 +112,35 @@ static NSString *const kCategory = @"category";
     //redirect to chat with friend with id userInfo[friendId]
     NSDictionary *aps = userInfo[kAPS];
     NSString *pushCategory = aps[kCategory];
+    NSString *pushTitle = aps[kPushTitle];
     
     FRDRemoteNotificationType currentNotificationType = [pushCategory isEqualToString:kNewFriendCategory] ? FRDRemoteNotificationTypeNewFriend : FRDRemoteNotificationTypeNewMessage;
     
     FRDFriend *currentFriend = [[FRDFriend alloc] initWithPushNotificationUserInfo:userInfo];
-    
+ 
     NSString *alertTitle = currentNotificationType == FRDRemoteNotificationTypeNewFriend ?
     [NSString localizedStringWithFormat:@"%@ %@. %@", LOCALIZED(@"You have new friend -"), currentFriend.fullName, LOCALIZED(@"Do you want to open chat with him?")] :
     [NSString localizedStringWithFormat:@"%@ %@. %@", LOCALIZED(@"You have new message from "), currentFriend.fullName, LOCALIZED(@"Do you want to open chat with him?")];
     
+    /***** new things *****/
+    FRDRemoteNotification *notification = [[FRDRemoteNotification alloc] init];
+    notification.notificationType = currentNotificationType;
+    notification.currentFriend = currentFriend;
+    notification.notificationTitle = pushTitle;
+    
     if (state == UIApplicationStateActive) {
         // app was already in the foreground
-        WEAK_SELF;
-        [FRDAlertFacade showDialogAlertWithMessage:alertTitle forController:nil withCompletion:^(BOOL cancel) {
-            if (!cancel) {
-                [weakSelf checkForRedirectionWithCurrentFriend:currentFriend];
-            }
-        }];
+        
+        FRDNotificationInfoView *infoView = [FRDNotificationInfoView makeFromXib];
+        infoView.currentNotification = notification;
+        [[FRDNotificationInfoViewManager sharedManager] showNotificationView:infoView];
+//        WEAK_SELF;
+//        [FRDAlertFacade showDialogAlertWithMessage:alertTitle forController:nil withCompletion:^(BOOL cancel) {
+//            if (!cancel) {
+//                [weakSelf checkForRedirectionWithCurrentFriend:currentFriend];
+//            }
+//        }];
+ 
     } else {
         [self checkForRedirectionWithCurrentFriend:currentFriend];
     }

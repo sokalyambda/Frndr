@@ -29,6 +29,9 @@
 
 #import "FRDRedirectionHelper.h"
 
+#import "FRDNotificationInfoViewManager.h"
+#import "FRDNotificationInfoView.h"
+
 static NSString *const kPreferencesImageName = @"PreferencesIcon";
 static NSString *const kMessagesImageName = @"MessagesIcon";
 
@@ -130,6 +133,9 @@ static CGFloat const kMaxGalleryCollectionHeight = 125.f;
     //Show/hide like buttons container
     [self showHideButtonsContainer];
     [self.pulsingOverlay subscribeForNotifications];
+    
+//    FRDNotificationInfoView *infoView = [FRDNotificationInfoView makeFromXib];
+//    [[FRDNotificationInfoViewManager sharedManager] showNotificationView:infoView];
 }
 
 - (void)viewDidAppear:(BOOL)animated

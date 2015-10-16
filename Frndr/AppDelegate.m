@@ -12,6 +12,7 @@
 #import "FRDFacebookService.h"
 
 #import "FRDChatManager.h"
+#import "FRDLocationObserver.h"
 
 @interface AppDelegate ()
 
@@ -23,6 +24,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [FRDLocationObserver sharedObserver];
     //set flag for needed updating
     [FRDStorageManager sharedStorage].userProfileUpdateNeeded = YES;
     [FRDStorageManager sharedStorage].searchSettingsUpdateNeeded = YES;

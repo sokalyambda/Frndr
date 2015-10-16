@@ -57,8 +57,6 @@
         [self setupTutorialScrollView];
         [self animateTutorialViews];
     });
-    
-    [FRDLocationObserver sharedObserver];
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -169,6 +169,11 @@ static NSInteger const kRowsNumberThreshold = 4;
     self.dropDownList.delegate = self.dropDownDataSource;
     [self.dropDownList reloadData];
     
+    if (!self.anchorView) {
+        UIView *anchor = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, CGRectGetWidth(self.presentedView.frame), 0.f)];
+        self.anchorView = anchor;
+    }
+    
     if (!self.expandingNeeded) {
         [self showDropDownList];
     } else {

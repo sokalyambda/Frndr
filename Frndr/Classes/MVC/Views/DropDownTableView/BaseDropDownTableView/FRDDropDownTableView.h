@@ -46,4 +46,6 @@ typedef void(^PresentingCompletion)(FRDDropDownTableView *table);
 
 - (void)hideDropDownList;
 
+- (void)commonInit;
+
 @end
