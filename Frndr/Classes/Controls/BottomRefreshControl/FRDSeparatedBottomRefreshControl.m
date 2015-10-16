@@ -8,7 +8,7 @@
 
 #import "FRDSeparatedBottomRefreshControl.h"
 
-@interface FRDSeparatedBottomRefreshControl () <UITableViewDelegate>
+@interface FRDSeparatedBottomRefreshControl ()
 
 @property (weak, nonatomic) UITableView *tableView;
 
@@ -74,7 +74,7 @@
 - (void)adjustFramesWithOffsetY:(CGFloat)offsetY
 {
     self.tableView.tableFooterView.frame = CGRectMake(CGRectGetMinX(self.tableView.tableFooterView.frame),
-                                                      self.savedAnchorHeight,
+                                                      self.tableView.contentSize.height,
                                                       CGRectGetWidth(self.tableView.frame),
                                                       offsetY);
     
@@ -100,6 +100,7 @@
  */
 - (void)endRefreshing
 {
+    NSLog(@"Refreshing ended");
     [self setDefaultInsetsAnimated];
     _refreshing = NO;
 }
@@ -135,12 +136,15 @@
     }
     
     offsetY = MAX(0, offsetY);
-        
+//    NSLog(@"OffsetY: %f", offsetY);
+    
     if ([keyPath isEqualToString:@"contentOffset"]) {
         if (self.isDragging || self.refreshing) {
             if (offsetY > self.pullHeightTreshold && !self.refreshing) {
                 [self beginRefreshing];
+                self.isDragging = NO;
                 self.tableView.contentInset = UIEdgeInsetsMake(-self.pullHeightTreshold, 0, self.pullHeightTreshold, 0);
+                return;
             }
             
             if (offsetY < self.pullHeightTreshold && !self.refreshing) {
@@ -153,13 +157,6 @@
         switch (self.tableView.panGestureRecognizer.state) {
             case UIGestureRecognizerStateBegan: {
                 self.isDragging = YES;
-                
-                if (self.tableView.contentSize.height < [UIScreen mainScreen].bounds.size.height - self.additionalVerticalInset) {
-                    self.savedAnchorHeight = CGRectGetMaxY(self.lastVisibleCell.frame);
-                } else {
-                    self.savedAnchorHeight = self.tableView.contentSize.height;
-                }
-                
                 break;
             }
  

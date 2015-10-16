@@ -104,8 +104,6 @@
     self.friendsTableView.estimatedRowHeight = UITableViewAutomaticDimension;
     self.friendsTableView.rowHeight = UITableViewAutomaticDimension;
     
-//    [self configureBottomRefreshControl];
-    
     WEAK_SELF;
     [self loadFriendsFirstPageOnSuccess:^(NSArray *friends) {
         [weakSelf updateLastFriendsPageWithFriends:friends];
@@ -124,6 +122,7 @@
     [super viewDidAppear:animated];
     
     [self initNoMatchesView];
+    [self configureBottomRefreshControl];
     
     WEAK_SELF;
     [self loadFriendsFirstPageOnSuccess:^(NSArray *friends) {
@@ -198,7 +197,7 @@
 - (void)configureBottomRefreshControl
 {
     [self.bottomRefreshControl addTarget:self action:@selector(loadMoreFriends) forControlEvents:UIControlEventValueChanged];
-    self.bottomRefreshControl.additionalVerticalInset = CGRectGetHeight(self.navigationController.navigationBar.frame);
+    self.bottomRefreshControl.additionalVerticalInset = CGRectGetHeight(self.navigationController.navigationBar.frame) + CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
 }
 
 /**
@@ -286,29 +285,36 @@
                       onSuccess:(void(^)(NSArray *friendsList))success
 {
     WEAK_SELF;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [FRDProjectFacade getFriendsListWithPage:page onSuccess:^(NSArray *friendsList) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+       // [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
         if (success) {
             success(friendsList);
         }
+        [weakSelf.bottomRefreshControl endRefreshing];
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        //[MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-
+        
+        [weakSelf.bottomRefreshControl endRefreshing];
     }];
     
 //    For testing purposes
-    
-//    NSMutableArray *friends = [NSMutableArray array];
-//    for (int i = 0; i < 3; ++i) {
-//        FRDFriend *friend = [[FRDFriend alloc] init];
-//        friend.lastMessage = @"AAAKSJJSKLADAIWDIAWLLIAWDAWDILJAWDDWLKJWDIALWIDJW";
-//        [friends addObject:friend];
-//    }
-//    success(friends);
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self.bottomRefreshControl endRefreshing];
+//        static int j = 1;
+//        NSMutableArray *friends = [NSMutableArray array];
+//        for (int i = 1; i <= 2; ++i) {
+//            FRDFriend *friend = [[FRDFriend alloc] init];
+//            friend.lastMessage = [NSString stringWithFormat:@"%d %d", j, i];
+//            [friends addObject:friend];
+//        }
+//        j++;
+//        NSLog(@"Frieds added");
+//        success(friends);
+//    });
 }
 
 /**
