@@ -72,7 +72,7 @@ dispatch_queue_t messages_unpacking_queue() {
 {
     self = [super initWithCoder:coder];
     if (self) {
-        _currentPage = 1;
+        _currentPage = 2;
     }
     return self;
 }
@@ -93,7 +93,6 @@ dispatch_queue_t messages_unpacking_queue() {
     [self loadMessagesFirstPageOnSuccess:^(NSArray *messages) {
         [weakSelf updateLastMessagesPageWithMessages:messages];
         [weakSelf scrollTableViewToBottomAnimated:NO];
-        weakSelf.currentPage++;
     }];
 }
 
@@ -186,6 +185,9 @@ dispatch_queue_t messages_unpacking_queue() {
     WEAK_SELF;
     [self loadChatHistoryWithPage:self.currentPage onSuccess:^(NSArray *messages) {
         [weakSelf updateLastMessagesPageWithMessages:messages];
+        if (messages.count) {
+            weakSelf.currentPage++;
+        }
     }];
 }
 
@@ -233,7 +235,6 @@ dispatch_queue_t messages_unpacking_queue() {
 - (void)updateLastMessagesPageWithMessages:(NSArray *)messages
 {
     if (messages.count) {
-        self.currentPage++;
         //set messages array
         NSMutableArray *updatedMessages = [NSMutableArray arrayWithArray:messages];
         [updatedMessages addObjectsFromArray:self.messageHistory];
