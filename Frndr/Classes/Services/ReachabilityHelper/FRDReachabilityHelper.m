@@ -10,6 +10,8 @@
 
 #import "FRDProjectFacade.h"
 
+static NSString *const kInternetIsNotReachableString = @"Internet Is Not Reachable";
+
 @implementation FRDReachabilityHelper
 
 /**
@@ -26,7 +28,7 @@
             success();
         }
     } else {
-        NSError *internetError = [NSError errorWithDomain:@"" code:NSURLErrorNotConnectedToInternet userInfo:@{NSLocalizedDescriptionKey: InternetIsNotReachableString}];
+        NSError *internetError = [NSError errorWithDomain:@"" code:NSURLErrorNotConnectedToInternet userInfo:@{NSLocalizedDescriptionKey: kInternetIsNotReachableString}];
         if (failure) {
             failure(internetError);
         }

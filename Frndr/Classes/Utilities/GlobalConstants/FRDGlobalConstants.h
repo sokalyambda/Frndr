@@ -15,16 +15,11 @@ static NSString *const PasswordKey          = @"PasswordKey";
 static NSString *const UserCredentialsKey   = @"UserCredentialsKey";
 static NSString *const IsFirstLaunch        = @"IsFirstLaunch";
 
-//Strings
-static NSString *const InternetIsNotReachableString = @"Internet Is Not Reachable";
-
 //Facebook
 static NSString *const FBLoginSuccess = @"FBLoginSuccess";
 static NSString *const FBAccessTokenExpirationDate = @"FBAccessTokenExpirationDate";
 static NSString *const FBAccessToken = @"FBAccessToken";
 static NSString *const FBCurrentProfile = @"FBCurrentProfile";
-
-static NSString *const IsLogined = @"IsLogined";
 
 //Notifications
 static NSString *const DidReceiveNewMessageNotification = @"DidReceiveNewMessageNotification";

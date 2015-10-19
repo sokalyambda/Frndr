@@ -10,8 +10,6 @@
 
 #import "FRDPushNotifiactionService.h"
 
-#import "FRDNotificationInfoView.h"
-
 #import "FRDRemoteNotification.h"
 #import "FRDFriend.h"
 
@@ -28,7 +26,7 @@
 + (FRDNotificationInfoViewManager *)sharedManager;
 {
     static FRDNotificationInfoViewManager *manager = nil;
-    
+
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [[self alloc] init];
@@ -42,12 +40,15 @@
 - (void)showNotificationView:(FRDNotificationInfoView *)infoView
 {
     if (!self.notificationInfoView) {
+        
         self.notificationInfoView = infoView;
         self.notificationInfoView.delegate = self;
+        
+        WEAK_SELF;
         [infoView dropDownTableBecomeActiveInView:[UIApplication sharedApplication].keyWindow fromAnchorView:nil withDataSource:nil withShowingCompletion:^(FRDDropDownTableView *table) {
             
             if (table.isExpanded) {
-                [self performSelector:@selector(hideNotificationInfoView:) withObject:infoView afterDelay:5.f];
+                [weakSelf performSelector:@selector(hideNotificationInfoView:) withObject:infoView afterDelay:5.f];
             }
             
         } withCompletion:nil];
@@ -57,6 +58,7 @@
 - (void)hideNotificationInfoView:(FRDNotificationInfoView *)infoView
 {
     [infoView hideDropDownList];
+    
     self.notificationInfoView = nil;
 }
 
@@ -64,7 +66,9 @@
 
 - (void)notificationViewDidTapOpenChatButton:(FRDNotificationInfoView *)infoView
 {
-    [FRDPushNotifiactionService checkForRedirectionWithCurrentFriend:self.notificationInfoView.currentNotification.currentFriend];
+    if (infoView.currentNotification) {
+        [FRDPushNotifiactionService checkForRedirectionWithCurrentFriend:self.notificationInfoView.currentNotification.currentFriend];
+    }
 }
 
 @end

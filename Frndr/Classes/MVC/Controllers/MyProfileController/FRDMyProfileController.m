@@ -263,6 +263,9 @@ static CGFloat const kMinimumBottomSpacing = 8.f;
 - (void)initDropDownHolderContainer
 {
     self.dropDownHolderController = [[FRDDropDownHolderController alloc] initWithNibName:NSStringFromClass([FRDDropDownHolderController class]) bundle:nil];
+    
+    self.dropDownHolderController.currentSourceType = FRDSourceTypeMyProfile;
+    
     self.dropDownHolderController.viewForDisplaying = self.scrollView;
     [self.dropDownHolderController.view setFrame:self.dropDownHolderContainer.frame];
     [self.dropDownHolderContainer addSubview:self.dropDownHolderController.view];

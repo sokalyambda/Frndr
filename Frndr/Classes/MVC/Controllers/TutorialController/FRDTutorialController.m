@@ -311,6 +311,9 @@
 - (void)updateCurrentProfileOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
+    
+    currentProfile.visible = YES;
+    
     [FRDProjectFacade updatedProfile:currentProfile onSuccess:^(FRDCurrentUserProfile *confirmedProfile) {
         
         [currentProfile updateWithUserProfile:confirmedProfile];

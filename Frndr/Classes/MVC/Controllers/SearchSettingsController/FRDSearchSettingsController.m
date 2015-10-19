@@ -28,7 +28,7 @@
 static CGFloat const kMinValidAge = 18.f;
 static CGFloat const kMaxValidAge = 50.f;
 static CGFloat const kYearsSpace = 2.f;
-static CGFloat const kMaxDistanceValue = 5000.f;
+static CGFloat const kMaxDistanceValue = 500.f;
 
 @interface FRDSearchSettingsController ()
 
@@ -172,7 +172,7 @@ static CGFloat const kMaxDistanceValue = 5000.f;
     tempSearchSettings.minAgeValue = self.currentMinimumAge;
     tempSearchSettings.maxAgeValue = self.currentMaximumAge;
     tempSearchSettings.sexualOrientation = self.dropDownHolderController.chosenOrientation;
-    tempSearchSettings.smoker = self.dropDownHolderController.smoker;
+    tempSearchSettings.smokerString = self.dropDownHolderController.smokerString;
     tempSearchSettings.relationshipStatuses = self.relationshipController.relationshipStatusesForSearch;
     tempSearchSettings.distance = self.currentDistance;
     //set data to temp settings and update it
@@ -199,6 +199,7 @@ static CGFloat const kMaxDistanceValue = 5000.f;
 - (void)initDropDownHolderContainer
 {
     self.dropDownHolderController = [[FRDDropDownHolderController alloc] initWithNibName:NSStringFromClass([FRDDropDownHolderController class]) bundle:nil];
+    self.dropDownHolderController.currentSourceType = FRDSourceTypeSearchSettings;
     self.dropDownHolderController.viewForDisplaying = self.scrollView;
     [self.dropDownHolderController.view setFrame:self.dropDownHolderContainer.frame];
     [self.dropDownHolderContainer addSubview:self.dropDownHolderController.view];

@@ -30,6 +30,14 @@ static NSString *const kDistance                = @"distance";
     _maxAgeValue = [_ageRange[kMaxAge] integerValue];
 }
 
+- (NSString *)smokerString
+{
+    if (!_smokerString.length) {
+        _smokerString = LOCALIZED(@"Non-Smoker");
+    }
+    return _smokerString;
+}
+
 #pragma mark - FRDMappingProtocol
 
 - (instancetype)initWithServerResponse:(NSDictionary *)response
@@ -38,7 +46,8 @@ static NSString *const kDistance                = @"distance";
     if (self) {
         self.ageRange = response[kAgeRange];
         _sexualOrientation = [FRDSexualOrientation orientationWithOrientationString:response[kSexualOrientation]];
-        _smoker = [response[kSmoker] boolValue];
+        
+        _smokerString = response[kSmoker];
         _relationshipStatuses = [NSSet setWithSet:[self relationshipStatusesFromServerResponse:response]];
         _distance = [response[kDistance] floatValue];
     }
@@ -50,7 +59,7 @@ static NSString *const kDistance                = @"distance";
     if (self) {
         self.ageRange = response[kAgeRange];
         _sexualOrientation = [FRDSexualOrientation orientationWithOrientationString:response[kSexualOrientation]];
-        _smoker = [response[kSmoker] boolValue];
+        _smokerString = response[kSmoker];
         _relationshipStatuses = [NSSet setWithSet:[self relationshipStatusesFromServerResponse:response]];
         _distance = [response[kDistance] floatValue];
     }

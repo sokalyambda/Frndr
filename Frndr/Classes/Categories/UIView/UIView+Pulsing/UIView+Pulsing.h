@@ -10,4 +10,6 @@
 
 - (void)pulsingWithWavesInView:(UIView *)viewForWaves repeating:(BOOL)repeating;
 
+- (void)highlightWithScaling; //pulsing from greater to original
+
 @end

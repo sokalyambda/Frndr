@@ -10,6 +10,8 @@
 
 #import "FRDAvatar.h"
 
+#import "UIView+Pulsing.h"
+
 @interface FRDPhotoGalleryCollectionViewCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *crossImageView;
@@ -92,6 +94,8 @@
 
 - (void)handlePlusClick:(UITapGestureRecognizer *)tap
 {
+    [self.plusImageView highlightWithScaling];
+    
     if ([self.delegate respondsToSelector:@selector(galleryCell:didTapPlusImageView:)]) {
         [self.delegate galleryCell:self didTapPlusImageView:self.plusImageView];
     }
@@ -99,6 +103,8 @@
 
 - (void)handleCrossClick:(UITapGestureRecognizer *)tap
 {
+    [self.crossImageView highlightWithScaling];
+    
     if ([self.delegate respondsToSelector:@selector(galleryCell:didTapCrossImageView:)]) {
         [self.delegate galleryCell:self didTapCrossImageView:self.crossImageView];
     }

@@ -24,6 +24,8 @@
 
 #import "UIView+MakeFromXib.h"
 
+static NSString *const kPreferencesIconName = @"preferencesTopIcon";
+
 @interface FRDFriendsListController ()<UITableViewDataSource, UITableViewDelegate, FRDNoMatchesViewDelegate>
 
 @property (nonatomic) NSMutableArray *friends;
@@ -71,7 +73,7 @@ dispatch_queue_t friends_updating_queue() {
 
 - (NSString *)leftImageName
 {
-    return @"preferencesTopIcon";
+    return kPreferencesIconName;
 }
 
 - (NSString *)rightImageName
@@ -317,6 +319,7 @@ dispatch_queue_t friends_updating_queue() {
         if (success) {
             success(friendsList);
         }
+        [weakSelf showHideNoMatchesView];
   
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [weakSelf.bottomRefreshControl endRefreshing];
@@ -346,6 +349,9 @@ dispatch_queue_t friends_updating_queue() {
  */
 - (void)loadMoreFriends
 {
+    if (!self.friends.count) {
+        return;
+    }
     WEAK_SELF;
     [self loadFriendsListWithPage:self.currentPage onSuccess:^(NSArray *friendsList) {
         

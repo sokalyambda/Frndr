@@ -29,9 +29,6 @@
 
 #import "FRDRedirectionHelper.h"
 
-#import "FRDNotificationInfoViewManager.h"
-#import "FRDNotificationInfoView.h"
-
 static NSString *const kPreferencesImageName = @"PreferencesIcon";
 static NSString *const kMessagesImageName = @"MessagesIcon";
 
@@ -71,12 +68,12 @@ static CGFloat const kMaxGalleryCollectionHeight = 125.f;
 
 - (NSString *)leftImageName
 {
-    return @"PreferencesIcon";
+    return kPreferencesImageName;
 }
 
 - (NSString *)rightImageName
 {
-    return @"MessagesIcon";
+    return kMessagesImageName;
 }
 
 - (BOOL)isOverlayPresented
@@ -133,9 +130,6 @@ static CGFloat const kMaxGalleryCollectionHeight = 125.f;
     //Show/hide like buttons container
     [self showHideButtonsContainer];
     [self.pulsingOverlay subscribeForNotifications];
-    
-//    FRDNotificationInfoView *infoView = [FRDNotificationInfoView makeFromXib];
-//    [[FRDNotificationInfoViewManager sharedManager] showNotificationView:infoView];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -280,9 +274,6 @@ static CGFloat const kMaxGalleryCollectionHeight = 125.f;
     BOOL isSearchSettingsUpdateNeeded = [FRDStorageManager sharedStorage].isSearchSettingsUpdateNeeded;
     
     WEAK_SELF;
-//    if (!self.isOverlayPresented) {
-//        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    } else
     if (self.isOverlayPresented) {
         [self.pulsingOverlay addPulsingAnimations];
     }
