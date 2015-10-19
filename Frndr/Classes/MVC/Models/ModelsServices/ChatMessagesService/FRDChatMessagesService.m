@@ -179,6 +179,7 @@
                     currentFriend.lastMessage = newFriend.lastMessage;
                     currentFriend.lastMessagePostedDate = newFriend.lastMessagePostedDate;
                     currentFriend.hasNewMessages = newFriend.hasNewMessages;
+                    currentFriend.newFriend = newFriend.isNewFriend;
                     break;
                 }
             }

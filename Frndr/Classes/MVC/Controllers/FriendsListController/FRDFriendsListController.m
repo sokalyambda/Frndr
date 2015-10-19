@@ -177,6 +177,7 @@ dispatch_queue_t friends_updating_queue() {
     
     //there are no new messages now
     currentFriend.hasNewMessages = NO;
+    
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     
     FRDChatController *chatController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDChatController class])];
@@ -244,6 +245,7 @@ dispatch_queue_t friends_updating_queue() {
 - (void)subscribeForNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNewMessageNotification:) name:DidReceiveNewMessageNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNewFriendNotification:) name:NewFriendAddedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
@@ -274,11 +276,9 @@ dispatch_queue_t friends_updating_queue() {
                 FRDFriend *currentFirstFriend = self.friends.firstObject;
                 
                 for (FRDFriend *friend in friends) {
-                    
-                    if (friend.isNewFriend && [currentFirstFriend.lastMessagePostedDate compare:friend.lastMessagePostedDate] == NSOrderedAscending) {
+                    if (friend.isNewFriend && ([currentFirstFriend.lastMessagePostedDate compare:friend.lastMessagePostedDate] == NSOrderedAscending || !currentFirstFriend)) {
                         [newFriends addObject:friend];
                     }
-                    
                 }
                 
                 [newFriends addObjectsFromArray:self.friends];
@@ -287,11 +287,15 @@ dispatch_queue_t friends_updating_queue() {
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.friends = newFriends;
+                    [self showHideNoMatchesView];
                 });
                 
             });
             
         }
+    } else {
+        self.friends = [NSMutableArray array];
+        [self showHideNoMatchesView];
     }
 }
 
@@ -299,6 +303,8 @@ dispatch_queue_t friends_updating_queue() {
 {
     [self.friends addObjectsFromArray:friends];
     [self.friendsTableView reloadData];
+    
+    [self showHideNoMatchesView];
 }
 
 /**
@@ -319,7 +325,6 @@ dispatch_queue_t friends_updating_queue() {
         if (success) {
             success(friendsList);
         }
-        [weakSelf showHideNoMatchesView];
   
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [weakSelf.bottomRefreshControl endRefreshing];
@@ -327,21 +332,6 @@ dispatch_queue_t friends_updating_queue() {
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
 
     }];
-    
-//    For testing purposes
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [self.bottomRefreshControl endRefreshing];
-//        static int j = 1;
-//        NSMutableArray *friends = [NSMutableArray array];
-//        for (int i = 1; i <= 2; ++i) {
-//            FRDFriend *friend = [[FRDFriend alloc] init];
-//            friend.lastMessage = [NSString stringWithFormat:@"%d %d", j, i];
-//            [friends addObject:friend];
-//        }
-//        j++;
-//        NSLog(@"Frieds added");
-//        success(friends);
-//    });
 }
 
 /**
@@ -392,6 +382,17 @@ dispatch_queue_t friends_updating_queue() {
             [self.friendsTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.friends indexOfObject:messageOwner] inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
     }
+}
+
+/**
+ *  New friend has been added
+ */
+- (void)didReceiveNewFriendNotification:(NSNotification *)notification
+{
+    FRDFriend *newFriend = (FRDFriend *)notification.object;
+    [self.friends addObject:newFriend];
+    [self.friendsTableView reloadData];
+    [self showHideNoMatchesView];
 }
 
 #pragma mark - Notifications
