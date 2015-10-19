@@ -15,6 +15,7 @@
 @property (nonatomic) UIView *viewForDisplaying;
 
 @property (nonatomic) BOOL smoker;
+@property (nonatomic) NSString *smokerString;
 @property (nonatomic) FRDSexualOrientation *chosenOrientation;
 
 - (void)updateWithSourceType:(FRDSourceType)sourceType;

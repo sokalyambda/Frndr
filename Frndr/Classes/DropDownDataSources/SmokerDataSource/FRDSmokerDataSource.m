@@ -23,7 +23,11 @@
 - (NSArray *)smokerTypes
 {
     if (!_smokerTypes) {
-        _smokerTypes = @[@"Smoker", @"Non-Smoker"];
+        if (self.sourceType == FRDSourceTypeMyProfile) {
+            _smokerTypes = @[@"Smoker", @"Non-Smoker"];
+        } else if (self.sourceType == FRDSourceTypeSearchSettings) {
+            _smokerTypes = @[@"Smoker", @"Non-Smoker", @"Any"];
+        }
     }
     return _smokerTypes;
 }

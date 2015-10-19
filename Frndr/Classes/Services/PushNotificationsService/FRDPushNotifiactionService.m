@@ -92,6 +92,7 @@ static NSString *const kPushTitle = @"alert";
  */
 + (void)receivedPushNotification:(NSDictionary*)userInfo withApplicationState:(UIApplicationState)state
 {
+    //If geolocation access not granted
     if (![FRDLocationObserver sharedObserver].managerAuthorized) {
         return;
     }
@@ -117,12 +118,8 @@ static NSString *const kPushTitle = @"alert";
     FRDRemoteNotificationType currentNotificationType = [pushCategory isEqualToString:kNewFriendCategory] ? FRDRemoteNotificationTypeNewFriend : FRDRemoteNotificationTypeNewMessage;
     
     FRDFriend *currentFriend = [[FRDFriend alloc] initWithPushNotificationUserInfo:userInfo];
- 
-    NSString *alertTitle = currentNotificationType == FRDRemoteNotificationTypeNewFriend ?
-    [NSString localizedStringWithFormat:@"%@ %@. %@", LOCALIZED(@"You have new friend -"), currentFriend.fullName, LOCALIZED(@"Do you want to open chat with him?")] :
-    [NSString localizedStringWithFormat:@"%@ %@. %@", LOCALIZED(@"You have new message from "), currentFriend.fullName, LOCALIZED(@"Do you want to open chat with him?")];
     
-    /***** new things *****/
+    /***** create remote notification *****/
     FRDRemoteNotification *notification = [[FRDRemoteNotification alloc] init];
     notification.notificationType = currentNotificationType;
     notification.currentFriend = currentFriend;
@@ -130,22 +127,19 @@ static NSString *const kPushTitle = @"alert";
     
     if (state == UIApplicationStateActive) {
         // app was already in the foreground
-        
         FRDNotificationInfoView *infoView = [FRDNotificationInfoView makeFromXib];
         infoView.currentNotification = notification;
         [[FRDNotificationInfoViewManager sharedManager] showNotificationView:infoView];
-//        WEAK_SELF;
-//        [FRDAlertFacade showDialogAlertWithMessage:alertTitle forController:nil withCompletion:^(BOOL cancel) {
-//            if (!cancel) {
-//                [weakSelf checkForRedirectionWithCurrentFriend:currentFriend];
-//            }
-//        }];
- 
     } else {
         [self checkForRedirectionWithCurrentFriend:currentFriend];
     }
 }
 
+/**
+ *  Check whether redirection is possible
+ *
+ *  @param currentFriend Current Friend for chatting
+ */
 + (void)checkForRedirectionWithCurrentFriend:(FRDFriend *)currentFriend
 {
     if ([FRDStorageManager sharedStorage].logined) {

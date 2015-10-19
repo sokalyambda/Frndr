@@ -11,6 +11,8 @@
 #import "FRDRemoteNotification.h"
 #import "FRDFriend.h"
 
+static CGFloat const kDropDownHeight = 84.f;
+
 @interface FRDNotificationInfoView ()
 
 @property (weak, nonatomic) IBOutlet UIView *infoHolder;
@@ -58,7 +60,7 @@
                         options:UIViewAnimationOptionCurveEaseOut animations:^{
                             
                             CGRect newFrame = weakSelf.frame;
-                            newFrame.size.height = 64.f;
+                            newFrame.size.height = kDropDownHeight;
                             weakSelf.frame = newFrame;
                             weakSelf.infoHolder.frame = newFrame;
                             [weakSelf layoutIfNeeded];
@@ -103,6 +105,7 @@
 - (IBAction)openChatClick:(id)sender
 {
     [self hideDropDownList];
+    
     if ([self.delegate respondsToSelector:@selector(notificationViewDidTapOpenChatButton:)]) {
         [self.delegate notificationViewDidTapOpenChatButton:self];
     }

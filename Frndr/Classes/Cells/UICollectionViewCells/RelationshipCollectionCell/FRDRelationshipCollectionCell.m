@@ -10,6 +10,8 @@
 
 #import "FRDRelationshipItem.h"
 
+#import "FRDRoundedView.h"
+
 @interface FRDRelationshipCollectionCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *relationshipImageView;

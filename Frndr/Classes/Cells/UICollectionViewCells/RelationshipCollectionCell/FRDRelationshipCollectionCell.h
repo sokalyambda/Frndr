@@ -6,9 +6,11 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-@class FRDRelationshipItem;
+@class FRDRelationshipItem, FRDRoundedView;
 
 @interface FRDRelationshipCollectionCell : UICollectionViewCell
+
+@property (weak, nonatomic) IBOutlet FRDRoundedView *roundedBackgroundView;
 
 - (void)configureCellWithRelationshipItem:(FRDRelationshipItem *)item;
 - (void)updateCellWithRelationshipItem:(FRDRelationshipItem *)item;

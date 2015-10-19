@@ -69,6 +69,7 @@ static NSString *const kNotSmokerString = @"Non-Smoker";
 {
     UIView *tapView = tap.view;
     FRDBaseDropDownDataSource *smokerDataSource = [FRDBaseDropDownDataSource dataSourceWithType:FRDDataSourceTypeSmoker];
+    smokerDataSource.sourceType = self.currentSourceType;
     
     if (self.dropDownList.isMoving) {
         return;
@@ -84,6 +85,7 @@ static NSString *const kNotSmokerString = @"Non-Smoker";
         if ([chosenValue isKindOfClass:[NSString class]]) {
             weakSelf.smokerLabel.text = chosenValue;
             weakSelf.smoker = [chosenValue isEqualToString:kSmokerString] ? YES : NO;
+            weakSelf.smokerString = chosenValue;
         }
     }];
     
@@ -132,7 +134,7 @@ static NSString *const kNotSmokerString = @"Non-Smoker";
         case FRDSourceTypeSearchSettings: {
             FRDSearchSettings *currentSearchSettings = currentProfile.currentSearchSettings;
             self.sexualOrientationLabel.text = currentSearchSettings.sexualOrientation.orientationString;
-            self.smokerLabel.text = currentSearchSettings.isSmoker ? kSmokerString : kNotSmokerString;
+            self.smokerLabel.text = currentSearchSettings.smokerString;
             break;
         }
             

@@ -14,7 +14,9 @@
 
 @property (strong, nonatomic) FRDSexualOrientation *sexualOrientation;
 @property (strong, nonatomic) NSSet *relationshipStatuses;
-@property (assign, nonatomic, getter=isSmoker) BOOL smoker;
+
+@property (strong, nonatomic) NSString *smokerString;
+
 @property (assign, nonatomic) CGFloat distance;
 @property (assign, nonatomic) NSInteger minAgeValue;
 @property (assign, nonatomic) NSInteger maxAgeValue;

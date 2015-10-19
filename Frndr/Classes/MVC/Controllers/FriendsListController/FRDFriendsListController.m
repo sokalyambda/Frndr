@@ -24,6 +24,8 @@
 
 #import "UIView+MakeFromXib.h"
 
+static NSString *const kPreferencesIconName = @"preferencesTopIcon";
+
 @interface FRDFriendsListController ()<UITableViewDataSource, UITableViewDelegate, FRDNoMatchesViewDelegate>
 
 @property (nonatomic) NSMutableArray *friends;
@@ -71,7 +73,7 @@ dispatch_queue_t friends_updating_queue() {
 
 - (NSString *)leftImageName
 {
-    return @"preferencesTopIcon";
+    return kPreferencesIconName;
 }
 
 - (NSString *)rightImageName
@@ -317,13 +319,29 @@ dispatch_queue_t friends_updating_queue() {
         if (success) {
             success(friendsList);
         }
-        
+        [weakSelf showHideNoMatchesView];
+  
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [weakSelf.bottomRefreshControl endRefreshing];
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-        
+
     }];
+    
+//    For testing purposes
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self.bottomRefreshControl endRefreshing];
+//        static int j = 1;
+//        NSMutableArray *friends = [NSMutableArray array];
+//        for (int i = 1; i <= 2; ++i) {
+//            FRDFriend *friend = [[FRDFriend alloc] init];
+//            friend.lastMessage = [NSString stringWithFormat:@"%d %d", j, i];
+//            [friends addObject:friend];
+//        }
+//        j++;
+//        NSLog(@"Frieds added");
+//        success(friends);
+//    });
 }
 
 /**
@@ -331,6 +349,9 @@ dispatch_queue_t friends_updating_queue() {
  */
 - (void)loadMoreFriends
 {
+    if (!self.friends.count) {
+        return;
+    }
     WEAK_SELF;
     [self loadFriendsListWithPage:self.currentPage onSuccess:^(NSArray *friendsList) {
         

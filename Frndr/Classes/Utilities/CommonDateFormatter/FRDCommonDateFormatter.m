@@ -26,7 +26,6 @@
         [commonDateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
         [commonDateFormatter setDateStyle:NSDateFormatterShortStyle];
         [commonDateFormatter setTimeStyle:NSDateFormatterNoStyle];
-//        [commonDateFormatter setDateFormat:@"MM/dd/yyyy"];
     });
     
     return commonDateFormatter;

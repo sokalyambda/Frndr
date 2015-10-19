@@ -14,6 +14,8 @@
 
 #import "FRDRelationshipCollectionCell.h"
 
+#import "FRDRoundedView.h"
+
 #import "UIView+MakeFromXib.h"
 
 #import "FRDRelationshipStatusesService.h"
@@ -113,7 +115,6 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
     }
     
     [collectionView reloadData];
-    
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout

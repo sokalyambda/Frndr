@@ -13,8 +13,8 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="descr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgi-Lg-Voq" userLabel="descriprion label">
-                        <rect key="frame" x="34" y="83" width="32" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="descr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgi-Lg-Voq" userLabel="descriprion label">
+                        <rect key="frame" x="39" y="83" width="23" height="12"/>
                         <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="10"/>
                         <color key="textColor" red="0.42352941179999998" green="0.3294117647" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -53,6 +53,7 @@
             <connections>
                 <outlet property="relationshipImageView" destination="Vvl-HY-Zch" id="Wt0-DD-Uss"/>
                 <outlet property="relationshipTitleLabel" destination="pgi-Lg-Voq" id="x4A-cy-Pqi"/>
+                <outlet property="roundedBackgroundView" destination="C3W-s3-Suv" id="YgH-hW-qOW"/>
             </connections>
             <point key="canvasLocation" x="490" y="358.5"/>
         </collectionViewCell>

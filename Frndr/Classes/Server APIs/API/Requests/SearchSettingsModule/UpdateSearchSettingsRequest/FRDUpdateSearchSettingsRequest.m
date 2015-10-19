@@ -36,7 +36,7 @@ static NSString *const kDistance                = @"distance";
         NSMutableDictionary *parameters = [@{kAgeRange: @{kMinAge: @(searchSettingsForUpdating.minAgeValue),
                                                           kMaxAge: @(searchSettingsForUpdating.maxAgeValue)},
                                              kSexualOrientation: searchSettingsForUpdating.sexualOrientation.orientationString,
-                                             kSmoker: @(searchSettingsForUpdating.isSmoker),
+                                             kSmoker: searchSettingsForUpdating.smokerString,
                                              kRelationshipStatuses: [self relationsipStatusesForUpdatingFromSearchSettings:searchSettingsForUpdating],
                                              kDistance: @(searchSettingsForUpdating.distance)
                                              } mutableCopy];

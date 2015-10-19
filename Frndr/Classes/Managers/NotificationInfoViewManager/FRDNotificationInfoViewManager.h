@@ -6,7 +6,7 @@
 //  Copyright © 2015 ThinkMobiles. All rights reserved.
 //
 
-@class FRDNotificationInfoView;
+#import "FRDNotificationInfoView.h"
 
 @interface FRDNotificationInfoViewManager : NSObject
 
