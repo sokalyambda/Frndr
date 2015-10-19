@@ -51,6 +51,7 @@
         _tableView = tableView;
         [_tableView.tableFooterView addSubview:_activityIndicatorView];
         _tableView.tableFooterView.clipsToBounds = YES;
+        _tableView.tableFooterView.backgroundColor = UIColorFromRGB(0xF0F0F0);
         
         [_tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
         [_tableView addObserver:self forKeyPath:@"pan.state" options:NSKeyValueObservingOptionNew context:nil];
@@ -101,6 +102,7 @@
 - (void)endRefreshing
 {
     NSLog(@"Refreshing ended");
+    self.tableView.panGestureRecognizer.enabled = NO;
     [self setDefaultInsetsAnimated];
     _refreshing = NO;
 }
@@ -113,9 +115,10 @@
                         options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          weakSelf.tableView.contentInset = UIEdgeInsetsZero;
-                         weakSelf.activityIndicatorView.transform = CGAffineTransformMakeScale(0.1f, 0.1f);
+                         [weakSelf adjustFramesWithOffsetY:0.01];
                      } completion:^(BOOL finished) {
                          [weakSelf adjustFramesWithOffsetY:0.f];
+                         weakSelf.tableView.panGestureRecognizer.enabled = YES;
                      }];
 }
 
@@ -136,15 +139,12 @@
     }
     
     offsetY = MAX(0, offsetY);
-//    NSLog(@"OffsetY: %f", offsetY);
     
     if ([keyPath isEqualToString:@"contentOffset"]) {
         if (self.isDragging || self.refreshing) {
             if (offsetY > self.pullHeightTreshold && !self.refreshing) {
                 [self beginRefreshing];
-                self.isDragging = NO;
                 self.tableView.contentInset = UIEdgeInsetsMake(-self.pullHeightTreshold, 0, self.pullHeightTreshold, 0);
-                return;
             }
             
             if (offsetY < self.pullHeightTreshold && !self.refreshing) {
