@@ -25,6 +25,7 @@
 #import "UIView+MakeFromXib.h"
 
 static NSString *const kPreferencesIconName = @"preferencesTopIcon";
+static NSString *const kBackArrowIconName = @"backArrow";
 
 @interface FRDFriendsListController ()<UITableViewDataSource, UITableViewDelegate, FRDNoMatchesViewDelegate>
 
@@ -73,12 +74,12 @@ dispatch_queue_t friends_updating_queue() {
 
 - (NSString *)leftImageName
 {
-    return kPreferencesIconName;
+    return kBackArrowIconName;
 }
 
 - (NSString *)rightImageName
 {
-    return @"";
+    return kPreferencesIconName;
 }
 
 /*****Friends array accessors*****/
