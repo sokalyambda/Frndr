@@ -14,7 +14,7 @@
 @interface FRDRedirectionHelper : NSObject
 
 + (void)redirectToMainContainerControllerWithNavigationController:(FRDBaseNavigationController *)navigationController andDelegate:(id<ContainerViewControllerDelegate>)delegate;
-+ (void)redirectToTermsAndServicesWithURL:(NSURL *)url andPresentingController:(FRDBaseViewController *)presentingController;
++ (void)redirectToTermsAndServicesWithURI:(NSString *)uri title:(NSString *)title andPresentingController:(FRDBaseViewController *)presentingController;
 
 + (void)redirectToChatWithFriend:(FRDFriend *)currentFriend
                        onSuccess:(SuccessBlock)success

@@ -401,7 +401,11 @@ static CGFloat const kPageControlAnimDuration = .6f;
 
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
 {
-    [FRDRedirectionHelper redirectToTermsAndServicesWithURL:url andPresentingController:self];
+    if ([url.absoluteString isEqualToString:PrivacyPolicyResourceName]) {
+        [FRDRedirectionHelper redirectToTermsAndServicesWithURI:url.absoluteString title:@"Privacy Policy" andPresentingController:self];
+    } else if ([url.absoluteString isEqualToString:TermsOfServiceResourceName]) {
+        [FRDRedirectionHelper redirectToTermsAndServicesWithURI:url.absoluteString title:@"Terms of Service" andPresentingController:self];
+    }
 }
 
 #pragma mark - UIScrollViewDelegate

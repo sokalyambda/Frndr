@@ -15,8 +15,8 @@
 #import "FRDFacebookService.h"
 
 //static NSString *const kBaseHostURL = @"http://192.168.89.188:8859";//Misha
-//static NSString *const kBaseHostURL = @"http://192.168.89.191:8859";//Vanya
-static NSString *const kBaseHostURL = @"http://projects.thinkmobiles.com:8859";//Live
+static NSString *const kBaseHostURL = @"http://192.168.89.191:8859";//Vanya
+//static NSString *const kBaseHostURL = @"http://projects.thinkmobiles.com:8859";//Live
 
 static NSString *const kConnectedToServerEvent = @"connectedToServer";
 static NSString *const kAuthorizeEvent = @"authorize";

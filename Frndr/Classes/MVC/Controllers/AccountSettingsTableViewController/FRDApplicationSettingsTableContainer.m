@@ -144,12 +144,12 @@ typedef NS_ENUM(NSInteger, FRDApplicationSettingsSectionType)
             }
                 
             case FRDApplicationOtherSettingPrivacyPolicy: {
-                [FRDRedirectionHelper redirectToTermsAndServicesWithURL:[NSURL URLWithString:@"http://Privacy policy URL"] andPresentingController:(FRDBaseViewController *)self.parentViewController];
+                [FRDRedirectionHelper redirectToTermsAndServicesWithURI:PrivacyPolicyResourceName title:@"Privacy Policy" andPresentingController:(FRDBaseViewController *)self.parentViewController];
                 break;
             }
                 
             case FRDApplicationOtherSettingTermsOfService: {
-                [FRDRedirectionHelper redirectToTermsAndServicesWithURL:[NSURL URLWithString:@"http://Terms of services URL"] andPresentingController:(FRDBaseViewController *)self.parentViewController];
+                [FRDRedirectionHelper redirectToTermsAndServicesWithURI:TermsOfServiceResourceName title:@"Terms of Service" andPresentingController:(FRDBaseViewController *)self.parentViewController];
                 break;
             }
         }

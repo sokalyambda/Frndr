@@ -54,16 +54,18 @@ static NSString *const kMainStoryboardName = @"Main";
 /**
  *  Redirect to terms&services
  *
- *  @param url                  Current URL for webView
+ *  @param uri                  Current URI (Universal Resource Identifier) for textView
+ *  @param title                Title text
  *  @param presentingController Controller which will be presenting the terms controller
  */
-+ (void)redirectToTermsAndServicesWithURL:(NSURL *)url andPresentingController:(FRDBaseViewController *)presentingController
++ (void)redirectToTermsAndServicesWithURI:(NSString *)uri title:(NSString *)title andPresentingController:(FRDBaseViewController *)presentingController
 {
     UIStoryboard *mainBoard = [UIStoryboard storyboardWithName:kMainStoryboardName bundle:nil];
     
     FRDTermsAndServicesController *controller = [mainBoard instantiateViewControllerWithIdentifier:NSStringFromClass([FRDTermsAndServicesController class])];
     FRDBaseNavigationController *navigationController = [[FRDBaseNavigationController alloc] initWithRootViewController:controller];
-    controller.currentURL = url;
+    controller.sourceTextPath = uri;
+    controller.titleText = title;
     
     [presentingController presentViewController:navigationController animated:YES completion:nil];
 }

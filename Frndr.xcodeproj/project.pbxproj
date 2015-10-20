@@ -42,6 +42,7 @@
 		3E945CD01BBE734200BD5820 /* FRDSystemChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E945CCE1BBE734200BD5820 /* FRDSystemChatCell.m */; settings = {ASSET_TAGS = (); }; };
 		3E945CD41BBE7EA300BD5820 /* FRDBaseChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E945CD31BBE7EA300BD5820 /* FRDBaseChatCell.m */; settings = {ASSET_TAGS = (); }; };
 		3EA078301BC5625C00A7B468 /* FRDKeyboardResponderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0782F1BC5625C00A7B468 /* FRDKeyboardResponderController.m */; settings = {ASSET_TAGS = (); }; };
+		3EA552831BD67081001500A3 /* PrivacyPolicy.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3EA552821BD67081001500A3 /* PrivacyPolicy.txt */; };
 		3EB1A0331BC269310032CB5A /* FRDChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1A0321BC269310032CB5A /* FRDChatController.m */; settings = {ASSET_TAGS = (); }; };
 		3EB1A0361BC2695C0032CB5A /* FRDChatTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1A0351BC2695C0032CB5A /* FRDChatTableController.m */; settings = {ASSET_TAGS = (); }; };
 		3EB7292B1BC69BC3001BEF4B /* FRDExpandableToThresholdTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB7292A1BC69BC3001BEF4B /* FRDExpandableToThresholdTextView.m */; settings = {ASSET_TAGS = (); }; };
@@ -293,6 +294,7 @@
 		3E945CD31BBE7EA300BD5820 /* FRDBaseChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDBaseChatCell.m; path = Classes/Cells/UITableViewCells/ChatCells/FRDBaseChatCell.m; sourceTree = "<group>"; };
 		3EA0782E1BC5625C00A7B468 /* FRDKeyboardResponderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDKeyboardResponderController.h; path = Classes/MVC/Controllers/KeyboardResponderController/FRDKeyboardResponderController.h; sourceTree = "<group>"; };
 		3EA0782F1BC5625C00A7B468 /* FRDKeyboardResponderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDKeyboardResponderController.m; path = Classes/MVC/Controllers/KeyboardResponderController/FRDKeyboardResponderController.m; sourceTree = "<group>"; };
+		3EA552821BD67081001500A3 /* PrivacyPolicy.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = PrivacyPolicy.txt; path = ../PrivacyPolicy.txt; sourceTree = "<group>"; };
 		3EB1A0311BC269310032CB5A /* FRDChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDChatController.h; path = Classes/MVC/Controllers/ChatController/FRDChatController.h; sourceTree = "<group>"; };
 		3EB1A0321BC269310032CB5A /* FRDChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDChatController.m; path = Classes/MVC/Controllers/ChatController/FRDChatController.m; sourceTree = "<group>"; };
 		3EB1A0341BC2695C0032CB5A /* FRDChatTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDChatTableController.h; path = Classes/MVC/Controllers/ChatController/ChatTableController/FRDChatTableController.h; sourceTree = "<group>"; };
@@ -2183,6 +2185,7 @@
 		58BC76FC1B9EBBD300BB8B5A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3EA552821BD67081001500A3 /* PrivacyPolicy.txt */,
 				58BC76FE1B9EBBE500BB8B5A /* Fonts */,
 			);
 			name = Resources;
@@ -2798,6 +2801,7 @@
 				3E945CCC1BBE733700BD5820 /* FRDUserChatCell.xib in Resources */,
 				3E941A491BB1815D00F034E6 /* FRDPersonalBioTableHeader.xib in Resources */,
 				3EF22FB41BBE851100E23F72 /* FRDFriendChatCell.xib in Resources */,
+				3EA552831BD67081001500A3 /* PrivacyPolicy.txt in Resources */,
 				58D5A16C1BA329E500D552CF /* FRDNavigationTitleView.xib in Resources */,
 				58B7B6831BC660F100E56067 /* NSDateTimeAgo.bundle in Resources */,
 				58C28C501BA99A6E009D1AC4 /* FRDFriendDragableView.xib in Resources */,

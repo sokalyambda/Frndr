@@ -10,6 +10,7 @@
 
 @interface FRDTermsAndServicesController : FRDBaseViewController
 
-@property (strong, nonatomic) NSURL *currentURL;
+@property (strong, nonatomic) NSString *sourceTextPath;
+@property (strong, nonatomic) NSString *titleText;
 
 @end

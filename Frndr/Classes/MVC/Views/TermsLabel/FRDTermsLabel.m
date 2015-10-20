@@ -22,8 +22,8 @@
     self.linkAttributes = attributes;
     self.activeLinkAttributes = attributes;
     
-    [self addLinkToURL:[NSURL URLWithString:@"http://PRIVACY_POLICY"] withRange:[self.text rangeOfString:@"Privacy Policy"]];
-    [self addLinkToURL:[NSURL URLWithString:@"http://TERMS_OF_SERVICE"] withRange:[self.text rangeOfString:@"Terms of Service"]];
+    [self addLinkToURL:[NSURL URLWithString:@"PrivacyPolicy.txt"] withRange:[self.text rangeOfString:@"Privacy Policy"]];
+    [self addLinkToURL:[NSURL URLWithString:@"TermsOfService.txt"] withRange:[self.text rangeOfString:@"Terms of Service"]];
 }
 
 

@@ -12,33 +12,45 @@
 
 @interface FRDTermsAndServicesController ()<UIWebViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
 @end
 
 @implementation FRDTermsAndServicesController
 
+#pragma mark - Accessors
+
+
+
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self updateWebViewInformation];
+    [self loadTextViewInformation];
 }
 
 #pragma mark - Actions
 
-- (void)updateWebViewInformation
+- (void)loadTextViewInformation
 {
-    NSURLRequest *currentRequest = [NSURLRequest requestWithURL:self.currentURL];
-    [self.webView loadRequest:currentRequest];
+    NSString *path = [[NSBundle mainBundle] pathForResource:self.sourceTextPath ofType:nil];
+    
+    NSError *error;
+    NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
+    
+    if (error) {
+        NSLog(@"Error reading file: %@", error.localizedDescription);
+    } else {
+        self.textView.text = content;
+    }
 }
 
 - (void)customizeNavigationItem
 {
     [super customizeNavigationItem];
-    self.navigationTitleView.titleText = LOCALIZED(@"Terms of Service");
+    self.navigationTitleView.titleText = LOCALIZED(self.titleText);
     //show navigation bar
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
@@ -53,24 +65,6 @@
 - (IBAction)doneClick:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark - UIWebViewDelegate
-
-- (void)webViewDidStartLoad:(UIWebView *)webView
-{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-    [FRDAlertFacade showFailureResponseAlertWithError:error forController:self andCompletion:nil];
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 #pragma mark - UIStatusBar

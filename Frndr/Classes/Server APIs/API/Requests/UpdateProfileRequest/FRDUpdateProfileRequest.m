@@ -49,8 +49,9 @@ static NSString *const kGender              = @"sex";
         _method = @"PUT";
         
         CLLocation *currentLocation = [FRDLocationObserver sharedObserver].currentLocation;
-        NSArray *coords = @[@(currentLocation.coordinate.longitude), @(currentLocation.coordinate.latitude)];
-        
+//        NSArray *coords = @[@(currentLocation.coordinate.longitude), @(currentLocation.coordinate.latitude)];
+NSArray *coords = @[@(22.3), @(48.6)];
+#pragma TEMPORARY COORDS!
         NSDictionary *profile = @{
                                   
                                   kName:                updatedProfile.fullName,
