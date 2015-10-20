@@ -24,6 +24,7 @@ static NSString *const FBCurrentProfile = @"FBCurrentProfile";
 //Notifications
 static NSString *const DidReceiveNewMessageNotification = @"DidReceiveNewMessageNotification";
 static NSString *const NewFriendAddedNotification = @"NewFriendAddedNotification";
+static NSString *const FriendDeletedNotification = @"FriendDeletedNotification";
 
 static NSString *const PrivacyPolicyResourceName = @"PrivacyPolicy.txt";
 static NSString *const TermsOfServiceResourceName = @"TermsOfService.txt";
