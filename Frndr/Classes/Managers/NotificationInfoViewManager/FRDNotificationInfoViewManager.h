@@ -13,5 +13,6 @@
 + (FRDNotificationInfoViewManager *)sharedManager;
 
 - (void)showNotificationView:(FRDNotificationInfoView *)infoView;
+- (void)hideNotificationInfoView;
 
 @end

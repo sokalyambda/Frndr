@@ -10,6 +10,26 @@
 
 @implementation FRDRoundedImageView
 
+#pragma mark - Lifecycle
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self customize];
+    }
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self customize];
+    }
+    return self;
+}
+
 #pragma mark - Accessors
 
 - (void)setFrame:(CGRect)frame
@@ -30,6 +50,7 @@
 {
     self.layer.cornerRadius = CGRectGetHeight(self.bounds) / 2.f;
     self.layer.masksToBounds = YES;
+    self.clipsToBounds = YES;
 }
 
 - (void)addBorder

@@ -8,7 +8,7 @@
 
 #import "FRDContainerController.h"
 #import "FRDBaseContentController.h"
-#import "FRDPreferencesController.h";
+#import "FRDPreferencesController.h"
 
 #import "FRDTopContentView.h"
 
