@@ -100,11 +100,18 @@ dispatch_queue_t friends_updating_queue() {
 
 #pragma mark - Lifecycle
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:FriendDeletedNotification object:nil];
+}
+
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
     if (self) {
         _currentPage = 2;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(friendHasBeenDeletedNotification:) name:FriendDeletedNotification object:nil];
     }
     return self;
 }
@@ -252,7 +259,9 @@ dispatch_queue_t friends_updating_queue() {
 
 - (void)unsibscribeFromNotifications
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:DidReceiveNewMessageNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NewFriendAddedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)customizeNavigationItem
@@ -394,6 +403,21 @@ dispatch_queue_t friends_updating_queue() {
     [self.friends addObject:newFriend];
     [self.friendsTableView reloadData];
     [self showHideNoMatchesView];
+}
+
+/**
+ *  Friend has been deleted
+ */
+- (void)friendHasBeenDeletedNotification:(NSNotification *)notification
+{
+    FRDFriend *deletedFriend = (FRDFriend *)notification.object;
+
+    FRDFriend *extraFriend = [FRDChatMessagesService findFriendWithId:deletedFriend.userId inArray:self.friends];
+    if (extraFriend) {
+        [self.friends removeObject:extraFriend];
+        [self.friendsTableView reloadData];
+        [self showHideNoMatchesView];
+    }
 }
 
 #pragma mark - Notifications
