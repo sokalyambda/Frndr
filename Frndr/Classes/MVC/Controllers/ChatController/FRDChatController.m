@@ -25,6 +25,8 @@
 
 #import "FRDChatMessagesService.h"
 
+#import "FRDNotificationInfoViewManager.h"
+
 static NSString *const kChatTableControllerSegueIdentifier = @"chatTableControllerSegue";
 
 static NSString *const kOptionsHiddenButtonImage = @"ChatOptionsUnactive";
@@ -81,8 +83,25 @@ static CGFloat const kReplyTextViewMinimumHeight = 62.f;
     [self configureReplyTextView];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self dismissNotificationInfoViweInNeeded];
+}
+
 #pragma mark - Actions
 
+/**
+ *  If notification view already exists - dismiss it
+ */
+- (void)dismissNotificationInfoViweInNeeded
+{
+    [[FRDNotificationInfoViewManager sharedManager] hideNotificationInfoView];
+}
+
+/**
+ *  Send message to friend
+ */
 - (void)sendReply
 {
     NSString *replyText = self.replyTextView.text;
