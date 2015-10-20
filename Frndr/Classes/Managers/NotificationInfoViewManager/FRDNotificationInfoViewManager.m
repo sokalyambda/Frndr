@@ -48,18 +48,22 @@
         [infoView dropDownTableBecomeActiveInView:[UIApplication sharedApplication].keyWindow fromAnchorView:nil withDataSource:nil withShowingCompletion:^(FRDDropDownTableView *table) {
             
             if (table.isExpanded) {
-                [weakSelf performSelector:@selector(hideNotificationInfoView:) withObject:infoView afterDelay:5.f];
+                [weakSelf performSelector:@selector(hideNotificationInfoView) withObject:nil afterDelay:4.f];
             }
             
         } withCompletion:nil];
     }
 }
 
-- (void)hideNotificationInfoView:(FRDNotificationInfoView *)infoView
+/**
+ *  Hide notification view if needed
+ */
+- (void)hideNotificationInfoView
 {
-    [infoView hideDropDownList];
-    
-    self.notificationInfoView = nil;
+    if (self.notificationInfoView) {
+        [self.notificationInfoView hideDropDownList];
+        self.notificationInfoView = nil;
+    }
 }
 
 #pragma mark - FRDNotificationInfoViewDelegate

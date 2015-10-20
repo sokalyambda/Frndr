@@ -114,7 +114,7 @@ static CGFloat const kAvatarPreferredHeight = 70.f;
 
     switch (message.ownerType) {
         case FRDMessageOwnerTypeFriend: {
-            [self->avatarImageView sd_setImageWithURL:currentFriend.avatarURL];
+            [self->avatarImageView sd_setImageWithURL:currentFriend.avatarURL ?: currentFriend.currentAvatar.photoURL];
             break;
         }
         case FRDMessageOwnerTypeUser: {

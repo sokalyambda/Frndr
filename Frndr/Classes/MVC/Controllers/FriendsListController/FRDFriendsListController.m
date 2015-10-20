@@ -98,6 +98,7 @@ dispatch_queue_t friends_updating_queue() {
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:FriendDeletedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:DidReceiveNewMessageNotification object:nil];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder
@@ -107,6 +108,7 @@ dispatch_queue_t friends_updating_queue() {
         _currentPage = 2;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(friendHasBeenDeletedNotification:) name:FriendDeletedNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNewMessageNotification:) name:DidReceiveNewMessageNotification object:nil];
     }
     return self;
 }
@@ -247,14 +249,13 @@ dispatch_queue_t friends_updating_queue() {
 
 - (void)subscribeForNotifications
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNewMessageNotification:) name:DidReceiveNewMessageNotification object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNewFriendNotification:) name:NewFriendAddedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)unsibscribeFromNotifications
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:DidReceiveNewMessageNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NewFriendAddedNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
 }
@@ -383,6 +384,10 @@ dispatch_queue_t friends_updating_queue() {
             messageOwner.lastMessagePostedDate = message.creationDate;
             //new message received from this friend
             messageOwner.hasNewMessages = YES;
+            
+            if (messageOwner.isNewFriend) {
+                messageOwner.newFriend = NO;
+            }
             
             [self.friendsTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.friends indexOfObject:messageOwner] inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
