@@ -22,6 +22,7 @@ static NSString *const kConnectedToServerEvent = @"connectedToServer";
 static NSString *const kAuthorizeEvent = @"authorize";
 static NSString *const kChatMessageEvent = @"chat message";
 static NSString *const kNewFriendAddedEvent = @"new friend";
+static NSString *const kFriendDeletedEvent = @"friend deleted";
 static NSString *const kLogoutEvent = @"logout";
 
 static NSString *const kSuccess = @"success";
@@ -94,6 +95,16 @@ static NSString *const kSuccess = @"success";
         [[NSNotificationCenter defaultCenter] postNotificationName:NewFriendAddedNotification object:currentFriend];
         
         NSLog(@"data %@", data);
+    }];
+    
+    [self.socketIOClient on:kFriendDeletedEvent callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nullable emitter) {
+        
+        NSDictionary *friendDict = data.firstObject;
+        
+        FRDFriend *currentFriend = [[FRDFriend alloc] initWithServerResponse:friendDict];
+        
+        //post friend deleted notification
+        [[NSNotificationCenter defaultCenter] postNotificationName:FriendDeletedNotification object:currentFriend];
     }];
     
     /*
