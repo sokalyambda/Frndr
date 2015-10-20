@@ -41,5 +41,6 @@
 #import "FRDGetGalleryPhotosRequest.h"
 #import "FRDRemoveAvatarRequest.h"
 #import "FRDRemoveImageFromGalleryRequest.h"
+#import "FRDChangeAvatarFromGalleryRequest.h"
 
 #endif

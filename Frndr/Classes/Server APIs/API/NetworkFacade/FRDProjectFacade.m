@@ -763,6 +763,29 @@ NSString *baseURLString = @"http://projects.thinkmobiles.com:8859/"; //Live
     return operation;
 }
 
++ (FRDNetworkOperation *)exchangeCurrentAvatarWithGalleryPhoto:(FRDGalleryPhoto *)galleryPhoto
+                                                     onSuccess:(void(^)(FRDAvatar *updatedAvatar))success
+                                                     onFailure:(FailureBlock)failure
+{
+    FRDChangeAvatarFromGalleryRequest *request = [[FRDChangeAvatarFromGalleryRequest alloc] initWithGalleryPhoto:galleryPhoto];
+    
+    FRDNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(FRDNetworkOperation *operation) {
+        
+        FRDChangeAvatarFromGalleryRequest *request = (FRDChangeAvatarFromGalleryRequest *)operation.networkRequest;
+        
+        if (success) {
+            success(request.updatedAvatar);
+        }
+        
+    } failure:^(FRDNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
 #pragma mark - Reachability
 
 + (BOOL)isInternetReachable

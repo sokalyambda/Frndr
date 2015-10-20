@@ -18,7 +18,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeAndDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *incomingMessageIcon;
+
+@property (weak, nonatomic) IBOutlet UIView *incomingMessageView;
 
 @end
 
@@ -35,7 +36,7 @@
     
     self.messageLabel.textColor = currentFriend.isNewFriend ? UIColorFromRGB(0x35B8B4) : UIColorFromRGB(0x58406B);
     
-    self.incomingMessageIcon.alpha = currentFriend.hasNewMessages ? 1.f : 0.f;
+    self.incomingMessageView.alpha = currentFriend.hasNewMessages ? 1.f : 0.f;
 }
 
 @end
