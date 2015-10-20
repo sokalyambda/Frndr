@@ -21,6 +21,7 @@
 
 @property (strong, nonatomic) UITapGestureRecognizer *crossTap;
 @property (strong, nonatomic) UITapGestureRecognizer *plusTap;
+@property (strong, nonatomic) UITapGestureRecognizer *galleryPhotoTap;
 
 @end
 
@@ -44,6 +45,14 @@
     return _plusTap;
 }
 
+- (UITapGestureRecognizer *)galleryPhotoTap
+{
+    if (!_galleryPhotoTap) {
+        _galleryPhotoTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGalleryPhotoTap:)];
+    }
+    return _galleryPhotoTap;
+}
+
 #pragma mark - Lifecycle
 
 - (void)awakeFromNib
@@ -63,6 +72,9 @@
     }
     if (![self.gestureRecognizers containsObject:self.plusTap]) {
         [self.plusImageView addGestureRecognizer:self.plusTap];
+    }
+    if (![self.gestureRecognizers containsObject:self.galleryPhotoTap]) {
+        [self.imageView addGestureRecognizer:self.galleryPhotoTap];
     }
 }
 
@@ -107,6 +119,13 @@
     
     if ([self.delegate respondsToSelector:@selector(galleryCell:didTapCrossImageView:)]) {
         [self.delegate galleryCell:self didTapCrossImageView:self.crossImageView];
+    }
+}
+
+- (void)handleGalleryPhotoTap:(UITapGestureRecognizer *)tap
+{
+    if ([self.delegate respondsToSelector:@selector(galleryCell:didTapGalleryPhotoImageView:)]) {
+        [self.delegate galleryCell:self didTapGalleryPhotoImageView:self.imageView];
     }
 }
 

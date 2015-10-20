@@ -127,5 +127,8 @@ extern NSString *defaultBaseURLString;
                                        onFailure:(FailureBlock)failure;
 + (FRDNetworkOperation *)getGalleryOnSuccess:(void(^)(NSArray *gallery))success
                                    onFailure:(FailureBlock)failure;
++ (FRDNetworkOperation *)exchangeCurrentAvatarWithGalleryPhoto:(FRDGalleryPhoto *)galleryPhoto
+                                                     onSuccess:(void(^)(FRDAvatar *updatedAvatar))success
+                                                     onFailure:(FailureBlock)failure;
 
 @end

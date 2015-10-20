@@ -30,5 +30,6 @@ typedef NS_ENUM(NSUInteger, FRDGallegyType) {
 @optional
 - (void)galleryCell:(FRDPhotoGalleryCollectionViewCell *)cell didTapCrossImageView:(UIImageView *)crossImageView;
 - (void)galleryCell:(FRDPhotoGalleryCollectionViewCell *)cell didTapPlusImageView:(UIImageView *)plusImageView;
+- (void)galleryCell:(FRDPhotoGalleryCollectionViewCell *)cell didTapGalleryPhotoImageView:(UIImageView *)galleryPhotoView;
 
 @end

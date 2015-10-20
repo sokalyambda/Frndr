@@ -147,6 +147,7 @@
 		58C28FF81BAAC6800099ABE4 /* ZLPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C28FF51BAAC6800099ABE4 /* ZLPanGestureRecognizer.m */; };
 		58C28FF91BAAC6800099ABE4 /* ZLSwipeableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C28FF71BAAC6800099ABE4 /* ZLSwipeableView.m */; };
 		58C28FFC1BAAC69B0099ABE4 /* CAAnimation+CompetionBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C28FFB1BAAC69B0099ABE4 /* CAAnimation+CompetionBlock.m */; };
+		58C7310E1BD6226800112AD9 /* FRDChangeAvatarFromGalleryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C7310D1BD6226800112AD9 /* FRDChangeAvatarFromGalleryRequest.m */; settings = {ASSET_TAGS = (); }; };
 		58CB4E7D1BC960EF00517287 /* SocketAckEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CB4E6D1BC960EF00517287 /* SocketAckEmitter.swift */; settings = {ASSET_TAGS = (); }; };
 		58CB4E7E1BC960EF00517287 /* SocketAckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CB4E6E1BC960EF00517287 /* SocketAckManager.swift */; settings = {ASSET_TAGS = (); }; };
 		58CB4E7F1BC960EF00517287 /* SocketAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CB4E6F1BC960EF00517287 /* SocketAnyEvent.swift */; settings = {ASSET_TAGS = (); }; };
@@ -488,6 +489,8 @@
 		58C28FF71BAAC6800099ABE4 /* ZLSwipeableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZLSwipeableView.m; path = Frndr/Classes/Libraries/ZLSwipeableView/ZLSwipeableView.m; sourceTree = SOURCE_ROOT; };
 		58C28FFA1BAAC69B0099ABE4 /* CAAnimation+CompetionBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CAAnimation+CompetionBlock.h"; path = "Classes/Categories/CAAnimation/CAAnimation+CompletionBlock/CAAnimation+CompetionBlock.h"; sourceTree = "<group>"; };
 		58C28FFB1BAAC69B0099ABE4 /* CAAnimation+CompetionBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CAAnimation+CompetionBlock.m"; path = "Classes/Categories/CAAnimation/CAAnimation+CompletionBlock/CAAnimation+CompetionBlock.m"; sourceTree = "<group>"; };
+		58C7310C1BD6226800112AD9 /* FRDChangeAvatarFromGalleryRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDChangeAvatarFromGalleryRequest.h; path = "Classes/Server APIs/API/Requests/ImagesModule/ChangeAvatarFromGalleryRequest/FRDChangeAvatarFromGalleryRequest.h"; sourceTree = "<group>"; };
+		58C7310D1BD6226800112AD9 /* FRDChangeAvatarFromGalleryRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDChangeAvatarFromGalleryRequest.m; path = "Classes/Server APIs/API/Requests/ImagesModule/ChangeAvatarFromGalleryRequest/FRDChangeAvatarFromGalleryRequest.m"; sourceTree = "<group>"; };
 		58CB4E6D1BC960EF00517287 /* SocketAckEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketAckEmitter.swift; path = Classes/Libraries/Sockets/Socket.io/SocketAckEmitter.swift; sourceTree = "<group>"; };
 		58CB4E6E1BC960EF00517287 /* SocketAckManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketAckManager.swift; path = Classes/Libraries/Sockets/Socket.io/SocketAckManager.swift; sourceTree = "<group>"; };
 		58CB4E6F1BC960EF00517287 /* SocketAnyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketAnyEvent.swift; path = Classes/Libraries/Sockets/Socket.io/SocketAnyEvent.swift; sourceTree = "<group>"; };
@@ -1302,6 +1305,7 @@
 		58B27CED1BC193110035712C /* ImagesModule */ = {
 			isa = PBXGroup;
 			children = (
+				58C7310B1BD6223000112AD9 /* ChangeAvatarFromGalleryRequest */,
 				58B27CEE1BC193180035712C /* UploadAvatarRequest */,
 				58B970331BC251C80017785E /* UploadPhotoToGalleryRequest */,
 				58B9701B1BC248470017785E /* GetAvatarAndGalleryPhotosRequest */,
@@ -2279,6 +2283,15 @@
 			path = ZLSwipeableView;
 			sourceTree = "<group>";
 		};
+		58C7310B1BD6223000112AD9 /* ChangeAvatarFromGalleryRequest */ = {
+			isa = PBXGroup;
+			children = (
+				58C7310C1BD6226800112AD9 /* FRDChangeAvatarFromGalleryRequest.h */,
+				58C7310D1BD6226800112AD9 /* FRDChangeAvatarFromGalleryRequest.m */,
+			);
+			name = ChangeAvatarFromGalleryRequest;
+			sourceTree = "<group>";
+		};
 		58CD17E61BA18A880021D948 /* CAAnimation */ = {
 			isa = PBXGroup;
 			children = (
@@ -3006,6 +3019,7 @@
 				3E1D9BE61BB3CE34003A1E5C /* FRDPhotoGalleryController.m in Sources */,
 				58B47C891BC3A7F800BA502E /* FRDChatManager.m in Sources */,
 				586264C61BBD067F00824BA3 /* FRDPulsingOverlayView.m in Sources */,
+				58C7310E1BD6226800112AD9 /* FRDChangeAvatarFromGalleryRequest.m in Sources */,
 				3E941A431BB1815400F034E6 /* FRDApplicationSettingsTableHeader.m in Sources */,
 				58DE5B441BB541E10020A34C /* FRDRelationshipItem.m in Sources */,
 				58ED54D21BB14C5E00F9B378 /* FRDLocationObserver.m in Sources */,

@@ -227,6 +227,49 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
 }
 
 /**
+ *  Show exchange avatar with gallery photo action sheet
+ */
+- (void)showExchangeAvatarWithGalleryPhotoActionSheetWithGalleryPhoto:(FRDGalleryPhoto *)galleryPhoto
+{
+    UIAlertController *exchangeAvatarAlertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    WEAK_SELF;
+    UIAlertAction *setAsProfilePictureAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Set as Profile Picture") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        //set as profile picture
+        [weakSelf exchangeCurrentAvatarWithGalleryPhoto:galleryPhoto];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [exchangeAvatarAlertController addAction:setAsProfilePictureAction];
+    [exchangeAvatarAlertController addAction:cancelAction];
+    
+    [self presentViewController:exchangeAvatarAlertController animated:YES completion:nil];
+}
+
+/**
+ *  Exchange avatar with gallery photo
+ *
+ *  @param galleryPhoto Photo for new avatar
+ */
+- (void)exchangeCurrentAvatarWithGalleryPhoto:(FRDGalleryPhoto *)galleryPhoto
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [FRDProjectFacade exchangeCurrentAvatarWithGalleryPhoto:galleryPhoto onSuccess:^(FRDAvatar *updatedAvatar) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        [weakSelf updateCurrentAvatarWithAvatar:updatedAvatar];
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+    }];
+}
+
+/**
  *  Remove current photo
  *
  *  @param photo Photo for removing
@@ -312,9 +355,7 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
             
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             
-            [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar = avatar;
-            
-            [weakSelf.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
+            [weakSelf updateCurrentAvatarWithAvatar:avatar];
             
         } onFailure:^(NSError *error, BOOL isCanceled) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
@@ -361,6 +402,18 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
     picker.sourceType = type;
     picker.mediaTypes = @[(NSString*)kUTTypeImage];
     [self presentViewController:picker animated:YES completion:nil];
+}
+
+/**
+ *  Update current user avatar
+ *
+ *  @param avatar New Avatar
+ */
+- (void)updateCurrentAvatarWithAvatar:(FRDAvatar *)avatar
+{
+    [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar = avatar;
+    
+    [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
 }
 
 #pragma mark - UIImagePickerControllerDelegate methods
@@ -423,7 +476,22 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
         FRDGalleryPhoto *currentPhoto = self.photosGallery[indexPath.row - 1];
         [self showRemovePhotoActionSheetWithPhoto:currentPhoto];
     }
+}
+
+- (void)galleryCell:(FRDPhotoGalleryCollectionViewCell *)cell didTapGalleryPhotoImageView:(UIImageView *)galleryPhotoView
+{
+    if (self.currentFriend) {
+        return;
+    }
     
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    
+    if (indexPath.row == 0) {
+        return;
+    } else {
+        FRDGalleryPhoto *currentPhoto = self.photosGallery[indexPath.row - 1];
+        [self showExchangeAvatarWithGalleryPhotoActionSheetWithGalleryPhoto:currentPhoto];
+    }
 }
 
 @end
