@@ -31,6 +31,8 @@
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
+    self.navigationTitleView.titleText = LOCALIZED(@"Settings");
+    
     UIBarButtonItem *rightIcon = [FRDSerialViewConstructor customRightBarButtonForController:self withAction:nil];
     
     //set right bar button item

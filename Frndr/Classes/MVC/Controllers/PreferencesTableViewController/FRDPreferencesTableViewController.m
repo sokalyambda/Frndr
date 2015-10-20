@@ -14,7 +14,7 @@
 static CGFloat const kDefaultRowHeight = 70.f;
 static NSInteger const kNumberOfPreferences = 4;
 
-static NSString * kShareMessage = @"Sharing from Frndr!";
+static NSString * kShareMessage = @"Check out this great Frndr App I'm using, download it here {AppStoreURL (not available yet)}!";
 
 @implementation FRDPreferencesTableViewController
 
@@ -82,9 +82,9 @@ static NSString * kShareMessage = @"Sharing from Frndr!";
                                                               BOOL completed,
                                                               NSArray * __nullable returnedItems,
                                                               NSError * __nullable activityError) {
-        NSLog(@"Activity type: %@", activityType);
-        NSLog(@"Activity controller completed? - %d", completed);
-        NSLog(@"Returned items: %@", returnedItems);
+//        NSLog(@"Activity type: %@", activityType);
+//        NSLog(@"Activity controller completed? - %d", completed);
+//        NSLog(@"Returned items: %@", returnedItems);
     };
     
     [self.navigationController presentViewController:activityViewController animated:YES completion:nil];

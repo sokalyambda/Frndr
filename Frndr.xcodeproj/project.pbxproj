@@ -800,6 +800,13 @@
 			name = RangeSlider;
 			sourceTree = "<group>";
 		};
+		3E6137771BD62964000E1ACB /* PrivacyPolicyController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = PrivacyPolicyController;
+			sourceTree = "<group>";
+		};
 		3E786A5D1BCE76C9006AD2E1 /* ClearMessageRequest */ = {
 			isa = PBXGroup;
 			children = (
@@ -1770,6 +1777,7 @@
 		58BC76D21B9EB95600BB8B5A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3E6137771BD62964000E1ACB /* PrivacyPolicyController */,
 				3EB1A02F1BC268F10032CB5A /* ChatController */,
 				3E84DE971BB2ECBA00FFCB7C /* PhotoGalleryController */,
 				58ED54F51BB189C800F9B378 /* GeolocationDeniedController */,

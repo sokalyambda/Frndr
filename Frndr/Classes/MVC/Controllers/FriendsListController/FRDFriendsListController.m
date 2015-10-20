@@ -67,11 +67,6 @@ dispatch_queue_t friends_updating_queue() {
     return _bottomRefreshControl;
 }
 
-- (NSString *)titleString
-{
-    return @"Frnds";
-}
-
 - (NSString *)leftImageName
 {
     return kBackArrowIconName;

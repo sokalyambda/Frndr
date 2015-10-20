@@ -8,6 +8,7 @@
 
 #import "FRDContainerController.h"
 #import "FRDBaseContentController.h"
+#import "FRDPreferencesController.h";
 
 #import "FRDTopContentView.h"
 
@@ -103,17 +104,29 @@
 
 - (void)topContentView:(FRDTopContentView *)contentView didPressItemWithType:(FRDTopViewActionType)type
 {
-    switch (type) {
-        case FRDTopViewActionTypeLeftIcon: {
-            [self showNextPreviousController:FRDPresentedControllerTypePrevious];
-            break;
+    // In this particular case (on PreferencesController) we need the back button to return to container, not the right bar button
+    if ([self.selectedViewController isKindOfClass:[FRDPreferencesController class]]) {
+        switch (type) {
+            case FRDTopViewActionTypeLeftIcon: {
+                [self showNextPreviousController:FRDPresentedControllerTypeNext];
+                break;
+            }
+            default:
+                break;
         }
-        case FRDTopViewActionTypeRightIcon: {
-            [self showNextPreviousController:FRDPresentedControllerTypeNext];
-            break;
+    } else {
+        switch (type) {
+            case FRDTopViewActionTypeLeftIcon: {
+                [self showNextPreviousController:FRDPresentedControllerTypePrevious];
+                break;
+            }
+            case FRDTopViewActionTypeRightIcon: {
+                [self showNextPreviousController:FRDPresentedControllerTypeNext];
+                break;
+            }
+            default:
+                break;
         }
-        default:
-            break;
     }
 }
 

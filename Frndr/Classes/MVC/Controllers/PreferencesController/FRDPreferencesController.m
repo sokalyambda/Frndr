@@ -7,10 +7,16 @@
 //
 
 #import "FRDPreferencesController.h"
+#import "FRDContainerController.h"
 
 #import "FRDTopContentView.h"
 
 #import "FRDProjectFacade.h"
+
+#import "FRDSerialViewConstructor.h"
+
+static NSString *const kPreferencesIconName = @"preferencesTopIcon";
+static NSString *const kBackArrowIconName = @"backArrow";
 
 @implementation FRDPreferencesController
 
@@ -23,12 +29,12 @@
 
 - (NSString *)leftImageName
 {
-    return @"";
+    return kBackArrowIconName;
 }
 
 - (NSString *)rightImageName
 {
-    return @"preferencesTopIcon";
+    return kPreferencesIconName;
 }
 
 #pragma mark - View Lifecycle
