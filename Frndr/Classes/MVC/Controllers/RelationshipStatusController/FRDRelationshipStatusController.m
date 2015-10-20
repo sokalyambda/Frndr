@@ -206,12 +206,26 @@ static NSString *const kNotActiveImageName = @"NotActiveImageName";
         }
     }
     if (self.currentRelationshipStatus) {
-        [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:[self.relationshipStatuses indexOfObject:self.currentRelationshipStatus] inSection:0]]];
-        NSInteger idx = [self.relationshipStatuses indexOfObject:self.currentRelationshipStatus];
-        if (idx != NSNotFound) {
-            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:idx inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+        if ([userModel isKindOfClass:[FRDCurrentUserProfile class]]) {
+            [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:[self.relationshipStatuses indexOfObject:self.currentRelationshipStatus] inSection:0]]];
+            NSInteger idx = [self.relationshipStatuses indexOfObject:self.currentRelationshipStatus];
+            if (idx != NSNotFound) {
+                [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:idx inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+            }
+        } else if ([userModel isKindOfClass:[FRDFriend class]]) {
+            self.relationshipStatuses = @[self.currentRelationshipStatus];
+            [self.collectionView reloadData];
+            [self centerSingleAvailableStatusHorizontally];
         }
     }
+}
+
+- (void)centerSingleAvailableStatusHorizontally
+{
+    CGFloat leftInset = CGRectGetMidX(self.collectionView.frame) - CGRectGetMidY(self.collectionView.bounds);
+    UIEdgeInsets insets = self.collectionView.contentInset;
+    insets.left = leftInset;
+    self.collectionView.contentInset = insets;
 }
 
 /**

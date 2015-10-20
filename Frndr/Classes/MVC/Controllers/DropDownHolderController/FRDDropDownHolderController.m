@@ -152,6 +152,9 @@ static NSString *const kNotSmokerString = @"Non-Smoker";
 {
     self.sexualOrientationLabel.text = currentFriend.sexualOrientation.orientationString;
     self.smokerLabel.text = currentFriend.isSmoker ? kSmokerString : kNotSmokerString;
+    
+    self.smokerPointingArrow.hidden = YES;
+    self.sexualOrientationPointingArrow.hidden = YES;
 }
 
 @end

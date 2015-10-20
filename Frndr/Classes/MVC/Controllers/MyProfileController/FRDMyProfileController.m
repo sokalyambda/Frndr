@@ -220,7 +220,6 @@ static CGFloat const kMinimumBottomSpacing = 8.f;
     [self.jobTitleField setUserInteractionEnabled:NO];
     [self.dropDownHolderContainer setUserInteractionEnabled:NO];
     [self.personalBioTableController.view setUserInteractionEnabled:NO];
-    
 }
 
 - (IBAction)managePhotosPress:(id)sender
