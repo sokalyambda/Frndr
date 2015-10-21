@@ -310,7 +310,7 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zcg-1H-sFP">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zcg-1H-sFP">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -330,10 +330,10 @@
                                 <exclude reference="zcg-1H-sFP"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="UJr-Sz-EuA"/>
                                 <exclude reference="XHR-W3-2o8"/>
                                 <exclude reference="ZnB-VC-kn6"/>
                                 <exclude reference="fKp-Mf-gRi"/>
-                                <exclude reference="UJr-Sz-EuA"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -341,10 +341,10 @@
                                 <include reference="zcg-1H-sFP"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="UJr-Sz-EuA"/>
                                 <include reference="XHR-W3-2o8"/>
                                 <include reference="ZnB-VC-kn6"/>
                                 <include reference="fKp-Mf-gRi"/>
-                                <include reference="UJr-Sz-EuA"/>
                             </mask>
                         </variation>
                     </view>
