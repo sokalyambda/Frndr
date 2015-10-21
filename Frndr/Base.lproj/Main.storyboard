@@ -255,7 +255,7 @@
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="FiX-yb-8fL"/>
-                                <include reference="VKy-Ec-wi1"/>
+                                <exclude reference="VKy-Ec-wi1"/>
                                 <include reference="mbj-Hd-iYU"/>
                                 <include reference="kgk-7h-Ry8"/>
                                 <include reference="Qzs-jU-R28"/>
@@ -3865,7 +3865,7 @@
         <image name="ActiveDot" width="11" height="12"/>
         <image name="MyProfileCellFrame" width="388" height="152"/>
         <image name="NewMessageIcon" width="26" height="26"/>
-        <image name="TutorialBackground" width="495" height="775"/>
+        <image name="TutorialBackground" width="413" height="735"/>
         <image name="UnactiveControlDot" width="9" height="10"/>
         <image name="crossSymbol" width="25" height="25"/>
         <image name="disclosureIndicator" width="8" height="23"/>
