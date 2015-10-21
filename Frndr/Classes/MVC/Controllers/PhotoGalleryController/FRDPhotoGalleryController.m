@@ -413,7 +413,7 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
 {
     [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar = avatar;
     
-    [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
+    [self.collectionView reloadData];
 }
 
 #pragma mark - UIImagePickerControllerDelegate methods
