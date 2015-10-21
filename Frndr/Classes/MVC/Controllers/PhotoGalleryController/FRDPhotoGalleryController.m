@@ -259,9 +259,17 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [FRDProjectFacade exchangeCurrentAvatarWithGalleryPhoto:galleryPhoto onSuccess:^(FRDAvatar *updatedAvatar) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
-        [weakSelf updateCurrentAvatarWithAvatar:updatedAvatar];
+        [FRDProjectFacade getGalleryOnSuccess:^(NSArray *gallery) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            
+            weakSelf.photosGallery = gallery;
+            [weakSelf updateCurrentAvatarWithAvatar:updatedAvatar];
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            [FRDAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+        }];
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
@@ -309,7 +317,7 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
         //avatar has been removed
         [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar = nil;
         
-        [weakSelf.collectionView reloadData];
+        [weakSelf.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
@@ -413,7 +421,7 @@ typedef void(^PhotoSelectionCompletion)(UIImage *chosenImage);
 {
     [FRDStorageManager sharedStorage].currentUserProfile.currentAvatar = avatar;
     
-    [self.collectionView reloadData];
+    [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
 }
 
 #pragma mark - UIImagePickerControllerDelegate methods
