@@ -14,7 +14,7 @@
 static CGFloat const kDefaultRowHeight = 70.f;
 static NSInteger const kNumberOfPreferences = 4;
 
-static NSString * kShareMessage = @"Check out this great Frndr App I'm using, download it here {AppStoreURL (not available yet)}!";
+static NSString * kShareMessage = @"Check out this great Frndr App I'm using, download it here http://itunes.com/apps/Frndr!";
 
 @implementation FRDPreferencesTableViewController
 
@@ -75,7 +75,7 @@ static NSString * kShareMessage = @"Check out this great Frndr App I'm using, do
 
 - (void)showActivityViewController
 {
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[kShareMessage]applicationActivities:nil];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[kShareMessage] applicationActivities:nil];
 
     //activityViewController.excludedActivityTypes = @[UIActivityTypeAirDrop];
     activityViewController.completionWithItemsHandler = ^void(NSString * __nullable activityType,

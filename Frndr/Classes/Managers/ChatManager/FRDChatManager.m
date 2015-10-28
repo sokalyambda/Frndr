@@ -16,7 +16,8 @@
 
 //static NSString *const kBaseHostURL = @"http://192.168.89.188:8859";//Misha
 //static NSString *const kBaseHostURL = @"http://192.168.89.191:8859";//Vanya
-static NSString *const kBaseHostURL = @"http://projects.thinkmobiles.com:8859";//Live
+//static NSString *const kBaseHostURL = @"http://projects.thinkmobiles.com:8859";//Live ThinkMobiles
+static NSString *const kBaseHostURL = @"http://frndr-custom.appinstitute.co.uk";//Live Live
 
 static NSString *const kConnectedToServerEvent = @"connectedToServer";
 static NSString *const kAuthorizeEvent = @"authorize";
@@ -85,6 +86,7 @@ static NSString *const kSuccess = @"success";
         NSLog(@"data %@", data);
     }];
     
+    //Listen to new friend event
     [self.socketIOClient on:kNewFriendAddedEvent callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nullable emitter) {
         
         NSDictionary *friendDict = data.firstObject;
@@ -97,6 +99,7 @@ static NSString *const kSuccess = @"success";
         NSLog(@"data %@", data);
     }];
     
+    //Listen to friend deleted event
     [self.socketIOClient on:kFriendDeletedEvent callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nullable emitter) {
         
         NSDictionary *friendDict = data.firstObject;
