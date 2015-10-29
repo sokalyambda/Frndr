@@ -12,7 +12,7 @@
 
 @interface FRDTermsAndServicesController ()<UIWebViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
 @end
@@ -28,23 +28,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self loadTextViewInformation];
+    
+    self.webView.scalesPageToFit = YES;
+    [self loadDocument];
 }
 
 #pragma mark - Actions
 
-- (void)loadTextViewInformation
+- (void)loadDocument
 {
-    NSString *path = [[NSBundle mainBundle] pathForResource:self.sourceTextPath ofType:nil];
-    
-    NSError *error;
-    NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
-    
-    if (error) {
-        NSLog(@"Error reading file: %@", error.localizedDescription);
-    } else {
-        self.textView.text = content;
-    }
+    NSString *path = [[NSBundle mainBundle] pathForResource:self.sourceTextPath ofType:@"docx"];
+    NSURL *url = [NSURL URLWithString:path];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [self.webView loadRequest:request];
 }
 
 - (void)customizeNavigationItem

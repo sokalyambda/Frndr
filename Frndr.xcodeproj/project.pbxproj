@@ -20,6 +20,8 @@
 		3E1D9BE61BB3CE34003A1E5C /* FRDPhotoGalleryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1D9BE51BB3CE34003A1E5C /* FRDPhotoGalleryController.m */; };
 		3E1D9BED1BB3CE46003A1E5C /* FRDPreviewGalleryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1D9BEB1BB3CE46003A1E5C /* FRDPreviewGalleryController.m */; };
 		3E1D9BEE1BB3CE46003A1E5C /* FRDPreviewGalleryController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E1D9BEC1BB3CE46003A1E5C /* FRDPreviewGalleryController.xib */; };
+		3E226FDD1BE22EB0004CFE98 /* TermsOfService.docx in Resources */ = {isa = PBXBuildFile; fileRef = 3E226FDC1BE22E5E004CFE98 /* TermsOfService.docx */; };
+		3E226FDF1BE23334004CFE98 /* PrivacyPolicy.docx in Resources */ = {isa = PBXBuildFile; fileRef = 3E226FDE1BE232E2004CFE98 /* PrivacyPolicy.docx */; };
 		3E3D41591BA6A5A90021026A /* FRDAutologinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D41581BA6A5A90021026A /* FRDAutologinViewController.m */; };
 		3E3D415D1BA6B1530021026A /* FRDSearchSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D415C1BA6B1530021026A /* FRDSearchSettingsController.m */; };
 		3E4CA3871BCBFEEA00E721DB /* FRDSeparatedBottomRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4CA3861BCBFEEA00E721DB /* FRDSeparatedBottomRefreshControl.m */; };
@@ -42,7 +44,6 @@
 		3E945CD01BBE734200BD5820 /* FRDSystemChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E945CCE1BBE734200BD5820 /* FRDSystemChatCell.m */; };
 		3E945CD41BBE7EA300BD5820 /* FRDBaseChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E945CD31BBE7EA300BD5820 /* FRDBaseChatCell.m */; };
 		3EA078301BC5625C00A7B468 /* FRDKeyboardResponderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0782F1BC5625C00A7B468 /* FRDKeyboardResponderController.m */; };
-		3EA552831BD67081001500A3 /* PrivacyPolicy.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3EA552821BD67081001500A3 /* PrivacyPolicy.txt */; };
 		3EB1A0331BC269310032CB5A /* FRDChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1A0321BC269310032CB5A /* FRDChatController.m */; };
 		3EB1A0361BC2695C0032CB5A /* FRDChatTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1A0351BC2695C0032CB5A /* FRDChatTableController.m */; };
 		3EB7292B1BC69BC3001BEF4B /* FRDExpandableToThresholdTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB7292A1BC69BC3001BEF4B /* FRDExpandableToThresholdTextView.m */; };
@@ -254,6 +255,8 @@
 		3E1D9BEA1BB3CE46003A1E5C /* FRDPreviewGalleryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDPreviewGalleryController.h; path = Classes/MVC/Controllers/PhotoGalleryController/PreviewGalleryController/FRDPreviewGalleryController.h; sourceTree = "<group>"; };
 		3E1D9BEB1BB3CE46003A1E5C /* FRDPreviewGalleryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDPreviewGalleryController.m; path = Classes/MVC/Controllers/PhotoGalleryController/PreviewGalleryController/FRDPreviewGalleryController.m; sourceTree = "<group>"; };
 		3E1D9BEC1BB3CE46003A1E5C /* FRDPreviewGalleryController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FRDPreviewGalleryController.xib; path = Classes/MVC/Controllers/PhotoGalleryController/PreviewGalleryController/FRDPreviewGalleryController.xib; sourceTree = "<group>"; };
+		3E226FDC1BE22E5E004CFE98 /* TermsOfService.docx */ = {isa = PBXFileReference; lastKnownFileType = file; name = TermsOfService.docx; path = Resources/TermsOfService.docx; sourceTree = "<group>"; };
+		3E226FDE1BE232E2004CFE98 /* PrivacyPolicy.docx */ = {isa = PBXFileReference; lastKnownFileType = file; name = PrivacyPolicy.docx; path = Resources/PrivacyPolicy.docx; sourceTree = "<group>"; };
 		3E3D41571BA6A5A90021026A /* FRDAutologinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDAutologinViewController.h; path = Classes/MVC/Controllers/SplashScreenController/FRDAutologinViewController.h; sourceTree = "<group>"; };
 		3E3D41581BA6A5A90021026A /* FRDAutologinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDAutologinViewController.m; path = Classes/MVC/Controllers/SplashScreenController/FRDAutologinViewController.m; sourceTree = "<group>"; };
 		3E3D415B1BA6B1530021026A /* FRDSearchSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDSearchSettingsController.h; path = Classes/MVC/Controllers/SearchSettingsController/FRDSearchSettingsController.h; sourceTree = "<group>"; };
@@ -294,7 +297,6 @@
 		3E945CD31BBE7EA300BD5820 /* FRDBaseChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDBaseChatCell.m; path = Classes/Cells/UITableViewCells/ChatCells/FRDBaseChatCell.m; sourceTree = "<group>"; };
 		3EA0782E1BC5625C00A7B468 /* FRDKeyboardResponderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDKeyboardResponderController.h; path = Classes/MVC/Controllers/KeyboardResponderController/FRDKeyboardResponderController.h; sourceTree = "<group>"; };
 		3EA0782F1BC5625C00A7B468 /* FRDKeyboardResponderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDKeyboardResponderController.m; path = Classes/MVC/Controllers/KeyboardResponderController/FRDKeyboardResponderController.m; sourceTree = "<group>"; };
-		3EA552821BD67081001500A3 /* PrivacyPolicy.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = PrivacyPolicy.txt; path = ../PrivacyPolicy.txt; sourceTree = "<group>"; };
 		3EB1A0311BC269310032CB5A /* FRDChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDChatController.h; path = Classes/MVC/Controllers/ChatController/FRDChatController.h; sourceTree = "<group>"; };
 		3EB1A0321BC269310032CB5A /* FRDChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDChatController.m; path = Classes/MVC/Controllers/ChatController/FRDChatController.m; sourceTree = "<group>"; };
 		3EB1A0341BC2695C0032CB5A /* FRDChatTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDChatTableController.h; path = Classes/MVC/Controllers/ChatController/ChatTableController/FRDChatTableController.h; sourceTree = "<group>"; };
@@ -2185,7 +2187,8 @@
 		58BC76FC1B9EBBD300BB8B5A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3EA552821BD67081001500A3 /* PrivacyPolicy.txt */,
+				3E226FDE1BE232E2004CFE98 /* PrivacyPolicy.docx */,
+				3E226FDC1BE22E5E004CFE98 /* TermsOfService.docx */,
 				58BC76FE1B9EBBE500BB8B5A /* Fonts */,
 			);
 			name = Resources;
@@ -2764,7 +2767,7 @@
 				TargetAttributes = {
 					58BC769A1B9EB6B500BB8B5A = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 7JSQETKKF7;
+						DevelopmentTeam = 6T72C88SAS;
 					};
 					58BC76B31B9EB6B500BB8B5A = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -2801,7 +2804,6 @@
 				3E945CCC1BBE733700BD5820 /* FRDUserChatCell.xib in Resources */,
 				3E941A491BB1815D00F034E6 /* FRDPersonalBioTableHeader.xib in Resources */,
 				3EF22FB41BBE851100E23F72 /* FRDFriendChatCell.xib in Resources */,
-				3EA552831BD67081001500A3 /* PrivacyPolicy.txt in Resources */,
 				58D5A16C1BA329E500D552CF /* FRDNavigationTitleView.xib in Resources */,
 				58B7B6831BC660F100E56067 /* NSDateTimeAgo.bundle in Resources */,
 				58C28C501BA99A6E009D1AC4 /* FRDFriendDragableView.xib in Resources */,
@@ -2819,6 +2821,8 @@
 				3E941A441BB1815400F034E6 /* FRDApplicationSettingsTableHeader.xib in Resources */,
 				3E941A4B1BB1818F00F034E6 /* FRDMyProfileTopView.xib in Resources */,
 				58BC76AA1B9EB6B500BB8B5A /* Main.storyboard in Resources */,
+				3E226FDD1BE22EB0004CFE98 /* TermsOfService.docx in Resources */,
+				3E226FDF1BE23334004CFE98 /* PrivacyPolicy.docx in Resources */,
 				589664FE1BCC15CE007022C6 /* FRDChatOptionsDropDownTableView.xib in Resources */,
 				58F05AD01BAC3F730092D767 /* FRDPreviewPhotoCell.xib in Resources */,
 				58BC76AF1B9EB6B500BB8B5A /* LaunchScreen.xib in Resources */,
@@ -3174,8 +3178,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mairead Cremins (4VE67ZNZ6W)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mairead Cremins (4VE67ZNZ6W)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mairead Cremins (6T72C88SAS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mairead Cremins (6T72C88SAS)";
 				DEFINES_MODULE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Frndr/Frndr-Prefix.pch";
@@ -3183,7 +3187,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "79d96d78-2218-4e2f-b345-f54bfe554146";
+				PROVISIONING_PROFILE = "797e2200-ae5a-466d-9599-65a3d6ec089b";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3196,8 +3200,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mairead Cremins (4VE67ZNZ6W)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mairead Cremins (4VE67ZNZ6W)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mairead Cremins (6T72C88SAS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mairead Cremins (6T72C88SAS)";
 				DEFINES_MODULE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Frndr/Frndr-Prefix.pch";
@@ -3205,7 +3209,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "79d96d78-2218-4e2f-b345-f54bfe554146";
+				PROVISIONING_PROFILE = "797e2200-ae5a-466d-9599-65a3d6ec089b";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
