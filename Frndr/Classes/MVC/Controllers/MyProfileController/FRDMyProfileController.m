@@ -86,10 +86,6 @@ static CGFloat const kMinimumBottomSpacing = 8.f;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if ([textField isEqual:self.ageTextField] && !self.ageTextField.text.length) {
-        self.ageTextField.text = @"1";
-    }
-    
     [self dismissKeyboard:self];
     return YES;
 }
@@ -131,7 +127,7 @@ static CGFloat const kMinimumBottomSpacing = 8.f;
     FRDCurrentUserProfile *profileForUpdating = [[FRDCurrentUserProfile alloc] init];
     FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
     
-    profileForUpdating.age = self.ageTextField.text.length ? self.ageTextField.text.intValue : 1;
+    profileForUpdating.age = self.ageTextField.text.intValue;
     profileForUpdating.fullName = currentProfile.fullName;
     profileForUpdating.genderString = currentProfile.genderString;
     
@@ -207,7 +203,7 @@ static CGFloat const kMinimumBottomSpacing = 8.f;
     [self.dropDownHolderController updateWithSourceType:FRDSourceTypeMyProfile];
     [self.personalBioTableController update];
     self.jobTitleField.text = profile.jobTitle;
-    self.ageTextField.text = [NSString stringWithFormat:@"%ld", profile.age];
+    self.ageTextField.text = profile.age > 0 ? [NSString stringWithFormat:@"%ld", profile.age] : @"";
     [self.visibleOnFrndrSwitch setOn:profile.isVisible animated:NO];
     
     [self.relationshipController updateWithSourceType:FRDSourceTypeMyProfile];
@@ -221,7 +217,7 @@ static CGFloat const kMinimumBottomSpacing = 8.f;
     [self.dropDownHolderController updateWithFriend:currentFriend];
     [self.personalBioTableController updateForFriend:currentFriend];
     self.jobTitleField.text = currentFriend.jobTitle;
-    self.ageTextField.text = [NSString stringWithFormat:@"%ld", currentFriend.age];
+    self.ageTextField.text = currentFriend.age > 0 ? [NSString stringWithFormat:@"%ld", currentFriend.age] : @"";
     [self.visibleOnFrndrSwitch setOn:currentFriend.isVisible animated:NO];
     
     [self.relationshipController updateForCurrentFriend:currentFriend];

@@ -82,7 +82,7 @@ static NSString *const kGender = @"gender";
     if (!_birthDate) {
         NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
-        [offsetComponents setYear:-18.f];
+        [offsetComponents setYear:0.f];
         _birthDate = [gregorian dateByAddingComponents:offsetComponents toDate:[NSDate date] options:0];
     }
     return _birthDate;
