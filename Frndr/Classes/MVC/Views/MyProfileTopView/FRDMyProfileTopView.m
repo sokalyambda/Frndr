@@ -15,7 +15,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *ageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *genderLabel;
 
 @end
@@ -31,7 +30,6 @@
     FRDBaseUserModel *profileForUpdating = currentFriend ?: currentUserProfile;
 
     self.nameLabel.text = profileForUpdating.fullName;
-    self.ageLabel.text = [NSString localizedStringWithFormat:@"%d %@", profileForUpdating.age, LOCALIZED(@"years")];
     self.genderLabel.text = profileForUpdating.genderString;
     
     if (profileForUpdating.currentAvatar.photoURL) {

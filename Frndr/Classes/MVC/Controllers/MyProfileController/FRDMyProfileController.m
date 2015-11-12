@@ -43,6 +43,7 @@ static CGFloat const kMinimumBottomSpacing = 8.f;
 @property (weak, nonatomic) IBOutlet UIView *relationshipsContainer;
 @property (weak, nonatomic) IBOutlet UIView *dropDownHolderContainer;
 @property (weak, nonatomic) IBOutlet UITextField *jobTitleField;
+@property (weak, nonatomic) IBOutlet UITextField *ageTextField;
 @property (weak, nonatomic) IBOutlet UIButton *managePhotosButton;
 @property (weak, nonatomic) IBOutlet UIButton *saveChangesButton;
 @property (weak, nonatomic) IBOutlet UIView *visibleOnFrienderContainer;
@@ -85,7 +86,28 @@ static CGFloat const kMinimumBottomSpacing = 8.f;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    if ([textField isEqual:self.ageTextField] && !self.ageTextField.text.length) {
+        self.ageTextField.text = @"1";
+    }
+    
     [self dismissKeyboard:self];
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if ([textField isEqual:self.ageTextField]) {
+        NSCharacterSet *cs = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        if ([string isEqualToString:filtered]) {
+            NSInteger destinationValue = [self.ageTextField.text stringByAppendingString:string].integerValue;
+            return (destinationValue > 0 && destinationValue <= 200) ? YES : NO;
+        } else {
+            return NO;
+        }
+    }
+    
     return YES;
 }
 
@@ -109,7 +131,7 @@ static CGFloat const kMinimumBottomSpacing = 8.f;
     FRDCurrentUserProfile *profileForUpdating = [[FRDCurrentUserProfile alloc] init];
     FRDCurrentUserProfile *currentProfile = [FRDStorageManager sharedStorage].currentUserProfile;
     
-    profileForUpdating.age = currentProfile.age;
+    profileForUpdating.age = self.ageTextField.text.length ? self.ageTextField.text.intValue : 1;
     profileForUpdating.fullName = currentProfile.fullName;
     profileForUpdating.genderString = currentProfile.genderString;
     
@@ -185,6 +207,7 @@ static CGFloat const kMinimumBottomSpacing = 8.f;
     [self.dropDownHolderController updateWithSourceType:FRDSourceTypeMyProfile];
     [self.personalBioTableController update];
     self.jobTitleField.text = profile.jobTitle;
+    self.ageTextField.text = [NSString stringWithFormat:@"%ld", profile.age];
     [self.visibleOnFrndrSwitch setOn:profile.isVisible animated:NO];
     
     [self.relationshipController updateWithSourceType:FRDSourceTypeMyProfile];
@@ -198,6 +221,7 @@ static CGFloat const kMinimumBottomSpacing = 8.f;
     [self.dropDownHolderController updateWithFriend:currentFriend];
     [self.personalBioTableController updateForFriend:currentFriend];
     self.jobTitleField.text = currentFriend.jobTitle;
+    self.ageTextField.text = [NSString stringWithFormat:@"%ld", currentFriend.age];
     [self.visibleOnFrndrSwitch setOn:currentFriend.isVisible animated:NO];
     
     [self.relationshipController updateForCurrentFriend:currentFriend];
@@ -218,6 +242,7 @@ static CGFloat const kMinimumBottomSpacing = 8.f;
     
     [self.relationshipsContainer setUserInteractionEnabled:NO];
     [self.jobTitleField setUserInteractionEnabled:NO];
+    [self.ageTextField setUserInteractionEnabled:NO];
     [self.dropDownHolderContainer setUserInteractionEnabled:NO];
     [self.personalBioTableController.view setUserInteractionEnabled:NO];
 }
@@ -286,12 +311,9 @@ static CGFloat const kMinimumBottomSpacing = 8.f;
     self.scrollView.scrollIndicatorInsets = contentInsets;
     
     UIView *currentResponder = [UIResponder currentFirstResponder];
+    CGRect responderFrame = currentResponder.frame;
     
-    CGRect responderFrame;
-    
-    if ([currentResponder isEqual:self.jobTitleField]) {
-        responderFrame = self.jobTitleField.frame;
-    } else {
+    if ([currentResponder isDescendantOfView:self.personalBioTableController.tableView]) {
         responderFrame = [currentResponder convertRect:currentResponder.frame toView:self.scrollView];
     }
     

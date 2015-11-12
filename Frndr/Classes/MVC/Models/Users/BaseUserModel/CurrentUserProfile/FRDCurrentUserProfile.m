@@ -17,6 +17,7 @@ static NSString *const kId = @"_id";
 
 static NSString *const kProfile = @"profile";
 static NSString *const kVisible = @"visible";
+static NSString *const kAge = @"age";
 static NSString *const kThingsLovedMost = @"things";
 static NSString *const kSexualOrientation = @"sexual";
 static NSString *const kRelationshipStatus = @"relStatus";
@@ -80,6 +81,8 @@ static NSString *const kNewFriends = @"newFriends";
         _userId = response[kId];
         
         NSDictionary *profileDict = response[kProfile];
+        
+        _age = [profileDict[kAge] integerValue];
         _visible = [profileDict[kVisible] boolValue];
         _thingsLovedMost = profileDict[kThingsLovedMost];
         _sexualOrientation = [FRDSexualOrientation orientationWithOrientationString:profileDict[kSexualOrientation]];
@@ -105,6 +108,7 @@ static NSString *const kNewFriends = @"newFriends";
         _biography = profile.biography;
         _jobTitle = profile.jobTitle;
         _smoker = profile.isSmoker;
+        _age = profile.age;
     }
     return self;
 }

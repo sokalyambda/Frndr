@@ -2762,7 +2762,7 @@
 			attributes = {
 				CLASSPREFIX = FRD;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = ThinkMobiles;
 				TargetAttributes = {
 					58BC769A1B9EB6B500BB8B5A = {
@@ -3110,6 +3110,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -3186,6 +3187,7 @@
 				INFOPLIST_FILE = Frndr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.appinst.frndr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "58f0a8d5-9a80-4311-8cf1-1bef158f89a5";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -3208,6 +3210,7 @@
 				INFOPLIST_FILE = Frndr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.appinst.frndr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "58f0a8d5-9a80-4311-8cf1-1bef158f89a5";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -3229,6 +3232,7 @@
 				);
 				INFOPLIST_FILE = FrndrTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thinkmobiles.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Frndr.app/Frndr";
 			};
@@ -3244,6 +3248,7 @@
 				);
 				INFOPLIST_FILE = FrndrTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thinkmobiles.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Frndr.app/Frndr";
 			};

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FRDContainerViewController">
@@ -17,6 +17,7 @@
             <subviews>
                 <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JVo-wW-zCU">
                     <rect key="frame" x="559" y="30" width="25" height="25"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="25" id="SJv-dO-L10"/>
                         <constraint firstAttribute="height" constant="25" id="SSg-Ir-ON6"/>
@@ -27,6 +28,7 @@
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XD2-0X-H55">
                     <rect key="frame" x="49" y="30" width="502" height="25"/>
+                    <animations/>
                     <attributedString key="attributedText">
                         <fragment content="f">
                             <attributes>
@@ -54,6 +56,7 @@
                 </label>
                 <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U8P-Ne-1P6">
                     <rect key="frame" x="16" y="30" width="25" height="25"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="Apn-AD-dA3"/>
                         <constraint firstAttribute="width" constant="25" id="dA5-Sx-neI"/>
@@ -63,6 +66,7 @@
                     </connections>
                 </imageView>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="U8P-Ne-1P6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="0aF-d5-hNP"/>
