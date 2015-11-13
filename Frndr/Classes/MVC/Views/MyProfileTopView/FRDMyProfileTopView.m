@@ -9,7 +9,6 @@
 #import "FRDMyProfileTopView.h"
 
 #import "FRDAvatar.h"
-#import "FRDFriend.h"
 
 @interface FRDMyProfileTopView ()
 
@@ -23,19 +22,15 @@
 
 #pragma mark - Actions
 
-- (void)updateProfileTopViewForFriend:(FRDFriend *)currentFriend
+- (void)updateProfileTopViewForFriend:(FRDBaseUserModel *)currentProfile
 {
-    FRDCurrentUserProfile *currentUserProfile = [FRDStorageManager sharedStorage].currentUserProfile;
+    self.nameLabel.text = currentProfile.fullName;
+    self.genderLabel.text = currentProfile.genderString;
     
-    FRDBaseUserModel *profileForUpdating = currentFriend ?: currentUserProfile;
-
-    self.nameLabel.text = profileForUpdating.fullName;
-    self.genderLabel.text = profileForUpdating.genderString;
-    
-    if (profileForUpdating.currentAvatar.photoURL) {
-        [self.avatarImageView sd_setImageWithURL:profileForUpdating.currentAvatar.photoURL]; //avatar from server
+    if (currentProfile.currentAvatar.photoURL) {
+        [self.avatarImageView sd_setImageWithURL:currentProfile.currentAvatar.photoURL]; //avatar from server
     } else {
-        [self.avatarImageView sd_setImageWithURL:profileForUpdating.avatarURL]; //avatar from facebook
+        [self.avatarImageView sd_setImageWithURL:currentProfile.avatarURL]; //avatar from facebook
     }
 }
 

@@ -8,14 +8,9 @@
 
 @interface FRDPulsingOverlayView : UIView
 
-- (void)showHide;
-
-- (void)showInView:(UIView *)view;
+- (void)showInView:(UIView *)view withProfile:(FRDCurrentUserProfile *)profile;
 - (void)dismissFromView:(UIView *)view;
 
-- (void)addPulsingAnimations;
-
-- (void)subscribeForNotifications;
-- (void)unsibscribeFromNotifications;
+- (void)addPulsingAnimationsWithProfile:(FRDCurrentUserProfile *)profile;
 
 @end

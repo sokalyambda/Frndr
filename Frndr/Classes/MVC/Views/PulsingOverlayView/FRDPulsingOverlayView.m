@@ -27,10 +27,8 @@ static CGFloat const kDuration = .2f;
 
 #pragma mark - Actions
 
-- (void)updatePulsingViewAvatar
+- (void)updatePulsingViewAvatarWithProfile:(FRDCurrentUserProfile *)profile
 {
-    FRDCurrentUserProfile *profile = [FRDStorageManager sharedStorage].currentUserProfile;
-    
     if (profile.currentAvatar.photoURL) {
         [self.avatarImageView sd_setImageWithURL:profile.currentAvatar.photoURL]; //avatar from server
     } else {
@@ -45,61 +43,12 @@ static CGFloat const kDuration = .2f;
     [self.avatarImageView pulsingWithWavesInView:self repeating:NO];
 }
 
-- (void)applicationDidBecomeActiveNotification:(NSNotification *)notification
-{
-    if (self) {
-        [self addPulsingAnimations];
-    }
-}
-
-#pragma mark - Public Methods
-
-- (void)subscribeForNotifications
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
-}
-
-- (void)unsibscribeFromNotifications
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-/**
- *  Show or hide pulsing modal overlap view
- */
-- (void)showHide
-{
-    UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
-    WEAK_SELF;
-    
-    if (![mainWindow.subviews containsObject:self]) {
-        [self setAlpha:0.f];
-        [self setFrame:mainWindow.frame];
-        
-        [self.bluredView blurView];
-        
-        [mainWindow addSubview:self];
-        
-        [UIView animateWithDuration:kDuration animations:^{
-            [weakSelf setAlpha:1.f];
-        } completion:^(BOOL finished) {
-            [weakSelf.avatarImageView pulsingWithWavesInView:self.superview repeating:YES];
-        }];
-    } else {
-        [UIView animateWithDuration:kDuration animations:^{
-            weakSelf.alpha = 0.f;
-        }completion:^(BOOL finished) {
-            [weakSelf removeFromSuperview];
-        }];
-    }
-}
-
 /**
  *  Show overlap view
  *
  *  @param view View for presenting
  */
-- (void)showInView:(UIView *)view
+- (void)showInView:(UIView *)view withProfile:(FRDCurrentUserProfile *)profile
 {
     [self cleanFromAnimations];
     WEAK_SELF;
@@ -112,9 +61,9 @@ static CGFloat const kDuration = .2f;
         [UIView animateWithDuration:kDuration animations:^{
             [weakSelf setAlpha:1.f];
             //update avatar
-            [weakSelf updatePulsingViewAvatar];
+            [weakSelf updatePulsingViewAvatarWithProfile:profile];
         } completion:^(BOOL finished) {
-            [weakSelf addPulsingAnimations];
+            [weakSelf addPulsingAnimationsWithProfile:profile];
         }];
     }
 }
@@ -141,12 +90,12 @@ static CGFloat const kDuration = .2f;
 /**
  *  Configure animations and blur
  */
-- (void)addPulsingAnimations
+- (void)addPulsingAnimationsWithProfile:(FRDCurrentUserProfile *)profile
 {
     [self cleanFromAnimations];
     [self.avatarImageView pulsingWithWavesInView:self repeating:YES];
     //update avatar
-    [self updatePulsingViewAvatar];
+    [self updatePulsingViewAvatarWithProfile:profile];
 }
 
 /**

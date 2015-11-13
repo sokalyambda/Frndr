@@ -79,7 +79,7 @@ static CGFloat const kMinimumBottomSpacing = 8.f;
     [super viewWillAppear:animated];
     
     //will update for current user if !self.currentFriend
-    [self.topView updateProfileTopViewForFriend:self.currentFriend];
+    [self.topView updateProfileTopViewForFriend:self.currentFriend ?: [FRDStorageManager sharedStorage].currentUserProfile];
 }
 
 #pragma mark - UITextFieldDelegate

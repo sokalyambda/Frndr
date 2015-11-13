@@ -129,7 +129,8 @@ static CGFloat const kMaxGalleryCollectionHeight = 125.f;
     [self.dragableViewsHolder discardAllSwipeableViews];
     //Show/hide like buttons container
     [self showHideButtonsContainer];
-    [self.pulsingOverlay subscribeForNotifications];
+    
+    [self subscribeForAppNotifications];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -142,7 +143,7 @@ static CGFloat const kMaxGalleryCollectionHeight = 125.f;
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self.pulsingOverlay unsibscribeFromNotifications];
+    [self unsibscribeFromAppNotifications];
     
     [super viewWillDisappear:animated];
 }
@@ -211,6 +212,25 @@ static CGFloat const kMaxGalleryCollectionHeight = 125.f;
     }
 }
 
+#pragma mark - Notifications
+
+- (void)applicationDidBecomeActiveNotification:(NSNotification *)notification
+{
+    if (self.pulsingOverlay) {
+        [self.pulsingOverlay addPulsingAnimationsWithProfile:[FRDStorageManager sharedStorage].currentUserProfile];
+    }
+}
+
+- (void)subscribeForAppNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
+- (void)unsibscribeFromAppNotifications
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - Updating Actions
 
 - (void)refreshNearestUsers
@@ -275,7 +295,7 @@ static CGFloat const kMaxGalleryCollectionHeight = 125.f;
     
     WEAK_SELF;
     if (self.isOverlayPresented) {
-        [self.pulsingOverlay addPulsingAnimations];
+        [self.pulsingOverlay addPulsingAnimationsWithProfile:[FRDStorageManager sharedStorage].currentUserProfile];
     }
     
     if (isUserUpdateNeeded && isSearchSettingsUpdateNeeded) {
@@ -391,7 +411,7 @@ static CGFloat const kMaxGalleryCollectionHeight = 125.f;
 - (void)showPulsingView
 {
     if (!self.isOverlayPresented) {
-        [self.pulsingOverlay showInView:self.view];
+        [self.pulsingOverlay showInView:self.view withProfile:[FRDStorageManager sharedStorage].currentUserProfile];
     }
 }
 
@@ -406,7 +426,7 @@ static CGFloat const kMaxGalleryCollectionHeight = 125.f;
 - (void)updatePulsingView
 {
     if (self.isOverlayPresented) {
-        [self.pulsingOverlay addPulsingAnimations];
+        [self.pulsingOverlay addPulsingAnimationsWithProfile:[FRDStorageManager sharedStorage].currentUserProfile];
     }
 }
 
